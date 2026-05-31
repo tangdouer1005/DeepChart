@@ -1,4 +1,4 @@
-# Versions pinned in Phase 5. Loose deps for now:
+# Deps are loose; pin exact versions for reproducibility as needed.
 
 # schema / ETL
 pydantic>=2

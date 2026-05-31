@@ -1,2 +1,8 @@
-TBD — license to be selected in Phase 5 (data + code release).
-Placeholder so downstream files can reference ./LICENSE.
+License to be determined.
+
+Until a license is added here, all rights are reserved by the authors.
+
+Note on provenance: source documents retain their original terms (Nature
+article text and SEC filings as cited per instance; third-party Research Report
+PDFs are not redistributed). The queries and ground-truth artifacts in this
+repository are the authors' own work.

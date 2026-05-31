@@ -15,7 +15,7 @@ with *hidden references* used only for scoring:
 
 The three domains were authored independently and use three *different* on-disk
 formats. This document defines **one canonical record** that all three normalize
-into (Phase 3 ETL produces it). One JSON object per line in
+into (the ETL produces it). One JSON object per line in
 `instances/<domain>.jsonl`.
 
 ---
@@ -97,7 +97,7 @@ into (Phase 3 ETL produces it). One JSON object per line in
   - *Renderer* (`code_types`: python / html) is a separate axis. Both text
     domains actually ship **both** a python and an html gold program
     (`stage2_python` and `stage2_html`); which renderer is scored is an eval
-    choice (Phase 4), not part of the headline count.
+    choice (made at eval time), not part of the headline count.
 - **`chart_image == ""`** is legal: it means no pre-rendered `G_GT` is stored and
   the reference chart must be produced by executing `program.stage2_*`. (In
   practice all three domains DO ship a pre-rendered python `G_GT`, so this is
@@ -132,7 +132,7 @@ into (Phase 3 ETL produces it). One JSON object per line in
 | `references.program.stage2_html` (secondary) | `nature_2_html/{id}.html` | `report/{id}.html` | — |
 | `references.chart_image` (python-rendered) | `ground_truth_image` (`id-N.png`) | `image/report_py/{id}.png` | `ground_truth.chart_image` (.png) |
 
-### Domain quirks the ETL must absorb (from Phase 0)
+### Domain quirks the ETL absorbs
 
 - GT directory prefixes `nature_*` / `report_*` → normalize to
   `academic` / `finance`.

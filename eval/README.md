@@ -1,4 +1,4 @@
-# Eval — unified harness (Phase 4)
+# Eval — unified harness
 
 Two-stage generation, then four metrics, over all three domains. All metrics read
 the **canonical** `instances/<domain>.jsonl` + `references/`, so one harness

@@ -1,7 +1,5 @@
 # DeepChart — Data Card
 
-> Draft. Finalized in Phase 6 before any release.
-
 ## Overview
 
 DeepChart evaluates **faithful data-science chart generation** under the
@@ -14,34 +12,37 @@ chart-ready form, and emit code that renders the requested chart.
 | domain | source | docs | base queries | context variants | instances |
 |---|---|---|---|---|---|
 | Academic | Nature research articles | by DOI | 178 | normal, long | 356 |
-| Finance | SEC 10-K annual reports | by ticker | 290 | normal, long, ultra_long | 870 |
-| Research Report | CB Insights / StartupBlink / Startup Genome PDFs | by report | 256 | (single) | 256 |
+| Finance | SEC 10-K filings | by ticker | 290 | normal, long, ultra_long | 870 |
+| Research Report | CB Insights / StartupBlink / Startup Genome reports | by report | 256 | (single) | 256 |
 | **total** | | | **724** | | **1,482** |
 
 Chart types: Academic spans 15 types (Bar/Scatter/Line/Heatmap/Box/Sankey/…);
-Finance is Bar + Line. Levels: present snapshot is uniformly `easy` (field kept
-for future medium/hard).
+Finance is Bar + Line. Finance's three context variants are all OCR'd text at
+growing scope (3 statement tables → tables+context → full 10-K markdown).
 
 ## What ships per instance
 
-- **Model-facing:** context document(s) (`data/`), query template.
+- **Model-facing:** context document(s) (`data/`) and the query template.
 - **Hidden references (`references/`):** `D_src` (source data), `D_der` (derived
-  data), `P_GT` (gold program, python and/or html), `G_GT` (gold chart image).
+  data), `P_GT` (gold program, python; html kept as a secondary variant for the
+  text domains), `G_GT` (gold chart image).
 
 ## Provenance & licensing
 
-- Academic: figures/data from open-access Nature articles (URLs retained).
-- Finance: public SEC filings.
-- Research Report: third-party industry reports (source PDFs retained).
-- Per-source license review and citation list: **Phase 5–6** (see `CITATION.cff`).
+- **Academic** — Nature-family articles (URLs/DOIs retained per instance);
+  ~60% open access.
+- **Finance** — public SEC 10-K filings, used as OCR'd text.
+- **Research Report** — third-party industry reports; **source PDFs are not
+  redistributed** (see `data/research_report/SOURCES.md`).
 
-## Known limitations / gaps (Phase 0)
+Source documents retain their original terms; queries and ground-truth artifacts
+are the authors' own work. See `LICENSE` and `CITATION.cff`.
 
-- Finance ids 268, 278, 284, 285, 286, 288 lack a stage1 program.
-- Finance `G_GT` images are rendered on the fly (no pre-stored PNGs).
+## Known limitations
+
+- Finance ids 268, 278, 284, 285, 286, 288 have no stage-1 program
+  (`references.program.stage1_extract` is `null`).
+- Research Report gold programs are provenance-only (the pre-rendered
+  `chart_image` is the usable `G_GT`); see `eval/README.md`.
 - Some annotator fields are in Chinese (e.g. `indicator_full`), preserved verbatim.
-
-## Secrets / safety
-
-Raw sources contained API keys and credentials; these are scrubbed in Phase 5
-(`*key*`, cookies, `google_accounts.json`, RAG configs). See `.gitignore`.
+- The `level` field is uniformly `easy` in this release (kept for future use).
