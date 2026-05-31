@@ -1,0 +1,105 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "CFO": 9795000000.0,
+            "Operating Income": 12930000000.0,
+            "D&A": 2055000000.0,
+            "Denominator (OpInc+D&A)": 14985000000.0
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "CFO": 13596000000.0,
+            "Operating Income": 15209000000.0,
+            "D&A": 2245000000.0,
+            "Denominator (OpInc+D&A)": 17454000000.0
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "CFO": 15713000000.0,
+            "Operating Income": 17344000000.0,
+            "D&A": 2428000000.0,
+            "Denominator (OpInc+D&A)": 19772000000.0
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "CFO": 18463000000.0,
+            "Operating Income": 19685000000.0,
+            "D&A": 2720000000.0,
+            "Denominator (OpInc+D&A)": 22405000000.0
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "CFO": 22174000000.0,
+            "Operating Income": 22405000000.0,
+            "D&A": 2891000000.0,
+            "Denominator (OpInc+D&A)": 25296000000.0
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "CFO": 22343000000.0,
+            "Operating Income": 23970000000.0,
+            "D&A": 3103000000.0,
+            "Denominator (OpInc+D&A)": 27073000000.0
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "CFO": 26206000000.0,
+            "Operating Income": 28435000000.0,
+            "D&A": 3400000000.0,
+            "Denominator (OpInc+D&A)": 31835000000.0
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "CFO": 29068000000.0,
+            "Operating Income": 32358000000.0,
+            "D&A": 3972000000.0,
+            "Denominator (OpInc+D&A)": 36330000000.0
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "CFO": 24204000000.0,
+            "Operating Income": 32287000000.0,
+            "D&A": 4099000000.0,
+            "Denominator (OpInc+D&A)": 36386000000.0
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "自由现金流收益质量 (Quality of Income Ratio)": 0.6536536536536537
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "自由现金流收益质量 (Quality of Income Ratio)": 0.7789618425575799
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "自由现金流收益质量 (Quality of Income Ratio)": 0.7947096904713736
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "自由现金流收益质量 (Quality of Income Ratio)": 0.8240571301048873
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "自由现金流收益质量 (Quality of Income Ratio)": 0.8765812776723593
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "自由现金流收益质量 (Quality of Income Ratio)": 0.8252871864957707
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "自由现金流收益质量 (Quality of Income Ratio)": 0.823182032354327
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "自由现金流收益质量 (Quality of Income Ratio)": 0.800110101844206
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "自由现金流收益质量 (Quality of Income Ratio)": 0.665200901445611
+        }
+    ]
+}

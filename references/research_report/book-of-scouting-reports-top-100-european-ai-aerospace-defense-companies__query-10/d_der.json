@@ -1,0 +1,92 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a horizontal bar chart showing the top 10 companies by `maturity-adjusted Mosaic`, computed as `Mosaic / Commercial Maturity`, after excluding rows with `Commercial Maturity = N/A / 5` or `0`, expressing the value in `Mosaic points per maturity point`, and color the bars by segment.",
+  "status": "completed",
+  "title": "Top companies by maturity-adjusted Mosaic",
+  "chart_kind": "horizontal_bar",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "Mosaic points per maturity point",
+  "sort_rule": "descending by maturity_adjusted_mosaic",
+  "selection_rule": "top 10 excluding missing or zero maturity",
+  "metadata": {
+    "entity_field": "entity",
+    "value_field": "maturity_adjusted_mosaic",
+    "hue_field": "segment",
+    "figsize": [
+      12,
+      7
+    ]
+  },
+  "records": [
+    {
+      "entity": "Swarm Biotactics",
+      "segment": "Defense",
+      "maturity_adjusted_mosaic": 674.0,
+      "commercial_maturity": 1.0,
+      "mosaic": 674
+    },
+    {
+      "entity": "Tencore",
+      "segment": "Defense",
+      "maturity_adjusted_mosaic": 594.0,
+      "commercial_maturity": 1.0,
+      "mosaic": 594
+    },
+    {
+      "entity": "ORUS",
+      "segment": "Aerospace (dual-use)",
+      "maturity_adjusted_mosaic": 582.0,
+      "commercial_maturity": 1.0,
+      "mosaic": 582
+    },
+    {
+      "entity": "Hive Robotics",
+      "segment": "Aerospace (dual-use)",
+      "maturity_adjusted_mosaic": 570.0,
+      "commercial_maturity": 1.0,
+      "mosaic": 570
+    },
+    {
+      "entity": "Voltrac",
+      "segment": "Defense",
+      "maturity_adjusted_mosaic": 550.0,
+      "commercial_maturity": 1.0,
+      "mosaic": 550
+    },
+    {
+      "entity": "Lendurai",
+      "segment": "Aerospace (dual-use)",
+      "maturity_adjusted_mosaic": 526.0,
+      "commercial_maturity": 1.0,
+      "mosaic": 526
+    },
+    {
+      "entity": "Kara Dag",
+      "segment": "Aerospace (dual-use)",
+      "maturity_adjusted_mosaic": 501.0,
+      "commercial_maturity": 1.0,
+      "mosaic": 501
+    },
+    {
+      "entity": "Skyral",
+      "segment": "Aerospace (dual-use)",
+      "maturity_adjusted_mosaic": 386.0,
+      "commercial_maturity": 2.0,
+      "mosaic": 772
+    },
+    {
+      "entity": "Alpine Eagle",
+      "segment": "Aerospace (dual-use)",
+      "maturity_adjusted_mosaic": 345.5,
+      "commercial_maturity": 2.0,
+      "mosaic": 691
+    },
+    {
+      "entity": "sensmore",
+      "segment": "Defense",
+      "maturity_adjusted_mosaic": 337.0,
+      "commercial_maturity": 2.0,
+      "mosaic": 674
+    }
+  ]
+}

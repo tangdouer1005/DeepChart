@@ -1,0 +1,75 @@
+{
+    "plot_data": [
+        {
+            "Model": "conch",
+            "Category": "Morphology",
+            "AUROC": 0.7659939108398429,
+            "Dataset": 1.2
+        },
+        {
+            "Model": "biomedclip",
+            "Category": "Morphology",
+            "AUROC": 0.7331658780868027,
+            "Dataset": 15.0
+        },
+        {
+            "Model": "plip",
+            "Category": "Morphology",
+            "AUROC": 0.6983860366946149,
+            "Dataset": 0.208
+        },
+        {
+            "Model": "conch",
+            "Category": "Biomarker",
+            "AUROC": 0.726168367463843,
+            "Dataset": 1.2
+        },
+        {
+            "Model": "biomedclip",
+            "Category": "Biomarker",
+            "AUROC": 0.667361737958213,
+            "Dataset": 15.0
+        },
+        {
+            "Model": "plip",
+            "Category": "Biomarker",
+            "AUROC": 0.6516216846643966,
+            "Dataset": 0.208
+        },
+        {
+            "Model": "conch",
+            "Category": "Prognosis",
+            "AUROC": 0.6318876255522493,
+            "Dataset": 1.2
+        },
+        {
+            "Model": "biomedclip",
+            "Category": "Prognosis",
+            "AUROC": 0.6051941716893544,
+            "Dataset": 15.0
+        },
+        {
+            "Model": "plip",
+            "Category": "Prognosis",
+            "AUROC": 0.5674663216946358,
+            "Dataset": 0.208
+        }
+    ],
+    "stats_data": [
+        {
+            "category": "Morphology",
+            "r": 0.07661250816855629,
+            "p": 0.9511791239949174
+        },
+        {
+            "category": "Biomarker",
+            "r": -0.25893321472137487,
+            "p": 0.8332580855389864
+        },
+        {
+            "category": "Prognosis",
+            "r": 0.1579282737538284,
+            "p": 0.8990370419326468
+        }
+    ]
+}

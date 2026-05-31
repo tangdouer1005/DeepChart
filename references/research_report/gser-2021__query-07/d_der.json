@@ -1,0 +1,95 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a bubble chart including only ecosystems in the North America section with `Total Early-Stage Funding >= $500 m` and exact values for four relevant fields; the x-axis is `Median Seed Round / Software Engineer Salary` in `salary-years`, the y-axis is `Ecosystem Value / Total Early-Stage Funding` in `x multiple`, bubble size is `Ecosystem Value` in `$B`, and labels are added to the top 8 ecosystems by highest y value.",
+  "chart_type": "bubble chart",
+  "value_unit": "salary-years / x multiple / $B",
+  "sort_rule": "labels assigned to top 8 by capital efficiency",
+  "selection_rule": "all filtered North America ecosystems with funding >= 500M",
+  "plot_spec": {
+    "title": "2021 North America Cost-Adjusted Seed vs Capital Efficiency",
+    "x_field": "x_seed_affordability",
+    "y_field": "y_capital_efficiency",
+    "size_field": "size_ecosystem_value_busd",
+    "xlabel": "Median Seed / Salary (salary-years)",
+    "ylabel": "Ecosystem Value / Early-Stage Funding (x)"
+  },
+  "records": [
+    {
+      "entity": "Austin",
+      "x_seed_affordability": 7.4419,
+      "y_capital_efficiency": 10.4211,
+      "size_ecosystem_value_busd": 19.8,
+      "label": false
+    },
+    {
+      "entity": "Boston",
+      "x_seed_affordability": 11.0132,
+      "y_capital_efficiency": 20.7812,
+      "size_ecosystem_value_busd": 133.0,
+      "label": true
+    },
+    {
+      "entity": "Chicago",
+      "x_seed_affordability": 6.5554,
+      "y_capital_efficiency": 22.0,
+      "size_ecosystem_value_busd": 28.6,
+      "label": true
+    },
+    {
+      "entity": "Los Angeles",
+      "x_seed_affordability": 6.5312,
+      "y_capital_efficiency": 23.8,
+      "size_ecosystem_value_busd": 119.0,
+      "label": true
+    },
+    {
+      "entity": "Miami",
+      "x_seed_affordability": 8.6538,
+      "y_capital_efficiency": 26.1538,
+      "size_ecosystem_value_busd": 17.0,
+      "label": true
+    },
+    {
+      "entity": "New York City",
+      "x_seed_affordability": 7.6415,
+      "y_capital_efficiency": 18.5294,
+      "size_ecosystem_value_busd": 189.0,
+      "label": true
+    },
+    {
+      "entity": "Philadelphia",
+      "x_seed_affordability": 6.7901,
+      "y_capital_efficiency": 18.9135,
+      "size_ecosystem_value_busd": 18.8,
+      "label": true
+    },
+    {
+      "entity": "Seattle",
+      "x_seed_affordability": 11.4286,
+      "y_capital_efficiency": 16.3333,
+      "size_ecosystem_value_busd": 49.0,
+      "label": true
+    },
+    {
+      "entity": "Silicon Valley",
+      "x_seed_affordability": 8.4034,
+      "y_capital_efficiency": 46.7727,
+      "size_ecosystem_value_busd": 1029.0,
+      "label": true
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "x_seed_affordability": 7.1429,
+      "y_capital_efficiency": 9.0435,
+      "size_ecosystem_value_busd": 20.8,
+      "label": false
+    },
+    {
+      "entity": "Washington, D.C.",
+      "x_seed_affordability": 6.5104,
+      "y_capital_efficiency": 13.7619,
+      "size_ecosystem_value_busd": 28.9,
+      "label": false
+    }
+  ]
+}

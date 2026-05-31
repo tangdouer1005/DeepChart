@@ -1,0 +1,77 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a slope chart showing the top 10 ecosystems with the largest absolute disagreement between the global rank of `Median Seed Round` and the global rank of `Software Engineer Salary` among ecosystems with complete and exact numeric fields; the left side is seed-round rank, the right side is salary rank, values are expressed in `rank position`, and items are sorted descending by absolute rank gap.",
+  "chart_type": "slope chart",
+  "value_unit": "rank position",
+  "sort_rule": "descending by absolute rank gap, ties broken by lower seed_rank then entity",
+  "selection_rule": "top 10 after deterministic tie-break",
+  "plot_spec": {
+    "title": "2021 Seed vs Salary Rank Gap",
+    "left_field": "seed_rank",
+    "right_field": "salary_rank",
+    "left_label": "seed_rank",
+    "right_label": "salary_rank"
+  },
+  "records": [
+    {
+      "entity": "Pittsburgh",
+      "seed_rank": 55,
+      "salary_rank": 10,
+      "abs_rank_gap": 45
+    },
+    {
+      "entity": "Shenzhen",
+      "seed_rank": 4,
+      "salary_rank": 47,
+      "abs_rank_gap": 43
+    },
+    {
+      "entity": "Beijing",
+      "seed_rank": 2,
+      "salary_rank": 36,
+      "abs_rank_gap": 34
+    },
+    {
+      "entity": "Shanghai",
+      "seed_rank": 3,
+      "salary_rank": 37,
+      "abs_rank_gap": 34
+    },
+    {
+      "entity": "Mississippi",
+      "seed_rank": 42,
+      "salary_rank": 13,
+      "abs_rank_gap": 29
+    },
+    {
+      "entity": "Kyoto",
+      "seed_rank": 10,
+      "salary_rank": 35,
+      "abs_rank_gap": 25
+    },
+    {
+      "entity": "Abu Dhabi",
+      "seed_rank": 21,
+      "salary_rank": 46,
+      "abs_rank_gap": 25
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "seed_rank": 37,
+      "salary_rank": 17,
+      "abs_rank_gap": 20
+    },
+    {
+      "entity": "Paris",
+      "seed_rank": 6,
+      "salary_rank": 24,
+      "abs_rank_gap": 18
+    },
+    {
+      "entity": "Washington, D.C.",
+      "seed_rank": 21,
+      "salary_rank": 4,
+      "abs_rank_gap": 17
+    }
+  ]
+}

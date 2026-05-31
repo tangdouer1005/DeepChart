@@ -1,0 +1,114 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "Net Income": 4059000000.0,
+            "Avg Total Equity": 5842000000.0,
+            "Dividends": 837000000.0,
+            "ROE(Avg)": 0.6947963026360835,
+            "Retention Ratio": 0.7937915742793792
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "Net Income": 3915000000.0,
+            "Avg Total Equity": 5562000000.0,
+            "Dividends": 942000000.0,
+            "ROE(Avg)": 0.7038834951456311,
+            "Retention Ratio": 0.7593869731800766
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "Net Income": 5859000000.0,
+            "Avg Total Equity": 5431500000.0,
+            "Dividends": 1044000000.0,
+            "ROE(Avg)": 1.0787075393537695,
+            "Retention Ratio": 0.8218125960061444
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "Net Income": 8118000000.0,
+            "Avg Total Equity": 5644000000.0,
+            "Dividends": 1345000000.0,
+            "ROE(Avg)": 1.4383416017009214,
+            "Retention Ratio": 0.8343187977334319
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "Net Income": 6411000000.0,
+            "Avg Total Equity": 6142000000.0,
+            "Dividends": 1605000000.0,
+            "ROE(Avg)": 1.0437968088570495,
+            "Retention Ratio": 0.7496490407112775
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "Net Income": 8687000000.0,
+            "Avg Total Equity": 6851500000.0,
+            "Dividends": 1741000000.0,
+            "ROE(Avg)": 1.2678975406845217,
+            "Retention Ratio": 0.7995855876597214
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Net Income": 9930000000.0,
+            "Avg Total Equity": 6805000000.0,
+            "Dividends": 1903000000.0,
+            "ROE(Avg)": 1.4592211609110948,
+            "Retention Ratio": 0.8083585095669688
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Net Income": 11195000000.0,
+            "Avg Total Equity": 6613500000.0,
+            "Dividends": 2158000000.0,
+            "ROE(Avg)": 1.6927496786875331,
+            "Retention Ratio": 0.8072353729343457
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "Net Income": 12874000000.0,
+            "Avg Total Equity": 6707000000.0,
+            "Dividends": 2448000000.0,
+            "ROE(Avg)": 1.9194871030266885,
+            "Retention Ratio": 0.8098493086841696
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "可持续增长率 (Sustainable Growth Rate, SGR)": 0.5515234508729887
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "可持续增长率 (Sustainable Growth Rate, SGR)": 0.5345199568500539
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "可持续增长率 (Sustainable Growth Rate, SGR)": 0.8864954432477217
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "可持续增长率 (Sustainable Growth Rate, SGR)": 1.2000354358610914
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "可持续增长率 (Sustainable Growth Rate, SGR)": 0.78248127645718
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "可持续增长率 (Sustainable Growth Rate, SGR)": 1.0137926001605488
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "可持续增长率 (Sustainable Growth Rate, SGR)": 1.1795738427626745
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "可持续增长率 (Sustainable Growth Rate, SGR)": 1.3664474181598245
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "可持续增长率 (Sustainable Growth Rate, SGR)": 1.5544953034143432
+        }
+    ]
+}

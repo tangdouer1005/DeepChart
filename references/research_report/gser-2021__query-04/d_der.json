@@ -1,0 +1,88 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a bubble chart including only ecosystems in the Asia section with `Total Early-Stage Funding >= $100 m` and exact values for all five core fields; the x-axis is `Software Engineer Salary` in `$k`, the y-axis is `Median Series A Round / Median Seed Round` in `x multiple`, bubble size is `Total Early-Stage Funding` in `$M`, and only the top 10 ecosystems by funding are kept.",
+  "chart_type": "bubble chart",
+  "value_unit": "$k / x multiple / $M",
+  "sort_rule": "descending by total early-stage funding",
+  "selection_rule": "top 10 Asia ecosystems with funding >= 100M",
+  "plot_spec": {
+    "title": "2021 Asia Funding vs Stage Step-Up",
+    "x_field": "x_salary_kusd",
+    "y_field": "y_stage_multiple",
+    "size_field": "size_funding_musd",
+    "xlabel": "Software Engineer Salary ($k)",
+    "ylabel": "Median Series A / Median Seed (x)"
+  },
+  "records": [
+    {
+      "entity": "Beijing",
+      "x_salary_kusd": 42.0,
+      "y_stage_multiple": 2.9553,
+      "size_funding_musd": 10800.0,
+      "label": true
+    },
+    {
+      "entity": "Shanghai",
+      "x_salary_kusd": 37.0,
+      "y_stage_multiple": 3.2639,
+      "size_funding_musd": 5100.0,
+      "label": true
+    },
+    {
+      "entity": "Shenzhen",
+      "x_salary_kusd": 27.0,
+      "y_stage_multiple": 3.0952,
+      "size_funding_musd": 3200.0,
+      "label": true
+    },
+    {
+      "entity": "Tokyo",
+      "x_salary_kusd": 70.0,
+      "y_stage_multiple": 3.5398,
+      "size_funding_musd": 2800.0,
+      "label": true
+    },
+    {
+      "entity": "Seoul",
+      "x_salary_kusd": 47.0,
+      "y_stage_multiple": 6.8041,
+      "size_funding_musd": 2500.0,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "x_salary_kusd": 48.0,
+      "y_stage_multiple": 8.0,
+      "size_funding_musd": 2000.0,
+      "label": true
+    },
+    {
+      "entity": "Bangalore-Karnataka",
+      "x_salary_kusd": 13.0,
+      "y_stage_multiple": 8.125,
+      "size_funding_musd": 1400.0,
+      "label": true
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "x_salary_kusd": 17.0,
+      "y_stage_multiple": 7.2848,
+      "size_funding_musd": 165.0,
+      "label": true
+    },
+    {
+      "entity": "Telangana",
+      "x_salary_kusd": 12.0,
+      "y_stage_multiple": 20.0,
+      "size_funding_musd": 120.0,
+      "label": true
+    },
+    {
+      "entity": "Manila",
+      "x_salary_kusd": 8.6,
+      "y_stage_multiple": 23.0415,
+      "size_funding_musd": 101.0,
+      "label": true
+    }
+  ]
+}

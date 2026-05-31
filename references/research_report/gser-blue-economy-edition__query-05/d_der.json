@@ -1,0 +1,47 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a horizontal bar chart comparing `maturity multiple = Ecosystem Value / Total Early-Stage Funding` across the U.S. ecosystems `Silicon Valley - Bay Area`, `New York City`, `Los Angeles`, `Boston`, `San Diego`, `Miami`, `Philadelphia`, and `Mississippi`, with the result expressed as `x multiple`, sorted descending, and keeping all U.S. items.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by maturity_multiple",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "Blue Economy US Maturity Multiple",
+    "xlabel": "x multiple",
+    "value_field": "maturity_multiple"
+  },
+  "records": [
+    {
+      "entity": "Mississippi",
+      "maturity_multiple": 333.3333
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "maturity_multiple": 80.0
+    },
+    {
+      "entity": "Los Angeles",
+      "maturity_multiple": 50.339
+    },
+    {
+      "entity": "Philadelphia",
+      "maturity_multiple": 35.3846
+    },
+    {
+      "entity": "San Diego",
+      "maturity_multiple": 33.5714
+    },
+    {
+      "entity": "Boston",
+      "maturity_multiple": 30.5747
+    },
+    {
+      "entity": "New York City",
+      "maturity_multiple": 26.5
+    },
+    {
+      "entity": "Miami",
+      "maturity_multiple": 18.9474
+    }
+  ]
+}

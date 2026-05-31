@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const chartData = {
+    "plot_data": [
+        {
+            "flow_rate": 4.0,
+            "heat_power": 12.54969,
+            "h2_power": 2.56383
+        },
+        {
+            "flow_rate": 4.22222,
+            "heat_power": 12.94205,
+            "h2_power": 2.55607
+        },
+        {
+            "flow_rate": 4.44444,
+            "heat_power": 13.30578,
+            "h2_power": 2.54881
+        },
+        {
+            "flow_rate": 4.66667,
+            "heat_power": 13.64379,
+            "h2_power": 2.54199
+        },
+        {
+            "flow_rate": 4.88889,
+            "heat_power": 13.95868,
+            "h2_power": 2.53551
+        },
+        {
+            "flow_rate": 5.11111,
+            "heat_power": 14.25273,
+            "h2_power": 2.52925
+        },
+        {
+            "flow_rate": 5.33333,
+            "heat_power": 14.52797,
+            "h2_power": 2.52308
+        },
+        {
+            "flow_rate": 5.55556,
+            "heat_power": 14.78616,
+            "h2_power": 2.51698
+        },
+        {
+            "flow_rate": 5.77778,
+            "heat_power": 15.02868,
+            "h2_power": 2.51115
+        },
+        {
+            "flow_rate": 6.0,
+            "heat_power": 15.25653,
+            "h2_power": 2.5061
+        }
+    ]
+};
+
+        const data = chartData.plot_data;
+        
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const color_fuel = '#757575'; // Grey
+        const color_heat = '#D35E5E'; // Muted Red
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 60, bottom: 60, left: 60 },
+            xAxis: {
+                type: 'value',
+                name: 'Water flow rate (l min⁻¹)',
+                nameLocation: 'middle',
+                nameGap: 35,
+                min: 3.7,
+                max: 6.3,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    name: 'Power fuel (kW)',
+                    nameLocation: 'middle',
+                    nameGap: 40,
+                    min: 2.50,
+                    max: 2.57,
+                    interval: 0.02,
+                    axisLabel: { color: 'black' },
+                    axisLine: { show: true, lineStyle: { color: 'black' } },
+                    splitLine: { show: false }
+                },
+                {
+                    type: 'value',
+                    name: 'Power heat (kW)',
+                    nameLocation: 'middle',
+                    nameGap: 40,
+                    min: 12,
+                    max: 15.5,
+                    interval: 1,
+                    position: 'right',
+                    axisLabel: { color: 'black' },
+                    axisLine: { show: true, lineStyle: { color: 'black' } },
+                    nameTextStyle: { color: color_heat }, // Label is red
+                    splitLine: { show: false }
+                }
+            ],
+            series: [
+                {
+                    name: 'Power fuel',
+                    type: 'line',
+                    data: data.map(d => [d.flow_rate, d.h2_power]),
+                    symbol: 'rect', // Square marker
+                    symbolSize: 9,
+                    itemStyle: { color: color_fuel, borderColor: color_fuel },
+                    lineStyle: { width: 0.8, color: color_fuel },
+                    yAxisIndex: 0
+                },
+                {
+                    name: 'Power heat',
+                    type: 'line',
+                    data: data.map(d => [d.flow_rate, d.heat_power]),
+                    symbol: 'triangle', // Triangle marker
+                    symbolSize: 9,
+                    itemStyle: { color: color_heat, borderColor: color_heat },
+                    lineStyle: { width: 0.8, type: 'dashed', color: color_heat },
+                    yAxisIndex: 1
+                }
+            ]
+        };
+
+        chart.setOption(option); // Initial chart render
+
+        // Function to create and update graphic elements (annotations)
+        function updateGraphicElements() {
+            // Vertical dashed line at 4.88889
+            const vertical_line_x_value = 4.88889;
+
+            // These pixel conversions need to happen after the chart is rendered
+            // Using yAxisIndex: 0 (the first y-axis) to get the pixel range for the grid
+            const y_bottom_pixel = chart.convertToPixel({yAxisIndex: 0}, chart.getOption().yAxis[0].min);
+            const y_top_pixel = chart.convertToPixel({yAxisIndex: 0}, chart.getOption().yAxis[0].max);
+
+            return [
+                { type: 'text', left: 10, top: 10, style: { text: 'a', font: 'bold 24px Arial' } },
+                {
+                    type: 'line',
+                    shape: {
+                        x1: chart.convertToPixel('xAxis', vertical_line_x_value),
+                        y1: y_bottom_pixel,
+                        x2: chart.convertToPixel('xAxis', vertical_line_x_value),
+                        y2: y_top_pixel
+                    },
+                    style: { stroke: 'gray', lineWidth: 0.8, lineDash: [5, 5] }
+                }
+            ];
+        }
+
+        // Apply graphic elements after the chart has rendered
+        chart.setOption({ graphic: updateGraphicElements() });
+
+        // Update graphic elements on resize
+        window.addEventListener('resize', () => {
+            chart.resize();
+            chart.setOption({ graphic: updateGraphicElements() });
+        });
+    </script>
+</body>
+</html>

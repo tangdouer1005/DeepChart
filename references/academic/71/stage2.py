@@ -1,0 +1,160 @@
+import sys
+import io
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+
+# 1. Source Data (Figure 3A Go)
+csv_data = """Compound,Vehicle,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7,Unnamed: 8,Unnamed: 9,Unnamed: 10,Unnamed: 11,Unnamed: 12,Vehicle + 100 nM NT,Unnamed: 14,Unnamed: 15,Unnamed: 16,Unnamed: 17,Unnamed: 18,Unnamed: 19,Unnamed: 20,Unnamed: 21,Unnamed: 22,Unnamed: 23,Unnamed: 24,SBI-553 + 100 nM NT,Unnamed: 26,Unnamed: 27,Unnamed: 28,Unnamed: 29,Unnamed: 30,Unnamed: 31,Unnamed: 32,Unnamed: 33,Unnamed: 34,Unnamed: 35,Unnamed: 36,SR142948A + 100 nM NT,Unnamed: 38,Unnamed: 39,Unnamed: 40,Unnamed: 41,Unnamed: 42,Unnamed: 43,Unnamed: 44,Unnamed: 45,Unnamed: 46,Unnamed: 47,Unnamed: 48
+nan,4/11/24,4/11/24,4/11/24,4/5/24,4/5/24,4/5/24,3/29/24 #2,3/29/24 #2,3/29/24 #2,4/19/24,4/19/24,4/19/24,4/11/24,4/11/24,4/11/24,4/5/24,4/5/24,4/5/24,3/29/24 #2,3/29/24 #2,3/29/24 #2,4/19/24,4/19/24,4/19/24,4/11/24,4/11/24,4/11/24,4/5/24,4/5/24,4/5/24,3/29/24 #2,3/29/24 #2,3/29/24 #2,4/19/24,4/19/24,4/19/24,4/11/24,4/11/24,4/11/24,4/5/24,4/5/24,4/5/24,3/29/24 #2,3/29/24 #2,3/29/24 #2,4/19/24,4/19/24,4/19/24
+3e-06,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.02256109042,0.01990245891,0.01544612362,0.02046966544,0.01434083284,0.01262746739,0.02806684934,0.03273414984,0.03294598154,0.02550837311,0.02507485415,0.0180587963,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+1e-06,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.01958476241,0.02804749235,0.02149376458,0.01811065894,0.01549913848,0.02332652541,0.0229024698,0.01585129167,0.01614560368,0.02203960867,0.02639970082,0.02087282258,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+3e-07,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.02804544523,0.01757308593,0.02339129409,0.02172184925,0.01926689075,0.01526122898,0.03388650214,0.03408741411,0.01850473792,0.02207260129,0.02910768487,0.01882659423,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+1e-07,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.02283186551,0.02850353727,0.02285613164,0.01209409501,0.0150640595,0.004161954723,0.03002121092,0.02505185791,0.01760945955,0.02543229193,0.0247845365,0.02043286097,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+3e-08,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.01601400607,0.02245741728,0.01572821965,0.01500411986,0.01620881612,-0.002858228929,0.04010968152,0.03009570834,0.01378465662,0.02841582737,0.02427437432,0.02878932559,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+1e-08,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.01628843186,0.02105740306,0.02338913084,0.01617769616,0.01335575454,0.01383159268,0.03764786744,0.02501875011,0.02113348052,0.02992193027,0.03420932929,0.02818565883,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+3e-09,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.01787426069,0.01925386765,0.01057465146,0.0210250226,0.02210727128,0.0240341048,0.03716082406,0.02414246002,0.02113573036,0.01964978945,0.02660873118,0.02557709839,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+1e-11,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.02319632338,0.0253108335,0.02959918666,0.0246836057,0.02369408653,0.02238484836,0.02319632338,0.02531083352,0.0238290407,0.02632293334,0.02281819815,0.02172780896,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+0.0001*,0.00418873897*,0.0007452421557*,0.01315851115*,-0.0005238446045*,0.003233806113*,0.006717560266*,0.00244373859*,0.002957072949*,0.00131653915*,0.003401256191*,0.01979822311*,0.001102006657*,0.03012816815*,0.02794626277*,0.03191320649*,0.03488537484*,0.04124318993*,0.02855263767*,0.02954109736*,0.03129435903*,0.03176249275*,0.03184387761*,0.02391061545*,0.02615036019*,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.00982940494*,0.0113663146*,0.01762709633*,0.0117968429*,0.01779754869*,0.008894552954*,0.004399071206*,0.002591204488*,0.0110799041*,0.01052017926*,0.01132953717*,0.01121411137*
+1e-05,0.004083235787,0.003534494952,0.004372010576,-0.003805343084,0.006012828961,0.008286983471,0.003860912277,0.003931585024,-0.0009966839549,0.004743458791,0.007480296072,0.00380690507,0.0207501377,0.02606615307,0.03006254204,0.02488965026,0.02424096805,0.02092410643,0.03239131941,0.03419218739,0.03173005741,0.02764093688,0.0199189784,0.02627570154,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.01025168531,0.0112533555,0.01209064387,0.003227794109,0.00467411962,0.0003641922035,0.001970636257,-0.001601441451,0.008061731677,0.003009786581,0.00552494771,0.003225769228
+1e-06,0.006979741657,0.01599035634,-0.00145887239,-0.003045027806,0.00532941992,0.003664680314,0.002783240528,0.006381964642,0.002108122595,0.009632168999,0.0001802107703,0.01073819338,0.03407550359,0.03270755691,0.02622657748,0.02853496034,0.02738777543,0.01970637473,0.02059158959,0.01750072658,0.01547275163,0.03459216643,0.02949467997,0.02410027012,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.01174876307,0.002525243408,0.01729272924,0.006613188992,0.003026369945,0.006097574847,-0.01131660276,-0.01009439837,-0.0003351828207,0.005515641014,0.01499321157,0.004681837161
+1e-07,0.0009161255648,0.004750502435,0.005801763621,0.004361993058,0.003454008462,0.003439652973,0.004243323786,-0.0006261400015,0.007777747771,0.003310767991,0.001092594832,0.001684624403,0.02540074979,0.02888264914,0.04261427811,0.0194729708,0.01958140986,0.01815181114,0.02789618433,0.02473844018,0.02745645553,0.02593719973,0.02392855426,0.02804580063,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.008149282801,0.01498760559,0.01918624917,0.002231861315,-0.002287387015,0.003426296553,-0.007284029013,-0.002693630343,-1.144601371e-05,0.005686313753,0.001955970729,0.009197558558
+1e-08,0.003580949834,0.004615521934,0.0009920772556,0.003440660368,0.001560345435,0.001059036496,0.004532007992,0.004777209149,0.003305581947,0.001988042934,0.002757051854,0.004696750243,0.02550130003,0.02697886644,0.0185943418,0.02358499632,0.02187571431,0.02097670819,0.03257580126,0.03245117907,0.03346224547,0.02886241339,0.03357184878,0.02704365922,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.01932012143,0.01565858226,0.02897686526,0.01137014077,0.0174773752,0.01501724624,0.00751494452,0.0161720016,0.008447972347,0.01645243064,0.01917664951,0.01377451314
+1e-09,0.003301394263,0.008558309687,0.00299967769,0.002619956916,0.001034363247,0.001846944974,0.003899650603,0.001917276179,0.001339781092,0.0001821482782,0.006705882155,0.009779296597,0.03098596966,0.02741478409,0.02157967009,0.02651469685,0.01711362194,0.02100564479,0.02526263198,0.03199200724,0.02771431172,0.03010615666,0.03008050095,0.02820387959,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.02140337832,0.02693138441,0.031932716,0.01807482699,0.02385854695,0.01643938966,0.0262438333,0.01777498882,0.02118901494,0.03057976925,0.02801379781,0.02789420503
+1e-10,0.01437927652,0.0005137481027,0.00233433028,0.002327162845,0.007381677638,0.002189518724,0.006260396745,0.003214467239,0.0005767494145,-0.003081011303,0.01317545315,0.009920212808,0.02268034126,0.017467053,0.02209432856,0.03427051713,0.01777519326,0.02557636228,0.006921772371,0.03402913475,0.02918543106,0.03022093677,0.02813148155,0.03388710294,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.03402735977,0.0198863382,0.02188184962,0.02080750233,0.02849368481,0.02260359474,0.02069757737,0.02060020808,0.02226114399,0.02899759038,0.02565537509,0.02404215414
+1e-11,0.003344258772,0.007386488525,0.012692556,0.0008290128136,0.002789628746,0.003056579752,-0.0002068916132,0.002913045506,0.004586508992,-0.001225410954,0.005488993035,0.007308644848,0.03063333407,0.02180176332,0.01702838689,0.03063333407,0.02180176332,0.01702838689,0.03244702761,0.02239963007,0.02196732695,0.03100553506,0.03416908899,0.03951081188,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.02522533936,0.02351366071,0.03196984739,0.01809100388,0.0252588977,0.02338866497,0.02768571713,0.0225975453,0.02227364485,0.0319495257,0.0225361067,0.02522724327
+"""
+
+# 2. Data Processing
+def clean_value(val):
+    if pd.isna(val):
+        return np.nan
+    if isinstance(val, str):
+        val = val.replace('*', '').strip()
+        if val == '' or val.lower() == 'nan':
+            return np.nan
+    try:
+        return float(val)
+    except ValueError:
+        return np.nan
+
+# Read CSV
+df = pd.read_csv(io.StringIO(csv_data))
+
+# Clean all columns
+for col in df.columns:
+    df[col] = df[col].apply(clean_value)
+
+# Drop rows where Compound is NaN (metadata rows)
+df = df.dropna(subset=['Compound'])
+
+# Define column groups
+vehicle_cols = df.columns[1:13]  # Cols 2-13
+vehicle_nt_cols = df.columns[13:25] # Cols 14-25
+sbi_cols = df.columns[25:37] # Cols 26-37
+sr_cols = df.columns[37:49] # Cols 38-49
+
+# Helper to extract group data
+def extract_group_data(dataframe, cols):
+    # Filter rows where at least one column in the group has data
+    subset = dataframe.dropna(subset=cols, how='all').copy()
+    if subset.empty:
+        return None
+    
+    x_vals = np.log10(subset['Compound'].values)
+    
+    # Calculate mean and SEM row-wise
+    y_vals = subset[cols].mean(axis=1).values
+    y_err = subset[cols].sem(axis=1).values
+    
+    return x_vals, y_vals, y_err
+
+# Extract data for each group
+data_vehicle = extract_group_data(df, vehicle_cols)
+data_vehicle_nt = extract_group_data(df, vehicle_nt_cols)
+data_sbi = extract_group_data(df, sbi_cols)
+data_sr = extract_group_data(df, sr_cols)
+
+# 3. Curve Fitting
+def sigmoid(x, Top, Bottom, LogEC50, HillSlope):
+    return Bottom + (Top - Bottom) / (1 + 10**((LogEC50 - x) * HillSlope))
+
+def fit_and_plot(ax, x, y, yerr, color, label, initial_guess=None):
+    # Plot points
+    ax.errorbar(x, y, yerr=yerr, fmt='o', color=color, ecolor=color, 
+                capsize=3, markersize=8, elinewidth=1.5, label=label)
+    
+    # Fit curve
+    # Initial guess: [Top, Bottom, LogEC50, HillSlope]
+    if initial_guess is None:
+        initial_guess = [max(y), min(y), np.mean(x), 1.0]
+        
+    try:
+        popt, _ = curve_fit(sigmoid, x, y, p0=initial_guess, maxfev=10000)
+        
+        # Generate smooth line
+        x_smooth = np.linspace(min(x)-0.5, max(x)+0.5, 200)
+        y_smooth = sigmoid(x_smooth, *popt)
+        ax.plot(x_smooth, y_smooth, color=color, linewidth=2)
+    except Exception:
+        # Fallback: plot a line connecting points or a flat line if fit fails
+        # For flat controls, just plot mean line
+        mean_y = np.mean(y)
+        ax.axhline(mean_y, color=color, linewidth=2, linestyle='-')
+
+# 4. Plotting
+fig, ax = plt.subplots(figsize=(5, 4))
+
+# Plot each group
+# Vehicle (Grey)
+if data_vehicle:
+    fit_and_plot(ax, *data_vehicle, color='#808080', label='Vehicle', 
+                 initial_guess=[0.004, 0.004, -8, 1]) # Flat guess
+
+# Vehicle + NT (Blue)
+if data_vehicle_nt:
+    fit_and_plot(ax, *data_vehicle_nt, color='#00008B', label='Vehicle + NT',
+                 initial_guess=[0.026, 0.026, -8, 1]) # Flat guess
+
+# SBI-553 (Purple)
+if data_sbi:
+    fit_and_plot(ax, *data_sbi, color='#bf40bf', label='SBI-553',
+                 initial_guess=[0.022, 0.020, -7, 1])
+
+# SR142948A (Orange)
+if data_sr:
+    fit_and_plot(ax, *data_sr, color='#ed7d31', label='SR142948A',
+                 initial_guess=[0.025, 0.005, -7.5, -1])
+
+# Styling
+ax.set_xlabel('log[Compound] (M)', fontsize=12, fontname='Arial')
+ax.set_ylabel('Mini G$_o$ recruitment\n($\Delta$ Net BRET)', fontsize=12, fontname='Arial')
+
+# Axis limits and ticks
+ax.set_xlim(-12, -3.5)
+ax.set_xticks([-12, -10, -8, -6, -4])
+
+ax.set_ylim(-0.005, 0.04)
+ax.set_yticks([0, 0.01, 0.02, 0.03, 0.04])
+
+# Dotted line at y=0
+ax.axhline(0, color='black', linestyle=':', linewidth=1.5)
+
+# Remove top and right spines
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+
+# Tick parameters
+ax.tick_params(axis='both', which='major', labelsize=11, direction='out', length=5)
+
+# Layout adjustment
+plt.tight_layout()
+
+# Save output
+output_file = 'output.png'
+if len(sys.argv) > 1:
+    output_file = sys.argv[1]
+
+plt.savefig(output_file, dpi=300)

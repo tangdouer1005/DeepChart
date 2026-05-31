@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>abbv 皮奥特罗斯基 F-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f7f8fa;
+      color: #222;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      padding: 20px 24px 32px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      margin: 0 0 4px 0;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin: 0 0 14px 0;
+      text-align: center;
+      color: #555;
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: #777;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border-radius: 999px;
+      border: 1px solid #d0d7de;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      background: #ffffff;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+
+    button:hover {
+      background: #f0f4ff;
+      border-color: #4c6fff;
+      color: #1f3bb3;
+    }
+
+    button.active {
+      background: #4c6fff;
+      color: #ffffff;
+      border-color: #4c6fff;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .chart-container {
+        padding: 16px 12px 22px;
+      }
+      h1 {
+        font-size: 1.1rem;
+      }
+      h2 {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>abbv 皮奥特罗斯基 F-Score 变化</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="meta">数据来源：用户提供的年度 Piotroski F-Score（RESULT_F_Score）</div>
+
+    <div class="controls">
+      <button id="barBtn" class="active">柱状图</button>
+      <button id="lineBtn">折线图</button>
+      <button id="toggleValuesBtn">显示 / 隐藏数值标签</button>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="fScoreChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Register custom plugin BEFORE creating the chart
+    const customValueLabelsPlugin = {
+      id: 'customValueLabels',
+      afterDatasetsDraw(chart, args, pluginOptions) {
+        const show = chart.options.plugins && chart.options.plugins.customValueLabels;
+        if (!show) return;
+
+        const { ctx } = chart;
+        ctx.save();
+        ctx.font = '11px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillStyle = '#333';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+
+        chart.data.datasets.forEach((dataset, datasetIndex) => {
+          const meta = chart.getDatasetMeta(datasetIndex);
+          meta.data.forEach((element, index) => {
+            const value = dataset.data[index];
+            if (value == null) return;
+            const position = element.tooltipPosition();
+            ctx.fillText(value, position.x, position.y - 6);
+          });
+        });
+
+        ctx.restore();
+      }
+    };
+
+    // Register the plugin globally
+    Chart.register(customValueLabelsPlugin);
+
+    // Source data
+    const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const fScores = [6, 5, 7, 7, 4, 6, 8, 5, 6];
+
+    const baseColor = 'rgba(76, 111, 255, 0.85)';
+    const baseBorderColor = 'rgba(48, 82, 220, 1)';
+
+    const ctx = document.getElementById('fScoreChart').getContext('2d');
+
+    const chartConfig = {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [{
+          label: 'Piotroski F-Score',
+          data: fScores,
+          backgroundColor: baseColor,
+          borderColor: baseBorderColor,
+          borderWidth: 1.5,
+          borderRadius: 6,
+          hoverBackgroundColor: 'rgba(76, 111, 255, 1)',
+          hoverBorderColor: 'rgba(35, 60, 180, 1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function(context) {
+                return ' F-Score: ' + context.parsed.y;
+              }
+            }
+          },
+          legend: {
+            display: false
+          },
+          // customValueLabels flag (used by our plugin)
+          customValueLabels: false
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Fiscal Year',
+              color: '#444',
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              color: '#555'
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 9,
+            title: {
+              display: true,
+              text: 'Piotroski F-Score',
+              color: '#444',
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              stepSize: 1,
+              color: '#555',
+              precision: 0
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          }
+        }
+      }
+    };
+
+    const fScoreChart = new Chart(ctx, chartConfig);
+
+    // Buttons
+    const barBtn = document.getElementById('barBtn');
+    const lineBtn = document.getElementById('lineBtn');
+    const toggleValuesBtn = document.getElementById('toggleValuesBtn');
+
+    let valuesShown = false;
+
+    // Toggle chart type between bar and line
+    barBtn.addEventListener('click', () => {
+      if (fScoreChart.config.type !== 'bar') {
+        fScoreChart.config.type = 'bar';
+        const ds = fScoreChart.data.datasets[0];
+        ds.type = 'bar';              // keep dataset in sync
+        ds.borderWidth = 1.5;
+        ds.borderRadius = 6;
+        ds.fill = false;
+        fScoreChart.update();
+      }
+      barBtn.classList.add('active');
+      lineBtn.classList.remove('active');
+    });
+
+    lineBtn.addEventListener('click', () => {
+      if (fScoreChart.config.type !== 'line') {
+        fScoreChart.config.type = 'line';
+        const ds = fScoreChart.data.datasets[0];
+        ds.type = 'line';
+        ds.borderWidth = 2;
+        ds.borderRadius = 0;
+        ds.fill = false;
+        fScoreChart.update();
+      }
+      lineBtn.classList.add('active');
+      barBtn.classList.remove('active');
+    });
+
+    // Toggle inline numeric value labels
+    toggleValuesBtn.addEventListener('click', () => {
+      valuesShown = !valuesShown;
+      fScoreChart.options.plugins.customValueLabels = valuesShown;
+      if (valuesShown) {
+        toggleValuesBtn.classList.add('active');
+      } else {
+        toggleValuesBtn.classList.remove('active');
+      }
+      fScoreChart.update();
+    });
+  </script>
+</body>
+</html>

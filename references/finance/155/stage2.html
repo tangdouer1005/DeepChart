@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta 格雷厄姆“烟蒂股”净值 (NNWC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 4px 0;
+    }
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin: 0 0 16px 0;
+      color: #555;
+    }
+    .chart-container {
+      position: relative;
+      max-width: 960px;
+      height: 520px; /* explicit height avoids sizing issues */
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 18px 22px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .footer-note {
+      max-width: 960px;
+      margin: 10px auto 0;
+      font-size: 0.78rem;
+      color: #666;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .chart-container {
+        padding: 12px;
+        height: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>Meta 格雷厄姆“烟蒂股”净值 (NNWC) 每股变动</h1>
+    <h2>2016–2024 财年，单位：每股 NNWC</h2>
+    <canvas id="nnwcChart"></canvas>
+  </div>
+  <div class="footer-note">
+    数据来源：用户提供；图表为交互式，可悬停查看精确数值。
+  </div>
+
+  <script>
+    // 数据
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const nnwcPerShare = [
+      9.789401709401709,
+      12.985791610284169,
+      12.760356042451216,
+      11.788247566063978,
+      15.458448753462603,
+      8.939489331934242,
+      -0.1720947446336047,
+      3.3891213389121337,
+      2.5355776587605203
+    ];
+
+    function createBarColors(ctx, data) {
+      const chartArea = ctx.chart ? ctx.chart.chartArea : null;
+      const height = chartArea ? chartArea.bottom - chartArea.top : 400;
+
+      const positiveGradient = ctx.createLinearGradient(0, 0, 0, height);
+      positiveGradient.addColorStop(0, "#1982FC");
+      positiveGradient.addColorStop(1, "#6FB6FF");
+
+      const negativeGradient = ctx.createLinearGradient(0, 0, 0, height);
+      negativeGradient.addColorStop(0, "#F97373");
+      negativeGradient.addColorStop(1, "#FECACA");
+
+      const bgColors = [];
+      const borderColors = [];
+
+      data.forEach((value) => {
+        if (value >= 0) {
+          bgColors.push(positiveGradient);
+          borderColors.push("#145BB5");
+        } else {
+          bgColors.push(negativeGradient);
+          borderColors.push("#C53030");
+        }
+      });
+
+      return { bgColors, borderColors };
+    }
+
+    window.addEventListener("load", function () {
+      const canvas = document.getElementById("nnwcChart");
+      if (!canvas) {
+        console.error("Canvas element with id 'nnwcChart' not found.");
+        return;
+      }
+      const ctx = canvas.getContext("2d");
+
+      const chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "NNWC 每股 (Graham’s Net-Net Working Capital per share)",
+              data: nnwcPerShare,
+              borderWidth: 1.2,
+              borderRadius: 6,
+              hoverBorderWidth: 1.6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 10,
+              right: 12,
+              bottom: 10,
+              left: 6
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                pointStyle: "rectRounded",
+                boxWidth: 10,
+                padding: 14,
+                font: {
+                  size: 11
+                }
+              }
+            },
+            tooltip: {
+              enabled: true,
+              backgroundColor: "rgba(15,23,42,0.92)",
+              borderColor: "rgba(148,163,184,0.6)",
+              borderWidth: 1,
+              padding: 10,
+              displayColors: false,
+              callbacks: {
+                label: function (context) {
+                  const value = context.parsed.y;
+                  if (value == null || isNaN(value)) return "";
+                  return " NNWC 每股: " + value.toFixed(3);
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                maxRotation: 0,
+                minRotation: 0,
+                font: {
+                  size: 11
+                }
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: "rgba(148,163,184,0.25)"
+              },
+              ticks: {
+                font: {
+                  size: 11
+                },
+                callback: function (value) {
+                  return Number(value).toFixed(0);
+                }
+              },
+              title: {
+                display: true,
+                text: "NNWC 每股 (数值)",
+                font: {
+                  size: 11
+                },
+                color: "#374151"
+              }
+            }
+          },
+          animation: {
+            duration: 900,
+            easing: "easeOutCubic"
+          }
+        }
+      });
+
+      // After initial render, apply gradients now that chartArea exists
+      function applyGradients() {
+        const { bgColors, borderColors } = createBarColors(chart.ctx, nnwcPerShare);
+        chart.data.datasets[0].backgroundColor = bgColors;
+        chart.data.datasets[0].borderColor = borderColors;
+        chart.update();
+      }
+
+      // First time
+      applyGradients();
+
+      // On resize, recompute gradients
+      window.addEventListener("resize", function () {
+        applyGradients();
+      });
+    });
+  </script>
+</body>
+</html>

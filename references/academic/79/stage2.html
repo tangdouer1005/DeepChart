@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart 79 Reproduction</title>
+    <!-- Load Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fff;
+        }
+        #chart {
+            /* 3.5 x 6 inches at roughly 96-100 DPI -> 350x600 px or scaled up */
+            width: 500px; /* Scaled up for better visibility on screen */
+            height: 857px; /* Maintain aspect ratio approx 3.5:6 */
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. Data (Injected JSON)
+        // ---------------------------------------------------------
+        const sourceData = [
+    {
+        "Label": "I",
+        "X": 20.22,
+        "Xerr": 1.78,
+        "Y": 0.07,
+        "Yerr": 0.02,
+        "Color": "#EA899A",
+        "Offset": [
+            -5,
+            5
+        ]
+    },
+    {
+        "Label": "R",
+        "X": 15.52,
+        "Xerr": 1.0,
+        "Y": 0.06,
+        "Yerr": 0.01,
+        "Color": "#D966E8",
+        "Offset": [
+            -10,
+            -10
+        ]
+    },
+    {
+        "Label": "SU",
+        "X": 20.73,
+        "Xerr": 6.58,
+        "Y": 0.12,
+        "Yerr": 0.03,
+        "Color": "#6FAEE5",
+        "Offset": [
+            -5,
+            5
+        ]
+    },
+    {
+        "Label": "T",
+        "X": 22.44,
+        "Xerr": 3.26,
+        "Y": 0.13,
+        "Yerr": 0.03,
+        "Color": "#C4B068",
+        "Offset": [
+            5,
+            5
+        ]
+    },
+    {
+        "Label": "U",
+        "X": 21.91,
+        "Xerr": 0.99,
+        "Y": 0.07,
+        "Yerr": 0.0,
+        "Color": "#7FB866",
+        "Offset": [
+            5,
+            5
+        ]
+    },
+    {
+        "Label": "(V)",
+        "X": 20.34,
+        "Xerr": 2.1,
+        "Y": 0.11,
+        "Yerr": 0.01,
+        "Color": "#C0C0C0",
+        "Offset": [
+            -15,
+            -5
+        ]
+    }
+];
+
+        // ---------------------------------------------------------
+        // 2. Plotly Traces
+        // ---------------------------------------------------------
+        
+        // We will create one trace per point to easily handle specific colors for error bars and markers simultaneously
+        
+        const traces = sourceData.map(d => ({
+            x: [d.X],
+            y: [d.Y],
+            error_x: {
+                type: 'data',
+                array: [d.Xerr],
+                visible: true,
+                color: d.Color,
+                thickness: 2.5,
+                width: 0 // capsize=0
+            },
+            error_y: {
+                type: 'data',
+                array: [d.Yerr],
+                visible: true,
+                color: d.Color,
+                thickness: 2.5,
+                width: 0 // capsize=0
+            },
+            mode: 'markers',
+            type: 'scatter',
+            marker: {
+                color: d.Color,
+                size: 14, // Roughly matching matplotlib size=9 visuals
+                opacity: 0.8 // alpha=0.8
+            },
+            hoverinfo: 'x+y+text',
+            text: d.Label,
+            showlegend: false
+        }));
+
+        // ---------------------------------------------------------
+        // 3. Annotations
+        // ---------------------------------------------------------
+        
+        // Data Labels
+        const dataAnnotations = sourceData.map(d => ({
+            x: d.X,
+            y: d.Y,
+            text: d.Label,
+            showarrow: false,
+            xshift: d.Offset[0],
+            yshift: d.Offset[1],
+            font: {
+                family: 'Arial, sans-serif',
+                size: 16, // fontsize=12 in python, scaled up slightly
+                color: 'black'
+            }
+        }));
+
+        // Figure Label "a"
+        const figLabel = {
+            xref: 'paper',
+            yref: 'paper',
+            x: 0.02,
+            y: 0.98, // Close to top left
+            text: '<b>a</b>',
+            showarrow: false,
+            font: {
+                family: 'Arial, sans-serif',
+                size: 24, // fontsize=20 scaled
+                color: 'black'
+            }
+        };
+
+        const layout = {
+            width: 500,
+            height: 857,
+            margin: { l: 80, r: 20, t: 40, b: 80 }, // Margins to fit labels
+            plot_bgcolor: 'white',
+            paper_bgcolor: 'white',
+            
+            // X Axis
+            xaxis: {
+                range: [12, 28],
+                tickvals: [15, 20, 25],
+                title: {
+                    text: 'PM<sub>10</sub> (μg m<sup>-3</sup>)',
+                    font: { size: 18, family: 'Arial, sans-serif' }
+                },
+                tickfont: { size: 16, family: 'Arial, sans-serif' },
+                ticks: 'outside',
+                ticklen: 6,
+                tickwidth: 1,
+                showline: true,
+                linecolor: 'black',
+                linewidth: 1,
+                mirror: false // Only bottom spine
+            },
+
+            // Y Axis
+            yaxis: {
+                range: [0.04, 0.165],
+                tickvals: [0.04, 0.06, 0.08, 0.10, 0.12, 0.14, 0.16],
+                title: {
+                    text: 'OP<sub>m</sub><sup>AA</sup> (nmolAA min<sup>-1</sup> μg<sup>-1</sup>)',
+                    font: { size: 18, family: 'Arial, sans-serif' }
+                },
+                tickfont: { size: 16, family: 'Arial, sans-serif' },
+                ticks: 'outside',
+                ticklen: 6,
+                tickwidth: 1,
+                showline: true,
+                linecolor: 'black',
+                linewidth: 1,
+                mirror: false // Only left spine
+            },
+            
+            annotations: [...dataAnnotations, figLabel],
+            showlegend: false
+        };
+
+        Plotly.newPlot('chart', traces, layout);
+    </script>
+</body>
+</html>

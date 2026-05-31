@@ -1,0 +1,78 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a slope chart for the 10 countries with the largest absolute gap between diagnostics share and information share in the 2020 report, where each slope connects `diagnostics / total sampled innovations` and `information / total sampled innovations`, values are expressed as percentages, countries must have at least 8 total sampled innovations, and countries are sorted by the absolute percentage-point gap after both shares are derived.",
+  "chart_type": "slope chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by absolute_gap_pp",
+  "selection_rule": "top 10 after total_innovations >= 8",
+  "plot_spec": {
+    "title": "2020 Diagnostics vs Information Share Gap",
+    "left_field": "diagnostics_share_pct",
+    "right_field": "information_share_pct",
+    "left_label": "Diagnostics share",
+    "right_label": "Information share",
+    "ylabel": "Share (%)"
+  },
+  "records": [
+    {
+      "entity": "Taiwan",
+      "diagnostics_share_pct": 69.2308,
+      "information_share_pct": 0.0,
+      "absolute_gap_pp": 69.2308
+    },
+    {
+      "entity": "South Korea",
+      "diagnostics_share_pct": 69.2308,
+      "information_share_pct": 7.6923,
+      "absolute_gap_pp": 61.5385
+    },
+    {
+      "entity": "Portugal",
+      "diagnostics_share_pct": 0.0,
+      "information_share_pct": 55.5556,
+      "absolute_gap_pp": 55.5556
+    },
+    {
+      "entity": "Poland",
+      "diagnostics_share_pct": 55.5556,
+      "information_share_pct": 11.1111,
+      "absolute_gap_pp": 44.4444
+    },
+    {
+      "entity": "Belgium",
+      "diagnostics_share_pct": 38.2353,
+      "information_share_pct": 2.9412,
+      "absolute_gap_pp": 35.2941
+    },
+    {
+      "entity": "Nigeria",
+      "diagnostics_share_pct": 33.3333,
+      "information_share_pct": 0.0,
+      "absolute_gap_pp": 33.3333
+    },
+    {
+      "entity": "Estonia",
+      "diagnostics_share_pct": 9.0909,
+      "information_share_pct": 36.3636,
+      "absolute_gap_pp": 27.2727
+    },
+    {
+      "entity": "Spain",
+      "diagnostics_share_pct": 31.4286,
+      "information_share_pct": 8.5714,
+      "absolute_gap_pp": 22.8571
+    },
+    {
+      "entity": "Brazil",
+      "diagnostics_share_pct": 10.0,
+      "information_share_pct": 30.0,
+      "absolute_gap_pp": 20.0
+    },
+    {
+      "entity": "France",
+      "diagnostics_share_pct": 28.5714,
+      "information_share_pct": 9.5238,
+      "absolute_gap_pp": 19.0476
+    }
+  ]
+}

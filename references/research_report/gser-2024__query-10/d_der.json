@@ -1,0 +1,180 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a heatmap for the 20 ecosystems with the highest `balanced scaling score`, defined as the average of four normalized components: `Ecosystem Value`, `Total Early-Stage Funding`, `Exit Amount`, and `Number of Unicorns`, each converted to within-sample percentile ranks on a `0-100` scale, sorted by the composite score descending and excluding rows with missing source values.",
+  "chart_type": "heatmap",
+  "value_unit": "0-100 percentile score",
+  "sort_rule": "descending by balanced_scaling_score",
+  "selection_rule": "top 20 ecosystems",
+  "plot_spec": {
+    "title": "2024 Balanced Scaling Heatmap",
+    "value_fields": [
+      "value_pct",
+      "funding_pct",
+      "exit_pct",
+      "unicorn_pct",
+      "balanced_scaling_score"
+    ]
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley",
+      "value_pct": 100.0,
+      "funding_pct": 100.0,
+      "exit_pct": 100.0,
+      "unicorn_pct": 100.0,
+      "balanced_scaling_score": 100.0
+    },
+    {
+      "entity": "New York City",
+      "value_pct": 98.3333,
+      "funding_pct": 98.3333,
+      "exit_pct": 96.6667,
+      "unicorn_pct": 98.3333,
+      "balanced_scaling_score": 97.9167
+    },
+    {
+      "entity": "London",
+      "value_pct": 95.0,
+      "funding_pct": 96.6667,
+      "exit_pct": 93.3333,
+      "unicorn_pct": 95.0,
+      "balanced_scaling_score": 95.0
+    },
+    {
+      "entity": "Boston",
+      "value_pct": 91.6667,
+      "funding_pct": 95.0,
+      "exit_pct": 95.0,
+      "unicorn_pct": 91.6667,
+      "balanced_scaling_score": 93.3333
+    },
+    {
+      "entity": "Los Angeles",
+      "value_pct": 93.3333,
+      "funding_pct": 93.3333,
+      "exit_pct": 90.0,
+      "unicorn_pct": 93.3333,
+      "balanced_scaling_score": 92.5
+    },
+    {
+      "entity": "Beijing",
+      "value_pct": 96.6667,
+      "funding_pct": 86.6667,
+      "exit_pct": 98.3333,
+      "unicorn_pct": 87.5,
+      "balanced_scaling_score": 92.2917
+    },
+    {
+      "entity": "Tel Aviv",
+      "value_pct": 88.3333,
+      "funding_pct": 91.6667,
+      "exit_pct": 86.6667,
+      "unicorn_pct": 96.6667,
+      "balanced_scaling_score": 90.8333
+    },
+    {
+      "entity": "Shanghai",
+      "value_pct": 90.0,
+      "funding_pct": 88.3333,
+      "exit_pct": 88.3333,
+      "unicorn_pct": 85.0,
+      "balanced_scaling_score": 87.9167
+    },
+    {
+      "entity": "Seoul",
+      "value_pct": 86.6667,
+      "funding_pct": 83.3333,
+      "exit_pct": 91.6667,
+      "unicorn_pct": 83.3333,
+      "balanced_scaling_score": 86.25
+    },
+    {
+      "entity": "Seattle",
+      "value_pct": 80.0,
+      "funding_pct": 80.8333,
+      "exit_pct": 81.6667,
+      "unicorn_pct": 80.8333,
+      "balanced_scaling_score": 80.8333
+    },
+    {
+      "entity": "Singapore",
+      "value_pct": 81.6667,
+      "funding_pct": 85.0,
+      "exit_pct": 66.6667,
+      "unicorn_pct": 76.6667,
+      "balanced_scaling_score": 77.5
+    },
+    {
+      "entity": "Bengaluru - Karnataka",
+      "value_pct": 85.0,
+      "funding_pct": 78.3333,
+      "exit_pct": 56.6667,
+      "unicorn_pct": 90.0,
+      "balanced_scaling_score": 77.5
+    },
+    {
+      "entity": "Berlin",
+      "value_pct": 73.3333,
+      "funding_pct": 80.8333,
+      "exit_pct": 71.6667,
+      "unicorn_pct": 80.8333,
+      "balanced_scaling_score": 76.6667
+    },
+    {
+      "entity": "São Paulo",
+      "value_pct": 78.3333,
+      "funding_pct": 63.3333,
+      "exit_pct": 85.0,
+      "unicorn_pct": 70.8333,
+      "balanced_scaling_score": 74.375
+    },
+    {
+      "entity": "San Diego",
+      "value_pct": 76.6667,
+      "funding_pct": 70.0,
+      "exit_pct": 78.3333,
+      "unicorn_pct": 70.8333,
+      "balanced_scaling_score": 73.9583
+    },
+    {
+      "entity": "Shenzhen",
+      "value_pct": 75.0,
+      "funding_pct": 76.6667,
+      "exit_pct": 75.0,
+      "unicorn_pct": 68.3333,
+      "balanced_scaling_score": 73.75
+    },
+    {
+      "entity": "Washington, D.C.",
+      "value_pct": 65.0,
+      "funding_pct": 68.3333,
+      "exit_pct": 80.0,
+      "unicorn_pct": 78.3333,
+      "balanced_scaling_score": 72.9167
+    },
+    {
+      "entity": "Chicago",
+      "value_pct": 69.1667,
+      "funding_pct": 60.8333,
+      "exit_pct": 76.6667,
+      "unicorn_pct": 74.1667,
+      "balanced_scaling_score": 70.2083
+    },
+    {
+      "entity": "The Netherlands",
+      "value_pct": 71.6667,
+      "funding_pct": 75.0,
+      "exit_pct": 68.3333,
+      "unicorn_pct": 61.6667,
+      "balanced_scaling_score": 69.1667
+    },
+    {
+      "entity": "Austin",
+      "value_pct": 66.6667,
+      "funding_pct": 73.3333,
+      "exit_pct": 60.8333,
+      "unicorn_pct": 74.1667,
+      "balanced_scaling_score": 68.75
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "report_id": "010",
+  "query_id": 1,
+  "query_text": "Create a ranked horizontal bar chart for the top 15 companies in the report by capital efficiency, where capital efficiency is `Mosaic score divided by Total raised` converted to `Mosaic points per $100M raised`, using only companies with numeric `Total raised`, sorted descending by that derived metric, and excluding rows where `Total raised` is `N/A`.",
+  "chart_type": "ranked_bar",
+  "value_unit": "Mosaic points per $100M raised",
+  "sort_rule": "descending by capital efficiency",
+  "selection_rule": "top 15 companies with numeric funding",
+  "records": [
+    {
+      "label": "Lonestar",
+      "value": 11491.525424
+    },
+    {
+      "label": "Stamus Networks",
+      "value": 5879.032258
+    },
+    {
+      "label": "Mobilint",
+      "value": 4689.873418
+    },
+    {
+      "label": "Natura Resources",
+      "value": 3985.0
+    },
+    {
+      "label": "Starcloud",
+      "value": 3355.648536
+    },
+    {
+      "label": "Accelsius",
+      "value": 3036.585366
+    },
+    {
+      "label": "Green Revolution Cooling",
+      "value": 2005.509642
+    },
+    {
+      "label": "AlgoSec",
+      "value": 1972.222222
+    },
+    {
+      "label": "MemryX",
+      "value": 1477.227723
+    },
+    {
+      "label": "Corintis",
+      "value": 1411.214953
+    },
+    {
+      "label": "Ramon.Space",
+      "value": 1360.91954
+    },
+    {
+      "label": "Lumu Technologies",
+      "value": 1271.028037
+    },
+    {
+      "label": "Emerald AI",
+      "value": 1267.46167
+    },
+    {
+      "label": "MangoBoost",
+      "value": 1135.464231
+    },
+    {
+      "label": "Positron",
+      "value": 1000.0
+    }
+  ],
+  "plot_config": {
+    "title": "Top companies by capital efficiency",
+    "x_label": "Mosaic points per $100M raised",
+    "y_label": "Company"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with numeric Total raised and Mosaic.",
+    "Converted Total raised to millions of dollars and then to units of $100M.",
+    "Computed Mosaic score divided by funding-in-$100M-units.",
+    "Ranked companies descending and kept the top 15."
+  ],
+  "stats": {
+    "eligible_count": 64,
+    "returned_count": 15
+  },
+  "open_issues": []
+}

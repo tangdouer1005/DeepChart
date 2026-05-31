@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ma's 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+                   Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 22px 18px 22px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    /* FIX: Give the chart a reasonable fixed height and
+       let Chart.js preserve aspect ratio to avoid vertical stretching */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px; /* reasonable height for readability */
+    }
+
+    canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #777;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .controls input[type="range"] {
+      width: 160px;
+    }
+
+    button {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #f2f2f2;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e6e6e6;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>ma's 自由现金流收益质量 (Quality of Income Ratio)</h1>
+    <h2>2016–2024 年度变化（柱状图）</h2>
+
+    <div class="controls">
+      <label>
+        <input type="checkbox" id="toggleLine" checked>
+        同时显示折线趋势
+      </label>
+      <label>
+        Y 轴上限缩放：
+        <input type="range" id="yMaxRange" min="0.9" max="1.2" step="0.01" value="1.0">
+        <span id="yMaxLabel">1.00</span>
+      </label>
+      <button id="resetZoomBtn" type="button">重置缩放</button>
+    </div>
+
+    <div class="chart-wrapper">
+      <!-- FIX: no inline height attribute; height is controlled via CSS wrapper -->
+      <canvas id="qoiChart"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：给定源数据（Fiscal Year, RESULT_QoI_Ratio）。<br>
+      指标说明：自由现金流收益质量 (Quality of Income Ratio) 通常 = 经营活动现金流 / 净收益，越接近或高于 1，收益的现金保障程度通常被认为越高。
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <script>
+    // --- Data from source ---
+    const years = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const qoiValues = [
+      0.7310074991848712,
+      0.7869386598668366,
+      0.8039013047409895,
+      0.803357549577852,
+      0.8340838240387946,
+      0.8755551443375278,
+      0.8602274473643768,
+      0.809076788005673,
+      0.8968990836822622
+    ];
+
+    // --- Helper: compute nice Y-axis max ---
+    function getNiceMax(values, padding = 0.05) {
+      const maxVal = Math.max(...values);
+      let upper = maxVal + padding;
+      if (upper < 1) upper = 1;
+      return Math.round(upper * 100) / 100;
+    }
+
+    const baseYMax = getNiceMax(qoiValues);
+
+    const ctx = document.getElementById("qoiChart").getContext("2d");
+
+    const chartConfig = {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            type: "bar",
+            label: "自由现金流收益质量 (柱状)",
+            data: qoiValues,
+            backgroundColor: "rgba(54, 162, 235, 0.7)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+            hoverBackgroundColor: "rgba(54, 162, 235, 0.9)",
+            hoverBorderColor: "rgba(54, 162, 235, 1)"
+          },
+          {
+            type: "line",
+            label: "趋势 (折线)",
+            data: qoiValues,
+            borderColor: "rgba(255, 99, 132, 0.9)",
+            backgroundColor: "rgba(255, 99, 132, 0.15)",
+            tension: 0.25,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            yAxisID: "y"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        // FIX: let Chart.js preserve a sensible aspect ratio – this avoids abnormal vertical stretching
+        maintainAspectRatio: true,
+        aspectRatio: 2, // width : height = 2 : 1 inside the wrapper
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const val = context.parsed.y;
+                return `${context.dataset.label}: ${val.toFixed(3)}`;
+              }
+            }
+          },
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year"
+            },
+            ticks: {
+              autoSkip: false
+            }
+          },
+          y: {
+            beginAtZero: false,
+            min: 0.6,
+            max: baseYMax,
+            title: {
+              display: true,
+              text: "Quality of Income Ratio"
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(2);
+              }
+            }
+          }
+        }
+      }
+    };
+
+    const qoiChart = new Chart(ctx, chartConfig);
+
+    // --- UI Controls ---
+
+    // Toggle line dataset
+    const toggleLineCheckbox = document.getElementById("toggleLine");
+    toggleLineCheckbox.addEventListener("change", () => {
+      const lineDataset = qoiChart.data.datasets[1];
+      lineDataset.hidden = !toggleLineCheckbox.checked;
+      qoiChart.update();
+    });
+
+    // Y-axis scaling via range input
+    const yMaxRange = document.getElementById("yMaxRange");
+    const yMaxLabel = document.getElementById("yMaxLabel");
+
+    function applyYMaxFromRange() {
+      const val = parseFloat(yMaxRange.value);
+      const yScale = qoiChart.options.scales.y;
+      const maxToUse = Math.max(val, baseYMax); // don't go below data max
+      yScale.max = maxToUse;
+      yMaxLabel.textContent = maxToUse.toFixed(2);
+      qoiChart.update();
+    }
+
+    // Initialize range based on baseYMax
+    if (baseYMax <= parseFloat(yMaxRange.max)) {
+      yMaxRange.value = baseYMax.toFixed(2);
+    } else {
+      yMaxRange.value = yMaxRange.max;
+    }
+    yMaxLabel.textContent = parseFloat(yMaxRange.value).toFixed(2);
+    yMaxRange.addEventListener("input", applyYMaxFromRange);
+
+    // Simple zoom reset by re-applying base Y max
+    function resetZoom() {
+      const yScale = qoiChart.options.scales.y;
+      yScale.max = baseYMax;
+      yMaxRange.value = baseYMax.toFixed(2);
+      yMaxLabel.textContent = baseYMax.toFixed(2);
+      qoiChart.update();
+    }
+
+    const resetZoomBtn = document.getElementById("resetZoomBtn");
+    resetZoomBtn.addEventListener("click", resetZoom);
+
+    // Double-click on canvas resets zoom
+    ctx.canvas.addEventListener("dblclick", resetZoom);
+  </script>
+</body>
+</html>

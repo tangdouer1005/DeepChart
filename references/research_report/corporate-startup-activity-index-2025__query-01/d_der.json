@@ -1,0 +1,58 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a ranked horizontal bar chart showing the top 10 main industries in the 2025 report by `single-country score share`, where the plotted value is `the sum of scores contributed by the highest-scoring country in each main industry divided by that industry's visible top-20 score total`, values are expressed as percentages, only the 11 main industries on pages 15-25 are included, and bars are sorted from highest to lowest after the ratio is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by single_country_score_share_percent, ties by leading-country subtotal then industry",
+  "selection_rule": "top 10 of the 11 main industries",
+  "plot_spec": {
+    "title": "Main Industry Single-Country Score Share",
+    "xlabel": "Percent of visible industry score",
+    "ylabel": "Main industry",
+    "value_field": "single_country_score_share_percent",
+    "label_suffix": "%",
+    "label_decimals": 1
+  },
+  "records": [
+    {
+      "entity": "Software & Data",
+      "single_country_score_share_percent": 92.2264
+    },
+    {
+      "entity": "Social & Leisure",
+      "single_country_score_share_percent": 75.3035
+    },
+    {
+      "entity": "Fintech",
+      "single_country_score_share_percent": 70.8726
+    },
+    {
+      "entity": "Hardware & IoT",
+      "single_country_score_share_percent": 64.3915
+    },
+    {
+      "entity": "Healthtech",
+      "single_country_score_share_percent": 52.2053
+    },
+    {
+      "entity": "Foodtech",
+      "single_country_score_share_percent": 48.9201
+    },
+    {
+      "entity": "Marketing & Sales",
+      "single_country_score_share_percent": 47.2101
+    },
+    {
+      "entity": "Edtech",
+      "single_country_score_share_percent": 40.6389
+    },
+    {
+      "entity": "Ecommerce & Retail",
+      "single_country_score_share_percent": 40.4709
+    },
+    {
+      "entity": "Transportation",
+      "single_country_score_share_percent": 33.7458
+    }
+  ]
+}

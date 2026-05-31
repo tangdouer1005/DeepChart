@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>NFLX 净资产收益率-杜邦分析 (ROE) 2016–2024 折线图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      padding: 1.5rem 1.75rem 2rem;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.3rem;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      margin: 0;
+      font-weight: 400;
+      color: #6b7280;
+    }
+
+    .meta {
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .chart-wrapper {
+      margin-top: 1.5rem;
+      position: relative;
+      height: 420px;
+    }
+
+    .note {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    .legend-inline {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      color: #374151;
+    }
+
+    .legend-color {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      margin-right: 0.25rem;
+      vertical-align: middle;
+      background: #2563eb;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 0.75rem;
+      }
+      .container {
+        padding: 1rem 1rem 1.5rem;
+      }
+      .chart-wrapper {
+        height: 330px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>NFLX 净资产收益率（ROE，杜邦分析）变化趋势</h1>
+      <h2>2016–2024 财年（原始 ROE，平均值）</h2>
+      <div class="meta">
+        单位：百分比（%） · 数据来源：用户提供的原始 ROE(Avg) 数值
+      </div>
+    </header>
+
+    <div class="chart-wrapper">
+      <canvas id="roeChart"></canvas>
+    </div>
+
+    <div class="legend-inline">
+      <span class="legend-color"></span>
+      NFLX 原始 ROE（杜邦分析）
+    </div>
+
+    <p class="note">
+      说明：原始数据为小数形式的 ROE(Avg)，本图已转换为百分比展示（例如 0.0761 → 7.61%）。
+      可将鼠标悬停在折线上的任意点查看具体年度数值。
+    </p>
+  </div>
+
+  <script>
+    // Data from source (Original ROE(Avg))
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    // Original decimals converted to percentage values
+    const roePercent = [
+      0.076144970678488,
+      0.1785214882215148,
+      0.2746355995161846,
+      0.2912296011160508,
+      0.2961694868189914,
+      0.3801839366217927,
+      0.2452817346189655,
+      0.26147209739931,
+      0.3843489835409429
+    ].map(v => v * 100);
+
+    const ctx = document.getElementById("roeChart").getContext("2d");
+
+    // Create gradient for line fill
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(37, 99, 235, 0.25)");
+    gradient.addColorStop(0.4, "rgba(37, 99, 235, 0.08)");
+    gradient.addColorStop(1, "rgba(37, 99, 235, 0)");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "NFLX 原始 ROE（杜邦分析，Avg）",
+            data: roePercent,
+            borderColor: "#2563eb",
+            backgroundColor: gradient,
+            pointBackgroundColor: "#2563eb",
+            pointBorderColor: "#ffffff",
+            pointHoverBackgroundColor: "#1d4ed8",
+            pointHoverBorderColor: "#ffffff",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBorderWidth: 1.5,
+            fill: true,
+            tension: 0.24, // smooth line
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.92)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#f9fafb",
+            borderColor: "rgba(148, 163, 184, 0.4)",
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 6,
+            displayColors: false,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                // Show with 2 decimal places
+                return "ROE: " + value.toFixed(2) + "%";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              color: "#4b5563"
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: "rgba(209, 213, 219, 0.6)",
+              drawBorder: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              color: "#4b5563",
+              // Limit to nice step size
+              callback: function (value) {
+                return value + "%";
+              }
+            },
+            title: {
+              display: true,
+              text: "ROE（%）",
+              color: "#374151",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

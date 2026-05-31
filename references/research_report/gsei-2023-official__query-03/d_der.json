@@ -1,0 +1,492 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a heatmap for the 15 countries with the highest weighted rank-bucket score in the 2023 country tables, where each cell shows the count of listed cities in global-rank buckets `1-20`, `21-50`, `51-100`, `101-200`, and `201+`, and the country ordering is based on a derived weighted score of `5, 4, 3, 2, 1` points for those buckets respectively.",
+  "status": "complete",
+  "chart_type": "heatmap",
+  "title": "2023 Weighted Rank-Bucket Profiles",
+  "value_unit": "count",
+  "sort_rule": "descending by weighted_bucket_score, tie-break alphabetically",
+  "selection_rule": "top 15 countries by weighted bucket score",
+  "records": [
+    {
+      "entity": "United States",
+      "bucket": "1-20",
+      "count": 7,
+      "weighted_bucket_score": 47
+    },
+    {
+      "entity": "United States",
+      "bucket": "21-50",
+      "count": 3,
+      "weighted_bucket_score": 47
+    },
+    {
+      "entity": "United States",
+      "bucket": "51-100",
+      "count": 0,
+      "weighted_bucket_score": 47
+    },
+    {
+      "entity": "United States",
+      "bucket": "101-200",
+      "count": 0,
+      "weighted_bucket_score": 47
+    },
+    {
+      "entity": "United States",
+      "bucket": "201+",
+      "count": 0,
+      "weighted_bucket_score": 47
+    },
+    {
+      "entity": "China",
+      "bucket": "1-20",
+      "count": 3,
+      "weighted_bucket_score": 37
+    },
+    {
+      "entity": "China",
+      "bucket": "21-50",
+      "count": 3,
+      "weighted_bucket_score": 37
+    },
+    {
+      "entity": "China",
+      "bucket": "51-100",
+      "count": 2,
+      "weighted_bucket_score": 37
+    },
+    {
+      "entity": "China",
+      "bucket": "101-200",
+      "count": 2,
+      "weighted_bucket_score": 37
+    },
+    {
+      "entity": "China",
+      "bucket": "201+",
+      "count": 0,
+      "weighted_bucket_score": 37
+    },
+    {
+      "entity": "India",
+      "bucket": "1-20",
+      "count": 2,
+      "weighted_bucket_score": 28
+    },
+    {
+      "entity": "India",
+      "bucket": "21-50",
+      "count": 1,
+      "weighted_bucket_score": 28
+    },
+    {
+      "entity": "India",
+      "bucket": "51-100",
+      "count": 2,
+      "weighted_bucket_score": 28
+    },
+    {
+      "entity": "India",
+      "bucket": "101-200",
+      "count": 3,
+      "weighted_bucket_score": 28
+    },
+    {
+      "entity": "India",
+      "bucket": "201+",
+      "count": 2,
+      "weighted_bucket_score": 28
+    },
+    {
+      "entity": "Canada",
+      "bucket": "1-20",
+      "count": 0,
+      "weighted_bucket_score": 27
+    },
+    {
+      "entity": "Canada",
+      "bucket": "21-50",
+      "count": 3,
+      "weighted_bucket_score": 27
+    },
+    {
+      "entity": "Canada",
+      "bucket": "51-100",
+      "count": 2,
+      "weighted_bucket_score": 27
+    },
+    {
+      "entity": "Canada",
+      "bucket": "101-200",
+      "count": 4,
+      "weighted_bucket_score": 27
+    },
+    {
+      "entity": "Canada",
+      "bucket": "201+",
+      "count": 1,
+      "weighted_bucket_score": 27
+    },
+    {
+      "entity": "United Kingdom",
+      "bucket": "1-20",
+      "count": 1,
+      "weighted_bucket_score": 25
+    },
+    {
+      "entity": "United Kingdom",
+      "bucket": "21-50",
+      "count": 0,
+      "weighted_bucket_score": 25
+    },
+    {
+      "entity": "United Kingdom",
+      "bucket": "51-100",
+      "count": 3,
+      "weighted_bucket_score": 25
+    },
+    {
+      "entity": "United Kingdom",
+      "bucket": "101-200",
+      "count": 5,
+      "weighted_bucket_score": 25
+    },
+    {
+      "entity": "United Kingdom",
+      "bucket": "201+",
+      "count": 1,
+      "weighted_bucket_score": 25
+    },
+    {
+      "entity": "Germany",
+      "bucket": "1-20",
+      "count": 1,
+      "weighted_bucket_score": 24
+    },
+    {
+      "entity": "Germany",
+      "bucket": "21-50",
+      "count": 1,
+      "weighted_bucket_score": 24
+    },
+    {
+      "entity": "Germany",
+      "bucket": "51-100",
+      "count": 1,
+      "weighted_bucket_score": 24
+    },
+    {
+      "entity": "Germany",
+      "bucket": "101-200",
+      "count": 5,
+      "weighted_bucket_score": 24
+    },
+    {
+      "entity": "Germany",
+      "bucket": "201+",
+      "count": 2,
+      "weighted_bucket_score": 24
+    },
+    {
+      "entity": "Australia",
+      "bucket": "1-20",
+      "count": 0,
+      "weighted_bucket_score": 19
+    },
+    {
+      "entity": "Australia",
+      "bucket": "21-50",
+      "count": 2,
+      "weighted_bucket_score": 19
+    },
+    {
+      "entity": "Australia",
+      "bucket": "51-100",
+      "count": 1,
+      "weighted_bucket_score": 19
+    },
+    {
+      "entity": "Australia",
+      "bucket": "101-200",
+      "count": 1,
+      "weighted_bucket_score": 19
+    },
+    {
+      "entity": "Australia",
+      "bucket": "201+",
+      "count": 6,
+      "weighted_bucket_score": 19
+    },
+    {
+      "entity": "Brazil",
+      "bucket": "1-20",
+      "count": 1,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Brazil",
+      "bucket": "21-50",
+      "count": 0,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Brazil",
+      "bucket": "51-100",
+      "count": 0,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Brazil",
+      "bucket": "101-200",
+      "count": 3,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Brazil",
+      "bucket": "201+",
+      "count": 6,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "France",
+      "bucket": "1-20",
+      "count": 1,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "France",
+      "bucket": "21-50",
+      "count": 0,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "France",
+      "bucket": "51-100",
+      "count": 0,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "France",
+      "bucket": "101-200",
+      "count": 3,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "France",
+      "bucket": "201+",
+      "count": 6,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Israel",
+      "bucket": "1-20",
+      "count": 1,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Israel",
+      "bucket": "21-50",
+      "count": 0,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Israel",
+      "bucket": "51-100",
+      "count": 1,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Israel",
+      "bucket": "101-200",
+      "count": 1,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Israel",
+      "bucket": "201+",
+      "count": 7,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Spain",
+      "bucket": "1-20",
+      "count": 0,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Spain",
+      "bucket": "21-50",
+      "count": 2,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Spain",
+      "bucket": "51-100",
+      "count": 0,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Spain",
+      "bucket": "101-200",
+      "count": 1,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Spain",
+      "bucket": "201+",
+      "count": 7,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "The Netherlands",
+      "bucket": "1-20",
+      "count": 0,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "The Netherlands",
+      "bucket": "21-50",
+      "count": 1,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "The Netherlands",
+      "bucket": "51-100",
+      "count": 0,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "The Netherlands",
+      "bucket": "101-200",
+      "count": 4,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "The Netherlands",
+      "bucket": "201+",
+      "count": 5,
+      "weighted_bucket_score": 17
+    },
+    {
+      "entity": "Japan",
+      "bucket": "1-20",
+      "count": 1,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Japan",
+      "bucket": "21-50",
+      "count": 0,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Japan",
+      "bucket": "51-100",
+      "count": 0,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Japan",
+      "bucket": "101-200",
+      "count": 2,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Japan",
+      "bucket": "201+",
+      "count": 7,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Sweden",
+      "bucket": "1-20",
+      "count": 1,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Sweden",
+      "bucket": "21-50",
+      "count": 0,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Sweden",
+      "bucket": "51-100",
+      "count": 0,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Sweden",
+      "bucket": "101-200",
+      "count": 2,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Sweden",
+      "bucket": "201+",
+      "count": 7,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Switzerland",
+      "bucket": "1-20",
+      "count": 0,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Switzerland",
+      "bucket": "21-50",
+      "count": 0,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Switzerland",
+      "bucket": "51-100",
+      "count": 1,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Switzerland",
+      "bucket": "101-200",
+      "count": 4,
+      "weighted_bucket_score": 16
+    },
+    {
+      "entity": "Switzerland",
+      "bucket": "201+",
+      "count": 5,
+      "weighted_bucket_score": 16
+    }
+  ],
+  "row_field": "entity",
+  "column_field": "bucket",
+  "value_field": "count",
+  "row_order": [
+    "United States",
+    "China",
+    "India",
+    "Canada",
+    "United Kingdom",
+    "Germany",
+    "Australia",
+    "Brazil",
+    "France",
+    "Israel",
+    "Spain",
+    "The Netherlands",
+    "Japan",
+    "Sweden",
+    "Switzerland"
+  ],
+  "column_order": [
+    "1-20",
+    "21-50",
+    "51-100",
+    "101-200",
+    "201+"
+  ],
+  "x_label": "Global-rank bucket",
+  "y_label": "Country",
+  "cmap": "YlGnBu"
+}

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>abt 内部增长率 (IGR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #222222;
+      --grid: #e0e0e0;
+      --pos-bar: #2b8cbe;
+      --neg-bar: #de2d26;
+      --hover: #ffa500;
+      --accent: #555555;
+      --tooltip-bg: rgba(0, 0, 0, 0.8);
+      --tooltip-fg: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --fg: #f3f3f3;
+        --grid: #333333;
+        --pos-bar: #4aa4ff;
+        --neg-bar: #ff6666;
+        --hover: #ffd166;
+        --accent: #bbbbbb;
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 0 0 1rem;
+      color: var(--accent);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 480px;
+      background: rgba(0, 0, 0, 0.01);
+      border-radius: 8px;
+      padding: 1rem;
+      box-sizing: border-box;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .note {
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-top: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .legend {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    .swatch-pos {
+      background: var(--pos-bar);
+    }
+    .swatch-neg {
+      background: var(--neg-bar);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>abt 内部增长率 (IGR) 变化趋势</h1>
+    <h2>2016–2024 财年</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="igrChart"></canvas>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <span class="legend-swatch swatch-pos"></span>
+        <span>正 IGR（内部增长）</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch swatch-neg"></span>
+        <span>负 IGR（内部收缩）</span>
+      </div>
+    </div>
+
+    <div class="note">
+      数据来源（RESULT_IGR，单位为比例）：<br />
+      2016: -0.0028, 2017: -0.0205, 2018: 0.0055, 2019: 0.0214, 2020: 0.0283,
+      2021: 0.0553, 2022: 0.0509, 2023: 0.0302, 2024: 0.1412
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // Raw data (RESULT_IGR)
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+    const igrValues = [
+      -0.0027998791419075,
+      -0.0204768478788104,
+      0.0055245907385985,
+      0.0214330010739189,
+      0.0283381539926042,
+      0.0552690598974329,
+      0.0509038809995364,
+      0.0302404443266023,
+      0.1411997402137332
+    ];
+
+    // Utility: format as percentage with one decimal place
+    function formatPct(value) {
+      return (value * 100).toFixed(1) + "%";
+    }
+
+    // Bar colors by sign
+    const backgroundColors = igrValues.map(v =>
+      v >= 0 ? getComputedStyle(document.documentElement).getPropertyValue("--pos-bar").trim() :
+               getComputedStyle(document.documentElement).getPropertyValue("--neg-bar").trim()
+    );
+    const borderColors = backgroundColors.map(c => c);
+
+    const ctx = document.getElementById("igrChart");
+
+    const igrChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "内部增长率 (IGR)",
+            data: igrValues,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1.2,
+            borderRadius: 4,
+            hoverBackgroundColor: backgroundColors.map(() =>
+              getComputedStyle(document.documentElement)
+                .getPropertyValue("--hover")
+                .trim()
+            )
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: true
+        },
+        plugins: {
+          title: {
+            display: false
+          },
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: getComputedStyle(
+              document.documentElement
+            ).getPropertyValue("--tooltip-bg"),
+            titleColor: getComputedStyle(
+              document.documentElement
+            ).getPropertyValue("--tooltip-fg"),
+            bodyColor: getComputedStyle(
+              document.documentElement
+            ).getPropertyValue("--tooltip-fg"),
+            borderWidth: 0,
+            padding: 10,
+            callbacks: {
+              label: context => {
+                const value = context.raw;
+                const signLabel = value >= 0 ? "正向" : "负向";
+                return `${signLabel} IGR：${formatPct(value)}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: getComputedStyle(
+                document.documentElement
+              ).getPropertyValue("--grid")
+            },
+            ticks: {
+              callback: value => value * 100 + "%"
+            },
+            title: {
+              display: true,
+              text: "内部增长率 (IGR，%)",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            }
+          }
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutCubic"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ABT 经济增加值 (EVA) 2016-2024 趋势图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 使用 Chart.js 3.x（更常见、更稳定的 UMD 入口），不带 integrity -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f7;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px 0;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0 0 16px 0;
+      color: #666;
+    }
+    .chart-container-outer {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .chart-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 20px 24px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px; /* 固定高度避免高度为 0 导致无法显示 */
+    }
+    .note {
+      max-width: 960px;
+      margin: 8px auto 0 auto;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container-outer">
+    <div class="chart-card">
+      <h1>ABT 经济增加值 (EVA) - 简化版</h1>
+      <h2>2016–2024 财年变化趋势</h2>
+      <div class="chart-wrapper">
+        <canvas id="evaChart"></canvas>
+      </div>
+    </div>
+    <div class="note">
+      数据来源：用户提供的 EVA 原始数值（RESULT_EVA）。将鼠标悬停在折线点上可查看精确 EVA 数值。
+    </div>
+  </div>
+
+  <script>
+    // 等待 DOM 完全加载后再初始化图表，避免找不到 canvas
+    window.addEventListener("DOMContentLoaded", function () {
+      if (typeof Chart === "undefined") {
+        console.error("Chart.js 未正确加载。请检查网络或 CDN 链接。");
+        return;
+      }
+
+      // 源数据（Fiscal Year, RESULT_EVA）
+      const labels = [
+        "2016", "2017", "2018", "2019", "2020",
+        "2021", "2022", "2023", "2024"
+      ];
+
+      const evaData = [
+        -12527070.063694,
+        -3354880277.902286,
+        -1660168116.950922,
+        -439068506.2545986,
+        236386996.77938843,
+        3461089075.630252,
+        2574493077.293523,
+        1004436284.5138054,
+        -4445627791.244831
+      ];
+
+      const canvas = document.getElementById("evaChart");
+      if (!canvas) {
+        console.error("未找到 id 为 'evaChart' 的 canvas 元素。");
+        return;
+      }
+      const ctx = canvas.getContext("2d");
+
+      // 计算 Y 轴建议范围
+      const minVal = Math.min(...evaData);
+      const maxVal = Math.max(...evaData);
+      const padding = (maxVal - minVal) * 0.1 || 1;
+
+      // 千分位 + 两位小数的格式化
+      function formatNumber(value) {
+        if (value === null || value === undefined || isNaN(value)) return "";
+        return Number(value).toLocaleString("zh-CN", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      }
+
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "EVA",
+              data: evaData,
+              borderColor: "#1976d2",
+              backgroundColor: "rgba(25, 118, 210, 0.08)",
+              pointBackgroundColor: "#1976d2",
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointHitRadius: 10,
+              pointBorderWidth: 1,
+              cubicInterpolationMode: "monotone",
+              tension: 0.25,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false, // 使用外层固定高度
+          interaction: {
+            mode: "nearest",
+            axis: "x",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                boxWidth: 8,
+                font: {
+                  size: 12
+                }
+              }
+            },
+            title: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  const v = context.parsed.y;
+                  return " EVA: " + formatNumber(v);
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年",
+                font: { size: 12 }
+              },
+              grid: {
+                display: false
+              },
+              ticks: {
+                autoSkip: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "EVA（原始单位）",
+                font: { size: 12 }
+              },
+              grid: {
+                color: "rgba(0,0,0,0.06)"
+              },
+              suggestedMin: minVal - padding,
+              suggestedMax: maxVal + padding,
+              ticks: {
+                callback: function (value) {
+                  const absVal = Math.abs(value);
+                  if (absVal >= 1e9) {
+                    return (value / 1e9).toFixed(1) + "B";
+                  } else if (absVal >= 1e6) {
+                    return (value / 1e6).toFixed(1) + "M";
+                  } else {
+                    return value.toLocaleString("zh-CN");
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

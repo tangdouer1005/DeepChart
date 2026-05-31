@@ -1,0 +1,55 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a horizontal bar chart for the top 10 ecosystems by `exit speed efficiency`, defined as `Exit Amount / Time to Exit`, using 2024 card values with `Exit Amount` normalized to `$B` and the plotted value expressed as `$B per year`, sorted descending, and excluding ecosystems where `Time to Exit` is zero or missing.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "$B per year",
+  "sort_rule": "descending by exit_speed_efficiency_busd_per_year",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "2024 Exit Speed Efficiency",
+    "xlabel": "$B per year",
+    "value_field": "exit_speed_efficiency_busd_per_year"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley",
+      "exit_speed_efficiency_busd_per_year": 82.7711
+    },
+    {
+      "entity": "Beijing",
+      "exit_speed_efficiency_busd_per_year": 35.6989
+    },
+    {
+      "entity": "New York City",
+      "exit_speed_efficiency_busd_per_year": 17.1875
+    },
+    {
+      "entity": "Boston",
+      "exit_speed_efficiency_busd_per_year": 12.7451
+    },
+    {
+      "entity": "Seoul",
+      "exit_speed_efficiency_busd_per_year": 11.954
+    },
+    {
+      "entity": "London",
+      "exit_speed_efficiency_busd_per_year": 10.2857
+    },
+    {
+      "entity": "Los Angeles",
+      "exit_speed_efficiency_busd_per_year": 9.899
+    },
+    {
+      "entity": "Tel Aviv",
+      "exit_speed_efficiency_busd_per_year": 8.8158
+    },
+    {
+      "entity": "Shanghai",
+      "exit_speed_efficiency_busd_per_year": 8.3173
+    },
+    {
+      "entity": "São Paulo",
+      "exit_speed_efficiency_busd_per_year": 6.4286
+    }
+  ]
+}

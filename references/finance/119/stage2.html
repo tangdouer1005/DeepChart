@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>JNJ 经济增加值 (EVA) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+        sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f6fa;
+      color: #222;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.25rem;
+    }
+    h2 {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 0;
+      color: #555;
+    }
+    .chart-container {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+    canvas {
+      max-height: 520px;
+    }
+    .note {
+      max-width: 960px;
+      margin: 12px auto 0;
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.5;
+    }
+    .note strong {
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>JNJ 经济增加值 (EVA) - 简化版</h1>
+    <h2>2016–2024 财年变化（单位：美元）</h2>
+    <canvas id="evaChart"></canvas>
+  </div>
+
+  <div class="note">
+    <strong>说明：</strong>数据来自用户提供的“RESULT_EVA”。柱状图显示了 2016–2024 年 JNJ
+    的经济增加值（EVA）简化版变化，鼠标悬停可查看精确数值。
+  </div>
+
+  <script>
+    // Source data (from user)
+    const evaData = [
+      { year: 2016, value: 9656176960.561531 },
+      { year: 2017, value: -6384414352.40197 },
+      { year: 2018, value: 10544120623.367966 },
+      { year: 2019, value: 11197362257.61773 },
+      { year: 2020, value: 9879202288.294842 },
+      { year: 2021, value: 10546971196.16227 },
+      { year: 2022, value: 7926324928.973602 },
+      { year: 2023, value: 10343990134.112335 },
+      { year: 2024, value: 10656792527.116917 }
+    ];
+
+    const labels = evaData.map(d => d.year);
+    const values = evaData.map(d => d.value);
+
+    // Use billions of USD for readability
+    const valuesInBillions = values.map(v => v / 1e9);
+
+    const ctx = document.getElementById("evaChart").getContext("2d");
+
+    // Define colors for positive and negative EVA
+    const backgroundColors = valuesInBillions.map(v =>
+      v >= 0 ? "rgba(54, 162, 235, 0.75)" : "rgba(231, 76, 60, 0.75)"
+    );
+    const borderColors = valuesInBillions.map(v =>
+      v >= 0 ? "rgba(54, 162, 235, 1)" : "rgba(192, 57, 43, 1)"
+    );
+
+    // Determine y-axis range with padding
+    const minVal = Math.min(...valuesInBillions);
+    const maxVal = Math.max(...valuesInBillions);
+    const padding = (maxVal - minVal) * 0.1 || 1;
+    const suggestedMin = minVal - padding;
+    const suggestedMax = maxVal + padding;
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "EVA（十亿美元）",
+            data: valuesInBillions,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1.5,
+            hoverBackgroundColor: backgroundColors,
+            borderRadius: 4,
+            maxBarThickness: 60
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.raw;
+                const originalValue = values[context.dataIndex];
+                return [
+                  `EVA: ${value.toFixed(2)} 十亿美元`,
+                  `约: ${originalValue.toLocaleString("en-US", {
+                    maximumFractionDigits: 0
+                  })} 美元`
+                ];
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              font: { size: 12 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "EVA（十亿美元）",
+              font: { size: 12 }
+            },
+            grid: {
+              color: "rgba(0, 0, 0, 0.06)"
+            },
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(1);
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recreated Chart 95</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+        }
+        #chart-container {
+            width: 250px; /* Approx 2.5 inches */
+            height: 450px; /* Approx 4.5 inches */
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        // 1. Source Data
+        // Extracted faithfully from the provided Markdown table.
+        // Column: Fig. 1l (Parental)
+        
+        const data = {"data_parental": [0.8299296674003414, 1.0355057637490246, 1.134564568850634, 1.067366156351031, 1.0214732863448737, 0.9111623735995769, 0.7882105310868032, 0.9514894525471388, 1.2603002786479676, 1.151744305174724, 0.8150691363293474, 1.033186952433866, 1.0000178133667066, 1.0001977922468785, 1.000081804170821], "data_ln": [0.8025826043362723, 0.5586761586545418, 0.981485217508094, 0.6828174503771713, 0.8991676521394686, 0.8518380020755709, 2.222764945615544, 1.625153697906596, 2.496864417961382, 1.1651481165731932, 1.54030017361637, 1.1177187016815318, 0.37278141648377583, 0.21125251548675206, 0.2840339839626573, 0.4938553059954519, 0.9079694495974822, 0.6916331033068995, 0.6090772699389065, 0.5130045874571015, 0.618016249272412, 0.555341273528883, 0.9781711654635805, 0.45367395258469567, 0.5369301638703191, 0.589444402175406, 0.43573465345652695, 0.5996181837280969, 0.8639109240152595, 1.2218269477581314, 0.13994083686105493, 0.10597787396603812, 0.18815322961925368, 0.2869213153964222, 0.8911277607591113, 0.40339876934736785, 0.5357799907267852, 0.7520433000113403, 0.8726564170965828, 0.20897275168862095, 1.2240086468234774, 0.3036788001925242, 0.5369725529955741, 0.735953968614233, 0.5482852964188359, 0.5125056222512814, 1.0522782074088821, 0.5448505274112878]};
+        const data_parental = data.data_parental;
+        const data_ln = data.data_ln;
+
+        // 2. Calculations
+        function calculateMean(data) {
+            return data.reduce((sum, val) => sum + val, 0) / data.length;
+        }
+
+        function calculateStd(data, mean) {
+            // Using Sample Standard Deviation (ddof=1) to match numpy's std(ddof=1)
+            const squareDiffs = data.map(val => Math.pow(val - mean, 2));
+            const avgSquareDiff = squareDiffs.reduce((sum, val) => sum + val, 0) / (data.length - 1);
+            return Math.sqrt(avgSquareDiff);
+        }
+
+        const meanParental = calculateMean(data_parental);
+        const stdParental = calculateStd(data_parental, meanParental);
+        const meanLn = calculateMean(data_ln);
+        const stdLn = calculateStd(data_ln, meanLn);
+
+        // 3. ECharts Setup
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        // Prepare Scatter Data with Jitter
+        // We want 'Parental' at x=0, 'LN' at x=1. 
+        // We'll add random jitter between -0.08 and 0.08 (clamped) to match Python's +/- 0.2 bounds but normal dist
+        function makeScatterData(data, xIndex) {
+            return data.map(val => {
+                // Approximate normal distribution using Box-Muller transform or simple random for visual similarity
+                let u = 0, v = 0;
+                while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+                while(v === 0) v = Math.random();
+                let num = Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+                let jitter = num * 0.08; // Std dev 0.08
+                // Clip to -0.2 to 0.2
+                if (jitter > 0.2) jitter = 0.2;
+                if (jitter < -0.2) jitter = -0.2;
+                
+                return [xIndex + jitter, val];
+            });
+        }
+
+        const parentalScatter = makeScatterData(data_parental, 0);
+        const lnScatter = makeScatterData(data_ln, 1);
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: '10%', // Increased top margin for the 'l' label if needed, though 'graphic' is absolute
+                bottom: '15%',
+                left: '20%',
+                right: '10%',
+                containLabel: false
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Parental', 'LN'],
+                axisLine: {
+                    lineStyle: { color: 'black' }
+                },
+                axisLabel: {
+                    color: 'black',
+                    fontSize: 12,
+                    rotate: 45,
+                    margin: 14
+                },
+                axisTick: {
+                    alignWithLabel: true
+                }
+            },
+            yAxis: {
+                type: 'value',
+                min: 0,
+                max: 3.0,
+                interval: 0.5,
+                name: 'Relative ACSL4 levels',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: {
+                    color: 'black',
+                    fontSize: 13,
+                    fontFamily: 'Arial, sans-serif'
+                },
+                axisLine: {
+                    show: true, // Show y-axis line
+                    lineStyle: { color: 'black' } // Darker line
+                },
+                axisLabel: {
+                    color: 'black',
+                    fontSize: 12,
+                    formatter: function (value) {
+                        return value % 1 === 0 ? value.toFixed(1) : value.toFixed(1);
+                    }
+                },
+                splitLine: { show: false } // Remove grid lines
+            },
+            series: [
+                // 1. Bars
+                {
+                    type: 'bar',
+                    data: [
+                        { 
+                            value: meanParental, 
+                            itemStyle: { 
+                                color: '#d9d9d9', 
+                                borderColor: '#404040', 
+                                borderWidth: 1 
+                            } 
+                        },
+                        { 
+                            value: meanLn, 
+                            itemStyle: { 
+                                color: '#90c088', 
+                                borderColor: '#404040', 
+                                borderWidth: 1 
+                            } 
+                        }
+                    ],
+                    barWidth: '60%',
+                    z: 1
+                },
+                // 2. Error Bars (Custom Series)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const meanValue = api.value(1);
+                        const stdValue = api.value(2);
+                        
+                        const pointStart = api.coord([xValue, meanValue - stdValue]);
+                        const pointEnd = api.coord([xValue, meanValue + stdValue]);
+                        
+                        // Error bar cap width
+                        const capWidth = 10; 
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: pointStart[0], y1: pointStart[1],
+                                        x2: pointEnd[0], y2: pointEnd[1]
+                                    },
+                                    style: {
+                                        stroke: '#404040',
+                                        lineWidth: 1
+                                    }
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: pointStart[0] - capWidth / 2, y1: pointStart[1],
+                                        x2: pointStart[0] + capWidth / 2, y2: pointStart[1]
+                                    },
+                                    style: {
+                                        stroke: '#404040',
+                                        lineWidth: 1
+                                    }
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: pointEnd[0] - capWidth / 2, y1: pointEnd[1],
+                                        x2: pointEnd[0] + capWidth / 2, y2: pointEnd[1]
+                                    },
+                                    style: {
+                                        stroke: '#404040',
+                                        lineWidth: 1
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: [
+                        [0, meanParental, stdParental],
+                        [1, meanLn, stdLn]
+                    ],
+                    z: 3
+                },
+                // 3. Scatter Points
+                {
+                    type: 'scatter',
+                    data: parentalScatter,
+                    itemStyle: {
+                        color: '#000000',
+                        opacity: 0.9
+                    },
+                    symbolSize: 6, // approx s=25 in matplotlib
+                    z: 2
+                },
+                {
+                    type: 'scatter',
+                    data: lnScatter,
+                    itemStyle: {
+                        color: '#3a7d2e',
+                        opacity: 0.9
+                    },
+                    symbolSize: 6,
+                    z: 2
+                }
+            ],
+            graphic: [
+                // Text 'l'
+                {
+                    type: 'text',
+                    left: '2%',
+                    top: '2%',
+                    style: {
+                        text: 'l',
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        fill: 'black',
+                        fontFamily: 'Arial, sans-serif'
+                    }
+                }
+            ]
+        };
+
+        // Add Significance Line and Text as a Custom Series to stick to coordinates
+        option.series.push({
+            type: 'custom',
+            renderItem: function (params, api) {
+                // Coordinates for line at y=2.75
+                const p1 = api.coord([0, 2.75]);
+                const p2 = api.coord([1, 2.75]);
+
+                return {
+                    type: 'group',
+                    children: [
+                        {
+                            type: 'line',
+                            shape: {
+                                x1: p1[0], y1: p1[1],
+                                x2: p2[0], y2: p2[1]
+                            },
+                            style: {
+                                stroke: 'black',
+                                lineWidth: 1
+                            }
+                        },
+                        {
+                            type: 'text',
+                            style: {
+                                text: 'P = 0.0016',
+                                fontSize: 12,
+                                textAlign: 'center',
+                                fill: 'black',
+                                x: (p1[0] + p2[0]) / 2,
+                                y: p1[1] - 5 // Slightly above
+                            }
+                        }
+                    ]
+                };
+            },
+            data: [[0]] // Dummy data to trigger render
+        });
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

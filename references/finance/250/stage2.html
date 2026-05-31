@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>TSLA 资本再投资率（2016–2024）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 4px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin: 0 0 18px;
+      text-align: center;
+      color: #666;
+    }
+    #chartWrapper {
+      position: relative;
+      height: 480px;
+    }
+    .note {
+      font-size: 0.8rem;
+      color: #777;
+      margin-top: 12px;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      #chartWrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TSLA 资本再投资率</h1>
+    <h2>Fiscal Year 2016–2024（Reinvestment Rate）</h2>
+    <div id="chartWrapper">
+      <canvas id="tslaReinvestmentChart"></canvas>
+    </div>
+    <div class="note">
+      数据来源：用户提供结果集。资本再投资率 = RESULT_Reinvestment_Rate。
+    </div>
+  </div>
+
+  <script>
+    // Source data (fiscal year and reinvestment rate)
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const reinvestmentRates = [
+      -0.5110573320945845,
+      -1.4004283088235294,
+      -8.124451030927835,
+      -18.52173913043478,
+      1.0500503831680656,
+      0.6586453750504618,
+      1.2535518694979602,
+      3.7161259277349625,
+      3.639364888743231
+    ];
+
+    const ctx = document.getElementById("tslaReinvestmentChart").getContext("2d");
+
+    const data = {
+      labels: labels,
+      datasets: [
+        {
+          label: "资本再投资率",
+          data: reinvestmentRates,
+          borderColor: "#1f78b4",
+          backgroundColor: "rgba(31, 120, 180, 0.12)",
+          pointBackgroundColor: "#1f78b4",
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointHitRadius: 8,
+          tension: 0.25,
+          fill: true,
+          borderWidth: 2
+        }
+      ]
+    };
+
+    const config = {
+      type: "line",
+      data: data,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              padding: 16,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(40,40,40,0.9)",
+            titleFont: { size: 13, weight: "600" },
+            bodyFont: { size: 12 },
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return "  资本再投资率: " + value.toFixed(3);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "会计年度 (Fiscal Year)",
+              font: { size: 12 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "资本再投资率 (倍)",
+              font: { size: 12 }
+            },
+            grid: {
+              color: "rgba(0,0,0,0.05)"
+            },
+            ticks: {
+              callback: function (value) {
+                return value;
+              }
+            }
+          }
+        }
+      }
+    };
+
+    new Chart(ctx, config);
+  </script>
+</body>
+</html>

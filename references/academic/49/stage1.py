@@ -1,0 +1,156 @@
+import sys
+import io
+import pandas as pd
+import json
+import os
+
+def compute_data(output_json_path):
+    # 1. Source Data
+    # Using the raw markdown table provided in the prompt
+    csv_data = """
+GO_term|log2fc_PNEC_vs_others|RB_E2F_CHIPseq_score|annotation|marker_size_binned_q|sum_abs_log10_q_value
+microtubule-based movement|1.20670480622823|1.0202015806528|nan|20|4.6138584791602
+pronucleus|-0.1001054322258801|1.228012941794914|nan|20|3.843193571661222
+signal release|3.889897058409272|0.4028465234162195|nan|20|5.784592801611462
+regulation of cell development|1.540135094776259|0.5085709038569207|nan|40|11.13619904135352
+endocrine system development|2.318078268815988|0.1727724696983979|nan|20|4.01341394068209
+microtubule motor activity|0.5229135839259957|1.384099683344504|nan|40|13.49581278302938
+kinesin complex|0.534574680231793|1.569272351785036|nan|40|10.78125608579182
+negative regulation of gene expression, epigenetic|0.4227814798009545|0.9352169496079143|nan|20|4.412915298813484
+membrane docking|1.925972643060236|0.9167464157747806|nan|20|7.631935092824332
+signal transduction by p53 class mediator|-0.9696449170026672|1.52184790603343|nan|20|8.944930363872974
+protein depolymerization|0.6783717499282899|1.021053019638188|nan|20|8.244426638042908
+regulation of microtubule cytoskeleton organization|0.172325172616351|1.291070516080746|nan|40|16.07316463964284
+cilium organization|0.7192702115909774|0.955038471783134|nan|20|5.563497634669008
+cell projection morphogenesis|1.772474260972692|0.4663167230428461|nan|40|12.97980531804684
+head development|1.943882626724927|0.5137208714095451|nan|40|11.88909493255475
+tubulin binding|0.4342817906177706|1.221763209293746|nan|80|28.35721949533152
+exocytic vesicle|3.016231115495649|0.5481699308652962|nan|40|10.30584200462298
+response to ionizing radiation|-0.316495908993384|1.454443092178473|nan|20|6.112657620003966
+transport vesicle membrane|2.68113035334154|0.5991199267053875|nan|20|6.072311236501418
+nose development|3.071179313807034|0.3880411762666394|nan|20|6.576708376723261
+histone binding|0.0042864335434814|1.233695216045463|nan|20|9.93072368842161
+cell body|3.228995089630702|0.6200033217337048|nan|20|9.833721295436227
+ESC/E(Z) complex|0.0138430552663621|0.8053039903160076|nan|20|3.85069957888311
+regulation of signal transduction by p53 class mediator|-0.1952130048646947|1.483772513771814|nan|40|10.22056172439032
+regionalization|1.553854831033216|0.3914698292619781|nan|20|4.872151296041086
+cell fate specification|1.141925997663992|0.1695166704885187|nan|20|5.199919006021894
+regulation of ubiquitin protein ligase activity|-0.9714755697090144|1.590704174243126|nan|20|3.869696036787605
+microtubule|0.0487877482172321|1.248258428100323|nan|80|22.39001417336228
+nuclear ubiquitin ligase complex|-0.4483946424238184|1.509108913792161|nan|20|3.880960402962834
+microtubule organizing center|-0.2184279284434325|1.30139191925474|nan|80|21.25527206852384
+organelle localization|1.450151985038472|1.10717431510416|nan|40|17.71957243986129
+organelle assembly|-0.3032358944091685|1.266665514518397|nan|20|9.206996245961315
+microtubule cytoskeleton organization|-0.1848114559844774|1.316147023051212|nan|80|47.75450157380595
+regulation of synaptic vesicle cycle|3.885950179429043|0.4435161127772872|neuronal|20|8.046701072128032
+mitotic cell cycle|-0.5897051140784151|1.552474094040284|cell proliferation|80|127.0165730274768
+regulation of cell division|-0.4563538059804594|1.208935301838117|cell proliferation|20|8.783502581015856
+regulation of synapse organization|2.400695798643253|0.3836396067491855|neuronal|20|4.994872915768569
+chromosome segregation|-0.67862486602614|1.672549679354268|cell proliferation|80|57.88995953073522
+DNA packaging complex|-0.4845054086647754|1.750036313782797|DNA maintenance / repair|20|5.669183531156273
+chromosome organization|-0.4578495666583203|1.482236586315903|DNA maintenance / repair|80|69.71881090093706
+cell cycle checkpoint|-0.8811688827751449|1.551146913780344|cell proliferation|80|31.18118026474693
+regulation of chromosome segregation|-0.6440881953936822|1.670392452024025|cell proliferation|80|25.17946938682367
+regulation of cyclin-dependent protein serine/threonine kinase activity|1.040994785529782|1.42613256258855|cell proliferation|40|10.73318210907242
+positive regulation of cell cycle|0.1669291471955148|1.298646288590264|cell proliferation|80|28.88402951203617
+presynapse|3.094706389113028|0.5529351720339476|neuronal|40|11.58941222700616
+adult behavior|2.876972035755845|0.4139411219096331|neuronal|20|3.973921722381573
+regulation of meiotic cell cycle|-0.7308128130991733|1.136037507040515|cell proliferation|20|5.750728483064681
+nerve development|2.000061388979298|0.5989206927270474|neuronal|20|7.131601353715361
+neuronal dense core vesicle|7.38979220681863|0.1710800483523134|neuronal|20|9.201582454440215
+cellular response to DNA damage stimulus|-0.4471946239559604|1.572810348104225|DNA maintenance / repair|80|42.52658869105653
+neuron projection terminus|4.25426150136266|0.4682736187800825|neuronal|20|4.602204358933601
+MCM complex|-0.194169232267309|1.789454979718607|cell proliferation|20|9.614656823884156
+catalytic activity, acting on DNA|-0.2338439760292787|1.621566119160417|DNA maintenance / repair|80|24.85308552973603
+protein localization to chromosome|-0.6947148862364104|1.512571183949908|DNA maintenance / repair|20|5.966672737484575
+positive regulation of cyclin-dependent protein kinase activity|1.901250853969009|1.297977564075439|cell proliferation|20|5.556772895495052
+regulation of DNA metabolic process|-0.198181025640143|1.59968891257566|DNA maintenance / repair|20|7.433601343096038
+cell cycle process|-0.5354181836049021|1.504811336238309|cell proliferation|80|125.0182756817175
+nuclear division|-0.9410939709808406|1.634207064087876|cell proliferation|80|63.76695773857206
+midbody|-0.583203085667596|1.302631065281283|cell proliferation|40|13.00721037323707
+somatodendritic compartment|2.801119810471424|0.5877356618577725|neuronal|40|11.26309217915007
+axon|3.095503182440229|0.5613257187938738|neuronal|40|19.8990293943045
+neural nucleus development|3.824516907419284|0.5056077391442668|neuronal|20|4.271531733691623
+synaptic membrane|2.77186412549361|0.4087595495103898|neuronal|20|5.171706966331878
+meiotic cell cycle|-0.6172811740003233|1.516548150483468|cell proliferation|80|32.02985941765669
+DNA secondary structure binding|-0.0156608525256486|1.447870864272128|DNA maintenance / repair|20|7.916896512222181
+regulation of response to DNA damage stimulus|-0.4614186528392991|1.64807222773458|DNA maintenance / repair|20|5.131254967634019
+modulation of chemical synaptic transmission|3.084786544418804|0.4062206613361631|neuronal|20|8.93916182142137
+regulation of neurotransmitter transport|3.794991928315949|0.4829349690150102|neuronal|20|5.964162523016154
+negative regulation of chromosome organization|-0.4130580589710327|1.46550983186676|DNA maintenance / repair|40|12.46247945686272
+neuron migration|2.47120547236328|0.4066968399049556|neuronal|20|6.86858752562174
+chromosomal region|-0.7823618321177878|1.677157795621953|DNA maintenance / repair|80|60.92286608771973
+neuron differentiation|2.018003338266737|0.4518332386259261|neuronal|40|16.04605421661306
+DNA polymerase complex|-1.392472050597941|1.461686574385645|cell proliferation|20|7.280388835804919
+condensed chromosome|-0.8936143985328543|1.659632083441207|cell proliferation|80|52.66684945581025
+regulation of neurotransmitter levels|3.529767322104744|0.4193488274050775|neuronal|40|10.91610802863907
+neurotransmitter transport|3.898550119308734|0.4574326596958942|neuronal|20|9.44970916448586
+regulation of cell cycle process|-0.2057577711184686|1.31286871434223|cell proliferation|80|49.20877735414541
+regulation of mitotic cell cycle|-0.2183857929003446|1.323779692006223|cell proliferation|80|40.95644756948349
+regulation of nuclear division|-0.5363347456410675|1.480380938903345|cell proliferation|80|24.66651804335836
+heterochromatin|-0.2964194485182021|1.411786128092049|DNA maintenance / repair|40|10.02918201167309
+chemical synaptic transmission|3.007876100406344|0.4226647919052315|neuronal|40|10.284298181991
+protein-DNA complex assembly|-0.5250647128807936|1.562234201957198|DNA maintenance / repair|80|26.92833387233324
+cyclin-dependent protein kinase holoenzyme complex|-1.060985102647097|1.963765315294442|cell proliferation|20|7.902516552444065
+regulation of stem cell proliferation|-0.3289551962281715|0.4786879193814446|cell proliferation|20|3.938186438718151
+regulation of DNA replication|-0.7289020191256216|1.871775558227238|cell proliferation|40|15.39246500506761
+spindle|-0.6627261675707102|1.448410352398714|cell proliferation|80|44.01537816438309
+replication fork|-0.4389372969414301|1.633456703155542|cell proliferation|40|18.11504326997183
+DNA replication|-0.3465551794366857|1.732906826277225|cell proliferation|80|61.95764422810456
+single-stranded DNA binding|-0.1379506931735647|1.521970634315349|DNA maintenance / repair|40|13.20979154988954
+DNA replication origin binding|-0.2791360080738524|1.721121134946433|cell proliferation|40|13.31397188190334
+regulation of nervous system development|1.657266796024463|0.4797783914431135|neuronal|40|14.35235097375222
+damaged DNA binding|0.017061902854468|1.975691063574597|DNA maintenance / repair|20|8.45049004770294
+helicase activity|0.0313465235885037|1.712368157862505|DNA maintenance / repair|20|9.10235586405696
+DNA-dependent ATPase activity|-0.0351232383596327|1.607260176607366|DNA maintenance / repair|80|22.44489060484508
+glutamatergic synapse|3.023609770639085|0.410565812623184|neuronal|20|6.348964673040268
+cell division|-0.65128483933492|1.551159147404204|cell proliferation|80|77.37344781619292
+central nervous system development|1.979607109004887|0.5107924348250219|neuronal|40|15.52245785994762
+positive regulation of neural precursor cell proliferation|2.698789754564984|0.2288752670102102|neuronal|20|6.210865481910467
+chromatin binding|0.3317318000810281|1.185093084429811|DNA maintenance / repair|80|20.32611079520883
+DNA metabolic process|-0.435310376253133|1.557115312393904|DNA maintenance / repair|80|57.42399520515645
+"""
+
+    # 2. Data Processing
+    # Read CSV data
+    df = pd.read_csv(io.StringIO(csv_data), sep="|")
+    
+    # Clean column names (remove whitespace)
+    df.columns = [c.strip() for c in df.columns]
+    
+    # Clean string data (remove whitespace)
+    df['annotation'] = df['annotation'].astype(str).str.strip()
+    
+    # Handle 'nan' strings in annotation by converting to 'Other'
+    df.loc[df['annotation'] == 'nan', 'annotation'] = 'Other'
+    
+    # Rename 'DNA maintenance / repair' to 'DNA maintenance' to match legend
+    df.loc[df['annotation'] == 'DNA maintenance / repair', 'annotation'] = 'DNA maintenance'
+    
+    # Capitalize 'neuronal' and 'cell proliferation' to match legend
+    df.loc[df['annotation'] == 'neuronal', 'annotation'] = 'Neuronal'
+    df.loc[df['annotation'] == 'cell proliferation', 'annotation'] = 'Cell proliferation'
+
+    # Save raw data to scr_data (before modifications if possible, or reconstructed)
+    # Re-reading for purity
+    df_raw = pd.read_csv(io.StringIO(csv_data), sep="|")
+    df_raw.columns = [c.strip() for c in df_raw.columns]
+    
+    scr_data = df_raw.to_dict(orient='records')
+    der_data = df.to_dict(orient='records') # Processed data
+
+    output_json = {
+        "scr_data": scr_data,
+        "der_data": der_data
+    }
+
+    # Ensure output directory exists
+    os.makedirs(os.path.dirname(output_json_path), exist_ok=True)
+
+    with open(output_json_path, 'w') as f:
+        json.dump(output_json, f, indent=4)
+    print(f"Data saved to {output_json_path}")
+
+if __name__ == "__main__":
+    output_json = "bench/ground_truth_code/nature_1_output/49.json"
+    compute_data(output_json)

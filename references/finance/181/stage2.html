@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>NFLX 现金循环周期（CCC）2019–2023</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    #chartContainer {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 16px 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .caption {
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div id="chartContainer">
+    <h1>NFLX 现金循环周期（Cash Conversion Cycle, CCC）</h1>
+    <h2>按年度走势：2019 – 2023（单位：天）</h2>
+    <canvas id="cccChart"></canvas>
+    <div class="caption">
+      数据：公司披露财报整理（单位：天）；柱状图颜色按值高低区分，支持悬停查看精确数值与年度。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // 原始数据（已经给出）
+    const years = ["2019", "2020", "2021", "2022", "2023"];
+    const cccValues = [
+      45.91537952550215,
+      0.3006853876878477,
+      -1.4833828352979823,
+      6.25844976502882,
+      12.842663607755082
+    ];
+
+    // 动态设置 y 轴范围，留出视觉边距
+    const minValue = Math.min(...cccValues);
+    const maxValue = Math.max(...cccValues);
+    const padding = (maxValue - minValue) * 0.2 || 5;
+    const suggestedMin = Math.floor(minValue - padding);
+    const suggestedMax = Math.ceil(maxValue + padding);
+
+    // 为不同区间提供视觉差异的颜色
+    const barColors = cccValues.map(v => {
+      if (v < 0) return "rgba(239, 68, 68, 0.85)";      // 负值：红
+      if (v > 30) return "rgba(37, 99, 235, 0.9)";      // 较高：深蓝
+      return "rgba(56, 189, 248, 0.85)";                // 其余：青蓝
+    });
+
+    const ctx = document.getElementById("cccChart").getContext("2d");
+
+    const cccChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [{
+          label: "现金循环周期（天）",
+          data: cccValues,
+          backgroundColor: barColors,
+          borderColor: barColors.map(c => c.replace("0.85", "1").replace("0.9", "1")),
+          borderWidth: 1.5,
+          borderRadius: 4,
+          hoverBorderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        // 给画布容器一个固定高度
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.raw;
+                return ` ${context.dataset.label}: ${value.toFixed(2)} 天`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "现金循环周期（天）",
+              font: {
+                size: 12
+              }
+            },
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            grid: {
+              color: "rgba(148, 163, 184, 0.3)",
+              drawBorder: false
+            },
+            ticks: {
+              callback: function(value) {
+                return value + " 天";
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutCubic"
+        }
+      }
+    });
+
+    // 强制设置高度，保证在不同屏幕有较好展示
+    document.getElementById("cccChart").parentElement.style.height = "420px";
+  </script>
+</body>
+</html>

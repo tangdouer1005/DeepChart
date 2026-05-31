@@ -1,0 +1,30 @@
+{
+  "status": "complete",
+  "chart_type": "slope",
+  "title": "Sector Spotlights: average deal size from 2024 to 2025",
+  "y_label": "Average deal size ($M)",
+  "start_label": "2024 average",
+  "end_label": "2025 average",
+  "data": [
+    {
+      "label": "AI",
+      "start": 24.6,
+      "end": 44.8
+    },
+    {
+      "label": "Digital Health",
+      "start": 15.8,
+      "end": 20.3
+    },
+    {
+      "label": "Fintech",
+      "start": 12.9,
+      "end": 20.0
+    },
+    {
+      "label": "Retail Tech",
+      "start": 14.9,
+      "end": 20.0
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a bar chart of the top 10 countries in the 2025 country tables by growth dispersion, measured as `max(numeric growth) - min(numeric growth)` across each country's listed cities, expressed in percentage points, sorted descending, and restricted to countries with at least 6 numeric growth entries.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2025 Growth Dispersion by Country",
+  "value_unit": "percentage points",
+  "sort_rule": "descending by growth_dispersion_pp, tie-break alphabetically",
+  "selection_rule": "top 10 countries with at least 6 numeric growth entries",
+  "records": [
+    {
+      "entity": "Russia",
+      "growth_dispersion_pp": 470.9
+    },
+    {
+      "entity": "Ireland",
+      "growth_dispersion_pp": 375.3
+    },
+    {
+      "entity": "Sweden",
+      "growth_dispersion_pp": 317.1
+    },
+    {
+      "entity": "China",
+      "growth_dispersion_pp": 206.4
+    },
+    {
+      "entity": "Brazil",
+      "growth_dispersion_pp": 200.4
+    },
+    {
+      "entity": "Finland",
+      "growth_dispersion_pp": 132.1
+    },
+    {
+      "entity": "France",
+      "growth_dispersion_pp": 130.8
+    },
+    {
+      "entity": "Taiwan",
+      "growth_dispersion_pp": 125.2
+    },
+    {
+      "entity": "Germany",
+      "growth_dispersion_pp": 118.6
+    },
+    {
+      "entity": "Israel",
+      "growth_dispersion_pp": 114.9
+    }
+  ],
+  "value_field": "growth_dispersion_pp",
+  "x_label": "Country",
+  "y_label": "max(numeric growth) - min(numeric growth)"
+}

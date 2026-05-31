@@ -1,0 +1,65 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a dumbbell chart showing the top 8 ecosystems with the largest absolute disagreement between `Funding rank` and `Value rank` within the Europe section, using ecosystems where `Total Early-Stage Funding` and `Ecosystem Value` are both exact values; the left endpoint shows rank by `Total Early-Stage Funding`, the right endpoint shows rank by `Ecosystem Value`, values are expressed in `rank position`, and items are sorted descending by absolute rank gap.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "rank position",
+  "sort_rule": "descending by absolute rank gap, ties broken by lower funding_rank then entity",
+  "selection_rule": "top 8 after deterministic tie-break",
+  "plot_spec": {
+    "title": "2021 Europe Funding vs Value Rank Gap",
+    "left_field": "funding_rank",
+    "right_field": "value_rank",
+    "left_label": "funding_rank",
+    "right_label": "value_rank"
+  },
+  "records": [
+    {
+      "entity": "Frankfurt",
+      "funding_rank": 11,
+      "value_rank": 8,
+      "abs_rank_gap": 3
+    },
+    {
+      "entity": "Stockholm",
+      "funding_rank": 5,
+      "value_rank": 3,
+      "abs_rank_gap": 2
+    },
+    {
+      "entity": "Rhineland",
+      "funding_rank": 8,
+      "value_rank": 10,
+      "abs_rank_gap": 2
+    },
+    {
+      "entity": "Western Denmark",
+      "funding_rank": 9,
+      "value_rank": 11,
+      "abs_rank_gap": 2
+    },
+    {
+      "entity": "Berlin",
+      "funding_rank": 3,
+      "value_rank": 4,
+      "abs_rank_gap": 1
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "funding_rank": 4,
+      "value_rank": 5,
+      "abs_rank_gap": 1
+    },
+    {
+      "entity": "Istanbul",
+      "funding_rank": 10,
+      "value_rank": 9,
+      "abs_rank_gap": 1
+    },
+    {
+      "entity": "Biscay Bay Region",
+      "funding_rank": 13,
+      "value_rank": 14,
+      "abs_rank_gap": 1
+    }
+  ]
+}

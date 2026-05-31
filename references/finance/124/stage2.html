@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>ko 的斯隆比率（Sloan Ratio / Accruals Ratio）2016–2024 變化</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", "PingFang TC",
+        "Microsoft JhengHei", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;
+      /* FIX: set a sane, fixed height to avoid vertical stretching */
+      height: 420px;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 16px 20px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-sizing: border-box;
+    }
+    .note {
+      font-size: 11px;
+      color: #666;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      .chart-container {
+        height: 360px;
+        padding: 12px 12px 18px;
+      }
+      h1 {
+        font-size: 18px;
+      }
+      h2 {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>ko 的斯隆比率（Sloan Ratio / Accruals Ratio）</h1>
+    <h2>2016–2024 年度變化（柱狀圖）</h2>
+
+    <div class="chart-container">
+      <canvas id="sloanChart" aria-label="Sloan Ratio from 2016 to 2024" role="img"></canvas>
+    </div>
+
+    <div class="note">
+      資料來源：使用者提供財報指標資料。<br>
+      正值通常代表較高的權責基礎盈餘成分，負值代表現金流成分較高；解讀時請搭配其他財務指標。
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('sloanChart');
+
+    // Data
+    const labels = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const dataValues = [
+      -0.0255999458440987,
+      -0.066885126108948,
+      -0.0139440834073589,
+      -0.0182904178729576,
+      -0.0241482752465784,
+      -0.0314230663363611,
+      -0.0157762255700978,
+      -0.0092929971753488,
+       0.0385973407582269
+    ];
+
+    // Colors: negative = blue, positive = red
+    const backgroundColors = dataValues.map(v =>
+      v >= 0 ? "rgba(220, 76, 70, 0.75)" : "rgba(54, 162, 235, 0.75)"
+    );
+    const borderColors = dataValues.map(v =>
+      v >= 0 ? "rgba(220, 76, 70, 1)" : "rgba(54, 162, 235, 1)"
+    );
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "斯隆比率",
+          data: dataValues,
+          backgroundColor: backgroundColors,
+          borderColor: borderColors,
+          borderWidth: 1,
+          borderRadius: 4,
+          maxBarThickness: 40
+        }]
+      },
+      options: {
+        // FIX: let the container control the size
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return "  斯隆比率: " + value.toFixed(4);
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: "會計年度 (Fiscal Year)",
+              font: { size: 12 }
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+              autoSkip: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: "rgba(0, 0, 0, 0.05)"
+            },
+            title: {
+              display: true,
+              text: "斯隆比率 (Sloan Ratio / Accruals Ratio)",
+              font: { size: 12 }
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(2);
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        }
+      }
+    });
+  </script>
+</body>
+</html>

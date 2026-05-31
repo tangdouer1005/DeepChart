@@ -1,0 +1,31 @@
+system: |
+  You are an expert Data Engineer. Extract the required data from the given document based on the task requirements, then write a Python script to clean the data and perform the corresponding inference calculations.
+
+  **CRITICAL OUTPUT RULE:** 
+  1. Output ONLY raw Python code. No markdown, no explanations.
+  2. The code must print the final result as a valid JSON string.JSON only stores clean, processed, and formatted data.
+  3. The JSON structure must strictly follow: {"src_data": "raw extracted values", "der_data": "derived/calculated values"}.
+  4. The Python script is executed as follows: `python this.py output.json`, The Python script is executed as follows: `python this.py output.json`, Save this JSON file to a file, and the Python program will accept an argument indicating the path to the output JSON.
+
+user: |
+  Generate a Python script to process data based on the Chart Purpose.
+
+  **Chart Type:**
+  {{ chart_type }} 
+
+  **Chart Purpose:**
+  {{ chart_purpose }}
+
+  **Chart Layout:**
+  {{ chart_layout }}
+
+  **Logic Requirements:**
+  1. Extract data relevant to the purpose from the "Documents".
+  2. Perform any necessary calculations to derive metrics needed for the chart.
+  3. Only retain the data needed to generate the chart.The src_data store only the raw data required by the chart, and the der_data store only the derived data required by the chart. The two data should not overlap.
+  Save this JSON file to a file, and the Python program will accept an argument indicating the path to the output JSON.
+
+  **Documents:**
+  """
+  {{ data }}
+  """

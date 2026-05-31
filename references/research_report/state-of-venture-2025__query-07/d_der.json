@@ -1,0 +1,100 @@
+{
+  "status": "complete",
+  "chart_type": "bubble",
+  "title": "Top-15 markets: stage gap vs headline-round amplification",
+  "x_label": "Early-stage share minus late-stage share (pp)",
+  "y_label": "Largest top deal / average deal size (x)",
+  "size_label": "Annual deal count",
+  "data": [
+    {
+      "label": "Silicon Valley",
+      "x": 66,
+      "y": 375.7028665931643,
+      "size": 3029
+    },
+    {
+      "label": "New York",
+      "x": 58,
+      "y": 115.27777777777779,
+      "size": 1660
+    },
+    {
+      "label": "United Kingdom",
+      "x": 57,
+      "y": 87.64423076923077,
+      "size": 1823
+    },
+    {
+      "label": "Los Angeles",
+      "x": 51,
+      "y": 92.79569892473118,
+      "size": 863
+    },
+    {
+      "label": "China",
+      "x": 57,
+      "y": 80.04324324324324,
+      "size": 2468
+    },
+    {
+      "label": "Boston",
+      "x": 43,
+      "y": 23.378048780487806,
+      "size": 639
+    },
+    {
+      "label": "India",
+      "x": 58,
+      "y": 53.18503937007875,
+      "size": 1501
+    },
+    {
+      "label": "France",
+      "x": 54,
+      "y": 10.386666666666667,
+      "size": 760
+    },
+    {
+      "label": "Germany",
+      "x": 63,
+      "y": 20.955,
+      "size": 762
+    },
+    {
+      "label": "Austin",
+      "x": 42,
+      "y": 56.986301369863014,
+      "size": 416
+    },
+    {
+      "label": "Dallas",
+      "x": 30,
+      "y": 1.5140845070422535,
+      "size": 215
+    },
+    {
+      "label": "Israel",
+      "x": 59,
+      "y": 12.181818181818182,
+      "size": 402
+    },
+    {
+      "label": "Denver",
+      "x": 39,
+      "y": 56.90322580645161,
+      "size": 252
+    },
+    {
+      "label": "Philadelphia",
+      "x": 71,
+      "y": 42.846774193548384,
+      "size": 805
+    },
+    {
+      "label": "Seattle",
+      "x": 52,
+      "y": 38.490566037735846,
+      "size": 408
+    }
+  ]
+}

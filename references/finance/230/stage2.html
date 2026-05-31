@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMO 资本再投资率（2016–2024）折线图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      margin: 0;
+      padding: 24px 12px;
+      background: #f5f5f7;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    p.subtitle {
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #555;
+      font-size: 13px;
+    }
+
+    .chart-card {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      /* Use a fixed but responsive aspect ratio to avoid extreme stretching */
+      aspect-ratio: 16 / 9;
+      min-height: 320px; /* helps on very narrow screens */
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      padding: 16px 16px 12px;
+      box-sizing: border-box;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important; /* let the aspect-ratio container control height */
+      display: block;
+    }
+
+    .footer-note {
+      max-width: 960px;
+      margin: 10px auto 0;
+      font-size: 11px;
+      color: #777;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-card">
+    <h1>TMO 资本再投资率（2016–2024）</h1>
+    <p class="subtitle">展示 2016–2024 财年 TMO 的资本再投资率变动情况</p>
+
+    <div class="chart-container">
+      <canvas id="reinvestmentRateChart"></canvas>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    数据来源：用户提供（RESULT_Reinvestment_Rate）
+  </div>
+
+  <script>
+    // Source data: Fiscal Year vs RESULT_Reinvestment_Rate
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+
+    const reinvestmentRatesRaw = [
+      0.6007163507916056,
+      0.0716131721436111,
+      0.3529838775464278,
+      0.3671496774337817,
+      0.211532442086167,
+      0.3752573193161401,
+      0.3598125526679475,
+      0.3510083120917305,
+      0.3320200159154047,
+    ];
+
+    // Convert to percentage values
+    const reinvestmentRatesPct = reinvestmentRatesRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("reinvestmentRateChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "资本再投资率（%）",
+            data: reinvestmentRatesPct,
+            borderColor: "rgba(75, 134, 255, 1)",
+            backgroundColor: "rgba(75, 134, 255, 0.12)",
+            pointBackgroundColor: "rgba(75, 134, 255, 1)",
+            pointBorderColor: "#ffffff",
+            pointHoverRadius: 5,
+            pointRadius: 3.5,
+            pointBorderWidth: 2,
+            tension: 0.25,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true, // let the container's aspect-ratio control the canvas size
+        interaction: {
+          mode: "nearest",
+          intersect: false,
+        },
+        layout: {
+          padding: {
+            top: 8,
+            right: 16,
+            bottom: 8,
+            left: 8,
+          },
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+            labels: {
+              font: {
+                size: 12,
+              },
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                if (value == null || isNaN(value)) return "";
+                return "资本再投资率: " + value.toFixed(2) + "%";
+              },
+              title: function (contexts) {
+                if (!contexts.length) return "";
+                return "财年: " + contexts[0].label;
+              },
+            },
+          },
+          title: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              font: { size: 12 },
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              minRotation: 0,
+              font: { size: 11 },
+            },
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "资本再投资率（%）",
+              font: { size: 12 },
+            },
+            ticks: {
+              callback: function (value) {
+                return value + "%";
+              },
+              font: { size: 11 },
+            },
+            beginAtZero: true,
+            suggestedMax: 70, // headroom above max ~60%
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+            },
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>

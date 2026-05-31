@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: white;
+        }
+        #chart-container {
+            width: 250px; /* Approximate width from 2.5 inch */
+            height: 450px; /* Approximate height from 4.5 inch */
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        // 1. Data
+        
+        const data = {"parental": [21863.712354984018, 24875.51895888996, 22016.88534472098, 25814.18797596233, 27246.77866410799], "ln": [5248.1946577061535, 4320.354879247093, 15541.987943068676, 13139.913582885727, 14483.39717982995, 13964.363297837686, 10780.695635644199, 8743.865759079777, 13898.341508026346, 10198.568416990754, 12314.923007748532, 11617.386425505598, 17421.548254970465, 15474.152131782945, 16688.727498423043, 14176.337430747923, 13151.321576226404, 15637.465129727156, 14238.328096084297, 13632.089870994174, 13037.781395889358, 14076.181229212425, 13737.782678088366, 14613.457395722215], "means": [24363.416659733055, 12922.381874226636], "stds": [2368.3060110858573, 3181.8174317014823]};
+        const parentalData = data.parental;
+        const lnData = data.ln;
+        const means = data.means;
+        const stds = data.stds;
+
+
+
+        // 3. Jitter Helper (Box-Muller transform)
+        // Seeding isn't native in JS Math.random, so we use a simple LCG if we want exact reproducibility, 
+        // but for this visual reproduction, standard Math.random is sufficient as long as logic is correct.
+        // However, to mimic Python's np.random.seed(42), we can implement a simple seedable generator.
+        
+        let seed = 42;
+        function random() {
+            var x = Math.sin(seed++) * 10000;
+            return x - Math.floor(x);
+        }
+
+        function randn_bm() {
+            let u = 0, v = 0;
+            while(u === 0) u = random(); 
+            while(v === 0) v = random();
+            return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+        }
+
+        // Prepare Scatter Data with Jitter
+        const scatterDataP = parentalData.map(val => {
+            const jitter = randn_bm() * 0.06;
+            return [0 + jitter, val];
+        });
+
+        const scatterDataLN = lnData.map(val => {
+            const jitter = randn_bm() * 0.1; // Python script used 0.1 for LN
+            return [1 + jitter, val];
+        });
+
+        // 4. Chart Configuration
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        const option = {
+            animation: false,
+            grid: {
+                top: '10%', // Adjust for 'i' label and title space
+                bottom: '15%',
+                left: '25%', // Space for Y axis labels
+                right: '5%'
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Parental', 'LN'],
+                axisLabel: {
+                    rotate: 45,
+                    fontSize: 11,
+                    color: 'black',
+                    margin: 10
+                },
+                axisTick: {
+                    show: true,
+                    alignWithLabel: true,
+                    lineStyle: { color: 'black' }
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: { color: 'black' }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'GSSG peak intensity',
+                nameLocation: 'middle',
+                nameGap: 50, // Increase gap for long label
+                nameTextStyle: {
+                    fontSize: 11,
+                    color: 'black'
+                },
+                min: 0,
+                max: 42000,
+                interval: 10000,
+                axisLabel: {
+                    fontSize: 11,
+                    color: 'black',
+                    formatter: function (value) {
+                        if (value === 0) return '0';
+                        const base = value / 10000;
+                        return base + ' × 10⁴';
+                    },
+                    margin: 4
+                },
+                axisLine: {
+                    show: true, // Show Y axis line
+                    lineStyle: { color: 'black' }
+                },
+                splitLine: { show: false } // Remove grid lines
+            },
+            series: [
+                // Bars
+                {
+                    type: 'bar',
+                    data: [
+                        {
+                            value: means[0],
+                            itemStyle: { color: '#D9D9D9', borderColor: 'black', borderWidth: 1 }
+                        },
+                        {
+                            value: means[1],
+                            itemStyle: { color: '#98C996', borderColor: 'black', borderWidth: 1 }
+                        }
+                    ],
+                    barWidth: '60%',
+                    z: 1
+                },
+                // Error Bars (Custom)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        var xValue = api.value(0);
+                        var mean = api.value(1);
+                        var std = api.value(2); // encoded
+                        var highPoint = api.coord([xValue, mean + std]);
+                        var lowPoint = api.coord([xValue, mean - std]); // Although python uses symmetric, matplotlib yerr is usually symmetric
+                        // Python: yerr=stds -> symmetric error bar
+                        
+                        var halfWidth = 5; // capsize
+                        var style = api.style({
+                            stroke: 'black',
+                            fill: undefined,
+                            lineWidth: 1
+                        });
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0] - halfWidth, y1: highPoint[1],
+                                        x2: highPoint[0] + halfWidth, y2: highPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0], y1: highPoint[1],
+                                        x2: highPoint[0], y2: lowPoint[1] // Normally error bars go down too
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0] - halfWidth, y1: lowPoint[1],
+                                        x2: lowPoint[0] + halfWidth, y2: lowPoint[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    encode: {
+                        x: 0,
+                        y: [1, 2] // 1: mean, 2: std
+                    },
+                    data: [
+                        [0, means[0], stds[0]],
+                        [1, means[1], stds[1]]
+                    ],
+                    z: 2
+                },
+                // Scatter Points
+                {
+                    type: 'scatter',
+                    data: scatterDataP,
+                    itemStyle: {
+                        color: 'black',
+                        borderColor: 'transparent'
+                    },
+                    symbolSize: 8,
+                    z: 3
+                },
+                {
+                    type: 'scatter',
+                    data: scatterDataLN,
+                    itemStyle: {
+                        color: '#2E8B57', // SeaGreen
+                        borderColor: 'transparent'
+                    },
+                    symbolSize: 8,
+                    z: 3
+                },
+                // P-Value Line
+                {
+                    type: 'line',
+                    markLine: {
+                        symbol: 'none',
+                        data: [
+                            [
+                                { coord: [0, 38000], lineStyle: { color: 'black', width: 1, type: 'solid' } },
+                                { coord: [1, 38000] }
+                            ]
+                        ],
+                        silent: true
+                    },
+                    z: 4
+                },
+                // P-Value Text (using a hidden point with label)
+                {
+                    type: 'scatter',
+                    data: [[0.5, 39000]],
+                    symbolSize: 0,
+                    label: {
+                        show: true,
+                        formatter: 'P = 2.6 × 10⁻⁵',
+                        color: 'black',
+                        fontSize: 10,
+                        position: 'top',
+                        distance: 0 // Exact position
+                    },
+                    z: 4
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0, // Approx -0.35 in Axes coordinates is way left, but ECharts doesn't have Axes coords easily.
+                    top: 0, 
+                    style: {
+                        text: 'i',
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

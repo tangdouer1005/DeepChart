@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 550px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = [
+    {
+        "fraction": 0.0,
+        "heat_power": 14.00411,
+        "h2_power": 2.52974,
+        "percent": 0.0
+    },
+    {
+        "fraction": 0.11111,
+        "heat_power": 13.97707,
+        "h2_power": 2.57286,
+        "percent": 11.111
+    },
+    {
+        "fraction": 0.22222,
+        "heat_power": 13.94922,
+        "h2_power": 2.61728,
+        "percent": 22.222
+    },
+    {
+        "fraction": 0.33333,
+        "heat_power": 13.91881,
+        "h2_power": 2.66577,
+        "percent": 33.333
+    },
+    {
+        "fraction": 0.44444,
+        "heat_power": 13.88884,
+        "h2_power": 2.71358,
+        "percent": 44.444
+    },
+    {
+        "fraction": 0.55556,
+        "heat_power": 13.85947,
+        "h2_power": 2.76041,
+        "percent": 55.556000000000004
+    },
+    {
+        "fraction": 0.66667,
+        "heat_power": 13.82843,
+        "h2_power": 2.80991,
+        "percent": 66.667
+    },
+    {
+        "fraction": 0.77778,
+        "heat_power": 13.79622,
+        "h2_power": 2.86128,
+        "percent": 77.778
+    },
+    {
+        "fraction": 0.88889,
+        "heat_power": 13.76039,
+        "h2_power": 2.91842,
+        "percent": 88.889
+    },
+    {
+        "fraction": 1.0,
+        "heat_power": 13.73574,
+        "h2_power": 2.95773,
+        "percent": 100.0
+    }
+];
+
+        const xData = rawData.map(d => d.fraction * 100);
+        const h2Power = rawData.map(d => d.h2_power);
+        const heatPower = rawData.map(d => d.heat_power);
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                left: '15%',
+                right: '15%',
+                bottom: '20%',
+                top: '10%'
+            },
+            xAxis: {
+                type: 'value',
+                min: -15,
+                max: 115,
+                interval: 50,
+                axisLabel: {
+                    color: '#000',
+                    fontSize: 12
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: { color: '#000' }
+                },
+                axisTick: { show: true },
+                splitLine: { show: false },
+                name: "Linear interpolation of homogeneity (%)\n0% = actual experiment,\n100% = fully homogeneous light",
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: {
+                    fontSize: 12,
+                    color: '#000',
+                    align: 'center'
+                }
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    name: 'Power fuel (kW)',
+                    nameLocation: 'middle',
+                    nameGap: 40,
+                    nameTextStyle: {
+                        color: '#333333',
+                        fontSize: 12
+                    },
+                    min: 2.45,
+                    max: 3.0,
+                    interval: 0.1,
+                    axisLabel: {
+                        color: '#333333',
+                        fontSize: 11,
+                        formatter: function(value) {
+                            return value.toFixed(1);
+                        }
+                    },
+                    axisLine: { show: true, lineStyle: { color: '#333333' } },
+                    axisTick: { show: true },
+                    splitLine: { show: false }
+                },
+                {
+                    type: 'value',
+                    name: 'Power heat (kW)',
+                    nameLocation: 'middle',
+                    nameGap: 50,
+                    nameRotate: 270,
+                    nameTextStyle: {
+                        color: '#D6504D',
+                        fontSize: 12
+                    },
+                    min: 13.65,
+                    max: 14.05,
+                    interval: 0.1,
+                    axisLabel: {
+                        color: '#333333', // Ticks are dark as per python script comment
+                        fontSize: 11,
+                        formatter: function(value) {
+                            return value.toFixed(1);
+                        }
+                    },
+                    axisLine: { show: true, lineStyle: { color: '#D6504D' } }, // Optional: match axis line to data color
+                    axisTick: { show: true },
+                    splitLine: { show: false }
+                }
+            ],
+            series: [
+                {
+                    name: 'Power fuel',
+                    type: 'line',
+                    data: rawData.map(item => [item.fraction * 100, item.h2_power]),
+                    yAxisIndex: 0,
+                    symbol: 'rect', // Square
+                    symbolSize: 11,
+                    itemStyle: {
+                        color: '#757575'
+                    },
+                    lineStyle: {
+                        color: '#757575',
+                        width: 1
+                    },
+                    markLine: {
+                        symbol: 'none',
+                        data: [
+                            { xAxis: 0, lineStyle: { type: 'dashed', color: 'black', width: 1 } }
+                        ],
+                        label: { show: false }
+                    }
+                },
+                {
+                    name: 'Power heat',
+                    type: 'line',
+                    data: rawData.map(item => [item.fraction * 100, item.heat_power]),
+                    yAxisIndex: 1,
+                    symbol: 'triangle', // Triangle
+                    symbolSize: 12,
+                    itemStyle: {
+                        color: '#D6504D'
+                    },
+                    lineStyle: {
+                        color: '#D6504D',
+                        width: 1
+                    }
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: '2%',
+                    top: '2%',
+                    style: {
+                        text: 'd',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

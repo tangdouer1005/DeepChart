@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lilly EBITDA 2016–2024 折线图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f7;
+      color: #222;
+    }
+    .chart-container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px 24px 24px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      font-weight: 600;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+    .note {
+      font-size: 11px;
+      color: #888;
+      margin-top: 10px;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+    .toolbar button {
+      border-radius: 999px;
+      border: 1px solid #d0d0d5;
+      background: #fff;
+      padding: 4px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      color: #333;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.15s, box-shadow 0.15s, border-color 0.15s;
+    }
+    .toolbar button span.range-label {
+      font-weight: 500;
+    }
+    .toolbar button.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37,99,235,0.3);
+    }
+    .toolbar button:hover {
+      background: #f3f4ff;
+    }
+    .toolbar button.active:hover {
+      background: #1d4ed8;
+    }
+
+    /* FIX: give the canvas a stable, readable aspect ratio */
+    .canvas-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 920px;
+      /* 16:9 aspect ratio to avoid extreme stretching */
+      aspect-ratio: 16 / 9;
+      margin: 0 auto;
+    }
+    .canvas-wrapper canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .chart-container {
+        padding: 16px 14px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>Lilly 2016–2024 年 EBITDA 变化</h1>
+    <div class="subtitle">单位：美元（US$，精确到个位；图中以十亿美元显示）</div>
+
+    <div class="toolbar">
+      <span>时间范围：</span>
+      <button id="btnAll" class="active"><span class="range-label">全部 (2016–2024)</span></button>
+      <button id="btn5yr"><span class="range-label">近 5 年</span></button>
+      <button id="btn3yr"><span class="range-label">近 3 年</span></button>
+    </div>
+
+    <div class="canvas-wrapper">
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：用户提供的财政年度 EBITDA 数据（RESULT_EBITDA）。<br>
+      Fiscal Year, RESULT_EBITDA（USD）：<br>
+      2016: 5,055,800,000 · 2017: 3,979,400,000 · 2018: 5,613,000,000 · 2019: 10,579,600,000 ·<br>
+      2020: 8,913,400,000 · 2021: 8,042,900,000 · 2022: 8,660,500,000 · 2023: 8,567,800,000 · 2024: 15,227,600,000
+    </div>
+  </div>
+
+  <script>
+    // 原始数据：财政年度 & EBITDA（美元）
+    const fiscalYears = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const ebitdaValues = [
+      5055800000,
+      3979400000,
+      5613000000,
+      10579600000,
+      8913400000,
+      8042900000,
+      8660500000,
+      8567800000,
+      15227600000
+    ];
+
+    // 缩放为 “十亿美元” 以便阅读
+    const scaleToBillion = v => v / 1e9;
+
+    function getRangeData(rangeType) {
+      let startIndex = 0;
+      if (rangeType === '5yr') {
+        startIndex = Math.max(0, fiscalYears.length - 5);
+      } else if (rangeType === '3yr') {
+        startIndex = Math.max(0, fiscalYears.length - 3);
+      }
+      const labels = fiscalYears.slice(startIndex);
+      const data = ebitdaValues.slice(startIndex).map(scaleToBillion);
+      return { labels, data };
+    }
+
+    const ctx = document.getElementById('ebitdaChart').getContext('2d');
+
+    let currentRange = 'all';
+    const initialData = getRangeData(currentRange);
+
+    const ebitdaChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: initialData.labels,
+        datasets: [{
+          label: 'EBITDA（十亿美元）',
+          data: initialData.data,
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37, 99, 235, 0.12)',
+          pointBackgroundColor: '#ffffff',
+          pointBorderColor: '#2563eb',
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointBorderWidth: 2,
+          tension: 0.25,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        // FIX: let the wrapper control aspect ratio; prevent Chart.js from forcing one
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 8,
+            right: 12,
+            top: 8,
+            bottom: 8
+          }
+        },
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: 'line',
+              font: { size: 12 }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(17,24,39,0.92)',
+            titleFont: { size: 12, weight: '600' },
+            bodyFont: { size: 11 },
+            padding: 10,
+            callbacks: {
+              label: function(context) {
+                const year = context.label;
+                const valueBillion = context.parsed.y;
+                const rawIndex = fiscalYears.indexOf(Number(year));
+                const rawValue = ebitdaValues[rawIndex];
+
+                const formatter = new Intl.NumberFormat('en-US');
+                const rawFormatted = formatter.format(rawValue);
+                const billionFormatted = valueBillion.toFixed(2);
+
+                return [
+                  `EBITDA：$${billionFormatted} B`,
+                  `≈ $${rawFormatted}`
+                ];
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财政年度',
+              font: { size: 12 }
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              minRotation: 0,
+              font: { size: 11 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'EBITDA（十亿美元，US$）',
+              font: { size: 12 }
+            },
+            ticks: {
+              font: { size: 11 },
+              callback: function(value) {
+                return value + 'B';
+              }
+            },
+            grid: {
+              color: 'rgba(148, 163, 184, 0.24)'
+            }
+          }
+        }
+      }
+    });
+
+    // 交互按钮
+    const btnAll = document.getElementById('btnAll');
+    const btn5yr = document.getElementById('btn5yr');
+    const btn3yr = document.getElementById('btn3yr');
+
+    function setActiveButton(activeId) {
+      [btnAll, btn5yr, btn3yr].forEach(btn => {
+        if (btn.id === activeId) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    function updateRange(rangeType) {
+      if (currentRange === rangeType) return;
+      currentRange = rangeType;
+      const { labels, data } = getRangeData(rangeType);
+      ebitdaChart.data.labels = labels;
+      ebitdaChart.data.datasets[0].data = data;
+      ebitdaChart.update();
+    }
+
+    btnAll.addEventListener('click', () => {
+      updateRange('all');
+      setActiveButton('btnAll');
+    });
+    btn5yr.addEventListener('click', () => {
+      updateRange('5yr');
+      setActiveButton('btn5yr');
+    });
+    btn3yr.addEventListener('click', () => {
+      updateRange('3yr');
+      setActiveButton('btn3yr');
+    });
+  </script>
+</body>
+</html>

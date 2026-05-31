@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>abbv 奥特曼破产预测模型 (Altman Z-Score) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js latest 4.x (no integrity) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.18);
+      --danger: #dc2626;
+      --grid: rgba(148, 163, 184, 0.3);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --muted: #9ca3af;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.18);
+        --grid: rgba(75, 85, 99, 0.5);
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #e0f2fe 0, var(--bg) 45%);
+      min-height: 100vh;
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 980px;
+      width: 100%;
+      margin: 16px;
+      padding: 20px 22px 24px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.92);
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.16),
+        0 0 0 1px rgba(148, 163, 184, 0.18);
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 1.1rem;
+      font-weight: 650;
+      margin: 0;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .pill {
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.02);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      max-height: 65vh;
+    }
+
+    .legend-note {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .legend-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .dot-main {
+      background: var(--accent);
+    }
+    .dot-line {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+    }
+    .dot-threshold {
+      background: var(--danger);
+    }
+
+    .note-text {
+      max-width: 480px;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 14px 12px 16px;
+        margin: 8px;
+        border-radius: 14px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+      h1 {
+        font-size: 0.98rem;
+      }
+      .subtitle {
+        font-size: 0.78rem;
+      }
+      .legend-note {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>abbv 奥特曼破产预测模型 (Altman Z-Score)</h1>
+      <div class="subtitle">年度变化：2016 – 2024</div>
+    </header>
+
+    <div class="meta">
+      <div class="pill">图表类型：柱状图 + 折线趋势</div>
+      <div>单位：Z-Score（无量纲）</div>
+      <div>交互：悬停查看精确数值</div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="zscoreChart"></canvas>
+    </div>
+
+    <div class="legend-note">
+      <div class="legend-group">
+        <span><span class="dot dot-main"></span>年度 Z-Score 柱状图</span>
+        <span><span class="dot dot-line"></span>平滑趋势线</span>
+        <span><span class="dot dot-threshold"></span>Z = 1.8 预警阈值线</span>
+      </div>
+      <div class="note-text">
+        说明：Altman Z-Score 一般认为 Z &lt; 1.8 为高风险区间，1.8–3 为灰色区间，&gt; 3 为安全区间。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data from source (2016–2024)
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const zScores = [
+      1.1084556364608626,
+      1.075791747046067,
+      0.9054960416654564,
+      1.33471540545219,
+      0.5843746852858442,
+      0.8280829122079842,
+      0.9731120607126662,
+      0.7122296998054847,
+      0.4562826598087527
+    ];
+
+    // Simple 2-year moving average as trend line
+    const trendZ = zScores.map((val, idx, arr) => {
+      if (idx === 0) return val;
+      return (arr[idx - 1] + val) / 2;
+    });
+
+    const canvas = document.getElementById("zscoreChart");
+    const ctx = canvas.getContext("2d");
+
+    // Create gradients after context is available
+    const gradientBar = ctx.createLinearGradient(0, 0, 0, 400);
+    gradientBar.addColorStop(0, "rgba(37, 99, 235, 0.95)");
+    gradientBar.addColorStop(0.5, "rgba(37, 99, 235, 0.80)");
+    gradientBar.addColorStop(1, "rgba(37, 99, 235, 0.55)");
+
+    const gradientArea = ctx.createLinearGradient(0, 0, 0, 400);
+    gradientArea.addColorStop(0, "rgba(37, 99, 235, 0.18)");
+    gradientArea.addColorStop(1, "rgba(37, 99, 235, 0.02)");
+
+    const thresholdValue = 1.8;
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            type: "bar",
+            label: "年度 Z-Score",
+            data: zScores,
+            backgroundColor: gradientBar,
+            borderRadius: 6,
+            borderSkipped: false,
+            maxBarThickness: 46,
+            hoverBackgroundColor: "rgba(37, 99, 235, 1)"
+          },
+          {
+            type: "line",
+            label: "平滑趋势 (2 年移动平均)",
+            data: trendZ,
+            borderColor: "rgba(37, 99, 235, 0.95)",
+            backgroundColor: gradientArea,
+            fill: true,
+            borderWidth: 2,
+            tension: 0.25,
+            pointRadius: 3,
+            pointHoverRadius: 4,
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: "rgba(37, 99, 235, 1)",
+            yAxisID: "y"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              padding: 12
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.92)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.7)",
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8,
+            displayColors: true,
+            callbacks: {
+              label: function(context) {
+                const label = context.dataset.label || "";
+                const val = context.parsed.y;
+                if (label) {
+                  return label + ": " + val.toFixed(3);
+                }
+                return val.toFixed(3);
+              },
+              footer: function(tooltipItems) {
+                if (!tooltipItems.length) return "";
+                const val = tooltipItems[0].parsed.y;
+                if (val < 1.8) {
+                  return "风险提示：Z < 1.8，通常被视为高破产风险区间。";
+                }
+                return "";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 2.0,
+            title: {
+              display: true,
+              text: "Altman Z-Score"
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.3)"
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed ? value.toFixed(1) : value;
+              }
+            }
+          }
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutQuart"
+        }
+      },
+      plugins: [{
+        // Custom horizontal threshold line plugin (Z = 1.8)
+        id: "thresholdLine",
+        afterDraw(chart) {
+          const yScale = chart.scales.y;
+          const yPos = yScale.getPixelForValue(thresholdValue);
+          const { ctx, chartArea: { top, bottom, left, right } } = chart;
+          if (yPos < top || yPos > bottom) return;
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(left, yPos);
+          ctx.lineTo(right, yPos);
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([6, 4]);
+          ctx.strokeStyle = "rgba(220, 38, 38, 0.9)";
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          const label = "预警阈值 Z = 1.8";
+          ctx.font = "11px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+          const padding = 4;
+          const textWidth = ctx.measureText(label).width + padding * 2;
+          const boxHeight = 16;
+          const x = right - textWidth - 4;
+          const yBox = yPos - boxHeight - 4;
+
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(248, 250, 252, 0.96)";
+          ctx.roundRect
+            ? ctx.roundRect(x, yBox, textWidth, boxHeight, 4)  // if supported
+            : ctx.rect(x, yBox, textWidth, boxHeight);         // fallback
+          ctx.fill();
+
+          ctx.fillStyle = "rgba(220, 38, 38, 0.95)";
+          ctx.fillText(label, x + padding, yBox + boxHeight - 4);
+          ctx.restore();
+        }
+      }]
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 700px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // ---------------------------------------------------------
+        // 1. Data Preparation (From JSON)
+        // ---------------------------------------------------------
+        const jsonData = [
+    {
+        "Electrolyte": "LiAsF6",
+        "Thickness_Li_um": 11.7,
+        "Measurements": [2.9, 2.6, 2.6, 2.7],
+        "Crystallite_Mean": 2.7,
+        "Crystallite_Std": 0.14142135623730942
+    },
+    {
+        "Electrolyte": "LiPF6",
+        "Thickness_Li_um": 12.3,
+        "Measurements": [3.0, 3.3, 2.8, 3.3],
+        "Crystallite_Mean": 3.0999999999999996,
+        "Crystallite_Std": 0.2449489742783178
+    },
+    {
+        "Electrolyte": "LiFSI",
+        "Thickness_Li_um": 14.2,
+        "Measurements": [3.2, 3.1, 3.3, 3.0],
+        "Crystallite_Mean": 3.1500000000000004,
+        "Crystallite_Std": 0.12909944487358052
+    },
+    {
+        "Electrolyte": "LiTFSI",
+        "Thickness_Li_um": 15.8,
+        "Measurements": [3.9, 3.4, 3.0, 3.7],
+        "Crystallite_Mean": 3.5,
+        "Crystallite_Std": 0.3915780041490244
+    },
+    {
+        "Electrolyte": "LiClO4",
+        "Thickness_Li_um": 15.8,
+        "Measurements": [4.1, 4.8, 4.2, 3.8],
+        "Crystallite_Mean": 4.225,
+        "Crystallite_Std": 0.4193248541803042
+    },
+    {
+        "Electrolyte": "LiBF4",
+        "Thickness_Li_um": 16.1,
+        "Measurements": [3.9, 4.1, 5.4, 4.4],
+        "Crystallite_Mean": 4.45,
+        "Crystallite_Std": 0.6658328118479395
+    },
+    {
+        "Electrolyte": "LiDFOB",
+        "Thickness_Li_um": 14.9,
+        "Measurements": [4.7, 4.5, 4.9, 5.4],
+        "Crystallite_Mean": 4.875,
+        "Crystallite_Std": 0.3862210075418824
+    },
+    {
+        "Electrolyte": "LiNO3",
+        "Thickness_Li_um": 17.0,
+        "Measurements": [5.2, 5.2, 6.2, 5.3],
+        "Crystallite_Mean": 5.4750000000000005,
+        "Crystallite_Std": 0.48562674281111556
+    }
+];
+
+        const electrolytes = jsonData.map(d => d.Electrolyte);
+        const thicknessLi = jsonData.map(d => d.Thickness_Li_um);
+        const meanSize = jsonData.map(d => d.Crystallite_Mean);
+        const stdSize = jsonData.map(d => d.Crystallite_Std);
+
+        // Colors mapped by index (Assuming order is same as hardcoded original)
+        // Original order: LiAsF6, LiPF6, LiFSI, LiTFSI, LiClO4, LiBF4, LiDFOB, LiNO3
+        // JSON order matches.
+        const colors = [
+            '#d62728', // LiAsF6 - Red
+            '#3b5b92', // LiPF6 - Dark Blue
+            '#eecb5f', // LiFSI - Yellow/Gold
+            '#74c476', // LiTFSI - Light Green
+            '#756bb1', // LiClO4 - Purple
+            '#969696', // LiBF4 - Grey
+            '#ef8a84', // LiDFOB - Salmon/Pink
+            '#6baed6'  // LiNO3 - Light Blue
+        ];
+
+        // Formatted Labels
+        const displayLabels = [
+            'LiAsF₆', 'LiPF₆', 'LiFSI', 'LiTFSI',
+            'LiClO₄', 'LiBF₄', 'LiDFOB', 'LiNO₃'
+        ];
+
+        // ---------------------------------------------------------
+        // 2. Statistics Functions
+        // ---------------------------------------------------------
+        function getMean(arr) {
+            return arr.reduce((a, b) => a + b, 0) / arr.length;
+        }
+
+        // Spearman Correlation Implementation
+        function calculateSpearman(x, y) {
+            // Helper to calculate ranks
+            function getRanks(arr) {
+                // Pair value with original index
+                const sorted = arr.map((v, i) => ({v, i})).sort((a, b) => a.v - b.v);
+                const ranks = new Array(arr.length).fill(0);
+                
+                let i = 0;
+                while (i < arr.length) {
+                    let j = i;
+                    // Find range of equal values
+                    while (j < arr.length - 1 && sorted[j].v === sorted[j + 1].v) {
+                        j++;
+                    }
+                    // Average rank for ties
+                    const avgRank = (i + 1 + j + 1) / 2;
+                    for (let k = i; k <= j; k++) {
+                        ranks[sorted[k].i] = avgRank;
+                    }
+                    i = j + 1;
+                }
+                return ranks;
+            }
+
+            function pearson(x, y) {
+                const mx = getMean(x);
+                const my = getMean(y);
+                let num = 0, denX = 0, denY = 0;
+                for (let i = 0; i < x.length; i++) {
+                    const dx = x[i] - mx;
+                    const dy = y[i] - my;
+                    num += dx * dy;
+                    denX += dx * dx;
+                    denY += dy * dy;
+                }
+                if (denX === 0 || denY === 0) return 0;
+                return num / Math.sqrt(denX * denY);
+            }
+
+            const rx = getRanks(x);
+            const ry = getRanks(y);
+            return pearson(rx, ry);
+        }
+
+        const spearmanCorr = calculateSpearman(thicknessLi, meanSize);
+        
+        // P-value estimation
+        // t = r * sqrt((n-2)/(1-r^2))
+        // n = 8, df = 6
+        const n = thicknessLi.length;
+        const tStat = spearmanCorr * Math.sqrt((n - 2) / (1 - spearmanCorr * spearmanCorr));
+        
+        // Manual lookup/approximation for t-distribution (two-tailed)
+        // For df=6:
+        // t=3.707 => p=0.01
+        // t=5.959 => p=0.001
+        // tStat calculated is approx 3.96, so p is between 0.001 and 0.01.
+        // Using a more precise value derived from Python's scipy.stats for this dataset:
+        // p-value ~ 0.0074
+        const pValue = 0.0074;
+
+        // ---------------------------------------------------------
+        // 3. Chart Configuration
+        // ---------------------------------------------------------
+        const scatterData = [];
+        const errorData = [];
+
+        // Manual label offsets [x, y] to replicate the image layout
+        // Adjusted to match Python script logic
+        const labelOffsets = [
+            [-35, 0],   // LiAsF6
+            [-35, 10],  // LiPF6
+            [-35, 0],   // LiFSI
+            [-35, 0],   // LiTFSI
+            [-35, 0],   // LiClO4
+            [35, 0],    // LiBF4
+            [-35, 0],   // LiDFOB
+            [-35, 15]   // LiNO3
+        ];
+
+        electrolytes.forEach((name, i) => {
+            scatterData.push({
+                name: name,
+                value: [thicknessLi[i], meanSize[i]],
+                itemStyle: { color: colors[i] },
+                label: {
+                    show: true,
+                    formatter: displayLabels[i],
+                    offset: labelOffsets[i],
+                    position: 'top', 
+                    color: 'black',
+                    fontSize: 12
+                }
+            });
+
+            // Error Bar Data: [x, y_low, y_high]
+            errorData.push({
+                value: [
+                    thicknessLi[i], 
+                    meanSize[i] - stdSize[i],
+                    meanSize[i] + stdSize[i]
+                ]
+            });
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: 50, right: 50, bottom: 60, left: 60
+            },
+            xAxis: {
+                type: 'value',
+                name: 'Thickness of deposited Li (μm)',
+                nameLocation: 'middle',
+                nameGap: 35,
+                min: 10,
+                max: 18,
+                axisLabel: { color: 'black', fontSize: 11 },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Crystallite size in SEI (nm)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                min: 2.0,
+                max: 6.0,
+                axisLabel: { color: 'black', fontSize: 11 },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    type: 'custom',
+                    name: 'error_bar',
+                    data: errorData,
+                    z: 2, // Layer below scatter points
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const low = api.value(1);
+                        const high = api.value(2);
+                        
+                        const lowPoint = api.coord([xValue, low]);
+                        const highPoint = api.coord([xValue, high]);
+                        const halfWidth = 4; // Width of the caps (pixels)
+                        
+                        const style = {
+                            stroke: '#444444',
+                            lineWidth: 1
+                        };
+
+                        return {
+                            type: 'group',
+                            children: [
+                                // Vertical line
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0], y1: lowPoint[1],
+                                        x2: highPoint[0], y2: highPoint[1]
+                                    },
+                                    style: style
+                                },
+                                // Bottom cap
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0] - halfWidth, y1: lowPoint[1],
+                                        x2: lowPoint[0] + halfWidth, y2: lowPoint[1]
+                                    },
+                                    style: style
+                                },
+                                // Top cap
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0] - halfWidth, y1: highPoint[1],
+                                        x2: highPoint[0] + halfWidth, y2: highPoint[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    encode: {
+                        x: 0,
+                        y: [1, 2]
+                    }
+                },
+                {
+                    type: 'scatter',
+                    name: 'values',
+                    data: scatterData,
+                    symbol: 'rect', // Square marker
+                    symbolSize: 15,
+                    z: 3, // Layer above error bars
+                    labelLayout: { hideOverlap: false }
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'c',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                },
+                {
+                    type: 'text',
+                    left: 60,
+                    top: 60,
+                    style: {
+                        text: 'Correlation coefficient: ' + spearmanCorr.toFixed(2) + '\nP value: ' + pValue.toFixed(3),
+                        font: '14px Arial',
+                        lineHeight: 20,
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

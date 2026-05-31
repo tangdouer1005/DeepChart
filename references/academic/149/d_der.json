@@ -1,0 +1,50 @@
+[
+    {
+        "Category":"MSW transport",
+        "Value":2.2
+    },
+    {
+        "Category":"Pre-treatment+Gasification",
+        "Value":24.0
+    },
+    {
+        "Category":"Water gas shift reaction",
+        "Value":-13.6
+    },
+    {
+        "Category":"Rectisol Process",
+        "Value":92.6
+    },
+    {
+        "Category":"Fischer Tropsch",
+        "Value":5.7
+    },
+    {
+        "Category":"Hydrotreating",
+        "Value":0.4
+    },
+    {
+        "Category":"Hydrocracking",
+        "Value":0.5
+    },
+    {
+        "Category":"Others",
+        "Value":9.8
+    },
+    {
+        "Category":"Fuel transport",
+        "Value":0.4
+    },
+    {
+        "Category":"Operation",
+        "Value":73.2
+    },
+    {
+        "Category":"Biogenic content",
+        "Value":-176.7
+    },
+    {
+        "Category":"Credit",
+        "Value":-4.3
+    }
+]

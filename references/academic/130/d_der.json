@@ -1,0 +1,463 @@
+{
+    "data": [
+        {
+            "UF": "RO",
+            "Total": 60206,
+            "Domestic": 0.0420061,
+            "China": 0.0,
+            "EU": 0.0181188,
+            "Other_countries": 0.0,
+            "Biome": "AMAZ\u00d4NIA"
+        },
+        {
+            "UF": "AC",
+            "Total": 50,
+            "Domestic": 5e-05,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "AMAZ\u00d4NIA"
+        },
+        {
+            "UF": "AM",
+            "Total": 200,
+            "Domestic": 0.0002,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "AMAZ\u00d4NIA"
+        },
+        {
+            "UF": "RR",
+            "Total": 8000,
+            "Domestic": 0.00800073,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "AMAZ\u00d4NIA"
+        },
+        {
+            "UF": "PA",
+            "Total": 63600,
+            "Domestic": 0.0137926,
+            "China": 0.00563479,
+            "EU": 0.038185300000000005,
+            "Other_countries": 0.000162346,
+            "Biome": "AMAZ\u00d4NIA"
+        },
+        {
+            "UF": "AP",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "AMAZ\u00d4NIA"
+        },
+        {
+            "UF": "TO",
+            "Total": 1000,
+            "Domestic": 0.001,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "AMAZ\u00d4NIA"
+        },
+        {
+            "UF": "MA",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "AMAZ\u00d4NIA"
+        },
+        {
+            "UF": "MT",
+            "Total": 1322956,
+            "Domestic": 0.156352,
+            "China": 0.06933139999999999,
+            "EU": 0.344324,
+            "Other_countries": 0.0643845,
+            "Biome": "AMAZ\u00d4NIA"
+        },
+        {
+            "UF": "RO",
+            "Total": 39000,
+            "Domestic": 0.008730680000000001,
+            "China": 0.0,
+            "EU": 0.0296183,
+            "Other_countries": 0.000642021,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "PA",
+            "Total": 7460,
+            "Domestic": 0.0017,
+            "China": 0.00317216,
+            "EU": 0.0025654299999999996,
+            "Other_countries": 1.16822e-05,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "TO",
+            "Total": 331508,
+            "Domestic": 0.0328404,
+            "China": 0.0866512,
+            "EU": 0.137273,
+            "Other_countries": 0.00982101,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "MA",
+            "Total": 421520,
+            "Domestic": 0.0665629,
+            "China": 0.132082,
+            "EU": 0.189301,
+            "Other_countries": 0.0142289,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "PI",
+            "Total": 253566,
+            "Domestic": 0.107704,
+            "China": 0.0573513,
+            "EU": 0.0572553,
+            "Other_countries": 0.0150252,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "BA",
+            "Total": 903000,
+            "Domestic": 0.332655,
+            "China": 0.104003,
+            "EU": 0.357408,
+            "Other_countries": 0.0905345,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "MG",
+            "Total": 793077,
+            "Domestic": 0.368037,
+            "China": 0.139259,
+            "EU": 0.18995,
+            "Other_countries": 0.0631783,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "SP",
+            "Total": 161189,
+            "Domestic": 0.030265,
+            "China": 0.0709555,
+            "EU": 0.021572099999999997,
+            "Other_countries": 0.0102847,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "PR",
+            "Total": 55200,
+            "Domestic": 0.0168384,
+            "China": 0.00701174,
+            "EU": 0.0216619,
+            "Other_countries": 0.00806483,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "MS",
+            "Total": 1281130,
+            "Domestic": 0.646417,
+            "China": 0.054106800000000004,
+            "EU": 0.404804,
+            "Other_countries": 0.0921955,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "MT",
+            "Total": 4336193,
+            "Domestic": 1.07509,
+            "China": 0.63915,
+            "EU": 1.49716,
+            "Other_countries": 0.523573,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "GO",
+            "Total": 2179921,
+            "Domestic": 1.21275,
+            "China": 0.501814,
+            "EU": 0.286943,
+            "Other_countries": 0.167406,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "DF",
+            "Total": 48712,
+            "Domestic": 0.0,
+            "China": 0.0215056,
+            "EU": 0.0123621,
+            "Other_countries": 0.0148361,
+            "Biome": "CERRADO"
+        },
+        {
+            "UF": "PI",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "CAATINGA"
+        },
+        {
+            "UF": "CE",
+            "Total": 512,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.000489827,
+            "Biome": "CAATINGA"
+        },
+        {
+            "UF": "RN",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "CAATINGA"
+        },
+        {
+            "UF": "PB",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "CAATINGA"
+        },
+        {
+            "UF": "PE",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "CAATINGA"
+        },
+        {
+            "UF": "AL",
+            "Total": 180,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.00018,
+            "Biome": "CAATINGA"
+        },
+        {
+            "UF": "SE",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "CAATINGA"
+        },
+        {
+            "UF": "BA",
+            "Total": 2018,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0012513399999999999,
+            "Other_countries": 3.3128300000000006e-05,
+            "Biome": "CAATINGA"
+        },
+        {
+            "UF": "MG",
+            "Total": 10,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "CAATINGA"
+        },
+        {
+            "UF": "RN",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "PB",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "PE",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "AL",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "SE",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "BA",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "MG",
+            "Total": 77515,
+            "Domestic": 0.01945,
+            "China": 0.036472300000000006,
+            "EU": 0.00726213,
+            "Other_countries": 0.00987345,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "ES",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "RJ",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "SP",
+            "Total": 364751,
+            "Domestic": 0.106006,
+            "China": 0.12944,
+            "EU": 0.049437,
+            "Other_countries": 0.0196473,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "PR",
+            "Total": 3913913,
+            "Domestic": 1.44108,
+            "China": 0.884692,
+            "EU": 1.06045,
+            "Other_countries": 0.474172,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "SC",
+            "Total": 373358,
+            "Domestic": 0.161633,
+            "China": 0.10147,
+            "EU": 0.0714027,
+            "Other_countries": 0.0207053,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "RS",
+            "Total": 1460074,
+            "Domestic": 0.626134,
+            "China": 0.263333,
+            "EU": 0.298653,
+            "Other_countries": 0.250711,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "MS",
+            "Total": 450901,
+            "Domestic": 0.193762,
+            "China": 0.12863,
+            "EU": 0.0838714,
+            "Other_countries": 0.0428144,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "GO",
+            "Total": 650,
+            "Domestic": 0.00065,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "MATA ATL\u00c2NTICA"
+        },
+        {
+            "UF": "RS",
+            "Total": 2344351,
+            "Domestic": 0.866785,
+            "China": 0.539985,
+            "EU": 0.398787,
+            "Other_countries": 0.522266,
+            "Biome": "PAMPA"
+        },
+        {
+            "UF": "MS",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "PANTANAL"
+        },
+        {
+            "UF": "MT",
+            "Total": 0,
+            "Domestic": 0.0,
+            "China": 0.0,
+            "EU": 0.0,
+            "Other_countries": 0.0,
+            "Biome": "PANTANAL"
+        },
+        {
+            "UF": "NA",
+            "Total": 0,
+            "Domestic": 8.66477e-05,
+            "China": 0.520399,
+            "EU": 0.95472,
+            "Other_countries": 0.384197,
+            "Biome": "NA"
+        }
+    ],
+    "biome_order": [
+        "AMAZ\u00d4NIA",
+        "PANTANAL",
+        "CERRADO",
+        "CAATINGA",
+        "PAMPA",
+        "MATA ATL\u00c2NTICA",
+        "NA"
+    ]
+}

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ACN Altman Z-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Use a specific stable Chart.js version to avoid CDN "latest" issues -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 4px 0;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 0 0 16px 0;
+      text-align: center;
+      color: #555;
+    }
+
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 420px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      padding: 20px 20px 28px 20px;
+      box-sizing: border-box;
+    }
+
+    canvas {
+      max-width: 100%;
+    }
+
+    .footer-note {
+      max-width: 900px;
+      margin: 12px auto 0 auto;
+      font-size: 0.82rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+      .chart-container {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>ACN 奥特曼破产预测模型 (Altman Z-Score)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="chart-container">
+      <canvas id="zScoreChart"></canvas>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Data source: RESULT_Z_Score by Fiscal Year (2016–2024). Higher Altman Z-Score generally
+    indicates lower bankruptcy risk; values above 3.0 are often interpreted as relatively safe.
+  </div>
+
+  <script>
+    // Run after DOM is ready
+    window.addEventListener("DOMContentLoaded", function () {
+      // Data from your source
+      const fiscalYears = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ];
+
+      const zScores = [
+        3.539380452887661,
+        3.3203097898278533,
+        3.549860596193813,
+        3.393482981145315,
+        2.928085842132397,
+        2.824249565449503,
+        3.1412553834007086,
+        3.093859440169516,
+        2.9787255239518355
+      ];
+
+      // Color: green if >= 3, amber if < 3
+      const barColors = zScores.map(function (value) {
+        return value >= 3
+          ? "rgba(46, 204, 113, 0.7)"
+          : "rgba(243, 156, 18, 0.75)";
+      });
+
+      const borderColors = barColors.map(function (c) {
+        // Normalize to fully opaque RGBA
+        return c.replace(/rgba\(([^,]+),([^,]+),([^,]+),[^)]+\)/, "rgba($1,$2,$3,1)");
+      });
+
+      const hoverColors = barColors.map(function (c) {
+        // Slightly higher alpha for hover
+        return c.replace(/rgba\(([^,]+),([^,]+),([^,]+),[^)]+\)/, "rgba($1,$2,$3,0.9)");
+      });
+
+      const canvas = document.getElementById("zScoreChart");
+      if (!canvas) {
+        console.error("Canvas element #zScoreChart not found.");
+        return;
+      }
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        console.error("2D context for #zScoreChart not available.");
+        return;
+      }
+
+      // Chart.js v4 – ensure global Chart is available
+      if (typeof Chart === "undefined") {
+        console.error("Chart.js failed to load.");
+        return;
+      }
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: fiscalYears,
+          datasets: [
+            {
+              label: "Altman Z-Score",
+              data: zScores,
+              backgroundColor: barColors,
+              borderColor: borderColors,
+              hoverBackgroundColor: hoverColors,
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                boxWidth: 14,
+                usePointStyle: true
+              }
+            },
+            tooltip: {
+              mode: "index",
+              intersect: false,
+              callbacks: {
+                label: function (context) {
+                  var value = context.raw;
+                  return "Altman Z-Score: " + Number(value).toFixed(3);
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Fiscal Year",
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Altman Z-Score",
+                font: {
+                  size: 12
+                }
+              },
+              beginAtZero: false,
+              suggestedMin: 2.5,
+              suggestedMax: 3.7,
+              grid: {
+                color: "rgba(148, 163, 184, 0.25)"
+              }
+            }
+          },
+          interaction: {
+            mode: "index",
+            intersect: false
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

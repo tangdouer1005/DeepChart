@@ -1,0 +1,981 @@
+{
+    "flows": [
+        {
+            "source_col": 0,
+            "source": "CH4",
+            "target_col": 1,
+            "target": "Energy",
+            "value": 246515.0367,
+            "color_key": "CH4"
+        },
+        {
+            "source_col": 0,
+            "source": "CH4",
+            "target_col": 1,
+            "target": "Industry",
+            "value": 5.12562,
+            "color_key": "CH4"
+        },
+        {
+            "source_col": 0,
+            "source": "CH4",
+            "target_col": 1,
+            "target": "Landbased",
+            "value": 3341321.3,
+            "color_key": "CH4"
+        },
+        {
+            "source_col": 0,
+            "source": "CH4",
+            "target_col": 1,
+            "target": "Waste",
+            "value": 1187591.7,
+            "color_key": "CH4"
+        },
+        {
+            "source_col": 0,
+            "source": "CO2",
+            "target_col": 1,
+            "target": "Energy",
+            "value": 1762728.59,
+            "color_key": "CO2"
+        },
+        {
+            "source_col": 0,
+            "source": "CO2",
+            "target_col": 1,
+            "target": "Industry",
+            "value": 160726.62999999998,
+            "color_key": "CO2"
+        },
+        {
+            "source_col": 0,
+            "source": "CO2",
+            "target_col": 1,
+            "target": "Landbased",
+            "value": 5065022.1,
+            "color_key": "CO2"
+        },
+        {
+            "source_col": 0,
+            "source": "CO2",
+            "target_col": 1,
+            "target": "Waste",
+            "value": 1180.78,
+            "color_key": "CO2"
+        },
+        {
+            "source_col": 0,
+            "source": "N2O",
+            "target_col": 1,
+            "target": "Energy",
+            "value": 57947.745839999996,
+            "color_key": "N2O"
+        },
+        {
+            "source_col": 0,
+            "source": "N2O",
+            "target_col": 1,
+            "target": "Industry",
+            "value": 7871.4882099999995,
+            "color_key": "N2O"
+        },
+        {
+            "source_col": 0,
+            "source": "N2O",
+            "target_col": 1,
+            "target": "Landbased",
+            "value": 1030299.091,
+            "color_key": "N2O"
+        },
+        {
+            "source_col": 0,
+            "source": "N2O",
+            "target_col": 1,
+            "target": "Waste",
+            "value": 67292.657,
+            "color_key": "N2O"
+        },
+        {
+            "source_col": 1,
+            "source": "Energy",
+            "target_col": 2,
+            "target": "Consumption",
+            "value": 325919.8311,
+            "color_key": "Energy"
+        },
+        {
+            "source_col": 1,
+            "source": "Energy",
+            "target_col": 2,
+            "target": "Packaging",
+            "value": 572751.8347,
+            "color_key": "Energy"
+        },
+        {
+            "source_col": 1,
+            "source": "Energy",
+            "target_col": 2,
+            "target": "Processing",
+            "value": 271238.819,
+            "color_key": "Energy"
+        },
+        {
+            "source_col": 1,
+            "source": "Energy",
+            "target_col": 2,
+            "target": "Production",
+            "value": 442867.88234,
+            "color_key": "Energy"
+        },
+        {
+            "source_col": 1,
+            "source": "Energy",
+            "target_col": 2,
+            "target": "Retail",
+            "value": 101371.477,
+            "color_key": "Energy"
+        },
+        {
+            "source_col": 1,
+            "source": "Energy",
+            "target_col": 2,
+            "target": "Transport",
+            "value": 353041.5284,
+            "color_key": "Energy"
+        },
+        {
+            "source_col": 1,
+            "source": "Industry",
+            "target_col": 2,
+            "target": "Packaging",
+            "value": 10514.76683,
+            "color_key": "Industry"
+        },
+        {
+            "source_col": 1,
+            "source": "Industry",
+            "target_col": 2,
+            "target": "Processing",
+            "value": 341.167,
+            "color_key": "Industry"
+        },
+        {
+            "source_col": 1,
+            "source": "Industry",
+            "target_col": 2,
+            "target": "Production",
+            "value": 157747.31,
+            "color_key": "Industry"
+        },
+        {
+            "source_col": 1,
+            "source": "Landbased",
+            "target_col": 2,
+            "target": "LULUC",
+            "value": 5014125.591,
+            "color_key": "Landbased"
+        },
+        {
+            "source_col": 1,
+            "source": "Landbased",
+            "target_col": 2,
+            "target": "Production",
+            "value": 4422516.9,
+            "color_key": "Landbased"
+        },
+        {
+            "source_col": 1,
+            "source": "Waste",
+            "target_col": 2,
+            "target": "End of Life",
+            "value": 1168743.437,
+            "color_key": "Waste"
+        },
+        {
+            "source_col": 1,
+            "source": "Waste",
+            "target_col": 2,
+            "target": "Processing",
+            "value": 87321.7,
+            "color_key": "Waste"
+        },
+        {
+            "source_col": 2,
+            "source": "Consumption",
+            "target_col": 3,
+            "target": "Ener for agric. fishing",
+            "value": 59785.07510000001,
+            "color_key": "Consumption"
+        },
+        {
+            "source_col": 2,
+            "source": "Consumption",
+            "target_col": 3,
+            "target": "Ener for households",
+            "value": 29482.456,
+            "color_key": "Consumption"
+        },
+        {
+            "source_col": 2,
+            "source": "Consumption",
+            "target_col": 3,
+            "target": "Indirect emi",
+            "value": 26740.2,
+            "color_key": "Consumption"
+        },
+        {
+            "source_col": 2,
+            "source": "Consumption",
+            "target_col": 3,
+            "target": "Residential",
+            "value": 209912.1,
+            "color_key": "Consumption"
+        },
+        {
+            "source_col": 2,
+            "source": "End of Life",
+            "target_col": 3,
+            "target": "Solid waste",
+            "value": 359898.037,
+            "color_key": "End of Life"
+        },
+        {
+            "source_col": 2,
+            "source": "End of Life",
+            "target_col": 3,
+            "target": "Waste water",
+            "value": 808845.4,
+            "color_key": "End of Life"
+        },
+        {
+            "source_col": 2,
+            "source": "LULUC",
+            "target_col": 3,
+            "target": "LULUC",
+            "value": 5014125.591,
+            "color_key": "LULUC"
+        },
+        {
+            "source_col": 2,
+            "source": "Packaging",
+            "target_col": 3,
+            "target": "Chemicals",
+            "value": 165.22983,
+            "color_key": "Packaging"
+        },
+        {
+            "source_col": 2,
+            "source": "Packaging",
+            "target_col": 3,
+            "target": "Ener for packaging",
+            "value": 88216.8047,
+            "color_key": "Packaging"
+        },
+        {
+            "source_col": 2,
+            "source": "Packaging",
+            "target_col": 3,
+            "target": "Industrial",
+            "value": 484535.03,
+            "color_key": "Packaging"
+        },
+        {
+            "source_col": 2,
+            "source": "Packaging",
+            "target_col": 3,
+            "target": "Iron Steel",
+            "value": 344.997,
+            "color_key": "Packaging"
+        },
+        {
+            "source_col": 2,
+            "source": "Packaging",
+            "target_col": 3,
+            "target": "Non-Ferrous",
+            "value": 5970.96,
+            "color_key": "Packaging"
+        },
+        {
+            "source_col": 2,
+            "source": "Packaging",
+            "target_col": 3,
+            "target": "Non-metallic",
+            "value": 4033.58,
+            "color_key": "Packaging"
+        },
+        {
+            "source_col": 2,
+            "source": "Processing",
+            "target_col": 3,
+            "target": "Ener for production",
+            "value": 139706.879,
+            "color_key": "Processing"
+        },
+        {
+            "source_col": 2,
+            "source": "Processing",
+            "target_col": 3,
+            "target": "Indirect emi",
+            "value": 341.167,
+            "color_key": "Processing"
+        },
+        {
+            "source_col": 2,
+            "source": "Processing",
+            "target_col": 3,
+            "target": "Industrial",
+            "value": 131531.94,
+            "color_key": "Processing"
+        },
+        {
+            "source_col": 2,
+            "source": "Processing",
+            "target_col": 3,
+            "target": "Waste water",
+            "value": 87321.7,
+            "color_key": "Processing"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Agriculture",
+            "value": 1893502.1,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Chemicals",
+            "value": 153913.54,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Ener for agr. fishing",
+            "value": 39746.9308,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Ener for aluminium,paper,glass",
+            "value": 1295.19354,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Ener for household",
+            "value": 141038.908,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Enteric Ferment",
+            "value": 2139590.0,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Indirect N2O",
+            "value": 131801.0,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Manure",
+            "value": 202014.3,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Residential",
+            "value": 260786.85,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Solvents",
+            "value": 3833.77,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Production",
+            "target_col": 3,
+            "target": "Waste burning",
+            "value": 55609.5,
+            "color_key": "Production"
+        },
+        {
+            "source_col": 2,
+            "source": "Retail",
+            "target_col": 3,
+            "target": "Ener for retail",
+            "value": 46239.873,
+            "color_key": "Retail"
+        },
+        {
+            "source_col": 2,
+            "source": "Retail",
+            "target_col": 3,
+            "target": "Residential",
+            "value": 55131.604,
+            "color_key": "Retail"
+        },
+        {
+            "source_col": 2,
+            "source": "Transport",
+            "target_col": 3,
+            "target": "Ener for transport",
+            "value": 64945.326,
+            "color_key": "Transport"
+        },
+        {
+            "source_col": 2,
+            "source": "Transport",
+            "target_col": 3,
+            "target": "Road Transport",
+            "value": 274752.12,
+            "color_key": "Transport"
+        },
+        {
+            "source_col": 2,
+            "source": "Transport",
+            "target_col": 3,
+            "target": "Transport",
+            "value": 13344.0824,
+            "color_key": "Transport"
+        },
+        {
+            "source_col": 3,
+            "source": "Agriculture",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 988974.0,
+            "color_key": "Agriculture"
+        },
+        {
+            "source_col": 3,
+            "source": "Agriculture",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 71232.1,
+            "color_key": "Agriculture"
+        },
+        {
+            "source_col": 3,
+            "source": "Agriculture",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 833296.0,
+            "color_key": "Agriculture"
+        },
+        {
+            "source_col": 3,
+            "source": "Chemicals",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 5.12562,
+            "color_key": "Chemicals"
+        },
+        {
+            "source_col": 3,
+            "source": "Chemicals",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 146543.323,
+            "color_key": "Chemicals"
+        },
+        {
+            "source_col": 3,
+            "source": "Chemicals",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 7530.32121,
+            "color_key": "Chemicals"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for agr. fishing",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 24530.7,
+            "color_key": "Ener for agr. fishing"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for agr. fishing",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 15173.2,
+            "color_key": "Ener for agr. fishing"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for agr. fishing",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 43.0308,
+            "color_key": "Ener for agr. fishing"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for agric. fishing",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 55.0091,
+            "color_key": "Ener for agric. fishing"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for agric. fishing",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 59469.3,
+            "color_key": "Ener for agric. fishing"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for agric. fishing",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 260.766,
+            "color_key": "Ener for agric. fishing"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for aluminium,paper,glass",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 1.1112,
+            "color_key": "Ener for aluminium,paper,glass"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for aluminium,paper,glass",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 1287.49,
+            "color_key": "Ener for aluminium,paper,glass"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for aluminium,paper,glass",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 6.59234,
+            "color_key": "Ener for aluminium,paper,glass"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for household",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 109.451,
+            "color_key": "Ener for household"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for household",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 140174.0,
+            "color_key": "Ener for household"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for household",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 755.457,
+            "color_key": "Ener for household"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for households",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 18178.3,
+            "color_key": "Ener for households"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for households",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 11279.4,
+            "color_key": "Ener for households"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for households",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 24.756,
+            "color_key": "Ener for households"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for packaging",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 53635.7,
+            "color_key": "Ener for packaging"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for packaging",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 34532.0,
+            "color_key": "Ener for packaging"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for packaging",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 49.1047,
+            "color_key": "Ener for packaging"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for production",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 38328.2,
+            "color_key": "Ener for production"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for production",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 100855.0,
+            "color_key": "Ener for production"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for production",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 523.679,
+            "color_key": "Ener for production"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for retail",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 7879.48,
+            "color_key": "Ener for retail"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for retail",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 38193.9,
+            "color_key": "Ener for retail"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for retail",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 166.493,
+            "color_key": "Ener for retail"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for transport",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 40641.9,
+            "color_key": "Ener for transport"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for transport",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 24225.2,
+            "color_key": "Ener for transport"
+        },
+        {
+            "source_col": 3,
+            "source": "Ener for transport",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 78.226,
+            "color_key": "Ener for transport"
+        },
+        {
+            "source_col": 3,
+            "source": "Enteric Ferment",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 2139590.0,
+            "color_key": "Enteric Ferment"
+        },
+        {
+            "source_col": 3,
+            "source": "Indirect N2O",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 131801.0,
+            "color_key": "Indirect N2O"
+        },
+        {
+            "source_col": 3,
+            "source": "Indirect emi",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 27081.367000000002,
+            "color_key": "Indirect emi"
+        },
+        {
+            "source_col": 3,
+            "source": "Industrial",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 2860.34,
+            "color_key": "Industrial"
+        },
+        {
+            "source_col": 3,
+            "source": "Industrial",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 608388.0,
+            "color_key": "Industrial"
+        },
+        {
+            "source_col": 3,
+            "source": "Industrial",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 4818.63,
+            "color_key": "Industrial"
+        },
+        {
+            "source_col": 3,
+            "source": "Iron Steel",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 344.997,
+            "color_key": "Iron Steel"
+        },
+        {
+            "source_col": 3,
+            "source": "LULUC",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 20031.3,
+            "color_key": "LULUC"
+        },
+        {
+            "source_col": 3,
+            "source": "LULUC",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 4993790.0,
+            "color_key": "LULUC"
+        },
+        {
+            "source_col": 3,
+            "source": "LULUC",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 304.291,
+            "color_key": "LULUC"
+        },
+        {
+            "source_col": 3,
+            "source": "Manure",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 148073.0,
+            "color_key": "Manure"
+        },
+        {
+            "source_col": 3,
+            "source": "Manure",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 53941.3,
+            "color_key": "Manure"
+        },
+        {
+            "source_col": 3,
+            "source": "Non-Ferrous",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 5970.96,
+            "color_key": "Non-Ferrous"
+        },
+        {
+            "source_col": 3,
+            "source": "Non-metallic",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 4033.58,
+            "color_key": "Non-metallic"
+        },
+        {
+            "source_col": 3,
+            "source": "Residential",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 59005.746999999996,
+            "color_key": "Residential"
+        },
+        {
+            "source_col": 3,
+            "source": "Residential",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 444831.1,
+            "color_key": "Residential"
+        },
+        {
+            "source_col": 3,
+            "source": "Residential",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 21993.707,
+            "color_key": "Residential"
+        },
+        {
+            "source_col": 3,
+            "source": "Road Transport",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 1264.39,
+            "color_key": "Road Transport"
+        },
+        {
+            "source_col": 3,
+            "source": "Road Transport",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 271497.0,
+            "color_key": "Road Transport"
+        },
+        {
+            "source_col": 3,
+            "source": "Road Transport",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 1990.73,
+            "color_key": "Road Transport"
+        },
+        {
+            "source_col": 3,
+            "source": "Solid waste",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 358516.0,
+            "color_key": "Solid waste"
+        },
+        {
+            "source_col": 3,
+            "source": "Solid waste",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 1180.78,
+            "color_key": "Solid waste"
+        },
+        {
+            "source_col": 3,
+            "source": "Solid waste",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 201.257,
+            "color_key": "Solid waste"
+        },
+        {
+            "source_col": 3,
+            "source": "Solvents",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 3833.77,
+            "color_key": "Solvents"
+        },
+        {
+            "source_col": 3,
+            "source": "Transport",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 24.7084,
+            "color_key": "Transport"
+        },
+        {
+            "source_col": 3,
+            "source": "Transport",
+            "target_col": 4,
+            "target": "CO2",
+            "value": 12823.0,
+            "color_key": "Transport"
+        },
+        {
+            "source_col": 3,
+            "source": "Transport",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 496.374,
+            "color_key": "Transport"
+        },
+        {
+            "source_col": 3,
+            "source": "Waste burning",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 44653.0,
+            "color_key": "Waste burning"
+        },
+        {
+            "source_col": 3,
+            "source": "Waste burning",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 10956.5,
+            "color_key": "Waste burning"
+        },
+        {
+            "source_col": 3,
+            "source": "Waste water",
+            "target_col": 4,
+            "target": "CH4",
+            "value": 829075.7,
+            "color_key": "Waste water"
+        },
+        {
+            "source_col": 3,
+            "source": "Waste water",
+            "target_col": 4,
+            "target": "N2O",
+            "value": 67091.4,
+            "color_key": "Waste water"
+        }
+    ],
+    "total_flux": 12928502.24437
+}

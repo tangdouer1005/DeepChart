@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const chartData = {
+    "plot_data": [
+        {
+            "Model": "bioptimus",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7467894276890517,
+            "Pretraining Dataset (k WSIs)": 500.0,
+            "Pretraining Dataset (k Patients)": 333.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "ctranspath",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7245662906836026,
+            "Pretraining Dataset (k WSIs)": 32.0,
+            "Pretraining Dataset (k Patients)": 13.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.6986905923455256,
+            "Pretraining Dataset (k WSIs)": 6.0,
+            "Pretraining Dataset (k Patients)": 5.6,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7242330131938731,
+            "Pretraining Dataset (k WSIs)": 171.0,
+            "Pretraining Dataset (k Patients)": 30.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 31.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7300469326931298,
+            "Pretraining Dataset (k WSIs)": 1488.0,
+            "Pretraining Dataset (k Patients)": 120.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 17.0
+        },
+        {
+            "Model": "hibou-l",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7297320720088225,
+            "Pretraining Dataset (k WSIs)": 1139.0,
+            "Pretraining Dataset (k Patients)": 306.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.762773096016989,
+            "Pretraining Dataset (k WSIs)": 3135.0,
+            "Pretraining Dataset (k Patients)": 225.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 175.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7073485188270819,
+            "Pretraining Dataset (k WSIs)": 29.0,
+            "Pretraining Dataset (k Patients)": 11.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        },
+        {
+            "Model": "bioptimus",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.7046859564606631,
+            "Pretraining Dataset (k WSIs)": 500.0,
+            "Pretraining Dataset (k Patients)": 333.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "ctranspath",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.6865689130621666,
+            "Pretraining Dataset (k WSIs)": 32.0,
+            "Pretraining Dataset (k Patients)": 13.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.6655231079066909,
+            "Pretraining Dataset (k WSIs)": 6.0,
+            "Pretraining Dataset (k Patients)": 5.6,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.7222276213474471,
+            "Pretraining Dataset (k WSIs)": 171.0,
+            "Pretraining Dataset (k Patients)": 30.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 31.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.6850684143619094,
+            "Pretraining Dataset (k WSIs)": 1488.0,
+            "Pretraining Dataset (k Patients)": 120.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 17.0
+        },
+        {
+            "Model": "hibou-l",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.6854885628643554,
+            "Pretraining Dataset (k WSIs)": 1139.0,
+            "Pretraining Dataset (k Patients)": 306.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.732159659734404,
+            "Pretraining Dataset (k WSIs)": 3135.0,
+            "Pretraining Dataset (k Patients)": 225.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 175.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.6807236915312719,
+            "Pretraining Dataset (k WSIs)": 29.0,
+            "Pretraining Dataset (k Patients)": 11.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        },
+        {
+            "Model": "bioptimus",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5857513036006027,
+            "Pretraining Dataset (k WSIs)": 500.0,
+            "Pretraining Dataset (k Patients)": 333.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "ctranspath",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5770248615268212,
+            "Pretraining Dataset (k WSIs)": 32.0,
+            "Pretraining Dataset (k Patients)": 13.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5897553541124554,
+            "Pretraining Dataset (k WSIs)": 6.0,
+            "Pretraining Dataset (k Patients)": 5.6,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5871979448905298,
+            "Pretraining Dataset (k WSIs)": 171.0,
+            "Pretraining Dataset (k Patients)": 30.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 31.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5873006733060928,
+            "Pretraining Dataset (k WSIs)": 1488.0,
+            "Pretraining Dataset (k Patients)": 120.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 17.0
+        },
+        {
+            "Model": "hibou-l",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5754285617170372,
+            "Pretraining Dataset (k WSIs)": 1139.0,
+            "Pretraining Dataset (k Patients)": 306.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.6065370877164761,
+            "Pretraining Dataset (k WSIs)": 3135.0,
+            "Pretraining Dataset (k Patients)": 225.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 175.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5543899668068984,
+            "Pretraining Dataset (k WSIs)": 29.0,
+            "Pretraining Dataset (k Patients)": 11.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        }
+    ],
+    "stats_data": [
+        {
+            "category": "Morphology",
+            "r": 0.7252874859979225,
+            "p": 0.041737391569081565
+        },
+        {
+            "category": "Biomarker",
+            "r": 0.3454421572318547,
+            "p": 0.40197846917947355
+        },
+        {
+            "category": "Prognosis",
+            "r": 0.2946265763094684,
+            "p": 0.4787114151864745
+        }
+    ]
+};
+
+        const rawData = chartData.plot_data.map(d => ({
+            model: d["Model"],
+            cat: d["Task Category"],
+            auroc: d["Average Downstream Performance (AUROC)"],
+            patients: d["Pretraining Dataset (k Patients)"]
+        })).filter(d => d.patients != null && !isNaN(d.patients));
+
+        const colors = {
+            'Morphology': '#5D3A75', // Purple
+            'Biomarker': '#C06C84',  // Pink/Red
+            'Prognosis': '#8C4646'   // Brown/Red
+        };
+
+        // Linear Regression Helper
+        function linearRegression(x, y) {
+            const n = x.length;
+            let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+            for (let i = 0; i < n; i++) {
+                sumX += x[i];
+                sumY += y[i];
+                sumXY += x[i] * y[i];
+                sumXX += x[i] * x[i];
+            }
+            const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+            const intercept = (sumY - slope * sumX) / n;
+            return { slope, intercept };
+        }
+
+        const categories = ['Morphology', 'Biomarker', 'Prognosis'];
+        const series = [];
+
+        categories.forEach(cat => {
+            const catData = rawData.filter(d => d.cat === cat && !isNaN(d.patients))
+                                   .map(d => [d.patients, d.auroc]);
+            
+            // Sort by X for line drawing order (optional but good practice)
+            catData.sort((a, b) => a[0] - b[0]);
+
+            const xValues = catData.map(d => d[0]);
+            const yValues = catData.map(d => d[1]);
+
+            // Calculate Stats using JSON data
+            const stat = chartData.stats_data.find(s => s.category === cat);
+            const r = stat ? stat.r : 0;
+            const p = stat ? stat.p : 0;
+            
+            let pStr = p.toFixed(2);
+            if (cat === 'Morphology') pStr = p.toFixed(3);
+            if (cat === 'Biomarker') pStr = p.toFixed(1);
+
+            const label = `${cat} (r = ${r.toFixed(2)}, P = ${pStr})`;
+
+            // Calculate Regression Line Points
+            const reg = linearRegression(xValues, yValues);
+            // Points at extreme ends of x-axis or just data range? 
+            // Usually regression lines span the data range or slightly more.
+            // Let's use 0 to 350 to cover the whole chart width as is common in trend lines
+            const lineData = [
+                [0, reg.intercept],
+                [350, reg.slope * 350 + reg.intercept]
+            ];
+
+            // Scatter Series
+            series.push({
+                name: label,
+                type: 'scatter',
+                data: catData,
+                itemStyle: { color: colors[cat], opacity: 0.9 },
+                symbolSize: 15,
+                z: 10
+            });
+
+            // Regression Line Series
+            series.push({
+                name: label, // Same name to link in legend (though ECharts treats scatter/line separate usually)
+                type: 'line',
+                data: lineData,
+                symbol: 'none',
+                lineStyle: { color: colors[cat], width: 3 },
+                silent: true,
+                tooltip: { show: false },
+                z: 1
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 80, left: 80 },
+            xAxis: {
+                name: 'Pretraining dataset (k patients)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: -10,
+                max: 350,
+                splitLine: { show: true, lineStyle: { color: '#E0E0E0' } },
+                axisLine: { show: true, lineStyle: { color: '#ccc' } },
+                axisLabel: { color: 'black' },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                name: 'Average downstream performance\nby task type (AUROC)',
+                nameLocation: 'middle',
+                nameGap: 60,
+                type: 'value',
+                min: 0.50,
+                max: 0.85,
+                splitLine: { show: true, lineStyle: { color: '#E0E0E0' } },
+                axisLine: { show: true, lineStyle: { color: '#ccc' } },
+                axisLabel: { color: 'black' },
+                axisTick: { show: true }
+            },
+            legend: {
+                top: 20,
+                right: 20,
+                orient: 'vertical',
+                itemGap: 10,
+                textStyle: { fontSize: 12 },
+                backgroundColor: 'rgba(255,255,255,0.8)',
+                // Custom data to only show one item per category
+                data: series.filter(s => s.type === 'scatter').map(s => s.name)
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'a',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRM 皮奥特罗斯基 F-Score (Piotroski F-Score) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      --bg-color: #f7f7f9;
+      --card-bg: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --grid-color: rgba(148, 163, 184, 0.35);
+      --border-color: #e5e7eb;
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: var(--font-family);
+      background: radial-gradient(circle at top left, #e0f2fe 0, #f7f7f9 45%);
+      color: var(--text-main);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px 20px 16px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.08),
+        0 1px 3px rgba(15, 23, 42, 0.12);
+      border: 1px solid var(--border-color);
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .title-block {
+      min-width: 220px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .badge {
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .legend-inline {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      margin-top: 8px;
+    }
+
+    canvas {
+      max-height: 420px;
+    }
+
+    .hint {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hint span {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+      }
+      .card {
+        padding: 16px 12px 12px;
+      }
+      h1 {
+        font-size: 17px;
+      }
+      .subtitle {
+        font-size: 12px;
+      }
+      canvas {
+        max-height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div class="title-block">
+          <h1>CRM 皮奥特罗斯基 F-Score（Piotroski F-Score）变化</h1>
+          <div class="subtitle">按财年统计：2016–2024（单位：分，0–9 分）</div>
+        </div>
+        <div class="meta">
+          <span class="badge">Bar Chart</span>
+          <div class="legend-inline">
+            <span class="legend-dot"></span> <span>Piotroski F-Score</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="piotroskiChart"></canvas>
+      </div>
+
+      <div class="hint">
+        <span>交互说明：移动或点击柱状条可查看具体分值。</span>
+        <span>数据来源：用户提供的 CRM 财报 F-Score 数据（2016–2024）。</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data from the user (CRM Piotroski F-Score by fiscal year)
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const fScores = [5, 5, 6, 6, 6, 6, 3, 4, 9];
+
+    const ctx = document.getElementById("piotroskiChart").getContext("2d");
+
+    // Create gradient fill for bars
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(37, 99, 235, 0.9)");
+    gradient.addColorStop(1, "rgba(96, 165, 250, 0.25)");
+
+    const borderGradient = ctx.createLinearGradient(0, 0, 0, 400);
+    borderGradient.addColorStop(0, "rgba(30, 64, 175, 1)");
+    borderGradient.addColorStop(1, "rgba(37, 99, 235, 0.7)");
+
+    const data = {
+      labels: years,
+      datasets: [
+        {
+          label: "Piotroski F-Score",
+          data: fScores,
+          backgroundColor: gradient,
+          borderColor: borderGradient,
+          borderWidth: 1.5,
+          borderRadius: 6,
+          borderSkipped: false,
+          hoverBackgroundColor: "rgba(37, 99, 235, 0.95)",
+          hoverBorderColor: "rgba(30, 64, 175, 1)",
+          maxBarThickness: 50
+        }
+      ]
+    };
+
+    const config = {
+      type: "bar",
+      data,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            usePointStyle: true,
+            backgroundColor: "#020617",
+            titleColor: "#e5e7eb",
+            bodyColor: "#f9fafb",
+            borderColor: "rgba(148, 163, 184, 0.5)",
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8,
+            displayColors: false,
+            callbacks: {
+              title: function (items) {
+                const year = items[0].label;
+                return `Fiscal Year ${year}`;
+              },
+              label: function (item) {
+                return `Piotroski F-Score: ${item.formattedValue}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 11.5
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 9,
+            ticks: {
+              stepSize: 1,
+              precision: 0,
+              color: "#4b5563",
+              font: {
+                size: 11
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.35)",
+              drawBorder: false
+            },
+            title: {
+              display: true,
+              text: "Piotroski F-Score",
+              color: "#6b7280",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            }
+          }
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutCubic"
+        }
+      }
+    };
+
+    new Chart(ctx, config);
+  </script>
+</body>
+</html>

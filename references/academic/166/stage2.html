@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1200px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const groupedData = [
+    {
+        "income_cat": "High-income countries",
+        "consumerexpenditure": 827719.4,
+        "foodandnonalcoholicbeverage": 103461.6,
+        "alcoholicbeveragesandtobacco": 29194.2,
+        "disposable_income": 921403.5,
+        "food_share": 11.228696222664663,
+        "stim_share": 3.1684490019844724,
+        "remain_share": 85.60285477535086
+    },
+    {
+        "income_cat": "Upper-middle-income countries",
+        "consumerexpenditure": 126742.40000000001,
+        "foodandnonalcoholicbeverage": 34089.0,
+        "alcoholicbeveragesandtobacco": 4169.6,
+        "disposable_income": 133500.1,
+        "food_share": 25.534812333473905,
+        "stim_share": 3.1232935406040894,
+        "remain_share": 71.341894125922
+    },
+    {
+        "income_cat": "Lower-middle-income countries",
+        "consumerexpenditure": 52331.1,
+        "foodandnonalcoholicbeverage": 18094.1,
+        "alcoholicbeveragesandtobacco": 1405.0,
+        "disposable_income": 54815.2,
+        "food_share": 33.009274799690594,
+        "stim_share": 2.5631576642974943,
+        "remain_share": 64.42756753601192
+    },
+    {
+        "income_cat": "Low-income countries",
+        "consumerexpenditure": 1348.6999999999998,
+        "foodandnonalcoholicbeverage": 572.7,
+        "alcoholicbeveragesandtobacco": 26.700000000000003,
+        "disposable_income": 1413.3000000000002,
+        "food_share": 40.522182126936954,
+        "stim_share": 1.8891954998938654,
+        "remain_share": 57.58862237316918
+    }
+];
+
+        const pieData = [];
+        const order = [
+            "High-income countries",
+            "Upper-middle-income countries",
+            "Lower-middle-income countries",
+            "Low-income countries",
+        ];
+
+        order.forEach(cat => {
+            const group = groupedData.find(d => d.income_cat === cat);
+            if (group) {
+                pieData.push({
+                    name: cat,
+                    data: [
+                        { value: group.food_share, name: 'Food' },
+                        { value: group.stim_share, name: 'Stimulants' },
+                        { value: group.remain_share, name: 'Remaining' }
+                    ]
+                });
+            }
+        });
+
+        const colors = ["#336699", "#4CAF50", "#F7931E"]; // Blue, Green, Orange
+        const labels = [
+            "Expenditure on food and non-alcoholic beverages",
+            "Expenditure on stimulants (alcoholic drinks and tobacco)",
+            "Remaining disposable income"
+        ];
+        
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [];
+        const pieRadius = '55%';
+        const pieCenters = [
+            ['12.5%', '50%'], // High-income
+            ['37.5%', '50%'], // Upper-middle-income
+            ['62.5%', '50%'], // Lower-middle-income
+            ['87.5%', '50%']  // Low-income
+        ];
+
+        pieData.forEach((pie, idx) => {
+            series.push({
+                name: pie.name,
+                type: 'pie',
+                radius: pieRadius,
+                center: pieCenters[idx],
+                startAngle: 90,
+                clockwise: false,
+                label: {
+                    show: true,
+                    formatter: '{d}%', // Display percentage
+                    fontSize: 10
+                },
+                itemStyle: {
+                    borderColor: 'white',
+                    borderWidth: 1
+                },
+                data: pie.data.map((item, i) => ({
+                    value: item.value,
+                    name: item.name,
+                    itemStyle: { color: colors[i] }
+                }))
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            title: pieData.map((pie, idx) => ({
+                text: pie.name,
+                left: pieCenters[idx][0],
+                top: '5%',
+                textAlign: 'center',
+                textStyle: { fontSize: 12 }
+            })),
+            legend: {
+                data: labels,
+                top: '90%', // Position below pies
+                left: 'center',
+                orient: 'horizontal',
+                itemGap: 10,
+                textStyle: {
+                    color: 'black'
+                }
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10, top: 10,
+                    style: { text: 'a', font: 'bold 16px Arial', fill: 'black' }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

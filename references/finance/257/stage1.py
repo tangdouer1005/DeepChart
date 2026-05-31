@@ -1,0 +1,103 @@
+#!/usr/bin/env python3
+import sys
+import io
+import json
+import pandas as pd
+
+CSV_DATA = """Fiscal Year,Working Capital,Total Assets,Retained Earnings,Operating Income,Market Value of Equity,Total Liabilities,Revenue,X1 (WC/TA),X2 (RE/TA),X3 (EBIT/TA),X4 (MVE/TL),X5 (S/TA)
+2016,-15467000000,122679000000,40945000000,12930000000,38397000000,82270000000,184828000000,-0.1260769976931667,0.3337572037594046,0.1053970117134961,0.4667193387626109,1.5065985213443214
+2017,-13379000000,139057000000,48730000000,15209000000,49833000000,87035000000,201159000000,-0.0962123445781226,0.3504318373041271,0.1093724156281237,0.5725627621071983,1.4465938428126597
+2018,-14517000000,152221000000,55846000000,17344000000,51696000000,95994000000,226247000000,-0.0953679190124884,0.3668744785542073,0.1139396009748983,0.5385336583536471,1.4863060944284954
+2019,-19148000000,173889000000,61178000000,19685000000,57616000000,111727000000,242155000000,-0.1101162235679082,0.3518221394107735,0.1132044005083702,0.5156855549688079,1.3925837747068532
+2020,-18702000000,197289000000,69295000000,22405000000,65491000000,126750000000,257141000000,-0.0947949454860636,0.3512360040346902,0.1135643649671294,0.5166942800788955,1.3033722103107623
+2021,-16534000000,212206000000,77134000000,23970000000,71760000000,135727000000,287597000000,-0.0779148563188599,0.3634864235695503,0.1129562783333176,0.5287083631112454,1.355272706709518
+2022,-20168000000,245705000000,86156000000,28435000000,77772000000,159358000000,324162000000,-0.0820821717099774,0.3506481349585885,0.1157282106591237,0.4880332333488121,1.3193138112777518
+2023,-20617000000,273720000000,95774000000,32358000000,88756000000,174801000000,371622000000,-0.0753214964196989,0.3498977056846412,0.1182156948706707,0.507754532296726,1.357672073651907
+2024,-17990000000,298278000000,96036000000,32287000000,92658000000,195687000000,400278000000,-0.0603128624974017,0.3219680968760686,0.1082446576683496,0.4735010501464072,1.341962866855752
+"""
+
+def to_native(v):
+    # Convert pandas/numpy scalars to native Python types for JSON serialization
+    try:
+        if pd.isna(v):
+            return None
+    except Exception:
+        pass
+    if hasattr(v, "item"):
+        try:
+            return v.item()
+        except Exception:
+            pass
+    return v
+
+def compute_altman_z(row):
+    # Use raw accounting/market inputs to compute X1..X5 and then Z
+    # X1 = (Current Assets - Current Liabilities) / Total Assets
+    # Here Working Capital is given as (Current Assets - Current Liabilities)
+    wc = row.get("Working Capital")
+    ta = row.get("Total Assets")
+    re = row.get("Retained Earnings")
+    ebit = row.get("Operating Income")  # EBIT proxy
+    mve = row.get("Market Value of Equity")
+    tl = row.get("Total Liabilities")
+    s = row.get("Revenue")
+
+    # Safely convert to float for arithmetic
+    def f(x):
+        try:
+            return float(x)
+        except Exception:
+            return float("nan")
+
+    wc = f(wc)
+    ta = f(ta)
+    re = f(re)
+    ebit = f(ebit)
+    mve = f(mve)
+    tl = f(tl)
+    s = f(s)
+
+    X1 = wc / ta if ta != 0 else float("nan")
+    X2 = re / ta if ta != 0 else float("nan")
+    X3 = ebit / ta if ta != 0 else float("nan")
+    X4 = mve / tl if tl != 0 else float("nan")
+    X5 = s / ta if ta != 0 else float("nan")
+
+    Z = 1.2 * X1 + 1.4 * X2 + 3.3 * X3 + 0.6 * X4 + 1.0 * X5
+    return {
+        "Fiscal Year": int(row.get("Fiscal Year")) if row.get("Fiscal Year") is not None else None,
+        "奥特曼破产预测模型 (Altman Z-Score)": float(Z)
+    }
+
+def main(argv):
+    if len(argv) != 2:
+        print("Usage: python this.py output.json")
+        sys.exit(1)
+    out_path = argv[1]
+
+    df = pd.read_csv(io.StringIO(CSV_DATA), dtype=object)
+
+    # Prepare scr_data: raw CSV rows as list of dicts with native Python types
+    raw_records = df.to_dict(orient="records")
+    scr_data = []
+    for rec in raw_records:
+        converted = {k: to_native(v) for k, v in rec.items()}
+        scr_data.append(converted)
+
+    # Compute derived Altman Z-Score for each row
+    der_data = []
+    for rec in raw_records:
+        der = compute_altman_z(rec)
+        der_data.append(der)
+
+    output = {
+        "scr_data": scr_data,
+        "der_data": der_data
+    }
+
+    # Write JSON with Chinese characters preserved
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=4)
+
+if __name__ == "__main__":
+    main(sys.argv)

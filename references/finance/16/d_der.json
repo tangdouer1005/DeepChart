@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016,
+            "CFO": 3203000000,
+            "Net Income": 1400000000,
+            "Total Assets": 55011000000,
+            "Avg Total Assets": 49506000000.0,
+            "CFO per Asset": 0.0646992283763584,
+            "NI per Asset": 0.0282794004767098
+        },
+        {
+            "Fiscal Year": 2017,
+            "CFO": 5570000000,
+            "Net Income": 477000000,
+            "Total Assets": 76250000000,
+            "Avg Total Assets": 65630500000.0,
+            "CFO per Asset": 0.0848690776392073,
+            "NI per Asset": 0.0072679623041116
+        },
+        {
+            "Fiscal Year": 2018,
+            "CFO": 6300000000,
+            "Net Income": 2368000000,
+            "Total Assets": 67173000000,
+            "Avg Total Assets": 71711500000.0,
+            "CFO per Asset": 0.0878520181560837,
+            "NI per Asset": 0.0330212030148581
+        },
+        {
+            "Fiscal Year": 2019,
+            "CFO": 6136000000,
+            "Net Income": 3687000000,
+            "Total Assets": 67887000000,
+            "Avg Total Assets": 67530000000.0,
+            "CFO per Asset": 0.0908633200059232,
+            "NI per Asset": 0.0545979564637938
+        },
+        {
+            "Fiscal Year": 2020,
+            "CFO": 7901000000,
+            "Net Income": 4495000000,
+            "Total Assets": 72548000000,
+            "Avg Total Assets": 70217500000.0,
+            "CFO per Asset": 0.1125218072417844,
+            "NI per Asset": 0.0640153807811443
+        },
+        {
+            "Fiscal Year": 2021,
+            "CFO": 10533000000,
+            "Net Income": 7071000000,
+            "Total Assets": 75196000000,
+            "Avg Total Assets": 73872000000.0,
+            "CFO per Asset": 0.1425844704353476,
+            "NI per Asset": 0.0957196231319038
+        },
+        {
+            "Fiscal Year": 2022,
+            "CFO": 9581000000,
+            "Net Income": 6933000000,
+            "Total Assets": 74438000000,
+            "Avg Total Assets": 74817000000.0,
+            "CFO per Asset": 0.1280591309461753,
+            "NI per Asset": 0.0926661052969245
+        },
+        {
+            "Fiscal Year": 2023,
+            "CFO": 7261000000,
+            "Net Income": 5723000000,
+            "Total Assets": 73214000000,
+            "Avg Total Assets": 73826000000.0,
+            "CFO per Asset": 0.0983528838078725,
+            "NI per Asset": 0.0775201148646818
+        },
+        {
+            "Fiscal Year": 2024,
+            "CFO": 8558000000,
+            "Net Income": 13402000000,
+            "Total Assets": 81414000000,
+            "Avg Total Assets": 77314000000.0,
+            "CFO per Asset": 0.1106914659699407,
+            "NI per Asset": 0.1733450604030318
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.03277526312919234
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.06679344262295081
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.05853542345883018
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.03607465346826344
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.04694822738049291
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.04603968296185969
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.03557322872726297
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.021006911246482907
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": -0.059498366374333644
+        }
+    ]
+}

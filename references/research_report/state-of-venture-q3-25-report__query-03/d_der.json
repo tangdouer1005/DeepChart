@@ -1,0 +1,38 @@
+{
+  "status": "complete",
+  "chart_type": "slope",
+  "title": "Sector average deal size: 2024 vs 2025 YTD",
+  "label_field": "label",
+  "left_field": "left",
+  "right_field": "right",
+  "left_label": "2024 average deal size",
+  "right_label": "2025 YTD average deal size",
+  "x_label": "$M per deal",
+  "data": [
+    {
+      "label": "AI",
+      "left": 26.5,
+      "right": 49.3
+    },
+    {
+      "label": "CVC",
+      "left": 29.5,
+      "right": 35.7
+    },
+    {
+      "label": "Digital Health",
+      "left": 16.3,
+      "right": 21.5
+    },
+    {
+      "label": "Fintech",
+      "left": 12.4,
+      "right": 17.0
+    },
+    {
+      "label": "Retail Tech",
+      "left": 15.0,
+      "right": 18.4
+    }
+  ]
+}

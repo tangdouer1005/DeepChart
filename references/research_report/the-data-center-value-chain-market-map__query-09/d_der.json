@@ -1,0 +1,113 @@
+{
+  "report_id": "010",
+  "query_id": 9,
+  "query_text": "Create a bubble chart for the top 12 companies after filtering to rows with numeric `Total raised`, `Headcount`, and `Mosaic`, where the plotted value is `Mosaic score minus the company’s funding-rank percentile`, the x-axis is `Headcount`, the y-axis is that derived gap score, bubble size is `Total raised ($M)`, and color shows whether `Commercial Maturity` is below 4, equal to 4, or equal to 5.",
+  "chart_type": "bubble",
+  "value_unit": "Mosaic score minus funding-rank percentile",
+  "sort_rule": "descending by derived gap score",
+  "selection_rule": "top 12 companies with numeric funding, headcount, Mosaic, and Commercial Maturity",
+  "records": [
+    {
+      "label": "Cato Networks",
+      "x": 1377,
+      "y": 857.298246,
+      "size": 1200.0,
+      "color": "5"
+    },
+    {
+      "label": "Groq",
+      "x": 539,
+      "y": 855.263158,
+      "size": 3300.0,
+      "color": "5"
+    },
+    {
+      "label": "DEEPX",
+      "x": 89,
+      "y": 838.912281,
+      "size": 98.6,
+      "color": "4"
+    },
+    {
+      "label": "Rebellions",
+      "x": 177,
+      "y": 838.842105,
+      "size": 541.6,
+      "color": "4"
+    },
+    {
+      "label": "Cerebras",
+      "x": 721,
+      "y": 836.526316,
+      "size": 1800.0,
+      "color": "5"
+    },
+    {
+      "label": "Armada",
+      "x": 368,
+      "y": 831.368421,
+      "size": 226.0,
+      "color": "4"
+    },
+    {
+      "label": "d-Matrix",
+      "x": 234,
+      "y": 810.596491,
+      "size": 429.0,
+      "color": "Below 4"
+    },
+    {
+      "label": "Stellar Cyber",
+      "x": 149,
+      "y": 800.175439,
+      "size": 88.7,
+      "color": "4"
+    },
+    {
+      "label": "Radiant",
+      "x": 260,
+      "y": 795.122807,
+      "size": 225.2,
+      "color": "4"
+    },
+    {
+      "label": "Starcloud",
+      "x": 11,
+      "y": 794.982456,
+      "size": 23.9,
+      "color": "Below 4"
+    },
+    {
+      "label": "Natura Resources",
+      "x": 23,
+      "y": 791.736842,
+      "size": 20.0,
+      "color": "Below 4"
+    },
+    {
+      "label": "Rapidus",
+      "x": 214,
+      "y": 790.508772,
+      "size": 5600.0,
+      "color": "4"
+    }
+  ],
+  "plot_config": {
+    "title": "Quality minus funding-rank percentile gap",
+    "x_label": "Headcount",
+    "y_label": "Mosaic score minus funding-rank percentile"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with numeric funding, headcount, Mosaic, and Commercial Maturity.",
+    "Computed funding-rank percentiles from funding ranks.",
+    "Subtracted funding-rank percentile from Mosaic score.",
+    "Bucketed maturity into below 4, equal to 4, and equal to 5, then kept the top 12 gap scores."
+  ],
+  "stats": {
+    "eligible_count": 58,
+    "returned_count": 12
+  },
+  "open_issues": [
+    "Rows with N/A Commercial Maturity were excluded because the color encoding requires numeric maturity."
+  ]
+}

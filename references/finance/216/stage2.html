@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>pg 奥特曼破产预测模型 (Altman Z-Score) 走势 2016–2024</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Chart.js (latest stable 4.x) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg: #f7f7f9;
+            --fg: #222;
+            --card-bg: #ffffff;
+            --accent: #2563eb;
+            --accent-soft: rgba(37, 99, 235, 0.12);
+            --grid: rgba(148, 163, 184, 0.4);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #020617;
+                --fg: #e5e7eb;
+                --card-bg: #020617;
+                --accent: #60a5fa;
+                --accent-soft: rgba(96, 165, 250, 0.18);
+                --grid: rgba(148, 163, 184, 0.4);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                sans-serif;
+            background: radial-gradient(circle at top, #e0ecff 0, var(--bg) 55%);
+            color: var(--fg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 980px;
+            background-color: var(--card-bg);
+            border-radius: 18px;
+            box-shadow:
+                0 18px 45px rgba(15, 23, 42, 0.20),
+                0 0 0 1px rgba(15, 23, 42, 0.05);
+            padding: 18px 20px 16px;
+        }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 8px 12px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+            margin-bottom: 12px;
+        }
+
+        .title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: 650;
+            margin: 0;
+            letter-spacing: 0.02em;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .badge {
+            font-size: 11px;
+            padding: 3px 7px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(37, 99, 235, 0.35);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toggle-group {
+            display: inline-flex;
+            border-radius: 999px;
+            padding: 2px;
+            background: rgba(148, 163, 184, 0.18);
+        }
+
+        .toggle-btn {
+            border: none;
+            background: transparent;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            cursor: pointer;
+            color: #4b5563;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .toggle-btn.active {
+            background: #0f172a;
+            color: #e5e7eb;
+        }
+
+        .toggle-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.8);
+            background: rgba(15, 23, 42, 0.06);
+        }
+
+        .toggle-btn.active .toggle-dot {
+            background: #22c55e;
+            border-color: #bbf7d0;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            height: 420px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+            margin-top: 4px;
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .legend-color {
+            width: 18px;
+            height: 3px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #60a5fa, #2563eb);
+        }
+
+        .threshold {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .threshold span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .threshold-line {
+            width: 10px;
+            height: 1px;
+        }
+
+        .safe {
+            background: #22c55e;
+        }
+
+        .risk {
+            background: #eab308;
+        }
+
+        .distress {
+            background: #ef4444;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 14px 12px 12px;
+            }
+            .chart-wrapper {
+                height: 320px;
+            }
+            h1 {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="title-group">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                pg · 奥特曼破产预测模型 (Altman Z-Score)
+            </div>
+            <h1>2016–2024 年 Z-Score 走势</h1>
+            <div class="subtitle">数据单位：Z-Score（数值越高，破产风险越低）</div>
+        </div>
+        <div class="toolbar">
+            <div class="toggle-group" aria-label="视图切换">
+                <button class="toggle-btn active" id="btnZScore">
+                    <span class="toggle-dot"></span>
+                    Z-Score
+                </button>
+                <button class="toggle-btn" id="btnYoY">
+                    <span class="toggle-dot"></span>
+                    同比变化 (%)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-wrapper">
+        <canvas id="zScoreChart"></canvas>
+    </div>
+
+    <div class="footer">
+        <div class="legend">
+            <span class="legend-item">
+                <span class="legend-color"></span>
+                pg Z-Score 指标
+            </span>
+        </div>
+        <div class="threshold">
+            <span>
+                <span class="threshold-line distress"></span> <span>困境区 &lt; 1.8</span>
+            </span>
+            <span>
+                <span class="threshold-line risk"></span> <span>灰色区 1.8–3.0</span>
+            </span>
+            <span>
+                <span class="threshold-line safe"></span> <span>安全区 ≥ 3.0</span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ----- 原始数据（保证与提供数据完全一致） -----
+    const years = [
+        "2016", "2017", "2018", "2019", "2020",
+        "2021", "2022", "2023", "2024"
+    ];
+    const zScores = [
+        2.356963144198428,
+        2.5105637836565515,
+        2.534553044584185,
+        2.240773849536933,
+        2.508410028583276,
+        2.665744106766192,
+        2.80890863694267,
+        2.7934551570859045,
+        2.9360520927176847
+    ];
+
+    // 计算同比变化百分比
+    const yoyChanges = zScores.map((val, idx) => {
+        if (idx === 0) return null; // 第一年的同比为空
+        const prev = zScores[idx - 1];
+        return ((val - prev) / prev) * 100;
+    });
+
+    const ctx = document.getElementById('zScoreChart').getContext('2d');
+
+    // 创建渐变色
+    function createLineGradient(ctx, chartArea) {
+        const gradient = ctx.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
+        gradient.addColorStop(0, '#60a5fa');
+        gradient.addColorStop(1, '#2563eb');
+        return gradient;
+    }
+
+    let currentMode = 'zscore';
+    let chart;
+
+    function buildConfig(mode, existingChart) {
+        const isYoY = mode === 'yoy';
+        const data = isYoY
+            ? yoyChanges.map(v => (v === null ? null : +v.toFixed(2)))
+            : zScores.map(v => +v.toFixed(3));
+
+        const label = isYoY
+            ? "Altman Z-Score 同比变化率"
+            : "Altman Z-Score";
+
+        const yLabel = isYoY ? "同比变化 (%)" : "Z-Score 数值";
+
+        // 动态y轴范围
+        let minY, maxY;
+        if (isYoY) {
+            const ys = yoyChanges.filter(v => v !== null);
+            const min = Math.min(...ys);
+            const max = Math.max(...ys);
+            const padding = (max - min || 1) * 0.25;
+            minY = Math.floor(min - padding);
+            maxY = Math.ceil(max + padding);
+        } else {
+            const min = Math.min(...zScores);
+            const max = Math.max(...zScores);
+            const padding = (max - min || 0.2) * 0.25;
+            minY = Math.max(0, +(min - padding).toFixed(2));
+            maxY = +(max + padding).toFixed(2);
+        }
+
+        return {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label,
+                    data,
+                    tension: 0.35,
+                    pointRadius: 4,
+                    pointHoverRadius: 5,
+                    pointBackgroundColor: function(context) {
+                        // 2019年特殊标注颜色略深
+                        const idx = context.dataIndex;
+                        if (years[idx] === "2019") return "#1f2937";
+                        return "#ffffff";
+                    },
+                    pointBorderWidth: 2,
+                    pointBorderColor: '#2563eb',
+                    pointHoverBorderWidth: 2.5,
+                    fill: true,
+                    backgroundColor: function(context) {
+                        const { chart } = context;
+                        const { ctx, chartArea } = chart;
+                        if (!chartArea) {
+                            // 初始加载时，无chartArea
+                            return 'rgba(37, 99, 235, 0.10)';
+                        }
+                        const gradient = ctx.createLinearGradient(
+                            0, chartArea.top,
+                            0, chartArea.bottom
+                        );
+                        gradient.addColorStop(0, 'rgba(37, 99, 235, 0.18)');
+                        gradient.addColorStop(1, 'rgba(37, 99, 235, 0.02)');
+                        return gradient;
+                    },
+                    borderColor: function(context) {
+                        const { chart } = context;
+                        const { ctx, chartArea } = chart;
+                        if (!chartArea) return '#2563eb';
+                        return createLineGradient(ctx, chartArea);
+                    },
+                    borderWidth: 2.5,
+                    spanGaps: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#020617',
+                        titleColor: '#e5e7eb',
+                        bodyColor: '#e5e7eb',
+                        borderColor: 'rgba(148,163,184,0.6)',
+                        borderWidth: 1,
+                        padding: 10,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            title: function(context) {
+                                return "财年 " + context[0].label;
+                            },
+                            label: function(context) {
+                                const value = context.raw;
+                                if (mode === 'zscore') {
+                                    return "Z-Score: " + value.toFixed(3);
+                                } else {
+                                    return "同比变化: " + value.toFixed(2) + " %";
+                                }
+                            },
+                            afterLabel: function(context) {
+                                const year = context.label;
+                                if (mode === 'zscore') {
+                                    if (year === "2019") {
+                                        return "（略有下滑，注意财务表现变化）";
+                                    }
+                                    if (year === "2024") {
+                                        return "（样本内最高水平）";
+                                    }
+                                }
+                                return "";
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(148, 163, 184, 0.25)',
+                            drawBorder: false,
+                            drawOnChartArea: false,
+                            tickLength: 6
+                        },
+                        ticks: {
+                            font: {
+                                size: 11
+                            },
+                            color: '#6b7280'
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        min: minY,
+                        max: maxY,
+                        grid: {
+                            color: 'rgba(148, 163, 184, 0.22)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 11
+                            },
+                            color: '#6b7280',
+                            callback: function(value) {
+                                return isYoY ? value + '%' : value;
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: yLabel,
+                            font: {
+                                size: 11.5,
+                                weight: 500
+                            },
+                            color: '#4b5563'
+                        }
+                    }
+                }
+            }
+        };
+    }
+
+    function renderChart(mode) {
+        const config = buildConfig(mode, chart);
+        if (chart) {
+            chart.destroy();
+        }
+        chart = new Chart(ctx, config);
+    }
+
+    // 初始渲染
+    renderChart(currentMode);
+
+    // 绑定按钮切换
+    const btnZScore = document.getElementById('btnZScore');
+    const btnYoY = document.getElementById('btnYoY');
+
+    btnZScore.addEventListener('click', () => {
+        if (currentMode === 'zscore') return;
+        currentMode = 'zscore';
+        btnZScore.classList.add('active');
+        btnYoY.classList.remove('active');
+        renderChart(currentMode);
+    });
+
+    btnYoY.addEventListener('click', () => {
+        if (currentMode === 'yoy') return;
+        currentMode = 'yoy';
+        btnYoY.classList.add('active');
+        btnZScore.classList.remove('active');
+        renderChart(currentMode);
+    });
+</script>
+</body>
+</html>

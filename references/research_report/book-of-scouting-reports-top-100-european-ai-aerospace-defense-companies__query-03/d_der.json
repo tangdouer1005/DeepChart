@@ -1,0 +1,108 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a dumbbell chart for the 12 companies whose `Mosaic rank` and `Total raised rank` differ the most within their own segment, with one endpoint showing segment-specific `Mosaic rank`, the other showing segment-specific `Total raised rank`, and the companies sorted by absolute rank gap descending.",
+  "status": "completed",
+  "title": "Within-segment Mosaic rank vs Total raised rank gaps",
+  "chart_kind": "dumbbell",
+  "chart_type": "dumbbell chart",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by absolute rank gap",
+  "selection_rule": "top 12 by within-segment absolute rank gap",
+  "metadata": {
+    "entity_field": "entity",
+    "left_field": "mosaic_rank",
+    "right_field": "total_raised_rank",
+    "left_label": "Segment Mosaic rank",
+    "right_label": "Segment Total raised rank",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "entity": "Destinus",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_rank": 38,
+      "total_raised_rank": 11,
+      "abs_rank_gap": 27
+    },
+    {
+      "entity": "Azur Drones",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_rank": 35,
+      "total_raised_rank": 12,
+      "abs_rank_gap": 23
+    },
+    {
+      "entity": "Sees.ai",
+      "segment": "Aerospace (commercial)",
+      "mosaic_rank": 1,
+      "total_raised_rank": 18,
+      "abs_rank_gap": 17
+    },
+    {
+      "entity": "Unseenlabs",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_rank": 21,
+      "total_raised_rank": 5,
+      "abs_rank_gap": 16
+    },
+    {
+      "entity": "Zaitra",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_rank": 19,
+      "total_raised_rank": 35,
+      "abs_rank_gap": 16
+    },
+    {
+      "entity": "Meteomatics",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_rank": 4,
+      "total_raised_rank": 19,
+      "abs_rank_gap": 15
+    },
+    {
+      "entity": "Donecle",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_rank": 37,
+      "total_raised_rank": 24,
+      "abs_rank_gap": 13
+    },
+    {
+      "entity": "Look Up",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_rank": 20,
+      "total_raised_rank": 9,
+      "abs_rank_gap": 11
+    },
+    {
+      "entity": "Adarga",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_rank": 24,
+      "total_raised_rank": 14,
+      "abs_rank_gap": 10
+    },
+    {
+      "entity": "Perceptual Robotics",
+      "segment": "Aerospace (commercial)",
+      "mosaic_rank": 26,
+      "total_raised_rank": 16,
+      "abs_rank_gap": 10
+    },
+    {
+      "entity": "RigiTech",
+      "segment": "Aerospace (commercial)",
+      "mosaic_rank": 19,
+      "total_raised_rank": 28,
+      "abs_rank_gap": 9
+    },
+    {
+      "entity": "Roseman Labs",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_rank": 13,
+      "total_raised_rank": 22,
+      "abs_rank_gap": 9
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRM 现金循环周期（CCC）2016-2023 柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- 使用 ESM 版 Chart.js 可能导致某些环境报错，这里改为 UMD 版 3.x（兼容性更好） -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f6f7fb;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;
+      background: #fff;
+      padding: 18px 20px 24px;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+      height: 480px; /* 固定高度，方便渲染 */
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .footer-note {
+      max-width: 900px;
+      margin: 12px auto 0;
+      font-size: 11px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <div class="chart-container">
+      <h1>CRM 现金循环周期（CCC）</h1>
+      <h2>2016–2023 年度变化（单位：天）</h2>
+      <canvas id="cccChart"></canvas>
+    </div>
+    <div class="footer-note">
+      数据来源：用户提供的 CRM 财报数据（2016–2023）。<br>
+      说明：现金循环周期（Cash Conversion Cycle, CCC）为企业从支付现金购买存货到收到销售货款所经历的时间（天数），数值为负表示回款速度快于支付周期。
+    </div>
+  </div>
+
+  <script>
+    // 防御式写法：确保 DOM 与 Chart.js 都已加载
+    (function initChartWhenReady() {
+      function createChart() {
+        var canvas = document.getElementById('cccChart');
+        if (!canvas) {
+          console.error('未找到 id 为 "cccChart" 的 canvas 元素。');
+          return;
+        }
+        if (typeof Chart === 'undefined') {
+          console.error('Chart.js 未正确加载。');
+          return;
+        }
+
+        var ctx = canvas.getContext('2d');
+
+        var labels = ['2016','2017','2018','2019','2020','2021','2022','2023'];
+
+        var cccValues = [
+          225.63684823629023,
+          149.17925065151655,
+          112.43368955501232,
+          150.83612414254966,
+          37.26970055115291,
+          -71.9492349706463,
+          -67.04543111887563,
+          -76.89192077060474
+        ];
+
+        // 颜色：正值为蓝色，负值为红色
+        var barColors = cccValues.map(function(v){ return v >= 0 ? '#3b82f6' : '#ef4444'; });
+        var borderColors = cccValues.map(function(v){ return v >= 0 ? '#1d4ed8' : '#b91c1c'; });
+
+        var data = {
+          labels: labels,
+          datasets: [{
+            label: '现金循环周期（天）',
+            data: cccValues,
+            backgroundColor: barColors,
+            borderColor: borderColors,
+            borderWidth: 1.5,
+            borderRadius: 5,
+            borderSkipped: false
+          }]
+        };
+
+        var options = {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'nearest',
+            intersect: true
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              usePointStyle: true,
+              callbacks: {
+                label: function(context) {
+                  var value = context.parsed.y;
+                  if (value == null || isNaN(value)) return '';
+                  return ' CCC：' + value.toFixed(2) + ' 天';
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                font: {
+                  size: 12
+                }
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: '现金循环周期（天）',
+                font: {
+                  size: 12,
+                  weight: 'bold'
+                }
+              },
+              ticks: {
+                font: { size: 11 },
+                callback: function(value) {
+                  return value + ' 天';
+                }
+              },
+              grid: {
+                color: 'rgba(148, 163, 184, 0.3)'
+              },
+              beginAtZero: false
+            }
+          }
+        };
+
+        new Chart(ctx, {
+          type: 'bar',
+          data: data,
+          options: options
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', createChart);
+      } else {
+        createChart();
+      }
+    })();
+  </script>
+</body>
+</html>

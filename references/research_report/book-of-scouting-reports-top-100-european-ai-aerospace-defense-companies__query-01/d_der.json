@@ -1,0 +1,127 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a horizontal bar chart for the top 15 companies with at least `$10M` in `Total raised`, where the plotted value is `Mosaic per $10M raised`, computed as `Mosaic / (Total raised in $M / 10)`, expressed as `Mosaic points per $10M`, sorted descending, and colored by segment.",
+  "status": "completed",
+  "title": "Top 15 companies by Mosaic per $10M raised",
+  "chart_kind": "horizontal_bar",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "Mosaic points per $10M",
+  "sort_rule": "descending by mosaic_per_10m",
+  "selection_rule": "top 15 with total_raised_m >= 10",
+  "metadata": {
+    "entity_field": "entity",
+    "value_field": "mosaic_per_10m",
+    "hue_field": "segment",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "entity": "Roseman Labs",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_per_10m": 681.9047619047619,
+      "mosaic": 716,
+      "total_raised_m": 10.5
+    },
+    {
+      "entity": "SwissDrones",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_per_10m": 660.0,
+      "mosaic": 660,
+      "total_raised_m": 10.0
+    },
+    {
+      "entity": "sensmore",
+      "segment": "Defense",
+      "mosaic_per_10m": 654.3689320388349,
+      "mosaic": 674,
+      "total_raised_m": 10.3
+    },
+    {
+      "entity": "VRAI",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_per_10m": 652.3364485981309,
+      "mosaic": 698,
+      "total_raised_m": 10.7
+    },
+    {
+      "entity": "Alpine Eagle",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_per_10m": 628.1818181818181,
+      "mosaic": 691,
+      "total_raised_m": 11.0
+    },
+    {
+      "entity": "Meteomatics",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_per_10m": 590.6474820143885,
+      "mosaic": 821,
+      "total_raised_m": 13.9
+    },
+    {
+      "entity": "Maritime Robotics",
+      "segment": "Defense",
+      "mosaic_per_10m": 566.6666666666666,
+      "mosaic": 680,
+      "total_raised_m": 12.0
+    },
+    {
+      "entity": "Comand AI",
+      "segment": "Defense",
+      "mosaic_per_10m": 531.9672131147541,
+      "mosaic": 649,
+      "total_raised_m": 12.2
+    },
+    {
+      "entity": "Voliro",
+      "segment": "Aerospace (commercial)",
+      "mosaic_per_10m": 523.0769230769231,
+      "mosaic": 680,
+      "total_raised_m": 13.0
+    },
+    {
+      "entity": "Shark Robotics",
+      "segment": "Defense",
+      "mosaic_per_10m": 489.9082568807339,
+      "mosaic": 534,
+      "total_raised_m": 10.9
+    },
+    {
+      "entity": "Swarm Biotactics",
+      "segment": "Defense",
+      "mosaic_per_10m": 446.3576158940397,
+      "mosaic": 674,
+      "total_raised_m": 15.1
+    },
+    {
+      "entity": "Picterra",
+      "segment": "Aerospace (commercial)",
+      "mosaic_per_10m": 446.0,
+      "mosaic": 446,
+      "total_raised_m": 10.0
+    },
+    {
+      "entity": "Altitude Angel",
+      "segment": "Aerospace (commercial)",
+      "mosaic_per_10m": 392.40506329113924,
+      "mosaic": 620,
+      "total_raised_m": 15.8
+    },
+    {
+      "entity": "Skyral",
+      "segment": "Aerospace (dual-use)",
+      "mosaic_per_10m": 386.0,
+      "mosaic": 772,
+      "total_raised_m": 20.0
+    },
+    {
+      "entity": "Flybotix",
+      "segment": "Aerospace (commercial)",
+      "mosaic_per_10m": 361.1111111111111,
+      "mosaic": 650,
+      "total_raised_m": 18.0
+    }
+  ]
+}

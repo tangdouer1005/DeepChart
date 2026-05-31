@@ -1,0 +1,473 @@
+import sys
+import io
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import matplotlib.lines as mlines
+import numpy as np
+
+# -----------------------------------------------------------------------------
+# 1. Source Data Embedding
+# -----------------------------------------------------------------------------
+csv_data = """Accession|Strand|Start|End|Accession2|Strand2|Start2|End2|Order
+Solanum_americanum|-|1048546|1053216|Solanum_cardiophyllumC509|-|11609384|11612798|2
+Solanum_americanum|+|1064427|1064891|Solanum_cardiophyllumC509|+|11674635|11678156|2
+Solanum_americanum|-|1082580|1082678|Solanum_cardiophyllumC509|-|11740273|11741433|2
+Solanum_americanum|-|1083078|1086056|Solanum_cardiophyllumC509|-|11740273|11741433|2
+Solanum_americanum|+|1094524|1095750|Solanum_cardiophyllumC509|+|11674635|11678156|2
+Solanum_americanum|-|1096019|1099015|Solanum_cardiophyllumC509|-|11740273|11741433|2
+Solanum_americanum|+|1100683|1102143|Solanum_cardiophyllumC509|+|11830983|11833670|2
+Solanum_americanum|+|1102204|1103313|Solanum_cardiophyllumC509|+|11830983|11833670|2
+Solanum_americanum|+|1108335|1109288|Solanum_cardiophyllumC509|+|11830983|11833670|2
+Solanum_americanum|-|1111665|1114991|Solanum_cardiophyllumC509|-|11740273|11741433|2
+Solanum_americanum|+|1120206|1124101|Solanum_cardiophyllumC509|+|11812255|11813277|2
+Solanum_americanum|+|1125874|1127862|Solanum_cardiophyllumC509|+|11830983|11833670|2
+Solanum_americanum|+|1127898|1128719|Solanum_cardiophyllumC509|+|11830983|11833670|2
+Solanum_americanum|-|1130420|1132744|Solanum_cardiophyllumC509|-|11740273|11741433|2
+Solanum_americanum|-|1139249|1142139|Solanum_cardiophyllumC509|-|11740273|11741433|2
+Solanum_americanum|+|1143238|1144530|Solanum_cardiophyllumC509|+|11830983|11833670|2
+Solanum_americanum|+|1144559|1144819|Solanum_cardiophyllumC509|+|11830983|11833670|2
+Solanum_americanum|-|1145696|1148997|Solanum_cardiophyllumC509|-|11740273|11741433|2
+Solanum_americanum|+|1150996|1152794|Solanum_cardiophyllumC509|+|11830983|11833670|2
+Solanum_americanum|-|1163174|1168019|Solanum_cardiophyllumC509|-|11740273|11741433|2
+Solanum_americanum|-|1176481|1184129|Solanum_cardiophyllumC509|-|11740273|11741433|2
+Solanum_americanum|+|1189712|1191118|Solanum_cardiophyllumC509|+|11774586|11778155|2
+Solanum_americanum|+|1192165|1193036|Solanum_cardiophyllumC509|+|11774031|11774531|2
+Solanum_americanum|+|1200738|1201599|Solanum_cardiophyllumC509|+|11785416|11786425|2
+Solanum_americanum|+|1201683|1208117|Solanum_cardiophyllumC509|+|11774031|11774531|2
+Solanum_americanum|+|1209734|1211571|Solanum_cardiophyllumC509|+|11793330|11795401|2
+Solanum_americanum|+|1216149|1217012|Solanum_cardiophyllumC509|+|11796454|11810900|2
+Solanum_americanum|+|1217453|1220481|Solanum_cardiophyllumC509|+|11740273|11741433|2
+Solanum_americanum|+|1222124|1225879|Solanum_cardiophyllumC509|+|11740273|11741433|2
+Solanum_americanum|+|1226446|1228237|Solanum_cardiophyllumC509|+|11796454|11810900|2
+Solanum_americanum|+|1229726|1233213|Solanum_cardiophyllumC509|+|11740273|11741433|2
+Solanum_americanum|+|1235158|1238043|Solanum_cardiophyllumC509|+|11740273|11741433|2
+Solanum_americanum|+|1235158|1238043|Solanum_cardiophyllumC509|+|11830983|11833670|2
+Solanum_americanum|+|1238702|1241332|Solanum_cardiophyllumC509|+|11740273|11741433|2
+Solanum_cardiophyllumC509|+|11830983|11833670|Solanum_jamesii|+|17634417|17635778|3
+Solanum_cardiophyllumC509|+|11826683|11827849|Solanum_jamesii|+|17630335|17631187|3
+Solanum_cardiophyllumC509|+|11820569|11824771|Solanum_jamesii|+|17583421|17585283|3
+Solanum_cardiophyllumC509|+|11812255|11813277|Solanum_jamesii|+|17583421|17585283|3
+Solanum_cardiophyllumC509|+|11796454|11810900|Solanum_jamesii|+|17609303|17613605|3
+Solanum_cardiophyllumC509|+|11793330|11795401|Solanum_jamesii|+|17605216|17607634|3
+Solanum_cardiophyllumC509|+|11785416|11786425|Solanum_jamesii|+|17600997|17601509|3
+Solanum_cardiophyllumC509|-|11774586|11778155|Solanum_jamesii|-|17590181|17591530|3
+Solanum_cardiophyllumC509|-|11774031|11774531|Solanum_jamesii|-|17590181|17591530|3
+Solanum_cardiophyllumC509|-|11740273|11741433|Solanum_jamesii|-|17583421|17585283|3
+Solanum_cardiophyllumC509|+|11735363|11737621|Solanum_jamesii|+|17634417|17635778|3
+Solanum_cardiophyllumC509|+|11693783|11696440|Solanum_jamesii|+|17619016|17619447|3
+Solanum_cardiophyllumC509|+|11674635|11678156|Solanum_jamesii|+|17574286|17580119|3
+Solanum_cardiophyllumC509|-|11609384|11612798|Solanum_jamesii|-|17539546|17544833|3
+Solanum_jamesii|-|17511594|17520035|Solanum_chacoense|-|7124878|7133335|4
+Solanum_jamesii|-|17539546|17544833|Solanum_chacoense|-|7134673|7140063|4
+Solanum_jamesii|+|17574286|17580119|Solanum_chacoense|+|7147207|7152979|4
+Solanum_jamesii|-|17583421|17585283|Solanum_chacoense|-|7274268|7274705|4
+Solanum_jamesii|+|17587776|17589107|Solanum_chacoense|+|7300442|7301622|4
+Solanum_jamesii|+|17590181|17591530|Solanum_chacoense|+|7298260|7299777|4
+Solanum_jamesii|+|17600418|17600906|Solanum_chacoense|+|7305556|7308028|4
+Solanum_jamesii|+|17600997|17601509|Solanum_chacoense|+|7305556|7308028|4
+Solanum_jamesii|+|17605216|17607634|Solanum_chacoense|+|7314431|7317470|4
+Solanum_jamesii|+|17609303|17613605|Solanum_chacoense|+|7318577|7323535|4
+Solanum_jamesii|+|17609303|17613605|Solanum_chacoense|+|7318577|7323535|4
+Solanum_jamesii|+|17619016|17619447|Solanum_chacoense|+|7346404|7347039|4
+Solanum_jamesii|+|17619751|17621377|Solanum_chacoense|+|7274268|7274705|4
+Solanum_jamesii|+|17626645|17628495|Solanum_chacoense|+|7243119|7243346|4
+Solanum_jamesii|+|17630335|17631187|Solanum_chacoense|+|7274769|7275515|4
+Solanum_jamesii|+|17634417|17635778|Solanum_chacoense|+|7393341|7395983|4
+Solanum_chacoense|-|7124878|7133335|Solanum_cajamarquenseC534|-|854070|861510|5
+Solanum_chacoense|-|7134673|7140063|Solanum_cajamarquenseC534|-|863350|866518|5
+Solanum_chacoense|-|7153601|7157740|Solanum_cajamarquenseC534|-|888357|892571|5
+Solanum_chacoense|-|7228065|7230495|Solanum_cajamarquenseC534|-|1015757|1016147|5
+Solanum_chacoense|-|7230554|7236614|Solanum_cajamarquenseC534|-|969428|974780|5
+Solanum_chacoense|-|7238639|7241774|Solanum_cajamarquenseC534|-|975719|979385|5
+Solanum_chacoense|-|7243119|7243346|Solanum_cajamarquenseC534|-|1043272|1044192|5
+Solanum_chacoense|-|7274268|7274705|Solanum_cajamarquenseC534|-|995975|997753|5
+Solanum_chacoense|-|7274769|7275515|Solanum_cajamarquenseC534|-|1043272|1044192|5
+Solanum_chacoense|-|7289137|7292908|Solanum_cajamarquenseC534|-|1015757|1016147|5
+Solanum_chacoense|-|7292957|7293208|Solanum_cajamarquenseC534|-|888357|892571|5
+Solanum_chacoense|+|7298260|7299777|Solanum_cajamarquenseC534|+|1054255|1062520|5
+Solanum_chacoense|+|7300442|7301622|Solanum_cajamarquenseC534|+|1054255|1062520|5
+Solanum_chacoense|+|7305556|7308028|Solanum_cajamarquenseC534|+|1054255|1062520|5
+Solanum_chacoense|+|7318577|7323535|Solanum_cajamarquenseC534|+|1074086|1078487|5
+Solanum_chacoense|+|7346404|7347039|Solanum_cajamarquenseC534|+|975719|979385|5
+Solanum_chacoense|+|7347127|7347291|Solanum_cajamarquenseC534|+|1043272|1044192|5
+Solanum_chacoense|+|7365917|7368140|Solanum_cajamarquenseC534|+|969428|974780|5
+Solanum_chacoense|+|7374888|7380317|Solanum_cajamarquenseC534|+|1015757|1016147|5
+Solanum_chacoense|+|7393341|7395983|Solanum_cajamarquenseC534|+|1114407|1117205|5
+Solanum_chacoense|+|7398270|7398572|Solanum_cajamarquenseC534|+|1160585|1180077|5
+Solanum_chacoense|-|7400465|7400785|Solanum_cajamarquenseC534|-|1125020|1128974|5
+Solanum_chacoense|+|7404258|7404566|Solanum_cajamarquenseC534|+|1160585|1180077|5
+Solanum_chacoense|+|7407589|7407897|Solanum_cajamarquenseC534|+|1160585|1180077|5
+Solanum_cajamarquenseC534|+|1160585|1180077|Solanum_neorossii|+|14185692|14185913|6
+Solanum_cajamarquenseC534|+|1118244|1120701|Solanum_neorossii|+|14105689|14110175|6
+Solanum_cajamarquenseC534|+|1114407|1117205|Solanum_neorossii|+|14175692|14177662|6
+Solanum_cajamarquenseC534|+|1091341|1096498|Solanum_neorossii|+|14115207|14118452|6
+Solanum_cajamarquenseC534|+|1079091|1084237|Solanum_neorossii|+|14078600|14079391|6
+Solanum_cajamarquenseC534|+|1074086|1078487|Solanum_neorossii|+|14071642|14076315|6
+Solanum_cajamarquenseC534|+|1054255|1062520|Solanum_neorossii|+|14056581|14058134|6
+Solanum_cajamarquenseC534|-|1045330|1048098|Solanum_neorossii|-|13989561|13989797|6
+Solanum_cajamarquenseC534|-|1043272|1044192|Solanum_neorossii|-|13984467|13987258|6
+Solanum_cajamarquenseC534|-|1031236|1035512|Solanum_neorossii|-|13989561|13989797|6
+Solanum_cajamarquenseC534|-|1015757|1016147|Solanum_neorossii|-|13984467|13987258|6
+Solanum_cajamarquenseC534|-|995975|997753|Solanum_neorossii|-|13989561|13989797|6
+Solanum_cajamarquenseC534|-|975719|979385|Solanum_neorossii|-|13956542|13960915|6
+Solanum_cajamarquenseC534|-|969428|974780|Solanum_neorossii|-|13989561|13989797|6
+Solanum_cajamarquenseC534|-|899379|902002|Solanum_neorossii|-|13989561|13989797|6
+Solanum_cajamarquenseC534|-|888357|892571|Solanum_neorossii|-|13989561|13989797|6
+Solanum_cajamarquenseC534|-|863350|866518|Solanum_neorossii|-|13887354|13892701|6
+Solanum_cajamarquenseC534|-|854070|861510|Solanum_neorossii|-|13877290|13885950|6
+Solanum_neorossii|-|13877290|13885950|Solanum_candolleanum|-|65746073|65755310|7
+Solanum_neorossii|-|13877290|13885950|Solanum_candolleanum|-|65746073|65755310|7
+Solanum_neorossii|-|13887354|13892701|Solanum_candolleanum|-|65756673|65762045|7
+Solanum_neorossii|-|13947211|13948483|Solanum_candolleanum|-|65797075|65798631|7
+Solanum_neorossii|-|13948598|13953366|Solanum_candolleanum|-|65928761|65931385|7
+Solanum_neorossii|-|13956542|13960915|Solanum_candolleanum|-|65932335|65935861|7
+Solanum_neorossii|-|13984467|13987258|Solanum_candolleanum|-|65874621|65875100|7
+Solanum_neorossii|-|13989561|13989797|Solanum_candolleanum|-|65928761|65931385|7
+Solanum_neorossii|-|13989831|13990697|Solanum_candolleanum|-|65928761|65931385|7
+Solanum_neorossii|-|14028553|14030447|Solanum_candolleanum|-|65856226|65858852|7
+Solanum_neorossii|-|14030504|14030851|Solanum_candolleanum|-|65775940|65778796|7
+Solanum_neorossii|+|14051198|14053771|Solanum_candolleanum|+|65997692|66000327|7
+Solanum_neorossii|+|14053898|14054800|Solanum_candolleanum|+|66000375|66005844|7
+Solanum_neorossii|+|14056581|14058134|Solanum_candolleanum|+|66000375|66005844|7
+Solanum_neorossii|+|14067701|14068850|Solanum_candolleanum|+|66010734|66011969|7
+Solanum_neorossii|+|14078600|14079391|Solanum_candolleanum|+|65874621|65875100|7
+Solanum_neorossii|+|14105689|14110175|Solanum_candolleanum|+|65874621|65875100|7
+Solanum_neorossii|+|14115207|14118452|Solanum_candolleanum|+|66017517|66022258|7
+Solanum_neorossii|+|14153466|14154728|Solanum_candolleanum|+|65874621|65875100|7
+Solanum_neorossii|+|14175692|14177662|Solanum_candolleanum|+|66023386|66026037|7
+Solanum_neorossii|+|14185692|14185913|Solanum_candolleanum|+|66031586|66031894|7
+Solanum_neorossii|-|14187599|14195215|Solanum_candolleanum|-|66038907|66039215|7
+Solanum_neorossii|-|14197617|14197925|Solanum_candolleanum|-|66031586|66031894|7
+Solanum_candolleanum|-|66042245|66042553|Solanum_tuberosum_phurejaC118|-|7423635|7434823|8
+Solanum_candolleanum|-|66038907|66039215|Solanum_tuberosum_phurejaC118|-|7423635|7434823|8
+Solanum_candolleanum|-|66031586|66031894|Solanum_tuberosum_phurejaC118|-|7423635|7434823|8
+Solanum_candolleanum|+|66023386|66026037|Solanum_tuberosum_phurejaC118|+|7415801|7418140|8
+Solanum_candolleanum|+|66017517|66022258|Solanum_tuberosum_phurejaC118|+|7411186|7411926|8
+Solanum_candolleanum|+|66010734|66011969|Solanum_tuberosum_phurejaC118|+|7378328|7384114|8
+Solanum_candolleanum|+|66000375|66005844|Solanum_tuberosum_phurejaC118|+|7364318|7372609|8
+Solanum_candolleanum|+|65997692|66000327|Solanum_tuberosum_phurejaC118|+|7364318|7372609|8
+Solanum_candolleanum|+|65980851|65984654|Solanum_tuberosum_phurejaC118|+|7407213|7407647|8
+Solanum_candolleanum|+|65960513|65963164|Solanum_tuberosum_phurejaC118|+|7407213|7407647|8
+Solanum_candolleanum|-|65940710|65941413|Solanum_tuberosum_phurejaC118|-|7304020|7304928|8
+Solanum_candolleanum|-|65932335|65935861|Solanum_tuberosum_phurejaC118|-|7295609|7299297|8
+Solanum_candolleanum|-|65928761|65931385|Solanum_tuberosum_phurejaC118|-|7285255|7288948|8
+Solanum_candolleanum|-|65874621|65875100|Solanum_tuberosum_phurejaC118|-|7295609|7299297|8
+Solanum_candolleanum|-|65872761|65874527|Solanum_tuberosum_phurejaC118|-|7272197|7273039|8
+Solanum_candolleanum|+|65869862|65870812|Solanum_tuberosum_phurejaC118|+|7245227|7246177|8
+Solanum_candolleanum|-|65856226|65858852|Solanum_tuberosum_phurejaC118|-|7239733|7242315|8
+Solanum_candolleanum|+|65854492|65855442|Solanum_tuberosum_phurejaC118|+|7245227|7246177|8
+Solanum_candolleanum|-|65831901|65836334|Solanum_tuberosum_phurejaC118|-|7239733|7242315|8
+Solanum_candolleanum|+|65823388|65827932|Solanum_tuberosum_phurejaC118|+|7411186|7411926|8
+Solanum_candolleanum|-|65797075|65798631|Solanum_tuberosum_phurejaC118|-|7282199|7283033|8
+Solanum_candolleanum|+|65781720|65782670|Solanum_tuberosum_phurejaC118|+|7245227|7246177|8
+Solanum_candolleanum|-|65775940|65778796|Solanum_tuberosum_phurejaC118|-|7239733|7242315|8
+Solanum_candolleanum|+|65774330|65775280|Solanum_tuberosum_phurejaC118|+|7237706|7238656|8
+Solanum_candolleanum|+|65769622|65770854|Solanum_tuberosum_phurejaC118|+|7230547|7231563|8
+Solanum_candolleanum|-|65756673|65762045|Solanum_tuberosum_phurejaC118|-|7218806|7222015|8
+Solanum_candolleanum|-|65746073|65755310|Solanum_tuberosum_phurejaC118|-|7208751|7217019|8
+Solanum_tuberosum_phurejaC118|-|7208751|7217019|Solanum_tuberosum_stenotomumC093|-|3256461|3264620|9
+Solanum_tuberosum_phurejaC118|-|7218806|7222015|Solanum_tuberosum_stenotomumC093|-|3265993|3271438|9
+Solanum_tuberosum_phurejaC118|+|7230547|7231563|Solanum_tuberosum_stenotomumC093|+|3284302|3285252|9
+Solanum_tuberosum_phurejaC118|+|7237706|7238656|Solanum_tuberosum_stenotomumC093|+|3284302|3285252|9
+Solanum_tuberosum_phurejaC118|-|7239733|7242315|Solanum_tuberosum_stenotomumC093|-|3285972|3288729|9
+Solanum_tuberosum_phurejaC118|+|7245227|7246177|Solanum_tuberosum_stenotomumC093|+|3284302|3285252|9
+Solanum_tuberosum_phurejaC118|-|7247799|7250429|Solanum_tuberosum_stenotomumC093|-|3379619|3381940|9
+Solanum_tuberosum_phurejaC118|+|7269468|7270420|Solanum_tuberosum_stenotomumC093|+|3314572|3315279|9
+Solanum_tuberosum_phurejaC118|-|7272197|7273039|Solanum_tuberosum_stenotomumC093|-|3374537|3377896|9
+Solanum_tuberosum_phurejaC118|-|7282199|7283033|Solanum_tuberosum_stenotomumC093|-|3320369|3324124|9
+Solanum_tuberosum_phurejaC118|-|7285255|7288948|Solanum_tuberosum_stenotomumC093|-|3379619|3381940|9
+Solanum_tuberosum_phurejaC118|-|7295609|7299297|Solanum_tuberosum_stenotomumC093|-|3386763|3390420|9
+Solanum_tuberosum_phurejaC118|-|7304020|7304928|Solanum_tuberosum_stenotomumC093|-|3397325|3399223|9
+Solanum_tuberosum_phurejaC118|-|7321339|7322408|Solanum_tuberosum_stenotomumC093|-|3285972|3288729|9
+Solanum_tuberosum_phurejaC118|-|7327702|7328142|Solanum_tuberosum_stenotomumC093|-|3285972|3288729|9
+Solanum_tuberosum_phurejaC118|-|7329327|7330220|Solanum_tuberosum_stenotomumC093|-|3374537|3377896|9
+Solanum_tuberosum_phurejaC118|-|7345108|7346814|Solanum_tuberosum_stenotomumC093|-|3285972|3288729|9
+Solanum_tuberosum_phurejaC118|+|7364318|7372609|Solanum_tuberosum_stenotomumC093|+|3458255|3467153|9
+Solanum_tuberosum_phurejaC118|+|7378328|7384097|Solanum_tuberosum_stenotomumC093|+|3472397|3474510|9
+Solanum_tuberosum_phurejaC118|+|7378328|7384114|Solanum_tuberosum_stenotomumC093|+|3472397|3474510|9
+Solanum_tuberosum_phurejaC118|+|7389523|7392803|Solanum_tuberosum_stenotomumC093|+|3379619|3381940|9
+Solanum_tuberosum_phurejaC118|+|7407213|7407647|Solanum_tuberosum_stenotomumC093|+|3329734|3334925|9
+Solanum_tuberosum_phurejaC118|+|7407711|7410037|Solanum_tuberosum_stenotomumC093|+|3500514|3502343|9
+Solanum_tuberosum_phurejaC118|+|7411186|7411926|Solanum_tuberosum_stenotomumC093|+|3504144|3508775|9
+Solanum_tuberosum_phurejaC118|+|7412047|7413752|Solanum_tuberosum_stenotomumC093|+|3504144|3508775|9
+Solanum_tuberosum_phurejaC118|+|7415801|7418140|Solanum_tuberosum_stenotomumC093|+|3520422|3524922|9
+Solanum_tuberosum_phurejaC118|-|7434840|7435448|Solanum_tuberosum_stenotomumC093|-|3556966|3573710|9
+Solanum_tuberosum_phurejaC118|-|7453812|7455999|Solanum_tuberosum_stenotomumC093|-|3593743|3595001|9
+Solanum_tuberosum_phurejaC118|-|7459783|7460091|Solanum_tuberosum_stenotomumC093|-|3556966|3573710|9"""
+
+# -----------------------------------------------------------------------------
+# 2. Data Processing
+# -----------------------------------------------------------------------------
+
+# Load data
+df = pd.read_csv(io.StringIO(csv_data), sep="|")
+
+# Clean column names (strip whitespace)
+df.columns = [c.strip() for c in df.columns]
+
+# Define the order of accessions (Top to Bottom)
+accession_order = [
+    'Solanum_americanum',
+    'Solanum_cardiophyllumC509',
+    'Solanum_jamesii',
+    'Solanum_chacoense',
+    'Solanum_cajamarquenseC534',
+    'Solanum_neorossii',
+    'Solanum_candolleanum',
+    'Solanum_tuberosum_phurejaC118',
+    'Solanum_tuberosum_stenotomumC093'
+]
+
+# Map accession to Y-coordinate (Top=8, Bottom=0)
+y_map = {acc: i for i, acc in enumerate(reversed(accession_order))}
+
+# Extract unique genes per accession to determine track ranges
+# We need to normalize the X-coordinates so the clusters align centrally.
+# Strategy: Calculate the median coordinate of all genes for each accession and center it at 0.
+
+gene_coords = {} # {accession: [(start, end, strand), ...]}
+
+# Helper to add genes to the dict
+def add_genes(row, acc_col, start_col, end_col, strand_col):
+    acc = row[acc_col].strip()
+    start = row[start_col]
+    end = row[end_col]
+    strand = row[strand_col].strip()
+    if acc not in gene_coords:
+        gene_coords[acc] = set()
+    gene_coords[acc].add((start, end, strand))
+
+for _, row in df.iterrows():
+    add_genes(row, 'Accession', 'Start', 'End', 'Strand')
+    add_genes(row, 'Accession2', 'Start2', 'End2', 'Strand2')
+
+# Convert sets to sorted lists and calculate offsets
+offsets = {}
+gene_lists = {}
+
+for acc in accession_order:
+    if acc not in gene_coords:
+        continue
+    unique_genes = sorted(list(gene_coords[acc]), key=lambda x: x[0])
+    gene_lists[acc] = unique_genes
+    
+    # Calculate center
+    starts = [g[0] for g in unique_genes]
+    ends = [g[1] for g in unique_genes]
+    min_coord = min(starts)
+    max_coord = max(ends)
+    center = (min_coord + max_coord) / 2
+    offsets[acc] = center
+
+# -----------------------------------------------------------------------------
+# 3. Plotting Setup
+# -----------------------------------------------------------------------------
+
+fig, ax = plt.subplots(figsize=(12, 8))
+ax.set_axis_off()
+
+# Colors
+COLOR_BLUE = '#7aa6d6'
+COLOR_YELLOW = '#e8cf7d'
+COLOR_RED = '#d64f5d'
+COLOR_LINK = '#d9d9d9'
+COLOR_TRACK = 'grey'
+
+# Heuristic ranges for "NLR" (Yellow) coloring based on visual inspection of the chart
+# Since the data lacks metadata, we approximate the central dense cluster as NLR.
+nlr_ranges = {
+    'Solanum_americanum': (1080000, 1180000),
+    'Solanum_cardiophyllumC509': (11700000, 11800000),
+    'Solanum_jamesii': (17580000, 17620000),
+    'Solanum_chacoense': (7200000, 7350000),
+    'Solanum_cajamarquenseC534': (950000, 1100000),
+    'Solanum_neorossii': (13950000, 14150000),
+    'Solanum_candolleanum': (65800000, 66000000),
+    'Solanum_tuberosum_phurejaC118': (7250000, 7400000),
+    'Solanum_tuberosum_stenotomumC093': (3300000, 3500000)
+}
+
+# Specific Red Genes (Approximate coordinates based on visual match)
+# Rpi-amr3 in S. americanum (right side of cluster)
+# Rpi-cph1 in S. cardiophyllum (right side of cluster)
+red_genes = {
+    'Solanum_americanum': [1150996], 
+    'Solanum_cardiophyllumC509': [11812255] 
+}
+
+# -----------------------------------------------------------------------------
+# 4. Draw Links (Background)
+# -----------------------------------------------------------------------------
+for _, row in df.iterrows():
+    acc1 = row['Accession'].strip()
+    acc2 = row['Accession2'].strip()
+    
+    if acc1 not in y_map or acc2 not in y_map:
+        continue
+        
+    y1 = y_map[acc1]
+    y2 = y_map[acc2]
+    
+    # Normalize X coordinates
+    x1_start = row['Start'] - offsets[acc1]
+    x1_end = row['End'] - offsets[acc1]
+    x2_start = row['Start2'] - offsets[acc2]
+    x2_end = row['End2'] - offsets[acc2]
+    
+    # Draw polygon connecting the two genes
+    # Points: (x1_s, y1), (x1_e, y1), (x2_e, y2), (x2_s, y2)
+    # Slight vertical offset for genes (genes are height 0.2, centered on y)
+    # Links connect the bottom of top gene to top of bottom gene
+    
+    poly_coords = [
+        (x1_start, y1 - 0.1),
+        (x1_end, y1 - 0.1),
+        (x2_end, y2 + 0.1),
+        (x2_start, y2 + 0.1)
+    ]
+    
+    poly = patches.Polygon(poly_coords, facecolor=COLOR_LINK, edgecolor='none', alpha=0.6)
+    ax.add_patch(poly)
+
+# -----------------------------------------------------------------------------
+# 5. Draw Tracks and Genes
+# -----------------------------------------------------------------------------
+gene_height = 0.2
+
+for acc in accession_order:
+    if acc not in gene_lists:
+        continue
+        
+    y = y_map[acc]
+    genes = gene_lists[acc]
+    
+    # Draw Track Line
+    # Find min/max of normalized coords
+    norm_starts = [g[0] - offsets[acc] for g in genes]
+    norm_ends = [g[1] - offsets[acc] for g in genes]
+    track_min = min(norm_starts) - 20000 # Add padding
+    track_max = max(norm_ends) + 20000
+    
+    ax.plot([track_min, track_max], [y, y], color='grey', linewidth=2, zorder=1)
+    
+    # Draw Genes
+    for g_start, g_end, g_strand in genes:
+        x_start = g_start - offsets[acc]
+        width = g_end - g_start
+        
+        # Determine Color
+        color = COLOR_BLUE # Default
+        
+        # Check NLR range
+        if acc in nlr_ranges:
+            r_start, r_end = nlr_ranges[acc]
+            midpoint = (g_start + g_end) / 2
+            if r_start <= midpoint <= r_end:
+                color = COLOR_YELLOW
+        
+        # Check Red overrides (approximate match)
+        if acc in red_genes:
+            for r_coord in red_genes[acc]:
+                if abs(g_start - r_coord) < 500: # Tolerance
+                    color = COLOR_RED
+                    
+                    # Add Label if it's the specific ones
+                    if acc == 'Solanum_americanum':
+                        ax.annotate('Rpi-amr3', xy=(x_start + width/2, y + gene_height/2), 
+                                    xytext=(x_start + width/2 + 50000, y + 0.6),
+                                    arrowprops=dict(arrowstyle='->', color='black'),
+                                    fontsize=10, style='italic')
+                    if acc == 'Solanum_cardiophyllumC509':
+                        ax.annotate('Rpi-cph1', xy=(x_start + width/2, y - gene_height/2), 
+                                    xytext=(x_start + width/2 - 50000, y - 0.6),
+                                    arrowprops=dict(arrowstyle='->', color='black'),
+                                    fontsize=10, style='italic')
+
+        rect = patches.Rectangle(
+            (x_start, y - gene_height/2), 
+            width, 
+            gene_height, 
+            facecolor=color, 
+            edgecolor='none',
+            zorder=2
+        )
+        ax.add_patch(rect)
+
+# -----------------------------------------------------------------------------
+# 6. Labels and Layout
+# -----------------------------------------------------------------------------
+
+# Accession Labels
+label_map = {
+    'Solanum_americanum': 'S. americanum',
+    'Solanum_cardiophyllumC509': 'S. cardiophyllum',
+    'Solanum_jamesii': 'S. jamesii',
+    'Solanum_chacoense': 'S. chacoense',
+    'Solanum_cajamarquenseC534': 'S. cajamarquense',
+    'Solanum_neorossii': 'S. neorossii',
+    'Solanum_candolleanum': 'S. candolleanum',
+    'Solanum_tuberosum_phurejaC118': 'S. tuberosum\nGp Phureja',
+    'Solanum_tuberosum_stenotomumC093': 'S. tuberosum\nGp Stenotomum'
+}
+
+# Add counts to labels
+for acc in accession_order:
+    if acc in gene_lists:
+        count = len(gene_lists[acc])
+        clean_name = label_map.get(acc, acc)
+        y = y_map[acc]
+        ax.text(-250000, y, f"{clean_name} ({count})", ha='left', va='center', fontsize=10)
+
+# Group Bars (Left side)
+groups = [
+    ("Clades\n1 + 2", ['Solanum_cardiophyllumC509', 'Solanum_jamesii'], '#c95c7e'),
+    ("Clades\n3 + 4", ['Solanum_chacoense', 'Solanum_cajamarquenseC534', 'Solanum_neorossii'], '#5c9bc9'),
+    ("CND", ['Solanum_candolleanum'], '#5c9bc9'),
+    ("Landrace", ['Solanum_tuberosum_phurejaC118', 'Solanum_tuberosum_stenotomumC093'], '#5c9bc9')
+]
+
+for label, accs, color in groups:
+    ys = [y_map[a] for a in accs]
+    max_y = max(ys) + 0.4
+    min_y = min(ys) - 0.4
+    mid_y = (max_y + min_y) / 2
+    
+    # Draw vertical bar
+    ax.plot([-650000, -650000], [min_y, max_y], color=color, linewidth=6, solid_capstyle='butt')
+    # Label
+    ax.text(-680000, mid_y, label, ha='right', va='center', fontsize=10)
+
+# Legend
+legend_y = 9.5
+rect_width = 30000
+ax.add_patch(patches.Rectangle((-150000, legend_y), rect_width, 0.2, facecolor=COLOR_BLUE, edgecolor='none'))
+ax.text(-110000, legend_y + 0.1, "Non-NLR gene", va='center', fontsize=10)
+
+ax.add_patch(patches.Rectangle((100000, legend_y), rect_width, 0.2, facecolor=COLOR_YELLOW, edgecolor='none'))
+ax.text(140000, legend_y + 0.1, "NLR gene", va='center', fontsize=10)
+
+ax.text(-750000, legend_y, "b", fontsize=14, fontweight='bold', va='center')
+
+# Scale Bar
+scale_len = 50000
+scale_x = 50000
+scale_y = 9.5
+ax.plot([scale_x, scale_x + scale_len], [scale_y, scale_y], color='black', linewidth=1)
+ax.plot([scale_x, scale_x], [scale_y, scale_y+0.1], color='black', linewidth=1)
+ax.plot([scale_x + scale_len, scale_x + scale_len], [scale_y, scale_y+0.1], color='black', linewidth=1)
+ax.text(scale_x + scale_len/2, scale_y + 0.3, "50 kb", ha='center', fontsize=10)
+
+# Adjust limits
+ax.set_xlim(-800000, 400000)
+ax.set_ylim(-1, 10)
+
+# -----------------------------------------------------------------------------
+# 7. Save Output
+# -----------------------------------------------------------------------------
+output_file = "output.png"
+if len(sys.argv) > 1:
+    output_file = sys.argv[1]
+
+plt.tight_layout()
+plt.savefig(output_file, dpi=300, bbox_inches='tight')

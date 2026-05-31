@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UNH ROIC (投入资本回报率) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --text-color: #222222;
+      --grid-color: rgba(0, 0, 0, 0.08);
+      --line-color: #1f78b4;
+      --point-border: #0c3c63;
+      --tooltip-bg: rgba(0, 0, 0, 0.8);
+      --tooltip-color: #ffffff;
+      --card-bg: #f7f7f7;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #111827;
+        --text-color: #e5e7eb;
+        --grid-color: rgba(255, 255, 255, 0.15);
+        --line-color: #60a5fa;
+        --point-border: #1d4ed8;
+        --tooltip-bg: rgba(17, 24, 39, 0.95);
+        --tooltip-color: #f9fafb;
+        --card-bg: #111827;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 24px 12px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      padding: 20px 20px 28px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+      text-align: left;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+
+    .meta span {
+      background: rgba(148, 163, 184, 0.12);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: min(520px, 70vh);
+    }
+
+    .note {
+      font-size: 0.76rem;
+      color: #6b7280;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 14px 12px 18px;
+        border-radius: 10px;
+      }
+      h1 {
+        font-size: 1.15rem;
+      }
+      .subtitle {
+        font-size: 0.8rem;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>UNH 投入资本回报率 (ROIC)</h1>
+    <div class="subtitle">2016–2024 年度变化趋势</div>
+
+    <div class="meta">
+      <span>单位：比例（小数）</span>
+      <span>公司：UNH</span>
+      <span>指标：Return on Invested Capital (ROIC)</span>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="roicChart"></canvas>
+    </div>
+
+    <div class="note">
+      说明：ROIC 为年度值；鼠标悬停可查看精确数值，图例可点击以切换线条显示。
+    </div>
+  </div>
+
+  <script>
+    // Source data (exact from prompt)
+    const roicData = [
+      { year: 2016, value: 0.1331083634235496 },
+      { year: 2017, value: 0.1799244167405453 },
+      { year: 2018, value: 0.1833446355503545 },
+      { year: 2019, value: 0.1893023141894938 },
+      { year: 2020, value: 0.1899488953362313 },
+      { year: 2021, value: 0.2022169976688141 },
+      { year: 2022, value: 0.2137821416002205 },
+      { year: 2023, value: 0.2153277937839195 },
+      { year: 2024, value: 0.1808483789551966 }
+    ];
+
+    const ctx = document.getElementById("roicChart").getContext("2d");
+
+    // Extract labels and data
+    const labels = roicData.map(d => d.year.toString());
+    const values = roicData.map(d => d.value);
+
+    // Compute y-axis bounds with a small margin for clarity
+    const minVal = Math.min(...values);
+    const maxVal = Math.max(...values);
+    const padding = (maxVal - minVal) * 0.1 || 0.01;
+    const suggestedMin = Math.max(0, minVal - padding);
+    const suggestedMax = maxVal + padding;
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "ROIC",
+            data: values,
+            borderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--line-color")
+              .trim() || "#1f78b4",
+            backgroundColor: "rgba(31, 120, 180, 0.12)",
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--point-border")
+              .trim() || "#0c3c63",
+            pointHoverRadius: 5,
+            pointRadius: 4,
+            pointHitRadius: 8,
+            borderWidth: 2.3,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              padding: 16,
+              font: {
+                size: 11
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-bg")
+              .trim() || "rgba(0, 0, 0, 0.8)",
+            titleColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-color")
+              .trim() || "#ffffff",
+            bodyColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-color")
+              .trim() || "#ffffff",
+            borderColor: "rgba(255, 255, 255, 0.08)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function (ctx) {
+                const val = ctx.raw;
+                // Show both decimal form and percentage for convenience
+                const pct = (val * 100).toFixed(2) + "%";
+                const dec = val.toFixed(4);
+                return `ROIC: ${dec} (${pct})`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--grid-color")
+                .trim() || "rgba(0,0,0,0.08)"
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              minRotation: 0,
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin,
+            suggestedMax,
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--grid-color")
+                .trim() || "rgba(0,0,0,0.08)"
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              callback: function (value) {
+                // show as percentage on axis
+                return (value * 100).toFixed(1) + "%";
+              }
+            },
+            title: {
+              display: true,
+              text: "ROIC（%）",
+              font: {
+                size: 12
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

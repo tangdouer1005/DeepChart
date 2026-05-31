@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>投入资本回报率 (ROIC) 2018–2024 柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js 最新稳定版 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        -sans-serif, "PingFang SC", "Microsoft YaHei";
+      margin: 0;
+      padding: 24px;
+      background-color: #f5f6fa;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px 22px 26px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      box-sizing: border-box;
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    h2 {
+      margin: 10px 0 8px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .chart-wrapper {
+      /* 关键修复：使用固定高度和宽度 使图表不再被拉伸变形 */
+      width: 100%;
+      max-width: 820px;
+      height: 420px; /* 适中的高度，避免过高或过窄 */
+      margin-top: 10px;
+    }
+
+    canvas {
+      width: 100% !important;   /* 保证随容器等比缩放 */
+      height: 100% !important;  /* 由上层容器控制高度 */
+      display: block;
+    }
+
+    .legend-inline {
+      font-size: 13px;
+      margin-top: 4px;
+      color: #444;
+    }
+
+    .legend-swatch {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      margin-right: 6px;
+      vertical-align: middle;
+      background: linear-gradient(135deg, #2f7ed8, #4fb6ff);
+    }
+
+    .meta {
+      font-size: 12px;
+      color: #777;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .container {
+        padding: 14px 14px 18px;
+      }
+      .chart-wrapper {
+        height: 320px; /* 移动端略矮一些以避免上下一味拉长 */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>投入资本回报率 (ROIC)</h1>
+    <h2>2018–2024 财年 · 柱状图</h2>
+    <div class="legend-inline">
+      <span class="legend-swatch"></span>ROIC（投入资本回报率）
+    </div>
+
+    <!-- 使用包裹容器来稳定宽高比例 -->
+    <div class="chart-wrapper">
+      <canvas id="roicChart"></canvas>
+    </div>
+
+    <div class="meta">
+      单位：百分比（%）<br />
+      区间：2018–2024 财年<br />
+      说明：ROIC = 税后经营利润 / 投入资本，用于衡量投入资本的盈利效率。
+    </div>
+  </div>
+
+  <script>
+    const fiscalYears = ["2018", "2019", "2020", "2021", "2022", "2023", "2024"];
+    const roicRaw = [
+      0.2445703808287204,
+      0.2726571364303687,
+      0.3011522905115193,
+      0.3721073375082542,
+      0.3818751130822868,
+      0.3455974552451687,
+      0.3752626944934977
+    ];
+    const roicPercent = roicRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("roicChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "ROIC（投入资本回报率）",
+            data: roicPercent,
+            backgroundColor: roicPercent.map(v =>
+              v >= 35 ? "rgba(47, 126, 216, 0.9)" : "rgba(79, 182, 255, 0.9)"
+            ),
+            borderColor: roicPercent.map(v =>
+              v >= 35 ? "rgba(36, 100, 170, 1)" : "rgba(52, 140, 204, 1)"
+            ),
+            borderWidth: 1,
+            borderRadius: 6,
+            barPercentage: 0.6,
+            categoryPercentage: 0.7
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // 由外层容器控制比例，避免被压扁或拉长
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(0,0,0,0.8)",
+            titleFont: {
+              size: 13,
+              weight: "600"
+            },
+            bodyFont: {
+              size: 12
+            },
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const value = context.raw;
+                return "ROIC：" + value.toFixed(1) + "%";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 45, // ROIC 最大约 38%，给一点顶部空间
+            ticks: {
+              callback: function (value) {
+                return value + "%";
+              },
+              font: {
+                size: 11
+              }
+            },
+            title: {
+              display: true,
+              text: "ROIC（%）",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            grid: {
+              color: "rgba(0,0,0,0.06)",
+              drawBorder: false
+            }
+          }
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutCubic"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

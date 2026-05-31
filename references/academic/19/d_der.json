@@ -1,0 +1,282 @@
+{
+    "order": [
+        "CONCH",
+        "Virchow2",
+        "ProvGigaPath",
+        "DinoSSLPath",
+        "H-optimus-0",
+        "UNI",
+        "Panakeia*",
+        "Virchow",
+        "CTransPath",
+        "Hibou-L",
+        "BiomedCLIP",
+        "Kaiko",
+        "Phikon",
+        "PLIP"
+    ],
+    "summary": [
+        {
+            "Model": "CONCH",
+            "Above 0.7": 17,
+            "0.6 - 0.7": 10,
+            "Below 0.6": 4
+        },
+        {
+            "Model": "Virchow2",
+            "Above 0.7": 16,
+            "0.6 - 0.7": 9,
+            "Below 0.6": 6
+        },
+        {
+            "Model": "ProvGigaPath",
+            "Above 0.7": 15,
+            "0.6 - 0.7": 9,
+            "Below 0.6": 7
+        },
+        {
+            "Model": "DinoSSLPath",
+            "Above 0.7": 13,
+            "0.6 - 0.7": 13,
+            "Below 0.6": 5
+        },
+        {
+            "Model": "H-optimus-0",
+            "Above 0.7": 14,
+            "0.6 - 0.7": 6,
+            "Below 0.6": 11
+        },
+        {
+            "Model": "UNI",
+            "Above 0.7": 13,
+            "0.6 - 0.7": 10,
+            "Below 0.6": 8
+        },
+        {
+            "Model": "Panakeia*",
+            "Above 0.7": 12,
+            "0.6 - 0.7": 12,
+            "Below 0.6": 7
+        },
+        {
+            "Model": "Virchow",
+            "Above 0.7": 11,
+            "0.6 - 0.7": 8,
+            "Below 0.6": 12
+        },
+        {
+            "Model": "CTransPath",
+            "Above 0.7": 9,
+            "0.6 - 0.7": 12,
+            "Below 0.6": 10
+        },
+        {
+            "Model": "Hibou-L",
+            "Above 0.7": 14,
+            "0.6 - 0.7": 4,
+            "Below 0.6": 13
+        },
+        {
+            "Model": "BiomedCLIP",
+            "Above 0.7": 10,
+            "0.6 - 0.7": 13,
+            "Below 0.6": 8
+        },
+        {
+            "Model": "Kaiko",
+            "Above 0.7": 11,
+            "0.6 - 0.7": 9,
+            "Below 0.6": 11
+        },
+        {
+            "Model": "Phikon",
+            "Above 0.7": 10,
+            "0.6 - 0.7": 10,
+            "Below 0.6": 11
+        },
+        {
+            "Model": "PLIP",
+            "Above 0.7": 7,
+            "0.6 - 0.7": 12,
+            "Below 0.6": 12
+        }
+    ],
+    "breakdown": [
+        {
+            "Model": "CONCH",
+            "('Above 0.7', 'Morphology')": 4,
+            "('Above 0.7', 'Biomarker')": 12,
+            "('Above 0.7', 'Prognosis')": 1,
+            "('0.6 - 0.7', 'Morphology')": 1,
+            "('0.6 - 0.7', 'Biomarker')": 5,
+            "('0.6 - 0.7', 'Prognosis')": 4,
+            "('Below 0.6', 'Morphology')": 0,
+            "('Below 0.6', 'Biomarker')": 2,
+            "('Below 0.6', 'Prognosis')": 2
+        },
+        {
+            "Model": "Virchow2",
+            "('Above 0.7', 'Morphology')": 4,
+            "('Above 0.7', 'Biomarker')": 12,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 0,
+            "('0.6 - 0.7', 'Biomarker')": 5,
+            "('0.6 - 0.7', 'Prognosis')": 4,
+            "('Below 0.6', 'Morphology')": 1,
+            "('Below 0.6', 'Biomarker')": 2,
+            "('Below 0.6', 'Prognosis')": 3
+        },
+        {
+            "Model": "ProvGigaPath",
+            "('Above 0.7', 'Morphology')": 3,
+            "('Above 0.7', 'Biomarker')": 12,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 1,
+            "('0.6 - 0.7', 'Biomarker')": 4,
+            "('0.6 - 0.7', 'Prognosis')": 4,
+            "('Below 0.6', 'Morphology')": 1,
+            "('Below 0.6', 'Biomarker')": 3,
+            "('Below 0.6', 'Prognosis')": 3
+        },
+        {
+            "Model": "DinoSSLPath",
+            "('Above 0.7', 'Morphology')": 4,
+            "('Above 0.7', 'Biomarker')": 9,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 1,
+            "('0.6 - 0.7', 'Biomarker')": 8,
+            "('0.6 - 0.7', 'Prognosis')": 4,
+            "('Below 0.6', 'Morphology')": 0,
+            "('Below 0.6', 'Biomarker')": 2,
+            "('Below 0.6', 'Prognosis')": 3
+        },
+        {
+            "Model": "H-optimus-0",
+            "('Above 0.7', 'Morphology')": 2,
+            "('Above 0.7', 'Biomarker')": 12,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 3,
+            "('0.6 - 0.7', 'Biomarker')": 2,
+            "('0.6 - 0.7', 'Prognosis')": 1,
+            "('Below 0.6', 'Morphology')": 0,
+            "('Below 0.6', 'Biomarker')": 5,
+            "('Below 0.6', 'Prognosis')": 6
+        },
+        {
+            "Model": "UNI",
+            "('Above 0.7', 'Morphology')": 2,
+            "('Above 0.7', 'Biomarker')": 11,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 3,
+            "('0.6 - 0.7', 'Biomarker')": 5,
+            "('0.6 - 0.7', 'Prognosis')": 2,
+            "('Below 0.6', 'Morphology')": 0,
+            "('Below 0.6', 'Biomarker')": 3,
+            "('Below 0.6', 'Prognosis')": 5
+        },
+        {
+            "Model": "Panakeia*",
+            "('Above 0.7', 'Morphology')": 3,
+            "('Above 0.7', 'Biomarker')": 9,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 1,
+            "('0.6 - 0.7', 'Biomarker')": 8,
+            "('0.6 - 0.7', 'Prognosis')": 3,
+            "('Below 0.6', 'Morphology')": 1,
+            "('Below 0.6', 'Biomarker')": 2,
+            "('Below 0.6', 'Prognosis')": 4
+        },
+        {
+            "Model": "Virchow",
+            "('Above 0.7', 'Morphology')": 2,
+            "('Above 0.7', 'Biomarker')": 9,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 2,
+            "('0.6 - 0.7', 'Biomarker')": 4,
+            "('0.6 - 0.7', 'Prognosis')": 2,
+            "('Below 0.6', 'Morphology')": 1,
+            "('Below 0.6', 'Biomarker')": 6,
+            "('Below 0.6', 'Prognosis')": 5
+        },
+        {
+            "Model": "CTransPath",
+            "('Above 0.7', 'Morphology')": 2,
+            "('Above 0.7', 'Biomarker')": 7,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 2,
+            "('0.6 - 0.7', 'Biomarker')": 8,
+            "('0.6 - 0.7', 'Prognosis')": 2,
+            "('Below 0.6', 'Morphology')": 1,
+            "('Below 0.6', 'Biomarker')": 4,
+            "('Below 0.6', 'Prognosis')": 5
+        },
+        {
+            "Model": "Hibou-L",
+            "('Above 0.7', 'Morphology')": 3,
+            "('Above 0.7', 'Biomarker')": 11,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 1,
+            "('0.6 - 0.7', 'Biomarker')": 2,
+            "('0.6 - 0.7', 'Prognosis')": 1,
+            "('Below 0.6', 'Morphology')": 1,
+            "('Below 0.6', 'Biomarker')": 6,
+            "('Below 0.6', 'Prognosis')": 6
+        },
+        {
+            "Model": "BiomedCLIP",
+            "('Above 0.7', 'Morphology')": 2,
+            "('Above 0.7', 'Biomarker')": 8,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 2,
+            "('0.6 - 0.7', 'Biomarker')": 6,
+            "('0.6 - 0.7', 'Prognosis')": 5,
+            "('Below 0.6', 'Morphology')": 1,
+            "('Below 0.6', 'Biomarker')": 5,
+            "('Below 0.6', 'Prognosis')": 2
+        },
+        {
+            "Model": "Kaiko",
+            "('Above 0.7', 'Morphology')": 1,
+            "('Above 0.7', 'Biomarker')": 10,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 3,
+            "('0.6 - 0.7', 'Biomarker')": 5,
+            "('0.6 - 0.7', 'Prognosis')": 1,
+            "('Below 0.6', 'Morphology')": 1,
+            "('Below 0.6', 'Biomarker')": 4,
+            "('Below 0.6', 'Prognosis')": 6
+        },
+        {
+            "Model": "Phikon",
+            "('Above 0.7', 'Morphology')": 2,
+            "('Above 0.7', 'Biomarker')": 8,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 2,
+            "('0.6 - 0.7', 'Biomarker')": 5,
+            "('0.6 - 0.7', 'Prognosis')": 3,
+            "('Below 0.6', 'Morphology')": 1,
+            "('Below 0.6', 'Biomarker')": 6,
+            "('Below 0.6', 'Prognosis')": 4
+        },
+        {
+            "Model": "PLIP",
+            "('Above 0.7', 'Morphology')": 2,
+            "('Above 0.7', 'Biomarker')": 5,
+            "('Above 0.7', 'Prognosis')": 0,
+            "('0.6 - 0.7', 'Morphology')": 2,
+            "('0.6 - 0.7', 'Biomarker')": 9,
+            "('0.6 - 0.7', 'Prognosis')": 1,
+            "('Below 0.6', 'Morphology')": 1,
+            "('Below 0.6', 'Biomarker')": 5,
+            "('Below 0.6', 'Prognosis')": 6
+        }
+    ],
+    "model_labels": {
+        "ProvGigaPath": "Giga-\nPath",
+        "DinoSSLPath": "Dino-\nSSLPath",
+        "H-optimus-0": "H-opti-\nmus-0",
+        "Panakeia*": "Pana-\nkeia*",
+        "CTransPath": "CTrans-\nPath",
+        "BiomedCLIP": "Biomed-\nCLIP"
+    }
+}

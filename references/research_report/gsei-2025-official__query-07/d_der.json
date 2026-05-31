@@ -1,0 +1,90 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a dumbbell chart for the 12 countries with the largest head-versus-bench growth gap in the 2025 country tables, comparing `score-weighted average numeric growth of cities ranked 1-3` against `score-weighted average numeric growth of cities ranked 4-10`, expressed as percentages, sorted by the absolute gap between the two averages from largest to smallest, and limited to countries with at least 2 numeric entries in each side.",
+  "status": "complete",
+  "chart_type": "dumbbell",
+  "title": "2025 Head vs Bench Growth Gap",
+  "value_unit": "percent",
+  "sort_rule": "descending by absolute_gap_pct, tie-break alphabetically",
+  "selection_rule": "top 12 countries with at least 2 numeric growth entries in both ranks 1-3 and ranks 4-10",
+  "records": [
+    {
+      "entity": "South Korea",
+      "head_growth_pct": 30.323122,
+      "bench_growth_pct": 206.529744,
+      "absolute_gap_pct": 176.206622
+    },
+    {
+      "entity": "Ireland",
+      "head_growth_pct": 25.404765,
+      "bench_growth_pct": 96.163086,
+      "absolute_gap_pct": 70.758321
+    },
+    {
+      "entity": "Finland",
+      "head_growth_pct": 17.720523,
+      "bench_growth_pct": 67.657078,
+      "absolute_gap_pct": 49.936555
+    },
+    {
+      "entity": "Sweden",
+      "head_growth_pct": 28.353267,
+      "bench_growth_pct": 63.426691,
+      "absolute_gap_pct": 35.073424
+    },
+    {
+      "entity": "Brazil",
+      "head_growth_pct": 15.665021,
+      "bench_growth_pct": 49.563778,
+      "absolute_gap_pct": 33.898757
+    },
+    {
+      "entity": "Hungary",
+      "head_growth_pct": 14.138119,
+      "bench_growth_pct": 43.066082,
+      "absolute_gap_pct": 28.927963
+    },
+    {
+      "entity": "Ukraine",
+      "head_growth_pct": 23.374229,
+      "bench_growth_pct": -5.515563,
+      "absolute_gap_pct": 28.889792
+    },
+    {
+      "entity": "Belgium",
+      "head_growth_pct": 39.479549,
+      "bench_growth_pct": 12.439499,
+      "absolute_gap_pct": 27.04005
+    },
+    {
+      "entity": "Denmark",
+      "head_growth_pct": 35.212265,
+      "bench_growth_pct": 8.356033,
+      "absolute_gap_pct": 26.856232
+    },
+    {
+      "entity": "Croatia",
+      "head_growth_pct": 14.475611,
+      "bench_growth_pct": -10.984211,
+      "absolute_gap_pct": 25.459821
+    },
+    {
+      "entity": "Pakistan",
+      "head_growth_pct": 16.024712,
+      "bench_growth_pct": -7.54,
+      "absolute_gap_pct": 23.564712
+    },
+    {
+      "entity": "China",
+      "head_growth_pct": 26.143071,
+      "bench_growth_pct": 49.367251,
+      "absolute_gap_pct": 23.224179
+    }
+  ],
+  "left_field": "head_growth_pct",
+  "right_field": "bench_growth_pct",
+  "left_label": "Ranks 1-3",
+  "right_label": "Ranks 4-10",
+  "x_label": "Score-weighted average numeric growth (%)",
+  "y_label": "Country"
+}

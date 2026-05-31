@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // ---------------------------------------------------------
+        // 1. Data Processing
+        // ---------------------------------------------------------
+        const jsonData = [
+    {
+        "Current_Density": 200,
+        "Configuration": "AEM",
+        "H2_mean": 0.04254,
+        "H2_std": 0.011748263701500745,
+        "C2H4_mean": 0.03223,
+        "C2H4_std": 0.005257261644620701,
+        "CO_mean": 0.10365333333333333,
+        "CO_std": 0.02306408969227559
+    },
+    {
+        "Current_Density": 200,
+        "Configuration": "Separator",
+        "H2_mean": 0.08430366666666667,
+        "H2_std": 0.013226773239658006,
+        "C2H4_mean": 0.024002333333333334,
+        "C2H4_std": 0.0009443602772953391,
+        "CO_mean": 0.08777666666666667,
+        "CO_std": 0.017012061407523
+    },
+    {
+        "Current_Density": 400,
+        "Configuration": "AEM",
+        "H2_mean": 0.03247,
+        "H2_std": 0.014063680172700174,
+        "C2H4_mean": 0.03749333333333333,
+        "C2H4_std": 0.007167121690981206,
+        "CO_mean": 0.07381,
+        "CO_std": 0.01270337356767879
+    },
+    {
+        "Current_Density": 400,
+        "Configuration": "Separator",
+        "H2_mean": 0.06996766666666666,
+        "H2_std": 0.009395045839873977,
+        "C2H4_mean": 0.022883333333333335,
+        "C2H4_std": 0.0008258530942808984,
+        "CO_mean": 0.06881,
+        "CO_std": 0.011689392627506352
+    },
+    {
+        "Current_Density": 600,
+        "Configuration": "AEM",
+        "H2_mean": 0.02469,
+        "H2_std": 0.011325299113047744,
+        "C2H4_mean": 0.022760000000000002,
+        "C2H4_std": 0.003419312796454868,
+        "CO_mean": 0.051636666666666664,
+        "CO_std": 0.006382572626561595
+    },
+    {
+        "Current_Density": 600,
+        "Configuration": "Separator",
+        "H2_mean": 0.05111333333333334,
+        "H2_std": 0.006170270118344365,
+        "C2H4_mean": 0.017756666666666667,
+        "C2H4_std": 0.0005727419430540525,
+        "CO_mean": 0.05370666666666666,
+        "CO_std": 0.010290992825443684
+    }
+];
+
+        const stats = {};
+        jsonData.forEach(d => {
+            const key = `${d.Current_Density}_${d.Configuration}`;
+            // Map JSON keys to internal keys used below
+            stats[key] = {
+                h2_mean: d.H2_mean,
+                h2_std: d.H2_std,
+                c2h4_mean: d.C2H4_mean,
+                c2h4_std: d.C2H4_std,
+                co_mean: d.CO_mean,
+                co_std: d.CO_std
+            };
+        });
+
+        // ---------------------------------------------------------
+        // 2. Chart Configurations
+        // ---------------------------------------------------------
+        const xLabels = ['200', '400', '600'];
+        const configs = ['AEM', 'Separator'];
+        const stackOrder = ['h2', 'c2h4', 'co'];
+        
+        const colors = { 'h2': '#aebcd1', 'c2h4': '#6b84b5', 'co': '#cccccc' };
+
+        // Helper: Generate Hatch Pattern (Fixed with type: 'pattern')
+        function getHatchPattern(bgColor) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 8;
+            canvas.height = 8;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0,0,8,8);
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0,8);
+            ctx.lineTo(8,0);
+            ctx.stroke();
+            return { type: 'pattern', image: canvas, repeat: 'repeat' };
+        }
+
+        const patterns = {
+            'h2': getHatchPattern(colors['h2']),
+            'c2h4': getHatchPattern(colors['c2h4']),
+            'co': getHatchPattern(colors['co'])
+        };
+        const separatorLegendPattern = getHatchPattern('#aebcd1');
+
+        // Layout Parameters
+        const barWidthData = 0.25; // Width in axis units
+
+        const series = [];
+
+        configs.forEach((config) => {
+            // Offset logic: -0.145 for AEM, +0.145 for Separator
+            const offset = config === 'AEM' ? -0.145 : 0.145;
+            let bottoms = [0, 0, 0];
+
+            stackOrder.forEach((gas) => {
+                // Data structure: [xIndex, bottom, mean, std, offset]
+                const data = xLabels.map((cd, i) => {
+                    const key = `${cd}_${config}`;
+                    const s = stats[key];
+                    const mean = s[`${gas}_mean`];
+                    const std = s[`${gas}_std`];
+                    const bottom = bottoms[i];
+                    bottoms[i] += mean;
+                    return [i, bottom, mean, std, offset];
+                });
+
+                // Shared renderItem logic to fix overlap
+                const renderBar = function (params, api) {
+                    const xIndex = api.value(0);
+                    const bottomVal = api.value(1);
+                    const heightVal = api.value(2);
+                    const barOffset = api.value(4);
+                    
+                    const centerCoord = api.coord([xIndex, 0]);
+                    const xCenterPx = centerCoord[0];
+                    
+                    const p0 = api.coord([0, 0]);
+                    const p1 = api.coord([1, 0]);
+                    const unitWidthPx = Math.abs(p1[0] - p0[0]);
+
+                    const xPx = xCenterPx + (barOffset * unitWidthPx);
+
+                    const yBottom = api.coord([0, bottomVal])[1];
+                    const yTop = api.coord([0, bottomVal + heightVal])[1];
+                    const pxHeight = Math.abs(yBottom - yTop);
+                    const pxWidth = unitWidthPx * barWidthData;
+
+                    const style = {
+                        fill: config === 'Separator' ? patterns[gas] : colors[gas],
+                        stroke: config === 'Separator' ? 'white' : undefined,
+                        lineWidth: 0.5
+                    };
+
+                    return {
+                        type: 'rect',
+                        shape: {
+                            x: xPx - pxWidth / 2,
+                            y: Math.min(yBottom, yTop),
+                            width: pxWidth,
+                            height: pxHeight
+                        },
+                        style: style
+                    };
+                };
+
+                const renderError = function (params, api) {
+                    const xIndex = api.value(0);
+                    const bottomVal = api.value(1);
+                    const meanVal = api.value(2);
+                    const stdVal = api.value(3);
+                    const barOffset = api.value(4);
+                    
+                    const p0 = api.coord([0, 0]);
+                    const p1 = api.coord([1, 0]);
+                    const unitWidthPx = Math.abs(p1[0] - p0[0]);
+                    const centerCoord = api.coord([xIndex, 0]);
+                    const xCenterPx = centerCoord[0];
+                    const xPx = xCenterPx + (barOffset * unitWidthPx);
+
+                    const topVal = bottomVal + meanVal;
+                    const highPointY = api.coord([0, topVal + stdVal])[1];
+                    const lowPointY = api.coord([0, topVal - stdVal])[1];
+                    
+                    const capWidth = unitWidthPx * 0.08;
+
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: xPx, y1: highPointY, x2: xPx, y2: lowPointY }, style: { stroke: 'black', lineWidth: 1 } },
+                            { type: 'line', shape: { x1: xPx - capWidth/2, y1: highPointY, x2: xPx + capWidth/2, y2: highPointY }, style: { stroke: 'black', lineWidth: 1 } },
+                            { type: 'line', shape: { x1: xPx - capWidth/2, y1: lowPointY, x2: xPx + capWidth/2, y2: lowPointY }, style: { stroke: 'black', lineWidth: 1 } }
+                        ]
+                    };
+                };
+
+                series.push({
+                    type: 'custom',
+                    name: `${gas}_${config}`,
+                    renderItem: renderBar,
+                    data: data,
+                    z: 2
+                });
+
+                series.push({
+                    type: 'custom',
+                    name: `${gas}_${config}_error`,
+                    renderItem: renderError,
+                    data: data,
+                    z: 3
+                });
+            });
+        });
+
+        // Legend Setup
+        const legendData = [
+            { name: 'H2', icon: 'rect', itemStyle: { color: colors['h2'] } },
+            { name: 'C2H4', icon: 'rect', itemStyle: { color: colors['c2h4'] } },
+            { name: 'CO', icon: 'rect', itemStyle: { color: colors['co'] } },
+            { name: 'AEM', icon: 'rect', itemStyle: { color: '#aebcd1' } },
+            { name: 'Separator', icon: 'rect', itemStyle: { color: separatorLegendPattern, borderColor: 'black', borderWidth: 1 } }
+        ];
+
+        legendData.forEach(item => {
+            series.push({ name: item.name, type: 'bar', data: [], itemStyle: item.itemStyle });
+        });
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: { top: 80, bottom: 60, left: 60, right: 30 },
+            legend: {
+                data: legendData.map(d => d.name),
+                top: 10, right: 30, orient: 'horizontal', itemGap: 15, width: 300,
+                formatter: (name) => {
+                    if (name === 'H2') return 'H₂';
+                    if (name === 'C2H4') return 'C₂H₄';
+                    return name;
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: xLabels,
+                name: 'Current density (mA cm⁻²)',
+                nameLocation: 'middle', nameGap: 30,
+                axisLine: { lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisTick: { alignWithLabel: true }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Anode gas composition (%)',
+                nameLocation: 'middle', nameGap: 45,
+                min: 0, max: 0.3, interval: 0.1,
+                axisLine: { show: false },
+                axisTick: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black', fontSize: 12 },
+                splitLine: { show: false }
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0, top: 0,
+                    style: { text: 'f', font: 'bold 24px Arial', fill: 'black' }
+                }
+            ]
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

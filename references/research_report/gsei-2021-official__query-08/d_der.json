@@ -1,0 +1,66 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a ranked dumbbell chart showing the 8 countries with the largest internal global-rank spread, where each dumbbell runs from the global rank of the top city to the global rank of the lowest-ranked listed city in that country's 3.2 national block, countries are selected only after computing `lowest listed global_rank - highest listed global_rank`, and the dumbbells are sorted from widest to narrowest spread.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "global rank positions",
+  "sort_rule": "descending by internal_global_rank_spread",
+  "selection_rule": "top 8 countries by internal spread",
+  "plot_spec": {
+    "title": "Internal Global-Rank Spread",
+    "start_field": "top_city_global_rank",
+    "end_field": "lowest_listed_global_rank",
+    "start_label": "Top city",
+    "end_label": "Lowest listed city",
+    "xlabel": "global rank position"
+  },
+  "records": [
+    {
+      "entity": "Argentina",
+      "top_city_global_rank": 60,
+      "lowest_listed_global_rank": 975,
+      "internal_global_rank_spread": 915
+    },
+    {
+      "entity": "Malaysia",
+      "top_city_global_rank": 80,
+      "lowest_listed_global_rank": 953,
+      "internal_global_rank_spread": 873
+    },
+    {
+      "entity": "Ireland",
+      "top_city_global_rank": 51,
+      "lowest_listed_global_rank": 915,
+      "internal_global_rank_spread": 864
+    },
+    {
+      "entity": "The Philippines",
+      "top_city_global_rank": 87,
+      "lowest_listed_global_rank": 944,
+      "internal_global_rank_spread": 857
+    },
+    {
+      "entity": "Nigeria",
+      "top_city_global_rank": 122,
+      "lowest_listed_global_rank": 978,
+      "internal_global_rank_spread": 856
+    },
+    {
+      "entity": "Chile",
+      "top_city_global_rank": 70,
+      "lowest_listed_global_rank": 913,
+      "internal_global_rank_spread": 843
+    },
+    {
+      "entity": "Taiwan",
+      "top_city_global_rank": 41,
+      "lowest_listed_global_rank": 870,
+      "internal_global_rank_spread": 829
+    },
+    {
+      "entity": "South Korea",
+      "top_city_global_rank": 23,
+      "lowest_listed_global_rank": 840,
+      "internal_global_rank_spread": 817
+    }
+  ]
+}

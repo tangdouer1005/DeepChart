@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TSLA 盈余-现金质量剪刀差 (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f7f7f9;
+      color: #222;
+      box-sizing: border-box;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1.5rem 1.75rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+      text-align: left;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin: 0 0 1.2rem;
+      color: #666;
+    }
+
+    .chart-wrapper {
+      /* Fix the height/width ratio so the chart is not vertically stretched */
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      height: 360px;           /* fixed, reasonable height */
+      margin-top: 0.5rem;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important; /* ensure canvas follows wrapper height */
+      display: block;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #777;
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      .container {
+        padding: 1rem 1rem 1.4rem;
+      }
+      h1 {
+        font-size: 1.15rem;
+      }
+      .chart-wrapper {
+        height: 280px;  /* slightly smaller but same aspect on mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TSLA 盈余-现金质量剪刀差</h1>
+    <h2>2016 – 2024 · Earnings Quality Spread</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="tslaSpreadChart" aria-label="TSLA Earnings Quality Spread 2016–2024" role="img"></canvas>
+    </div>
+
+    <div class="note">
+      说明：数值为盈余质量相对现金流质量的剪刀差（Earnings Quality Spread），单位为小数（比例）。
+    </div>
+  </div>
+
+  <script>
+    // Data from source
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const spreadData = [
+      0.0358639028387823,
+      0.0740849745694848,
+      0.1052823158657162,
+      0.1020156442723539,
+      0.1207999352279167,
+      0.1024335179691807,
+      0.0295842014549834,
+      -0.0181841275217511,
+      0.0681539914643531
+    ];
+
+    // Dynamic y-axis limits with padding
+    const minVal = Math.min(...spreadData);
+    const maxVal = Math.max(...spreadData);
+    const padding = (maxVal - minVal) * 0.25 || 0.01;
+
+    const ctx = document.getElementById("tslaSpreadChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "盈余-现金质量剪刀差",
+            data: spreadData,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            borderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#2563eb",
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 1.5,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // we manage height via CSS wrapper
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              padding: 16,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return " 剪刀差: " + value.toFixed(4);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: minVal - padding,
+            suggestedMax: maxVal + padding,
+            grid: {
+              color: "rgba(148, 163, 184, 0.3)",
+              drawBorder: false
+            },
+            ticks: {
+              callback: function (value) {
+                return Number(value).toFixed(3);
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

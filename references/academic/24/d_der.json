@@ -1,0 +1,218 @@
+{
+    "plot_data": [
+        {
+            "Cancer Type": "LUNG",
+            "Model": "ctranspath",
+            "Percentage": 8.4,
+            "Performance": 0.7101566922966756
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "ctranspath",
+            "Percentage": 7.5,
+            "Performance": 0.6901946923437127
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "ctranspath",
+            "Percentage": 3.4,
+            "Performance": 0.6727500426566878
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "ctranspath",
+            "Percentage": 11.7,
+            "Performance": 0.6402351975254987
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "phikon",
+            "Percentage": 9.7,
+            "Performance": 0.7086469364758765
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "phikon",
+            "Percentage": 8.8,
+            "Performance": 0.6333019990370683
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "phikon",
+            "Percentage": 4.0,
+            "Performance": 0.6650650873334706
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "phikon",
+            "Percentage": 5.7,
+            "Performance": 0.6335703165007269
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "uni",
+            "Percentage": 9.8,
+            "Performance": 0.7582049929810751
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "uni",
+            "Percentage": 3.3,
+            "Performance": 0.6884572772690907
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "uni",
+            "Percentage": 6.7,
+            "Performance": 0.6769115022211536
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "uni",
+            "Percentage": 8.3,
+            "Performance": 0.6585192894528652
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "kaiko",
+            "Percentage": 9.7,
+            "Performance": 0.7311053739265448
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "kaiko",
+            "Percentage": 8.8,
+            "Performance": 0.685518762408426
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "kaiko",
+            "Percentage": 4.0,
+            "Performance": 0.6679383667204072
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "kaiko",
+            "Percentage": 5.7,
+            "Performance": 0.609584221956904
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "prov-gigapath",
+            "Percentage": 45.0,
+            "Performance": 0.7578128341867243
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "prov-gigapath",
+            "Percentage": 2.7,
+            "Performance": 0.66703719221213
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "prov-gigapath",
+            "Percentage": 0.7,
+            "Performance": 0.6867942247149665
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "prov-gigapath",
+            "Percentage": 30.0,
+            "Performance": 0.6796362735454282
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "virchow-class",
+            "Percentage": 6.1,
+            "Performance": 0.7174955993098335
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "virchow-class",
+            "Percentage": 25.0,
+            "Performance": 0.6589119444462541
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "virchow-class",
+            "Percentage": 3.5,
+            "Performance": 0.6845577051089727
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "virchow-class",
+            "Percentage": 3.2,
+            "Performance": 0.6476261453717196
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "virchow2-class",
+            "Percentage": 4.0,
+            "Performance": 0.7453463548176368
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "virchow2-class",
+            "Percentage": 19.0,
+            "Performance": 0.7043400914608242
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "virchow2-class",
+            "Percentage": 3.0,
+            "Performance": 0.7171710064688561
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "virchow2-class",
+            "Percentage": 6.0,
+            "Performance": 0.6911429496854462
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "panakeia",
+            "Percentage": 0.0,
+            "Performance": 0.7136461434822977
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "panakeia",
+            "Percentage": 82.0,
+            "Performance": 0.7080816433172487
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "panakeia",
+            "Percentage": 0.0,
+            "Performance": 0.6830453013043695
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "panakeia",
+            "Percentage": 18.0,
+            "Performance": 0.6616418630330357
+        }
+    ],
+    "stats_data": [
+        {
+            "cancer_type": "LUNG",
+            "r": 0.548585053629297,
+            "p": 0.15913917874978992
+        },
+        {
+            "cancer_type": "STAD",
+            "r": -0.2788407405224243,
+            "p": 0.5036420596256193
+        },
+        {
+            "cancer_type": "BRCA",
+            "r": 0.43959345798517785,
+            "p": 0.27579154872184664
+        },
+        {
+            "cancer_type": "CRC",
+            "r": 0.4472210806869125,
+            "p": 0.2665607212308931
+        }
+    ]
+}

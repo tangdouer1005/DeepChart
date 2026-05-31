@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WMT Piotroski F-Score (2017–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      --bg-color: #f7f7f9;
+      --card-bg: #ffffff;
+      --primary: #1d4ed8;
+      --primary-light: #60a5fa;
+      --axis-color: #6b7280;
+      --grid-color: rgba(148, 163, 184, 0.25);
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --accent: #10b981;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at top left, #e0f2fe 0, #f7f7f9 50%, #eef2ff 100%);
+      color: var(--text-main);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem 1.9rem;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.08),
+        0 0 0 1px rgba(148, 163, 184, 0.25);
+    }
+
+    .header {
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .title-block h1 {
+      font-size: 1.3rem;
+      margin: 0 0 0.25rem;
+      letter-spacing: 0.01em;
+    }
+
+    .title-block p {
+      margin: 0;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .badge {
+      align-self: flex-start;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.07);
+      color: #1d4ed8;
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .badge span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.35);
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 1.2fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 800px) {
+      .content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .chart-wrapper {
+      position: relative;
+      min-height: 280px;
+    }
+
+    .chart-wrapper canvas {
+      max-height: 420px;
+    }
+
+    .sidebar {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .stat-card {
+      border-radius: 12px;
+      padding: 0.7rem 0.8rem;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(56, 189, 248, 0.08));
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      color: #0b1120;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.8;
+    }
+
+    .stat-value {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-top: 0.15rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.3rem;
+    }
+
+    .stat-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.8rem;
+      font-size: 0.78rem;
+      align-items: center;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .legend-swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    }
+
+    .notes {
+      font-size: 0.76rem;
+      line-height: 1.35;
+      color: var(--text-muted);
+    }
+
+    .notes strong {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div class="title-block">
+          <h1>WMT 皮奥特罗斯基 F-Score（2017–2024）</h1>
+          <p>Bar chart of Piotroski F-Score by fiscal year, based on provided data.</p>
+        </div>
+        <div class="badge">
+          <span class="dot"></span>
+          Interactive Chart
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="chart-wrapper">
+          <canvas id="fscoreChart"></canvas>
+        </div>
+
+        <aside class="sidebar">
+          <div class="stat-card">
+            <div class="stat-label">Latest F-Score (2024)</div>
+            <div class="stat-value">
+              8
+              <span class="stat-sub">out of 9</span>
+            </div>
+            <div class="stat-sub">
+              Highest value in the 2017–2024 period, up from 5 in 2023.
+            </div>
+          </div>
+
+          <div class="legend">
+            <div class="legend-item">
+              <span class="legend-swatch"></span>
+              <span>Piotroski F-Score (annual)</span>
+            </div>
+          </div>
+
+          <div class="notes">
+            <strong>Source data (Fiscal Year → F-Score):</strong><br />
+            2017: 7 &nbsp;·&nbsp; 2018: 6 &nbsp;·&nbsp; 2019: 5 &nbsp;·&nbsp; 2020: 6<br />
+            2021: 7 &nbsp;·&nbsp; 2022: 7 &nbsp;·&nbsp; 2023: 5 &nbsp;·&nbsp; 2024: 8
+            <br /><br />
+            Piotroski F-Score ranges from 0–9 and is based on profitability, leverage/liquidity, and operating efficiency signals.
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Wait until DOM is ready to ensure the canvas element exists
+    window.addEventListener("DOMContentLoaded", function () {
+      const fiscalYears = ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"];
+      const fScores = [7, 6, 5, 6, 7, 7, 5, 8];
+
+      const canvas = document.getElementById("fscoreChart");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      const minScore = Math.min(...fScores);
+      const maxScore = Math.max(...fScores);
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: fiscalYears,
+          datasets: [
+            {
+              label: "Piotroski F-Score",
+              data: fScores,
+              backgroundColor: function (context) {
+                const chart = context.chart;
+                const { ctx, chartArea } = chart;
+
+                // Before the chart is fully initialized, chartArea can be undefined
+                if (!chartArea) {
+                  return "#3b82f6";
+                }
+
+                const baseGradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                baseGradient.addColorStop(0, "#3b82f6");
+                baseGradient.addColorStop(1, "#60a5fa");
+
+                const highlightGradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                highlightGradient.addColorStop(0, "#22c55e");
+                highlightGradient.addColorStop(1, "#6ee7b7");
+
+                if (context.dataIndex === fiscalYears.length - 1) {
+                  return highlightGradient;
+                }
+                return baseGradient;
+              },
+              borderRadius: {
+                topLeft: 5,
+                topRight: 5
+              },
+              hoverBackgroundColor: "#1d4ed8",
+              borderWidth: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 900,
+            easing: "easeOutQuart"
+          },
+          layout: {
+            padding: {
+              top: 10,
+              right: 10,
+              bottom: 0,
+              left: 0
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: false
+            },
+            tooltip: {
+              enabled: true,
+              usePointStyle: true,
+              backgroundColor: "rgba(15, 23, 42, 0.96)",
+              titleColor: "#e5e7eb",
+              bodyColor: "#f9fafb",
+              padding: 10,
+              cornerRadius: 8,
+              displayColors: false,
+              callbacks: {
+                title: (items) => {
+                  const item = items[0];
+                  return "Fiscal Year " + item.label;
+                },
+                label: (item) => {
+                  return "F-Score: " + item.formattedValue + " / 9";
+                },
+                afterLabel: (item) => {
+                  const value = item.raw;
+                  let note = "";
+                  if (value === maxScore) {
+                    note = "Highest in series";
+                  } else if (value === minScore) {
+                    note = "Lowest in series";
+                  }
+                  return note ? "\n" + note : "";
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: "var(--axis-color)",
+                font: {
+                  size: 11
+                }
+              }
+            },
+            y: {
+              beginAtZero: true,
+              suggestedMax: 9,
+              ticks: {
+                stepSize: 1,
+                color: "var(--axis-color)",
+                font: {
+                  size: 11
+                }
+              },
+              grid: {
+                color: "var(--grid-color)"
+              },
+              title: {
+                display: true,
+                text: "Piotroski F-Score (0–9)",
+                color: "var(--axis-color)",
+                font: {
+                  size: 11,
+                  weight: "500"
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

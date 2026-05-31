@@ -1,0 +1,121 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a heatmap for the 8 countries with the highest `visible country-list score total`, where rows are countries, columns are industries that contribute at least 10% of visible score in at least one selected country, each cell is `that industry's share of the country's visible total score`, values are percentages, and the selected countries are determined only after computing country totals from pages 38-67.",
+  "chart_type": "heatmap",
+  "value_unit": "percent",
+  "sort_rule": "rows sorted by visible_country_total_score descending; thresholded industry columns sorted alphabetically",
+  "selection_rule": "top 8 countries by visible_country_total_score, with industries that reach at least 10% in at least one selected country",
+  "plot_spec": {
+    "title": "Industry Share Heatmap for Top-Score Countries",
+    "value_fields": [
+      "Conglomerate",
+      "Ecommerce & Retail",
+      "Energy & Environment",
+      "Fintech",
+      "Hardware & IoT",
+      "Healthtech",
+      "Social & Leisure",
+      "Software & Data",
+      "Transportation"
+    ],
+    "annot_format": ".1f"
+  },
+  "records": [
+    {
+      "entity": "United States",
+      "Conglomerate": 0.0,
+      "Ecommerce & Retail": 1.6748,
+      "Energy & Environment": 0.0,
+      "Fintech": 8.0587,
+      "Hardware & IoT": 34.2227,
+      "Healthtech": 1.0704,
+      "Social & Leisure": 8.288,
+      "Software & Data": 46.6854,
+      "Transportation": 0.0
+    },
+    {
+      "entity": "Japan",
+      "Conglomerate": 32.1749,
+      "Ecommerce & Retail": 9.995,
+      "Energy & Environment": 0.0,
+      "Fintech": 2.0453,
+      "Hardware & IoT": 30.1547,
+      "Healthtech": 6.965,
+      "Social & Leisure": 8.5698,
+      "Software & Data": 2.0644,
+      "Transportation": 3.7121
+    },
+    {
+      "entity": "Germany",
+      "Conglomerate": 1.3355,
+      "Ecommerce & Retail": 1.2707,
+      "Energy & Environment": 0.0,
+      "Fintech": 1.7499,
+      "Hardware & IoT": 32.163,
+      "Healthtech": 12.8459,
+      "Social & Leisure": 14.4862,
+      "Software & Data": 20.0395,
+      "Transportation": 16.1092
+    },
+    {
+      "entity": "France",
+      "Conglomerate": 0.0,
+      "Ecommerce & Retail": 16.9737,
+      "Energy & Environment": 1.9562,
+      "Fintech": 5.8365,
+      "Hardware & IoT": 18.3621,
+      "Healthtech": 8.1475,
+      "Social & Leisure": 0.0,
+      "Software & Data": 0.0,
+      "Transportation": 46.6972
+    },
+    {
+      "entity": "South Korea",
+      "Conglomerate": 3.2932,
+      "Ecommerce & Retail": 1.6766,
+      "Energy & Environment": 0.0,
+      "Fintech": 0.903,
+      "Hardware & IoT": 91.3659,
+      "Healthtech": 0.0,
+      "Social & Leisure": 0.0,
+      "Software & Data": 1.0207,
+      "Transportation": 1.7406
+    },
+    {
+      "entity": "United Kingdom",
+      "Conglomerate": 0.0,
+      "Ecommerce & Retail": 0.0,
+      "Energy & Environment": 25.9961,
+      "Fintech": 20.9007,
+      "Hardware & IoT": 6.7631,
+      "Healthtech": 3.3247,
+      "Social & Leisure": 10.7558,
+      "Software & Data": 8.7297,
+      "Transportation": 15.4226
+    },
+    {
+      "entity": "Spain",
+      "Conglomerate": 0.0,
+      "Ecommerce & Retail": 13.3335,
+      "Energy & Environment": 3.7504,
+      "Fintech": 7.8036,
+      "Hardware & IoT": 75.1125,
+      "Healthtech": 0.0,
+      "Social & Leisure": 0.0,
+      "Software & Data": 0.0,
+      "Transportation": 0.0
+    },
+    {
+      "entity": "China",
+      "Conglomerate": 4.0702,
+      "Ecommerce & Retail": 11.9684,
+      "Energy & Environment": 0.0,
+      "Fintech": 25.1019,
+      "Hardware & IoT": 55.999,
+      "Healthtech": 0.0,
+      "Social & Leisure": 2.8605,
+      "Software & Data": 0.0,
+      "Transportation": 0.0
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+[
+    {
+        "Region": "China",
+        "Scenario": "S1",
+        "Central": 18.6,
+        "Low": 14.4,
+        "High": 23.4,
+        "Label": "China-S1"
+    },
+    {
+        "Region": "China",
+        "Scenario": "S2",
+        "Central": 35.5,
+        "Low": 25.3,
+        "High": 36.3,
+        "Label": "China-S2"
+    },
+    {
+        "Region": "China",
+        "Scenario": "S3",
+        "Central": 57.8,
+        "Low": 41.6,
+        "High": 70.8,
+        "Label": "China-S3"
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S1",
+        "Central": 9.0,
+        "Low": 7.0,
+        "High": 11.5,
+        "Label": "EU27-S1"
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S2",
+        "Central": 17.4,
+        "Low": 12.2,
+        "High": 17.9,
+        "Label": "EU27-S2"
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S3",
+        "Central": 28.4,
+        "Low": 20.1,
+        "High": 35.0,
+        "Label": "EU27-S3"
+    },
+    {
+        "Region": "US",
+        "Scenario": "S1",
+        "Central": 8.3,
+        "Low": 6.5,
+        "High": 10.8,
+        "Label": "US-S1"
+    },
+    {
+        "Region": "US",
+        "Scenario": "S2",
+        "Central": 16.5,
+        "Low": 11.3,
+        "High": 17.1,
+        "Label": "US-S2"
+    },
+    {
+        "Region": "US",
+        "Scenario": "S3",
+        "Central": 26.8,
+        "Low": 18.6,
+        "High": 33.4,
+        "Label": "US-S3"
+    },
+    {
+        "Region": "India",
+        "Scenario": "S1",
+        "Central": 8.1,
+        "Low": 6.3,
+        "High": 10.2,
+        "Label": "India-S1"
+    },
+    {
+        "Region": "India",
+        "Scenario": "S2",
+        "Central": 15.5,
+        "Low": 11.0,
+        "High": 15.9,
+        "Label": "India-S2"
+    },
+    {
+        "Region": "India",
+        "Scenario": "S3",
+        "Central": 25.3,
+        "Low": 18.1,
+        "High": 31.0,
+        "Label": "India-S3"
+    }
+]

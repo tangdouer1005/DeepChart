@@ -1,0 +1,63 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a horizontal bar chart showing the top 12 capital-efficiency multiples computed as `Ecosystem Value / Total Early-Stage Funding` among ecosystems where `Total Early-Stage Funding` is an exact numeric value and does not contain a `<` marker, with values expressed in `x multiple`, sorted descending, and excluding `N/A` or range-valued items.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by capital_efficiency_multiple",
+  "selection_rule": "top 12",
+  "plot_spec": {
+    "title": "2021 Capital Efficiency",
+    "xlabel": "x multiple",
+    "value_field": "capital_efficiency_multiple"
+  },
+  "records": [
+    {
+      "entity": "Kuala Lumpur",
+      "capital_efficiency_multiple": 97.5758
+    },
+    {
+      "entity": "Silicon Valley",
+      "capital_efficiency_multiple": 46.7727
+    },
+    {
+      "entity": "Stockholm",
+      "capital_efficiency_multiple": 46.0
+    },
+    {
+      "entity": "Beijing",
+      "capital_efficiency_multiple": 41.2037
+    },
+    {
+      "entity": "Abu Dhabi",
+      "capital_efficiency_multiple": 38.2979
+    },
+    {
+      "entity": "Bangalore-Karnataka",
+      "capital_efficiency_multiple": 37.8571
+    },
+    {
+      "entity": "Frankfurt",
+      "capital_efficiency_multiple": 37.176
+    },
+    {
+      "entity": "Shanghai",
+      "capital_efficiency_multiple": 30.7843
+    },
+    {
+      "entity": "Pittsburgh",
+      "capital_efficiency_multiple": 28.8889
+    },
+    {
+      "entity": "Miami",
+      "capital_efficiency_multiple": 26.1538
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "capital_efficiency_multiple": 24.4545
+    },
+    {
+      "entity": "Los Angeles",
+      "capital_efficiency_multiple": 23.8
+    }
+  ]
+}

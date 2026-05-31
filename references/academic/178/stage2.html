@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 800px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // Data
+        const data = {
+    "df_nsf": [
+        {
+            "unit": "Alachua, Florida",
+            "fund_norm": 0.393397,
+            "gdp_norm": 0.0154887
+        },
+        {
+            "unit": "Alameda, California",
+            "fund_norm": 0.0109455,
+            "gdp_norm": 0.209677
+        },
+        {
+            "unit": "Albany, New York",
+            "fund_norm": 0.352985,
+            "gdp_norm": 0.0403226
+        },
+        {
+            "unit": "Albemarle, Virginia",
+            "fund_norm": 0.0429196,
+            "gdp_norm": 0.00595238
+        },
+        {
+            "unit": "Allegheny, Pennsylvania",
+            "fund_norm": 0.2474,
+            "gdp_norm": 0.134601
+        },
+        {
+            "unit": "Barnstable, Massachusetts",
+            "fund_norm": 0.210292,
+            "gdp_norm": 0.0104647
+        },
+        {
+            "unit": "Benton, Arkansas",
+            "fund_norm": 0.267752,
+            "gdp_norm": 0.0197773
+        },
+        {
+            "unit": "Bexar, Texas",
+            "fund_norm": 0.0109484,
+            "gdp_norm": 0.143721
+        },
+        {
+            "unit": "Boulder, Colorado",
+            "fund_norm": 0.19847,
+            "gdp_norm": 0.031298
+        },
+        {
+            "unit": "Brazos, Texas",
+            "fund_norm": 0.327723,
+            "gdp_norm": 0.0112327
+        },
+        {
+            "unit": "Centre, Pennsylvania",
+            "fund_norm": 0.0233701,
+            "gdp_norm": 0.0114247
+        },
+        {
+            "unit": "Champaign, Illinois",
+            "fund_norm": 0.344173,
+            "gdp_norm": 0.0113287
+        },
+        {
+            "unit": "Cleveland, Oklahoma",
+            "fund_norm": 0.0109484,
+            "gdp_norm": 0.015841
+        },
+        {
+            "unit": "Coconino, Arizona",
+            "fund_norm": 0.205369,
+            "gdp_norm": 0.00854455
+        },
+        {
+            "unit": "Cook, Illinois",
+            "fund_norm": 0.563428,
+            "gdp_norm": 0.71611
+        },
+        {
+            "unit": "Cumberland, Maine",
+            "fund_norm": 0.103504,
+            "gdp_norm": 0.0259217
+        },
+        {
+            "unit": "Cuyahoga, Ohio",
+            "fund_norm": 0.0393818,
+            "gdp_norm": 0.169931
+        },
+        {
+            "unit": "Davidson, Tennessee",
+            "fund_norm": 1.0,
+            "gdp_norm": 0.0869816
+        },
+        {
+            "unit": "DeKalb, Georgia",
+            "fund_norm": 0.0765153,
+            "gdp_norm": 0.0200653
+        },
+        {
+            "unit": "Delaware, Pennsylvania",
+            "fund_norm": 0.0108724,
+            "gdp_norm": 0.0560676
+        },
+        {
+            "unit": "Douglas, Kansas",
+            "fund_norm": 0.12569,
+            "gdp_norm": 0.00729647
+        },
+        {
+            "unit": "Douglas, Nebraska",
+            "fund_norm": 0.103833,
+            "gdp_norm": 0.0393625
+        },
+        {
+            "unit": "Douglas, Nevada",
+            "fund_norm": 0.00990158,
+            "gdp_norm": 0.0062404
+        },
+        {
+            "unit": "Durham, North Carolina",
+            "fund_norm": 0.0525111,
+            "gdp_norm": 0.046563
+        },
+        {
+            "unit": "El Paso, Texas",
+            "fund_norm": 0.158379,
+            "gdp_norm": 0.0321621
+        },
+        {
+            "unit": "Erie, New York",
+            "fund_norm": 0.213113,
+            "gdp_norm": 0.0383065
+        },
+        {
+            "unit": "Fayette, Kentucky",
+            "fund_norm": 0.0545489,
+            "gdp_norm": 0.031682
+        },
+        {
+            "unit": "Fulton, Georgia",
+            "fund_norm": 0.791746,
+            "gdp_norm": 0.220142
+        },
+        {
+            "unit": "Hampshire, Massachusetts",
+            "fund_norm": 0.0106141,
+            "gdp_norm": 0.00604839
+        },
+        {
+            "unit": "Harris, Texas",
+            "fund_norm": 0.14536,
+            "gdp_norm": 0.689708
+        },
+        {
+            "unit": "Hennepin, Minnesota",
+            "fund_norm": 0.185887,
+            "gdp_norm": 0.275058
+        },
+        {
+            "unit": "Hillsborough, Florida",
+            "fund_norm": 0.162688,
+            "gdp_norm": 0.131816
+        },
+        {
+            "unit": "Houghton, Michigan",
+            "fund_norm": 0.125677,
+            "gdp_norm": 0.000576037
+        },
+        {
+            "unit": "Jackson, Missouri",
+            "fund_norm": 0.0729075,
+            "gdp_norm": 0.102247
+        },
+        {
+            "unit": "King, Washington",
+            "fund_norm": 0.723896,
+            "gdp_norm": 0.460253
+        },
+        {
+            "unit": "Knox, Tennessee",
+            "fund_norm": 0.0273401,
+            "gdp_norm": 0.031394
+        },
+        {
+            "unit": "Leon, Florida",
+            "fund_norm": 0.0747808,
+            "gdp_norm": 0.015361
+        },
+        {
+            "unit": "Los Angeles, California",
+            "fund_norm": 0.331466,
+            "gdp_norm": 0.756624
+        },
+        {
+            "unit": "Lubbock, Texas",
+            "fund_norm": 0.0109398,
+            "gdp_norm": 0.0120968
+        },
+        {
+            "unit": "Maricopa, Arizona",
+            "fund_norm": 0.253546,
+            "gdp_norm": 0.324021
+        },
+        {
+            "unit": "McLennan, Texas",
+            "fund_norm": 2.05443e-05,
+            "gdp_norm": 0.0165131
+        },
+        {
+            "unit": "Mecklenburg, North Carolina",
+            "fund_norm": 0.245564,
+            "gdp_norm": 0.157354
+        },
+        {
+            "unit": "Miami-Dade, Florida",
+            "fund_norm": 0.0491464,
+            "gdp_norm": 0.149674
+        },
+        {
+            "unit": "Middlesex, Massachusetts",
+            "fund_norm": 0.305412,
+            "gdp_norm": 0.262289
+        },
+        {
+            "unit": "Middlesex, New Jersey",
+            "fund_norm": 0.413311,
+            "gdp_norm": 0.114247
+        },
+        {
+            "unit": "Milwaukee, Wisconsin",
+            "fund_norm": 0.103835,
+            "gdp_norm": 0.0817972
+        },
+        {
+            "unit": "Missoula, Montana",
+            "fund_norm": 0.0109481,
+            "gdp_norm": 0.00604839
+        },
+        {
+            "unit": "Monongalia, West Virginia",
+            "fund_norm": 0.0,
+            "gdp_norm": 0.00451229
+        },
+        {
+            "unit": "Monroe, New York",
+            "fund_norm": 0.158474,
+            "gdp_norm": 0.0341782
+        },
+        {
+            "unit": "Montgomery, Ohio",
+            "fund_norm": 0.0288705,
+            "gdp_norm": 0.0404186
+        },
+        {
+            "unit": "New Haven, Connecticut",
+            "fund_norm": 0.0382679,
+            "gdp_norm": 0.0534754
+        },
+        {
+            "unit": "New York, New York",
+            "fund_norm": 0.454125,
+            "gdp_norm": 1.0
+        },
+        {
+            "unit": "Norfolk, Virginia",
+            "fund_norm": 0.298713,
+            "gdp_norm": 0.0408026
+        },
+        {
+            "unit": "Orange, California",
+            "fund_norm": 0.870387,
+            "gdp_norm": 0.315476
+        },
+        {
+            "unit": "Orange, Florida",
+            "fund_norm": 0.134761,
+            "gdp_norm": 0.0999424
+        },
+        {
+            "unit": "Phelps, Missouri",
+            "fund_norm": 0.219031,
+            "gdp_norm": 0.000288018
+        },
+        {
+            "unit": "Philadelphia, Pennsylvania",
+            "fund_norm": 0.0950925,
+            "gdp_norm": 0.490783
+        },
+        {
+            "unit": "Pickens, South Carolina",
+            "fund_norm": 0.28414,
+            "gdp_norm": 0.00614439
+        },
+        {
+            "unit": "Pima, Arizona",
+            "fund_norm": 0.109744,
+            "gdp_norm": 0.0449309
+        },
+        {
+            "unit": "Prince George's, Maryland",
+            "fund_norm": 0.311065,
+            "gdp_norm": 0.0549155
+        },
+        {
+            "unit": "Richland, South Carolina",
+            "fund_norm": 0.0109462,
+            "gdp_norm": 0.0219854
+        },
+        {
+            "unit": "Riley, Kansas",
+            "fund_norm": 0.0109484,
+            "gdp_norm": 0.00528034
+        },
+        {
+            "unit": "Salt Lake, Utah",
+            "fund_norm": 0.147199,
+            "gdp_norm": 0.105511
+        },
+        {
+            "unit": "San Diego, California",
+            "fund_norm": 0.0126967,
+            "gdp_norm": 0.271025
+        },
+        {
+            "unit": "Santa Barbara, California",
+            "fund_norm": 0.0109484,
+            "gdp_norm": 0.0508833
+        },
+        {
+            "unit": "Santa Clara, California",
+            "fund_norm": 0.127786,
+            "gdp_norm": 0.404378
+        },
+        {
+            "unit": "Santa Cruz, California",
+            "fund_norm": 0.165685,
+            "gdp_norm": 0.0169931
+        },
+        {
+            "unit": "Sedgwick, Kansas",
+            "fund_norm": 0.117249,
+            "gdp_norm": 0.0324501
+        },
+        {
+            "unit": "Socorro, New Mexico",
+            "fund_norm": 0.0109483,
+            "gdp_norm": 0.0
+        },
+        {
+            "unit": "St. Joseph, Indiana",
+            "fund_norm": 2.05443e-05,
+            "gdp_norm": 0.015841
+        },
+        {
+            "unit": "Story, Iowa",
+            "fund_norm": 0.74758,
+            "gdp_norm": 0.00768049
+        },
+        {
+            "unit": "Suffolk, Massachusetts",
+            "fund_norm": 0.717179,
+            "gdp_norm": 0.309044
+        },
+        {
+            "unit": "Suffolk, New York",
+            "fund_norm": 0.275852,
+            "gdp_norm": 0.0947581
+        },
+        {
+            "unit": "Tarrant, Texas",
+            "fund_norm": 0.256798,
+            "gdp_norm": 0.203533
+        },
+        {
+            "unit": "Tippecanoe, Indiana",
+            "fund_norm": 0.42949,
+            "gdp_norm": 0.015169
+        },
+        {
+            "unit": "Tompkins, New York",
+            "fund_norm": 0.152897,
+            "gdp_norm": 0.00796851
+        },
+        {
+            "unit": "Travis, Texas",
+            "fund_norm": 0.371719,
+            "gdp_norm": 0.210061
+        },
+        {
+            "unit": "Tuscaloosa, Alabama",
+            "fund_norm": 0.0382679,
+            "gdp_norm": 0.0116167
+        },
+        {
+            "unit": "Wake, North Carolina",
+            "fund_norm": 0.231472,
+            "gdp_norm": 0.140553
+        },
+        {
+            "unit": "Waller, Texas",
+            "fund_norm": 0.0317551,
+            "gdp_norm": 0.00441628
+        },
+        {
+            "unit": "Washington, D.C.",
+            "fund_norm": 0.368165,
+            "gdp_norm": 0.133545
+        },
+        {
+            "unit": "Washoe, Nevada",
+            "fund_norm": 0.0106243,
+            "gdp_norm": 0.0235215
+        },
+        {
+            "unit": "Washtenaw, Michigan",
+            "fund_norm": 0.634831,
+            "gdp_norm": 0.0331221
+        },
+        {
+            "unit": "Wayne, Michigan",
+            "fund_norm": 2.0435e-05,
+            "gdp_norm": 0.188364
+        },
+        {
+            "unit": "Worcester, Massachusetts",
+            "fund_norm": 2.0435e-05,
+            "gdp_norm": 0.0961022
+        }
+    ],
+    "df_nsfc": [
+        {
+            "unit": "Beijing",
+            "fund_norm": 1.0,
+            "gdp_norm": 0.930411
+        },
+        {
+            "unit": "Changchun",
+            "fund_norm": 0.00175961,
+            "gdp_norm": 0.121839
+        },
+        {
+            "unit": "Changsha",
+            "fund_norm": 0.150526,
+            "gdp_norm": 0.277033
+        },
+        {
+            "unit": "Chengdu",
+            "fund_norm": 0.13405,
+            "gdp_norm": 0.425905
+        },
+        {
+            "unit": "Chongqing",
+            "fund_norm": 0.0220751,
+            "gdp_norm": 0.606356
+        },
+        {
+            "unit": "Dalian",
+            "fund_norm": 0.0153566,
+            "gdp_norm": 0.151893
+        },
+        {
+            "unit": "Fuzhou",
+            "fund_norm": 0.00972582,
+            "gdp_norm": 0.21731
+        },
+        {
+            "unit": "Guangzhou",
+            "fund_norm": 0.258502,
+            "gdp_norm": 0.606991
+        },
+        {
+            "unit": "Guilin",
+            "fund_norm": 0.080302,
+            "gdp_norm": 0.0178722
+        },
+        {
+            "unit": "Guiyang",
+            "fund_norm": 0.0188118,
+            "gdp_norm": 0.0708199
+        },
+        {
+            "unit": "Hangzhou",
+            "fund_norm": 0.527562,
+            "gdp_norm": 0.381016
+        },
+        {
+            "unit": "Harbin",
+            "fund_norm": 0.123972,
+            "gdp_norm": 0.103911
+        },
+        {
+            "unit": "Hefei",
+            "fund_norm": 0.0505487,
+            "gdp_norm": 0.217775
+        },
+        {
+            "unit": "Huzhou",
+            "fund_norm": 0.0147167,
+            "gdp_norm": 0.0457042
+        },
+        {
+            "unit": "Jiaozuo",
+            "fund_norm": 0.00127971,
+            "gdp_norm": 0.035815
+        },
+        {
+            "unit": "Jinan",
+            "fund_norm": 0.0278338,
+            "gdp_norm": 0.218706
+        },
+        {
+            "unit": "Kunming",
+            "fund_norm": 0.0166363,
+            "gdp_norm": 0.137496
+        },
+        {
+            "unit": "Lanzhou",
+            "fund_norm": 0.0156765,
+            "gdp_norm": 0.0378925
+        },
+        {
+            "unit": "Linfen",
+            "fund_norm": 0.0,
+            "gdp_norm": 0.0
+        },
+        {
+            "unit": "Nanchang",
+            "fund_norm": 0.0287296,
+            "gdp_norm": 0.113409
+        },
+        {
+            "unit": "Nanjing",
+            "fund_norm": 0.300285,
+            "gdp_norm": 0.344284
+        },
+        {
+            "unit": "Shanghai",
+            "fund_norm": 0.348722,
+            "gdp_norm": 1.0
+        },
+        {
+            "unit": "Shenyang",
+            "fund_norm": 0.00550277,
+            "gdp_norm": 0.137332
+        },
+        {
+            "unit": "Shenzhen",
+            "fund_norm": 0.0976741,
+            "gdp_norm": 0.697261
+        },
+        {
+            "unit": "Suzhou",
+            "fund_norm": 0.0633458,
+            "gdp_norm": 0.486745
+        },
+        {
+            "unit": "Tianjin",
+            "fund_norm": 0.0467095,
+            "gdp_norm": 0.344954
+        },
+        {
+            "unit": "Wuhan",
+            "fund_norm": 0.52785,
+            "gdp_norm": 0.404281
+        },
+        {
+            "unit": "Xi'an",
+            "fund_norm": 0.0852289,
+            "gdp_norm": 0.215366
+        },
+        {
+            "unit": "Xiamen",
+            "fund_norm": 0.0108776,
+            "gdp_norm": 0.12433
+        },
+        {
+            "unit": "Xiangtan",
+            "fund_norm": 0.0143968,
+            "gdp_norm": 0.0220337
+        },
+        {
+            "unit": "Xuzhou",
+            "fund_norm": 0.00127971,
+            "gdp_norm": 0.155981
+        },
+        {
+            "unit": "Yiyang",
+            "fund_norm": 0.013437,
+            "gdp_norm": 0.00930233
+        },
+        {
+            "unit": "Zhengzhou",
+            "fund_norm": 0.08926,
+            "gdp_norm": 0.277471
+        }
+    ],
+    "r_nsf": 0.3269489960660064,
+    "p_nsf": 0.002257424570115827,
+    "r_nsfc": 0.6666411355111052,
+    "p_nsfc": 2.2769649030200933e-05,
+    "median_gdp": 0.07630855,
+    "median_fund": 0.1036685,
+    "nsf_labels_map": {
+        "Davidson, Tennessee": "Davidson, TN",
+        "Orange, California": "Orange, CA",
+        "Fulton, Georgia": "Fulton, GA",
+        "Suffolk, Massachusetts": "Suffolk, MA",
+        "King, Washington": "King, WA",
+        "Story, Iowa": "Story, IA",
+        "Washtenaw, Michigan": "Washtenaw, MI",
+        "Cook, Illinois": "Cook, IL",
+        "New York, New York": "New York, NY",
+        "Los Angeles, California": "Los Angeles, CA",
+        "Harris, Texas": "Harris, TX"
+    },
+    "nsfc_labels_list": [
+        "Beijing",
+        "Hangzhou",
+        "Wuhan",
+        "Guangzhou",
+        "Shanghai",
+        "Shenzhen",
+        "Chongqing"
+    ]
+};
+
+        const nsfData = data.df_nsf;
+        const nsfcData = data.df_nsfc;
+        const nsfLabelsMap = data.nsf_labels_map;
+        const nsfcLabelsList = data.nsfc_labels_list;
+
+        // Label Mapping
+        /* const nsfLabelsMap = { ... };
+        const nsfcLabelsList = [ ... ]; */
+
+        // Prepare Series Data
+        const nsfScatter = nsfData.map(d => {
+            return {
+                value: [d.gdp_norm, d.fund_norm],
+                name: nsfLabelsMap[d.unit] || ""
+            };
+        });
+        const nsfcScatter = nsfcData.map(d => {
+            return {
+                value: [d.gdp_norm, d.fund_norm],
+                name: nsfcLabelsList.includes(d.unit) ? d.unit : ""
+            };
+        });
+
+        // --- Statistics Helper ---
+        const Stat = {
+            sum: function(arr) { return arr.reduce((a, b) => a + b, 0); },
+            mean: function(arr) { return this.sum(arr) / arr.length; },
+            median: function(arr) {
+                const sorted = [...arr].sort((a, b) => a - b);
+                const mid = Math.floor(sorted.length / 2);
+                return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+            },
+            variance: function(arr) {
+                const m = this.mean(arr);
+                return this.sum(arr.map(v => (v - m) ** 2)) / (arr.length - 1);
+            },
+            stddev: function(arr) { return Math.sqrt(this.variance(arr)); },
+            covariance: function(arr1, arr2) {
+                const m1 = this.mean(arr1);
+                const m2 = this.mean(arr2);
+                let sum = 0;
+                for (let i = 0; i < arr1.length; i++) {
+                    sum += (arr1[i] - m1) * (arr2[i] - m2);
+                }
+                return sum / (arr1.length - 1);
+            },
+            corrcoeff: function(arr1, arr2) {
+                const cov = this.covariance(arr1, arr2);
+                const std1 = this.stddev(arr1);
+                const std2 = this.stddev(arr2);
+                return cov / (std1 * std2);
+            },
+            // Log Gamma Function (Lanczos approximation)
+            logGamma: function(x) {
+                const c = [76.18009172947146, -86.50532032941677, 24.01409824083091,
+                     -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5];
+                let step = 2.5066282746310005;
+                let z = x;
+                let s = step;
+                for (let i = 0; i < 6; i++) {
+                    z += 1;
+                    s += c[i] / z;
+                }
+                return (x + 0.5) * Math.log(x + 5.5) - (x + 5.5) + Math.log(s / x);
+            },
+            // Regularized Incomplete Beta Function
+            betainc: function(x, a, b) {
+                if (x === 0 || x === 1) return x;
+                if (x > (a + 1) / (a + b + 2)) return 1 - this.betainc(1 - x, b, a);
+                
+                const lbeta = this.logGamma(a) + this.logGamma(b) - this.logGamma(a + b);
+                const front = Math.exp(Math.log(x) * a + Math.log(1 - x) * b - lbeta) / a;
+                
+                let f = 1.0, c = 1.0, d = 0.0;
+                for (let i = 1; i <= 200; i++) {
+                    let m = Math.floor(i / 2);
+                    let numer;
+                    if (i % 2 === 0) {
+                        numer = m * (b - m) * x / ((a + 2 * m - 1) * (a + 2 * m));
+                    } else {
+                        numer = -(a + m) * (a + b + m) * x / ((a + 2 * m) * (a + 2 * m + 1));
+                    }
+                    d = 1.0 + numer * d;
+                    if (Math.abs(d) < 1e-30) d = 1e-30;
+                    d = 1.0 / d;
+                    c = 1.0 + numer / c;
+                    if (Math.abs(c) < 1e-30) c = 1e-30;
+                    const cd = c * d;
+                    f *= cd;
+                    if (Math.abs(1.0 - cd) < 1e-8) break;
+                }
+                return front * (f - 1.0 + 1.0);
+            },
+            // Student's t CDF
+            tCdf: function(t, df) {
+                const x = df / (df + t * t);
+                return 1 - 0.5 * this.betainc(x, df / 2, 0.5);
+            },
+            // Student's t Inverse CDF (Approximation for 95% CI/two-tailed 0.05)
+            tCrit95: function(df) {
+                // Table lookup for two-tailed alpha=0.05
+                if (df >= 100) return 1.984;
+                if (df >= 80) return 1.990;
+                if (df >= 60) return 2.000;
+                if (df >= 50) return 2.009;
+                if (df >= 40) return 2.021;
+                if (df >= 30) return 2.042;
+                if (df >= 20) return 2.086;
+                if (df >= 10) return 2.228;
+                return 2.571; // df=5 or fallback
+            }
+        };
+
+        // Statistics and Regression Analysis
+        function calculateStats(data) {
+            try {
+                if (!data || data.length < 2) return null;
+                const x = data.map(d => d.value[0]);
+                const y = data.map(d => d.value[1]);
+                const n = x.length;
+
+                // 1. Basic Correlation and P-value
+                const r = Stat.corrcoeff(x, y);
+                if (isNaN(r)) return null;
+
+                // t-statistic for correlation
+                const t_r = r * Math.sqrt((n - 2) / (1 - r * r));
+                const p = 2 * (1 - Stat.tCdf(Math.abs(t_r), n - 2));
+
+                // 2. Linear Regression (OLS)
+                const xMean = Stat.mean(x);
+                const yMean = Stat.mean(y);
+                
+                // Sxx = sum((x - xMean)^2)
+                const Sxx = Stat.sum(x.map(v => Math.pow(v - xMean, 2)));
+                // Sxy = sum((x - xMean)(y - yMean))
+                const Sxy = Stat.sum(x.map((v, i) => (v - xMean) * (y[i] - yMean)));
+                
+                if (Sxx === 0) return null; // Avoid division by zero
+
+                const slope = Sxy / Sxx;
+                const intercept = yMean - slope * xMean;
+
+                // 3. Confidence Interval Prep
+                // Calculate Standard Error of Estimate (SE)
+                const yPred = x.map(v => slope * v + intercept);
+                const SSE = Stat.sum(y.map((v, i) => Math.pow(v - yPred[i], 2)));
+                const se = Math.sqrt(SSE / (n - 2));
+
+                // Critical t value for 95% CI
+                const tCrit = Stat.tCrit95(n - 2);
+
+                // 4. Generate Line and Band Points
+                // Plot range
+                const plotMinX = -0.05;
+                const plotMaxX = 1.05;
+                const steps = 100;
+                const stepSize = (plotMaxX - plotMinX) / steps;
+                
+                const lineData = [];
+                const bandData = [];
+
+                for (let i = 0; i <= steps; i++) {
+                    const cx = plotMinX + i * stepSize;
+                    const cy = slope * cx + intercept;
+                    
+                    // CI Width Formula: t * SE * sqrt(1/n + (x - x_bar)^2 / Sxx)
+                    const dist = se * Math.sqrt(1/n + Math.pow(cx - xMean, 2) / Sxx);
+                    const ciVal = tCrit * dist;
+                    
+                    lineData.push([cx, cy]);
+                    // Store [x, yMin, yMax] for custom renderer
+                    bandData.push([cx, cy - ciVal, cy + ciVal]);
+                }
+
+                return {
+                    r, p, slope, intercept,
+                    lineData, bandData
+                };
+            } catch (e) {
+                console.error("Calculation failed", e);
+                return null;
+            }
+        }
+
+        const statsNSF_calc = calculateStats(nsfScatter) || { r:0, p:0, lineData: [], bandData: [] };
+        const statsNSFC_calc = calculateStats(nsfcScatter) || { r:0, p:0, lineData: [], bandData: [] };
+
+        const statsNSF = {
+            ...statsNSF_calc,
+            r: data.r_nsf,
+            p: data.p_nsf
+        };
+        const statsNSFC = {
+            ...statsNSFC_calc,
+            r: data.r_nsfc,
+            p: data.p_nsfc
+        };
+
+        // Medians
+        /* const allGdp = [...nsfData.map(d=>d.gdp), ...nsfcData.map(d=>d.gdp)];
+        const allFund = [...nsfData.map(d=>d.fund), ...nsfcData.map(d=>d.fund)];
+        const medianGdp = Stat.median(allGdp);
+        const medianFund = Stat.median(allFund); */
+        
+        const medianGdp = data.median_gdp;
+        const medianFund = data.median_fund;
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Custom Render Function Factory
+        // Using closure to access bandData, avoiding params.data.customData usage
+        function createRenderItem(bandData) {
+            return function(params, api) {
+                if (!bandData || bandData.length === 0) return;
+                
+                var pointsLower = [];
+                var pointsUpper = [];
+                
+                for (var i = 0; i < bandData.length; i++) {
+                    var pt = bandData[i];
+                    var x = pt[0];
+                    var yLo = pt[1];
+                    var yHi = pt[2];
+                    
+                    var ptLo = api.coord([x, yLo]);
+                    var ptHi = api.coord([x, yHi]);
+                    
+                    if (isNaN(ptLo[0]) || isNaN(ptLo[1]) || isNaN(ptHi[0]) || isNaN(ptHi[1])) continue;
+
+                    pointsLower.push(ptLo);
+                    pointsUpper.push(ptHi);
+                }
+                
+                if (pointsLower.length === 0) return;
+
+                var polygonPoints = pointsLower.concat(pointsUpper.reverse());
+                
+                return {
+                    type: 'polygon',
+                    shape: {
+                        points: polygonPoints
+                    },
+                    style: api.style({
+                        fill: api.visual('color'),
+                        stroke: null,
+                        opacity: 0.2
+                    })
+                };
+            };
+        }
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 50, bottom: 50, left: 60 },
+            xAxis: {
+                name: 'GDP (normalized)',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: -0.05, max: 1.05,
+                splitLine: { show: true, lineStyle: { color: '#E0E0E0' } },
+                axisLine: { show: true, lineStyle: { color: 'black' } }
+            },
+            yAxis: {
+                name: 'Funds (normalized)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: -0.15, max: 1.05,
+                splitLine: { show: true, lineStyle: { color: '#E0E0E0' } },
+                axisLine: { show: true, lineStyle: { color: 'black' } }
+            },
+            legend: {
+                bottom: 20, right: 20,
+                orient: 'vertical',
+                data: [
+                    { name: `NSF (r=${statsNSF.r.toFixed(3)}, P=${statsNSF.p.toFixed(3)})`, icon: 'circle' },
+                    { name: `NSFC (r=${statsNSFC.r.toFixed(3)}, P=${statsNSFC.p.toFixed(3)})`, icon: 'circle' }
+                ],
+                textStyle: { fontSize: 12 }
+            },
+            series: [
+                // NSF Band (Custom)
+                {
+                    name: `NSF (r=${statsNSF.r.toFixed(3)}, P=${statsNSF.p.toFixed(3)})`,
+                    type: 'custom',
+                    renderItem: createRenderItem(statsNSF.bandData),
+                    itemStyle: { color: '#1f77b4' },
+                    data: [[0,0]], // Dummy data to trigger renderItem once
+                    z: 1,
+                    silent: true,
+                    tooltip: { show: false }
+                },
+                // NSFC Band (Custom)
+                {
+                    name: `NSFC (r=${statsNSFC.r.toFixed(3)}, P=${statsNSFC.p.toFixed(3)})`,
+                    type: 'custom',
+                    renderItem: createRenderItem(statsNSFC.bandData),
+                    itemStyle: { color: '#ff7f0e' },
+                    data: [[0,0]], // Dummy data
+                    z: 1,
+                    silent: true,
+                    tooltip: { show: false }
+                },
+
+                // NSF Line
+                {
+                    type: 'line',
+                    data: statsNSF.lineData,
+                    symbol: 'none',
+                    lineStyle: { color: '#1f77b4', width: 2 },
+                    z: 2,
+                    silent: true
+                },
+                // NSFC Line
+                {
+                    type: 'line',
+                    data: statsNSFC.lineData,
+                    symbol: 'none',
+                    lineStyle: { color: '#ff7f0e', width: 2 },
+                    z: 2,
+                    silent: true
+                },
+                // NSF Scatter
+                {
+                    name: `NSF (r=${statsNSF.r.toFixed(3)}, P=${statsNSF.p.toFixed(3)})`,
+                    type: 'scatter',
+                    data: nsfScatter,
+                    itemStyle: { color: 'transparent', borderColor: '#1f77b4', borderWidth: 1.5 },
+                    symbolSize: 8,
+                    label: {
+                        show: true,
+                        formatter: '{b}',
+                        position: 'top',
+                        color: 'black',
+                        fontSize: 10
+                    },
+                    z: 3
+                },
+                // NSFC Scatter
+                {
+                    name: `NSFC (r=${statsNSFC.r.toFixed(3)}, P=${statsNSFC.p.toFixed(3)})`,
+                    type: 'scatter',
+                    data: nsfcScatter,
+                    itemStyle: { color: 'transparent', borderColor: '#ff7f0e', borderWidth: 1.5 },
+                    symbolSize: 8,
+                    label: {
+                        show: true,
+                        formatter: '{b}',
+                        position: 'top',
+                        color: 'black',
+                        fontSize: 10
+                    },
+                    z: 3
+                },
+                // Median Lines
+                {
+                    type: 'line',
+                    markLine: {
+                        silent: true,
+                        symbol: 'none',
+                        data: [
+                            { xAxis: medianGdp, label: { formatter: 'GDP\nmedian', position: 'end' } },
+                            { yAxis: medianFund, label: { formatter: 'Funds\nmedian', position: 'end' } }
+                        ],
+                        lineStyle: { type: 'dashed', color: 'gray', width: 1.5 }
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

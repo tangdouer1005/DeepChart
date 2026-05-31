@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 700px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const df = [
+    {
+        "GO_term": "microtubule-based movement",
+        "log2fc_PNEC_vs_others": 1.20670480622823,
+        "RB_E2F_CHIPseq_score": 1.0202015806528,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 4.6138584791602
+    },
+    {
+        "GO_term": "pronucleus",
+        "log2fc_PNEC_vs_others": -0.1001054322258801,
+        "RB_E2F_CHIPseq_score": 1.228012941794914,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 3.843193571661222
+    },
+    {
+        "GO_term": "signal release",
+        "log2fc_PNEC_vs_others": 3.889897058409272,
+        "RB_E2F_CHIPseq_score": 0.4028465234162195,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 5.784592801611462
+    },
+    {
+        "GO_term": "regulation of cell development",
+        "log2fc_PNEC_vs_others": 1.540135094776259,
+        "RB_E2F_CHIPseq_score": 0.5085709038569207,
+        "annotation": "Other",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 11.13619904135352
+    },
+    {
+        "GO_term": "endocrine system development",
+        "log2fc_PNEC_vs_others": 2.318078268815988,
+        "RB_E2F_CHIPseq_score": 0.1727724696983979,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 4.01341394068209
+    },
+    {
+        "GO_term": "microtubule motor activity",
+        "log2fc_PNEC_vs_others": 0.5229135839259957,
+        "RB_E2F_CHIPseq_score": 1.384099683344504,
+        "annotation": "Other",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 13.49581278302938
+    },
+    {
+        "GO_term": "kinesin complex",
+        "log2fc_PNEC_vs_others": 0.534574680231793,
+        "RB_E2F_CHIPseq_score": 1.569272351785036,
+        "annotation": "Other",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 10.78125608579182
+    },
+    {
+        "GO_term": "negative regulation of gene expression, epigenetic",
+        "log2fc_PNEC_vs_others": 0.4227814798009545,
+        "RB_E2F_CHIPseq_score": 0.9352169496079143,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 4.412915298813484
+    },
+    {
+        "GO_term": "membrane docking",
+        "log2fc_PNEC_vs_others": 1.925972643060236,
+        "RB_E2F_CHIPseq_score": 0.9167464157747806,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 7.631935092824332
+    },
+    {
+        "GO_term": "signal transduction by p53 class mediator",
+        "log2fc_PNEC_vs_others": -0.9696449170026672,
+        "RB_E2F_CHIPseq_score": 1.52184790603343,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 8.944930363872974
+    },
+    {
+        "GO_term": "protein depolymerization",
+        "log2fc_PNEC_vs_others": 0.6783717499282899,
+        "RB_E2F_CHIPseq_score": 1.021053019638188,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 8.244426638042908
+    },
+    {
+        "GO_term": "regulation of microtubule cytoskeleton organization",
+        "log2fc_PNEC_vs_others": 0.172325172616351,
+        "RB_E2F_CHIPseq_score": 1.291070516080746,
+        "annotation": "Other",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 16.07316463964284
+    },
+    {
+        "GO_term": "cilium organization",
+        "log2fc_PNEC_vs_others": 0.7192702115909774,
+        "RB_E2F_CHIPseq_score": 0.955038471783134,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 5.563497634669008
+    },
+    {
+        "GO_term": "cell projection morphogenesis",
+        "log2fc_PNEC_vs_others": 1.772474260972692,
+        "RB_E2F_CHIPseq_score": 0.4663167230428461,
+        "annotation": "Other",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 12.97980531804684
+    },
+    {
+        "GO_term": "head development",
+        "log2fc_PNEC_vs_others": 1.943882626724927,
+        "RB_E2F_CHIPseq_score": 0.5137208714095451,
+        "annotation": "Other",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 11.88909493255475
+    },
+    {
+        "GO_term": "tubulin binding",
+        "log2fc_PNEC_vs_others": 0.4342817906177706,
+        "RB_E2F_CHIPseq_score": 1.221763209293746,
+        "annotation": "Other",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 28.35721949533152
+    },
+    {
+        "GO_term": "exocytic vesicle",
+        "log2fc_PNEC_vs_others": 3.016231115495649,
+        "RB_E2F_CHIPseq_score": 0.5481699308652962,
+        "annotation": "Other",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 10.30584200462298
+    },
+    {
+        "GO_term": "response to ionizing radiation",
+        "log2fc_PNEC_vs_others": -0.316495908993384,
+        "RB_E2F_CHIPseq_score": 1.454443092178473,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 6.112657620003966
+    },
+    {
+        "GO_term": "transport vesicle membrane",
+        "log2fc_PNEC_vs_others": 2.68113035334154,
+        "RB_E2F_CHIPseq_score": 0.5991199267053875,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 6.072311236501418
+    },
+    {
+        "GO_term": "nose development",
+        "log2fc_PNEC_vs_others": 3.071179313807034,
+        "RB_E2F_CHIPseq_score": 0.3880411762666394,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 6.576708376723261
+    },
+    {
+        "GO_term": "histone binding",
+        "log2fc_PNEC_vs_others": 0.0042864335434814,
+        "RB_E2F_CHIPseq_score": 1.233695216045463,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 9.93072368842161
+    },
+    {
+        "GO_term": "cell body",
+        "log2fc_PNEC_vs_others": 3.228995089630702,
+        "RB_E2F_CHIPseq_score": 0.6200033217337048,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 9.833721295436227
+    },
+    {
+        "GO_term": "ESC/E(Z) complex",
+        "log2fc_PNEC_vs_others": 0.0138430552663621,
+        "RB_E2F_CHIPseq_score": 0.8053039903160076,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 3.85069957888311
+    },
+    {
+        "GO_term": "regulation of signal transduction by p53 class mediator",
+        "log2fc_PNEC_vs_others": -0.1952130048646947,
+        "RB_E2F_CHIPseq_score": 1.483772513771814,
+        "annotation": "Other",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 10.22056172439032
+    },
+    {
+        "GO_term": "regionalization",
+        "log2fc_PNEC_vs_others": 1.553854831033216,
+        "RB_E2F_CHIPseq_score": 0.3914698292619781,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 4.872151296041086
+    },
+    {
+        "GO_term": "cell fate specification",
+        "log2fc_PNEC_vs_others": 1.141925997663992,
+        "RB_E2F_CHIPseq_score": 0.1695166704885187,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 5.199919006021894
+    },
+    {
+        "GO_term": "regulation of ubiquitin protein ligase activity",
+        "log2fc_PNEC_vs_others": -0.9714755697090144,
+        "RB_E2F_CHIPseq_score": 1.590704174243126,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 3.869696036787605
+    },
+    {
+        "GO_term": "microtubule",
+        "log2fc_PNEC_vs_others": 0.0487877482172321,
+        "RB_E2F_CHIPseq_score": 1.248258428100323,
+        "annotation": "Other",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 22.39001417336228
+    },
+    {
+        "GO_term": "nuclear ubiquitin ligase complex",
+        "log2fc_PNEC_vs_others": -0.4483946424238184,
+        "RB_E2F_CHIPseq_score": 1.509108913792161,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 3.880960402962834
+    },
+    {
+        "GO_term": "microtubule organizing center",
+        "log2fc_PNEC_vs_others": -0.2184279284434325,
+        "RB_E2F_CHIPseq_score": 1.30139191925474,
+        "annotation": "Other",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 21.25527206852384
+    },
+    {
+        "GO_term": "organelle localization",
+        "log2fc_PNEC_vs_others": 1.450151985038472,
+        "RB_E2F_CHIPseq_score": 1.10717431510416,
+        "annotation": "Other",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 17.71957243986129
+    },
+    {
+        "GO_term": "organelle assembly",
+        "log2fc_PNEC_vs_others": -0.3032358944091685,
+        "RB_E2F_CHIPseq_score": 1.266665514518397,
+        "annotation": "Other",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 9.206996245961315
+    },
+    {
+        "GO_term": "microtubule cytoskeleton organization",
+        "log2fc_PNEC_vs_others": -0.1848114559844774,
+        "RB_E2F_CHIPseq_score": 1.316147023051212,
+        "annotation": "Other",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 47.75450157380595
+    },
+    {
+        "GO_term": "regulation of synaptic vesicle cycle",
+        "log2fc_PNEC_vs_others": 3.885950179429043,
+        "RB_E2F_CHIPseq_score": 0.4435161127772872,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 8.046701072128032
+    },
+    {
+        "GO_term": "mitotic cell cycle",
+        "log2fc_PNEC_vs_others": -0.5897051140784151,
+        "RB_E2F_CHIPseq_score": 1.552474094040284,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 127.0165730274768
+    },
+    {
+        "GO_term": "regulation of cell division",
+        "log2fc_PNEC_vs_others": -0.4563538059804594,
+        "RB_E2F_CHIPseq_score": 1.208935301838117,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 8.783502581015856
+    },
+    {
+        "GO_term": "regulation of synapse organization",
+        "log2fc_PNEC_vs_others": 2.400695798643253,
+        "RB_E2F_CHIPseq_score": 0.3836396067491855,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 4.994872915768569
+    },
+    {
+        "GO_term": "chromosome segregation",
+        "log2fc_PNEC_vs_others": -0.67862486602614,
+        "RB_E2F_CHIPseq_score": 1.672549679354268,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 57.88995953073522
+    },
+    {
+        "GO_term": "DNA packaging complex",
+        "log2fc_PNEC_vs_others": -0.4845054086647754,
+        "RB_E2F_CHIPseq_score": 1.750036313782797,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 5.669183531156273
+    },
+    {
+        "GO_term": "chromosome organization",
+        "log2fc_PNEC_vs_others": -0.4578495666583203,
+        "RB_E2F_CHIPseq_score": 1.482236586315903,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 69.71881090093706
+    },
+    {
+        "GO_term": "cell cycle checkpoint",
+        "log2fc_PNEC_vs_others": -0.8811688827751449,
+        "RB_E2F_CHIPseq_score": 1.551146913780344,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 31.18118026474693
+    },
+    {
+        "GO_term": "regulation of chromosome segregation",
+        "log2fc_PNEC_vs_others": -0.6440881953936822,
+        "RB_E2F_CHIPseq_score": 1.670392452024025,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 25.17946938682367
+    },
+    {
+        "GO_term": "regulation of cyclin-dependent protein serine/threonine kinase activity",
+        "log2fc_PNEC_vs_others": 1.040994785529782,
+        "RB_E2F_CHIPseq_score": 1.42613256258855,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 10.73318210907242
+    },
+    {
+        "GO_term": "positive regulation of cell cycle",
+        "log2fc_PNEC_vs_others": 0.1669291471955148,
+        "RB_E2F_CHIPseq_score": 1.298646288590264,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 28.88402951203617
+    },
+    {
+        "GO_term": "presynapse",
+        "log2fc_PNEC_vs_others": 3.094706389113028,
+        "RB_E2F_CHIPseq_score": 0.5529351720339476,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 11.58941222700616
+    },
+    {
+        "GO_term": "adult behavior",
+        "log2fc_PNEC_vs_others": 2.876972035755845,
+        "RB_E2F_CHIPseq_score": 0.4139411219096331,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 3.973921722381573
+    },
+    {
+        "GO_term": "regulation of meiotic cell cycle",
+        "log2fc_PNEC_vs_others": -0.7308128130991733,
+        "RB_E2F_CHIPseq_score": 1.136037507040515,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 5.750728483064681
+    },
+    {
+        "GO_term": "nerve development",
+        "log2fc_PNEC_vs_others": 2.000061388979298,
+        "RB_E2F_CHIPseq_score": 0.5989206927270474,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 7.131601353715361
+    },
+    {
+        "GO_term": "neuronal dense core vesicle",
+        "log2fc_PNEC_vs_others": 7.38979220681863,
+        "RB_E2F_CHIPseq_score": 0.1710800483523134,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 9.201582454440215
+    },
+    {
+        "GO_term": "cellular response to DNA damage stimulus",
+        "log2fc_PNEC_vs_others": -0.4471946239559604,
+        "RB_E2F_CHIPseq_score": 1.572810348104225,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 42.52658869105653
+    },
+    {
+        "GO_term": "neuron projection terminus",
+        "log2fc_PNEC_vs_others": 4.25426150136266,
+        "RB_E2F_CHIPseq_score": 0.4682736187800825,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 4.602204358933601
+    },
+    {
+        "GO_term": "MCM complex",
+        "log2fc_PNEC_vs_others": -0.194169232267309,
+        "RB_E2F_CHIPseq_score": 1.789454979718607,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 9.614656823884156
+    },
+    {
+        "GO_term": "catalytic activity, acting on DNA",
+        "log2fc_PNEC_vs_others": -0.2338439760292787,
+        "RB_E2F_CHIPseq_score": 1.621566119160417,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 24.85308552973603
+    },
+    {
+        "GO_term": "protein localization to chromosome",
+        "log2fc_PNEC_vs_others": -0.6947148862364104,
+        "RB_E2F_CHIPseq_score": 1.512571183949908,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 5.966672737484575
+    },
+    {
+        "GO_term": "positive regulation of cyclin-dependent protein kinase activity",
+        "log2fc_PNEC_vs_others": 1.901250853969009,
+        "RB_E2F_CHIPseq_score": 1.297977564075439,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 5.556772895495052
+    },
+    {
+        "GO_term": "regulation of DNA metabolic process",
+        "log2fc_PNEC_vs_others": -0.198181025640143,
+        "RB_E2F_CHIPseq_score": 1.59968891257566,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 7.433601343096038
+    },
+    {
+        "GO_term": "cell cycle process",
+        "log2fc_PNEC_vs_others": -0.5354181836049021,
+        "RB_E2F_CHIPseq_score": 1.504811336238309,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 125.0182756817175
+    },
+    {
+        "GO_term": "nuclear division",
+        "log2fc_PNEC_vs_others": -0.9410939709808406,
+        "RB_E2F_CHIPseq_score": 1.634207064087876,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 63.76695773857206
+    },
+    {
+        "GO_term": "midbody",
+        "log2fc_PNEC_vs_others": -0.583203085667596,
+        "RB_E2F_CHIPseq_score": 1.302631065281283,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 13.00721037323707
+    },
+    {
+        "GO_term": "somatodendritic compartment",
+        "log2fc_PNEC_vs_others": 2.801119810471424,
+        "RB_E2F_CHIPseq_score": 0.5877356618577725,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 11.26309217915007
+    },
+    {
+        "GO_term": "axon",
+        "log2fc_PNEC_vs_others": 3.095503182440229,
+        "RB_E2F_CHIPseq_score": 0.5613257187938738,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 19.8990293943045
+    },
+    {
+        "GO_term": "neural nucleus development",
+        "log2fc_PNEC_vs_others": 3.824516907419284,
+        "RB_E2F_CHIPseq_score": 0.5056077391442668,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 4.271531733691623
+    },
+    {
+        "GO_term": "synaptic membrane",
+        "log2fc_PNEC_vs_others": 2.77186412549361,
+        "RB_E2F_CHIPseq_score": 0.4087595495103898,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 5.171706966331878
+    },
+    {
+        "GO_term": "meiotic cell cycle",
+        "log2fc_PNEC_vs_others": -0.6172811740003233,
+        "RB_E2F_CHIPseq_score": 1.516548150483468,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 32.02985941765669
+    },
+    {
+        "GO_term": "DNA secondary structure binding",
+        "log2fc_PNEC_vs_others": -0.0156608525256486,
+        "RB_E2F_CHIPseq_score": 1.447870864272128,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 7.916896512222181
+    },
+    {
+        "GO_term": "regulation of response to DNA damage stimulus",
+        "log2fc_PNEC_vs_others": -0.4614186528392991,
+        "RB_E2F_CHIPseq_score": 1.64807222773458,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 5.131254967634019
+    },
+    {
+        "GO_term": "modulation of chemical synaptic transmission",
+        "log2fc_PNEC_vs_others": 3.084786544418804,
+        "RB_E2F_CHIPseq_score": 0.4062206613361631,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 8.93916182142137
+    },
+    {
+        "GO_term": "regulation of neurotransmitter transport",
+        "log2fc_PNEC_vs_others": 3.794991928315949,
+        "RB_E2F_CHIPseq_score": 0.4829349690150102,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 5.964162523016154
+    },
+    {
+        "GO_term": "negative regulation of chromosome organization",
+        "log2fc_PNEC_vs_others": -0.4130580589710327,
+        "RB_E2F_CHIPseq_score": 1.46550983186676,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 12.46247945686272
+    },
+    {
+        "GO_term": "neuron migration",
+        "log2fc_PNEC_vs_others": 2.47120547236328,
+        "RB_E2F_CHIPseq_score": 0.4066968399049556,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 6.86858752562174
+    },
+    {
+        "GO_term": "chromosomal region",
+        "log2fc_PNEC_vs_others": -0.7823618321177878,
+        "RB_E2F_CHIPseq_score": 1.677157795621953,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 60.92286608771973
+    },
+    {
+        "GO_term": "neuron differentiation",
+        "log2fc_PNEC_vs_others": 2.018003338266737,
+        "RB_E2F_CHIPseq_score": 0.4518332386259261,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 16.04605421661306
+    },
+    {
+        "GO_term": "DNA polymerase complex",
+        "log2fc_PNEC_vs_others": -1.392472050597941,
+        "RB_E2F_CHIPseq_score": 1.461686574385645,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 7.280388835804919
+    },
+    {
+        "GO_term": "condensed chromosome",
+        "log2fc_PNEC_vs_others": -0.8936143985328543,
+        "RB_E2F_CHIPseq_score": 1.659632083441207,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 52.66684945581025
+    },
+    {
+        "GO_term": "regulation of neurotransmitter levels",
+        "log2fc_PNEC_vs_others": 3.529767322104744,
+        "RB_E2F_CHIPseq_score": 0.4193488274050775,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 10.91610802863907
+    },
+    {
+        "GO_term": "neurotransmitter transport",
+        "log2fc_PNEC_vs_others": 3.898550119308734,
+        "RB_E2F_CHIPseq_score": 0.4574326596958942,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 20,
+        "sum_abs_log10_q_value": 9.44970916448586
+    },
+    {
+        "GO_term": "regulation of cell cycle process",
+        "log2fc_PNEC_vs_others": -0.2057577711184686,
+        "RB_E2F_CHIPseq_score": 1.31286871434223,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 49.20877735414541
+    },
+    {
+        "GO_term": "regulation of mitotic cell cycle",
+        "log2fc_PNEC_vs_others": -0.2183857929003446,
+        "RB_E2F_CHIPseq_score": 1.323779692006223,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 40.95644756948349
+    },
+    {
+        "GO_term": "regulation of nuclear division",
+        "log2fc_PNEC_vs_others": -0.5363347456410675,
+        "RB_E2F_CHIPseq_score": 1.480380938903345,
+        "annotation": "Cell proliferation",
+        "marker_size_binned_q": 80,
+        "sum_abs_log10_q_value": 24.66651804335836
+    },
+    {
+        "GO_term": "heterochromatin",
+        "log2fc_PNEC_vs_others": -0.2964194485182021,
+        "RB_E2F_CHIPseq_score": 1.411786128092049,
+        "annotation": "DNA maintenance",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 10.02918201167309
+    },
+    {
+        "GO_term": "chemical synaptic transmission",
+        "log2fc_PNEC_vs_others": 3.007876100406344,
+        "RB_E2F_CHIPseq_score": 0.4226647919052315,
+        "annotation": "Neuronal",
+        "marker_size_binned_q": 40,
+        "sum_abs_log10_q_value": 10.284298181991
+    }
+];
+
+        const palette = {
+            'Cell proliferation': '#F28E2B',
+            'DNA maintenance': '#C1272D',
+            'Neuronal': '#5DBCD2',
+            'Other': '#808080'
+        };
+
+        const sizeScaleFactor = 2.5;
+        df.forEach(row => {
+            // Calculate diameter based on area to match legend (radius = sqrt(area/pi))
+            row.plot_size = 2 * Math.sqrt((row.marker_size_binned_q * sizeScaleFactor) / Math.PI);
+            row.color = palette[row.annotation];
+        });
+        
+        // Reverse data for plotting order (matplotlib default is bottom-up)
+        df.reverse();
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: { top: 80, right: 20, bottom: 60, left: 80 },
+            xAxis: {
+                name: 'log₂ (fold change) in PNECs vs others',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: -1.5,
+                max: 7.8,
+                interval: 1,
+                axisLabel: { color: 'black', fontSize: 11 },
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                axisTick: { alignWithLabel: true },
+                splitLine: { show: true, lineStyle: { color: 'black', width: 0.5 } }
+            },
+            yAxis: {
+                name: 'RB-E2F ChIP-seq score',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: 0.1,
+                max: 2.1,
+                interval: 0.2,
+                axisLabel: { color: 'black', fontSize: 11 },
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                axisTick: { alignWithLabel: true },
+                splitLine: { show: false }
+            },
+            series: [{
+                type: 'scatter',
+                data: df.map(row => ({
+                    value: [row.log2fc_PNEC_vs_others, row.RB_E2F_CHIPseq_score],
+                    itemStyle: {
+                        color: row.color,
+                        borderColor: 'white',
+                        borderWidth: 0.8,
+                        opacity: 1
+                    },
+                    symbolSize: row.plot_size // ECharts symbolSize is diameter
+                })),
+                z: 2
+            }],
+            markLine: {
+                silent: true,
+                lineStyle: {
+                    color: 'black',
+                    type: 'solid',
+                    width: 1.2
+                },
+                data: [{ xAxis: 0 }, { yAxis: 0.5 }]
+            },
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'd',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        // Custom Legend for Size and Color
+        // These need to be placed carefully using explicit pixel positions or relative to grid.
+        // For simplicity and direct translation of custom Matplotlib legend, we use `graphic` elements.
+
+        const legendX = 0.75; // Normalized X position for graphic elements
+        let legendY = 0.05;  // Normalized Y position for graphic elements (from top)
+
+        // Title for Color Legend
+        option.graphic.push({
+            type: 'text',
+            right: '20%',
+            top: 50,
+            style: { text: 'Annotations', fill: 'black', fontSize: 12, fontWeight: 'bold' }
+        });
+
+        const colorOrder = ['Cell proliferation', 'DNA maintenance', 'Neuronal', 'Other'];
+        colorOrder.forEach((cat, i) => {
+            option.graphic.push({
+                type: 'circle',
+                right: '20%',
+                top: 75 + i * 20,
+                shape: { r: 5 }, // Smaller marker in legend
+                style: { fill: palette[cat], stroke: 'white', lineWidth: 0.8 }
+            });
+            option.graphic.push({
+                type: 'text',
+                right: '15%',
+                top: 75 + i * 20,
+                style: { text: cat, fill: 'black', fontSize: 11, align: 'left' }
+            });
+        });
+
+        // Title for Size Legend
+        option.graphic.push({
+            type: 'text',
+            right: '20%',
+            top: 75 + colorOrder.length * 20 + 20,
+            style: { text: 'q-values', fill: 'black', fontSize: 12, fontWeight: 'bold' }
+        });
+
+        const sizesRaw = [20, 40, 80];
+        const sizeLabels = [
+            '0.01 ≥ q > 10⁻¹⁰',
+            '10⁻¹⁰ ≥ q > 10⁻²⁰',
+            '10⁻²⁰ ≥ q'
+        ];
+        sizesRaw.forEach((size, i) => {
+            // Replicate Matplotlib's marker size in legend. It is area, so sqrt(area/PI) is radius.
+            const markerRadius = Math.sqrt(size * sizeScaleFactor / Math.PI);
+
+            option.graphic.push({
+                type: 'circle',
+                right: '20%',
+                top: 75 + (colorOrder.length + 1) * 20 + 20 + i * 25,
+                shape: { r: markerRadius },
+                style: { fill: 'black', stroke: 'white', lineWidth: 0.8 }
+            });
+            option.graphic.push({
+                type: 'text',
+                right: '15%',
+                top: 75 + (colorOrder.length + 1) * 20 + 20 + i * 25,
+                style: { text: sizeLabels[i], fill: 'black', fontSize: 11, align: 'left' }
+            });
+        });
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

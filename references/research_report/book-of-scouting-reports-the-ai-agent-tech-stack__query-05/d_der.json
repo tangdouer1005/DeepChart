@@ -1,0 +1,370 @@
+{
+  "query_id": 5,
+  "query_text": "Create a heatmap showing, for each direction, the percentage of companies in each Commercial Maturity bucket from 1 / 5 through 5 / 5 plus N/A, restricted to directions with at least 3 companies, with directions sorted by the share of companies at 4 / 5 or 5 / 5 combined.",
+  "status": "complete",
+  "chart": {
+    "type": "heatmap",
+    "title": "Commercial maturity mix by direction",
+    "x_field": "maturity_bucket",
+    "y_field": "direction",
+    "value_field": "share_pct",
+    "x_order": [
+      "1/5",
+      "2/5",
+      "3/5",
+      "4/5",
+      "5/5",
+      "N/A"
+    ],
+    "y_order": [
+      "Model deployment & serving",
+      "Vector databases",
+      "LLM data preparation platforms",
+      "Large language model (LLM) developers",
+      "Tool libraries & integration platforms",
+      "Security & risk management platforms",
+      "Voice",
+      "Low-code platforms",
+      "AI web search APIs & scrapers",
+      "Developer frameworks & platforms",
+      "Authentication platforms",
+      "LLM benchmarking & model routing",
+      "Observability, evaluation, & governance",
+      "Payments infrastructure",
+      "Browser infrastructure",
+      "Memory management",
+      "Multi-agent systems & orchestration"
+    ],
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "data": [
+    {
+      "direction": "AI web search APIs & scrapers",
+      "maturity_bucket": "2/5",
+      "share_pct": 50.0,
+      "high_maturity_share_pct": 25.0
+    },
+    {
+      "direction": "AI web search APIs & scrapers",
+      "maturity_bucket": "3/5",
+      "share_pct": 12.5,
+      "high_maturity_share_pct": 25.0
+    },
+    {
+      "direction": "AI web search APIs & scrapers",
+      "maturity_bucket": "4/5",
+      "share_pct": 25.0,
+      "high_maturity_share_pct": 25.0
+    },
+    {
+      "direction": "AI web search APIs & scrapers",
+      "maturity_bucket": "N/A",
+      "share_pct": 12.5,
+      "high_maturity_share_pct": 25.0
+    },
+    {
+      "direction": "Authentication platforms",
+      "maturity_bucket": "1/5",
+      "share_pct": 20.0,
+      "high_maturity_share_pct": 20.0
+    },
+    {
+      "direction": "Authentication platforms",
+      "maturity_bucket": "3/5",
+      "share_pct": 20.0,
+      "high_maturity_share_pct": 20.0
+    },
+    {
+      "direction": "Authentication platforms",
+      "maturity_bucket": "4/5",
+      "share_pct": 20.0,
+      "high_maturity_share_pct": 20.0
+    },
+    {
+      "direction": "Authentication platforms",
+      "maturity_bucket": "N/A",
+      "share_pct": 40.0,
+      "high_maturity_share_pct": 20.0
+    },
+    {
+      "direction": "Browser infrastructure",
+      "maturity_bucket": "3/5",
+      "share_pct": 100.0,
+      "high_maturity_share_pct": 0.0
+    },
+    {
+      "direction": "Developer frameworks & platforms",
+      "maturity_bucket": "1/5",
+      "share_pct": 11.11111111111111,
+      "high_maturity_share_pct": 22.22222222222222
+    },
+    {
+      "direction": "Developer frameworks & platforms",
+      "maturity_bucket": "2/5",
+      "share_pct": 22.22222222222222,
+      "high_maturity_share_pct": 22.22222222222222
+    },
+    {
+      "direction": "Developer frameworks & platforms",
+      "maturity_bucket": "3/5",
+      "share_pct": 44.44444444444444,
+      "high_maturity_share_pct": 22.22222222222222
+    },
+    {
+      "direction": "Developer frameworks & platforms",
+      "maturity_bucket": "4/5",
+      "share_pct": 22.22222222222222,
+      "high_maturity_share_pct": 22.22222222222222
+    },
+    {
+      "direction": "LLM benchmarking & model routing",
+      "maturity_bucket": "1/5",
+      "share_pct": 33.33333333333333,
+      "high_maturity_share_pct": 16.666666666666664
+    },
+    {
+      "direction": "LLM benchmarking & model routing",
+      "maturity_bucket": "3/5",
+      "share_pct": 50.0,
+      "high_maturity_share_pct": 16.666666666666664
+    },
+    {
+      "direction": "LLM benchmarking & model routing",
+      "maturity_bucket": "4/5",
+      "share_pct": 16.666666666666664,
+      "high_maturity_share_pct": 16.666666666666664
+    },
+    {
+      "direction": "LLM data preparation platforms",
+      "maturity_bucket": "2/5",
+      "share_pct": 25.0,
+      "high_maturity_share_pct": 50.0
+    },
+    {
+      "direction": "LLM data preparation platforms",
+      "maturity_bucket": "3/5",
+      "share_pct": 25.0,
+      "high_maturity_share_pct": 50.0
+    },
+    {
+      "direction": "LLM data preparation platforms",
+      "maturity_bucket": "4/5",
+      "share_pct": 50.0,
+      "high_maturity_share_pct": 50.0
+    },
+    {
+      "direction": "Large language model (LLM) developers",
+      "maturity_bucket": "3/5",
+      "share_pct": 50.0,
+      "high_maturity_share_pct": 50.0
+    },
+    {
+      "direction": "Large language model (LLM) developers",
+      "maturity_bucket": "4/5",
+      "share_pct": 30.0,
+      "high_maturity_share_pct": 50.0
+    },
+    {
+      "direction": "Large language model (LLM) developers",
+      "maturity_bucket": "5/5",
+      "share_pct": 20.0,
+      "high_maturity_share_pct": 50.0
+    },
+    {
+      "direction": "Low-code platforms",
+      "maturity_bucket": "1/5",
+      "share_pct": 15.384615384615385,
+      "high_maturity_share_pct": 30.76923076923077
+    },
+    {
+      "direction": "Low-code platforms",
+      "maturity_bucket": "2/5",
+      "share_pct": 7.6923076923076925,
+      "high_maturity_share_pct": 30.76923076923077
+    },
+    {
+      "direction": "Low-code platforms",
+      "maturity_bucket": "3/5",
+      "share_pct": 38.46153846153847,
+      "high_maturity_share_pct": 30.76923076923077
+    },
+    {
+      "direction": "Low-code platforms",
+      "maturity_bucket": "4/5",
+      "share_pct": 30.76923076923077,
+      "high_maturity_share_pct": 30.76923076923077
+    },
+    {
+      "direction": "Low-code platforms",
+      "maturity_bucket": "N/A",
+      "share_pct": 7.6923076923076925,
+      "high_maturity_share_pct": 30.76923076923077
+    },
+    {
+      "direction": "Memory management",
+      "maturity_bucket": "1/5",
+      "share_pct": 16.666666666666664,
+      "high_maturity_share_pct": 0.0
+    },
+    {
+      "direction": "Memory management",
+      "maturity_bucket": "2/5",
+      "share_pct": 16.666666666666664,
+      "high_maturity_share_pct": 0.0
+    },
+    {
+      "direction": "Memory management",
+      "maturity_bucket": "3/5",
+      "share_pct": 50.0,
+      "high_maturity_share_pct": 0.0
+    },
+    {
+      "direction": "Memory management",
+      "maturity_bucket": "N/A",
+      "share_pct": 16.666666666666664,
+      "high_maturity_share_pct": 0.0
+    },
+    {
+      "direction": "Model deployment & serving",
+      "maturity_bucket": "3/5",
+      "share_pct": 11.11111111111111,
+      "high_maturity_share_pct": 88.88888888888889
+    },
+    {
+      "direction": "Model deployment & serving",
+      "maturity_bucket": "4/5",
+      "share_pct": 66.66666666666666,
+      "high_maturity_share_pct": 88.88888888888889
+    },
+    {
+      "direction": "Model deployment & serving",
+      "maturity_bucket": "5/5",
+      "share_pct": 22.22222222222222,
+      "high_maturity_share_pct": 88.88888888888889
+    },
+    {
+      "direction": "Multi-agent systems & orchestration",
+      "maturity_bucket": "3/5",
+      "share_pct": 66.66666666666666,
+      "high_maturity_share_pct": 0.0
+    },
+    {
+      "direction": "Multi-agent systems & orchestration",
+      "maturity_bucket": "N/A",
+      "share_pct": 33.33333333333333,
+      "high_maturity_share_pct": 0.0
+    },
+    {
+      "direction": "Observability, evaluation, & governance",
+      "maturity_bucket": "1/5",
+      "share_pct": 6.666666666666667,
+      "high_maturity_share_pct": 13.333333333333334
+    },
+    {
+      "direction": "Observability, evaluation, & governance",
+      "maturity_bucket": "2/5",
+      "share_pct": 13.333333333333334,
+      "high_maturity_share_pct": 13.333333333333334
+    },
+    {
+      "direction": "Observability, evaluation, & governance",
+      "maturity_bucket": "3/5",
+      "share_pct": 66.66666666666666,
+      "high_maturity_share_pct": 13.333333333333334
+    },
+    {
+      "direction": "Observability, evaluation, & governance",
+      "maturity_bucket": "4/5",
+      "share_pct": 13.333333333333334,
+      "high_maturity_share_pct": 13.333333333333334
+    },
+    {
+      "direction": "Payments infrastructure",
+      "maturity_bucket": "1/5",
+      "share_pct": 37.5,
+      "high_maturity_share_pct": 12.5
+    },
+    {
+      "direction": "Payments infrastructure",
+      "maturity_bucket": "2/5",
+      "share_pct": 12.5,
+      "high_maturity_share_pct": 12.5
+    },
+    {
+      "direction": "Payments infrastructure",
+      "maturity_bucket": "3/5",
+      "share_pct": 37.5,
+      "high_maturity_share_pct": 12.5
+    },
+    {
+      "direction": "Payments infrastructure",
+      "maturity_bucket": "5/5",
+      "share_pct": 12.5,
+      "high_maturity_share_pct": 12.5
+    },
+    {
+      "direction": "Security & risk management platforms",
+      "maturity_bucket": "2/5",
+      "share_pct": 7.6923076923076925,
+      "high_maturity_share_pct": 38.46153846153847
+    },
+    {
+      "direction": "Security & risk management platforms",
+      "maturity_bucket": "3/5",
+      "share_pct": 53.84615384615385,
+      "high_maturity_share_pct": 38.46153846153847
+    },
+    {
+      "direction": "Security & risk management platforms",
+      "maturity_bucket": "4/5",
+      "share_pct": 38.46153846153847,
+      "high_maturity_share_pct": 38.46153846153847
+    },
+    {
+      "direction": "Tool libraries & integration platforms",
+      "maturity_bucket": "1/5",
+      "share_pct": 20.0,
+      "high_maturity_share_pct": 40.0
+    },
+    {
+      "direction": "Tool libraries & integration platforms",
+      "maturity_bucket": "3/5",
+      "share_pct": 40.0,
+      "high_maturity_share_pct": 40.0
+    },
+    {
+      "direction": "Tool libraries & integration platforms",
+      "maturity_bucket": "4/5",
+      "share_pct": 40.0,
+      "high_maturity_share_pct": 40.0
+    },
+    {
+      "direction": "Vector databases",
+      "maturity_bucket": "3/5",
+      "share_pct": 33.33333333333333,
+      "high_maturity_share_pct": 66.66666666666666
+    },
+    {
+      "direction": "Vector databases",
+      "maturity_bucket": "4/5",
+      "share_pct": 66.66666666666666,
+      "high_maturity_share_pct": 66.66666666666666
+    },
+    {
+      "direction": "Voice",
+      "maturity_bucket": "3/5",
+      "share_pct": 61.53846153846154,
+      "high_maturity_share_pct": 38.46153846153847
+    },
+    {
+      "direction": "Voice",
+      "maturity_bucket": "4/5",
+      "share_pct": 38.46153846153847,
+      "high_maturity_share_pct": 38.46153846153847
+    }
+  ],
+  "notes": []
+}

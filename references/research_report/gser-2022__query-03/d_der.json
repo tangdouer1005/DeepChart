@@ -1,0 +1,494 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a bubble chart covering all ecosystems where `Early-Stage Funding Growth Tier`, `Total VC Funding`, `Total Early-Stage Funding`, and `Ecosystem Value` are all exact values; the x-axis is `Early-Stage Funding Growth Tier` in `tier score 1-10`, the y-axis is `Total VC Funding / Total Early-Stage Funding` in `x multiple`, bubble size is `Ecosystem Value` in `$B`, and only the top 10 ecosystems by highest y value are labeled.",
+  "chart_type": "bubble chart",
+  "value_unit": "tier / x multiple / $B",
+  "sort_rule": "labels assigned to top 10 by vc leverage",
+  "selection_rule": "all exact ecosystems",
+  "plot_spec": {
+    "title": "2022 Growth Tier vs VC Leverage",
+    "x_field": "x_growth_tier",
+    "y_field": "y_vc_leverage",
+    "size_field": "size_ecosystem_value_busd",
+    "xlabel": "Early-Stage Funding Growth Tier",
+    "ylabel": "VC / Early-Stage Funding (x)"
+  },
+  "records": [
+    {
+      "entity": "Accra",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 6.2857,
+      "size_ecosystem_value_busd": 0.259,
+      "label": false
+    },
+    {
+      "entity": "Cape Town",
+      "x_growth_tier": 8,
+      "y_vc_leverage": 3.5392,
+      "size_ecosystem_value_busd": 2.8,
+      "label": false
+    },
+    {
+      "entity": "Johannesburg",
+      "x_growth_tier": 9,
+      "y_vc_leverage": 4.4286,
+      "size_ecosystem_value_busd": 0.962,
+      "label": false
+    },
+    {
+      "entity": "Lagos",
+      "x_growth_tier": 9,
+      "y_vc_leverage": 3.4026,
+      "size_ecosystem_value_busd": 9.0,
+      "label": false
+    },
+    {
+      "entity": "Nairobi",
+      "x_growth_tier": 7,
+      "y_vc_leverage": 1.0,
+      "size_ecosystem_value_busd": 2.0,
+      "label": false
+    },
+    {
+      "entity": "Bangalore - Karnataka",
+      "x_growth_tier": 9,
+      "y_vc_leverage": 10.0,
+      "size_ecosystem_value_busd": 105.0,
+      "label": true
+    },
+    {
+      "entity": "Beijing",
+      "x_growth_tier": 1,
+      "y_vc_leverage": 9.0526,
+      "size_ecosystem_value_busd": 795.0,
+      "label": false
+    },
+    {
+      "entity": "Kerala",
+      "x_growth_tier": 8,
+      "y_vc_leverage": 1.5926,
+      "size_ecosystem_value_busd": 0.133,
+      "label": false
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "x_growth_tier": 3,
+      "y_vc_leverage": 33.3333,
+      "size_ecosystem_value_busd": 72.0,
+      "label": true
+    },
+    {
+      "entity": "Kyoto",
+      "x_growth_tier": 2,
+      "y_vc_leverage": 7.0513,
+      "size_ecosystem_value_busd": 0.471,
+      "label": false
+    },
+    {
+      "entity": "Manila",
+      "x_growth_tier": 10,
+      "y_vc_leverage": 1.9692,
+      "size_ecosystem_value_busd": 2.0,
+      "label": false
+    },
+    {
+      "entity": "Osaka",
+      "x_growth_tier": 7,
+      "y_vc_leverage": 6.0984,
+      "size_ecosystem_value_busd": 0.392,
+      "label": false
+    },
+    {
+      "entity": "Seoul",
+      "x_growth_tier": 8,
+      "y_vc_leverage": 8.2609,
+      "size_ecosystem_value_busd": 177.0,
+      "label": false
+    },
+    {
+      "entity": "Shanghai",
+      "x_growth_tier": 1,
+      "y_vc_leverage": 11.5556,
+      "size_ecosystem_value_busd": 250.0,
+      "label": true
+    },
+    {
+      "entity": "Shenzhen",
+      "x_growth_tier": 1,
+      "y_vc_leverage": 11.4286,
+      "size_ecosystem_value_busd": 97.0,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "x_growth_tier": 8,
+      "y_vc_leverage": 5.3125,
+      "size_ecosystem_value_busd": 89.0,
+      "label": false
+    },
+    {
+      "entity": "Sri Lanka",
+      "x_growth_tier": 1,
+      "y_vc_leverage": 7.0,
+      "size_ecosystem_value_busd": 0.228,
+      "label": false
+    },
+    {
+      "entity": "Telangana",
+      "x_growth_tier": 4,
+      "y_vc_leverage": 5.4945,
+      "size_ecosystem_value_busd": 4.8,
+      "label": false
+    },
+    {
+      "entity": "Tokyo",
+      "x_growth_tier": 3,
+      "y_vc_leverage": 5.0,
+      "size_ecosystem_value_busd": 62.0,
+      "label": false
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 4.8421,
+      "size_ecosystem_value_busd": 54.0,
+      "label": false
+    },
+    {
+      "entity": "Belgrade and Novi Sad",
+      "x_growth_tier": 4,
+      "y_vc_leverage": 2.0789,
+      "size_ecosystem_value_busd": 0.677,
+      "label": false
+    },
+    {
+      "entity": "Berlin",
+      "x_growth_tier": 7,
+      "y_vc_leverage": 6.5714,
+      "size_ecosystem_value_busd": 94.0,
+      "label": false
+    },
+    {
+      "entity": "Biscay Startup Bay",
+      "x_growth_tier": 8,
+      "y_vc_leverage": 4.2857,
+      "size_ecosystem_value_busd": 0.471,
+      "label": false
+    },
+    {
+      "entity": "Budapest",
+      "x_growth_tier": 2,
+      "y_vc_leverage": 2.1043,
+      "size_ecosystem_value_busd": 1.6,
+      "label": false
+    },
+    {
+      "entity": "Denmark",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 5.3636,
+      "size_ecosystem_value_busd": 38.0,
+      "label": false
+    },
+    {
+      "entity": "Frankfurt",
+      "x_growth_tier": 7,
+      "y_vc_leverage": 5.3719,
+      "size_ecosystem_value_busd": 11.0,
+      "label": false
+    },
+    {
+      "entity": "Helsinki Metropolitan Area",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 5.0526,
+      "size_ecosystem_value_busd": 25.0,
+      "label": false
+    },
+    {
+      "entity": "Istanbul",
+      "x_growth_tier": 9,
+      "y_vc_leverage": 4.2105,
+      "size_ecosystem_value_busd": 17.0,
+      "label": false
+    },
+    {
+      "entity": "Lille",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 10.8,
+      "size_ecosystem_value_busd": 7.0,
+      "label": true
+    },
+    {
+      "entity": "London",
+      "x_growth_tier": 7,
+      "y_vc_leverage": 4.8571,
+      "size_ecosystem_value_busd": 314.0,
+      "label": false
+    },
+    {
+      "entity": "Mannheim-Heidelberg",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 7.87,
+      "size_ecosystem_value_busd": 2.3,
+      "label": false
+    },
+    {
+      "entity": "Metro Rhein-Ruhr",
+      "x_growth_tier": 8,
+      "y_vc_leverage": 3.6842,
+      "size_ecosystem_value_busd": 5.5,
+      "label": false
+    },
+    {
+      "entity": "Mid-East Region Ireland",
+      "x_growth_tier": 1,
+      "y_vc_leverage": 15.2941,
+      "size_ecosystem_value_busd": 0.412,
+      "label": true
+    },
+    {
+      "entity": "Paris",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 4.6,
+      "size_ecosystem_value_busd": 89.0,
+      "label": false
+    },
+    {
+      "entity": "Stockholm",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 4.3846,
+      "size_ecosystem_value_busd": 63.0,
+      "label": false
+    },
+    {
+      "entity": "Turin",
+      "x_growth_tier": 9,
+      "y_vc_leverage": 1.5962,
+      "size_ecosystem_value_busd": 0.654,
+      "label": false
+    },
+    {
+      "entity": "Bogota",
+      "x_growth_tier": 7,
+      "y_vc_leverage": 10.2041,
+      "size_ecosystem_value_busd": 9.8,
+      "label": true
+    },
+    {
+      "entity": "Buenos Aires",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 5.8559,
+      "size_ecosystem_value_busd": 7.0,
+      "label": false
+    },
+    {
+      "entity": "Mexico City",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 4.6943,
+      "size_ecosystem_value_busd": 22.0,
+      "label": false
+    },
+    {
+      "entity": "Rio de Janeiro",
+      "x_growth_tier": 9,
+      "y_vc_leverage": 3.8029,
+      "size_ecosystem_value_busd": 2.2,
+      "label": false
+    },
+    {
+      "entity": "Abu Dhabi",
+      "x_growth_tier": 9,
+      "y_vc_leverage": 2.134,
+      "size_ecosystem_value_busd": 4.0,
+      "label": false
+    },
+    {
+      "entity": "Bahrain",
+      "x_growth_tier": 1,
+      "y_vc_leverage": 7.6316,
+      "size_ecosystem_value_busd": 0.564,
+      "label": false
+    },
+    {
+      "entity": "Cairo",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 1.9218,
+      "size_ecosystem_value_busd": 2.7,
+      "label": false
+    },
+    {
+      "entity": "Doha",
+      "x_growth_tier": 10,
+      "y_vc_leverage": 5.3333,
+      "size_ecosystem_value_busd": 0.123,
+      "label": false
+    },
+    {
+      "entity": "Sharjah",
+      "x_growth_tier": 1,
+      "y_vc_leverage": 10.4598,
+      "size_ecosystem_value_busd": 0.208,
+      "label": true
+    },
+    {
+      "entity": "Tel Aviv",
+      "x_growth_tier": 4,
+      "y_vc_leverage": 5.4545,
+      "size_ecosystem_value_busd": 120.0,
+      "label": false
+    },
+    {
+      "entity": "Tunisia",
+      "x_growth_tier": 10,
+      "y_vc_leverage": 3.8182,
+      "size_ecosystem_value_busd": 0.026,
+      "label": false
+    },
+    {
+      "entity": "Atlantic Canada",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 4.7273,
+      "size_ecosystem_value_busd": 4.4,
+      "label": false
+    },
+    {
+      "entity": "Austin",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 5.5556,
+      "size_ecosystem_value_busd": 42.0,
+      "label": false
+    },
+    {
+      "entity": "Boston",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 5.8621,
+      "size_ecosystem_value_busd": 266.0,
+      "label": false
+    },
+    {
+      "entity": "Calgary",
+      "x_growth_tier": 9,
+      "y_vc_leverage": 3.7652,
+      "size_ecosystem_value_busd": 2.5,
+      "label": false
+    },
+    {
+      "entity": "Chicago",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 6.4706,
+      "size_ecosystem_value_busd": 49.0,
+      "label": false
+    },
+    {
+      "entity": "Edmonton",
+      "x_growth_tier": 7,
+      "y_vc_leverage": 1.5821,
+      "size_ecosystem_value_busd": 0.641,
+      "label": false
+    },
+    {
+      "entity": "Indiana",
+      "x_growth_tier": 9,
+      "y_vc_leverage": 3.0319,
+      "size_ecosystem_value_busd": 2.9,
+      "label": false
+    },
+    {
+      "entity": "Los Angeles",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 6.6102,
+      "size_ecosystem_value_busd": 297.0,
+      "label": false
+    },
+    {
+      "entity": "Miami",
+      "x_growth_tier": 7,
+      "y_vc_leverage": 4.0,
+      "size_ecosystem_value_busd": 36.0,
+      "label": false
+    },
+    {
+      "entity": "Mississippi",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 36.6667,
+      "size_ecosystem_value_busd": 0.03,
+      "label": true
+    },
+    {
+      "entity": "New York City",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 6.2857,
+      "size_ecosystem_value_busd": 371.0,
+      "label": false
+    },
+    {
+      "entity": "Philadelphia",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 7.6923,
+      "size_ecosystem_value_busd": 46.0,
+      "label": false
+    },
+    {
+      "entity": "Pittsburgh",
+      "x_growth_tier": 4,
+      "y_vc_leverage": 7.6531,
+      "size_ecosystem_value_busd": 11.6,
+      "label": false
+    },
+    {
+      "entity": "San Diego",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 5.7143,
+      "size_ecosystem_value_busd": 94.0,
+      "label": false
+    },
+    {
+      "entity": "Seattle",
+      "x_growth_tier": 3,
+      "y_vc_leverage": 4.2105,
+      "size_ecosystem_value_busd": 109.0,
+      "label": false
+    },
+    {
+      "entity": "Silicon Valley",
+      "x_growth_tier": 5,
+      "y_vc_leverage": 9.88,
+      "size_ecosystem_value_busd": 2000.0,
+      "label": true
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 4.4444,
+      "size_ecosystem_value_busd": 46.0,
+      "label": false
+    },
+    {
+      "entity": "Washington, D.C.",
+      "x_growth_tier": 4,
+      "y_vc_leverage": 5.9091,
+      "size_ecosystem_value_busd": 56.0,
+      "label": false
+    },
+    {
+      "entity": "Melbourne",
+      "x_growth_tier": 6,
+      "y_vc_leverage": 3.799,
+      "size_ecosystem_value_busd": 17.0,
+      "label": false
+    },
+    {
+      "entity": "New Zealand",
+      "x_growth_tier": 7,
+      "y_vc_leverage": 3.0726,
+      "size_ecosystem_value_busd": 4.7,
+      "label": false
+    },
+    {
+      "entity": "Sydney",
+      "x_growth_tier": 9,
+      "y_vc_leverage": 4.5385,
+      "size_ecosystem_value_busd": 68.0,
+      "label": false
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "query_id": 9,
+  "query_text": "Create a stacked bar chart showing, for the top 8 directions by total disclosed funding, the percentage split of companies across stage families `early` (Seed, Pre-Seed, Seed VC, Series A), `mid` (Series B and Series C), `late` (Series D and later, Private Equity, Secondary Market, Corporate Minority, Loan, Grant, Option/Warrant, Convertible Note, Biz Plan, Spinoff / Spinout), and `other / unattributed`, with directions sorted by total disclosed funding in $M.",
+  "status": "complete",
+  "chart": {
+    "type": "stacked_bar",
+    "title": "Stage-family mix in top funded directions",
+    "group_field": "direction",
+    "segment_field": "stage_family",
+    "value_field": "share_pct",
+    "group_order": [
+      "Large language model (LLM) developers",
+      "Model deployment & serving",
+      "Payments infrastructure",
+      "AI web search APIs & scrapers",
+      "Developer frameworks & platforms",
+      "Voice",
+      "Vector databases",
+      "Low-code platforms"
+    ],
+    "segment_order": [
+      "early",
+      "mid",
+      "late",
+      "other / unattributed"
+    ],
+    "y_label": "Share of companies (%)",
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "direction": "AI web search APIs & scrapers",
+      "stage_family": "early",
+      "share_pct": 50.0,
+      "direction_funding_m": 1068.4
+    },
+    {
+      "direction": "AI web search APIs & scrapers",
+      "stage_family": "late",
+      "share_pct": 12.5,
+      "direction_funding_m": 1068.4
+    },
+    {
+      "direction": "AI web search APIs & scrapers",
+      "stage_family": "mid",
+      "share_pct": 25.0,
+      "direction_funding_m": 1068.4
+    },
+    {
+      "direction": "AI web search APIs & scrapers",
+      "stage_family": "other / unattributed",
+      "share_pct": 12.5,
+      "direction_funding_m": 1068.4
+    },
+    {
+      "direction": "Developer frameworks & platforms",
+      "stage_family": "early",
+      "share_pct": 77.77777777777779,
+      "direction_funding_m": 843.6
+    },
+    {
+      "direction": "Developer frameworks & platforms",
+      "stage_family": "mid",
+      "share_pct": 22.22222222222222,
+      "direction_funding_m": 843.6
+    },
+    {
+      "direction": "Large language model (LLM) developers",
+      "stage_family": "early",
+      "share_pct": 20.0,
+      "direction_funding_m": 123417.0
+    },
+    {
+      "direction": "Large language model (LLM) developers",
+      "stage_family": "late",
+      "share_pct": 60.0,
+      "direction_funding_m": 123417.0
+    },
+    {
+      "direction": "Large language model (LLM) developers",
+      "stage_family": "mid",
+      "share_pct": 10.0,
+      "direction_funding_m": 123417.0
+    },
+    {
+      "direction": "Large language model (LLM) developers",
+      "stage_family": "other / unattributed",
+      "share_pct": 10.0,
+      "direction_funding_m": 123417.0
+    },
+    {
+      "direction": "Low-code platforms",
+      "stage_family": "early",
+      "share_pct": 69.23076923076923,
+      "direction_funding_m": 650.2
+    },
+    {
+      "direction": "Low-code platforms",
+      "stage_family": "late",
+      "share_pct": 23.076923076923077,
+      "direction_funding_m": 650.2
+    },
+    {
+      "direction": "Low-code platforms",
+      "stage_family": "other / unattributed",
+      "share_pct": 7.6923076923076925,
+      "direction_funding_m": 650.2
+    },
+    {
+      "direction": "Model deployment & serving",
+      "stage_family": "early",
+      "share_pct": 11.11111111111111,
+      "direction_funding_m": 21574.4
+    },
+    {
+      "direction": "Model deployment & serving",
+      "stage_family": "late",
+      "share_pct": 22.22222222222222,
+      "direction_funding_m": 21574.4
+    },
+    {
+      "direction": "Model deployment & serving",
+      "stage_family": "mid",
+      "share_pct": 55.55555555555556,
+      "direction_funding_m": 21574.4
+    },
+    {
+      "direction": "Model deployment & serving",
+      "stage_family": "other / unattributed",
+      "share_pct": 11.11111111111111,
+      "direction_funding_m": 21574.4
+    },
+    {
+      "direction": "Payments infrastructure",
+      "stage_family": "early",
+      "share_pct": 87.5,
+      "direction_funding_m": 10184.9
+    },
+    {
+      "direction": "Payments infrastructure",
+      "stage_family": "late",
+      "share_pct": 12.5,
+      "direction_funding_m": 10184.9
+    },
+    {
+      "direction": "Vector databases",
+      "stage_family": "early",
+      "share_pct": 33.33333333333333,
+      "direction_funding_m": 686.4
+    },
+    {
+      "direction": "Vector databases",
+      "stage_family": "late",
+      "share_pct": 16.666666666666664,
+      "direction_funding_m": 686.4
+    },
+    {
+      "direction": "Vector databases",
+      "stage_family": "mid",
+      "share_pct": 33.33333333333333,
+      "direction_funding_m": 686.4
+    },
+    {
+      "direction": "Vector databases",
+      "stage_family": "other / unattributed",
+      "share_pct": 16.666666666666664,
+      "direction_funding_m": 686.4
+    },
+    {
+      "direction": "Voice",
+      "stage_family": "early",
+      "share_pct": 53.84615384615385,
+      "direction_funding_m": 756.0
+    },
+    {
+      "direction": "Voice",
+      "stage_family": "mid",
+      "share_pct": 23.076923076923077,
+      "direction_funding_m": 756.0
+    },
+    {
+      "direction": "Voice",
+      "stage_family": "other / unattributed",
+      "share_pct": 23.076923076923077,
+      "direction_funding_m": 756.0
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ORCL 盈余-现金质量剪刀差 (2016–2024)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 16px;
+      background: #f5f5f7;
+      color: #222;
+    }
+    #chart-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+    }
+    h2 {
+      font-size: 13px;
+      margin: 0 0 14px;
+      font-weight: 400;
+      color: #555;
+    }
+    #chart-container {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+      padding: 16px 18px 18px;
+      /* Fixed, sensible aspect ratio to avoid extreme stretching */
+      width: 100%;
+      height: 420px;
+    }
+    canvas {
+      width: 100% !important;  /* allow Chart.js to control size but keep responsive */
+      height: 100% !important;
+      display: block;
+    }
+    .note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #666;
+      line-height: 1.5;
+    }
+    .note strong {
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      #chart-container {
+        height: 360px;
+        padding: 12px 12px 14px;
+      }
+      h1 {
+        font-size: 18px;
+      }
+      h2 {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-wrapper">
+    <h1>ORCL 盈余-现金质量剪刀差</h1>
+    <h2>Fiscal Year 2016–2024（RESULT_Spread）</h2>
+
+    <div id="chart-container">
+      <canvas id="spreadChart"></canvas>
+    </div>
+
+    <div class="note">
+      <strong>说明：</strong> 条形图展示 2016–2024 年 ORCL 的盈余-现金质量剪刀差 (RESULT_Spread)。将鼠标悬停在柱状上可查看精确数值。
+    </div>
+  </div>
+
+  <script>
+    const fiscalYears = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+
+    const resultSpread = [
+      0.0417781722497904,
+      0.0378199707894534,
+      0.0866760941029549,
+      0.0281982168774621,
+      0.0268038385523785,
+      0.0173680261209921,
+      0.0234771468028818,
+      0.0710929452850242,
+      0.0596019755955839
+    ];
+
+    const ctx = document.getElementById("spreadChart").getContext("2d");
+
+    const minVal = Math.min(...resultSpread);
+    const maxVal = Math.max(...resultSpread);
+    const padding = (maxVal - minVal) * 0.35 || 0.01;
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "RESULT_Spread",
+            data: resultSpread,
+            backgroundColor: "#4F46E5",
+            hoverBackgroundColor: "#3730A3",
+            borderRadius: 5,
+            borderSkipped: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,  // let outer container control aspect ratio
+        layout: {
+          padding: { top: 8, right: 8, bottom: 4, left: 4 }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              font: { size: 11 }
+            }
+          },
+          title: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: "rgba(15,23,42,0.9)",
+            titleFont: { size: 12, weight: "600" },
+            bodyFont: { size: 11 },
+            padding: 8,
+            callbacks: {
+              label: function(context) {
+                const v = context.raw;
+                return "RESULT_Spread: " + v.toFixed(4);
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              font: { size: 12, weight: "500" }
+            },
+            ticks: {
+              font: { size: 11 },
+              maxRotation: 0,
+              minRotation: 0,
+              autoSkip: false   // we only have 9 labels – keep them all
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "RESULT_Spread（比率）",
+              font: { size: 12, weight: "500" }
+            },
+            ticks: {
+              font: { size: 11 },
+              callback: function(value) {
+                return value.toFixed(2);
+              }
+            },
+            min: Math.max(0, minVal - padding),
+            max: maxVal + padding,
+            grid: {
+              color: "rgba(148,163,184,0.35)",
+              drawBorder: false
+            }
+          }
+        },
+        animation: {
+          duration: 600,
+          easing: "easeOutQuad"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "chart_type": "ranked_bar",
+  "title": "Top markets by Q3 top-deal concentration",
+  "label_field": "label",
+  "value_field": "value",
+  "x_label": "Top-5 deals as share of Q3 funding (%)",
+  "data": [
+    {
+      "label": "South Africa",
+      "value": 99.146341
+    },
+    {
+      "label": "Toronto",
+      "value": 98.333333
+    },
+    {
+      "label": "Raleigh",
+      "value": 86.666667
+    },
+    {
+      "label": "Singapore",
+      "value": 83.090909
+    },
+    {
+      "label": "Dallas",
+      "value": 80.0
+    },
+    {
+      "label": "Denver",
+      "value": 78.333333
+    },
+    {
+      "label": "France",
+      "value": 73.04
+    },
+    {
+      "label": "Chicago",
+      "value": 70.666667
+    },
+    {
+      "label": "Miami",
+      "value": 70.0
+    },
+    {
+      "label": "Silicon Valley",
+      "value": 66.575342
+    }
+  ]
+}

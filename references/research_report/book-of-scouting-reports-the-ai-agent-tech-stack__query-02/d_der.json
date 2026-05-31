@@ -1,0 +1,144 @@
+{
+  "query_id": 2,
+  "query_text": "Create a bubble chart of the top 15 companies by Mosaic-per-$100M-raised, where the x-axis is Total raised in $M, the y-axis is Mosaic-per-$100M-raised, bubble size is Headcount, and color encodes direction, using only companies with numeric Total raised, Mosaic, and Headcount, sorted by the derived efficiency metric and limited to the top 15 companies.",
+  "status": "complete",
+  "chart": {
+    "type": "bubble",
+    "title": "Top companies by Mosaic per $100M raised",
+    "x_field": "total_raised_value_m",
+    "y_field": "mosaic_per_100m_raised",
+    "size_field": "headcount",
+    "hue_field": "direction",
+    "x_label": "Total raised ($M)",
+    "y_label": "Mosaic per $100M raised",
+    "label_field": "company",
+    "annotate": false,
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "company": "Lindy",
+      "direction": "Low-code platforms",
+      "total_raised_value_m": 0.3,
+      "mosaic_per_100m_raised": 222333.33333333334,
+      "headcount": 50.0,
+      "mosaic": 667.0
+    },
+    {
+      "company": "Skyvern",
+      "direction": "Browser infrastructure",
+      "total_raised_value_m": 0.7,
+      "mosaic_per_100m_raised": 78857.14285714287,
+      "headcount": 8.0,
+      "mosaic": 552.0
+    },
+    {
+      "company": "LangWatch",
+      "direction": "Observability, evaluation, & governance",
+      "total_raised_value_m": 1.3,
+      "mosaic_per_100m_raised": 47461.53846153846,
+      "headcount": 7.0,
+      "mosaic": 617.0
+    },
+    {
+      "company": "Giskard",
+      "direction": "Observability, evaluation, & governance",
+      "total_raised_value_m": 1.6,
+      "mosaic_per_100m_raised": 33125.0,
+      "headcount": 26.0,
+      "mosaic": 530.0
+    },
+    {
+      "company": "cognee",
+      "direction": "Memory management",
+      "total_raised_value_m": 1.6,
+      "mosaic_per_100m_raised": 32937.5,
+      "headcount": 7.0,
+      "mosaic": 527.0
+    },
+    {
+      "company": "Lyzr",
+      "direction": "Low-code platforms",
+      "total_raised_value_m": 2.5,
+      "mosaic_per_100m_raised": 31240.0,
+      "headcount": 73.0,
+      "mosaic": 781.0
+    },
+    {
+      "company": "Confident AI",
+      "direction": "LLM benchmarking & model routing",
+      "total_raised_value_m": 2.2,
+      "mosaic_per_100m_raised": 27636.363636363632,
+      "headcount": 4.0,
+      "mosaic": 608.0
+    },
+    {
+      "company": "AgentOps",
+      "direction": "Observability, evaluation, & governance",
+      "total_raised_value_m": 2.6,
+      "mosaic_per_100m_raised": 27269.230769230766,
+      "headcount": 441.0,
+      "mosaic": 709.0
+    },
+    {
+      "company": "Zep AI",
+      "direction": "Memory management",
+      "total_raised_value_m": 2.3,
+      "mosaic_per_100m_raised": 26086.956521739132,
+      "headcount": 7.0,
+      "mosaic": 600.0
+    },
+    {
+      "company": "Coval",
+      "direction": "Observability, evaluation, & governance",
+      "total_raised_value_m": 3.3,
+      "mosaic_per_100m_raised": 22666.666666666664,
+      "headcount": 9.0,
+      "mosaic": 748.0
+    },
+    {
+      "company": "Linkup",
+      "direction": "AI web search APIs & scrapers",
+      "total_raised_value_m": 3.2,
+      "mosaic_per_100m_raised": 21906.25,
+      "headcount": 13.0,
+      "mosaic": 701.0
+    },
+    {
+      "company": "Twin",
+      "direction": "Low-code platforms",
+      "total_raised_value_m": 3.0,
+      "mosaic_per_100m_raised": 21900.0,
+      "headcount": 18.0,
+      "mosaic": 657.0
+    },
+    {
+      "company": "Cekura",
+      "direction": "Observability, evaluation, & governance",
+      "total_raised_value_m": 2.9,
+      "mosaic_per_100m_raised": 21241.37931034483,
+      "headcount": 5.0,
+      "mosaic": 616.0
+    },
+    {
+      "company": "Browse AI",
+      "direction": "AI web search APIs & scrapers",
+      "total_raised_value_m": 2.8,
+      "mosaic_per_100m_raised": 20785.714285714286,
+      "headcount": 31.0,
+      "mosaic": 582.0
+    },
+    {
+      "company": "Protecto",
+      "direction": "Security & risk management platforms",
+      "total_raised_value_m": 4.0,
+      "mosaic_per_100m_raised": 16275.0,
+      "headcount": 35.0,
+      "mosaic": 651.0
+    }
+  ],
+  "notes": []
+}

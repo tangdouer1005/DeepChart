@@ -1,0 +1,63 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a horizontal bar chart showing the top 12 `VC leverage multiple` values computed as `Total VC Funding / Total Early-Stage Funding` among ecosystems where both `Total Early-Stage Funding` and `Total VC Funding` are exact values and `Total Early-Stage Funding` is nonzero, expressed in `x multiple`, sorted descending, and excluding `N/A` items.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by vc_leverage_multiple",
+  "selection_rule": "top 12",
+  "plot_spec": {
+    "title": "2022 VC Leverage",
+    "xlabel": "x multiple",
+    "value_field": "vc_leverage_multiple"
+  },
+  "records": [
+    {
+      "entity": "Mississippi",
+      "vc_leverage_multiple": 36.6667
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "vc_leverage_multiple": 33.3333
+    },
+    {
+      "entity": "Mid-East Region Ireland",
+      "vc_leverage_multiple": 15.2941
+    },
+    {
+      "entity": "Shanghai",
+      "vc_leverage_multiple": 11.5556
+    },
+    {
+      "entity": "Shenzhen",
+      "vc_leverage_multiple": 11.4286
+    },
+    {
+      "entity": "Lille",
+      "vc_leverage_multiple": 10.8
+    },
+    {
+      "entity": "Sharjah",
+      "vc_leverage_multiple": 10.4598
+    },
+    {
+      "entity": "Bogota",
+      "vc_leverage_multiple": 10.2041
+    },
+    {
+      "entity": "Bangalore - Karnataka",
+      "vc_leverage_multiple": 10.0
+    },
+    {
+      "entity": "Silicon Valley",
+      "vc_leverage_multiple": 9.88
+    },
+    {
+      "entity": "Beijing",
+      "vc_leverage_multiple": 9.0526
+    },
+    {
+      "entity": "Seoul",
+      "vc_leverage_multiple": 8.2609
+    }
+  ]
+}

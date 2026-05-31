@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>成本经济增加值 (EVA) 2018–2024 柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 使用稳定版 Chart.js 3（避免 v4 + 插件造成兼容性问题） -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <!-- DataLabels 插件（明确使用与 v3 兼容的版本） -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f7f9;
+      --card-bg: #ffffff;
+      --text: #111827;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --card-bg: #020617;
+        --text: #e5e7eb;
+      }
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .container {
+      width: 100%;
+      max-width: 960px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+      padding: 20px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    h1 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+    .subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+      max-width: 520px;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      align-items: center;
+    }
+    .btn {
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      padding: 4px 10px;
+      background: #f9fafb;
+      color: #374151;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+    }
+    .btn:hover {
+      background: #e5e7eb;
+    }
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toggle input {
+      accent-color: #2563eb;
+      cursor: pointer;
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: min(440px, 70vh);
+    }
+    footer {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .legend-ev {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>成本经济增加值 (EVA) - 简化版</h1>
+        <div class="subtitle">
+          展示 2018–2024 年 EVA 的变化趋势（单位：人民币元，原始数据）。
+          悬停查看精确数值，可切换是否显示网格与数据标签。
+        </div>
+      </div>
+      <div class="controls">
+        <label class="toggle">
+          <input type="checkbox" id="toggleGrid" checked />
+          <span>显示网格线</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="toggleLabels" />
+          <span>显示柱顶数值</span>
+        </label>
+        <button class="btn" id="downloadBtn" type="button">
+          下载 PNG
+        </button>
+      </div>
+    </header>
+
+    <div class="chart-wrapper">
+      <canvas id="evaChart"></canvas>
+    </div>
+
+    <footer>
+      <span class="legend-ev">
+        <span class="legend-color"></span>
+        EVA（Economic Value Added）
+      </span>
+      <span>数据来源：用户提供的 2018–2024 年 EVA 财务数据</span>
+    </footer>
+  </div>
+
+  <script>
+    window.addEventListener("load", function () {
+      // 注册插件（Chart.js v3 必须显式注册）
+      if (window.ChartDataLabels) {
+        Chart.register(window.ChartDataLabels);
+      }
+
+      // === 数据（与用户提供完全一致） ===
+      const fiscalYears = ["2018", "2019", "2020", "2021", "2022", "2023", "2024"];
+      const evaValues = [
+        1895245407.4741104,
+        2331734627.4921303,
+        2745527613.191727,
+        3729639221.556887,
+        4339890178.571428,
+        4274869305.997408,
+        5151403696.098562
+      ];
+
+      const canvas = document.getElementById("evaChart");
+      if (!canvas) return;
+
+      const ctx = canvas.getContext("2d");
+
+      const formatNumber = (value) => {
+        if (value === null || value === undefined || isNaN(value)) return "";
+        return value.toLocaleString("zh-CN", { maximumFractionDigits: 2 });
+      };
+
+      // 在 v3 中，渐变背景如果用函数，有时在某些环境下会导致绘制问题，这里改为固定颜色，确保可见
+      const evaChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: fiscalYears,
+          datasets: [
+            {
+              label: "EVA (元)",
+              data: evaValues,
+              backgroundColor: "rgba(37, 99, 235, 0.9)",
+              hoverBackgroundColor: "rgba(37, 99, 235, 1)",
+              borderRadius: 6,
+              borderSkipped: false,
+              maxBarThickness: 60
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: { top: 20, right: 16, bottom: 8, left: 8 }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              enabled: true,
+              backgroundColor: "rgba(15,23,42,0.92)",
+              borderColor: "rgba(148,163,184,0.6)",
+              borderWidth: 1,
+              padding: 10,
+              cornerRadius: 6,
+              titleFont: { size: 12, weight: "600" },
+              bodyFont: { size: 11 },
+              callbacks: {
+                label: (context) => {
+                  const value = context.parsed.y;
+                  return "EVA: " + formatNumber(value) + " 元";
+                }
+              }
+            },
+            datalabels: {
+              display: false, // 初始关闭，用开关控制
+              color: "#111827",
+              anchor: "end",
+              align: "end",
+              offset: -4,
+              clip: true,
+              formatter: (value) => formatNumber(value),
+              font: {
+                size: 10,
+                weight: "500"
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财政年度",
+                color: "#6b7280",
+                font: { size: 11 }
+              },
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: "#4b5563",
+                font: { size: 11 }
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "EVA (元)",
+                color: "#6b7280",
+                font: { size: 11 }
+              },
+              beginAtZero: true,
+              grid: {
+                color: "rgba(148,163,184,0.28)",
+                drawBorder: false
+              },
+              ticks: {
+                color: "#4b5563",
+                font: { size: 10 },
+                callback: function (value) {
+                  const billion = 1_000_000_000;
+                  if (value >= billion) {
+                    return (value / billion).toFixed(1).replace(/\.0$/, "") + "B";
+                  }
+                  return formatNumber(value);
+                }
+              }
+            }
+          },
+          animation: {
+            duration: 900,
+            easing: "easeOutCubic"
+          },
+          hover: {
+            mode: "nearest",
+            intersect: true
+          }
+        }
+      });
+
+      // 网格线开关
+      const toggleGridCheckbox = document.getElementById("toggleGrid");
+      toggleGridCheckbox.addEventListener("change", () => {
+        const showGrid = toggleGridCheckbox.checked;
+        evaChart.options.scales.y.grid.display = showGrid;
+        evaChart.update();
+      });
+
+      // 数据标签开关
+      const toggleLabelsCheckbox = document.getElementById("toggleLabels");
+      toggleLabelsCheckbox.addEventListener("change", () => {
+        const showLabels = toggleLabelsCheckbox.checked;
+        evaChart.options.plugins.datalabels.display = showLabels;
+        evaChart.update();
+      });
+
+      // 下载 PNG
+      const downloadBtn = document.getElementById("downloadBtn");
+      downloadBtn.addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.download = "EVA_2018_2024.png";
+        link.href = evaChart.toBase64Image("image/png", 1.0);
+        link.click();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+{
+    "plot_data": [
+        {
+            "Model": "ctranspath",
+            "Task Category": "Morphology",
+            "AUROC": 0.7245662906836026,
+            "k_WSIs": 32.0,
+            "k_Patients": 13.0,
+            "k_Sites": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Morphology",
+            "AUROC": 0.6986905923455256,
+            "k_WSIs": 6.0,
+            "k_Patients": 5.6,
+            "k_Sites": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Morphology",
+            "AUROC": 0.7242330131938731,
+            "k_WSIs": 171.0,
+            "k_Patients": 30.0,
+            "k_Sites": 31.0
+        },
+        {
+            "Model": "uni",
+            "Task Category": "Morphology",
+            "AUROC": 0.7351347723197759,
+            "k_WSIs": 100.0,
+            "k_Patients": NaN,
+            "k_Sites": 20.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Morphology",
+            "AUROC": 0.7300469326931298,
+            "k_WSIs": 1488.0,
+            "k_Patients": 120.0,
+            "k_Sites": 17.0
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Morphology",
+            "AUROC": 0.762773096016989,
+            "k_WSIs": 3135.0,
+            "k_Patients": 225.0,
+            "k_Sites": 175.0
+        },
+        {
+            "Model": "panakeia",
+            "Task Category": "Morphology",
+            "AUROC": 0.7306335682076608,
+            "k_WSIs": 6.0,
+            "k_Patients": NaN,
+            "k_Sites": 2.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Morphology",
+            "AUROC": 0.7073485188270819,
+            "k_WSIs": 29.0,
+            "k_Patients": 11.0,
+            "k_Sites": 25.0
+        },
+        {
+            "Model": "ctranspath",
+            "Task Category": "Biomarker",
+            "AUROC": 0.6865689130621666,
+            "k_WSIs": 32.0,
+            "k_Patients": 13.0,
+            "k_Sites": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Biomarker",
+            "AUROC": 0.6655231079066909,
+            "k_WSIs": 6.0,
+            "k_Patients": 5.6,
+            "k_Sites": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Biomarker",
+            "AUROC": 0.7222276213474471,
+            "k_WSIs": 171.0,
+            "k_Patients": 30.0,
+            "k_Sites": 31.0
+        },
+        {
+            "Model": "uni",
+            "Task Category": "Biomarker",
+            "AUROC": 0.7120236484959361,
+            "k_WSIs": 100.0,
+            "k_Patients": NaN,
+            "k_Sites": 20.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Biomarker",
+            "AUROC": 0.6850684143619094,
+            "k_WSIs": 1488.0,
+            "k_Patients": 120.0,
+            "k_Sites": 17.0
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Biomarker",
+            "AUROC": 0.732159659734404,
+            "k_WSIs": 3135.0,
+            "k_Patients": 225.0,
+            "k_Sites": 175.0
+        },
+        {
+            "Model": "panakeia",
+            "Task Category": "Biomarker",
+            "AUROC": 0.706014841052465,
+            "k_WSIs": 6.0,
+            "k_Patients": NaN,
+            "k_Sites": 2.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Biomarker",
+            "AUROC": 0.6807236915312719,
+            "k_WSIs": 29.0,
+            "k_Patients": 11.0,
+            "k_Sites": 25.0
+        },
+        {
+            "Model": "ctranspath",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5770248615268212,
+            "k_WSIs": 32.0,
+            "k_Patients": 13.0,
+            "k_Sites": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5897553541124554,
+            "k_WSIs": 6.0,
+            "k_Patients": 5.6,
+            "k_Sites": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5871979448905298,
+            "k_WSIs": 171.0,
+            "k_Patients": 30.0,
+            "k_Sites": 31.0
+        },
+        {
+            "Model": "uni",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5721758498408054,
+            "k_WSIs": 100.0,
+            "k_Patients": NaN,
+            "k_Sites": 20.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5873006733060928,
+            "k_WSIs": 1488.0,
+            "k_Patients": 120.0,
+            "k_Sites": 17.0
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Prognosis",
+            "AUROC": 0.6065370877164761,
+            "k_WSIs": 3135.0,
+            "k_Patients": 225.0,
+            "k_Sites": 175.0
+        },
+        {
+            "Model": "panakeia",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5866993918324305,
+            "k_WSIs": 6.0,
+            "k_Patients": NaN,
+            "k_Sites": 2.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5543899668068984,
+            "k_WSIs": 29.0,
+            "k_Patients": 11.0,
+            "k_Sites": 25.0
+        }
+    ],
+    "stats_data": [
+        {
+            "category": "Morphology",
+            "r": 0.7443450229025078,
+            "p": 0.03417349120757613
+        },
+        {
+            "category": "Biomarker",
+            "r": 0.6064670049508225,
+            "p": 0.11093353507975934
+        },
+        {
+            "category": "Prognosis",
+            "r": 0.5798363630222995,
+            "p": 0.131911772331571
+        }
+    ]
+}

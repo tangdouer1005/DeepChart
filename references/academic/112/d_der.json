@@ -1,0 +1,436 @@
+[
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 1.226013991989289,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 0.9137241501300842,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 1.2593749169413784,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 1.3181705861405943,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 0.46320361183478104,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 1.1517888949997317,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 0.667723847964141,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.26919108005571524,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.4740587435691917,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.03158430764694863,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.1172567421392968,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.030024832456880545,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.28110033805784285,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.5876161736753397,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.18387347551958827,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.5379202396120939,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.52758427493463,
+        "Group": "Intranodal\nWT"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.7439762627007868,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.8433562867119107,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.03158430764694863,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.03158430764694863,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.03158430764694863,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.03158430764694863,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.03158430764694863,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.03158430764694863,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.03158430764694863,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 0.6323691635918379,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 0.10994497491902819,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 0.09440549555672946,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 0.6810129454065946,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 0.25673107068899403,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 0.03158430764694863,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 0.09960901024156425,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Intranodal",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 0.03656278413979891,
+        "Group": "Intranodal\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 0.47505561344221175,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 0.6275176971758019,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 0.8627640623994038,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 1.07262093290512,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 1.5483034001667353,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 0.9886672051858337,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "Vehicle",
+        "Value": 1.425071088724893,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.32442302364590364,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.5469331491498078,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.5017894606485539,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.48018662260755507,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.9407594871142966,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.29633971719901214,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 1.6253259886079303,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "WT",
+        "Treatment": "viFSP1",
+        "Value": 0.789999228515666,
+        "Group": "Subcutaneous\nWT"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 1.6476616455742605,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.31997887263705566,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.4379039919663494,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 1.302964816119536,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 0.5985279422324202,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 1.058976968000909,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 1.7172092256394702,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "Vehicle",
+        "Value": 1.3238654757477606,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 1.5255694165371587,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 1.1622329419433417,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 0.6292029253664596,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 0.806938325207822,
+        "Group": "Subcutaneous\nFsp1 KO"
+    },
+    {
+        "Location": "Subcutaneous",
+        "Genotype": "Fsp1 KO",
+        "Treatment": "viFSP1",
+        "Value": 1.9126420748587845,
+        "Group": "Subcutaneous\nFsp1 KO"
+    }
+]

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recreated Chart 90</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+        }
+        #chart-container {
+            width: 700px; 
+            height: 600px; 
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        // 1. Source Data
+        const jsonData = {
+    "group_data": {
+        "B16-F0": [
+            0.8709716083391996,
+            1.163636166577947,
+            0.9655449807231168,
+            0.8597330379618892,
+            1.176093947359024,
+            0.9649672859886522,
+            0.8904168718543946,
+            1.0725268751993908,
+            1.0380790144390275,
+            1.1453606777036145,
+            0.8833249802905037,
+            0.9714125397543188,
+            0.9924852259159757,
+            0.9177934727647518,
+            1.089823273581349,
+            0.9572414622115824,
+            0.989919438617107,
+            1.0536712551188123,
+            1.2325350499581258,
+            0.8528342210715382,
+            0.9148067493803628,
+            1.2699145962304776,
+            0.8468665013964249,
+            0.883764678672027,
+            1.224122315643644,
+            0.77936863332052,
+            0.9970336321197292,
+            1.0000001351314969,
+            1.000215886511742,
+            1.0000899043170297
+        ],
+        "LN1 18IL": [
+            1.549737091580455,
+            1.8401402380371497,
+            1.6521837208879588,
+            1.2542451674858577,
+            1.3388246029929656,
+            1.2457475092264052,
+            1.462742400084962,
+            1.5541405295450688,
+            1.5530468086723124,
+            1.7943759076129866,
+            1.679568758448755,
+            1.6679331203191494,
+            1.6918266116105038,
+            1.8423120308000596,
+            1.6683607060951646,
+            1.368419886609368,
+            1.7096584994119155,
+            1.3301776296894663,
+            1.12561397270971,
+            0.916013041939194,
+            1.327349359914708,
+            0.9279254121332988,
+            0.8369649327189256,
+            0.6954857454040407,
+            1.1440898791454082,
+            0.9518361526174308,
+            1.0673735989212343,
+            1.2423290473908908,
+            1.1042231802244027,
+            1.722910406989444
+        ],
+        "LN7 1112AR": [
+            2.850802126911562,
+            2.831017458797632,
+            2.937364610340302,
+            2.1770580978498817,
+            2.1268461939871037,
+            2.3192470705407,
+            4.047197358133228,
+            2.009758501677493,
+            2.647457713277039
+        ],
+        "LN7 1120BL": [
+            4.285395632319021,
+            3.8618899449324937,
+            5.009290288466751,
+            2.2671921259682297,
+            2.5310387071115925,
+            2.9477890320349607,
+            4.813490147713096,
+            2.0512039066750813,
+            2.6243034434553247
+        ],
+        "LN7 1134BL": [
+            3.1159567335299294,
+            2.4972600558469304,
+            2.806207692911664,
+            2.377158080635001,
+            2.516819306046498,
+            2.8337094105335874,
+            3.663191672688194,
+            2.6744810776251278,
+            3.168788574091623
+        ],
+        "LN8 1194BR": [
+            2.7555710244555778,
+            2.695967051131912,
+            2.7880997823966487,
+            2.9460697874311013,
+            2.682577253048576,
+            2.662553716454028,
+            2.071476197899601,
+            2.0925956049722227,
+            2.116345859620026,
+            4.105397133510845,
+            2.419261893579584,
+            2.824200471110591
+        ],
+        "LN8 1198AR": [
+            3.1989135425398,
+            3.1224259486974386,
+            1.5357605307222275,
+            2.27619231605305,
+            2.3681003175586777,
+            2.577699599539925,
+            2.2386721533780003,
+            2.353859329808663,
+            2.473936441317873,
+            5.201513745752616,
+            2.5844047422525778,
+            3.3221986518454028
+        ],
+        "LN8 1205BL": [
+            1.1099025962411833,
+            1.3041709489940585,
+            1.794586399282931,
+            1.8198042685089368,
+            1.6813632372345209,
+            1.6071165932144746,
+            1.7509587691265476,
+            1.5222738827015716,
+            1.8334214971755416,
+            2.5129551901243325,
+            3.04541240900302,
+            1.783632147964823
+        ],
+        "LN9 1315BL": [
+            1.6594961664147203,
+            2.2613087425334126,
+            2.413476981833502,
+            1.263143683138213,
+            2.698559840287249,
+            2.2963958768441155
+        ],
+        "LN9 1358IR": [
+            2.720926327731109,
+            1.7118141094963657,
+            2.641496941582993,
+            4.853379099245915,
+            2.62824603612458,
+            3.047416468169401
+        ]
+    },
+    "p_values": {
+        "LN1 18IL": 0.091610521392838,
+        "LN7 1112AR": 3.2727e-11,
+        "LN7 1120BL": 4e-15,
+        "LN7 1134BL": 2.9e-13,
+        "LN8 1194BR": 1.81e-13,
+        "LN8 1198AR": 1.7e-14,
+        "LN8 1205BL": 0.000454712621187,
+        "LN9 1315BL": 0.000273075453655,
+        "LN9 1358IR": 4.998e-11
+    }
+};
+
+        // 2. Process Data
+        const groupNames = [
+            "B16-F0", "LN1 18IL", "LN7 1112AR", "LN7 1120BL", "LN7 1134BL", 
+            "LN8 1194BR", "LN8 1198AR", "LN8 1205BL", "LN9 1315BL", "LN9 1358IR"
+        ];
+        
+        const groupsData = groupNames.map(name => jsonData.group_data[name] || []);
+        const pValueMap = jsonData.p_values;
+
+        // Calculate Stats
+        const processedData = groupNames.map((name, i) => {
+            const data = groupsData[i];
+            const mean = data.reduce((a, b) => a + b, 0) / data.length;
+            const std = Math.sqrt(data.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b, 0) / (data.length - 1));
+            return {
+                name: name,
+                displayName: name.replace(/ /g, '-') ,
+                data: data,
+                mean: mean,
+                std: std,
+                colorType: name.includes('B16-F0') ? 'gray' : (name.includes('LN1') ? 'pink' : 'green')
+            };
+        });
+
+        // 3. ECharts Setup
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        const barData = [];
+        const errorBarData = [];
+        const scatterData = [];
+        const pValueAnnotations = [];
+
+        processedData.forEach((group, index) => {
+            // 1. Bar Data
+            let barColor = '#8CC686'; // Green
+            let dotColor = '#2E7D32'; // Dark Green
+            
+            if (group.colorType === 'gray') {
+                barColor = '#D9D9D9';
+                dotColor = 'black';
+            } else if (group.colorType === 'pink') {
+                barColor = '#EDA6E6';
+                dotColor = 'black';
+            }
+
+            barData.push({
+                value: group.mean,
+                itemStyle: {
+                    color: barColor,
+                    borderColor: 'black',
+                    borderWidth: 1
+                }
+            });
+
+            // 2. Error Bar Data
+            errorBarData.push([index, group.mean, group.std]);
+
+            // 3. Scatter Data (Jitter)
+            group.data.forEach(val => {
+                let u = 0, v = 0;
+                while(u === 0) u = Math.random(); 
+                while(v === 0) v = Math.random();
+                let num = Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+                let jitter = num * 0.08; 
+                if (jitter > 0.2) jitter = 0.2;
+                if (jitter < -0.2) jitter = -0.2;
+
+                scatterData.push({
+                    value: [index + jitter, val],
+                    itemStyle: { color: dotColor }
+                });
+            });
+
+            // 4. P-Value Annotation
+            if (pValueMap[group.name] !== undefined) {
+                const p = pValueMap[group.name];
+                let pText = '';
+                
+                if (p < 0.001) {
+                    const exponent = Math.floor(Math.log10(p));
+                    let mantissa = p / Math.pow(10, exponent);
+                    let mantissaStr = Math.abs(mantissa - Math.round(mantissa)) < 0.05 ? Math.round(mantissa) : mantissa.toFixed(1);
+                    pText = `P = ${mantissaStr} × 10^{${exponent}}`;
+                } else {
+                     const digits = -Math.floor(Math.log10(p));
+                     pText = `P = ${p.toFixed(digits)}`;
+                }
+                
+                const maxDataVal = Math.max(...group.data, group.mean + group.std);
+                
+                pValueAnnotations.push({
+                    xIndex: index,
+                    yVal: maxDataVal + 0.5,
+                    text: pText
+                });
+            }
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: '15%',
+                bottom: '20%',
+                left: '10%',
+                right: '5%',
+                containLabel: false
+            },
+            xAxis: {
+                type: 'category',
+                data: processedData.map(d => d.displayName),
+                axisLine: {
+                    show: true,
+                    lineStyle: { color: 'black' }
+                },
+                axisLabel: {
+                    color: 'black',
+                    fontSize: 12,
+                    rotate: 45,
+                    margin: 10,
+                    align: 'right',
+                    verticalAlign: 'top'
+                },
+                axisTick: {
+                    alignWithLabel: true,
+                    lineStyle: { color: 'black' }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Relative FSP1 levels',
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: {
+                    color: 'black',
+                    fontSize: 14
+                },
+                min: 0,
+                max: 10, 
+                interval: 1,
+                axisLine: {
+                    show: false
+                },
+                axisLabel: {
+                    color: 'black',
+                    fontSize: 12
+                },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: barData,
+                    barWidth: '60%',
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const meanValue = api.value(1);
+                        const stdValue = api.value(2);
+                        
+                        const pointStart = api.coord([xValue, meanValue - stdValue]);
+                        const pointEnd = api.coord([xValue, meanValue + stdValue]);
+                        const capWidth = 10; 
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: { x1: pointStart[0], y1: pointStart[1], x2: pointEnd[0], y2: pointEnd[1] },
+                                    style: { stroke: 'black', lineWidth: 1.5 }
+                                },
+                                {
+                                    type: 'line',
+                                    shape: { x1: pointStart[0] - capWidth / 2, y1: pointStart[1], x2: pointStart[0] + capWidth / 2, y2: pointStart[1] },
+                                    style: { stroke: 'black', lineWidth: 1.5 }
+                                },
+                                {
+                                    type: 'line',
+                                    shape: { x1: pointEnd[0] - capWidth / 2, y1: pointEnd[1], x2: pointEnd[0] + capWidth / 2, y2: pointEnd[1] },
+                                    style: { stroke: 'black', lineWidth: 1.5 }
+                                }
+                            ]
+                        };
+                    },
+                    data: errorBarData,
+                    z: 3
+                },
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    symbolSize: 8,
+                    z: 2
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: '2%',
+                    top: '2%',
+                    style: {
+                        text: 'g',
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        // Add P-value annotations
+        option.series.push({
+            type: 'custom',
+            renderItem: function (params, api) {
+                const xIdx = api.value(0);
+                const yPos = api.value(1);
+                const pTextIdx = api.value(2);
+                
+                const point = api.coord([xIdx, yPos]);
+                const textObj = pValueAnnotations[pTextIdx];
+                let formattedText = textObj.text.replace(/\^\{(\-?\d+)\}/, '{sup|$1}');
+                
+                return {
+                    type: 'text',
+                    x: point[0],
+                    y: point[1],
+                    rotation: Math.PI / 2, // 90 degrees (reading top-to-bottom or bottom-to-top depending on orientation)
+                                         // Standard for this type of plot in papers is often reading Bottom-to-Top (CCW).
+                                         // -Math.PI/2 is CCW.
+                                         // Let's stick to Python's likely default which is text drawn vertically.
+                                         // If we want it to read from bottom to top, use -Math.PI / 2.
+                    style: {
+                        text: formattedText,
+                        fontSize: 10,
+                        fill: 'black',
+                        textAlign: 'left',
+                        textVerticalAlign: 'middle',
+                        rich: {
+                            sup: {
+                                fontSize: 8,
+                                verticalAlign: 'top'
+                            }
+                        }
+                    }
+                };
+            },
+            data: pValueAnnotations.map((item, idx) => [item.xIndex, item.yVal, idx]),
+            z: 4
+        });
+
+        // Add the top significance line
+        option.series.push({
+            type: 'custom',
+            renderItem: function (params, api) {
+                const startPt = api.coord([2, 8.5]);
+                const endPt = api.coord([9, 8.5]);
+                
+                return {
+                    type: 'group',
+                    children: [
+                        {
+                            type: 'line',
+                            shape: { x1: startPt[0], y1: startPt[1], x2: endPt[0], y2: endPt[1] },
+                            style: { stroke: 'black', lineWidth: 1 }
+                        },
+                        {
+                            type: 'text',
+                            x: (startPt[0] + endPt[0]) / 2,
+                            y: startPt[1] - 5,
+                            style: {
+                                text: 'P < 1 × 10{sup|-15}',
+                                fontSize: 12,
+                                textAlign: 'center',
+                                fill: 'black',
+                                rich: {
+                                    sup: { fontSize: 9, verticalAlign: 'top' }
+                                }
+                            }
+                        }
+                    ]
+                };
+            },
+            data: [[0]]
+        });
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

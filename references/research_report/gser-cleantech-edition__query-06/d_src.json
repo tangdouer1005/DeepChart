@@ -1,0 +1,163 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a horizontal bar chart for European Cleantech ecosystems, comparing `Total Early-Stage Funding / Ecosystem Value`, expressed in `%`, sorted descending and showing all European items.",
+  "report_key": "gser-cleantech-edition",
+  "source_summary_file": "/Users/tangjiahui/Desktop/chartbench/StartupGenome/summaries/gser-cleantech-edition.md",
+  "source_query_file": "/Users/tangjiahui/Desktop/chartbench/StartupGenome/summaries/gser-cleantech-edition_queries.md",
+  "records": [
+    {
+      "entity": "Stockholm",
+      "source_page": 43,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 1.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 43",
+      "source_note": "directly visible in summary as `$1 bn`"
+    },
+    {
+      "entity": "Stockholm",
+      "source_page": 43,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 46.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 43",
+      "source_note": "directly visible in summary as `$46 bn`"
+    },
+    {
+      "entity": "London",
+      "source_page": 45,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 8.5,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 45",
+      "source_note": "directly visible in summary as `$8.5 bn`"
+    },
+    {
+      "entity": "London",
+      "source_page": 45,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 142.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 45",
+      "source_note": "directly visible in summary as `$142 bn`"
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "source_page": 51,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 1.1,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 51",
+      "source_note": "directly visible in summary as `$1.1 bn`"
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "source_page": 51,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 26.9,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 51",
+      "source_note": "directly visible in summary as `$26.9 bn`"
+    },
+    {
+      "entity": "Berlin",
+      "source_page": 59,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 2.3,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 59",
+      "source_note": "directly visible in summary as `$2.3 bn`"
+    },
+    {
+      "entity": "Berlin",
+      "source_page": 59,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 36.9,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 59",
+      "source_note": "directly visible in summary as `$36.9 bn`"
+    },
+    {
+      "entity": "Paris",
+      "source_page": 63,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 3.5,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 63",
+      "source_note": "directly visible in summary as `$3.5 bn`"
+    },
+    {
+      "entity": "Paris",
+      "source_page": 63,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 47.1,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 63",
+      "source_note": "directly visible in summary as `$47.1 bn`"
+    },
+    {
+      "entity": "Greater Helsinki",
+      "source_page": 67,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 549.0,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 67",
+      "source_note": "directly visible in summary as `$549 m`"
+    },
+    {
+      "entity": "Greater Helsinki",
+      "source_page": 67,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 6.6,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 67",
+      "source_note": "directly visible in summary as `$6.6 bn`"
+    },
+    {
+      "entity": "Frankfurt",
+      "source_page": 76,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 146.6,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 76",
+      "source_note": "directly visible in summary as `$146.6 m`"
+    },
+    {
+      "entity": "Frankfurt",
+      "source_page": 76,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 5.45,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 76",
+      "source_note": "directly visible in summary as `$5.45 b`"
+    }
+  ]
+}

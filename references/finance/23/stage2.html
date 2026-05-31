@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ACN 斯隆比率 (Sloan Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js latest 4.x (no integrity / crossorigin) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f7f7f9;
+      color: #222;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #111827;
+        color: #e5e7eb;
+      }
+      .chart-container {
+        background: #020617;
+        box-shadow: 0 18px 45px rgba(0,0,0,0.65);
+      }
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+    }
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 1rem;
+      font-weight: 400;
+      color: #6b7280;
+    }
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 460px;
+      padding: 1rem 1rem 1.5rem;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+      box-sizing: border-box;
+    }
+    .note {
+      max-width: 900px;
+      margin: 0.75rem auto 0;
+      font-size: 0.8rem;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+    .toggle-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 0.25rem;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    .toggle-row input {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>ACN 斯隆比率 (Sloan Ratio / Accruals Ratio)</h1>
+    <h2>按财政年度变化（2016–2024）</h2>
+
+    <div class="chart-container">
+      <div class="toggle-row">
+        <label for="toggleZero">
+          <input type="checkbox" id="toggleZero" checked />
+          以 0 为基线显示（强调正负变化）
+        </label>
+      </div>
+      <canvas id="sloanChart"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：用户提供的 ACN 财报指标。单位：斯隆比率（Accruals Ratio，数值越接近 0 通常代表权责发生制盈余成分较小）。
+    </div>
+  </div>
+
+  <script>
+    // Run after DOM is ready to avoid null canvas references
+    document.addEventListener('DOMContentLoaded', function () {
+      // Source data (2016–2024)
+      const fiscalYears = [
+        "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+      ];
+      const sloanValues = [
+        -0.0238703063675389,
+        -0.0705740890286943,
+        -0.0834460691368901,
+        -0.0681370327821348,
+        -0.0929380576703164,
+        -0.0764652809970529,
+        -0.0589116008978094,
+        -0.0538573980702921,
+        -0.0348251652573743
+      ];
+
+      const canvas = document.getElementById('sloanChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      function getTightScale(values) {
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        const padding = (max - min) * 0.15 || 0.02;
+        return {
+          min: min - padding,
+          max: max + padding
+        };
+      }
+
+      let useZeroBaseline = true;
+      const tight = getTightScale(sloanValues);
+
+      const sloanChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: fiscalYears,
+          datasets: [
+            {
+              label: '斯隆比率',
+              data: sloanValues,
+              borderWidth: 1.5,
+              borderRadius: 4,
+              backgroundColor: function (context) {
+                const v = context.raw;
+                return v >= 0 ? 'rgba(34,197,94,0.7)' : 'rgba(239,68,68,0.7)';
+              },
+              borderColor: function (context) {
+                const v = context.raw;
+                return v >= 0 ? 'rgba(21,128,61,1)' : 'rgba(185,28,28,1)';
+              },
+              hoverBackgroundColor: function (context) {
+                const v = context.raw;
+                return v >= 0 ? 'rgba(34,197,94,0.95)' : 'rgba(239,68,68,0.95)';
+              },
+              hoverBorderColor: function (context) {
+                const v = context.raw;
+                return v >= 0 ? 'rgba(21,128,61,1)' : 'rgba(127,29,29,1)';
+              }
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  const v = context.raw;
+                  const formatted = (v * 100).toFixed(2) + '%';
+                  return ' 斯隆比率: ' + formatted;
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                autoSkip: false,
+                maxRotation: 0,
+                minRotation: 0
+              }
+            },
+            y: {
+              beginAtZero: useZeroBaseline,
+              min: useZeroBaseline ? undefined : tight.min,
+              max: useZeroBaseline ? undefined : tight.max,
+              grid: {
+                color: 'rgba(156, 163, 175, 0.25)'
+              },
+              ticks: {
+                callback: function (value) {
+                  return (value * 100).toFixed(1) + '%';
+                }
+              },
+              title: {
+                display: true,
+                text: '斯隆比率（%）',
+                font: {
+                  size: 12,
+                  weight: '500'
+                }
+              }
+            }
+          },
+          animation: {
+            duration: 700,
+            easing: 'easeOutQuart'
+          }
+        }
+      });
+
+      const toggle = document.getElementById('toggleZero');
+      if (toggle) {
+        toggle.addEventListener('change', function (e) {
+          useZeroBaseline = e.target.checked;
+          const scaleY = sloanChart.options.scales.y;
+
+          if (useZeroBaseline) {
+            scaleY.beginAtZero = true;
+            scaleY.min = undefined;
+            scaleY.max = undefined;
+          } else {
+            const tight2 = getTightScale(sloanValues);
+            scaleY.beginAtZero = false;
+            scaleY.min = tight2.min;
+            scaleY.max = tight2.max;
+          }
+          sloanChart.update();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NVDA 盈余-现金质量剪刀差 (2016–2024)</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+                   Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px 0;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin: 0 0 16px 0;
+      color: #555;
+    }
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 16px 24px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+    #chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+    .note {
+      max-width: 900px;
+      margin: 12px auto 0;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>NVDA 盈余-现金质量剪刀差</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div id="chart-wrapper">
+      <canvas id="nvdaSpreadChart"></canvas>
+    </div>
+  </div>
+
+  <div class="note">
+    说明：盈余-现金质量剪刀差（Earnings Quality Spread）为盈余质量与现金流质量的差值。
+    柱状图为年度值，正值一般表示盈余质量高于现金质量，负值则相反。
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // Data from source
+    const fiscalYears = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const spreadValues = [
+      0.0770003200797619,
+      0.0006972285166463,
+      0.0431647851247509,
+      -0.0324460930175681,
+      0.1284019995425882,
+      0.0646336702381468,
+      -0.0176491545397242,
+      0.0298234722205953,
+      -0.0312412309419137
+    ];
+
+    // Split positive and negative values into separate datasets for clearer coloring
+    const positiveData = spreadValues.map(v => v > 0 ? v : 0);
+    const negativeData = spreadValues.map(v => v < 0 ? v : 0);
+
+    const ctx = document.getElementById("nvdaSpreadChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "正剪刀差 (盈余质量 > 现金质量)",
+            data: positiveData,
+            backgroundColor: "rgba(37, 99, 235, 0.75)",
+            borderColor: "rgba(37, 99, 235, 1)",
+            borderWidth: 1,
+            borderRadius: 4
+          },
+          {
+            label: "负剪刀差 (盈余质量 < 现金质量)",
+            data: negativeData,
+            backgroundColor: "rgba(239, 68, 68, 0.75)",
+            borderColor: "rgba(239, 68, 68, 1)",
+            borderWidth: 1,
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            position: "top"
+          },
+          title: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return `${context.dataset.label}: ${value.toFixed(4)}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              color: "#444"
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "盈余-现金质量剪刀差 (Earnings Quality Spread)",
+              color: "#444"
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(2);
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

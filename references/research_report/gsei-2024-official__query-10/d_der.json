@@ -1,0 +1,63 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a bar chart of the top 12 countries in the 2024 country tables by score-to-rank efficiency, defined as `sum(score ranks 1-10) / average(global_rank ranks 1-10)`, expressed as score points per global-rank position, sorted descending, and restricted to countries with at least 5 listed cities.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2024 Score-to-Rank Efficiency",
+  "value_unit": "score points per global-rank position",
+  "sort_rule": "descending by score_to_rank_efficiency, tie-break alphabetically",
+  "selection_rule": "top 12 countries with at least 5 listed cities",
+  "records": [
+    {
+      "entity": "United States",
+      "score_to_rank_efficiency": 115.756452
+    },
+    {
+      "entity": "China",
+      "score_to_rank_efficiency": 5.033388
+    },
+    {
+      "entity": "India",
+      "score_to_rank_efficiency": 2.091522
+    },
+    {
+      "entity": "United Kingdom",
+      "score_to_rank_efficiency": 1.584814
+    },
+    {
+      "entity": "Canada",
+      "score_to_rank_efficiency": 1.088669
+    },
+    {
+      "entity": "Germany",
+      "score_to_rank_efficiency": 0.77188
+    },
+    {
+      "entity": "France",
+      "score_to_rank_efficiency": 0.445814
+    },
+    {
+      "entity": "Israel",
+      "score_to_rank_efficiency": 0.231527
+    },
+    {
+      "entity": "The Netherlands",
+      "score_to_rank_efficiency": 0.204351
+    },
+    {
+      "entity": "Australia",
+      "score_to_rank_efficiency": 0.202469
+    },
+    {
+      "entity": "Brazil",
+      "score_to_rank_efficiency": 0.19428
+    },
+    {
+      "entity": "Switzerland",
+      "score_to_rank_efficiency": 0.182663
+    }
+  ],
+  "value_field": "score_to_rank_efficiency",
+  "x_label": "Country",
+  "y_label": "sum(score ranks 1-10) / average(global_rank ranks 1-10)"
+}

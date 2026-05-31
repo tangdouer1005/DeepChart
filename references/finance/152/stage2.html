@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta 防御区间比率 (DIR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --text: #222222;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --accent-border: rgba(37, 99, 235, 0.3);
+      --grid: rgba(148, 163, 184, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #e5edff 0, #f5f6fa 55%, #eef2ff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 960px;
+      width: 100%;
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.12),
+        0 0 0 1px rgba(15, 23, 42, 0.04);
+      padding: 20px 24px 24px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .title-block h1 {
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+
+    .title-block p {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 11px;
+    }
+
+    .stat {
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .stat-label {
+      color: #4b5563;
+    }
+
+    .stat-value {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      margin-top: 8px;
+    }
+
+    canvas {
+      max-height: 100%;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 10px;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6b7280;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 16px 14px 18px;
+      }
+      .chart-wrapper {
+        height: 340px;
+      }
+      .title-block h1 {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title-block">
+        <h1>Meta 防御区间比率 (DIR) 变化趋势</h1>
+        <p>财年 2016–2024 · 单位：天（防御区间可支撑天数）</p>
+      </div>
+      <div class="stats" id="stats-panel">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="dirChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      <span class="badge">Source: Provided financial metrics (RESULT_DIR)</span>
+      <span>交互说明：将鼠标悬停在柱上可查看具体数值，单击图例可切换数据系列。</span>
+    </div>
+  </div>
+
+  <script>
+    // Data (from source, unchanged)
+    const fiscalYears = [
+      2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024
+    ];
+
+    const resultDIR = [
+      309.4497403195056,
+      248.2892420537897,
+      207.79919159256264,
+      223.4571086039691,
+      198.00568544301424,
+      157.12599752725637,
+      117.19220897735698,
+      240.28445508275573,
+      233.62133493129804
+    ];
+
+    // Helper for simple stats to display
+    function computeStats(values) {
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const latest = values[values.length - 1];
+      const first = values[0];
+      const absChange = latest - first;
+      const pctChange = (absChange / first) * 100;
+      return {
+        min,
+        max,
+        latest,
+        absChange,
+        pctChange
+      };
+    }
+
+    function renderStats() {
+      const stats = computeStats(resultDIR);
+      const panel = document.getElementById('stats-panel');
+
+      const statItems = [
+        {
+          label: '最新 DIR (2024)',
+          value: stats.latest.toFixed(1) + ' 天'
+        },
+        {
+          label: '期间最高',
+          value: stats.max.toFixed(1) + ' 天'
+        },
+        {
+          label: '期间最低',
+          value: stats.min.toFixed(1) + ' 天'
+        },
+        {
+          label: '2016–2024 变化',
+          value:
+            (stats.absChange >= 0 ? '+' : '') +
+            stats.absChange.toFixed(1) +
+            ' 天 (' +
+            (stats.pctChange >= 0 ? '+' : '') +
+            stats.pctChange.toFixed(1) +
+            '%)'
+        }
+      ];
+
+      statItems.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'stat';
+        div.innerHTML =
+          '<span class="stat-label">' +
+          s.label +
+          '</span><span class="stat-value">' +
+          s.value +
+          '</span>';
+        panel.appendChild(div);
+      });
+    }
+
+    renderStats();
+
+    // Build Bar Chart
+    const ctx = document.getElementById('dirChart').getContext('2d');
+
+    // Determine y-axis range with some padding
+    const minVal = Math.min(...resultDIR);
+    const maxVal = Math.max(...resultDIR);
+    const padding = (maxVal - minVal) * 0.1 || 10;
+
+    const dirChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: fiscalYears.map(y => String(y)),
+        datasets: [
+          {
+            type: 'bar',
+            label: '防御区间比率 (DIR)',
+            data: resultDIR,
+            backgroundColor: function (ctx) {
+              const v = ctx.raw;
+              const max = maxVal;
+              const min = minVal;
+              if (v === max) return 'rgba(220, 38, 38, 0.82)';      // Highlight max (red)
+              if (v === min) return 'rgba(22, 163, 74, 0.85)';      // Highlight min (green)
+              return 'rgba(37, 99, 235, 0.72)';                     // Default blue
+            },
+            borderColor: function (ctx) {
+              const v = ctx.raw;
+              const max = maxVal;
+              const min = minVal;
+              if (v === max) return 'rgba(185, 28, 28, 1)';
+              if (v === min) return 'rgba(21, 128, 61, 1)';
+              return 'rgba(37, 99, 235, 1)';
+            },
+            borderWidth: 1.2,
+            borderRadius: 6,
+            hoverBackgroundColor: function (ctx) {
+              const v = ctx.raw;
+              if (v === maxVal) return 'rgba(220, 38, 38, 0.95)';
+              if (v === minVal) return 'rgba(22, 163, 74, 0.97)';
+              return 'rgba(37, 99, 235, 0.95)';
+            },
+            hoverBorderWidth: 1.4
+          },
+          {
+            // Dashed trend line (optional secondary visual cue)
+            type: 'line',
+            label: '趋势线 (DIR)',
+            data: resultDIR,
+            borderColor: 'rgba(30, 64, 175, 0.9)',
+            borderWidth: 1.5,
+            borderDash: [4, 3],
+            pointRadius: 0,
+            pointHitRadius: 4,
+            tension: 0.25,
+            yAxisID: 'y'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 10,
+            right: 12,
+            bottom: 4,
+            left: 6
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            align: 'start',
+            labels: {
+              usePointStyle: true,
+              padding: 16,
+              boxWidth: 8,
+              font: {
+                size: 11
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15, 23, 42, 0.96)',
+            titleColor: '#e5e7eb',
+            bodyColor: '#f9fafb',
+            borderColor: 'rgba(148, 163, 184, 0.5)',
+            borderWidth: 1,
+            padding: 10,
+            displayColors: true,
+            callbacks: {
+              label: context => {
+                const value = context.raw;
+                if (context.dataset.type === 'line') {
+                  return '趋势值: ' + value.toFixed(2) + ' 天';
+                }
+                return 'DIR: ' + value.toFixed(2) + ' 天';
+              },
+              afterBody: (items) => {
+                if (!items.length) return '';
+                const index = items[0].dataIndex;
+                if (index === 0) return '起始年份，随后整体呈下行趋势。';
+                if (index === resultDIR.length - 1)
+                  return '2024 年较前一年略有回落但仍高于 2020–2022 水平。';
+                return '';
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            type: 'linear',
+            beginAtZero: false,
+            min: Math.max(0, Math.floor(minVal - padding)),
+            max: Math.ceil(maxVal + padding),
+            grid: {
+              color: 'rgba(148, 163, 184, 0.35)',
+              drawBorder: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              callback: value => value + ' 天'
+            },
+            title: {
+              display: true,
+              text: '防御区间比率 (天)',
+              font: {
+                size: 11,
+                weight: '500'
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        animation: {
+          duration: 700,
+          easing: 'easeOutCubic'
+        }
+      }
+    });
+  </script>
+</body>
+</html>

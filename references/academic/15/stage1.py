@@ -1,0 +1,122 @@
+import sys
+import io
+import pandas as pd
+import numpy as np
+import json
+
+def compute_data(output_path):
+    # 1. Source Data
+    csv_data = """Task,CONCH,Concat,Avg-Pred,Virchow2
+CRC_DACHS_KRAS,0.534721,0.535258,0.549144,0.547883
+STAD_Kiel_M_STATUS,0.544224,0.557744,0.537224,0.526274
+BRCA_IEO_N_STATUS,0.575481,0.571745,0.574428,0.55847
+Lung_CPTAC_KRAS,0.581757,0.599324,0.576014,0.522889
+CRC_CPTAC_LEFT_RIGHT,0.613278,0.61947,0.613003,0.583832
+CRC_CPTAC_N_STATUS,0.630026,0.611971,0.638095,0.615013
+CRC_CPTAC_PIK3CA,0.617665,0.642105,0.645977,0.636782
+CRC_DACHS_N_STATUS,0.648021,0.63771,0.649866,0.632989
+STAD_Kiel_N_STATUS,0.631522,0.620105,0.654946,0.616924
+BRCA_CPTAC_PIK3CA,0.675417,0.662003,0.661682,0.610655
+CRC_CPTAC_KRAS,0.674286,0.67493,0.68668,0.613441
+BRCA_CPTAC_ERBB2,0.688275,0.651617,0.657008,0.66186
+CRC_DACHS_M_STATUS,0.675269,0.678237,0.692091,0.697332
+CRC_DACHS_CIMP,0.671484,0.684641,0.686804,0.698943
+STAD_Bern_N_STATUS,0.71867,0.594866,0.611224,0.598758
+Total,0.708066,0.710943,0.7204,0.705072
+CRC_DACHS_LEFT_RIGHT,0.707539,0.731377,0.744267,0.723064
+CRC_DACHS_BRAF,0.708614,0.756712,0.75453,0.725489
+Lung_CPTAC_EGFR,0.711846,0.761928,0.760948,0.701634
+CRC_CPTAC_BRAF,0.708571,0.734359,0.76967,0.724835
+Lung_CPTAC_STK11,0.727652,0.759091,0.774495,0.766667
+Lung_CPTAC_TP53,0.781961,0.764064,0.771907,0.752157
+STAD_Bern_isMSIH,0.738697,0.762577,0.763076,0.795687
+STAD_Kiel_isMSIH,0.731109,0.743598,0.774264,0.813374
+BRCA_CPTAC_PGR,0.800114,0.807714,0.826743,0.796057
+CRC_DACHS_isMSIH,0.828881,0.826826,0.858945,0.862416
+STAD_Kiel_EBV,0.87855,0.88245,0.880574,0.862767
+BRCA_CPTAC_ESR1,0.820932,0.846125,0.868231,0.894659
+CRC_CPTAC_isMSIH,0.916667,0.90607,0.920062,0.92284
+Lung_CPTAC_CANCER_TYPE,0.99268,0.992732,0.98971,0.983386
+"""
+    
+    # 2. Load and Prepare Data
+    df = pd.read_csv(io.StringIO(csv_data))
+    df = df[df['Task'] != 'Total'].copy().reset_index(drop=True)
+    
+    models = ['CONCH', 'Concat', 'Avg-Pred', 'Virchow2']
+    
+    # Scaling Logic
+    FIXED_STEP = 0.06
+    
+    df['data_max'] = df[models].max(axis=1)
+    
+    axis_tops = []
+    axis_bottoms = []
+    
+    for idx, row in df.iterrows():
+        dmax = row['data_max']
+        top = dmax
+        bottom = top - (4 * FIXED_STEP)
+        axis_tops.append(top)
+        axis_bottoms.append(bottom)
+        
+    df['axis_top'] = axis_tops
+    df['axis_bottom'] = axis_bottoms
+
+    # Label Properties logic
+    def get_label_props(raw_label):
+        text = raw_label.replace('_', ' ')
+        text = text.replace('Lung', 'LUAD')
+        text = text.replace('LEFT RIGHT', 'sidedness')
+        text = text.replace('CANCER TYPE', 'subtyping')
+        text = text.replace('isMSIH', 'MSI')
+        text = text.replace('N STATUS', 'N-status')
+        text = text.replace('M STATUS', 'M-status')
+        
+        if "DACHS CRC sidedness" not in text and "CRC DACHS sidedness" in text:
+            text = "DACHS CRC\nsidedness"
+        elif "CPTAC CRC sidedness" not in text and "CRC CPTAC sidedness" in text:
+            text = "CPTAC CRC\nsidedness"
+        elif "NSCLC subtyping" not in text and "LUAD CPTAC subtyping" in text:
+            text = "NSCLC\nsubtyping"
+        else:
+            words = text.split()
+            if len(words) >= 3:
+                text = " ".join(words[:-1]) + "\n" + words[-1]
+            elif len(words) == 2:
+                 text = words[0] + "\n" + words[1]
+
+        if 'sidedness' in text or 'subtyping' in text:
+            category = 'Morphology'
+        elif 'N-status' in text or 'M-status' in text:
+            category = 'Prognosis'
+        else:
+            category = 'Biomarkers'
+        return text, category
+
+    # Apply label logic
+    df[['label_text', 'category']] = df['Task'].apply(lambda x: pd.Series(get_label_props(x)))
+    
+    # Reconstruct raw data (filtered)
+    df_raw = df[['Task'] + models]
+
+    # Save to JSON
+    output_data = {
+        "scr_data": {
+            "data": df_raw.to_dict(orient='records')
+        },
+        "der_data": {
+            "models": models,
+            "processed_data": df.to_dict(orient='records')
+        }
+    }
+
+    with open(output_path, "w") as f:
+        json.dump(output_data, f, indent=4)
+    print(f"Data saved to {output_path}")
+
+if __name__ == "__main__":
+    output_file = "bench/ground_truth_code/nature_2_output/15.json"
+    if len(sys.argv) > 1:
+        output_file = sys.argv[1]
+    compute_data(output_file)

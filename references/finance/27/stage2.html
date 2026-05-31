@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ACN 盈余-现金质量剪刀差 (Earnings Quality Spread) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #1f2933;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --grid: #e5e7eb;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --tooltip-bg: #111827;
+      --tooltip-fg: #f9fafb;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin-bottom: 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .chart-card {
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem 1.5rem;
+      box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.04),
+        0 2px 8px rgba(15, 23, 42, 0.02);
+      background: #ffffff;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .chart-title-main {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .chart-title-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .chart-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .note {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ACN 盈余-现金质量剪刀差 (Earnings Quality Spread)</h1>
+    <div class="subtitle">年度变化：2016 – 2024 财年</div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title-main">盈余-现金质量剪刀差（RESULT_Spread）</div>
+          <div class="chart-title-sub">单位：绝对比率（例如 0.08 = 8%）</div>
+        </div>
+        <div class="chart-meta">
+          图表类型：柱状图<br />
+          交互：悬停查看精确数值，点击图例可切换数据集
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="spreadChart"></canvas>
+      </div>
+
+      <div class="note">
+        说明：剪刀差反映盈余与现金流之间的偏离程度，数值越高通常意味着盈余质量风险越大。数据来源为用户提供的 ACN 2016–2024 财年 RESULT_Spread。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data from source (kept exactly as provided)
+    const years = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const resultSpread = [
+      0.0238703063675389,
+      0.0705740890286943,
+      0.0834460691368902,
+      0.0681370327821348,
+      0.0929380576703164,
+      0.0764652809970529,
+      0.0589116008978094,
+      0.0538573980702921,
+      0.0348251652573743
+    ];
+
+    // Helper: format as percentage with 2 decimals
+    function formatPercent(value) {
+      if (value === null || value === undefined || isNaN(value)) return "-";
+      return (value * 100).toFixed(2) + "%";
+    }
+
+    const ctx = document.getElementById("spreadChart").getContext("2d");
+
+    const spreadChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "RESULT_Spread",
+            data: resultSpread,
+            backgroundColor: "rgba(37, 99, 235, 0.55)",
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.85)",
+            borderColor: "rgba(37, 99, 235, 1)",
+            borderWidth: 1,
+            borderRadius: 6,
+            borderSkipped: false,
+            maxBarThickness: 48
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              boxHeight: 8,
+              padding: 16
+            }
+          },
+          tooltip: {
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-bg") || "#111827",
+            titleColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-fg") || "#f9fafb",
+            bodyColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-fg") || "#f9fafb",
+            borderWidth: 0,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function (context) {
+                const raw = context.raw;
+                return "剪刀差: " + formatPercent(raw);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--grid") || "#e5e7eb"
+            },
+            ticks: {
+              callback: function (value) {
+                return formatPercent(value);
+              }
+            },
+            title: {
+              display: true,
+              text: "RESULT_Spread（%）",
+              padding: 6
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

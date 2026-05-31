@@ -1,0 +1,86 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a ranked horizontal bar chart showing the top 10 countries by regional flagship capture, where the plotted value is `sum of scores of that country's cities appearing in the 3.1 regional city top-10 table / sum of all listed city scores in that country's 3.2 national block`, values are percentages, only countries with at least 3 listed cities in 3.2 are eligible, and bars are sorted from highest to lowest after the share is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by regional_flagship_capture_pct",
+  "selection_rule": "top 10 among countries with at least 3 listed national cities",
+  "plot_spec": {
+    "title": "Regional Flagship Capture",
+    "xlabel": "percent",
+    "value_field": "regional_flagship_capture_pct",
+    "value_as_percent": true
+  },
+  "records": [
+    {
+      "entity": "United States",
+      "regional_flagship_capture_pct": 97.5779,
+      "regional_top10_score_sum": 1182.539,
+      "national_listed_score_sum": 1211.892,
+      "listed_cities": 10
+    },
+    {
+      "entity": "Chile",
+      "regional_flagship_capture_pct": 96.4914,
+      "regional_top10_score_sum": 9.708,
+      "national_listed_score_sum": 10.061,
+      "listed_cities": 3
+    },
+    {
+      "entity": "South Korea",
+      "regional_flagship_capture_pct": 84.4415,
+      "regional_top10_score_sum": 30.111,
+      "national_listed_score_sum": 35.659,
+      "listed_cities": 5
+    },
+    {
+      "entity": "India",
+      "regional_flagship_capture_pct": 82.5143,
+      "regional_top10_score_sum": 142.536,
+      "national_listed_score_sum": 172.741,
+      "listed_cities": 8
+    },
+    {
+      "entity": "Russia",
+      "regional_flagship_capture_pct": 82.3576,
+      "regional_top10_score_sum": 25.082,
+      "national_listed_score_sum": 30.455,
+      "listed_cities": 8
+    },
+    {
+      "entity": "China",
+      "regional_flagship_capture_pct": 79.2975,
+      "regional_top10_score_sum": 233.259,
+      "national_listed_score_sum": 294.157,
+      "listed_cities": 10
+    },
+    {
+      "entity": "Argentina",
+      "regional_flagship_capture_pct": 74.2012,
+      "regional_top10_score_sum": 10.938,
+      "national_listed_score_sum": 14.741,
+      "listed_cities": 4
+    },
+    {
+      "entity": "Brazil",
+      "regional_flagship_capture_pct": 73.9777,
+      "regional_top10_score_sum": 41.898,
+      "national_listed_score_sum": 56.636,
+      "listed_cities": 8
+    },
+    {
+      "entity": "Israel",
+      "regional_flagship_capture_pct": 71.9209,
+      "regional_top10_score_sum": 54.89,
+      "national_listed_score_sum": 76.32,
+      "listed_cities": 10
+    },
+    {
+      "entity": "Ireland",
+      "regional_flagship_capture_pct": 70.2633,
+      "regional_top10_score_sum": 15.049,
+      "national_listed_score_sum": 21.418,
+      "listed_cities": 8
+    }
+  ]
+}

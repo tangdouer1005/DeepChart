@@ -1,0 +1,422 @@
+[
+    {
+        "Country": "Germany",
+        "Status": "On track to meet goals",
+        "Percentage": 33
+    },
+    {
+        "Country": "France",
+        "Status": "On track to meet goals",
+        "Percentage": 19
+    },
+    {
+        "Country": "United Kingdom",
+        "Status": "On track to meet goals",
+        "Percentage": 29
+    },
+    {
+        "Country": "Italy",
+        "Status": "On track to meet goals",
+        "Percentage": 28
+    },
+    {
+        "Country": "Spain",
+        "Status": "On track to meet goals",
+        "Percentage": 29
+    },
+    {
+        "Country": "Poland",
+        "Status": "On track to meet goals",
+        "Percentage": 30
+    },
+    {
+        "Country": "Netherlands",
+        "Status": "On track to meet goals",
+        "Percentage": 25
+    },
+    {
+        "Country": "Belgium",
+        "Status": "On track to meet goals",
+        "Percentage": 24
+    },
+    {
+        "Country": "Sweden",
+        "Status": "On track to meet goals",
+        "Percentage": 34
+    },
+    {
+        "Country": "Greece",
+        "Status": "On track to meet goals",
+        "Percentage": 28
+    },
+    {
+        "Country": "Portugal",
+        "Status": "On track to meet goals",
+        "Percentage": 26
+    },
+    {
+        "Country": "Austria",
+        "Status": "On track to meet goals",
+        "Percentage": 33
+    },
+    {
+        "Country": "Czech Republic",
+        "Status": "On track to meet goals",
+        "Percentage": 27
+    },
+    {
+        "Country": "Denmark",
+        "Status": "On track to meet goals",
+        "Percentage": 33
+    },
+    {
+        "Country": "Ireland",
+        "Status": "On track to meet goals",
+        "Percentage": 20
+    },
+    {
+        "Country": "Finland",
+        "Status": "On track to meet goals",
+        "Percentage": 32
+    },
+    {
+        "Country": "Hungary",
+        "Status": "On track to meet goals",
+        "Percentage": 27
+    },
+    {
+        "Country": "Slovakia",
+        "Status": "On track to meet goals",
+        "Percentage": 25
+    },
+    {
+        "Country": "Bulgaria",
+        "Status": "On track to meet goals",
+        "Percentage": 28
+    },
+    {
+        "Country": "Croatia",
+        "Status": "On track to meet goals",
+        "Percentage": 29
+    },
+    {
+        "Country": "Lithuania",
+        "Status": "On track to meet goals",
+        "Percentage": 28
+    },
+    {
+        "Country": "Slovenia",
+        "Status": "On track to meet goals",
+        "Percentage": 31
+    },
+    {
+        "Country": "Latvia",
+        "Status": "On track to meet goals",
+        "Percentage": 28
+    },
+    {
+        "Country": "Estonia",
+        "Status": "On track to meet goals",
+        "Percentage": 33
+    },
+    {
+        "Country": "Cyprus",
+        "Status": "On track to meet goals",
+        "Percentage": 26
+    },
+    {
+        "Country": "Luxembourg",
+        "Status": "On track to meet goals",
+        "Percentage": 23
+    },
+    {
+        "Country": "Malta",
+        "Status": "On track to meet goals",
+        "Percentage": 26
+    },
+    {
+        "Country": "Romania",
+        "Status": "On track to meet goals",
+        "Percentage": 33
+    },
+    {
+        "Country": "Germany",
+        "Status": "Not on track to meet goals",
+        "Percentage": 33
+    },
+    {
+        "Country": "France",
+        "Status": "Not on track to meet goals",
+        "Percentage": 40
+    },
+    {
+        "Country": "United Kingdom",
+        "Status": "Not on track to meet goals",
+        "Percentage": 38
+    },
+    {
+        "Country": "Italy",
+        "Status": "Not on track to meet goals",
+        "Percentage": 40
+    },
+    {
+        "Country": "Spain",
+        "Status": "Not on track to meet goals",
+        "Percentage": 35
+    },
+    {
+        "Country": "Poland",
+        "Status": "Not on track to meet goals",
+        "Percentage": 40
+    },
+    {
+        "Country": "Netherlands",
+        "Status": "Not on track to meet goals",
+        "Percentage": 36
+    },
+    {
+        "Country": "Belgium",
+        "Status": "Not on track to meet goals",
+        "Percentage": 37
+    },
+    {
+        "Country": "Sweden",
+        "Status": "Not on track to meet goals",
+        "Percentage": 31
+    },
+    {
+        "Country": "Greece",
+        "Status": "Not on track to meet goals",
+        "Percentage": 34
+    },
+    {
+        "Country": "Portugal",
+        "Status": "Not on track to meet goals",
+        "Percentage": 38
+    },
+    {
+        "Country": "Austria",
+        "Status": "Not on track to meet goals",
+        "Percentage": 30
+    },
+    {
+        "Country": "Czech Republic",
+        "Status": "Not on track to meet goals",
+        "Percentage": 34
+    },
+    {
+        "Country": "Denmark",
+        "Status": "Not on track to meet goals",
+        "Percentage": 31
+    },
+    {
+        "Country": "Ireland",
+        "Status": "Not on track to meet goals",
+        "Percentage": 38
+    },
+    {
+        "Country": "Finland",
+        "Status": "Not on track to meet goals",
+        "Percentage": 31
+    },
+    {
+        "Country": "Hungary",
+        "Status": "Not on track to meet goals",
+        "Percentage": 33
+    },
+    {
+        "Country": "Slovakia",
+        "Status": "Not on track to meet goals",
+        "Percentage": 35
+    },
+    {
+        "Country": "Bulgaria",
+        "Status": "Not on track to meet goals",
+        "Percentage": 33
+    },
+    {
+        "Country": "Croatia",
+        "Status": "Not on track to meet goals",
+        "Percentage": 34
+    },
+    {
+        "Country": "Lithuania",
+        "Status": "Not on track to meet goals",
+        "Percentage": 31
+    },
+    {
+        "Country": "Slovenia",
+        "Status": "Not on track to meet goals",
+        "Percentage": 31
+    },
+    {
+        "Country": "Latvia",
+        "Status": "Not on track to meet goals",
+        "Percentage": 30
+    },
+    {
+        "Country": "Estonia",
+        "Status": "Not on track to meet goals",
+        "Percentage": 26
+    },
+    {
+        "Country": "Cyprus",
+        "Status": "Not on track to meet goals",
+        "Percentage": 31
+    },
+    {
+        "Country": "Luxembourg",
+        "Status": "Not on track to meet goals",
+        "Percentage": 32
+    },
+    {
+        "Country": "Malta",
+        "Status": "Not on track to meet goals",
+        "Percentage": 29
+    },
+    {
+        "Country": "Romania",
+        "Status": "Not on track to meet goals",
+        "Percentage": 30
+    },
+    {
+        "Country": "Germany",
+        "Status": "No data",
+        "Percentage": 34
+    },
+    {
+        "Country": "France",
+        "Status": "No data",
+        "Percentage": 41
+    },
+    {
+        "Country": "United Kingdom",
+        "Status": "No data",
+        "Percentage": 33
+    },
+    {
+        "Country": "Italy",
+        "Status": "No data",
+        "Percentage": 32
+    },
+    {
+        "Country": "Spain",
+        "Status": "No data",
+        "Percentage": 36
+    },
+    {
+        "Country": "Poland",
+        "Status": "No data",
+        "Percentage": 30
+    },
+    {
+        "Country": "Netherlands",
+        "Status": "No data",
+        "Percentage": 39
+    },
+    {
+        "Country": "Belgium",
+        "Status": "No data",
+        "Percentage": 39
+    },
+    {
+        "Country": "Sweden",
+        "Status": "No data",
+        "Percentage": 35
+    },
+    {
+        "Country": "Greece",
+        "Status": "No data",
+        "Percentage": 38
+    },
+    {
+        "Country": "Portugal",
+        "Status": "No data",
+        "Percentage": 36
+    },
+    {
+        "Country": "Austria",
+        "Status": "No data",
+        "Percentage": 37
+    },
+    {
+        "Country": "Czech Republic",
+        "Status": "No data",
+        "Percentage": 39
+    },
+    {
+        "Country": "Denmark",
+        "Status": "No data",
+        "Percentage": 36
+    },
+    {
+        "Country": "Ireland",
+        "Status": "No data",
+        "Percentage": 42
+    },
+    {
+        "Country": "Finland",
+        "Status": "No data",
+        "Percentage": 37
+    },
+    {
+        "Country": "Hungary",
+        "Status": "No data",
+        "Percentage": 40
+    },
+    {
+        "Country": "Slovakia",
+        "Status": "No data",
+        "Percentage": 40
+    },
+    {
+        "Country": "Bulgaria",
+        "Status": "No data",
+        "Percentage": 39
+    },
+    {
+        "Country": "Croatia",
+        "Status": "No data",
+        "Percentage": 37
+    },
+    {
+        "Country": "Lithuania",
+        "Status": "No data",
+        "Percentage": 41
+    },
+    {
+        "Country": "Slovenia",
+        "Status": "No data",
+        "Percentage": 38
+    },
+    {
+        "Country": "Latvia",
+        "Status": "No data",
+        "Percentage": 42
+    },
+    {
+        "Country": "Estonia",
+        "Status": "No data",
+        "Percentage": 41
+    },
+    {
+        "Country": "Cyprus",
+        "Status": "No data",
+        "Percentage": 43
+    },
+    {
+        "Country": "Luxembourg",
+        "Status": "No data",
+        "Percentage": 45
+    },
+    {
+        "Country": "Malta",
+        "Status": "No data",
+        "Percentage": 45
+    },
+    {
+        "Country": "Romania",
+        "Status": "No data",
+        "Percentage": 37
+    }
+]

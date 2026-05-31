@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 500px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        
+        const data = {
+    "means": {
+        "WT saline": 62.08419473684211,
+        "WT K": 75.27292105263157,
+        "A1ko saline": 62.73440000000001,
+        "A1ko K": 58.609249999999996,
+        "A2a ko saline": 62.209999999999994,
+        "A2a ko K": 65.78875
+    },
+    "sems": {
+        "WT saline": 2.5288597057050857,
+        "WT K": 2.1948268883977744,
+        "A1ko saline": 4.855123831559579,
+        "A1ko K": 3.926078806483923,
+        "A2a ko saline": 4.438929246692591,
+        "A2a ko K": 3.00040737561466
+    },
+    "raw_data": {
+        "WT saline": [
+            48.1752,
+            66.2921,
+            82.0513,
+            55.6391,
+            56.6901,
+            88.3803,
+            62.0155,
+            72.9167,
+            55.3719,
+            51.5038,
+            62.5,
+            45.0237,
+            65.26,
+            62.61,
+            56.64,
+            69.52,
+            61.04,
+            50.8,
+            67.17
+        ],
+        "WT K": [
+            87.156,
+            81.6514,
+            62.5514,
+            60.9043,
+            83.5249,
+            91.8182,
+            75.6477,
+            73.4615,
+            67.2199,
+            74.4361,
+            66.6667,
+            79.3774,
+            82.88,
+            81.76,
+            66.67,
+            78.55,
+            63.23,
+            87.82,
+            64.86
+        ],
+        "A1ko saline": [
+            50.9091,
+            88.9831,
+            80.0781,
+            58.0524,
+            63.986,
+            71.1679,
+            64.2857,
+            65.4762,
+            46.9055,
+            37.5
+        ],
+        "A1ko K": [
+            63.3663,
+            39.6226,
+            61.9048,
+            60.7595,
+            60.0746,
+            82.7206,
+            60.794,
+            63.7288,
+            40.0862,
+            53.0351
+        ],
+        "A2a ko saline": [
+            60.0,
+            83.47,
+            51.06,
+            68.25,
+            57.25,
+            43.1,
+            72.0,
+            62.55
+        ],
+        "A2a ko K": [
+            80.16,
+            72.88,
+            58.86,
+            52.89,
+            66.97,
+            60.5,
+            67.53,
+            66.52
+        ]
+    },
+    "columns": [
+        "WT saline",
+        "WT K",
+        "A1ko saline",
+        "A1ko K",
+        "A2a ko saline",
+        "A2a ko K"
+    ],
+    "comparisons": [
+        {
+            "col1_idx": 0,
+            "col2_idx": 1,
+            "col1": "WT saline",
+            "col2": "WT K",
+            "p_val": 0.0003603998450234315
+        },
+        {
+            "col1_idx": 2,
+            "col2_idx": 3,
+            "col1": "A1ko saline",
+            "col2": "A1ko K",
+            "p_val": 0.5171918214124611
+        },
+        {
+            "col1_idx": 4,
+            "col2_idx": 5,
+            "col1": "A2a ko saline",
+            "col2": "A2a ko K",
+            "p_val": 0.5150297583053653
+        }
+    ]
+};
+
+        const columns = data.columns;
+        
+        const stats = {};
+        if (data.means && data.sems && data.raw_data) {
+            columns.forEach(col => {
+                stats[col] = { 
+                    mean: data.means[col], 
+                    sem: data.sems[col], 
+                    arr: data.raw_data[col] 
+                };
+            });
+        } else {
+            console.error("JSON data missing required fields (means, sems, raw_data)");
+        }
+
+        const annotations = [];
+        const sigY = 105;
+        
+        if (data.comparisons) {
+            data.comparisons.forEach(comp => {
+                const idx1 = comp.col1_idx;
+                const idx2 = comp.col2_idx;
+                const pVal = comp.p_val;
+                
+                let sigText = "";
+                if (pVal < 0.001) sigText = "***";
+                else if (pVal < 0.01) sigText = "**";
+                else if (pVal < 0.05) sigText = "*";
+                else sigText = `P = ${pVal.toFixed(2)}`;
+
+                annotations.push({ x1: idx1, x2: idx2, y: sigY, text: sigText });
+            });
+        }
+
+        const chartCols = [];
+        const chartColors = [];
+        const colMap = {};
+        
+        const palette = [
+            '#000000', '#991f17', 
+            '#454545', '#e8554e', 
+            '#6b6b6b', '#f08582'
+        ];
+        
+        // Structure: 0,1 gap 2,3 gap 4,5
+        // Chart indices: 0,1, 2, 3,4, 5, 6,7
+        chartCols.push(columns[0]); chartColors.push(palette[0]); colMap[0] = 0;
+        chartCols.push(columns[1]); chartColors.push(palette[1]); colMap[1] = 1;
+        chartCols.push(null); chartColors.push('transparent');
+        
+        chartCols.push(columns[2]); chartColors.push(palette[2]); colMap[2] = 3;
+        chartCols.push(columns[3]); chartColors.push(palette[3]); colMap[3] = 4;
+        chartCols.push(null); chartColors.push('transparent');
+        
+        chartCols.push(columns[4]); chartColors.push(palette[4]); colMap[4] = 6;
+        chartCols.push(columns[5]); chartColors.push(palette[5]); colMap[5] = 7;
+        
+        const mappedAnnotations = annotations.map(a => ({
+            x1: colMap[a.x1],
+            x2: colMap[a.x2],
+            y: a.y,
+            text: a.text
+        }));
+        
+        const scatterData = [];
+        columns.forEach((col, idx) => {
+            const cIdx = colMap[idx];
+            stats[col].arr.forEach(val => {
+                const jitter = (Math.random() - 0.5) * 0.3;
+                scatterData.push([cIdx + jitter, val]);
+            });
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 100, left: 60 },
+            xAxis: {
+                type: 'category',
+                data: chartCols.map(c => c || ''),
+                axisLabel: { show: false },
+                axisTick: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } }
+            },
+            yAxis: {
+                type: 'value',
+                max: 115,
+                interval: 20,
+                axisLabel: { color: 'black', fontSize: 12 },
+                name: 'Sucrose preference (%)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: chartCols.map((col, i) => {
+                        if (!col) return { value: 0, itemStyle: { opacity: 0 } };
+                        return { value: stats[col].mean, itemStyle: { color: chartColors[i] } };
+                    }),
+                    barWidth: '70%',
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const colName = chartCols[params.dataIndex];
+                        if (!colName) return;
+                        const x = api.value(0);
+                        const mean = stats[colName].mean;
+                        const sem = stats[colName].sem;
+                        const p1 = api.coord([x, mean - sem]);
+                        const p2 = api.coord([x, mean + sem]);
+                        const style = api.style({ stroke: 'gray', lineWidth: 1.5 });
+                        return { type: 'line', shape: { x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1] }, style: style };
+                    },
+                    data: chartCols.map((c, i) => [i, 0]),
+                    z: 2
+                },
+                {
+                    type: 'scatter',
+                    symbolSize: 6,
+                    itemStyle: { color: 'gray', opacity: 0.9 }, // 6.py uses gray scatter points
+                    data: scatterData,
+                    z: 3
+                },
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const ann = mappedAnnotations[params.dataIndex];
+                        const p1 = api.coord([ann.x1, ann.y]);
+                        const p2 = api.coord([ann.x2, ann.y]);
+                        const style = api.style({ stroke: 'black', lineWidth: 1, fill: null });
+                        return {
+                            type: 'group',
+                            children: [
+                                { type: 'line', shape: { x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1] }, style: style },
+                                { type: 'text', style: { text: ann.text, x: (p1[0]+p2[0])/2, y: p1[1]-5, textAlign: 'center', textVerticalAlign: 'bottom', fill: 'black', font: '12px Arial' } }
+                            ]
+                        };
+                    },
+                    data: mappedAnnotations.map((a, i) => i),
+                    z: 4
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'e', font: 'bold 20px Arial' } },
+                { type: 'text', left: 10, bottom: 65, style: { text: 'CRS', textAlign: 'right', font: '12px Arial' } },
+                { type: 'text', left: 10, bottom: 45, style: { text: 'Ketamine', textAlign: 'right', font: '12px Arial' } },
+                
+                { type: 'line', shape: { x1: 75, y1: 460, x2: 155, y2: 460 }, style: { stroke: 'black' } }, 
+                { type: 'text', left: 115, bottom: 20, style: { text: 'WT', textAlign: 'center', font: '12px Arial' } },
+
+                { type: 'line', shape: { x1: 205, y1: 460, x2: 285, y2: 460 }, style: { stroke: 'black' } },
+                { type: 'text', left: 245, bottom: 20, style: { text: 'Adora1-/-', textAlign: 'center', font: '12px Arial' } },
+                
+                { type: 'line', shape: { x1: 335, y1: 460, x2: 415, y2: 460 }, style: { stroke: 'black' } },
+                { type: 'text', left: 375, bottom: 20, style: { text: 'Adora2a-/-', textAlign: 'center', font: '12px Arial' } }
+            ]
+        };
+        
+        const row1 = ['+', '+', '', '+', '+', '', '+', '+'];
+        const m = '\u2212';
+        const row2 = [m, '+', '', m, '+', '', m, '+'];
+
+        option.xAxis = [
+            option.xAxis,
+            { type: 'category', data: row1, position: 'bottom', offset: 15, axisLine: {show: false}, axisTick: {show: false}, axisLabel: { color: 'black' } },
+            { type: 'category', data: row2, position: 'bottom', offset: 35, axisLine: {show: false}, axisTick: {show: false}, axisLabel: { color: 'black', fontWeight: 'bold' } }
+        ];
+        option.series.forEach(s => s.xAxisIndex = 0);
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

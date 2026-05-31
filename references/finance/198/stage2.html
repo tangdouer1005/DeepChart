@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NVDA Altman Z-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: #f5f5f7;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 24px;
+      padding: 24px 28px 32px;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 4px;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 18px;
+      font-weight: 500;
+      color: #4b5563;
+    }
+    .meta {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+    .legend-inline {
+      font-size: 0.8rem;
+      color: #4b5563;
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: #2563eb;
+    }
+    canvas {
+      max-height: 460px;
+    }
+    @media (max-width: 640px) {
+      .container {
+        margin: 12px;
+        padding: 18px 16px 22px;
+      }
+      h1 {
+        font-size: 1.25rem;
+      }
+      h2 {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>NVDA 奥特曼破产预测模型 (Altman Z-Score)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="meta">
+      Data: Company filings / computed Altman Z-Score (RESULT_Z_Score).<br />
+      Interpretation (manufacturing/standard Altman Z-Score):<br />
+      Z &lt; 1.8: Distress zone &nbsp;|&nbsp; 1.8–3.0: Grey zone &nbsp;|&nbsp; Z &gt; 3.0: Safe zone
+    </div>
+
+    <canvas id="zscoreChart"></canvas>
+    <div class="legend-inline">
+      <span class="legend-item">
+        <span class="legend-color"></span>
+        <span>Z-Score by fiscal year (hover bars for exact values)</span>
+      </span>
+    </div>
+  </div>
+
+  <script>
+    // Data from source
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const zScores = [
+      3.353487853577838,
+      3.886255931183732,
+      4.954804529742273,
+      5.401418353858988,
+      4.641245226884335,
+      3.375519985942825,
+      3.4470721068718,
+      2.5152879899112253,
+      4.966406235220475
+    ];
+
+    // Helper to set nice y-axis bounds
+    const minZ = Math.min(...zScores);
+    const maxZ = Math.max(...zScores);
+    const padding = 0.4;
+    const yMin = Math.max(0, Math.floor((minZ - padding) * 10) / 10);
+    const yMax = Math.ceil((maxZ + padding) * 10) / 10;
+
+    const ctx = document.getElementById("zscoreChart").getContext("2d");
+
+    const chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "Altman Z-Score",
+            data: zScores,
+            backgroundColor: "rgba(37, 99, 235, 0.75)",
+            borderColor: "rgb(37, 99, 235)",
+            borderWidth: 1.3,
+            borderRadius: 6,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.95)"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 10,
+            right: 16,
+            bottom: 6,
+            left: 8
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.94)",
+            titleFont: { size: 13, weight: "600" },
+            bodyFont: { size: 12 },
+            padding: 10,
+            callbacks: {
+              label: (ctx) => {
+                const value = ctx.raw;
+                return ` Altman Z-Score: ${value.toFixed(3)}`;
+              },
+              afterLabel: (ctx) => {
+                const z = ctx.raw;
+                let zone = "";
+                if (z < 1.8) {
+                  zone = "Distress zone";
+                } else if (z < 3.0) {
+                  zone = "Grey zone";
+                } else {
+                  zone = "Safe zone";
+                }
+                return ` Zone: ${zone}`;
+              }
+            }
+          },
+          annotation: {
+            // will be added below if plugin loaded
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: { size: 11 }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            min: yMin,
+            max: yMax,
+            grid: {
+              color: "rgba(148, 163, 184, 0.35)",
+              drawBorder: false
+            },
+            ticks: {
+              font: { size: 11 },
+              callback: (value) => value.toFixed(1)
+            },
+            title: {
+              display: true,
+              text: "Altman Z-Score",
+              font: { size: 12, weight: "600" }
+            }
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        }
+      }
+    });
+
+    // Optional: light hover effect for cursor
+    document
+      .getElementById("zscoreChart")
+      .addEventListener("mousemove", (evt) => {
+        evt.target.style.cursor = "default";
+        const points = chart.getElementsAtEventForMode(
+          evt,
+          "nearest",
+          { intersect: true },
+          false
+        );
+        if (points.length) {
+          evt.target.style.cursor = "pointer";
+        }
+      });
+  </script>
+</body>
+</html>

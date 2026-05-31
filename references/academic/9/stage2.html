@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const data = {
+    "pc1": [
+        -1.7107059456515046,
+        -2.3935083424717867,
+        -4.438175585459164,
+        -0.6993176217537855,
+        -2.0384578761288155,
+        1.4352850147349954,
+        -0.04721756990064107,
+        2.7852642561233845,
+        0.8321841913652699,
+        3.5130537714344134,
+        0.6322469360239031,
+        2.1293487716837336
+    ],
+    "pc2": [
+        0.8502260616213777,
+        1.5763846515101003,
+        -0.4483254028559307,
+        -0.473884503047574,
+        -1.117058209514882,
+        -1.2552097197849144,
+        0.4536773287635247,
+        1.2226567037726794,
+        0.7783611933322462,
+        -0.13357168902542,
+        -1.3111569534414853,
+        -0.14209946132972273
+    ],
+    "labels": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3
+    ]
+};
+
+        function mean(arr) {
+            return arr.reduce((a, b) => a + b, 0) / arr.length;
+        }
+
+        const pcaRes = {
+            components: data.pc1.map((p1, i) => [p1, data.pc2[i]]),
+            var1: 72.36,
+            var2: 12.52
+        };
+        const labels = data.labels;
+
+        const dataPoints = pcaRes.components.map((p, i) => ({
+            pc1: p[0],
+            pc2: p[1],
+            label: labels[i]
+        }));
+
+        const groups = [
+            { label: 0, name: 'Control', color: '#6495ED' },
+            { label: 1, name: '2 µM ketamine', color: '#77DD77' },
+            { label: 2, name: '10 µM ketamine', color: '#BA55D3' },
+            { label: 3, name: '50 µM ketamine', color: '#EB5757' }
+        ];
+
+        // Ellipse calculation helper
+        function getEllipseData(points, cx, cy, color) {
+            const x = points.map(p => p[0]);
+            const y = points.map(p => p[1]);
+            const n = x.length;
+            const mx = mean(x);
+            const my = mean(y);
+            
+            let varX = 0, varY = 0, covXY = 0;
+            for(let i=0; i<n; i++) {
+                varX += Math.pow(x[i]-mx, 2);
+                varY += Math.pow(y[i]-my, 2);
+                covXY += (x[i]-mx)*(y[i]-my);
+            }
+            varX /= (n-1); // Sample variance
+            varY /= (n-1);
+            covXY /= (n-1);
+            
+            // Eigenvalues of 2x2 covariance matrix for ellipse
+            const lambda1 = (varX + varY + Math.sqrt(Math.pow(varX - varY, 2) + 4 * covXY * covXY)) / 2;
+            const lambda2 = (varX + varY - Math.sqrt(Math.pow(varX - varY, 2) + 4 * covXY * covXY)) / 2;
+            
+            // Angle
+            const theta = Math.atan2(lambda1 - varX, covXY);
+            
+            // Radius (n_std = 2.5)
+            const r1 = Math.sqrt(lambda1) * 2.5;
+            const r2 = Math.sqrt(lambda2) * 2.5;
+            
+            const data = [];
+            for (let t = 0; t <= 2 * Math.PI; t += 0.1) {
+                const px = r1 * Math.cos(t) * Math.cos(theta) - r2 * Math.sin(t) * Math.sin(theta) + mx;
+                const py = r1 * Math.cos(t) * Math.sin(theta) + r2 * Math.sin(t) * Math.cos(theta) + my;
+                data.push([px, py]);
+            }
+            return data;
+        }
+
+        const series = [];
+        groups.forEach(g => {
+            const subset = dataPoints.filter(d => d.label === g.label).map(d => [d.pc1, d.pc2]);
+            
+            series.push({
+                name: g.name,
+                type: 'scatter',
+                data: subset,
+                itemStyle: { color: g.color },
+                symbolSize: 15,
+                z: 10
+            });
+            
+            if (subset.length > 1) {
+                const ellipsePoints = getEllipseData(subset, 0, 0, g.color);
+                series.push({
+                    type: 'line',
+                    data: ellipsePoints,
+                    smooth: true,
+                    symbol: 'none',
+                    lineStyle: { color: g.color, width: 0 },
+                    areaStyle: { color: g.color, opacity: 0.3 },
+                    silent: true,
+                    z: 1
+                });
+            }
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 150, bottom: 60, left: 60 },
+            xAxis: {
+                name: `PC1 (${pcaRes.var1.toFixed(2)}%)`,
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: -6, max: 8,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black' }
+            },
+            yAxis: {
+                name: `PC2 (${pcaRes.var2.toFixed(2)}%)`,
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: -4, max: 3,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black' }
+            },
+            legend: {
+                data: groups.map(g => g.name),
+                right: 10,
+                top: 50,
+                orient: 'vertical',
+                textStyle: { color: 'black' }
+            },
+            series: series,
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'h', font: 'bold 20px Arial' } }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

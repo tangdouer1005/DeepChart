@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "Current_Density": 50,
+        "H2_mean": 9.017738817711841,
+        "H2_std": 0.6099497717603225,
+        "C2H4_mean": 28.053036808236808,
+        "C2H4_std": 0.7129250012684273
+    },
+    {
+        "Current_Density": 100,
+        "H2_mean": 7.390878849179583,
+        "H2_std": 0.8749712358063363,
+        "C2H4_mean": 34.17945328185328,
+        "C2H4_std": 0.5674260842258939
+    },
+    {
+        "Current_Density": 200,
+        "H2_mean": 5.298120926050793,
+        "H2_std": 0.598262161463463,
+        "C2H4_mean": 40.65289661089661,
+        "C2H4_std": 0.4414846588269848
+    },
+    {
+        "Current_Density": 300,
+        "H2_mean": 5.330781449014753,
+        "H2_std": 0.6872067290693673,
+        "C2H4_mean": 43.112168968968966,
+        "C2H4_std": 0.7984110896401561
+    },
+    {
+        "Current_Density": 400,
+        "H2_mean": 5.64386154191953,
+        "H2_std": 0.7316580926773713,
+        "C2H4_mean": 44.66181784641784,
+        "C2H4_std": 0.5565057596354692
+    },
+    {
+        "Current_Density": 500,
+        "H2_mean": 5.914168577208353,
+        "H2_std": 0.3952197506311754,
+        "C2H4_mean": 46.154065242385236,
+        "C2H4_std": 0.8422977851027523
+    },
+    {
+        "Current_Density": 600,
+        "H2_mean": 6.0135041582378,
+        "H2_std": 0.43768604782879567,
+        "C2H4_mean": 48.61142267982268,
+        "C2H4_std": 1.949556001929912
+    },
+    {
+        "Current_Density": 700,
+        "H2_mean": 6.20470988665189,
+        "H2_std": 0.3492342288951533,
+        "C2H4_mean": 50.48081377704235,
+        "C2H4_std": 1.7775421202893127
+    },
+    {
+        "Current_Density": 800,
+        "H2_mean": 6.266410429309953,
+        "H2_std": 0.4599524133388834,
+        "C2H4_mean": 52.31093642213642,
+        "C2H4_std": 1.8063637979006701
+    }
+];
+
+        // Process data
+        const currentDensity = jsonData.map(row => row.Current_Density);
+        
+        const h2_mean = jsonData.map(row => row.H2_mean);
+        const h2_std = jsonData.map(row => row.H2_std);
+        const c2h4_mean = jsonData.map(row => row.C2H4_mean);
+        const c2h4_std = jsonData.map(row => row.C2H4_std);
+
+        const colors = {
+            'H2': '#B9C3D7',
+            'C2H4': '#6D85AF',
+            'Acetate': '#4E6990',
+            'Ethanol': '#D5A79C',
+            'n-propanol': '#A95D4E'
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [];
+
+        // Stacked bars
+        series.push({
+            name: 'H2',
+            type: 'bar',
+            stack: 'total',
+            data: h2_mean,
+            itemStyle: { color: colors.H2 },
+            barWidth: '40%',
+            z: 1
+        });
+
+        series.push({
+            name: 'C2H4',
+            type: 'bar',
+            stack: 'total',
+            data: c2h4_mean,
+            itemStyle: { color: colors.C2H4 },
+            z: 1
+        });
+
+        // Error bars for H2
+        series.push({
+            type: 'custom',
+            name: 'H2 Error',
+            renderItem: (params, api) => {
+                const x = api.value(0);
+                const meanVal = h2_mean[x];
+                const stdVal = h2_std[x];
+                
+                const highPoint = api.coord([x, meanVal + stdVal]);
+                const lowPoint = api.coord([x, meanVal - stdVal]);
+                const capHalfWidth = 10;
+
+                const style = api.style({ stroke: 'black', lineWidth: 1 });
+                return {
+                    type: 'group',
+                    children: [
+                        { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                    ]
+                };
+            },
+            data: h2_mean.map((val, idx) => ([idx, val])), // Dummy data to trigger renderItem
+            z: 2
+        });
+
+        // Error bars for C2H4 (stacked)
+        series.push({
+            type: 'custom',
+            name: 'C2H4 Error',
+            renderItem: (params, api) => {
+                const x = api.value(0);
+                const meanValH2 = h2_mean[x];
+                const meanValC2H4 = c2h4_mean[x];
+                const stdValC2H4 = c2h4_std[x];
+
+                const bottom = meanValH2; // Base of C2H4 bar
+                const top = meanValH2 + meanValC2H4; // Top of C2H4 bar
+                const currentMean = top; // Error bar centered at top of its segment
+
+                const highPoint = api.coord([x, currentMean + stdValC2H4]);
+                const lowPoint = api.coord([x, currentMean - stdValC2H4]);
+                const capHalfWidth = 10;
+
+                const style = api.style({ stroke: 'black', lineWidth: 1 });
+                return {
+                    type: 'group',
+                    children: [
+                        { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                    ]
+                };
+            },
+            data: c2h4_mean.map((val, idx) => ([idx, val])), // Dummy data
+            z: 2
+        });
+
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: { top: 120, right: 20, bottom: 60, left: 60 },
+            xAxis: {
+                type: 'category',
+                data: currentDensity,
+                axisLabel: { color: 'black', fontSize: 10 },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { alignWithLabel: true }
+            },
+            yAxis: {
+                type: 'value',
+                max: 110,
+                interval: 20,
+                name: 'FE (%)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 12 },
+                axisLabel: { color: 'black', fontSize: 10 },
+                axisLine: { lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            legend: {
+                data: [
+                    { name: 'H2', icon: 'rect' },
+                    { name: 'C2H4', icon: 'rect' },
+                    { name: 'Acetate', icon: 'rect' },
+                    { name: 'Ethanol', icon: 'rect' },
+                    { name: 'n-propanol', icon: 'rect' }
+                ],
+                left: 'center',
+                top: 20,
+                orient: 'horizontal',
+                itemGap: 10,
+                textStyle: { fontSize: 9 },
+                formatter: function (name) {
+                    // Custom formatting for chemical symbols
+                    if (name === 'H2') return 'H₂';
+                    if (name === 'C2H4') return 'C₂H₄';
+                    return name;
+                }
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'd',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a ranked dumbbell chart for the matched parent-subindustry pairs in the report, where each pair compares `top-3 score share inside the subindustry list` versus `top-3 score share inside its parent industry list`, the plotted value is the percentage-point increase from parent to subindustry, parent-child pairs are limited to those explicitly visible on pages 15-25 and 27-36, and the pairs are sorted from the largest positive increase to the smallest.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by delta_percentage_points, ties by pair label",
+  "selection_rule": "all 10 explicitly listed parent-subindustry pairs",
+  "plot_spec": {
+    "title": "Top-3 Score Share: Parent vs Subindustry",
+    "left_field": "parent_top_3_share_percent",
+    "right_field": "subindustry_top_3_share_percent",
+    "left_label": "Parent top-3 share (%)",
+    "right_label": "Subindustry top-3 share (%)"
+  },
+  "records": [
+    {
+      "entity": "Ecommerce & Retail / Real Estate",
+      "parent_top_3_share_percent": 41.6301,
+      "subindustry_top_3_share_percent": 95.4425,
+      "delta_percentage_points": 53.8124
+    },
+    {
+      "entity": "Transportation / Aerospace",
+      "parent_top_3_share_percent": 50.178,
+      "subindustry_top_3_share_percent": 98.7686,
+      "delta_percentage_points": 48.5906
+    },
+    {
+      "entity": "Fintech / Cryptocurrency and Blockchain",
+      "parent_top_3_share_percent": 48.0333,
+      "subindustry_top_3_share_percent": 88.7755,
+      "delta_percentage_points": 40.7422
+    },
+    {
+      "entity": "Transportation / Aviation",
+      "parent_top_3_share_percent": 50.178,
+      "subindustry_top_3_share_percent": 69.5463,
+      "delta_percentage_points": 19.3683
+    },
+    {
+      "entity": "Healthtech / Pharmaceuticals",
+      "parent_top_3_share_percent": 32.5277,
+      "subindustry_top_3_share_percent": 43.3697,
+      "delta_percentage_points": 10.8421
+    },
+    {
+      "entity": "Energy & Environment / Oil, Gas and Mining",
+      "parent_top_3_share_percent": 34.0158,
+      "subindustry_top_3_share_percent": 43.4292,
+      "delta_percentage_points": 9.4134
+    },
+    {
+      "entity": "Hardware & IoT / Telecommunications",
+      "parent_top_3_share_percent": 53.6618,
+      "subindustry_top_3_share_percent": 61.2999,
+      "delta_percentage_points": 7.6381
+    },
+    {
+      "entity": "Fintech / Insurance",
+      "parent_top_3_share_percent": 48.0333,
+      "subindustry_top_3_share_percent": 52.2134,
+      "delta_percentage_points": 4.1801
+    },
+    {
+      "entity": "Hardware & IoT / Chemicals",
+      "parent_top_3_share_percent": 53.6618,
+      "subindustry_top_3_share_percent": 56.5244,
+      "delta_percentage_points": 2.8626
+    },
+    {
+      "entity": "Transportation / Automotive",
+      "parent_top_3_share_percent": 50.178,
+      "subindustry_top_3_share_percent": 51.3353,
+      "delta_percentage_points": 1.1573
+    }
+  ]
+}

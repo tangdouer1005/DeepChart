@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tesla Altman Z-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --card-bg: #f7f7f9;
+      --text-color: #111827;
+      --axis-color: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --grid-color: rgba(148, 163, 184, 0.35);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --card-bg: #020617;
+        --text-color: #e5e7eb;
+        --axis-color: #9ca3af;
+        --accent: #38bdf8;
+        --accent-soft: rgba(56, 189, 248, 0.15);
+        --grid-color: rgba(75, 85, 99, 0.6);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #e5f0ff 0, transparent 55%),
+        var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow:
+        0 22px 45px rgba(15, 23, 42, 0.16),
+        0 0 0 1px rgba(148, 163, 184, 0.18);
+      padding: 20px 22px 24px;
+      box-sizing: border-box;
+    }
+
+    header {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    header h1 {
+      font-size: 1.15rem;
+      margin: 0;
+      letter-spacing: 0.01em;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--axis-color);
+    }
+
+    .subtitle-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-top: 6px;
+      font-size: 0.75rem;
+      color: var(--axis-color);
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.16);
+      font-size: 0.7rem;
+    }
+
+    .pill span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .chart-wrap {
+      position: relative;
+      margin-top: 8px;
+    }
+
+    canvas {
+      max-width: 100%;
+    }
+
+    footer {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.7rem;
+      color: var(--axis-color);
+    }
+
+    footer .note {
+      max-width: 540px;
+    }
+
+    footer .source {
+      text-align: right;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="container">
+    <header>
+      <h1>Tesla Altman Z‑Score (奥特曼破产预测模型), 2016–2024</h1>
+      <p>Annual Z‑Score based on provided financial model outputs.</p>
+      <div class="subtitle-row">
+        <div class="pill">
+          <span class="dot"></span>
+          <span>Altman Z‑Score (RESULT_Z_Score)</span>
+        </div>
+        <div>Higher values generally indicate lower bankruptcy risk.</div>
+      </div>
+    </header>
+
+    <div class="chart-wrap">
+      <canvas id="zScoreChart"></canvas>
+    </div>
+
+    <footer>
+      <div class="note">
+        Note: Values are exactly as provided (RESULT_Z_Score) for Tesla’s fiscal years 2016–2024.
+      </div>
+      <div class="source">
+        Data source: User‑provided Altman Z‑Score results.
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script>
+  const ctx = document.getElementById('zScoreChart').getContext('2d');
+
+  const years = [
+    '2016','2017','2018','2019','2020','2021','2022','2023','2024'
+  ];
+
+  const zScores = [
+    0.2196297522451757,
+    0.0435765359899508,
+    0.4862893211779591,
+    0.6633033964295174,
+    1.341312106740742,
+    1.953863697347039,
+    2.6988990799856625,
+    2.657622222087664,
+    2.5898226699172686
+  ];
+
+  // Compute dynamic y-axis limits with padding
+  const minVal = Math.min(...zScores);
+  const maxVal = Math.max(...zScores);
+  const range = maxVal - minVal || 1;
+  const padding = range * 0.15;
+  const suggestedMin = Math.max(0, minVal - padding);
+  const suggestedMax = maxVal + padding;
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [{
+        label: 'Altman Z‑Score',
+        data: zScores,
+        tension: 0.28,
+        borderColor: getComputedStyle(document.documentElement)
+          .getPropertyValue('--accent').trim(),
+        backgroundColor: getComputedStyle(document.documentElement)
+          .getPropertyValue('--accent-soft').trim(),
+        pointBackgroundColor: getComputedStyle(document.documentElement)
+          .getPropertyValue('--accent').trim(),
+        pointBorderColor: '#ffffff',
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointBorderWidth: 1.5,
+        fill: true,
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: 'index',
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          usePointStyle: true,
+          callbacks: {
+            label: function(context) {
+              const v = context.parsed.y;
+              return ' Altman Z‑Score: ' + v.toFixed(3);
+            }
+          }
+        },
+        title: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Fiscal Year'
+          },
+          grid: {
+            display: false
+          },
+          ticks: {
+            maxRotation: 0
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Altman Z‑Score'
+          },
+          suggestedMin: suggestedMin,
+          suggestedMax: suggestedMax,
+          grid: {
+            color: getComputedStyle(document.documentElement)
+              .getPropertyValue('--grid-color').trim()
+          }
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

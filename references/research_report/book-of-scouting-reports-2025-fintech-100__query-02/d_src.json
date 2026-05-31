@@ -1,0 +1,713 @@
+{
+  "report_code": "018",
+  "query_id": "02",
+  "source_fields": [
+    "Company",
+    "Founded year",
+    "Total raised",
+    "Headcount",
+    "Commercial Maturity"
+  ],
+  "records": [
+    {
+      "company": "Affinity",
+      "founded_year": 2022,
+      "total_raised_m": 11.0,
+      "headcount": 20,
+      "commercial_maturity": 2
+    },
+    {
+      "company": "interface.ai",
+      "founded_year": 2019,
+      "total_raised_m": 40.0,
+      "headcount": 232,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Uzum",
+      "founded_year": 2022,
+      "total_raised_m": 179.5,
+      "headcount": 1130,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "9Fin",
+      "founded_year": 2016,
+      "total_raised_m": 83.9,
+      "headcount": 388,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Claira",
+      "founded_year": 2019,
+      "total_raised_m": 7.0,
+      "headcount": 20,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Baanx",
+      "founded_year": 2018,
+      "total_raised_m": 34.3,
+      "headcount": 53,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Beam",
+      "founded_year": 2022,
+      "total_raised_m": 14.0,
+      "headcount": 6,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Breez Development",
+      "founded_year": 2018,
+      "total_raised_m": 9.5,
+      "headcount": 17,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "BVNK",
+      "founded_year": 2021,
+      "total_raised_m": 91.7,
+      "headcount": 396,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Conduit",
+      "founded_year": 2021,
+      "total_raised_m": 59.0,
+      "headcount": 71,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Crossmint",
+      "founded_year": 2022,
+      "total_raised_m": 23.6,
+      "headcount": 63,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Due",
+      "founded_year": 2022,
+      "total_raised_m": 7.3,
+      "headcount": 32,
+      "commercial_maturity": null
+    },
+    {
+      "company": "Noah",
+      "founded_year": 2020,
+      "total_raised_m": 22.7,
+      "headcount": 55,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Rain",
+      "founded_year": 2021,
+      "total_raised_m": 88.8,
+      "headcount": 41,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "RD Technologies",
+      "founded_year": 2020,
+      "total_raised_m": 47.8,
+      "headcount": 128,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "RedotPay",
+      "founded_year": 2023,
+      "total_raised_m": 87.0,
+      "headcount": 67,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Relai",
+      "founded_year": 2020,
+      "total_raised_m": 21.8,
+      "headcount": 69,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Transak",
+      "founded_year": 2019,
+      "total_raised_m": 46.7,
+      "headcount": 88,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Banxware",
+      "founded_year": 2020,
+      "total_raised_m": 44.0,
+      "headcount": 61,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "BKN301",
+      "founded_year": 2021,
+      "total_raised_m": 40.1,
+      "headcount": 98,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "CredibleX",
+      "founded_year": 2023,
+      "total_raised_m": 155.0,
+      "headcount": 32,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Fimple",
+      "founded_year": 2022,
+      "total_raised_m": 20.5,
+      "headcount": 120,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "FISPAN",
+      "founded_year": 2016,
+      "total_raised_m": 44.5,
+      "headcount": 171,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "NymCard",
+      "founded_year": 2018,
+      "total_raised_m": 66.1,
+      "headcount": 255,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Abacum",
+      "founded_year": 2020,
+      "total_raised_m": 92.2,
+      "headcount": 121,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Auditoria.AI",
+      "founded_year": 2019,
+      "total_raised_m": 60.5,
+      "headcount": 89,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Campfire",
+      "founded_year": 2023,
+      "total_raised_m": 104.0,
+      "headcount": 31,
+      "commercial_maturity": 2
+    },
+    {
+      "company": "Clara",
+      "founded_year": 2020,
+      "total_raised_m": 550.0,
+      "headcount": 582,
+      "commercial_maturity": 5
+    },
+    {
+      "company": "Crowded",
+      "founded_year": 2021,
+      "total_raised_m": 18.3,
+      "headcount": 28,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Datricks",
+      "founded_year": 2019,
+      "total_raised_m": 15.0,
+      "headcount": 36,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Finmo",
+      "founded_year": 2021,
+      "total_raised_m": 18.5,
+      "headcount": 116,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Mendel",
+      "founded_year": 2021,
+      "total_raised_m": 130.6,
+      "headcount": 190,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Xelix",
+      "founded_year": 2018,
+      "total_raised_m": 165.1,
+      "headcount": 128,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Amlyze",
+      "founded_year": 2019,
+      "total_raised_m": 5.1,
+      "headcount": 32,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Casap",
+      "founded_year": 2023,
+      "total_raised_m": 33.6,
+      "headcount": 19,
+      "commercial_maturity": 2
+    },
+    {
+      "company": "Greenlite",
+      "founded_year": 2023,
+      "total_raised_m": 20.3,
+      "headcount": 63,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Hawk",
+      "founded_year": 2018,
+      "total_raised_m": 84.0,
+      "headcount": 201,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Bolto",
+      "founded_year": 2023,
+      "total_raised_m": 8.1,
+      "headcount": 10,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Borderless",
+      "founded_year": 2022,
+      "total_raised_m": 32.0,
+      "headcount": null,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Every",
+      "founded_year": 2021,
+      "total_raised_m": 32.5,
+      "headcount": 313,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "InstaPay",
+      "founded_year": 2017,
+      "total_raised_m": 7.8,
+      "headcount": 14,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Jet HR",
+      "founded_year": 2012,
+      "total_raised_m": 47.3,
+      "headcount": 219,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Khazna",
+      "founded_year": 2019,
+      "total_raised_m": 54.7,
+      "headcount": 419,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Niural",
+      "founded_year": 2022,
+      "total_raised_m": 41.5,
+      "headcount": 89,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "SeamlessHR",
+      "founded_year": 2017,
+      "total_raised_m": 19.1,
+      "headcount": 233,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Agora",
+      "founded_year": 2023,
+      "total_raised_m": 69.7,
+      "headcount": 40,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Cryptio",
+      "founded_year": 2018,
+      "total_raised_m": 26.2,
+      "headcount": 130,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "DigiFT",
+      "founded_year": 2021,
+      "total_raised_m": 21.5,
+      "headcount": 25,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Komainu",
+      "founded_year": 2018,
+      "total_raised_m": 100.0,
+      "headcount": 69,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Maple Finance",
+      "founded_year": 2020,
+      "total_raised_m": 11.4,
+      "headcount": 70,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Securitize",
+      "founded_year": 2017,
+      "total_raised_m": 203.0,
+      "headcount": 206,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Utila",
+      "founded_year": 2022,
+      "total_raised_m": 51.5,
+      "headcount": 48,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Delos",
+      "founded_year": 2017,
+      "total_raised_m": 22.3,
+      "headcount": 36,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Descartes Underwriting",
+      "founded_year": 2019,
+      "total_raised_m": 141.8,
+      "headcount": 237,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Further AI",
+      "founded_year": 2023,
+      "total_raised_m": 30.5,
+      "headcount": 21,
+      "commercial_maturity": 2
+    },
+    {
+      "company": "Skarlett",
+      "founded_year": 2023,
+      "total_raised_m": 13.6,
+      "headcount": 32,
+      "commercial_maturity": 2
+    },
+    {
+      "company": "Sixfold",
+      "founded_year": 2023,
+      "total_raised_m": 21.5,
+      "headcount": 51,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Quandri",
+      "founded_year": 2020,
+      "total_raised_m": 22.0,
+      "headcount": 88,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Casca",
+      "founded_year": 2023,
+      "total_raised_m": 33.4,
+      "headcount": 35,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "CrediLinq",
+      "founded_year": 2021,
+      "total_raised_m": 11.9,
+      "headcount": 37,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "InDebted",
+      "founded_year": 2016,
+      "total_raised_m": 93.8,
+      "headcount": 241,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Murphy",
+      "founded_year": 2024,
+      "total_raised_m": 15.0,
+      "headcount": 21,
+      "commercial_maturity": 1
+    },
+    {
+      "company": "Nada",
+      "founded_year": 2019,
+      "total_raised_m": 30.3,
+      "headcount": 987,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Peach Finance",
+      "founded_year": 2018,
+      "total_raised_m": 38.0,
+      "headcount": 54,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "PostEx",
+      "founded_year": 2020,
+      "total_raised_m": 15.9,
+      "headcount": 1211,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Scienaptic",
+      "founded_year": 2014,
+      "total_raised_m": 17.1,
+      "headcount": 168,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Versana",
+      "founded_year": 2021,
+      "total_raised_m": 66.0,
+      "headcount": 97,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "WonderLend Hubs",
+      "founded_year": 2016,
+      "total_raised_m": 1.6,
+      "headcount": 92,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Aspora",
+      "founded_year": 2022,
+      "total_raised_m": 94.3,
+      "headcount": 16,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Capi",
+      "founded_year": 2023,
+      "total_raised_m": 19.5,
+      "headcount": 36,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Catena Labs",
+      "founded_year": 2022,
+      "total_raised_m": 18.0,
+      "headcount": 13,
+      "commercial_maturity": 2
+    },
+    {
+      "company": "Easebuzz",
+      "founded_year": 2017,
+      "total_raised_m": 34.0,
+      "headcount": 403,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Enza",
+      "founded_year": 2023,
+      "total_raised_m": 6.8,
+      "headcount": 76,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Finom",
+      "founded_year": 2019,
+      "total_raised_m": 345.5,
+      "headcount": 497,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Haball",
+      "founded_year": 2017,
+      "total_raised_m": 52.0,
+      "headcount": 58,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Highnote",
+      "founded_year": 2020,
+      "total_raised_m": 169.0,
+      "headcount": 112,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Payrails",
+      "founded_year": 2021,
+      "total_raised_m": 52.8,
+      "headcount": 104,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "PayTic",
+      "founded_year": 2020,
+      "total_raised_m": 6.7,
+      "headcount": 35,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Toku",
+      "founded_year": 2020,
+      "total_raised_m": 66.6,
+      "headcount": 11,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Yaspa",
+      "founded_year": 2017,
+      "total_raised_m": 13.3,
+      "headcount": 71,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Yuno",
+      "founded_year": 2022,
+      "total_raised_m": 35.0,
+      "headcount": 955,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Ziina",
+      "founded_year": 2020,
+      "total_raised_m": 30.9,
+      "headcount": 182,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Candidly",
+      "founded_year": 2016,
+      "total_raised_m": 42.1,
+      "headcount": 133,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Debbie",
+      "founded_year": 2021,
+      "total_raised_m": 7.9,
+      "headcount": 32,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Grifin",
+      "founded_year": 2016,
+      "total_raised_m": 11.0,
+      "headcount": 31,
+      "commercial_maturity": null
+    },
+    {
+      "company": "Alpaca",
+      "founded_year": 2015,
+      "total_raised_m": 138.9,
+      "headcount": 313,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Axyon AI",
+      "founded_year": 2016,
+      "total_raised_m": 12.6,
+      "headcount": 48,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "BridgeWise",
+      "founded_year": 2019,
+      "total_raised_m": 40.5,
+      "headcount": 96,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Conquest Planning",
+      "founded_year": 2018,
+      "total_raised_m": 106.1,
+      "headcount": 161,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Dub",
+      "founded_year": 2021,
+      "total_raised_m": 54.5,
+      "headcount": 113,
+      "commercial_maturity": null
+    },
+    {
+      "company": "Flanks",
+      "founded_year": 2019,
+      "total_raised_m": 25.7,
+      "headcount": 94,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Jump",
+      "founded_year": 2023,
+      "total_raised_m": 24.6,
+      "headcount": 118,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Lightyear",
+      "founded_year": 2020,
+      "total_raised_m": 58.0,
+      "headcount": 44,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "ModernFi",
+      "founded_year": 2022,
+      "total_raised_m": 58.3,
+      "headcount": 43,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Retirable",
+      "founded_year": 2019,
+      "total_raised_m": 26.4,
+      "headcount": 27,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Thndr",
+      "founded_year": 2020,
+      "total_raised_m": 36.0,
+      "headcount": 266,
+      "commercial_maturity": 3
+    },
+    {
+      "company": "Wealth.com",
+      "founded_year": 2021,
+      "total_raised_m": 46.0,
+      "headcount": 164,
+      "commercial_maturity": null
+    },
+    {
+      "company": "Zocks",
+      "founded_year": 2022,
+      "total_raised_m": 19.3,
+      "headcount": 73,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Unique",
+      "founded_year": 2021,
+      "total_raised_m": 52.5,
+      "headcount": 122,
+      "commercial_maturity": 4
+    },
+    {
+      "company": "Upstage",
+      "founded_year": 2020,
+      "total_raised_m": 143.8,
+      "headcount": 183,
+      "commercial_maturity": 4
+    }
+  ]
+}

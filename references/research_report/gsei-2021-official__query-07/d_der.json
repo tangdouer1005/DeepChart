@@ -1,0 +1,65 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a ranked horizontal bar chart showing the top 10 countries by rebound intensity, where rebound intensity is defined as `average positive numeric rank_change among improving cities in each 3.2 national block`, values are expressed in rank positions gained, only countries with at least 2 improving cities are eligible, and bars are sorted from highest to lowest after the average is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by rebound_intensity_avg_rank_gain",
+  "selection_rule": "top 10 among countries with at least 2 improving cities",
+  "plot_spec": {
+    "title": "Rebound Intensity",
+    "xlabel": "rank positions",
+    "value_field": "rebound_intensity_avg_rank_gain"
+  },
+  "records": [
+    {
+      "entity": "Nigeria",
+      "rebound_intensity_avg_rank_gain": 303.0,
+      "improving_city_count": 2
+    },
+    {
+      "entity": "Croatia",
+      "rebound_intensity_avg_rank_gain": 284.5,
+      "improving_city_count": 2
+    },
+    {
+      "entity": "Russia",
+      "rebound_intensity_avg_rank_gain": 280.5,
+      "improving_city_count": 2
+    },
+    {
+      "entity": "Germany",
+      "rebound_intensity_avg_rank_gain": 224.25,
+      "improving_city_count": 4
+    },
+    {
+      "entity": "Belgium",
+      "rebound_intensity_avg_rank_gain": 123.0,
+      "improving_city_count": 4
+    },
+    {
+      "entity": "Saudi Arabia",
+      "rebound_intensity_avg_rank_gain": 116.0,
+      "improving_city_count": 2
+    },
+    {
+      "entity": "Austria",
+      "rebound_intensity_avg_rank_gain": 95.5,
+      "improving_city_count": 2
+    },
+    {
+      "entity": "Mexico",
+      "rebound_intensity_avg_rank_gain": 80.0,
+      "improving_city_count": 3
+    },
+    {
+      "entity": "Sweden",
+      "rebound_intensity_avg_rank_gain": 76.6,
+      "improving_city_count": 5
+    },
+    {
+      "entity": "Switzerland",
+      "rebound_intensity_avg_rank_gain": 74.6,
+      "improving_city_count": 5
+    }
+  ]
+}

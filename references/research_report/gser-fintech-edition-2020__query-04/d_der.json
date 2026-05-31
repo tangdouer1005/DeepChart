@@ -1,0 +1,172 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a bubble chart for Fintech ecosystems where `Total Early-Stage Funding` is an exact value and at least `$100M`, with the x-axis showing `capital intensity = Total Early-Stage Funding / Ecosystem Value`, the y-axis showing `momentum divergence = Funding Growth Index - Exit Growth Index`, expressed in `%` and `index-point gap` respectively, bubble size representing `Investor Activity Index`, and labels added to the top 10 ecosystems by highest x-axis value.",
+  "chart_type": "bubble chart",
+  "value_unit": "% / index-point gap / investor activity index",
+  "sort_rule": "labels assigned to top 10 by capital intensity",
+  "selection_rule": "all exact-value fintech ecosystems with early-stage funding >= 100M",
+  "plot_spec": {
+    "title": "Fintech 2020 Capital Intensity vs Momentum Divergence",
+    "x_field": "x_capital_intensity_percent",
+    "y_field": "y_momentum_divergence",
+    "size_field": "size_investor_activity",
+    "xlabel": "Early-Stage Funding / Ecosystem Value (%)",
+    "ylabel": "Funding Growth - Exit Growth (index points)"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "x_capital_intensity_percent": 2.6588,
+      "y_momentum_divergence": -2,
+      "size_investor_activity": 10,
+      "label": false
+    },
+    {
+      "entity": "New York City",
+      "x_capital_intensity_percent": 5.6463,
+      "y_momentum_divergence": -2,
+      "size_investor_activity": 10,
+      "label": false
+    },
+    {
+      "entity": "London",
+      "x_capital_intensity_percent": 6.5217,
+      "y_momentum_divergence": -2,
+      "size_investor_activity": 10,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "x_capital_intensity_percent": 6.6667,
+      "y_momentum_divergence": 1,
+      "size_investor_activity": 10,
+      "label": true
+    },
+    {
+      "entity": "Beijing",
+      "x_capital_intensity_percent": 2.1739,
+      "y_momentum_divergence": 1,
+      "size_investor_activity": 10,
+      "label": false
+    },
+    {
+      "entity": "Shanghai",
+      "x_capital_intensity_percent": 6.3043,
+      "y_momentum_divergence": 1,
+      "size_investor_activity": 10,
+      "label": false
+    },
+    {
+      "entity": "Boston",
+      "x_capital_intensity_percent": 4.0625,
+      "y_momentum_divergence": -3,
+      "size_investor_activity": 10,
+      "label": false
+    },
+    {
+      "entity": "Paris",
+      "x_capital_intensity_percent": 8.125,
+      "y_momentum_divergence": -2,
+      "size_investor_activity": 10,
+      "label": true
+    },
+    {
+      "entity": "Chicago",
+      "x_capital_intensity_percent": 5.7143,
+      "y_momentum_divergence": -4,
+      "size_investor_activity": 10,
+      "label": false
+    },
+    {
+      "entity": "Los Angeles",
+      "x_capital_intensity_percent": 3.0,
+      "y_momentum_divergence": 1,
+      "size_investor_activity": 10,
+      "label": false
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "x_capital_intensity_percent": 9.4118,
+      "y_momentum_divergence": -2,
+      "size_investor_activity": 10,
+      "label": true
+    },
+    {
+      "entity": "Sydney",
+      "x_capital_intensity_percent": 6.9818,
+      "y_momentum_divergence": -5,
+      "size_investor_activity": 6,
+      "label": true
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "x_capital_intensity_percent": 4.3636,
+      "y_momentum_divergence": -5,
+      "size_investor_activity": 10,
+      "label": false
+    },
+    {
+      "entity": "Tel Aviv",
+      "x_capital_intensity_percent": 6.383,
+      "y_momentum_divergence": -3,
+      "size_investor_activity": 10,
+      "label": false
+    },
+    {
+      "entity": "Stockholm",
+      "x_capital_intensity_percent": 2.1455,
+      "y_momentum_divergence": -6,
+      "size_investor_activity": 9,
+      "label": false
+    },
+    {
+      "entity": "Copenhagen",
+      "x_capital_intensity_percent": 4.2727,
+      "y_momentum_divergence": -2,
+      "size_investor_activity": 8,
+      "label": false
+    },
+    {
+      "entity": "Curitiba",
+      "x_capital_intensity_percent": 6.4091,
+      "y_momentum_divergence": 0,
+      "size_investor_activity": 1,
+      "label": true
+    },
+    {
+      "entity": "Frankfurt",
+      "x_capital_intensity_percent": 8.5714,
+      "y_momentum_divergence": 0,
+      "size_investor_activity": 8,
+      "label": true
+    },
+    {
+      "entity": "Manila",
+      "x_capital_intensity_percent": 6.375,
+      "y_momentum_divergence": -3,
+      "size_investor_activity": 1,
+      "label": false
+    },
+    {
+      "entity": "Melbourne",
+      "x_capital_intensity_percent": 7.5625,
+      "y_momentum_divergence": -4,
+      "size_investor_activity": 6,
+      "label": true
+    },
+    {
+      "entity": "Riyadh",
+      "x_capital_intensity_percent": 14.2,
+      "y_momentum_divergence": 5,
+      "size_investor_activity": 8,
+      "label": true
+    },
+    {
+      "entity": "Tokyo",
+      "x_capital_intensity_percent": 6.8,
+      "y_momentum_divergence": 1,
+      "size_investor_activity": 10,
+      "label": true
+    }
+  ]
+}

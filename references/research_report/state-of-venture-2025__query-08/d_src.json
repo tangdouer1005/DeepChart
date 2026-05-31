@@ -1,0 +1,934 @@
+{
+  "query_key": "006_q08",
+  "query_text": "Create a heatmap for all markets showing the percentage-point difference between each quarter’s share of 2025 annual funding and the same quarter’s share of 2025 annual deal count, with rows sorted by the largest positive Q4 gap and columns ordered Q1 to Q4.",
+  "quarterly_rows": [
+    {
+      "entity": "Silicon Valley",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 29.3,
+      "funding_unit": "B",
+      "deals": 916
+    },
+    {
+      "entity": "Silicon Valley",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 38.1,
+      "funding_unit": "B",
+      "deals": 811
+    },
+    {
+      "entity": "Silicon Valley",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 39.2,
+      "funding_unit": "B",
+      "deals": 687
+    },
+    {
+      "entity": "Silicon Valley",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 74.8,
+      "funding_unit": "B",
+      "deals": 615
+    },
+    {
+      "entity": "New York",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 4.5,
+      "funding_unit": "B",
+      "deals": 469
+    },
+    {
+      "entity": "New York",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 6.4,
+      "funding_unit": "B",
+      "deals": 456
+    },
+    {
+      "entity": "New York",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 8.1,
+      "funding_unit": "B",
+      "deals": 399
+    },
+    {
+      "entity": "New York",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 9.8,
+      "funding_unit": "B",
+      "deals": 336
+    },
+    {
+      "entity": "Los Angeles",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 3.1,
+      "funding_unit": "B",
+      "deals": 212
+    },
+    {
+      "entity": "Los Angeles",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 5.8,
+      "funding_unit": "B",
+      "deals": 206
+    },
+    {
+      "entity": "Los Angeles",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 3.2,
+      "funding_unit": "B",
+      "deals": 145
+    },
+    {
+      "entity": "Los Angeles",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 6.5,
+      "funding_unit": "B",
+      "deals": 300
+    },
+    {
+      "entity": "Boston",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 2.6,
+      "funding_unit": "B",
+      "deals": 159
+    },
+    {
+      "entity": "Boston",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 3.5,
+      "funding_unit": "B",
+      "deals": 172
+    },
+    {
+      "entity": "Boston",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 6.3,
+      "funding_unit": "B",
+      "deals": 145
+    },
+    {
+      "entity": "Boston",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 4.0,
+      "funding_unit": "B",
+      "deals": 163
+    },
+    {
+      "entity": "Seattle",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 2.1,
+      "funding_unit": "B",
+      "deals": 80
+    },
+    {
+      "entity": "Seattle",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 1.3,
+      "funding_unit": "B",
+      "deals": 80
+    },
+    {
+      "entity": "Seattle",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 0.9,
+      "funding_unit": "B",
+      "deals": 68
+    },
+    {
+      "entity": "Seattle",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 1.0,
+      "funding_unit": "B",
+      "deals": 180
+    },
+    {
+      "entity": "Denver",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 1.0,
+      "funding_unit": "B",
+      "deals": 73
+    },
+    {
+      "entity": "Denver",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.4,
+      "funding_unit": "B",
+      "deals": 59
+    },
+    {
+      "entity": "Denver",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 2.5,
+      "funding_unit": "B",
+      "deals": 60
+    },
+    {
+      "entity": "Denver",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 2.3,
+      "funding_unit": "B",
+      "deals": 60
+    },
+    {
+      "entity": "DC",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 0.5,
+      "funding_unit": "B",
+      "deals": 89
+    },
+    {
+      "entity": "DC",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.7,
+      "funding_unit": "B",
+      "deals": 83
+    },
+    {
+      "entity": "DC",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 1.8,
+      "funding_unit": "B",
+      "deals": 90
+    },
+    {
+      "entity": "DC",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 1.2,
+      "funding_unit": "B",
+      "deals": 150
+    },
+    {
+      "entity": "Chicago",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 1.0,
+      "funding_unit": "B",
+      "deals": 66
+    },
+    {
+      "entity": "Chicago",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.7,
+      "funding_unit": "B",
+      "deals": 66
+    },
+    {
+      "entity": "Chicago",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 0.5,
+      "funding_unit": "B",
+      "deals": 67
+    },
+    {
+      "entity": "Chicago",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 0.9,
+      "funding_unit": "B",
+      "deals": 180
+    },
+    {
+      "entity": "Dallas",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 5.8,
+      "funding_unit": "B",
+      "deals": 48
+    },
+    {
+      "entity": "Dallas",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.6,
+      "funding_unit": "B",
+      "deals": 63
+    },
+    {
+      "entity": "Dallas",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 0.4,
+      "funding_unit": "B",
+      "deals": 51
+    },
+    {
+      "entity": "Dallas",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 0.3,
+      "funding_unit": "B",
+      "deals": 53
+    },
+    {
+      "entity": "Austin",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 2.6,
+      "funding_unit": "B",
+      "deals": 85
+    },
+    {
+      "entity": "Austin",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 1.1,
+      "funding_unit": "B",
+      "deals": 73
+    },
+    {
+      "entity": "Austin",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 1.5,
+      "funding_unit": "B",
+      "deals": 78
+    },
+    {
+      "entity": "Austin",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 2.1,
+      "funding_unit": "B",
+      "deals": 180
+    },
+    {
+      "entity": "Miami",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 1.0,
+      "funding_unit": "B",
+      "deals": 79
+    },
+    {
+      "entity": "Miami",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.6,
+      "funding_unit": "B",
+      "deals": 86
+    },
+    {
+      "entity": "Miami",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 1.0,
+      "funding_unit": "B",
+      "deals": 77
+    },
+    {
+      "entity": "Miami",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 0.9,
+      "funding_unit": "B",
+      "deals": 180
+    },
+    {
+      "entity": "Atlanta",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 0.6,
+      "funding_unit": "B",
+      "deals": 30
+    },
+    {
+      "entity": "Atlanta",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.3,
+      "funding_unit": "B",
+      "deals": 31
+    },
+    {
+      "entity": "Atlanta",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 0.3,
+      "funding_unit": "B",
+      "deals": 49
+    },
+    {
+      "entity": "Atlanta",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 0.1,
+      "funding_unit": "B",
+      "deals": 120
+    },
+    {
+      "entity": "Philadelphia",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 1.8,
+      "funding_unit": "B",
+      "deals": 165
+    },
+    {
+      "entity": "Philadelphia",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 1.2,
+      "funding_unit": "B",
+      "deals": 151
+    },
+    {
+      "entity": "Philadelphia",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 1.3,
+      "funding_unit": "B",
+      "deals": 139
+    },
+    {
+      "entity": "Philadelphia",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 1.9,
+      "funding_unit": "B",
+      "deals": 350
+    },
+    {
+      "entity": "Raleigh",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 0.8,
+      "funding_unit": "B",
+      "deals": 50
+    },
+    {
+      "entity": "Raleigh",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.5,
+      "funding_unit": "B",
+      "deals": 31
+    },
+    {
+      "entity": "Raleigh",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 0.3,
+      "funding_unit": "B",
+      "deals": 21
+    },
+    {
+      "entity": "Raleigh",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 0.1,
+      "funding_unit": "B",
+      "deals": 25
+    },
+    {
+      "entity": "Toronto",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 0.5,
+      "funding_unit": "B",
+      "deals": 53
+    },
+    {
+      "entity": "Toronto",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.8,
+      "funding_unit": "B",
+      "deals": 34
+    },
+    {
+      "entity": "Toronto",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 0.3,
+      "funding_unit": "B",
+      "deals": 36
+    },
+    {
+      "entity": "Toronto",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 0.8,
+      "funding_unit": "B",
+      "deals": 160
+    },
+    {
+      "entity": "China",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 4.2,
+      "funding_unit": "B",
+      "deals": 608
+    },
+    {
+      "entity": "China",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 3.3,
+      "funding_unit": "B",
+      "deals": 661
+    },
+    {
+      "entity": "China",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 5.6,
+      "funding_unit": "B",
+      "deals": 648
+    },
+    {
+      "entity": "China",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 5.4,
+      "funding_unit": "B",
+      "deals": 551
+    },
+    {
+      "entity": "India",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 3.2,
+      "funding_unit": "B",
+      "deals": 406
+    },
+    {
+      "entity": "India",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 3.0,
+      "funding_unit": "B",
+      "deals": 349
+    },
+    {
+      "entity": "India",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 3.2,
+      "funding_unit": "B",
+      "deals": 396
+    },
+    {
+      "entity": "India",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 3.3,
+      "funding_unit": "B",
+      "deals": 350
+    },
+    {
+      "entity": "Singapore",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 1.1,
+      "funding_unit": "B",
+      "deals": 130
+    },
+    {
+      "entity": "Singapore",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.9,
+      "funding_unit": "B",
+      "deals": 118
+    },
+    {
+      "entity": "Singapore",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 2.2,
+      "funding_unit": "B",
+      "deals": 113
+    },
+    {
+      "entity": "Singapore",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 1.1,
+      "funding_unit": "B",
+      "deals": 77
+    },
+    {
+      "entity": "Japan",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 0.7,
+      "funding_unit": "B",
+      "deals": 363
+    },
+    {
+      "entity": "Japan",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.8,
+      "funding_unit": "B",
+      "deals": 390
+    },
+    {
+      "entity": "Japan",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 1.1,
+      "funding_unit": "B",
+      "deals": 373
+    },
+    {
+      "entity": "Japan",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 0.9,
+      "funding_unit": "B",
+      "deals": 370
+    },
+    {
+      "entity": "United Kingdom",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 4.3,
+      "funding_unit": "B",
+      "deals": 528
+    },
+    {
+      "entity": "United Kingdom",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 5.7,
+      "funding_unit": "B",
+      "deals": 496
+    },
+    {
+      "entity": "United Kingdom",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 4.8,
+      "funding_unit": "B",
+      "deals": 425
+    },
+    {
+      "entity": "United Kingdom",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 6.0,
+      "funding_unit": "B",
+      "deals": 374
+    },
+    {
+      "entity": "Germany",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 1.8,
+      "funding_unit": "B",
+      "deals": 221
+    },
+    {
+      "entity": "Germany",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 2.8,
+      "funding_unit": "B",
+      "deals": 200
+    },
+    {
+      "entity": "Germany",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 1.5,
+      "funding_unit": "B",
+      "deals": 186
+    },
+    {
+      "entity": "Germany",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 1.5,
+      "funding_unit": "B",
+      "deals": 155
+    },
+    {
+      "entity": "France",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 3.0,
+      "funding_unit": "B",
+      "deals": 210
+    },
+    {
+      "entity": "France",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 1.6,
+      "funding_unit": "B",
+      "deals": 209
+    },
+    {
+      "entity": "France",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 3.0,
+      "funding_unit": "B",
+      "deals": 150
+    },
+    {
+      "entity": "France",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 1.4,
+      "funding_unit": "B",
+      "deals": 191
+    },
+    {
+      "entity": "Israel",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 1.0,
+      "funding_unit": "B",
+      "deals": 95
+    },
+    {
+      "entity": "Israel",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 2.0,
+      "funding_unit": "B",
+      "deals": 80
+    },
+    {
+      "entity": "Israel",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 1.9,
+      "funding_unit": "B",
+      "deals": 77
+    },
+    {
+      "entity": "Israel",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 1.7,
+      "funding_unit": "B",
+      "deals": 150
+    },
+    {
+      "entity": "Netherlands",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 1.3,
+      "funding_unit": "B",
+      "deals": 112
+    },
+    {
+      "entity": "Netherlands",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 1.2,
+      "funding_unit": "B",
+      "deals": 122
+    },
+    {
+      "entity": "Netherlands",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 0.7,
+      "funding_unit": "B",
+      "deals": 87
+    },
+    {
+      "entity": "Netherlands",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 1.1,
+      "funding_unit": "B",
+      "deals": 92
+    },
+    {
+      "entity": "Sweden",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 0.7,
+      "funding_unit": "B",
+      "deals": 83
+    },
+    {
+      "entity": "Sweden",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.3,
+      "funding_unit": "B",
+      "deals": 99
+    },
+    {
+      "entity": "Sweden",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 0.4,
+      "funding_unit": "B",
+      "deals": 91
+    },
+    {
+      "entity": "Sweden",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 0.6,
+      "funding_unit": "B",
+      "deals": 84
+    },
+    {
+      "entity": "Mexico",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 317.0,
+      "funding_unit": "M",
+      "deals": 38
+    },
+    {
+      "entity": "Mexico",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 137.0,
+      "funding_unit": "M",
+      "deals": 18
+    },
+    {
+      "entity": "Mexico",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 454.0,
+      "funding_unit": "M",
+      "deals": 12
+    },
+    {
+      "entity": "Mexico",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 559.0,
+      "funding_unit": "M",
+      "deals": 18
+    },
+    {
+      "entity": "Brazil",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 0.6,
+      "funding_unit": "B",
+      "deals": 93
+    },
+    {
+      "entity": "Brazil",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 0.4,
+      "funding_unit": "B",
+      "deals": 103
+    },
+    {
+      "entity": "Brazil",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 1.1,
+      "funding_unit": "B",
+      "deals": 134
+    },
+    {
+      "entity": "Brazil",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 0.5,
+      "funding_unit": "B",
+      "deals": 86
+    },
+    {
+      "entity": "Kenya",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 59.0,
+      "funding_unit": "M",
+      "deals": 11
+    },
+    {
+      "entity": "Kenya",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 38.0,
+      "funding_unit": "M",
+      "deals": 8
+    },
+    {
+      "entity": "Kenya",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 23.0,
+      "funding_unit": "M",
+      "deals": 19
+    },
+    {
+      "entity": "Kenya",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 184.0,
+      "funding_unit": "M",
+      "deals": 17
+    },
+    {
+      "entity": "South Africa",
+      "year": 2025,
+      "quarter": "Q1",
+      "funding_value": 66.0,
+      "funding_unit": "M",
+      "deals": 18
+    },
+    {
+      "entity": "South Africa",
+      "year": 2025,
+      "quarter": "Q2",
+      "funding_value": 98.0,
+      "funding_unit": "M",
+      "deals": 17
+    },
+    {
+      "entity": "South Africa",
+      "year": 2025,
+      "quarter": "Q3",
+      "funding_value": 826.0,
+      "funding_unit": "M",
+      "deals": 18
+    },
+    {
+      "entity": "South Africa",
+      "year": 2025,
+      "quarter": "Q4",
+      "funding_value": 90.0,
+      "funding_unit": "M",
+      "deals": 21
+    }
+  ]
+}

@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 400px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "percent_high_aging":3.19149,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":0.19305,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.36986,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":0.52356,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.743494,
+        "fairness_index":-0.222222
+    },
+    {
+        "percent_high_aging":0.502513,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":0.980392,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":2.04082,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":4.44444,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":27.2727,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":6.82635,
+        "fairness_index":0.0695257
+    },
+    {
+        "percent_high_aging":5.9322,
+        "fairness_index":-0.492063
+    },
+    {
+        "percent_high_aging":5.39683,
+        "fairness_index":-0.529412
+    },
+    {
+        "percent_high_aging":8.0402,
+        "fairness_index":0.0972222
+    },
+    {
+        "percent_high_aging":9.64912,
+        "fairness_index":-0.010101
+    },
+    {
+        "percent_high_aging":15.493,
+        "fairness_index":-0.232323
+    },
+    {
+        "percent_high_aging":3.33333,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.724638,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":4.54545,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":8.33333,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":4.28571,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":4.16667,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":3.27869,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":11.1111,
+        "fairness_index":0.555556
+    },
+    {
+        "percent_high_aging":7.69231,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":3.57143,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.512821,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":3.33333,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":1.41287,
+        "fairness_index":-0.753086
+    },
+    {
+        "percent_high_aging":0.339559,
+        "fairness_index":0.222222
+    },
+    {
+        "percent_high_aging":2.08333,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":1.09649,
+        "fairness_index":-0.377778
+    },
+    {
+        "percent_high_aging":0.171206,
+        "fairness_index":-0.252525
+    },
+    {
+        "percent_high_aging":1.25,
+        "fairness_index":0.555556
+    },
+    {
+        "percent_high_aging":0.571429,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":5.88235,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":1.26582,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":0.858369,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":1.88679,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":2.13933,
+        "fairness_index":0.031339
+    },
+    {
+        "percent_high_aging":6.10329,
+        "fairness_index":0.299145
+    },
+    {
+        "percent_high_aging":9.09091,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":5.33981,
+        "fairness_index":0.143434
+    },
+    {
+        "percent_high_aging":0.328947,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":0.457875,
+        "fairness_index":-0.244444
+    },
+    {
+        "percent_high_aging":1.00279,
+        "fairness_index":-0.0123457
+    },
+    {
+        "percent_high_aging":0.172117,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":0.759494,
+        "fairness_index":-0.407407
+    },
+    {
+        "percent_high_aging":3.68098,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":0.215983,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":1.59744,
+        "fairness_index":0.466667
+    },
+    {
+        "percent_high_aging":0.186047,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":0.510204,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":1.75439,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":2.32558,
+        "fairness_index":-0.802469
+    },
+    {
+        "percent_high_aging":1.6129,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":2.08333,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.697674,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":0.819672,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":0.384615,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.47059,
+        "fairness_index":-0.296296
+    },
+    {
+        "percent_high_aging":4.34783,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.831601,
+        "fairness_index":0.222222
+    },
+    {
+        "percent_high_aging":0.645161,
+        "fairness_index":0.555556
+    },
+    {
+        "percent_high_aging":0.273973,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":2.77778,
+        "fairness_index":0.555556
+    },
+    {
+        "percent_high_aging":0.571429,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":0.611621,
+        "fairness_index":0.0
+    },
+    {
+        "percent_high_aging":0.29985,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":1.68067,
+        "fairness_index":0.0
+    },
+    {
+        "percent_high_aging":1.11465,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":1.06383,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":0.271739,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":11.194,
+        "fairness_index":0.288889
+    },
+    {
+        "percent_high_aging":0.645161,
+        "fairness_index":0.555556
+    },
+    {
+        "percent_high_aging":5.34591,
+        "fairness_index":0.137255
+    },
+    {
+        "percent_high_aging":4.46809,
+        "fairness_index":0.243386
+    },
+    {
+        "percent_high_aging":26.8519,
+        "fairness_index":0.48659
+    },
+    {
+        "percent_high_aging":13.6364,
+        "fairness_index":-2.15877e-17
+    },
+    {
+        "percent_high_aging":1.23457,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":28.4974,
+        "fairness_index":0.377778
+    },
+    {
+        "percent_high_aging":7.69231,
+        "fairness_index":0.222222
+    },
+    {
+        "percent_high_aging":0.612245,
+        "fairness_index":-0.185185
+    },
+    {
+        "percent_high_aging":13.4615,
+        "fairness_index":0.206349
+    },
+    {
+        "percent_high_aging":5.0,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":11.215,
+        "fairness_index":0.462963
+    },
+    {
+        "percent_high_aging":18.9873,
+        "fairness_index":-0.318519
+    },
+    {
+        "percent_high_aging":2.49716,
+        "fairness_index":0.343434
+    },
+    {
+        "percent_high_aging":22.5806,
+        "fairness_index":0.176955
+    },
+    {
+        "percent_high_aging":18.0934,
+        "fairness_index":0.173238
+    },
+    {
+        "percent_high_aging":1.12994,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":16.3462,
+        "fairness_index":-0.0261438
+    },
+    {
+        "percent_high_aging":10.2857,
+        "fairness_index":0.0493827
+    },
+    {
+        "percent_high_aging":19.1489,
+        "fairness_index":0.308642
+    },
+    {
+        "percent_high_aging":0.941029,
+        "fairness_index":0.244444
+    },
+    {
+        "percent_high_aging":6.57895,
+        "fairness_index":-0.644444
+    },
+    {
+        "percent_high_aging":7.5,
+        "fairness_index":0.037037
+    },
+    {
+        "percent_high_aging":2.5641,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":3.57143,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":0.8,
+        "fairness_index":-0.185185
+    },
+    {
+        "percent_high_aging":3.94737,
+        "fairness_index":0.407407
+    },
+    {
+        "percent_high_aging":19.3002,
+        "fairness_index":0.234568
+    },
+    {
+        "percent_high_aging":9.09091,
+        "fairness_index":0.531746
+    },
+    {
+        "percent_high_aging":7.3509,
+        "fairness_index":0.169811
+    },
+    {
+        "percent_high_aging":4.22961,
+        "fairness_index":-0.380952
+    },
+    {
+        "percent_high_aging":3.27869,
+        "fairness_index":-0.444444
+    },
+    {
+        "percent_high_aging":2.43902,
+        "fairness_index":0.444444
+    },
+    {
+        "percent_high_aging":13.4752,
+        "fairness_index":-0.309942
+    },
+    {
+        "percent_high_aging":28.5714,
+        "fairness_index":0.231481
+    },
+    {
+        "percent_high_aging":29.2683,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":3.84615,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":5.0,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":4.84429,
+        "fairness_index":-0.015873
+    },
+    {
+        "percent_high_aging":2.04082,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.46341,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":0.285714,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":1.81818,
+        "fairness_index":0.555556
+    },
+    {
+        "percent_high_aging":10.0,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":0.25641,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":1.44928,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":0.367647,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.81818,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":21.0526,
+        "fairness_index":-0.5
+    },
+    {
+        "percent_high_aging":5.88235,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":7.69231,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":1.63934,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":2.7027,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":0.500877,
+        "fairness_index":0.0444444
+    },
+    {
+        "percent_high_aging":0.648298,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.364964,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":0.497512,
+        "fairness_index":-0.666667
+    },
+    {
+        "percent_high_aging":1.0101,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":0.555556,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":2.04082,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":0.508906,
+        "fairness_index":0.0
+    },
+    {
+        "percent_high_aging":1.14068,
+        "fairness_index":0.259259
+    },
+    {
+        "percent_high_aging":0.252845,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":1.43369,
+        "fairness_index":-0.277778
+    },
+    {
+        "percent_high_aging":0.52356,
+        "fairness_index":0.0
+    },
+    {
+        "percent_high_aging":8.79121,
+        "fairness_index":0.0555556
+    },
+    {
+        "percent_high_aging":0.447094,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.52356,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":0.449438,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":2.48566,
+        "fairness_index":-0.846154
+    },
+    {
+        "percent_high_aging":1.91898,
+        "fairness_index":-0.037037
+    },
+    {
+        "percent_high_aging":0.338983,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":16.1376,
+        "fairness_index":-0.173042
+    },
+    {
+        "percent_high_aging":0.547945,
+        "fairness_index":0.222222
+    },
+    {
+        "percent_high_aging":0.552486,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":1.26582,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":0.425532,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":0.693241,
+        "fairness_index":-0.583333
+    },
+    {
+        "percent_high_aging":1.47059,
+        "fairness_index":-0.185185
+    },
+    {
+        "percent_high_aging":1.14943,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":1.81818,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":0.12837,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":12.5,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.6129,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.239808,
+        "fairness_index":0.422222
+    },
+    {
+        "percent_high_aging":0.328407,
+        "fairness_index":-0.444444
+    },
+    {
+        "percent_high_aging":0.349956,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":0.854701,
+        "fairness_index":-0.222222
+    },
+    {
+        "percent_high_aging":0.534759,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":1.05263,
+        "fairness_index":0.5
+    },
+    {
+        "percent_high_aging":0.362319,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":1.21951,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":0.572738,
+        "fairness_index":-0.622222
+    },
+    {
+        "percent_high_aging":0.8,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":0.295858,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":1.43885,
+        "fairness_index":-0.444444
+    },
+    {
+        "percent_high_aging":1.9019,
+        "fairness_index":-0.239766
+    },
+    {
+        "percent_high_aging":2.12766,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":0.710227,
+        "fairness_index":-0.377778
+    },
+    {
+        "percent_high_aging":0.454545,
+        "fairness_index":-0.0222222
+    },
+    {
+        "percent_high_aging":0.377358,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":0.787402,
+        "fairness_index":-0.185185
+    },
+    {
+        "percent_high_aging":0.833333,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":2.22222,
+        "fairness_index":0.185185
+    },
+    {
+        "percent_high_aging":1.13208,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":0.662252,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":0.457666,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":37.5,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.1236,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":5.26316,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":1.22699,
+        "fairness_index":0.0
+    },
+    {
+        "percent_high_aging":1.17647,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":0.813008,
+        "fairness_index":0.888889
+    },
+    {
+        "percent_high_aging":0.884956,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.900901,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":1.07143,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":0.990099,
+        "fairness_index":0.222222
+    },
+    {
+        "percent_high_aging":0.598802,
+        "fairness_index":-0.0833333
+    },
+    {
+        "percent_high_aging":2.32558,
+        "fairness_index":0.555556
+    },
+    {
+        "percent_high_aging":0.310559,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":15.7895,
+        "fairness_index":0.703704
+    },
+    {
+        "percent_high_aging":0.184502,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":1.33333,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":0.422833,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":5.55556,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.239664,
+        "fairness_index":0.5
+    },
+    {
+        "percent_high_aging":1.32275,
+        "fairness_index":0.377778
+    },
+    {
+        "percent_high_aging":0.779727,
+        "fairness_index":-0.222222
+    },
+    {
+        "percent_high_aging":4.0,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.233209,
+        "fairness_index":0.0666667
+    },
+    {
+        "percent_high_aging":1.47493,
+        "fairness_index":-0.377778
+    },
+    {
+        "percent_high_aging":3.33333,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":4.7619,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.483092,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":6.06061,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":16.6667,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":1.21212,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.537634,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":7.14286,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.03093,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":10.0,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":0.0849618,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":1.03093,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":0.172414,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":2.94118,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":0.70922,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":3.7037,
+        "fairness_index":-0.604938
+    },
+    {
+        "percent_high_aging":2.43902,
+        "fairness_index":0.259259
+    },
+    {
+        "percent_high_aging":0.676819,
+        "fairness_index":0.388889
+    },
+    {
+        "percent_high_aging":1.78571,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.970874,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":1.69492,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":0.990099,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.35135,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.474684,
+        "fairness_index":0.555556
+    },
+    {
+        "percent_high_aging":0.980392,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.25786,
+        "fairness_index":0.222222
+    },
+    {
+        "percent_high_aging":9.09091,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":6.66667,
+        "fairness_index":0.555556
+    },
+    {
+        "percent_high_aging":2.85714,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":2.94118,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":1.07527,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":0.806452,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.534759,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":1.48148,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.961538,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":0.173913,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":4.7619,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":0.302115,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":0.201207,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":6.25,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":1.25,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":0.469484,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":2.43902,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":5.0,
+        "fairness_index":0.047619
+    },
+    {
+        "percent_high_aging":0.961538,
+        "fairness_index":-0.037037
+    },
+    {
+        "percent_high_aging":1.32325,
+        "fairness_index":0.365079
+    },
+    {
+        "percent_high_aging":2.22222,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.943396,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.526316,
+        "fairness_index":-1.0
+    },
+    {
+        "percent_high_aging":5.0,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.79153,
+        "fairness_index":0.373737
+    },
+    {
+        "percent_high_aging":0.191205,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":7.14286,
+        "fairness_index":0.0
+    },
+    {
+        "percent_high_aging":1.40845,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":6.25,
+        "fairness_index":0.62963
+    },
+    {
+        "percent_high_aging":0.918836,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":10.2041,
+        "fairness_index":0.177778
+    },
+    {
+        "percent_high_aging":2.0979,
+        "fairness_index":-0.185185
+    },
+    {
+        "percent_high_aging":0.512821,
+        "fairness_index":0.777778
+    },
+    {
+        "percent_high_aging":0.3663,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.296736,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.0882613,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.632911,
+        "fairness_index":-0.037037
+    },
+    {
+        "percent_high_aging":0.277778,
+        "fairness_index":-0.777778
+    },
+    {
+        "percent_high_aging":0.309598,
+        "fairness_index":0.0
+    },
+    {
+        "percent_high_aging":0.178571,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":7.14286,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":2.08333,
+        "fairness_index":-0.555556
+    },
+    {
+        "percent_high_aging":2.7027,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":0.268097,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.514139,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":5.88235,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.884956,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.318979,
+        "fairness_index":0.888889
+    },
+    {
+        "percent_high_aging":1.44928,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":0.642398,
+        "fairness_index":-0.185185
+    },
+    {
+        "percent_high_aging":1.93548,
+        "fairness_index":0.037037
+    },
+    {
+        "percent_high_aging":0.274424,
+        "fairness_index":-0.244444
+    },
+    {
+        "percent_high_aging":3.57143,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.61665,
+        "fairness_index":0.148148
+    },
+    {
+        "percent_high_aging":4.7619,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":2.94118,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":1.8018,
+        "fairness_index":0.222222
+    },
+    {
+        "percent_high_aging":1.88679,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":1.92308,
+        "fairness_index":0.111111
+    },
+    {
+        "percent_high_aging":5.88235,
+        "fairness_index":0.333333
+    },
+    {
+        "percent_high_aging":8.33333,
+        "fairness_index":-0.333333
+    },
+    {
+        "percent_high_aging":1.42857,
+        "fairness_index":-0.111111
+    },
+    {
+        "percent_high_aging":0.746269,
+        "fairness_index":1.0
+    },
+    {
+        "percent_high_aging":0.542005,
+        "fairness_index":-0.666667
+    },
+    {
+        "percent_high_aging":2.63158,
+        "fairness_index":1.0
+    }
+];
+
+        const gfsData = jsonData.map(d => ({ x: d.percent_high_aging, y: d.fairness_index }));
+
+        // --- 1. Linear Regression & CI Calculation ---
+        const n = gfsData.length;
+        let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+        gfsData.forEach(p => {
+            sumX += p.x;
+            sumY += p.y;
+            sumXY += p.x * p.y;
+            sumXX += p.x * p.x;
+        });
+
+        const meanX = sumX / n;
+        const meanY = sumY / n;
+        const Sxx = sumXX - n * meanX * meanX;
+        const Sxy = sumXY - n * meanX * meanY;
+        const slope = Sxy / Sxx;
+        const intercept = meanY - slope * meanX;
+
+        // Calculate Standard Error of Estimate (Se)
+        let sse = 0;
+        gfsData.forEach(p => {
+            const yPred = slope * p.x + intercept;
+            sse += Math.pow(p.y - yPred, 2);
+        });
+        const se = Math.sqrt(sse / (n - 2));
+        
+        // t-value for 95% CI (approx 1.96 for large n) 
+        const tVal = 1.96; 
+
+        // Generate points for the regression line and CI band
+        // We span the range of X values shown on axis
+        const startX = -1;
+        const endX = 39;
+        const step = 0.5;
+        const regressionData = [];
+        const ciData = []; // will store [x, yLower, yUpper] 
+
+        for (let x = startX; x <= endX; x += step) {
+            const yPred = slope * x + intercept;
+            
+            // Standard error of the mean response at x
+            const seMean = se * Math.sqrt(1/n + Math.pow(x - meanX, 2) / Sxx);
+            const margin = tVal * seMean;
+            
+            regressionData.push([x, yPred]);
+            ciData.push([x, yPred - margin, yPred + margin]);
+        }
+
+        // Prepare polygon data for custom series
+        // The polygon points go from left to right for upper bound, then right to left for lower bound
+        const polygonPoints = [];
+        for (let i = 0; i < ciData.length; i++) {
+            polygonPoints.push([ciData[i][0], ciData[i][2]]); // Upper
+        }
+        for (let i = ciData.length - 1; i >= 0; i--) {
+            polygonPoints.push([ciData[i][0], ciData[i][1]]); // Lower
+        }
+
+        // Scatter Data
+        const scatterData = gfsData.map(p => [p.x, p.y]);
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            title: {
+                text: 'GFS',
+                left: 'center',
+                top: 10,
+                textStyle: {
+                    fontSize: 16,
+                    color: 'black',
+                    fontFamily: 'Arial'
+                }
+            },
+            grid: { top: 50, right: 20, bottom: 60, left: 60 },
+            xAxis: {
+                name: 'Percentage of high-ageing\nCBGs',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: -2,
+                max: 38,
+                interval: 10,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black' },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                name: 'ΔF̄', 
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: -1.1,
+                max: 1.1,
+                interval: 0.5,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black', formatter: (value) => value.toFixed(1) },
+                axisTick: { show: true }
+            },
+            series: [
+                {
+                    // Confidence Interval Band
+                    type: 'custom',
+                    name: 'confidence-band',
+                    renderItem: function (params, api) {
+                        const points = [];
+                        for (let i = 0; i < polygonPoints.length; i++) {
+                            points.push(api.coord(polygonPoints[i]));
+                        }
+                        return {
+                            type: 'polygon',
+                            shape: {
+                                points: points
+                            },
+                            style: api.style({
+                                fill: '#A696C6',
+                                opacity: 0.2, // Translucent
+                                stroke: 'none'
+                            })
+                        };
+                    },
+                    data: [0], // Dummy data to trigger render
+                    z: 0
+                },
+                {
+                    // Scatter Plot
+                    type: 'scatter',
+                    data: scatterData,
+                    itemStyle: {
+                        color: '#A696C6',
+                        opacity: 0.8,
+                        borderColor: 'white',
+                        borderWidth: 0.8
+                    },
+                    symbolSize: 8,
+                    z: 10
+                },
+                {
+                    // Regression Line
+                    type: 'line',
+                    data: regressionData,
+                    symbol: 'none',
+                    lineStyle: {
+                        color: '#9E8CC2',
+                        width: 3
+                    },
+                    z: 20
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'd',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

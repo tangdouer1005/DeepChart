@@ -1,0 +1,81 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a horizontal bar chart for the top 10 markets by `share of global 2025 YTD funding minus share of global 2025 YTD deals`, expressed in percentage points, after computing both shares from the 2025 Q1-Q3 totals and sorting descending.",
+  "status": "completed",
+  "title": "Top 10 markets by funding-share minus deal-share gap",
+  "chart_kind": "horizontal_bar",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percentage points",
+  "sort_rule": "descending by share_gap_pct",
+  "selection_rule": "top 10 from co-reported 2025 Q1-Q3 market rows",
+  "metadata": {
+    "entity_field": "market",
+    "value_field": "share_gap_pct",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "market": "Silicon Valley",
+      "share_gap_pct": 21.519939170160665,
+      "funding_share_pct": 35.0405828847102,
+      "deal_share_pct": 13.520643714549532
+    },
+    {
+      "market": "US",
+      "share_gap_pct": 13.380772487332813,
+      "funding_share_pct": 44.73547503317109,
+      "deal_share_pct": 31.35470254583828
+    },
+    {
+      "market": "Los Angeles",
+      "share_gap_pct": 0.4211831204792942,
+      "funding_share_pct": 1.6875068244761284,
+      "deal_share_pct": 1.2663237039968342
+    },
+    {
+      "market": "Austin",
+      "share_gap_pct": 0.01669371727042923,
+      "funding_share_pct": 0.6498555692688464,
+      "deal_share_pct": 0.6331618519984171
+    },
+    {
+      "market": "France",
+      "share_gap_pct": -0.29423726386106863,
+      "funding_share_pct": 0.7610324894696265,
+      "deal_share_pct": 1.0552697533306952
+    },
+    {
+      "market": "Israel",
+      "share_gap_pct": -0.39350237118319387,
+      "funding_share_pct": 0.6617673821475013,
+      "deal_share_pct": 1.0552697533306952
+    },
+    {
+      "market": "Brazil",
+      "share_gap_pct": -0.4442966622410787,
+      "funding_share_pct": 0.07014734250763514,
+      "deal_share_pct": 0.5144440047487139
+    },
+    {
+      "market": "Miami",
+      "share_gap_pct": -0.4556552127970783,
+      "funding_share_pct": 0.124743151534804,
+      "deal_share_pct": 0.5803983643318823
+    },
+    {
+      "market": "Canada",
+      "share_gap_pct": -0.4708206498349594,
+      "funding_share_pct": 0.5184947439125673,
+      "deal_share_pct": 0.9893153937475268
+    },
+    {
+      "market": "Seattle",
+      "share_gap_pct": -0.507192933733615,
+      "funding_share_pct": 0.5876494353469812,
+      "deal_share_pct": 1.0948423690805962
+    }
+  ]
+}

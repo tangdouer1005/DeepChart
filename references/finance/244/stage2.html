@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TSLA 净资产收益率-杜邦分析 (ROE) 2016–2024</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 24px;
+            background-color: #f7f7f9;
+            color: #222;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        h2 {
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 0;
+            color: #555;
+        }
+
+        #chart-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+            padding: 18px 20px 24px;
+        }
+
+        canvas {
+            max-height: 480px;
+        }
+
+        .chart-footer {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .legend-note {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            background: #2563eb;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 12px;
+            align-items: center;
+        }
+
+        .controls label {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .controls input[type="checkbox"] {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="chart-container">
+    <h1>特斯拉 (TSLA) 净资产收益率-杜邦分析 (ROE)</h1>
+    <h2>2016–2024 财年 · ROE = 净资产收益率，单位：百分比 (%)</h2>
+
+    <div class="controls">
+        <label>
+            <input type="checkbox" id="toggle-zero-line" checked>
+            显示 0% 基准线
+        </label>
+        <label>
+            <input type="checkbox" id="toggle-data-labels">
+            显示数据标签
+        </label>
+    </div>
+
+    <canvas id="roeChart"></canvas>
+
+    <div class="chart-footer">
+        <div class="legend-note">
+            <span class="legend-color"></span>
+            <span>柱形图：每年 ROE（Original ROE, Avg）</span>
+        </div>
+        <div>来源：用户提供的 TSLA 杜邦分析 ROE 数据</div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+<script>
+    // Data from user (Original ROE(Avg))
+    const years = [
+        "2016", "2017", "2018", "2019",
+        "2020", "2021", "2022", "2023", "2024"
+    ];
+    const roeRaw = [
+        -0.2312689803936014,
+        -0.4364775549426133,
+        -0.2130948068839229,
+        -0.1493804696300147,
+        0.0499947994314045,
+        0.215362307780364,
+        0.3361328829129558,
+        0.2790065028228586,
+        0.1052033611957476
+    ];
+
+    // Convert to percentage values
+    const roePercent = roeRaw.map(v => v * 100);
+
+    const ctx = document.getElementById('roeChart').getContext('2d');
+
+    // Register datalabels plugin
+    Chart.register(ChartDataLabels);
+
+    const roeChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: years,
+            datasets: [{
+                label: 'ROE (%)',
+                data: roePercent,
+                backgroundColor: function (ctx) {
+                    const value = ctx.raw;
+                    const positiveColor = 'rgba(37, 99, 235, 0.85)';   // blue
+                    const negativeColor = 'rgba(220, 38, 38, 0.8)';    // red
+                    return value >= 0 ? positiveColor : negativeColor;
+                },
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function (ctx) {
+                    const value = ctx.raw;
+                    const positiveColor = 'rgba(37, 99, 235, 1)';
+                    const negativeColor = 'rgba(185, 28, 28, 1)';
+                    return value >= 0 ? positiveColor : negativeColor;
+                }
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            const value = context.raw;
+                            const sign = value >= 0 ? '' : '';
+                            return ' ROE: ' + sign + value.toFixed(2) + '%';
+                        },
+                        title: function (context) {
+                            return 'Fiscal Year: ' + context[0].label;
+                        }
+                    }
+                },
+                datalabels: {
+                    display: false, // toggled by checkbox
+                    anchor: 'end',
+                    align: function(context) {
+                        return context.raw >= 0 ? 'start' : 'end';
+                    },
+                    offset: 2,
+                    color: function (context) {
+                        // light label on dark-ish colors
+                        return '#111827';
+                    },
+                    font: {
+                        size: 10,
+                        weight: '500'
+                    },
+                    formatter: function(value) {
+                        return value.toFixed(1) + '%';
+                    },
+                    clip: true
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        maxRotation: 0,
+                        autoSkip: false
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'ROE (%)',
+                        font: {
+                            size: 12
+                        }
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    },
+                    grid: {
+                        color: '#e5e7eb'
+                    }
+                }
+            }
+        }
+    });
+
+    // Controls: toggle zero line & data labels
+    const zeroLineCheckbox = document.getElementById('toggle-zero-line');
+    const dataLabelsCheckbox = document.getElementById('toggle-data-labels');
+
+    function updateZeroLine() {
+        const yScale = roeChart.options.scales.y;
+        if (!yScale) return;
+
+        // Chart.js displays zero line as part of grid lines.
+        // We mimic a dedicated "zero line" style by customizing grid color.
+        const hasZero = zeroLineCheckbox.checked;
+
+        yScale.grid.color = function(context) {
+            if (context.tick.value === 0 && hasZero) {
+                return '#111827'; // darker 0% line
+            }
+            return '#e5e7eb';
+        };
+
+        // Slightly thicker zero line
+        yScale.grid.lineWidth = function(context) {
+            if (context.tick.value === 0 && hasZero) {
+                return 1.4;
+            }
+            return 0.8;
+        };
+
+        roeChart.update();
+    }
+
+    function updateDataLabels() {
+        roeChart.options.plugins.datalabels.display = dataLabelsCheckbox.checked;
+        roeChart.update();
+    }
+
+    zeroLineCheckbox.addEventListener('change', updateZeroLine);
+    dataLabelsCheckbox.addEventListener('change', updateDataLabels);
+
+    // Initial application of zero line styling
+    updateZeroLine();
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a horizontal bar chart showing the top 12 ecosystems by `capital efficiency`, defined as `Ecosystem Value / Total Early-Stage Funding`, using the 2024 ecosystem cards, with both monetary inputs normalized to `$B` and the plotted value expressed as `x multiple`, sorted descending by the derived multiple, and excluding rows where either field is missing.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by capital_efficiency_multiple",
+  "selection_rule": "top 12",
+  "plot_spec": {
+    "title": "2024 Capital Efficiency",
+    "xlabel": "x multiple",
+    "value_field": "capital_efficiency_multiple"
+  },
+  "records": [
+    {
+      "entity": "Kuala Lumpur",
+      "capital_efficiency_multiple": 184.3137
+    },
+    {
+      "entity": "Beijing",
+      "capital_efficiency_multiple": 88.9831
+    },
+    {
+      "entity": "Silicon Valley",
+      "capital_efficiency_multiple": 77.8816
+    },
+    {
+      "entity": "Los Angeles",
+      "capital_efficiency_multiple": 56.6154
+    },
+    {
+      "entity": "São Paulo",
+      "capital_efficiency_multiple": 55.7143
+    },
+    {
+      "entity": "Palestine",
+      "capital_efficiency_multiple": 51.6667
+    },
+    {
+      "entity": "Chicago",
+      "capital_efficiency_multiple": 51.1111
+    },
+    {
+      "entity": "Seoul",
+      "capital_efficiency_multiple": 50.4255
+    },
+    {
+      "entity": "Shanghai",
+      "capital_efficiency_multiple": 45.3333
+    },
+    {
+      "entity": "Tamil Nadu",
+      "capital_efficiency_multiple": 45.14
+    },
+    {
+      "entity": "Bengaluru - Karnataka",
+      "capital_efficiency_multiple": 41.5789
+    },
+    {
+      "entity": "Melbourne",
+      "capital_efficiency_multiple": 37.4823
+    }
+  ]
+}

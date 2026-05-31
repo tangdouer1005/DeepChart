@@ -1,0 +1,55 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a horizontal bar chart for the top 10 ecosystems by `exit conversion efficiency`, defined as `Exit Amount / Total VC Funding`, using 2025 card values normalized to `%`, sorted descending by the derived percentage, and including only ecosystems with `Total VC Funding >= $3B` and `Exit Count >= 30`.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by exit_conversion_efficiency_percent",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "2025 Exit Conversion Efficiency",
+    "xlabel": "percent",
+    "value_field": "exit_conversion_efficiency_percent"
+  },
+  "records": [
+    {
+      "entity": "Kuala Lumpur",
+      "exit_conversion_efficiency_percent": 1242.4242
+    },
+    {
+      "entity": "Beijing",
+      "exit_conversion_efficiency_percent": 518.75
+    },
+    {
+      "entity": "São Paulo",
+      "exit_conversion_efficiency_percent": 333.3333
+    },
+    {
+      "entity": "Seoul",
+      "exit_conversion_efficiency_percent": 310.2564
+    },
+    {
+      "entity": "Silicon Valley",
+      "exit_conversion_efficiency_percent": 195.2646
+    },
+    {
+      "entity": "Shanghai",
+      "exit_conversion_efficiency_percent": 168.0
+    },
+    {
+      "entity": "Melbourne",
+      "exit_conversion_efficiency_percent": 166.6667
+    },
+    {
+      "entity": "North Rhine-Westphalia",
+      "exit_conversion_efficiency_percent": 164.7059
+    },
+    {
+      "entity": "Boston",
+      "exit_conversion_efficiency_percent": 155.5556
+    },
+    {
+      "entity": "Los Angeles",
+      "exit_conversion_efficiency_percent": 148.6486
+    }
+  ]
+}

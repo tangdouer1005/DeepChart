@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PG 投入资本回报率 (ROIC) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1.5rem 1.5rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+
+    #chartWrapper {
+      position: relative;
+      height: 480px;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .legend-inline {
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+      color: #444;
+    }
+
+    .legend-swatch {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 6px;
+      border-radius: 2px;
+      vertical-align: -1px;
+      background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>PG 投入资本回报率 (ROIC)</h1>
+    <h2>2016–2024 财年走势（柱状图）</h2>
+
+    <div id="chartWrapper">
+      <canvas id="roicChart"></canvas>
+    </div>
+
+    <div class="legend-inline">
+      <span class="legend-swatch"></span>
+      投入资本回报率（ROIC），单位：%
+    </div>
+
+    <div class="note">
+      数据来源：用户提供的 PG 2016–2024 财年 ROIC 序列。<br>
+      提示：将鼠标悬停在柱子上可查看准确数值。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Raw data (as decimals)
+    const years = [
+      "2016", "2017", "2018", "2019", "2020",
+      "2021", "2022", "2023", "2024"
+    ];
+
+    const roicDecimals = [
+      0.1208731419266845,
+      0.1306250479238995,
+      0.1218891518580171,
+      0.046540571291628,
+      0.1878801206951305,
+      0.2193819577646059,
+      0.2101368267711589,
+      0.201645559455722,
+      0.2015646899704573
+    ];
+
+    // Convert to percentage for display (e.g. 0.12 -> 12.1%)
+    const roicPercent = roicDecimals.map(v =>
+      Math.round(v * 1000) / 10 // one decimal place
+    );
+
+    const ctx = document.getElementById("roicChart").getContext("2d");
+
+    const gradientFill = (() => {
+      const g = ctx.createLinearGradient(0, 0, 0, 400);
+      g.addColorStop(0, "rgba(56, 189, 248, 0.95)"); // sky-400
+      g.addColorStop(1, "rgba(37, 99, 235, 0.95)");  // blue-600
+      return g;
+    })();
+
+    const borderColor = "rgba(30, 64, 175, 1)"; // blue-800
+
+    const roicChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "ROIC（%）",
+            data: roicPercent,
+            backgroundColor: gradientFill,
+            borderColor: borderColor,
+            borderWidth: 1,
+            borderRadius: 4,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.9)",
+            hoverBorderColor: "rgba(30, 64, 175, 1)"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.95)",
+            titleColor: "#f9fafb",
+            bodyColor: "#e5e7eb",
+            padding: 10,
+            cornerRadius: 6,
+            callbacks: {
+              label: (context) => {
+                const value = context.parsed.y;
+                return `ROIC: ${value.toFixed(1)}%`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 12
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 11
+              },
+              callback: (value) => value + "%"
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            title: {
+              display: true,
+              text: "ROIC（%）",
+              color: "#374151",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

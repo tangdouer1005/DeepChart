@@ -1,0 +1,82 @@
+{
+  "status": "complete",
+  "chart_type": "bubble",
+  "title": "Top-12 markets by 2025 funding: stage skew vs concentration",
+  "x_label": "Early-stage share minus late-stage share (pp)",
+  "y_label": "Top-5 deal concentration share (%)",
+  "size_label": "Annual deal count",
+  "data": [
+    {
+      "label": "US",
+      "x": 66,
+      "y": 26.09846479618846,
+      "size": 3656
+    },
+    {
+      "label": "Silicon Valley",
+      "x": 70,
+      "y": 33.70165745856354,
+      "size": 1528
+    },
+    {
+      "label": "Europe",
+      "x": 73,
+      "y": 10.009478672985782,
+      "size": 1494
+    },
+    {
+      "label": "Asia",
+      "x": 63,
+      "y": 16.098360655737707,
+      "size": 1417
+    },
+    {
+      "label": "New York",
+      "x": 65,
+      "y": 24.75,
+      "size": 487
+    },
+    {
+      "label": "United Kingdom",
+      "x": 72,
+      "y": 26.36231884057971,
+      "size": 399
+    },
+    {
+      "label": "China",
+      "x": 52,
+      "y": 28.88235294117647,
+      "size": 468
+    },
+    {
+      "label": "Los Angeles",
+      "x": 50,
+      "y": 3.5925925925925926,
+      "size": 147
+    },
+    {
+      "label": "Boston",
+      "x": 58,
+      "y": 18.5,
+      "size": 172
+    },
+    {
+      "label": "Philadelphia",
+      "x": 79,
+      "y": 24.397413286302175,
+      "size": 194
+    },
+    {
+      "label": "France",
+      "x": 72,
+      "y": 6.612903225806452,
+      "size": 144
+    },
+    {
+      "label": "Israel",
+      "x": 57,
+      "y": 19.82142857142857,
+      "size": 119
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        let df = [
+    {
+        "Country": "USA",
+        "Plate waste amount": 133.085,
+        "sd": 80.0026
+    },
+    {
+        "Country": "Denmark",
+        "Plate waste amount": 106.572,
+        "sd": 0.0
+    },
+    {
+        "Country": "South Africa",
+        "Plate waste amount": 105.772,
+        "sd": 26.4915
+    },
+    {
+        "Country": "China",
+        "Plate waste amount": 87.2099,
+        "sd": 18.7216
+    },
+    {
+        "Country": "Latvia",
+        "Plate waste amount": 86.3343,
+        "sd": 16.0132
+    },
+    {
+        "Country": "Portugal",
+        "Plate waste amount": 84.9073,
+        "sd": 37.5819
+    },
+    {
+        "Country": "Spain",
+        "Plate waste amount": 75.6494,
+        "sd": 53.1506
+    },
+    {
+        "Country": "Jordan",
+        "Plate waste amount": 73.6009,
+        "sd": 0.0
+    },
+    {
+        "Country": "France",
+        "Plate waste amount": 72.1517,
+        "sd": 16.4234
+    },
+    {
+        "Country": "Turkey",
+        "Plate waste amount": 64.4366,
+        "sd": 21.9458
+    },
+    {
+        "Country": "UK",
+        "Plate waste amount": 55.5429,
+        "sd": 4.695
+    },
+    {
+        "Country": "Italy",
+        "Plate waste amount": 55.445,
+        "sd": 34.3162
+    },
+    {
+        "Country": "Finland",
+        "Plate waste amount": 48.337,
+        "sd": 21.5668
+    },
+    {
+        "Country": "Brazil",
+        "Plate waste amount": 46.7486,
+        "sd": 12.487
+    },
+    {
+        "Country": "India",
+        "Plate waste amount": 43.5447,
+        "sd": 0.0
+    },
+    {
+        "Country": "Russia",
+        "Plate waste amount": 42.9844,
+        "sd": 47.3762
+    },
+    {
+        "Country": "Indonesia",
+        "Plate waste amount": 39.8112,
+        "sd": 9.40734
+    },
+    {
+        "Country": "Ethiopia",
+        "Plate waste amount": 35.2404,
+        "sd": 0.0
+    },
+    {
+        "Country": "Sweden",
+        "Plate waste amount": 32.8335,
+        "sd": 10.9777
+    },
+    {
+        "Country": "Thailand",
+        "Plate waste amount": 31.2178,
+        "sd": 26.9765
+    },
+    {
+        "Country": "Japan",
+        "Plate waste amount": 21.9694,
+        "sd": 27.4253
+    },
+    {
+        "Country": "Philippines",
+        "Plate waste amount": 17.0031,
+        "sd": 15.3442
+    },
+    {
+        "Country": "Switzerland",
+        "Plate waste amount": 16.0593,
+        "sd": 6.52803
+    },
+    {
+        "Country": "Malaysia",
+        "Plate waste amount": 8.92205,
+        "sd": 3.64655
+    }
+];
+        
+        // Sort by 'Plate waste amount' descending
+        df.sort((a, b) => b['Plate waste amount'] - a['Plate waste amount']);
+
+        const countries = df.map(row => row.Country);
+        const plateWasteAmounts = df.map(row => row['Plate waste amount']);
+        const sds = df.map(row => row.sd);
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Series 0: Bar series
+        // Series 1: Custom series (Error bars)
+
+        const series = [];
+
+        // Bar series
+        series.push({
+            type: 'bar',
+            data: plateWasteAmounts, // Simple array of values, visualMap will handle color
+            barWidth: '70%',
+            z: 1,
+            itemStyle: {
+                borderColor: 'black',
+                borderWidth: 0.8
+            }
+        });
+
+        // Error bar series (custom)
+        series.push({
+            type: 'custom',
+            renderItem: function(params, api) {
+                const xVal = api.value(0);
+                const mean = api.value(1);
+                const sd = api.value(2);
+                
+                const low = mean - sd;
+                const high = mean + sd;
+                
+                const style = api.style({ stroke: 'black', lineWidth: 0.8, fill: null });
+                const xCoord = api.coord([xVal, high])[0];
+                const lowCoord = api.coord([xVal, low]);
+                const highCoord = api.coord([xVal, high]);
+                const capSize = 5; // Pixels
+                
+                return {
+                    type: 'group',
+                    children: [
+                        { type: 'line', shape: { x1: lowCoord[0], y1: lowCoord[1], x2: highCoord[0], y2: highCoord[1] }, style: style },
+                        { type: 'line', shape: { x1: xCoord - capSize, y1: lowCoord[1], x2: xCoord + capSize, y2: lowCoord[1] }, style: style },
+                        { type: 'line', shape: { x1: xCoord - capSize, y1: highCoord[1], x2: xCoord + capSize, y2: highCoord[1] }, style: style }
+                    ]
+                };
+            },
+            data: plateWasteAmounts.map((amount, idx) => [idx, amount, sds[idx]]),
+            z: 2
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 60, bottom: 150, left: 80, right: 80 },
+            xAxis: {
+                type: 'category',
+                data: countries,
+                axisLabel: {
+                    rotate: 90,
+                    align: 'left',
+                    verticalAlign: 'middle',
+                    color: 'black',
+                    fontSize: 13
+                },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Plate waste amount\\n(g capita⁻¹ meal⁻¹)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                min: 0,
+                max: 220,
+                interval: 20,
+                axisLabel: { color: 'black', fontSize: 11 },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true },
+                splitLine: { show: false },
+                nameTextStyle: {
+                    align: 'center',
+                    lineHeight: 18,
+                    fontSize: 14
+                }
+            },
+            visualMap: {
+                min: 0,
+                max: 140,
+                calculable: false,
+                orient: 'horizontal',
+                left: '60%',
+                top: '5%',
+                itemWidth: 200, // Long horizontal bar
+                itemHeight: 20, // Thin thickness
+                inRange: {
+                    color: ['#f7fcf5', '#e5f5e0', '#c7e9c0', '#a1d99b', '#74c476', '#41ab5d', '#238b45', '#006d2c', '#00441b']
+                },
+                text: ['125', '25'], // Labels as seen in the Python plot
+                textGap: 5,
+                padding: 0,
+                // We want to simulate the colorbar. ECharts visualMap continuous mode is close.
+                // The python code has ticks [25, 50, 75, 100, 125].
+                // ECharts visualMap doesn't easily support arbitrary ticks on the bar itself without custom work,
+                // but we can set text to show range.
+                // We will use the gradient.
+                dimension: 0, // For bar chart (series 0), data is value, so dimension 0 (or undefined) works.
+                seriesIndex: 0
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: '60%',
+                    top: '2%',
+                    style: {
+                        text: 'Plate waste amount\\n(g capita⁻¹ meal⁻¹)',
+                        font: '12px Arial',
+                        fill: 'black',
+                        textAlign: 'left'
+                    }
+                }
+            ]
+        };
+        chart.setOption(option);
+    </script>
+</body>
+</html>

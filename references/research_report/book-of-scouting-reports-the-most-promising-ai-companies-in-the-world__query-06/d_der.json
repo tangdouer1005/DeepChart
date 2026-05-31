@@ -1,0 +1,212 @@
+{
+  "query_id": 6,
+  "query_text": "Create a stacked bar chart showing, for the top 8 founded-year cohorts by company count, the percentage composition of Stage families within each cohort, using counts of companies, expressed as percentages, and sorted by cohort size.",
+  "status": "complete",
+  "chart": {
+    "type": "stacked_bar",
+    "title": "Stage-family composition of top founded-year cohorts",
+    "group_field": "founded_year_cohort",
+    "segment_field": "stage_family",
+    "value_field": "share_pct",
+    "group_order": [
+      "2022",
+      "2021",
+      "2023",
+      "2019",
+      "2017",
+      "2020",
+      "2015",
+      "2016"
+    ],
+    "segment_order": [
+      "seed / pre-seed",
+      "Series A",
+      "Series B",
+      "Series C+",
+      "strategic / alternative",
+      "other / undisclosed"
+    ],
+    "y_label": "Share of companies (%)",
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "founded_year_cohort": "2015",
+      "stage_family": "Series B",
+      "share_pct": 50.0,
+      "cohort_count": 4
+    },
+    {
+      "founded_year_cohort": "2015",
+      "stage_family": "strategic / alternative",
+      "share_pct": 50.0,
+      "cohort_count": 4
+    },
+    {
+      "founded_year_cohort": "2016",
+      "stage_family": "Series C+",
+      "share_pct": 50.0,
+      "cohort_count": 4
+    },
+    {
+      "founded_year_cohort": "2016",
+      "stage_family": "strategic / alternative",
+      "share_pct": 50.0,
+      "cohort_count": 4
+    },
+    {
+      "founded_year_cohort": "2017",
+      "stage_family": "Series A",
+      "share_pct": 42.857142857142854,
+      "cohort_count": 7
+    },
+    {
+      "founded_year_cohort": "2017",
+      "stage_family": "Series B",
+      "share_pct": 28.57142857142857,
+      "cohort_count": 7
+    },
+    {
+      "founded_year_cohort": "2017",
+      "stage_family": "Series C+",
+      "share_pct": 28.57142857142857,
+      "cohort_count": 7
+    },
+    {
+      "founded_year_cohort": "2019",
+      "stage_family": "Series A",
+      "share_pct": 30.76923076923077,
+      "cohort_count": 13
+    },
+    {
+      "founded_year_cohort": "2019",
+      "stage_family": "Series B",
+      "share_pct": 15.384615384615385,
+      "cohort_count": 13
+    },
+    {
+      "founded_year_cohort": "2019",
+      "stage_family": "seed / pre-seed",
+      "share_pct": 38.46153846153847,
+      "cohort_count": 13
+    },
+    {
+      "founded_year_cohort": "2019",
+      "stage_family": "strategic / alternative",
+      "share_pct": 15.384615384615385,
+      "cohort_count": 13
+    },
+    {
+      "founded_year_cohort": "2020",
+      "stage_family": "Series A",
+      "share_pct": 20.0,
+      "cohort_count": 5
+    },
+    {
+      "founded_year_cohort": "2020",
+      "stage_family": "Series B",
+      "share_pct": 20.0,
+      "cohort_count": 5
+    },
+    {
+      "founded_year_cohort": "2020",
+      "stage_family": "seed / pre-seed",
+      "share_pct": 40.0,
+      "cohort_count": 5
+    },
+    {
+      "founded_year_cohort": "2020",
+      "stage_family": "strategic / alternative",
+      "share_pct": 20.0,
+      "cohort_count": 5
+    },
+    {
+      "founded_year_cohort": "2021",
+      "stage_family": "Series A",
+      "share_pct": 36.36363636363637,
+      "cohort_count": 22
+    },
+    {
+      "founded_year_cohort": "2021",
+      "stage_family": "Series B",
+      "share_pct": 9.090909090909092,
+      "cohort_count": 22
+    },
+    {
+      "founded_year_cohort": "2021",
+      "stage_family": "Series C+",
+      "share_pct": 4.545454545454546,
+      "cohort_count": 22
+    },
+    {
+      "founded_year_cohort": "2021",
+      "stage_family": "other / undisclosed",
+      "share_pct": 4.545454545454546,
+      "cohort_count": 22
+    },
+    {
+      "founded_year_cohort": "2021",
+      "stage_family": "seed / pre-seed",
+      "share_pct": 27.27272727272727,
+      "cohort_count": 22
+    },
+    {
+      "founded_year_cohort": "2021",
+      "stage_family": "strategic / alternative",
+      "share_pct": 18.181818181818183,
+      "cohort_count": 22
+    },
+    {
+      "founded_year_cohort": "2022",
+      "stage_family": "Series A",
+      "share_pct": 34.78260869565217,
+      "cohort_count": 23
+    },
+    {
+      "founded_year_cohort": "2022",
+      "stage_family": "Series B",
+      "share_pct": 21.73913043478261,
+      "cohort_count": 23
+    },
+    {
+      "founded_year_cohort": "2022",
+      "stage_family": "seed / pre-seed",
+      "share_pct": 30.434782608695656,
+      "cohort_count": 23
+    },
+    {
+      "founded_year_cohort": "2022",
+      "stage_family": "strategic / alternative",
+      "share_pct": 13.043478260869565,
+      "cohort_count": 23
+    },
+    {
+      "founded_year_cohort": "2023",
+      "stage_family": "Series A",
+      "share_pct": 33.33333333333333,
+      "cohort_count": 15
+    },
+    {
+      "founded_year_cohort": "2023",
+      "stage_family": "Series B",
+      "share_pct": 6.666666666666667,
+      "cohort_count": 15
+    },
+    {
+      "founded_year_cohort": "2023",
+      "stage_family": "seed / pre-seed",
+      "share_pct": 46.666666666666664,
+      "cohort_count": 15
+    },
+    {
+      "founded_year_cohort": "2023",
+      "stage_family": "strategic / alternative",
+      "share_pct": 13.333333333333334,
+      "cohort_count": 15
+    }
+  ],
+  "notes": []
+}

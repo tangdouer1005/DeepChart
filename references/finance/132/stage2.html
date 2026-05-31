@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LLY 防御区间比率 (DIR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2933;
+      --grid: #d3dce6;
+      --accent: #2563eb;
+      --accent-light: rgba(37, 99, 235, 0.15);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1120;
+        --fg: #e5e7eb;
+        --grid: #374151;
+        --accent: #60a5fa;
+        --accent-light: rgba(96, 165, 250, 0.2);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
+      display: flex;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 0.9rem;
+      font-weight: 400;
+      margin: 0 0 1rem;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      h2 {
+        color: #9ca3af;
+      }
+    }
+
+    .chart-card {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem 1.5rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .chart-card {
+        background-color: rgba(15, 23, 42, 0.95);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+        border-color: rgba(55, 65, 81, 0.9);
+      }
+    }
+
+    .chart-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .chart-meta {
+        color: #9ca3af;
+      }
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    .note {
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .note {
+        color: #9ca3af;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>LLY 防御区间比率 (DIR) 趋势</h1>
+    <h2>2016–2024 财年变化（Line Chart）</h2>
+
+    <div class="chart-card">
+      <div class="chart-meta">
+        <div>单位：指数值（RESULT_DIR）</div>
+        <div>交互：悬停查看精确数值，可在图例中单击切换序列显示</div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="dirChart"></canvas>
+      </div>
+
+      <div class="note">
+        数据来源：用户提供的 LLY 防御区间比率（RESULT_DIR），涵盖 2016–2024 财年。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Source data (as provided)
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+    const dirValues = [
+      196.65756045830744,
+      273.87534978377005,
+      309.0730564085987,
+      176.21430015747453,
+      222.9745801835074,
+      213.887414522158,
+      195.01377708277812,
+      221.3886222618354,
+      219.25445699139465
+    ];
+
+    const ctx = document.getElementById("dirChart");
+
+    const dirChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "防御区间比率 (DIR)",
+            data: dirValues,
+            borderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--accent")
+              .trim() || "#2563eb",
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--accent-light")
+              .trim() || "rgba(37,99,235,0.15)",
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--accent")
+              .trim() || "#2563eb",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointHitRadius: 10,
+            tension: 0.25,
+            fill: true,
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.95)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.8)",
+            borderWidth: 1,
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return " DIR: " + value.toFixed(3);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: true,
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--grid")
+                .trim() || "#d3dce6"
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            },
+            title: {
+              display: true,
+              text: "Fiscal Year"
+            }
+          },
+          y: {
+            beginAtZero: false,
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--grid")
+                .trim() || "#d3dce6"
+            },
+            title: {
+              display: true,
+              text: "防御区间比率 (DIR)"
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(0);
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

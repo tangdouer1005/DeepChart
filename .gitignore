@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# eval run outputs
+/outputs/
+
+# --- secrets: never commit (api_key_pool.py reads these at runtime) ---
+# (do NOT use a broad *key* glob — it would catch api_key_pool.py)
+/key
+glm_key
+anywhere_key
+*.cookie
+.env
+secrets.*
+google_accounts.json
+
+# --- Research Report source PDFs: third-party, NOT redistributed ---
+# (see data/research_report/SOURCES.md; fetch via scripts/download_reports.py)
+data/research_report/**/*.pdf

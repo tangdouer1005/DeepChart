@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>JNJ 现金消耗跑道（零收入情景）2016-2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --accent-border: rgba(37, 99, 235, 0.6);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: #1f2937;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.15);
+        --accent-border: rgba(96, 165, 250, 0.7);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #111827;
+      border-radius: 16px;
+      padding: 20px 24px 24px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.25),
+        0 0 0 1px rgba(148, 163, 184, 0.1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .container {
+        background: rgba(15, 23, 42, 0.96);
+        color: #e5e7eb;
+        box-shadow:
+          0 18px 45px rgba(0, 0, 0, 0.65),
+          0 0 0 1px rgba(15, 23, 42, 0.9);
+      }
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .meta-row span {
+      white-space: nowrap;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .meta-row {
+        color: #9ca3af;
+      }
+    }
+
+    .highlight-chip {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-border);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 14px 12px 16px;
+        border-radius: 12px;
+      }
+      .title {
+        font-size: 17px;
+      }
+      .subtitle {
+        font-size: 12px;
+      }
+      .chart-wrapper {
+        height: 340px;
+      }
+    }
+
+    .footer-note {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-note span {
+      white-space: nowrap;
+    }
+
+    .legend-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: center;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .legend-color-box {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      margin-right: 4px;
+      display: inline-block;
+      background: linear-gradient(
+        135deg,
+        rgba(37, 99, 235, 0.2),
+        rgba(37, 99, 235, 0.9)
+      );
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .legend-color-box {
+        background: linear-gradient(
+          135deg,
+          rgba(96, 165, 250, 0.2),
+          rgba(96, 165, 250, 0.95)
+        );
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title">JNJ 现金消耗跑道（零收入情景）</div>
+      <div class="subtitle">2016–2024 财年（单位：月）</div>
+    </div>
+
+    <div class="meta-row">
+      <span class="highlight-chip">Line Chart · 零收入情景</span>
+      <span>指标：Cash Burn Runway（RESULT_Runway_Months）</span>
+      <span>公司：JNJ</span>
+    </div>
+
+    <div class="legend-inline" aria-hidden="true">
+      <span>
+        <span class="legend-color-box"></span>
+        现金消耗跑道（月）
+      </span>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="runwayChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      <span>数据来源：用户提供（RESULT_Runway_Months）。</span>
+      <span>交互：悬停查看精确数值，可拖动缩放（滚轮或触控）。</span>
+    </div>
+  </div>
+
+  <!-- Optional zoom/pan plugin for better interactivity -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.umd.min.js"></script>
+
+  <script>
+    // Data from source (2016–2024)
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const runwayData = [
+      7.605024051309461,
+      6.472040668119099,
+      6.331118881118881,
+      6.134530737644383,
+      4.846787003610109,
+      5.027589796980739,
+      4.462821363649479,
+      7.031066555874233,
+      7.239463409750726
+    ];
+
+    // Create gradient for the line and area fill
+    function createGradient(ctx, chartArea) {
+      const { top, bottom } = chartArea;
+      const gradient = ctx.createLinearGradient(0, top, 0, bottom);
+      gradient.addColorStop(0, "rgba(37, 99, 235, 0.3)");
+      gradient.addColorStop(1, "rgba(37, 99, 235, 0.02)");
+      return gradient;
+    }
+
+    function createBorderGradient(ctx, chartArea) {
+      const { top, bottom } = chartArea;
+      const gradient = ctx.createLinearGradient(0, top, 0, bottom);
+      gradient.addColorStop(0, "rgba(37, 99, 235, 1)");
+      gradient.addColorStop(1, "rgba(37, 99, 235, 0.45)");
+      return gradient;
+    }
+
+    window.addEventListener("load", () => {
+      const ctx = document.getElementById("runwayChart").getContext("2d");
+
+      // We'll create the chart with dummy colors, then replace with gradients in 'beforeDatasetsDraw'
+      const chartConfig = {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "现金消耗跑道（月）",
+              data: runwayData,
+              tension: 0.25,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointBackgroundColor: "#ffffff",
+              pointBorderWidth: 2,
+              pointHoverBorderWidth: 2.2,
+              borderWidth: 2.4,
+              fill: true,
+              borderColor: "#2563eb",
+              backgroundColor: "rgba(37, 99, 235, 0.16)"
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "nearest",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: "rgba(15, 23, 42, 0.95)",
+              titleColor: "#f9fafb",
+              bodyColor: "#e5e7eb",
+              borderColor: "rgba(148, 163, 184, 0.6)",
+              borderWidth: 1,
+              padding: 10,
+              cornerRadius: 8,
+              displayColors: false,
+              callbacks: {
+                title: (items) =>
+                  items[0] ? `财年：${items[0].label}` : "",
+                label: (context) => {
+                  const v = context.parsed.y;
+                  if (v == null || isNaN(v)) return "";
+                  return `现金消耗跑道：${v.toFixed(2)} 个月`;
+                }
+              }
+            },
+            zoom: {
+              pan: {
+                enabled: true,
+                mode: "x"
+              },
+              zoom: {
+                wheel: {
+                  enabled: true
+                },
+                pinch: {
+                  enabled: true
+                },
+                mode: "x"
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年",
+                font: {
+                  size: 12,
+                  weight: "500"
+                }
+              },
+              grid: {
+                display: false
+              },
+              ticks: {
+                maxRotation: 0,
+                autoSkipPadding: 12
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "现金消耗跑道（月）",
+                font: {
+                  size: 12,
+                  weight: "500"
+                }
+              },
+              grid: {
+                color: (ctx) =>
+                  ctx.index === 0 ? "rgba(148, 163, 184, 0.7)" : "rgba(148, 163, 184, 0.25)",
+                borderDash: [3, 3]
+              },
+              ticks: {
+                precision: 1,
+                callback: (value) => value.toFixed(1)
+              },
+              suggestedMin: 4,
+              suggestedMax: 8
+            }
+          }
+        },
+        plugins: [
+          {
+            id: "customGradient",
+            beforeDatasetsDraw(chart, args, pluginOptions) {
+              const {
+                ctx,
+                chartArea
+              } = chart;
+              if (!chartArea) return;
+
+              const dataset = chart.data.datasets[0];
+              dataset.backgroundColor = createGradient(ctx, chartArea);
+              dataset.borderColor = createBorderGradient(ctx, chartArea);
+            }
+          }
+        ]
+      };
+
+      new Chart(ctx, chartConfig);
+    });
+  </script>
+</body>
+</html>

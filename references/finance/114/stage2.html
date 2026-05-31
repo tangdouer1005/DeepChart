@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JNJ 投入资本回报率 (ROIC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px 24px 28px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 4px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        margin: 16px;
+        padding: 16px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JNJ 投入资本回报率 (ROIC)</h1>
+    <p class="subtitle">2016–2024 财年 · 单位：%</p>
+    <div class="chart-wrapper">
+      <canvas id="roicChart"></canvas>
+    </div>
+    <p class="note">
+      数据来源：用户提供财报数据。ROIC = RESULT_ROIC × 100 转换为百分比展示。
+    </p>
+  </div>
+
+  <script>
+    // Source data (exact values from prompt)
+    const labels = [
+      "2016", "2017", "2018", "2019", "2020",
+      "2021", "2022", "2023", "2024"
+    ];
+
+    // Convert ROIC to percentage values (×100)
+    const roicRaw = [
+      0.2239154957050199,
+      0.0178795367852134,
+      0.241491936814696,
+      0.257723767071883,
+      0.2279515388230207,
+      0.2186079101712973,
+      0.1805332587807077,
+      0.2150572298378512,
+      0.2329888126878679
+    ];
+    const roicPercent = roicRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("roicChart").getContext("2d");
+
+    const roicChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "ROIC",
+            data: roicPercent,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            fill: true,
+            tension: 0.25,
+            borderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: "rgba(37, 99, 235, 1)",
+            pointBorderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.92)",
+            padding: 10,
+            cornerRadius: 6,
+            displayColors: false,
+            callbacks: {
+              label: (context) => {
+                const value = context.parsed.y;
+                return `ROIC：${value.toFixed(2)}%`;
+              },
+              title: (items) => `财年：${items[0].label}`
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              font: { size: 12 }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "ROIC (%)",
+              font: { size: 12 }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            ticks: {
+              callback: (value) => value + "%",
+              precision: 0
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

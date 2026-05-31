@@ -1,0 +1,67 @@
+{
+  "report_id": "014",
+  "query_id": 6,
+  "query_text": "Create a ranked horizontal bar chart for the top 10 companies by `Mosaic-to-IPO mismatch`, defined as the absolute difference between each company’s `Mosaic rank percentile` and `IPO probability percentile`, with values shown in percentile points and sorted descending.",
+  "chart_type": "ranked_bar",
+  "value_unit": "percentile-point mismatch",
+  "sort_rule": "descending by absolute mismatch between Mosaic percentile and IPO-probability percentile",
+  "selection_rule": "top 10 companies with numeric Mosaic",
+  "records": [
+    {
+      "label": "Games24x7",
+      "value": 98.039216
+    },
+    {
+      "label": "Kaseya",
+      "value": 97.058824
+    },
+    {
+      "label": "Verkada",
+      "value": 72.54902
+    },
+    {
+      "label": "o9 Solutions",
+      "value": 72.54902
+    },
+    {
+      "label": "Team Blue",
+      "value": 68.627451
+    },
+    {
+      "label": "Strava",
+      "value": 67.647058
+    },
+    {
+      "label": "Bolt",
+      "value": 66.666667
+    },
+    {
+      "label": "ManyPets",
+      "value": 66.666666
+    },
+    {
+      "label": "Mapbox",
+      "value": 58.823529
+    },
+    {
+      "label": "Formlabs",
+      "value": 56.862745
+    }
+  ],
+  "plot_config": {
+    "title": "Largest Mosaic-to-IPO mismatches",
+    "x_label": "Absolute percentile-point mismatch",
+    "y_label": "Company"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with numeric Mosaic.",
+    "Ranked companies by Mosaic and IPO probability separately.",
+    "Converted both rank series to percentile scales.",
+    "Computed the absolute mismatch and kept the top 10 companies."
+  ],
+  "stats": {
+    "eligible_count": 103,
+    "returned_count": 10
+  },
+  "open_issues": []
+}

@@ -1,0 +1,263 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a scatter plot for ecosystems with at least `20 Exit Count`, where the x-axis is `Ecosystem Value Growth` in `%`, the y-axis is `exit intensity`, defined as `Exit Amount / Exit Count` in `$M per exit`, and label the 15 ecosystems with the largest positive y-value after filtering, using 2025 card values and excluding missing growth or exit data.",
+  "chart_type": "scatter plot",
+  "value_unit": "% / $M per exit",
+  "sort_rule": "labels assigned to top 15 by exit intensity",
+  "selection_rule": "all ecosystems with exit count >= 20",
+  "plot_spec": {
+    "title": "2025 Growth vs Exit Intensity",
+    "x_field": "x_ecosystem_value_growth_percent",
+    "y_field": "y_exit_intensity_musd_per_exit",
+    "xlabel": "Ecosystem Value Growth (%)",
+    "ylabel": "Exit Amount / Exit Count ($M per exit)"
+  },
+  "records": [
+    {
+      "entity": "Beijing",
+      "x_ecosystem_value_growth_percent": -12.0,
+      "y_exit_intensity_musd_per_exit": 2141.9355,
+      "label": true
+    },
+    {
+      "entity": "North Rhine-Westphalia",
+      "x_ecosystem_value_growth_percent": 14.0,
+      "y_exit_intensity_musd_per_exit": 27.7228,
+      "label": false
+    },
+    {
+      "entity": "Boston",
+      "x_ecosystem_value_growth_percent": -27.0,
+      "y_exit_intensity_musd_per_exit": 164.2229,
+      "label": true
+    },
+    {
+      "entity": "Bengaluru-Karnataka",
+      "x_ecosystem_value_growth_percent": -9.0,
+      "y_exit_intensity_musd_per_exit": 106.1224,
+      "label": true
+    },
+    {
+      "entity": "Paris",
+      "x_ecosystem_value_growth_percent": 0.0,
+      "y_exit_intensity_musd_per_exit": 16.2095,
+      "label": false
+    },
+    {
+      "entity": "Calgary",
+      "x_ecosystem_value_growth_percent": 13.0,
+      "y_exit_intensity_musd_per_exit": 33.3333,
+      "label": false
+    },
+    {
+      "entity": "Hong Kong",
+      "x_ecosystem_value_growth_percent": -20.0,
+      "y_exit_intensity_musd_per_exit": 278.481,
+      "label": true
+    },
+    {
+      "entity": "Porto",
+      "x_ecosystem_value_growth_percent": 48.0,
+      "y_exit_intensity_musd_per_exit": 28.3019,
+      "label": false
+    },
+    {
+      "entity": "Edmonton",
+      "x_ecosystem_value_growth_percent": -11.0,
+      "y_exit_intensity_musd_per_exit": 10.8,
+      "label": false
+    },
+    {
+      "entity": "Los Angeles",
+      "x_ecosystem_value_growth_percent": -3.0,
+      "y_exit_intensity_musd_per_exit": 125.0,
+      "label": true
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "x_ecosystem_value_growth_percent": -68.0,
+      "y_exit_intensity_musd_per_exit": 546.6667,
+      "label": true
+    },
+    {
+      "entity": "Turin",
+      "x_ecosystem_value_growth_percent": 19.0,
+      "y_exit_intensity_musd_per_exit": 15.5238,
+      "label": false
+    },
+    {
+      "entity": "Manila",
+      "x_ecosystem_value_growth_percent": 35.0,
+      "y_exit_intensity_musd_per_exit": 10.32,
+      "label": false
+    },
+    {
+      "entity": "Valencia",
+      "x_ecosystem_value_growth_percent": -3.0,
+      "y_exit_intensity_musd_per_exit": 82.6087,
+      "label": false
+    },
+    {
+      "entity": "New York City",
+      "x_ecosystem_value_growth_percent": -2.0,
+      "y_exit_intensity_musd_per_exit": 91.0853,
+      "label": false
+    },
+    {
+      "entity": "Seoul",
+      "x_ecosystem_value_growth_percent": -19.0,
+      "y_exit_intensity_musd_per_exit": 336.1111,
+      "label": true
+    },
+    {
+      "entity": "Malta",
+      "x_ecosystem_value_growth_percent": 1.0,
+      "y_exit_intensity_musd_per_exit": 14.32,
+      "label": false
+    },
+    {
+      "entity": "Philadelphia",
+      "x_ecosystem_value_growth_percent": 3.0,
+      "y_exit_intensity_musd_per_exit": 41.1392,
+      "label": false
+    },
+    {
+      "entity": "Shanghai",
+      "x_ecosystem_value_growth_percent": -22.0,
+      "y_exit_intensity_musd_per_exit": 700.0,
+      "label": true
+    },
+    {
+      "entity": "Silicon Valley",
+      "x_ecosystem_value_growth_percent": -15.0,
+      "y_exit_intensity_musd_per_exit": 361.8998,
+      "label": true
+    },
+    {
+      "entity": "Shenzhen",
+      "x_ecosystem_value_growth_percent": -10.0,
+      "y_exit_intensity_musd_per_exit": 289.1566,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "x_ecosystem_value_growth_percent": 7.0,
+      "y_exit_intensity_musd_per_exit": 46.4286,
+      "label": false
+    },
+    {
+      "entity": "Tamil Nadu",
+      "x_ecosystem_value_growth_percent": -29.0,
+      "y_exit_intensity_musd_per_exit": 191.7808,
+      "label": true
+    },
+    {
+      "entity": "Mexico City",
+      "x_ecosystem_value_growth_percent": -10.0,
+      "y_exit_intensity_musd_per_exit": 19.2308,
+      "label": false
+    },
+    {
+      "entity": "Brisbane",
+      "x_ecosystem_value_growth_percent": -28.0,
+      "y_exit_intensity_musd_per_exit": 31.9672,
+      "label": false
+    },
+    {
+      "entity": "Telangana",
+      "x_ecosystem_value_growth_percent": -4.0,
+      "y_exit_intensity_musd_per_exit": 13.4426,
+      "label": false
+    },
+    {
+      "entity": "Melbourne",
+      "x_ecosystem_value_growth_percent": -14.0,
+      "y_exit_intensity_musd_per_exit": 26.3158,
+      "label": false
+    },
+    {
+      "entity": "Tokyo",
+      "x_ecosystem_value_growth_percent": 3.0,
+      "y_exit_intensity_musd_per_exit": 40.493,
+      "label": false
+    },
+    {
+      "entity": "Sydney",
+      "x_ecosystem_value_growth_percent": -17.0,
+      "y_exit_intensity_musd_per_exit": 34.4828,
+      "label": false
+    },
+    {
+      "entity": "Abu Dhabi",
+      "x_ecosystem_value_growth_percent": 6.0,
+      "y_exit_intensity_musd_per_exit": 107.1429,
+      "label": true
+    },
+    {
+      "entity": "Lagos",
+      "x_ecosystem_value_growth_percent": -5.0,
+      "y_exit_intensity_musd_per_exit": 14.3871,
+      "label": false
+    },
+    {
+      "entity": "Berlin",
+      "x_ecosystem_value_growth_percent": -13.0,
+      "y_exit_intensity_musd_per_exit": 64.2458,
+      "label": false
+    },
+    {
+      "entity": "Nairobi",
+      "x_ecosystem_value_growth_percent": -15.0,
+      "y_exit_intensity_musd_per_exit": 15.4872,
+      "label": false
+    },
+    {
+      "entity": "Budapest",
+      "x_ecosystem_value_growth_percent": 10.0,
+      "y_exit_intensity_musd_per_exit": 12.0303,
+      "label": false
+    },
+    {
+      "entity": "Riyadh",
+      "x_ecosystem_value_growth_percent": 1.0,
+      "y_exit_intensity_musd_per_exit": 240.0,
+      "label": true
+    },
+    {
+      "entity": "Greater Lausanne Region",
+      "x_ecosystem_value_growth_percent": 3.0,
+      "y_exit_intensity_musd_per_exit": 52.1127,
+      "label": false
+    },
+    {
+      "entity": "Istanbul",
+      "x_ecosystem_value_growth_percent": -20.0,
+      "y_exit_intensity_musd_per_exit": 48.4848,
+      "label": false
+    },
+    {
+      "entity": "Tel Aviv",
+      "x_ecosystem_value_growth_percent": -8.0,
+      "y_exit_intensity_musd_per_exit": 154.3779,
+      "label": true
+    },
+    {
+      "entity": "London",
+      "x_ecosystem_value_growth_percent": -5.0,
+      "y_exit_intensity_musd_per_exit": 63.3387,
+      "label": false
+    },
+    {
+      "entity": "São Paulo",
+      "x_ecosystem_value_growth_percent": -33.0,
+      "y_exit_intensity_musd_per_exit": 187.2659,
+      "label": true
+    },
+    {
+      "entity": "Montréal",
+      "x_ecosystem_value_growth_percent": -17.0,
+      "y_exit_intensity_musd_per_exit": 31.441,
+      "label": false
+    }
+  ]
+}

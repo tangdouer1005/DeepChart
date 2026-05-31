@@ -1,0 +1,52 @@
+{
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "Stage family scale-quality map",
+  "x_field": "x",
+  "y_field": "y",
+  "size_field": "size",
+  "hue_field": null,
+  "label_field": "label",
+  "x_label": "Average headcount",
+  "y_label": "Average Mosaic",
+  "size_label": "Share of total raised (%)",
+  "annotate": true,
+  "data": [
+    {
+      "label": "Debt/Line of Credit",
+      "x": 282.0,
+      "y": 740.0,
+      "size": 13.161149
+    },
+    {
+      "label": "Other/Unattributed",
+      "x": 92.0,
+      "y": 803.666667,
+      "size": 0.761403
+    },
+    {
+      "label": "Seed",
+      "x": 106.411765,
+      "y": 718.117647,
+      "size": 4.07024
+    },
+    {
+      "label": "Series A",
+      "x": 139.565217,
+      "y": 773.543478,
+      "size": 27.656079
+    },
+    {
+      "label": "Series B",
+      "x": 174.52,
+      "y": 802.8,
+      "size": 39.06653
+    },
+    {
+      "label": "Series C+",
+      "x": 291.6,
+      "y": 858.2,
+      "size": 15.284599
+    }
+  ]
+}

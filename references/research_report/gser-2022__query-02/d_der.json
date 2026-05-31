@@ -1,0 +1,55 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a horizontal bar chart showing the top 10 ecosystems by `value created per exit-year`, computed as `Ecosystem Value / Time to Exit`, among ecosystems where `Ecosystem Value` and `Time to Exit` are both exact values, expressed in `$B per year`, sorted descending, and excluding `N/A` items.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "$B per year",
+  "sort_rule": "descending by value_per_exit_year_busd",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "2022 Value Created per Exit-Year",
+    "xlabel": "$B per year",
+    "value_field": "value_per_exit_year_busd"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley",
+      "value_per_exit_year_busd": 263.1579
+    },
+    {
+      "entity": "Beijing",
+      "value_per_exit_year_busd": 99.375
+    },
+    {
+      "entity": "New York City",
+      "value_per_exit_year_busd": 43.1395
+    },
+    {
+      "entity": "London",
+      "value_per_exit_year_busd": 33.0526
+    },
+    {
+      "entity": "Los Angeles",
+      "value_per_exit_year_busd": 31.5957
+    },
+    {
+      "entity": "Boston",
+      "value_per_exit_year_busd": 29.8876
+    },
+    {
+      "entity": "Shanghai",
+      "value_per_exit_year_busd": 25.0
+    },
+    {
+      "entity": "Seoul",
+      "value_per_exit_year_busd": 22.125
+    },
+    {
+      "entity": "Tel Aviv",
+      "value_per_exit_year_busd": 17.1429
+    },
+    {
+      "entity": "Bangalore - Karnataka",
+      "value_per_exit_year_busd": 16.9355
+    }
+  ]
+}

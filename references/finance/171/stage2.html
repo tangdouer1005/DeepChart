@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MSFT 内部增长率 (Internal Growth Rate, IGR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x at time of creation) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f7f8fa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 1rem;
+      font-weight: 400;
+      color: #555;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 0.75rem;
+    }
+
+    .note strong {
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 0.75rem;
+      }
+      .chart-container {
+        padding: 1rem;
+      }
+      .chart-wrapper {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>MSFT 内部增长率 (Internal Growth Rate, IGR)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="chart-wrapper">
+      <canvas id="igrChart"></canvas>
+    </div>
+    <div class="note">
+      <strong>说明:</strong> 该图展示了 Microsoft 在 2016–2024 财年期间的内部增长率（IGR）变化。
+      悬停在折线上的数据点可查看精确数值（以百分比表示）。
+    </div>
+  </div>
+
+  <script>
+    // Source data (as provided)
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const igrValues = [
+      0.0546147235749069,
+      0.0669657318425883,
+      0.0157337613523232,
+      0.1028377542230652,
+      0.1100647873121857,
+      0.164042596088638,
+      0.1852792524087524,
+      0.1565028122925022,
+      0.1677135337101296
+    ];
+
+    // Convert to percentages for display
+    const igrPercentValues = igrValues.map(v => v * 100);
+
+    const ctx = document.getElementById("igrChart").getContext("2d");
+
+    // Create gradient for line fill (optional subtle area under the line)
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(37, 99, 235, 0.25)");
+    gradient.addColorStop(1, "rgba(37, 99, 235, 0)");
+
+    const igrChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "内部增长率 (IGR)",
+            data: igrPercentValues,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: gradient,
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderColor: "#ffffff",
+            pointHoverRadius: 6,
+            pointRadius: 4,
+            pointBorderWidth: 2,
+            borderWidth: 2.5,
+            fill: true,
+            tension: 0.25
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return "IGR: " + value.toFixed(2) + "%";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "内部增长率 (IGR, %)",
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              // Nice step for percentages
+              callback: function (value) {
+                return value + "%";
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

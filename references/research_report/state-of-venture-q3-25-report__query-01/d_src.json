@@ -1,0 +1,452 @@
+{
+  "report_code": "021",
+  "query_id": "01",
+  "source_fields": [
+    "2025 Q1-Q3 funding",
+    "2025 Q1-Q3 deals"
+  ],
+  "records": [
+    {
+      "market": "Silicon Valley",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 51400.0,
+          "deals": 772
+        },
+        "2025 Q2": {
+          "funding_m": 37300.0,
+          "deals": 724
+        },
+        "2025 Q3": {
+          "funding_m": 36500.0,
+          "deals": 546
+        }
+      }
+    },
+    {
+      "market": "New York",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 4300.0,
+          "deals": 413
+        },
+        "2025 Q2": {
+          "funding_m": 5800.0,
+          "deals": 416
+        },
+        "2025 Q3": {
+          "funding_m": 7300.0,
+          "deals": 335
+        }
+      }
+    },
+    {
+      "market": "Los Angeles",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 3000.0,
+          "deals": 190
+        },
+        "2025 Q2": {
+          "funding_m": 5800.0,
+          "deals": 184
+        },
+        "2025 Q3": {
+          "funding_m": 3100.0,
+          "deals": 117
+        }
+      }
+    },
+    {
+      "market": "Boston",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 2500.0,
+          "deals": 147
+        },
+        "2025 Q2": {
+          "funding_m": 3400.0,
+          "deals": 154
+        },
+        "2025 Q3": {
+          "funding_m": 2900.0,
+          "deals": 120
+        }
+      }
+    },
+    {
+      "market": "Seattle",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 2000.0,
+          "deals": 73
+        },
+        "2025 Q2": {
+          "funding_m": 1300.0,
+          "deals": 75
+        },
+        "2025 Q3": {
+          "funding_m": 400.0,
+          "deals": 53
+        }
+      }
+    },
+    {
+      "market": "Denver",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 900.0,
+          "deals": 68
+        },
+        "2025 Q2": {
+          "funding_m": 400.0,
+          "deals": 57
+        },
+        "2025 Q3": {
+          "funding_m": 900.0,
+          "deals": 54
+        }
+      }
+    },
+    {
+      "market": "Chicago",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 900.0,
+          "deals": 59
+        },
+        "2025 Q2": {
+          "funding_m": 700.0,
+          "deals": 57
+        },
+        "2025 Q3": {
+          "funding_m": 300.0,
+          "deals": 46
+        }
+      }
+    },
+    {
+      "market": "Dallas",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 5600.0,
+          "deals": 41
+        },
+        "2025 Q2": {
+          "funding_m": 600.0,
+          "deals": 60
+        },
+        "2025 Q3": {
+          "funding_m": 300.0,
+          "deals": 42
+        }
+      }
+    },
+    {
+      "market": "Austin",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 2700.0,
+          "deals": 78
+        },
+        "2025 Q2": {
+          "funding_m": 800.0,
+          "deals": 71
+        },
+        "2025 Q3": {
+          "funding_m": 1400.0,
+          "deals": 66
+        }
+      }
+    },
+    {
+      "market": "Miami",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 900.0,
+          "deals": 69
+        },
+        "2025 Q2": {
+          "funding_m": 600.0,
+          "deals": 80
+        },
+        "2025 Q3": {
+          "funding_m": 800.0,
+          "deals": 69
+        }
+      }
+    },
+    {
+      "market": "Atlanta",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 300.0,
+          "deals": 24
+        },
+        "2025 Q2": {
+          "funding_m": 300.0,
+          "deals": 27
+        },
+        "2025 Q3": {
+          "funding_m": 200.0,
+          "deals": 40
+        }
+      }
+    },
+    {
+      "market": "Philadelphia",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 1600.0,
+          "deals": 140
+        },
+        "2025 Q2": {
+          "funding_m": 1200.0,
+          "deals": 134
+        },
+        "2025 Q3": {
+          "funding_m": 1200.0,
+          "deals": 114
+        }
+      }
+    },
+    {
+      "market": "Raleigh",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 700.0,
+          "deals": 45
+        },
+        "2025 Q2": {
+          "funding_m": 500.0,
+          "deals": 29
+        },
+        "2025 Q3": {
+          "funding_m": 300.0,
+          "deals": 18
+        }
+      }
+    },
+    {
+      "market": "Toronto",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 500.0,
+          "deals": 48
+        },
+        "2025 Q2": {
+          "funding_m": 800.0,
+          "deals": 32
+        },
+        "2025 Q3": {
+          "funding_m": 300.0,
+          "deals": 27
+        }
+      }
+    },
+    {
+      "market": "China",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 4100.0,
+          "deals": 598
+        },
+        "2025 Q2": {
+          "funding_m": 3100.0,
+          "deals": 649
+        },
+        "2025 Q3": {
+          "funding_m": 4900.0,
+          "deals": 581
+        }
+      }
+    },
+    {
+      "market": "India",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 3100.0,
+          "deals": 374
+        },
+        "2025 Q2": {
+          "funding_m": 2700.0,
+          "deals": 329
+        },
+        "2025 Q3": {
+          "funding_m": 2900.0,
+          "deals": 343
+        }
+      }
+    },
+    {
+      "market": "Singapore",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 1000.0,
+          "deals": 117
+        },
+        "2025 Q2": {
+          "funding_m": 900.0,
+          "deals": 109
+        },
+        "2025 Q3": {
+          "funding_m": 2200.0,
+          "deals": 91
+        }
+      }
+    },
+    {
+      "market": "Japan",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 700.0,
+          "deals": 383
+        },
+        "2025 Q2": {
+          "funding_m": 800.0,
+          "deals": 343
+        },
+        "2025 Q3": {
+          "funding_m": 900.0,
+          "deals": 343
+        }
+      }
+    },
+    {
+      "market": "United Kingdom",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 3700.0,
+          "deals": 482
+        },
+        "2025 Q2": {
+          "funding_m": 4200.0,
+          "deals": 433
+        },
+        "2025 Q3": {
+          "funding_m": 4100.0,
+          "deals": 327
+        }
+      }
+    },
+    {
+      "market": "Germany",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 1700.0,
+          "deals": 210
+        },
+        "2025 Q2": {
+          "funding_m": 2700.0,
+          "deals": 183
+        },
+        "2025 Q3": {
+          "funding_m": 1400.0,
+          "deals": 163
+        }
+      }
+    },
+    {
+      "market": "France",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 1600.0,
+          "deals": 193
+        },
+        "2025 Q2": {
+          "funding_m": 1500.0,
+          "deals": 187
+        },
+        "2025 Q3": {
+          "funding_m": 2500.0,
+          "deals": 126
+        }
+      }
+    },
+    {
+      "market": "Israel",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 1000.0,
+          "deals": 83
+        },
+        "2025 Q2": {
+          "funding_m": 1900.0,
+          "deals": 69
+        },
+        "2025 Q3": {
+          "funding_m": 1300.0,
+          "deals": 66
+        }
+      }
+    },
+    {
+      "market": "Netherlands",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 1300.0,
+          "deals": 105
+        },
+        "2025 Q2": {
+          "funding_m": 1100.0,
+          "deals": 110
+        },
+        "2025 Q3": {
+          "funding_m": 700.0,
+          "deals": 76
+        }
+      }
+    },
+    {
+      "market": "Sweden",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 600.0,
+          "deals": 72
+        },
+        "2025 Q2": {
+          "funding_m": 300.0,
+          "deals": 82
+        },
+        "2025 Q3": {
+          "funding_m": 200.0,
+          "deals": 57
+        }
+      }
+    },
+    {
+      "market": "Brazil",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 600.0,
+          "deals": 87
+        },
+        "2025 Q2": {
+          "funding_m": 400.0,
+          "deals": 89
+        },
+        "2025 Q3": {
+          "funding_m": 900.0,
+          "deals": 90
+        }
+      }
+    },
+    {
+      "market": "South Africa",
+      "quarters": {
+        "2025 Q1": {
+          "funding_m": 66.0,
+          "deals": 17
+        },
+        "2025 Q2": {
+          "funding_m": 97.0,
+          "deals": 18
+        },
+        "2025 Q3": {
+          "funding_m": 820.0,
+          "deals": 16
+        }
+      }
+    }
+  ]
+}

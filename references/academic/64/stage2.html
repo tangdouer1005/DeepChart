@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstat/1.9.6/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // Data parsed from 64.json
+        const chartData = [
+    {
+        "label": "0 \u00b5M",
+        "x_vals": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y_mean": [
+            0.25902520833333337,
+            0.25460537166666664,
+            0.28184575333333334,
+            0.19939015666666662,
+            0.05101007,
+            0.008108270833333332,
+            0.0026727781666666672,
+            0.004859731
+        ],
+        "y_sem": [
+            0.002931521759741113,
+            0.0037414600293501103,
+            0.003576421834682337,
+            0.01855841129330754,
+            0.013756335979131583,
+            0.005604858001845168,
+            0.006469635506546247,
+            0.0035379434190518015
+        ]
+    },
+    {
+        "label": "1 \u00b5M",
+        "x_vals": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y_mean": [
+            0.219735,
+            0.23188666666666666,
+            0.224745,
+            0.11041000000000001,
+            0.0008188333333333341,
+            -0.009477166666666667,
+            -0.008556833333333335,
+            -0.007691166666666668
+        ],
+        "y_sem": [
+            0.007284296561020076,
+            0.00512337869567137,
+            0.006095411183833298,
+            0.02969877578846195,
+            0.01668405032494719,
+            0.010434678740240977,
+            0.010109582531815674,
+            0.00783866536052275
+        ]
+    },
+    {
+        "label": "3 \u00b5M",
+        "x_vals": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y_mean": [
+            0.18638833333333335,
+            0.20309999999999997,
+            0.20096999999999998,
+            0.04301166666666666,
+            -0.0005113333333333347,
+            -0.003510166666666666,
+            -0.007577166666666667,
+            -0.005716333333333334
+        ],
+        "y_sem": [
+            0.014820742674573562,
+            0.01031478334990879,
+            0.0128009962719921,
+            0.012251802682931256,
+            0.00884249216902448,
+            0.010631377292442372,
+            0.009059486646655313,
+            0.008104900594587707
+        ]
+    },
+    {
+        "label": "10 \u00b5M",
+        "x_vals": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y_mean": [
+            0.099815,
+            0.12185166666666668,
+            0.11676833333333332,
+            0.0002781666666666664,
+            -0.002675333333333333,
+            -0.007588333333333333,
+            -0.005189833333333334,
+            -0.011099166666666667
+        ],
+        "y_sem": [
+            0.007618385564613486,
+            0.007498570758879717,
+            0.009915789713792247,
+            0.0070969920953123464,
+            0.010609936055066148,
+            0.01048134375573695,
+            0.009608639652291712,
+            0.006786725279775818
+        ]
+    },
+    {
+        "label": "30 \u00b5M",
+        "x_vals": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y_mean": [
+            0.022077666666666666,
+            0.04224083333333333,
+            0.039219000000000004,
+            -0.014271833333333333,
+            -0.007500833333333336,
+            -0.010383833333333333,
+            -0.01076366666666667,
+            -0.021434666666666668
+        ],
+        "y_sem": [
+            0.01083449137827549,
+            0.011162531598603198,
+            0.015308701075241854,
+            0.008902136748546095,
+            0.012790259406666265,
+            0.011496051250602596,
+            0.009839589260472962,
+            0.012740989473320322
+        ]
+    }
+];
+
+        const colors = ['#000099', '#E0B0FF', '#DA70D6', '#9932CC', '#4B0082'];
+        const markers = ['circle', 'rect', 'rect', 'rect', 'rect'];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [];
+
+        chartData.forEach((dataset, i) => {
+            const label = dataset.label;
+            const color = colors[i];
+            
+            // Map JSON data to [x, y, err]
+            const data = dataset.x_vals.map((x, idx) => [x, dataset.y_mean[idx], dataset.y_sem[idx]]).sort((a,b) => a[0] - b[0]);
+            
+            if (data.length === 0) return;
+
+            // 1. Scatter Points (Means)
+            series.push({
+                name: label,
+                type: 'scatter',
+                data: data.map(d => [d[0], d[1]]),
+                symbol: markers[i],
+                symbolSize: 8,
+                itemStyle: { color: color },
+                z: 10
+            });
+
+            // 2. Error Bars (Custom Series)
+            series.push({
+                type: 'custom',
+                name: label + '_error',
+                itemStyle: {
+                    borderWidth: 1.5,
+                    stroke: color
+                },
+                renderItem: function (params, api) {
+                    const xValue = api.value(0);
+                    const meanValue = api.value(1);
+                    const semValue = api.value(2);
+                    
+                    const highPoint = api.coord([xValue, meanValue + semValue]);
+                    const lowPoint = api.coord([xValue, meanValue - semValue]);
+                    
+                    const halfWidth = 3; // pixels
+                    
+                    const style = api.style({
+                        stroke: color,
+                        fill: null
+                    });
+
+                    return {
+                        type: 'group',
+                        children: [
+                            {
+                                type: 'line',
+                                shape: {
+                                    x1: highPoint[0], y1: highPoint[1],
+                                    x2: lowPoint[0], y2: lowPoint[1]
+                                },
+                                style: style
+                            },
+                            {
+                                type: 'line',
+                                shape: {
+                                    x1: highPoint[0] - halfWidth, y1: highPoint[1],
+                                    x2: highPoint[0] + halfWidth, y2: highPoint[1]
+                                },
+                                style: style
+                            },
+                            {
+                                type: 'line',
+                                shape: {
+                                    x1: lowPoint[0] - halfWidth, y1: lowPoint[1],
+                                    x2: lowPoint[0] + halfWidth, y2: lowPoint[1]
+                                },
+                                style: style
+                            }
+                        ]
+                    };
+                },
+                data: data,
+                z: 9,
+                silent: true,
+                tooltip: { show: false } 
+            });
+
+            // 3. Smooth Line
+            series.push({
+                name: label + '_fit',
+                type: 'line',
+                data: data.map(d => [d[0], d[1]]),
+                smooth: true,
+                symbol: 'none',
+                lineStyle: { color: color, width: 1.5 },
+                z: 1,
+                silent: true
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 40, bottom: 40, left: 50, right: 20 },
+            xAxis: {
+                type: 'value',
+                min: -15, max: -3,
+                interval: 2,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true, alignWithLabel: true, inside: true },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                min: -0.05, max: 0.35,
+                interval: 0.1,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { show: false }, // Matplotlib plot shows no y-axis line, just ticks? No, usually box.
+                // Python: ax.spines['right'].set_visible(False), ax.spines['top'].set_visible(False)
+                // Left and Bottom are visible.
+                axisLine: { lineStyle: { color: 'black' }, show: true },
+                axisTick: { show: true, inside: true },
+                splitLine: { show: false }
+            },
+            graphic: [
+                 // Title G11
+                {
+                    type: 'text',
+                    left: '5%', top: '5%',
+                    style: { text: 'G₁₁', font: '14px sans-serif', fill: 'black' }
+                },
+                // Dashed line at y=0
+                {
+                    type: 'line',
+                    shape: { x1: 50, y1: 0, x2: 580, y2: 0 }, // We need to coordinate this with axis...
+                    // Easier to use markLine in a series, but let's use a dummy series for the ref line
+                },
+                // Arrow
+                // Hard to position exactly without coordinate conversion.
+                // ECharts allows graphic elements with position relative to chart.
+            ],
+            series: [
+                ...series,
+                {
+                    // Reference line y=0
+                    type: 'line',
+                    data: [[-15, 0], [-3, 0]],
+                    symbol: 'none',
+                    lineStyle: { color: 'black', type: 'dashed', width: 0.8 },
+                    z: 0,
+                    silent: true
+                }
+            ]
+        };
+
+        // Add custom Arrow via graphic component, but it's hard to map data coords to pixels easily in 'graphic'.
+        // We can use 'markLine' or just skip the arrow if not critical, or use a custom render.
+        // The Python script adds an arrow. We'll skip it for simplicity unless required for exact visual match.
+        // But we need the Title and Axes labels.
+        
+        option.xAxis.name = 'Log [NT], M';
+        option.xAxis.nameLocation = 'middle';
+        option.xAxis.nameGap = 25;
+        
+        // Y Axis name is missing in Python script explicitly?
+        // Python: No set_ylabel is called. 
+        // Wait. `fig, ax = plt.subplots(...)` 
+        // No `ax.set_ylabel(...)` in the provided python snippet.
+        // However, the HTML I was given earlier had "Relative activity". 
+        // I will check the Python code again.
+        // `ax.text(..., "G11", ...)`
+        // `ax.set_xticks(...)`
+        // There is NO Y-label in the python script provided!
+        // So I should NOT add a Y-label if I want to match the Python script exactly.
+        // But standard scientific charts usually have one.
+        // The user's previous HTML had "Relative activity". 
+        // I will stick to the Python script: NO Y-label.
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

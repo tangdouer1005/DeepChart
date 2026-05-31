@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>lly 格雷厄姆“烟蒂股”净值（NNWC）2016-2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      color: #555;
+      margin-top: 0;
+    }
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      /* 16:9 比例，避免极度拉伸 */
+      padding-top: 56.25%;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.10);
+      overflow: hidden;
+    }
+    .chart-inner {
+      position: absolute;
+      inset: 0;
+      padding: 18px 18px 8px;
+      box-sizing: border-box;
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin: 8px 0 10px;
+      flex-wrap: wrap;
+      font-size: 12px;
+    }
+    .controls button {
+      padding: 4px 10px;
+      border-radius: 14px;
+      border: 1px solid #cbd5e1;
+      background: #e2e8f0;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .controls button.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>lly 格雷厄姆“烟蒂股”净值（NNWC）</h1>
+    <h2>2016–2024 年每股 NNWC（单位：与原始数据一致）</h2>
+
+    <div class="controls">
+      <span>视图：</span>
+      <button id="view-raw" class="active">原始数值</button>
+      <button id="view-indexed">以 2016 年为 100 的指数</button>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-inner">
+        <canvas id="nnwcChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    数据来源：用户提供的 NNWC 每股数据。<br />
+    负数表示净流动资产为负，柱状图从 0 轴向下绘制。
+  </div>
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <script>
+    // 数据
+    const years = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const nnwcValues = [
+      -8.742136936527762,
+      -13.41320484438078,
+      -12.04420766068763,
+      -23.89219718315743,
+      -24.40523108123648,
+      -22.22904976967513,
+      -21.76414623724718,
+      -30.351030240765915,
+      -35.06806524795395
+    ];
+    const base = nnwcValues[0];
+    const indexedValues = nnwcValues.map(v => (v / base) * 100);
+
+    const ctx = document.getElementById("nnwcChart").getContext("2d");
+
+    let currentMode = "raw";
+    let gradientFill;
+
+    function createGradient(ctx, chartArea) {
+      const { top, bottom } = chartArea;
+      const g = ctx.createLinearGradient(0, top, 0, bottom);
+      g.addColorStop(0, "rgba(59, 130, 246, 0.15)");
+      g.addColorStop(1, "rgba(37, 99, 235, 0.85)");
+      return g;
+    }
+
+    const dataConfig = {
+      labels: years,
+      datasets: [
+        {
+          label: "每股 NNWC",
+          data: nnwcValues,
+          borderRadius: 4,
+          borderSkipped: false,
+          backgroundColor: (ctx) => {
+            const chart = ctx.chart;
+            const { chartArea } = chart;
+            if (!chartArea) {
+              return "rgba(37, 99, 235, 0.7)";
+            }
+            if (!gradientFill) {
+              gradientFill = createGradient(chart.ctx, chartArea);
+            }
+            return gradientFill;
+          },
+          hoverBackgroundColor: "rgba(30, 64, 175, 0.9)"
+        }
+      ]
+    };
+
+    const optionsConfig = {
+      responsive: true,
+      maintainAspectRatio: false, // 使用外层容器控制比例，避免拉长
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              const value = context.parsed.y;
+              if (currentMode === "raw") {
+                return "NNWC 每股: " + value.toFixed(4);
+              } else {
+                return "指数 (2016=100): " + value.toFixed(1);
+              }
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: {
+            maxRotation: 0,
+            autoSkip: false,
+            font: { size: 11 }
+          }
+        },
+        y: {
+          grid: {
+            color: "rgba(148, 163, 184, 0.25)"
+          },
+          ticks: {
+            font: { size: 11 }
+          },
+          title: {
+            display: true,
+            text: "NNWC 每股",
+            font: { size: 12 }
+          }
+        }
+      }
+    };
+
+    const nnwcChart = new Chart(ctx, {
+      type: "bar",
+      data: dataConfig,
+      options: optionsConfig
+    });
+
+    // 视图切换按钮
+    const btnRaw = document.getElementById("view-raw");
+    const btnIndexed = document.getElementById("view-indexed");
+
+    btnRaw.addEventListener("click", () => {
+      if (currentMode === "raw") return;
+      currentMode = "raw";
+      btnRaw.classList.add("active");
+      btnIndexed.classList.remove("active");
+
+      nnwcChart.data.datasets[0].data = nnwcValues;
+      nnwcChart.data.datasets[0].label = "每股 NNWC";
+      nnwcChart.options.scales.y.title.text = "NNWC 每股";
+      nnwcChart.update();
+    });
+
+    btnIndexed.addEventListener("click", () => {
+      if (currentMode === "indexed") return;
+      currentMode = "indexed";
+      btnIndexed.classList.add("active");
+      btnRaw.classList.remove("active");
+
+      nnwcChart.data.datasets[0].data = indexedValues;
+      nnwcChart.data.datasets[0].label = "NNWC 指数 (2016 = 100)";
+      nnwcChart.options.scales.y.title.text = "指数 (2016 = 100)";
+      nnwcChart.update();
+    });
+  </script>
+</body>
+</html>

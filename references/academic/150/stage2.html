@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 400px; height: 700px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "Category":"Combustion",
+        "Value":73.2
+    },
+    {
+        "Category":"Others",
+        "Value":4.7
+    },
+    {
+        "Category":"Transport",
+        "Value":2.6
+    },
+    {
+        "Category":"Loss",
+        "Value":103.5
+    },
+    {
+        "Category":"Electricity",
+        "Value":10.5
+    },
+    {
+        "Category":"Heat",
+        "Value":0.6
+    },
+    {
+        "Category":"Credits",
+        "Value":-4.3
+    },
+    {
+        "Category":"Biogenic",
+        "Value":-176.7
+    }
+];
+
+        const data = jsonData.map(d => ({
+            category: d.Category,
+            value: d.Value
+        }));
+        
+        const colors = {
+            'Combustion': '#E8BC85',
+            'Others': '#808080',
+            'Transport': '#468088',
+            'Loss': '#365D8D',
+            'Electricity': '#9ABCA6',
+            'Heat': '#8FBBD9',
+            'Credits': '#468088',
+            'Biogenic': '#D3654B'
+        };
+
+        // Pos Order: Heat -> Electricity -> Loss -> Transport -> Others -> Combustion (Bottom to Top)
+        const posOrder = ['Heat', 'Electricity', 'Loss', 'Transport', 'Others', 'Combustion'];
+        // Neg Order: Credits -> Biogenic (Top to Bottom from 0)
+        const negOrder = ['Credits', 'Biogenic'];
+
+        const series = [];
+        
+        // Positive Stack
+        posOrder.forEach(cat => {
+            const item = data.find(d => d.category === cat);
+            series.push({
+                name: cat,
+                type: 'bar',
+                stack: 'total',
+                data: [item.value],
+                itemStyle: { color: colors[cat] },
+                barWidth: 80
+            });
+        });
+
+        // Negative Stack
+        // ECharts stacks positive and negative values correctly from 0.
+        negOrder.forEach(cat => {
+            const item = data.find(d => d.category === cat);
+            series.push({
+                name: cat,
+                type: 'bar',
+                stack: 'total',
+                data: [item.value], // Negative value
+                itemStyle: { color: colors[cat] },
+                barWidth: 80
+            });
+        });
+
+        // Labels (Scatter)
+        // Manual Y positions from Python script
+        const labelPositions = {
+            'Combustion': 150,
+            'Others': 118,
+            'Transport': 95,
+            'Loss': 50,
+            'Electricity': 15,
+            'Heat': -5,         
+            'Credits': -35,
+            'Biogenic': -130
+        };
+
+        const labelData = [];
+        data.forEach(item => {
+            labelData.push({
+                value: [1.25, labelPositions[item.category]], 
+                label: {
+                    show: true,
+                    formatter: item.category + ' ' + item.value,
+                    color: colors[item.category],
+                    fontSize: 14,
+                    fontFamily: 'sans-serif',
+                    position: 'right'
+                },
+                itemStyle: { color: 'transparent' }
+            });
+        });
+
+        // Add Total Label
+        // 14.1 at y=195.1 + 15 = 210.1
+        labelData.push({
+            value: [0.5, 210.1], // x=0.5 (center of bar)
+            label: {
+                show: true,
+                formatter: '14.1\ngCO₂e MJ⁻¹',
+                color: '#2F5566',
+                fontSize: 16,
+                fontWeight: 'bold',
+                fontFamily: 'sans-serif',
+                position: 'top',
+                align: 'center'
+            },
+            itemStyle: { color: 'transparent' }
+        });
+
+        series.push({
+            type: 'scatter',
+            data: labelData,
+            symbolSize: 1,
+            xAxisIndex: 1,
+            silent: true
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: 50,
+                bottom: 50,
+                left: 100, // Space for spine
+                right: 150 // Space for labels
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: [''],
+                    axisTick: { show: false },
+                    axisLine: { show: false },
+                    splitLine: { show: false }
+                },
+                {
+                    type: 'value',
+                    min: -0.5,
+                    max: 1.5, // 0 is bar center. Bar width is relative.
+                    // If visual map needs x=1 to be right of bar.
+                    // Let's assume bar is centered at 0.
+                    show: false
+                }
+            ],
+            yAxis: {
+                type: 'value',
+                min: -200,
+                max: 250,
+                interval: 50,
+                axisLabel: { 
+                    color: '#333333', 
+                    fontSize: 12,
+                    formatter: function(val) { return val.toFixed(1); }
+                },
+                splitLine: { show: false },
+                axisLine: { 
+                    show: true, 
+                    lineStyle: { color: '#333333', width: 0.8 },
+                    // ECharts y-axis is usually on left.
+                    // We can offset it? 
+                    // offset: 20 
+                },
+                axisTick: { show: true, length: 4, inside: false }
+            },
+            series: series.map(s => {
+                if (s.type === 'scatter') {
+                    s.xAxisIndex = 1;
+                }
+                return s;
+            }),
+            graphic: [
+                {
+                    type: 'text',
+                    left: 20, // Relative to container
+                    top: 20,
+                    style: {
+                        text: 'b',
+                        font: 'bold 24px sans-serif',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a horizontal bar chart for European Cleantech ecosystems, comparing `Total Early-Stage Funding / Ecosystem Value`, expressed in `%`, sorted descending and showing all European items.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by capital_intensity_percent",
+  "selection_rule": "top 7",
+  "plot_spec": {
+    "title": "European Cleantech Capital Intensity",
+    "xlabel": "percent",
+    "value_field": "capital_intensity_percent"
+  },
+  "records": [
+    {
+      "entity": "Greater Helsinki",
+      "capital_intensity_percent": 8.3182
+    },
+    {
+      "entity": "Paris",
+      "capital_intensity_percent": 7.431
+    },
+    {
+      "entity": "Berlin",
+      "capital_intensity_percent": 6.2331
+    },
+    {
+      "entity": "London",
+      "capital_intensity_percent": 5.9859
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "capital_intensity_percent": 4.0892
+    },
+    {
+      "entity": "Frankfurt",
+      "capital_intensity_percent": 2.6899
+    },
+    {
+      "entity": "Stockholm",
+      "capital_intensity_percent": 2.1739
+    }
+  ]
+}

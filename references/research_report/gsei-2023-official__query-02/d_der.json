@@ -1,0 +1,63 @@
+{
+  "query_id": "query_02",
+  "query_text": "Build a horizontal bar chart for the top 12 countries by secondary-hub depth in the 2023 country tables, where the metric is `sum(score ranks 2-5) / score(rank 1)`, expressed as a ratio, sorted descending, and restricted to countries with at least 5 listed cities.",
+  "status": "complete",
+  "chart_type": "horizontal_bar",
+  "title": "2023 Secondary-Hub Depth by Country",
+  "value_unit": "ratio",
+  "sort_rule": "descending by secondary_hub_depth_ratio, tie-break alphabetically",
+  "selection_rule": "top 12 countries with at least 5 listed cities",
+  "records": [
+    {
+      "entity": "Switzerland",
+      "secondary_hub_depth_ratio": 2.220183
+    },
+    {
+      "entity": "Canada",
+      "secondary_hub_depth_ratio": 1.559301
+    },
+    {
+      "entity": "Australia",
+      "secondary_hub_depth_ratio": 1.523536
+    },
+    {
+      "entity": "China",
+      "secondary_hub_depth_ratio": 1.455262
+    },
+    {
+      "entity": "India",
+      "secondary_hub_depth_ratio": 1.418963
+    },
+    {
+      "entity": "Poland",
+      "secondary_hub_depth_ratio": 1.367403
+    },
+    {
+      "entity": "Spain",
+      "secondary_hub_depth_ratio": 1.102492
+    },
+    {
+      "entity": "Belgium",
+      "secondary_hub_depth_ratio": 1.090493
+    },
+    {
+      "entity": "United States",
+      "secondary_hub_depth_ratio": 0.90017
+    },
+    {
+      "entity": "New Zealand",
+      "secondary_hub_depth_ratio": 0.83247
+    },
+    {
+      "entity": "Italy",
+      "secondary_hub_depth_ratio": 0.803842
+    },
+    {
+      "entity": "Germany",
+      "secondary_hub_depth_ratio": 0.779777
+    }
+  ],
+  "value_field": "secondary_hub_depth_ratio",
+  "x_label": "sum(score ranks 2-5) / score(rank 1)",
+  "y_label": "Country"
+}

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <title>mrk 格雷厄姆“烟蒂股”净值（NNWC）2016–2024 走势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f7f7fa;
+      color: #222;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+    h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Key fix: constrain the aspect ratio with a fixed-height container
+       and let Chart.js keep its aspect ratio. */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      height: 400px;          /* Fixed reasonable height to avoid extreme stretching */
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem 1.5rem 1.5rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+      box-sizing: border-box;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important; /* Fill the container with controlled height */
+    }
+
+    .footnote {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 0.75rem;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      .chart-container {
+        height: 320px; /* slightly smaller on phones but still readable */
+        padding: 0.75rem 1rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>mrk 格雷厄姆“烟蒂股”净值（NNWC）走势</h1>
+    <h2>按年度每股 NNWC 变化（2016–2024）</h2>
+
+    <div class="chart-container">
+      <canvas id="nnwcChart"></canvas>
+    </div>
+
+    <div class="footnote">
+      数据单位：每股 NNWC（与原始数据一致，含负值）。<br />
+      负值表示流动资产扣除负债后为负，绝对值越大代表安全边际越低。
+    </div>
+  </div>
+
+  <script>
+    // 原始数据（来自用户提供的表格）
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const nnwcPerShare = [
+      -8.774668101901687,
+      -10.384643377001456,
+      -11.153415453527437,
+      -11.981782945736434,
+      -15.120031483667848,
+      -14.645784081954297,
+      -10.77104642014162,
+      -14.476639183352964,
+      -12.5745769382133
+    ];
+
+    // 寻找最小与最大值以优化 y 轴范围
+    const minValue = Math.min(...nnwcPerShare);
+    const maxValue = Math.max(...nnwcPerShare);
+
+    // 留出上下边距
+    const padding = 1.5;
+    const suggestedMin = Math.floor(minValue - padding);
+    const suggestedMax = Math.ceil(maxValue + padding);
+
+    const ctx = document.getElementById("nnwcChart").getContext("2d");
+
+    const nnwcChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "每股 NNWC",
+            data: nnwcPerShare,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            borderWidth: 2,
+            pointRadius: 3.5,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#2563eb",
+            pointBorderWidth: 1,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // we control size via CSS container
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        layout: {
+          padding: {
+            top: 10,
+            right: 16,
+            bottom: 10,
+            left: 4
+          }
+        },
+        plugins: {
+          title: {
+            display: false
+          },
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 6,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return "每股 NNWC: " + value.toFixed(3);
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              color: "#374151",
+              font: {
+                weight: "500",
+                size: 12
+              }
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              minRotation: 0,
+              font: {
+                size: 11
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "每股 NNWC（可能为负）",
+              color: "#374151",
+              font: {
+                weight: "500",
+                size: 12
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            ticks: {
+              font: {
+                size: 11
+              },
+              callback: function (value) {
+                return value.toFixed(0);
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // 简单交互：点击图表高亮最近一年
+    document.getElementById("nnwcChart").onclick = function () {
+      const lastIndex = nnwcPerShare.length - 1;
+      nnwcChart.setActiveElements([
+        {
+          datasetIndex: 0,
+          index: lastIndex
+        }
+      ]);
+      nnwcChart.tooltip.setActiveElements(
+        [
+          {
+            datasetIndex: 0,
+            index: lastIndex
+          }
+        ],
+        { x: 0, y: 0 }
+      );
+      nnwcChart.update();
+    };
+  </script>
+</body>
+</html>

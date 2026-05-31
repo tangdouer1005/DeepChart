@@ -1,0 +1,246 @@
+{
+    "model_order": [
+        "CONCH",
+        "Virchow2",
+        "ProvGigaPath",
+        "DinoSSLPath",
+        "H-optimus-0",
+        "UNI",
+        "Panakeia*",
+        "Virchow",
+        "CTransPath",
+        "Hibou-L",
+        "Hibou-B",
+        "BiomedCLIP",
+        "Kaiko",
+        "Phikon",
+        "PLIP"
+    ],
+    "records": [
+        {
+            "Task Type": "Morphology",
+            "Model": "CONCH",
+            "AUROC": 0.765994
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "CONCH",
+            "AUROC": 0.726168
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "CONCH",
+            "AUROC": 0.631888
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "Virchow2",
+            "AUROC": 0.762773
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "Virchow2",
+            "AUROC": 0.73216
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "Virchow2",
+            "AUROC": 0.606537
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "ProvGigaPath",
+            "AUROC": 0.724233
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "ProvGigaPath",
+            "AUROC": 0.722228
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "ProvGigaPath",
+            "AUROC": 0.587198
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "DinoSSLPath",
+            "AUROC": 0.764277
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "DinoSSLPath",
+            "AUROC": 0.702064
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "DinoSSLPath",
+            "AUROC": 0.602773
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "H-optimus-0",
+            "AUROC": 0.746789
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "H-optimus-0",
+            "AUROC": 0.704686
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "H-optimus-0",
+            "AUROC": 0.585751
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "UNI",
+            "AUROC": 0.735135
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "UNI",
+            "AUROC": 0.712024
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "UNI",
+            "AUROC": 0.572176
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "Panakeia*",
+            "AUROC": 0.730634
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "Panakeia*",
+            "AUROC": 0.706015
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "Panakeia*",
+            "AUROC": 0.586699
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "Virchow",
+            "AUROC": 0.730047
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "Virchow",
+            "AUROC": 0.685068
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "Virchow",
+            "AUROC": 0.587301
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "CTransPath",
+            "AUROC": 0.724566
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "CTransPath",
+            "AUROC": 0.686569
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "CTransPath",
+            "AUROC": 0.577025
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "Hibou-L",
+            "AUROC": 0.729732
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "Hibou-L",
+            "AUROC": 0.685489
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "Hibou-L",
+            "AUROC": 0.575429
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "Hibou-B",
+            "AUROC": 0.727391
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "Hibou-B",
+            "AUROC": 0.684032
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "Hibou-B",
+            "AUROC": 0.57008
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "BiomedCLIP",
+            "AUROC": 0.733166
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "BiomedCLIP",
+            "AUROC": 0.667362
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "BiomedCLIP",
+            "AUROC": 0.605194
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "Kaiko",
+            "AUROC": 0.707349
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "Kaiko",
+            "AUROC": 0.680724
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "Kaiko",
+            "AUROC": 0.55439
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "Phikon",
+            "AUROC": 0.698691
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "Phikon",
+            "AUROC": 0.665523
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "Phikon",
+            "AUROC": 0.589755
+        },
+        {
+            "Task Type": "Morphology",
+            "Model": "PLIP",
+            "AUROC": 0.698386
+        },
+        {
+            "Task Type": "Biomarker",
+            "Model": "PLIP",
+            "AUROC": 0.651622
+        },
+        {
+            "Task Type": "Prognosis",
+            "Model": "PLIP",
+            "AUROC": 0.567466
+        }
+    ]
+}

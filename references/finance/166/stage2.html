@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>mrk 现金消耗跑道 (零收入情景) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2933;
+      --grid: #d2d6dc;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1120;
+        --fg: #e5e7eb;
+        --grid: #374151;
+        --accent: #60a5fa;
+        --accent-hover: #3b82f6;
+        --accent-soft: rgba(96, 165, 250, 0.18);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      background: radial-gradient(circle at top left, #eff6ff 0, #f9fafb 40%, var(--bg) 100%);
+      color: var(--fg);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 20px 20px 16px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(148, 163, 184, 0.25);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .container {
+        background: rgba(15, 23, 42, 0.92);
+      }
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 0.82rem;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+
+    button.toggle {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 4px 10px;
+      background: rgba(249, 250, 251, 0.9);
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: var(--fg);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.05s ease;
+    }
+
+    button.toggle span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    button.toggle:hover {
+      background: #eef2ff;
+      box-shadow: 0 4px 12px rgba(148, 163, 184, 0.4);
+      transform: translateY(-1px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      button.toggle {
+        background: #020617;
+        border-color: #4b5563;
+      }
+      button.toggle:hover {
+        background: #020617;
+      }
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      margin-top: 12px;
+      height: 420px; /* explicit height so data is clearly visible */
+    }
+
+    .footer {
+      margin-top: 8px;
+      font-size: 0.7rem;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .footer {
+        color: #6b7280;
+      }
+    }
+
+    .stat-pill {
+      font-size: 0.75rem;
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stat-pill strong {
+      font-weight: 600;
+    }
+
+    .pill-badge {
+      height: 6px;
+      width: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>mrk 现金消耗跑道（月） · 零收入情景</h1>
+        <div class="subtitle">2016–2024 财年 · 单位：月（Runway in Months）</div>
+      </div>
+      <div class="controls">
+        <button class="toggle" id="chartTypeToggle" type="button">
+          <span class="dot"></span>
+          切换柱状 / 折线
+        </button>
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="runwayChart"></canvas>
+    </div>
+
+    <div class="footer">
+      <div class="stat-pill" id="statSummary">
+        <span class="pill-badge"></span>
+        <span>
+          <strong>2016：</strong><span id="firstVal"></span> 月，
+          <strong>2024：</strong><span id="lastVal"></span> 月
+        </span>
+      </div>
+      <div>数据来源：用户提供的 mrk 零收入情景下现金消耗跑道（月度估算）</div>
+    </div>
+  </div>
+
+  <script>
+    // Raw data from the user (exact)
+    const rawData = [
+      { year: 2016, months: 6.974752431082166 },
+      { year: 2017, months: 6.448266737232072 },
+      { year: 2018, months: 5.159235668789809 },
+      { year: 2019, months: 6.006207324643079 },
+      { year: 2020, months: 4.600657236748106 },
+      { year: 2021, months: 4.749779994133177 },
+      { year: 2022, months: 6.930615587606352 },
+      { year: 2023, months: 2.0909299304653475 },
+      { year: 2024, months: 5.9052361663384 },
+    ];
+
+    // Populate summary
+    document.getElementById("firstVal").textContent = rawData[0].months.toFixed(2);
+    document.getElementById("lastVal").textContent =
+      rawData[rawData.length - 1].months.toFixed(2);
+
+    const labels = rawData.map(d => d.year.toString());
+    const dataValues = rawData.map(d => d.months);
+
+    const ctx = document.getElementById("runwayChart").getContext("2d");
+
+    let currentType = "bar";
+
+    // Common options – explicitly make y scale linear and auto-fit data
+    const baseOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "nearest",
+        intersect: false
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              const v = context.raw;
+              return `  ${v.toFixed(2)} 个月`;
+            },
+            title: function (items) {
+              const item = items[0];
+              return `财年 ${item.label}`;
+            }
+          },
+          padding: 10,
+          backgroundColor: "rgba(15,23,42,0.92)",
+          borderColor: "rgba(148,163,184,0.8)",
+          borderWidth: 1,
+          titleFont: { weight: "600", size: 13 },
+          bodyFont: { size: 12 },
+          displayColors: false
+        },
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          type: "category",
+          grid: {
+            display: false
+          },
+          ticks: {
+            maxRotation: 0,
+            minRotation: 0
+          }
+        },
+        y: {
+          type: "linear",
+          beginAtZero: true,
+          // Let Chart.js compute sensible max based on data;
+          // we just ensure it auto-fits by not forcing a tiny max.
+          ticks: {
+            // reasonable step size near ‘months’ values (≈0–8)
+            stepSize: 1
+          },
+          title: {
+            display: true,
+            text: "现金消耗跑道（月）",
+            font: { weight: "600" }
+          },
+          grid: {
+            color: function(ctx) {
+              return ctx.tick.value === 0
+                ? "rgba(148, 163, 184, 0.7)"
+                : "rgba(209, 213, 219, 0.35)";
+            }
+          }
+        }
+      }
+    };
+
+    const datasetCommon = {
+      label: "现金消耗跑道（月，零收入情景）",
+      data: dataValues
+    };
+
+    function makeBarDataset() {
+      return {
+        ...datasetCommon,
+        type: "bar",
+        backgroundColor: labels.map(year =>
+          year === "2023" ? "rgba(220, 38, 38, 0.85)" : "rgba(37, 99, 235, 0.8)"
+        ),
+        hoverBackgroundColor: labels.map(year =>
+          year === "2023" ? "rgba(185, 28, 28, 0.9)" : "rgba(37, 99, 235, 0.95)"
+        ),
+        borderRadius: 6,
+        borderSkipped: false
+      };
+    }
+
+    function makeLineDataset() {
+      return {
+        ...datasetCommon,
+        type: "line",
+        borderColor: "rgba(37, 99, 235, 0.95)",
+        backgroundColor: "rgba(37, 99, 235, 0.22)",
+        tension: 0.22,
+        fill: true,
+        pointRadius: function(ctx) {
+          const index = ctx.dataIndex;
+          return labels[index] === "2023" ? 5 : 3;
+        },
+        pointHoverRadius: 6,
+        pointBackgroundColor: function(ctx) {
+          const index = ctx.dataIndex;
+          return labels[index] === "2023"
+            ? "rgba(220,38,38,0.95)"
+            : "rgba(37,99,235,1)";
+        },
+        pointBorderWidth: 1,
+        pointBorderColor: "#ffffff"
+      };
+    }
+
+    // Initial chart (bar)
+    let runwayChart = new Chart(ctx, {
+      type: currentType,
+      data: {
+        labels,
+        datasets: [makeBarDataset()]
+      },
+      options: baseOptions
+    });
+
+    // Toggle between bar and line
+    document.getElementById("chartTypeToggle").addEventListener("click", () => {
+      currentType = currentType === "bar" ? "line" : "bar";
+      runwayChart.destroy();
+      runwayChart = new Chart(ctx, {
+        type: currentType,
+        data: {
+          labels,
+          datasets: [currentType === "bar" ? makeBarDataset() : makeLineDataset()]
+        },
+        options: baseOptions
+      });
+    });
+  </script>
+</body>
+</html>

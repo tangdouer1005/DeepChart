@@ -1,0 +1,62 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a ranked horizontal bar chart comparing all 11 main industries by `tail-depth ratio`, defined as `the sum of scores for ranks 6-10 divided by the sum of scores for ranks 1-5` within each main industry, with values shown as percentages, using only pages 15-25, and sort the industries from highest to lowest after the ratio is derived.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by tail_depth_ratio_percent, ties by industry",
+  "selection_rule": "all 11 main industries",
+  "plot_spec": {
+    "title": "Main Industry Tail-Depth Ratio",
+    "xlabel": "Percent (ranks 6-10 / ranks 1-5)",
+    "ylabel": "Main industry",
+    "value_field": "tail_depth_ratio_percent",
+    "label_suffix": "%",
+    "label_decimals": 1
+  },
+  "records": [
+    {
+      "entity": "Healthtech",
+      "tail_depth_ratio_percent": 62.9517
+    },
+    {
+      "entity": "Energy & Environment",
+      "tail_depth_ratio_percent": 49.1982
+    },
+    {
+      "entity": "Ecommerce & Retail",
+      "tail_depth_ratio_percent": 38.1644
+    },
+    {
+      "entity": "Foodtech",
+      "tail_depth_ratio_percent": 34.5001
+    },
+    {
+      "entity": "Transportation",
+      "tail_depth_ratio_percent": 31.1563
+    },
+    {
+      "entity": "Fintech",
+      "tail_depth_ratio_percent": 31.0666
+    },
+    {
+      "entity": "Hardware & IoT",
+      "tail_depth_ratio_percent": 21.1864
+    },
+    {
+      "entity": "Software & Data",
+      "tail_depth_ratio_percent": 11.6509
+    },
+    {
+      "entity": "Social & Leisure",
+      "tail_depth_ratio_percent": 8.75
+    },
+    {
+      "entity": "Edtech",
+      "tail_depth_ratio_percent": 0.0
+    },
+    {
+      "entity": "Marketing & Sales",
+      "tail_depth_ratio_percent": 0.0
+    }
+  ]
+}

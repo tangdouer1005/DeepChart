@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta 奥特曼破产预测模型 (Altman Z-Score) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #ffffff;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+
+    .chart-container {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px 20px 24px;
+      border-radius: 12px;
+      background: #fafafa;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+
+      /* Fixed, sane aspect ratio via height */
+      height: 420px;
+    }
+
+    canvas {
+      /* Let Chart.js control the drawing area within container */
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .footer-note {
+      max-width: 900px;
+      margin: 8px auto 0;
+      font-size: 12px;
+      color: #777;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .chart-container {
+        padding: 12px;
+        height: 320px; /* Slightly shorter but still readable */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>Meta 奥特曼破产预测模型 (Altman Z-Score)</h1>
+    <h2>2016–2024 财年变化（柱状图）</h2>
+    <canvas id="altmanZChart"></canvas>
+  </div>
+
+  <div class="footer-note">
+    说明：Altman Z-Score 数值越高，通常意味着财务破产风险越低；数值下降表示财务风险相对上升。本图基于用户提供的 2016–2024 财年 Z-Score 数据绘制。
+  </div>
+
+  <script>
+    const ctx = document.getElementById('altmanZChart').getContext('2d');
+
+    const years = [
+      '2016', '2017', '2018', '2019',
+      '2020', '2021', '2022', '2023', '2024'
+    ];
+
+    const zScores = [
+      8.26468714057128,
+      6.852032555196057,
+      6.379922916297005,
+      4.04438747282325,
+      4.834067907880158,
+      4.38022491379083,
+      3.097551335325865,
+      3.2408635998043285,
+      3.4070346259751405
+    ];
+
+    const baseColor = 'rgba(54, 162, 235, 0.8)';
+    const baseBorder = 'rgba(54, 162, 235, 1)';
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [{
+          label: 'Altman Z-Score',
+          data: zScores,
+          borderWidth: 1.5,
+          backgroundColor: baseColor,
+          borderColor: baseBorder,
+          borderRadius: 6,
+          hoverBackgroundColor: 'rgba(54, 162, 235, 1)',
+          hoverBorderColor: 'rgba(30, 120, 200, 1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // We control aspect via CSS container
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 18,
+              boxHeight: 18,
+              padding: 16
+            }
+          },
+          title: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            mode: 'index',
+            intersect: false,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return ' Altman Z-Score: ' + value.toFixed(3);
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Fiscal Year',
+              font: {
+                size: 12,
+                weight: '500'
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Altman Z-Score',
+              font: {
+                size: 12,
+                weight: '500'
+              }
+            },
+            beginAtZero: false,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            },
+            ticks: {
+              precision: 1,
+              font: {
+                size: 11
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>GE 奥特曼 Z-Score（2016–2024）柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --text-main: #1f2933;
+      --text-muted: #6b778d;
+      --bar: #2563eb;
+      --bar-hover: #1d4ed8;
+      --danger: #dc2626;
+      --warning: #f59e0b;
+      --safe: #059669;
+      --grid: rgba(148, 163, 184, 0.25);
+      --border: #d0d7e2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --card-bg: #020617;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --bar: #38bdf8;
+        --bar-hover: #0ea5e9;
+        --grid: rgba(148, 163, 184, 0.35);
+        --border: #1f2937;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: radial-gradient(circle at top left, #e0f2fe 0, #f5f7fa 50%, #eef2ff 100%);
+      background-attachment: fixed;
+      color: var(--text-main);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      max-width: 960px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.18),
+        0 1px 0 rgba(148, 163, 184, 0.4);
+      padding: 20px 24px 24px;
+      box-sizing: border-box;
+      border: 1px solid var(--border);
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .title-block {
+      min-width: 0;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 650;
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background-color: rgba(148, 163, 184, 0.06);
+      backdrop-filter: blur(6px);
+    }
+
+    .legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+    }
+
+    .legend-label {
+      white-space: nowrap;
+    }
+
+    .threshold-line {
+      border-bottom: 1px dashed #9ca3af;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: min(460px, 70vh);
+      margin-top: 12px;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .footer-note span {
+      white-space: nowrap;
+    }
+
+    .badge {
+      padding: 1px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 16px 14px 18px;
+        border-radius: 14px;
+      }
+      h1 {
+        font-size: 17px;
+      }
+      .subtitle {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="card">
+    <div class="header">
+      <div class="title-block">
+        <h1>GE 奥特曼破产预测模型 (Altman Z-Score) 2016–2024</h1>
+        <div class="subtitle">
+          柱状图展示 2016–2024 年 GE 的 Z-Score 变化（数值来源于给定数据）
+        </div>
+      </div>
+      <div class="legend" aria-hidden="true">
+        <div class="legend-item">
+          <span class="legend-color" style="background: var(--bar);"></span>
+          <span class="legend-label">年度 Z-Score</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color threshold-line" style="background: transparent;"></span>
+          <span class="legend-label">1.8：困境阈值</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color threshold-line" style="background: transparent;"></span>
+          <span class="legend-label">3.0：安全阈值</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="zscoreChart" aria-label="GE Altman Z-Score Bar Chart 2016-2024" role="img"></canvas>
+    </div>
+
+    <div class="footer-note">
+      <span>区间：2016–2024 财年</span>
+      <span class="badge">Altman Z-Score</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Data from source
+  const labels = [
+    "2016", "2017", "2018", "2019", "2020",
+    "2021", "2022", "2023", "2024"
+  ];
+
+  const zScores = [
+    1.2004696151179748,
+    0.8530227702840858,
+    0.9059671818201912,
+    1.0964149220426171,
+    1.0445023294768303,
+    1.1414408121223127,
+    1.241244009199146,
+    1.1598825303183968,
+    1.5213888393844202
+  ];
+
+  // Color by risk zone (classic Altman Z thresholds)
+  // Z < 1.8: Distress; 1.8–3.0: Grey; >3.0: Safe
+  function getBarColor(z) {
+    if (z < 1.8) return "rgba(220, 38, 38, 0.85)";      // red-ish (distress zone)
+    if (z < 3.0) return "rgba(245, 158, 11, 0.85)";    // amber (grey zone)
+    return "rgba(5, 150, 105, 0.9)";                   // green (safe zone)
+  }
+
+  const barColors = zScores.map(getBarColor);
+  const barHoverColors = zScores.map(z => {
+    if (z < 1.8) return "rgba(220, 38, 38, 1)";
+    if (z < 3.0) return "rgba(245, 158, 11, 1)";
+    return "rgba(5, 150, 105, 1)";
+  });
+
+  const ctx = document.getElementById("zscoreChart").getContext("2d");
+
+  const zscoreChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        {
+          type: "bar",
+          label: "Z-Score",
+          data: zScores,
+          backgroundColor: barColors,
+          hoverBackgroundColor: barHoverColors,
+          borderRadius: 6,
+          maxBarThickness: 40,
+        },
+        // Threshold lines as overlayed datasets
+        {
+          type: "line",
+          label: "困境阈值 (1.8)",
+          data: labels.map(() => 1.8),
+          borderColor: "rgba(148, 163, 184, 0.75)",
+          borderWidth: 1.2,
+          borderDash: [4, 4],
+          pointRadius: 0,
+          pointHitRadius: 0,
+          fill: false,
+        },
+        {
+          type: "line",
+          label: "安全阈值 (3.0)",
+          data: labels.map(() => 3.0),
+          borderColor: "rgba(148, 163, 184, 0.6)",
+          borderWidth: 1.2,
+          borderDash: [4, 4],
+          pointRadius: 0,
+          pointHitRadius: 0,
+          fill: false,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            usePointStyle: true,
+            padding: 16,
+            filter: (item) =>
+              item.text === "Z-Score" ||
+              item.text.includes("阈值"),
+          }
+        },
+        tooltip: {
+          backgroundColor: "rgba(15, 23, 42, 0.92)",
+          borderColor: "rgba(148, 163, 184, 0.6)",
+          borderWidth: 1,
+          padding: 10,
+          displayColors: true,
+          callbacks: {
+            label: function (context) {
+              if (context.dataset.type === "line") {
+                return context.dataset.label;
+              }
+              const value = context.raw;
+              let zone = "安全区";
+              if (value < 1.8) zone = "困境区";
+              else if (value < 3.0) zone = "灰色区";
+              return ` Z-Score: ${value.toFixed(3)} (${zone})`;
+            }
+          }
+        },
+        title: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+          ticks: {
+            color: "var(--text-main)",
+          }
+        },
+        y: {
+          beginAtZero: true,
+          suggestedMax: 3.5,
+          grid: {
+            color: "var(--grid)",
+          },
+          ticks: {
+            color: "var(--text-main)",
+            callback: (value) => value.toFixed(1)
+          },
+          title: {
+            display: true,
+            text: "Altman Z-Score",
+            color: "var(--text-muted)",
+            font: {
+              size: 11,
+              weight: "normal"
+            }
+          }
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

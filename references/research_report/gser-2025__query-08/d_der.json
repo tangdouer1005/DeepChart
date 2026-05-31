@@ -1,0 +1,55 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a horizontal bar chart for the top 10 ecosystems by `growth-adjusted venture efficiency`, defined as `(Total VC Funding / Total Early-Stage Funding) * (1 + Ecosystem Value Growth%)`, using 2025 card values with the plotted value expressed as an `adjusted multiple`, sorted descending after derivation, and excluding ecosystems with negative growth below `-30%` to avoid extreme penalty outliers.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "adjusted multiple",
+  "sort_rule": "descending by growth_adjusted_venture_efficiency",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "2025 Growth-Adjusted Venture Efficiency",
+    "xlabel": "adjusted multiple",
+    "value_field": "growth_adjusted_venture_efficiency"
+  },
+  "records": [
+    {
+      "entity": "Malta",
+      "growth_adjusted_venture_efficiency": 16.8187
+    },
+    {
+      "entity": "Porto",
+      "growth_adjusted_venture_efficiency": 16.062
+    },
+    {
+      "entity": "Bengaluru-Karnataka",
+      "growth_adjusted_venture_efficiency": 15.7182
+    },
+    {
+      "entity": "Sharjah",
+      "growth_adjusted_venture_efficiency": 12.8449
+    },
+    {
+      "entity": "Los Angeles",
+      "growth_adjusted_venture_efficiency": 12.3759
+    },
+    {
+      "entity": "Manila",
+      "growth_adjusted_venture_efficiency": 12.0896
+    },
+    {
+      "entity": "Beijing",
+      "growth_adjusted_venture_efficiency": 11.7333
+    },
+    {
+      "entity": "Shanghai",
+      "growth_adjusted_venture_efficiency": 11.4706
+    },
+    {
+      "entity": "Tel Aviv",
+      "growth_adjusted_venture_efficiency": 11.3905
+    },
+    {
+      "entity": "Valencia",
+      "growth_adjusted_venture_efficiency": 10.9516
+    }
+  ]
+}

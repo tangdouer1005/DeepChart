@@ -1,0 +1,81 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2019,
+            "Avg Receivables": 3246483000.0,
+            "Revenue": 20156447000,
+            "Avg Inventory": 179916000.0,
+            "Cost of Revenue": 12440213000,
+            "Avg Payables": 618666000.0,
+            "DSO": 58.788450911016206,
+            "DIO": 5.278795467569567,
+            "DPO": 18.151866853083625
+        },
+        {
+            "Fiscal Year": 2020,
+            "Avg Receivables": 794943500.0,
+            "Revenue": 24996056000,
+            "Avg Inventory": 192020500.0,
+            "Cost of Revenue": 15276319000,
+            "Avg Payables": 665265000.0,
+            "DSO": 11.608006379086364,
+            "DIO": 4.587982386332729,
+            "DPO": 15.895303377731247
+        },
+        {
+            "Fiscal Year": 2021,
+            "Avg Receivables": 707569500.0,
+            "Revenue": 29697844000,
+            "Avg Inventory": 263430000.0,
+            "Cost of Revenue": 17332683000,
+            "Avg Payables": 746833000.0,
+            "DSO": 8.696350735090398,
+            "DIO": 5.547436020147602,
+            "DPO": 15.727169590535985
+        },
+        {
+            "Fiscal Year": 2022,
+            "Avg Receivables": 1195609000.0,
+            "Revenue": 31615550000,
+            "Avg Inventory": 358276500.0,
+            "Cost of Revenue": 19168285000,
+            "Avg Payables": 754498000.0,
+            "DSO": 13.803248243348603,
+            "DIO": 6.822254703537641,
+            "DPO": 14.367053181857427
+        },
+        {
+            "Fiscal Year": 2023,
+            "Avg Receivables": 1714476000.0,
+            "Revenue": 33723297000,
+            "Avg Inventory": 400835500.0,
+            "Cost of Revenue": 19715368000,
+            "Avg Payables": 709462500.0,
+            "DSO": 18.55642228575693,
+            "DIO": 7.420858565764534,
+            "DPO": 13.134617243766384
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2019.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": 45.91537952550215
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": 0.3006853876878477
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": -1.4833828352979825
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": 6.2584497650288196
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": 12.842663607755082
+        }
+    ]
+}

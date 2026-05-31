@@ -1,0 +1,66 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "Dividends": 0.0,
+            "Net Income": 19478000000.0,
+            "Avg Total Assets": 157479000000.0,
+            "ROA(Avg)": 0.1236863327808787,
+            "Retention Ratio": 1.0
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "Dividends": 0.0,
+            "Net Income": 12662000000.0,
+            "Avg Total Assets": 182396000000.0,
+            "ROA(Avg)": 0.0694203820259216,
+            "Retention Ratio": 1.0
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Dividends": 0.0,
+            "Net Income": 59972000000.0,
+            "Avg Total Assets": 362266000000.0,
+            "ROA(Avg)": 0.1655468633545516,
+            "Retention Ratio": 1.0
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Dividends": 0.0,
+            "Net Income": 73795000000.0,
+            "Avg Total Assets": 383828000000.0,
+            "ROA(Avg)": 0.1922605958919099,
+            "Retention Ratio": 1.0
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "Dividends": 7363000000.0,
+            "Net Income": 100118000000.0,
+            "Avg Total Assets": 426324000000.0,
+            "ROA(Avg)": 0.2348401685103348,
+            "Retention Ratio": 0.926456780998422
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.14114390475431338
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.07459907855821461
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.19838964716468074
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.23802304915928305
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.2780684056372145
+        }
+    ]
+}

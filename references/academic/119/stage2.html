@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 500px; height: 450px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const pt_data = [
+    [
+        0.06784,
+        0.0802
+    ],
+    [
+        0.0908,
+        0.0968
+    ],
+    [
+        0.0579,
+        0.0871
+    ],
+    [
+        0.0372,
+        0.0682
+    ],
+    [
+        0.1016,
+        0.1147
+    ],
+    [
+        0.0,
+        0.0646
+    ],
+    [
+        0.0271,
+        0.1423
+    ],
+    [
+        0.0918,
+        0.1262
+    ],
+    [
+        0.0,
+        0.1117
+    ],
+    [
+        0.0,
+        0.1265
+    ],
+    [
+        0.0462,
+        0.0877
+    ],
+    [
+        0.0296,
+        0.0962
+    ],
+    [
+        0.0508,
+        0.1131
+    ],
+    [
+        0.0577,
+        0.0
+    ],
+    [
+        0.0206,
+        0.0587
+    ],
+    [
+        0.1052,
+        0.0995
+    ],
+    [
+        0.0421,
+        0.1306
+    ],
+    [
+        0.0481,
+        0.1284
+    ],
+    [
+        0.0458,
+        0.0823
+    ],
+    [
+        0.0268,
+        0.1239
+    ],
+    [
+        0.0837,
+        0.0969
+    ],
+    [
+        0.0445,
+        0.1038
+    ],
+    [
+        0.0547,
+        0.0749
+    ],
+    [
+        0.0391,
+        0.0746
+    ],
+    [
+        0.0763,
+        0.1051
+    ]
+];
+
+        const ln_data = [
+    [
+        0.0897,
+        0.0769
+    ],
+    [
+        0.0488,
+        0.105
+    ],
+    [
+        0.0082,
+        0.1191
+    ],
+    [
+        0.0635,
+        0.1346
+    ],
+    [
+        0.0197,
+        0.1102
+    ],
+    [
+        0.0041,
+        0.0744
+    ],
+    [
+        0.0757,
+        0.0942
+    ],
+    [
+        0.0758,
+        0.0956
+    ],
+    [
+        0.0702,
+        0.1068
+    ],
+    [
+        0.0735,
+        0.1209
+    ],
+    [
+        0.0378,
+        0.1431
+    ],
+    [
+        0.0,
+        0.0961
+    ],
+    [
+        0.0794,
+        0.0986
+    ],
+    [
+        0.1062,
+        0.049
+    ],
+    [
+        0.0652,
+        0.0947
+    ],
+    [
+        0.086,
+        0.1197
+    ],
+    [
+        0.0657,
+        0.1331
+    ],
+    [
+        0.0837,
+        0.0809
+    ],
+    [
+        0.1191,
+        0.0849
+    ],
+    [
+        0.0317,
+        0.1076
+    ],
+    [
+        0.0584,
+        0.0366
+    ],
+    [
+        0.0662,
+        0.1132
+    ]
+];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        echarts.registerTransform(ecStat.transform.regression);
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 60, right: 150, bottom: 60, left: 80 },
+            xAxis: {
+                name: 'GPX4 protein levels (a.u)',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: 0, max: 0.12,
+                interval: 0.05,
+                axisLabel: { color: 'black', fontWeight: 'bold' },
+                axisLine: { show: true, lineStyle: { color: 'black', width: 2 } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: 'FSP1 protein levels (a.u)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                type: 'value',
+                min: 0, max: 0.15,
+                interval: 0.05,
+                axisLabel: { color: 'black', fontWeight: 'bold' },
+                axisLine: { show: true, lineStyle: { color: 'black', width: 2 } },
+                splitLine: { show: false }
+            },
+            dataset: [
+                { source: pt_data },
+                { source: ln_data },
+                { transform: { type: 'ecStat:regression', config: { method: 'linear' } }, fromDatasetIndex: 0 },
+                { transform: { type: 'ecStat:regression', config: { method: 'linear' } }, fromDatasetIndex: 1 }
+            ],
+            series: [
+                {
+                    name: 'Primary',
+                    type: 'scatter',
+                    datasetIndex: 0,
+                    itemStyle: { borderColor: '#888888', borderWidth: 2, color: 'white' },
+                    symbolSize: 8
+                },
+                {
+                    name: 'Metastasis',
+                    type: 'scatter',
+                    datasetIndex: 1,
+                    itemStyle: { borderColor: '#55a630', borderWidth: 2, color: 'white' },
+                    symbolSize: 8
+                },
+                {
+                    name: 'Primary Line',
+                    type: 'line',
+                    datasetIndex: 2,
+                    symbol: 'none',
+                    lineStyle: { color: '#888888', width: 3 }
+                },
+                {
+                    name: 'Metastasis Line',
+                    type: 'line',
+                    datasetIndex: 3,
+                    symbol: 'none',
+                    lineStyle: { color: '#55a630', width: 3 }
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 's', font: 'bold 24px Arial' } },
+                // Box
+                {
+                    type: 'group',
+                    right: 10,
+                    top: 100,
+                    children: [
+                        {
+                            type: 'rect',
+                            shape: { width: 130, height: 100 },
+                            style: { stroke: 'black', lineWidth: 2, fill: 'none' }
+                        },
+                        {
+                            type: 'text',
+                            style: {
+                                text: 'Pearson= 0.0225\nSpearman= 0.03695',
+                                x: 10, y: 20,
+                                font: 'bold 12px Arial', fill: '#888888'
+                            }
+                        },
+                        {
+                            type: 'text',
+                            style: {
+                                text: 'Pearson= -0.2406\nSpearman= -0.2829',
+                                x: 10, y: 60,
+                                font: 'bold 12px Arial', fill: '#55a630'
+                            }
+                        }
+                    ]
+                },
+                // Legend
+                {
+                    type: 'text',
+                    right: 10, bottom: 80,
+                    style: { text: 'Melanoma\nPrimary tumors', font: 'bold 12px Arial', fill: '#888888', textAlign: 'right' }
+                },
+                {
+                    type: 'text',
+                    right: 10, bottom: 50,
+                    style: { text: 'Melanoma\nLN metastasis', font: 'bold 12px Arial', fill: '#55a630', textAlign: 'right' }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

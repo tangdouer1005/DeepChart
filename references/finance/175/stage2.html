@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>MSFT 格雷厄姆“烟蒂股”净值 (NNWC) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 20px 22px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    }
+    canvas {
+      max-width: 100%;
+      height: 420px !important;
+    }
+    .chart-footer {
+      font-size: 11px;
+      color: #777;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>MSFT 格雷厄姆“烟蒂股”净值 (NNWC) 每股</h1>
+    <h2>2016–2024 财年变化（单位：美元/股）</h2>
+    <canvas id="nnwcChart"></canvas>
+    <div class="chart-footer">
+      数据：用户提供的 Microsoft NNWC 每股估算值（RESULT_NNWC_Per_Share）。<br />
+      提示：柱状颜色区分正值（蓝色）与负值（红色）；可将鼠标移到柱上查看具体数值。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Data from source
+    const fiscalYears = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const nnwcPerShare = [
+      2.2417321851990515,
+      -1.1288304392236976,
+      -0.829869130100077,
+      -1.1187927253966206,
+      -0.1421319796954314,
+      -0.970688748685594,
+      -3.794960212201592,
+      -2.876873661670236,
+      -11.240058910162002
+    ];
+
+    // Colors: blue for positive, red for negative
+    const positiveColor = "rgba(54, 162, 235, 0.8)";
+    const negativeColor = "rgba(235, 99, 132, 0.8)";
+    const positiveBorder = "rgba(54, 162, 235, 1)";
+    const negativeBorder = "rgba(235, 99, 132, 1)";
+
+    const barBackgroundColors = nnwcPerShare.map(v =>
+      v >= 0 ? positiveColor : negativeColor
+    );
+    const barBorderColors = nnwcPerShare.map(v =>
+      v >= 0 ? positiveBorder : negativeBorder
+    );
+
+    const ctx = document.getElementById("nnwcChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "NNWC 每股 (美元)",
+            data: nnwcPerShare,
+            backgroundColor: barBackgroundColors,
+            borderColor: barBorderColors,
+            borderWidth: 1.2,
+            borderRadius: 4,
+            hoverBackgroundColor: nnwcPerShare.map(v =>
+              v >= 0 ? "rgba(54, 162, 235, 1)" : "rgba(235, 99, 132, 1)"
+            ),
+            hoverBorderColor: nnwcPerShare.map(v =>
+              v >= 0 ? "rgba(54, 162, 235, 1)" : "rgba(235, 99, 132, 1)"
+            )
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 10,
+            right: 10,
+            bottom: 0,
+            left: 0
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: (context) => {
+                const value = context.parsed.y;
+                return " NNWC 每股: " + value.toFixed(3) + " 美元";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "NNWC 每股 (美元)",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            grid: {
+              color: "rgba(0, 0, 0, 0.06)"
+            },
+            ticks: {
+              callback: (value) => value.toFixed ? value.toFixed(1) : value
+            }
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        animation: {
+          duration: 900,
+          easing: "easeOutQuart"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

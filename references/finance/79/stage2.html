@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CVX Altman Z-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f7f7f9;
+      color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      padding: 24px 16px 40px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 4px;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 16px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px 16px 8px;
+      box-sizing: border-box;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
+
+    canvas {
+      max-height: 480px;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #0f172a;
+        color: #e5e7eb;
+      }
+      .chart-wrapper {
+        background: #111827;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+      }
+      h2 {
+        color: #9ca3af;
+      }
+      .note {
+        color: #9ca3af;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CVX 奥特曼破产预测模型 (Altman Z-Score)</h1>
+    <h2>2016–2024 年度变化（Bar Chart）</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="zScoreChart"></canvas>
+    </div>
+
+    <p class="note">
+      说明：Altman Z-Score 通常用于衡量企业的财务健康状况，数值越高，发生财务困境或破产的风险通常越低。
+    </p>
+  </div>
+
+  <!-- Chart.js (latest stable v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Source data (as provided)
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+
+    const zScores = [
+      2.04630720126347,
+      2.386130891879364,
+      2.78832562590807,
+      2.569409511006749,
+      1.9922776281521608,
+      2.882190721085518,
+      3.686195263130206,
+      3.2584724854518625,
+      3.1397450006614367,
+    ];
+
+    // Basic color palette (clean design)
+    const mainColor = "rgba(37, 99, 235, 0.8)"; // blue
+    const hoverColor = "rgba(29, 78, 216, 1)";
+    const borderColor = "rgba(23, 37, 84, 1)";
+
+    const ctx = document.getElementById("zScoreChart").getContext("2d");
+
+    const zScoreChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "Altman Z-Score",
+            data: zScores,
+            backgroundColor: mainColor,
+            borderColor: borderColor,
+            borderWidth: 1.5,
+            hoverBackgroundColor: hoverColor,
+            borderRadius: 8,
+            maxBarThickness: 48,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: true,
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            callbacks: {
+              title: (items) => `Fiscal Year: ${items[0].label}`,
+              label: (item) =>
+                `Altman Z-Score: ${item.raw.toFixed(3)}`,
+            },
+          },
+          title: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+            },
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Altman Z-Score",
+            },
+            beginAtZero: false,
+            suggestedMin: 1.5,
+            suggestedMax: 4.0,
+            ticks: {
+              precision: 1,
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+            },
+          },
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutQuart",
+        },
+      },
+    });
+  </script>
+</body>
+</html>

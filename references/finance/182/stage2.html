@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NFLX Defensive Interval Ratio (DIR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js latest 4.x -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chart.js Zoom Plugin compatible with Chart.js 4 -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.umd.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #f7f8fa;
+      --card-bg: #ffffff;
+      --axis-color: #4b5563;
+      --grid-color: rgba(148, 163, 184, 0.25);
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.12);
+      --text-main: #111827;
+      --text-subtle: #6b7280;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+    body {
+      background: var(--bg-color);
+      color: var(--text-main);
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px 24px 24px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
+    }
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 6px 12px;
+      margin-bottom: 10px;
+    }
+    .title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .subtitle {
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+    }
+    .legend-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      color: var(--text-subtle);
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-swatch {
+      width: 18px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-soft);
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+    .footer-note {
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 4px 10px;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .container {
+        padding: 14px 14px 16px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title">NFLX 防御区间比率 (Defensive Interval Ratio, DIR)</div>
+      <div class="subtitle">Fiscal Years 2016–2024</div>
+    </div>
+
+    <div class="legend-inline">
+      <div class="legend-item">
+        <span class="legend-swatch"></span>
+        <span>DIR (days)</span>
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="dirChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      <span>Interaction: hover for exact values; scroll/drag horizontally to zoom; double‑click to reset.</span>
+      <span>Source: Provided dataset (RESULT_DIR, 2016–2024)</span>
+    </div>
+  </div>
+
+  <script>
+    // Ensure the zoom plugin is registered with Chart.js (required in v4)
+    if (window.Chart && window.ChartZoom) {
+      Chart.register(window.ChartZoom);
+    }
+
+    // Data from the provided table
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const dirValues = [
+      224.32790340315012,
+      239.89339677764045,
+      239.4482717914401,
+      124.71884994655652,
+      157.66064474696125,
+      106.1009112111111,
+      94.59891437843744,
+      122.15574138787522,
+      125.05386019806214
+    ];
+
+    const canvas = document.getElementById("dirChart");
+    const ctx = canvas.getContext("2d");
+
+    // Compute a reasonable y-axis range with padding
+    const minVal = Math.min(...dirValues);
+    const maxVal = Math.max(...dirValues);
+    const padding = (maxVal - minVal) * 0.12;
+    const suggestedMin = Math.max(0, Math.floor(minVal - padding));
+    const suggestedMax = Math.ceil(maxVal + padding);
+
+    const dirChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "Defensive Interval Ratio (DIR)",
+            data: dirValues,
+            fill: false,
+            tension: 0.32,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 1)",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointHitRadius: 8,
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 2,
+            borderWidth: 2.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "#0f172a",
+            titleColor: "#e5e7eb",
+            bodyColor: "#e5e7eb",
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              title: function (items) {
+                const year = items[0].label;
+                return "Fiscal Year " + year;
+              },
+              label: function (item) {
+                const value = item.parsed.y;
+                return "DIR: " + value.toFixed(2) + " days";
+              }
+            }
+          },
+          zoom: {
+            zoom: {
+              wheel: {
+                enabled: true
+              },
+              drag: {
+                enabled: true,
+                borderColor: "rgba(37, 99, 235, 0.5)",
+                borderWidth: 1,
+                backgroundColor: "rgba(191, 219, 254, 0.25)"
+              },
+              mode: "x"
+            },
+            pan: {
+              enabled: true,
+              mode: "x"
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: true,
+              drawBorder: false,
+              color: "rgba(148, 163, 184, 0.2)"
+            },
+            ticks: {
+              color: "#4b5563",
+              padding: 8
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+              drawBorder: false
+            },
+            ticks: {
+              color: "#4b5563",
+              padding: 8,
+              callback: function (value) {
+                return value + " d";
+              }
+            },
+            title: {
+              display: true,
+              text: "DIR (days)",
+              color: "#4b5563",
+              font: {
+                size: 11,
+                weight: "500"
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Double-click to reset zoom
+    canvas.addEventListener("dblclick", function () {
+      if (dirChart && typeof dirChart.resetZoom === "function") {
+        dirChart.resetZoom();
+      }
+    });
+  </script>
+</body>
+</html>

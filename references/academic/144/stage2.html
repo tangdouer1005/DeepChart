@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 500px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = {
+    "data": [
+        {
+            "service_type": "Health Care Services",
+            "state": "AZ",
+            "fairnes_index": 0.0413625,
+            "number_HighAging_CBG": 274,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "CA",
+            "fairnes_index": -0.075969,
+            "number_HighAging_CBG": 215,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "FL",
+            "fairnes_index": 0.146886,
+            "number_HighAging_CBG": 851,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "IL",
+            "fairnes_index": 0.423423,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "MD",
+            "fairnes_index": 0.311111,
+            "number_HighAging_CBG": 40,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "MA",
+            "fairnes_index": -0.105105,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "MI",
+            "fairnes_index": 0.00740741,
+            "number_HighAging_CBG": 30,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "NV",
+            "fairnes_index": 0.255556,
+            "number_HighAging_CBG": 40,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "NJ",
+            "fairnes_index": -0.266055,
+            "number_HighAging_CBG": 109,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "NY",
+            "fairnes_index": 0.0896921,
+            "number_HighAging_CBG": 83,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "OH",
+            "fairnes_index": 0.160494,
+            "number_HighAging_CBG": 36,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "PA",
+            "fairnes_index": 0.106667,
+            "number_HighAging_CBG": 50,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "SC",
+            "fairnes_index": -0.045045,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "TX",
+            "fairnes_index": -0.100529,
+            "number_HighAging_CBG": 63,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "VA",
+            "fairnes_index": 0.117845,
+            "number_HighAging_CBG": 33,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "WA",
+            "fairnes_index": 0.247312,
+            "number_HighAging_CBG": 31,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "AZ",
+            "fairnes_index": -0.0841503,
+            "number_HighAging_CBG": 272,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "CA",
+            "fairnes_index": -0.167186,
+            "number_HighAging_CBG": 214,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "FL",
+            "fairnes_index": 0.12178,
+            "number_HighAging_CBG": 854,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "IL",
+            "fairnes_index": 0.141141,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "MD",
+            "fairnes_index": 0.19883,
+            "number_HighAging_CBG": 38,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "MA",
+            "fairnes_index": -0.117284,
+            "number_HighAging_CBG": 36,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "MI",
+            "fairnes_index": -0.103704,
+            "number_HighAging_CBG": 30,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "NV",
+            "fairnes_index": -0.015873,
+            "number_HighAging_CBG": 42,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "NJ",
+            "fairnes_index": -0.323232,
+            "number_HighAging_CBG": 110,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "NY",
+            "fairnes_index": -0.259259,
+            "number_HighAging_CBG": 84,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "NC",
+            "fairnes_index": -0.25448,
+            "number_HighAging_CBG": 31,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "OH",
+            "fairnes_index": 0.123457,
+            "number_HighAging_CBG": 36,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "PA",
+            "fairnes_index": -0.12854,
+            "number_HighAging_CBG": 51,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "SC",
+            "fairnes_index": 0.00900901,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "TX",
+            "fairnes_index": -0.107584,
+            "number_HighAging_CBG": 63,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "VA",
+            "fairnes_index": 0.0505051,
+            "number_HighAging_CBG": 33,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "WA",
+            "fairnes_index": 0.139785,
+            "number_HighAging_CBG": 31,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "AZ",
+            "fairnes_index": 0.0178427,
+            "number_HighAging_CBG": 274,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "CA",
+            "fairnes_index": -0.00253678,
+            "number_HighAging_CBG": 219,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "FL",
+            "fairnes_index": 0.142783,
+            "number_HighAging_CBG": 856,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "IL",
+            "fairnes_index": 0.171171,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "MD",
+            "fairnes_index": 0.138889,
+            "number_HighAging_CBG": 40,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "MA",
+            "fairnes_index": -0.135135,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "NV",
+            "fairnes_index": 0.0757576,
+            "number_HighAging_CBG": 44,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "NJ",
+            "fairnes_index": -0.232143,
+            "number_HighAging_CBG": 112,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "NY",
+            "fairnes_index": 0.0534979,
+            "number_HighAging_CBG": 81,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "OH",
+            "fairnes_index": 0.117284,
+            "number_HighAging_CBG": 36,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "PA",
+            "fairnes_index": -0.0283224,
+            "number_HighAging_CBG": 51,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "SC",
+            "fairnes_index": -0.0643275,
+            "number_HighAging_CBG": 38,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "TX",
+            "fairnes_index": 0.00529101,
+            "number_HighAging_CBG": 63,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "VA",
+            "fairnes_index": 0.030303,
+            "number_HighAging_CBG": 33,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "WA",
+            "fairnes_index": 0.194444,
+            "number_HighAging_CBG": 32,
+            "service_type_abbr": "HRE"
+        }
+    ],
+    "p_values": {
+        "p_hcs_gfs": 0.037674137986940824,
+        "p_gfs_hre": 0.12102733871022793,
+        "p_hcs_hre": 0.36285087090683965
+    }
+};
+
+        const data = jsonData.data.map(d => ({
+            service: d.service_type,
+            value: d.fairnes_index
+        }));
+        
+        const categories = ['Health Care Services', 'Grocery and Food Supply', 'Housing and Real Estate'];
+        const abbrs = ['HCS', 'GFS', 'HRE'];
+        const colors = ['#90a4c2', '#b0a4c2', '#a4c2b6'];
+
+        // --- KDE and Statistics Helpers ---
+
+        function gaussian(x) {
+            return (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * x * x);
+        }
+        
+        function kde(points, bandwidth) {
+            if (bandwidth <= 0) return [];
+            const min = Math.min(...points);
+            const max = Math.max(...points);
+            const range = max - min;
+            // Pad range to avoid cutting off tails
+            const pad = Math.max(range * 0.5, bandwidth * 3);
+            const step = (range + 2 * pad) / 100;
+            
+            const density = [];
+            for (let t = min - pad; t <= max + pad; t += step) {
+                let sum = 0;
+                points.forEach(p => {
+                    sum += gaussian((t - p) / bandwidth);
+                });
+                const d = sum / (points.length * bandwidth);
+                density.push([t, d]);
+            }
+            return density;
+        }
+
+        function calcBandwidth(arr) {
+            if (arr.length < 2) return 0.1; // Fallback
+            const n = arr.length;
+            const std = jStat.stdev(arr, true);
+            if (!std || std === 0) return 0.1; // Fallback for zero variance
+            return 1.06 * std * Math.pow(n, -1/5);
+        }
+
+        // --- Prepare Data for Chart ---
+
+        const violinData = [];
+        const boxData = [];
+        
+        categories.forEach((cat, i) => {
+            const values = data.filter(d => d.service === cat).map(d => d.value);
+            
+            // 1. Boxplot Data
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            const q1 = jStat.percentile(values, 0.25);
+            const median = jStat.median(values);
+            const q3 = jStat.percentile(values, 0.75);
+            
+            boxData.push([min, q1, median, q3, max]);
+
+            // 2. Violin Data
+            const bw = calcBandwidth(values);
+            const density = kde(values, bw);
+            
+            // Normalize density width
+            let maxD = 0;
+            density.forEach(d => maxD = Math.max(maxD, d[1]));
+            
+            const normalizedDensity = density.map(d => {
+                // d[0] is value (Y-axis), d[1] is density
+                const width = (maxD > 0) ? (d[1] / maxD * 0.4) : 0; // 0.4 relative width
+                return [d[0], width];
+            });
+            
+            violinData.push({
+                categoryIndex: i,
+                density: normalizedDensity
+            });
+        });
+
+        // --- P-values from JSON ---
+        const pValues = [
+            jsonData.p_values.p_hcs_gfs,
+            jsonData.p_values.p_gfs_hre,
+            jsonData.p_values.p_hcs_hre
+        ];
+        
+        const pairs = [[0, 1], [1, 2], [0, 2]];
+        const pairHeights = [0.78, 0.78, 0.98];
+        
+        const sigData = pairs.map((pair, i) => ({
+            x1: pair[0],
+            x2: pair[1],
+            y: pairHeights[i],
+            p: pValues[i]
+        }));
+
+        // --- Chart Configuration ---
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 50, left: 60 },
+            xAxis: {
+                data: abbrs,
+                axisTick: { show: false },
+                axisLine: { show: false },
+                axisLabel: { color: 'black', fontSize: 12 }
+            },
+            yAxis: {
+                name: 'ΔF̄', 
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: -0.55,
+                max: 1.15,
+                interval: 0.4,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black' }
+            },
+            series: [
+                // 1. Violin Plot (Custom Series)
+                {
+                    type: 'custom',
+                    name: 'Violin',
+                    renderItem: function(params, api) {
+                        const categoryIndex = api.value(0);
+                        if (categoryIndex >= violinData.length) return;
+
+                        const dataItem = violinData[categoryIndex];
+                        const density = dataItem.density;
+                        
+                        // Calculate step width in pixels for accurate rendering
+                        // Map category distance (1 unit) to pixels
+                        const p0 = api.coord([0, 0]);
+                        const p1 = api.coord([1, 0]);
+                        const stepPx = Math.abs(p1[0] - p0[0]); 
+
+                        const points = [];
+                        
+                        // Right side
+                        for (let i = 0; i < density.length; i++) {
+                            const val = density[i][0];   // Y value
+                            const widthOffset = density[i][1]; // Data width (normalized to ~0.4 units)
+                            
+                            // Center coordinate in pixels
+                            const center = api.coord([categoryIndex, val]);
+                            
+                            // Calculate X offset in pixels using stepPx
+                            const px = center[0] + (widthOffset * stepPx);
+                            const py = center[1];
+                            
+                            points.push([px, py]);
+                        }
+                        // Left side (reverse)
+                        for (let i = density.length - 1; i >= 0; i--) {
+                            const val = density[i][0];
+                            const widthOffset = density[i][1];
+                            
+                            const center = api.coord([categoryIndex, val]);
+                            const px = center[0] - (widthOffset * stepPx);
+                            const py = center[1];
+                            
+                            points.push([px, py]);
+                        }
+                        
+                        return {
+                            type: 'polygon',
+                            shape: {
+                                points: points
+                            },
+                            style: api.style({
+                                fill: colors[categoryIndex],
+                                stroke: '#555',
+                                lineWidth: 1
+                            })
+                        };
+                    },
+                    data: [0, 1, 2],
+                    z: 1
+                },
+                // 2. Boxplot (Overlay)
+                {
+                    type: 'boxplot',
+                    data: boxData,
+                    itemStyle: {
+                        color: '#ffffff',
+                        borderColor: '#000000',
+                        borderWidth: 1.5
+                    },
+                    boxWidth: [12, 12],
+                    z: 5
+                },
+                // 3. Significance Markers
+                {
+                    type: 'custom',
+                    name: 'Significance',
+                    renderItem: function(params, api) {
+                        const item = sigData[params.dataIndex];
+                        const start = api.coord([item.x1, item.y]);
+                        const end = api.coord([item.x2, item.y]);
+                        const dh = 5;
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'polyline',
+                                    shape: {
+                                        points: [
+                                            [start[0], start[1] + dh],
+                                            [start[0], start[1]],
+                                            [end[0], end[1]],
+                                            [end[0], end[1] + dh]
+                                        ]
+                                    },
+                                    style: {
+                                        stroke: 'black',
+                                        fill: 'none',
+                                        lineWidth: 1
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    style: {
+                                        text: 'P = ' + item.p.toFixed(3),
+                                        x: (start[0] + end[0]) / 2,
+                                        y: start[1] - 5,
+                                        textAlign: 'center',
+                                        textVerticalAlign: 'bottom',
+                                        fill: 'black',
+                                        font: '10px Arial'
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: sigData,
+                    z: 10
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'a',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

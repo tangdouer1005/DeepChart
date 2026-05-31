@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 800px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = [
+    {
+        "Type": "Individual\nbehaviour",
+        "Driver": "Satisfaction with sensory characteristics",
+        "Frequency in literatures": 10,
+        "Percentage": 0.178571
+    },
+    {
+        "Type": "Individual\nbehaviour",
+        "Driver": "Social norms",
+        "Frequency in literatures": 6,
+        "Percentage": 0.107143
+    },
+    {
+        "Type": "Individual\nbehaviour",
+        "Driver": "Attitude towards food waste",
+        "Frequency in literatures": 4,
+        "Percentage": 0.0714286
+    },
+    {
+        "Type": "Individual\nbehaviour",
+        "Driver": "Economic level",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0535714
+    },
+    {
+        "Type": "Individual\nbehaviour",
+        "Driver": "Eating habits",
+        "Frequency in literatures": 2,
+        "Percentage": 0.0357143
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Duration of eating time",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0892857
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Menu planning",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0892857
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Portion size",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0892857
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Use of trays",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0535714
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Staff training",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0535714
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Food quality and palatability",
+        "Frequency in literatures": 2,
+        "Percentage": 0.0357143
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Canteen atmosphere",
+        "Frequency in literatures": 1,
+        "Percentage": 0.0178571
+    },
+    {
+        "Type": "Demographic",
+        "Driver": "Gender",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0892857
+    },
+    {
+        "Type": "Demographic",
+        "Driver": "Age",
+        "Frequency in literatures": 2,
+        "Percentage": 0.0357143
+    }
+];
+
+        // Colors
+        // Inner: Red, Yellow, Blue
+        const colors = {
+            'Individual\nbehaviour': '#C06C6C',
+            'Canteen': '#D4B95E',
+            'Demographic': '#5C97A8'
+        };
+        
+        // Gradients for outer ring
+        const gradients = {
+            'Individual\nbehaviour': ['#C06C6C', '#CD7F7F', '#D99292', '#E5A5A5', '#F0B9B9'],
+            'Canteen': ['#D4B95E', '#DCC474', '#E3CF8A', '#EBD9A0', '#F2E4B6', '#F9EFCC', '#FFF9E2'],
+            'Demographic': ['#5C97A8', '#82B3C0']
+        };
+
+        const totalFreq = rawData.reduce((sum, item) => sum + item["Frequency in literatures"], 0);
+
+        // Build Hierarchy
+        const dataMap = {};
+        rawData.forEach(item => {
+            if (!dataMap[item.Type]) {
+                dataMap[item.Type] = { name: item.Type, children: [], total: 0 };
+            }
+            dataMap[item.Type].children.push({ name: item.Driver, value: item["Frequency in literatures"] });
+            dataMap[item.Type].total += item["Frequency in literatures"];
+        });
+
+        const chartData = [];
+        const typeOrder = ['Individual\nbehaviour', 'Canteen', 'Demographic']; // Clockwise starting 12
+
+        typeOrder.forEach(type => {
+            const group = dataMap[type];
+            if(!group) return;
+            
+            // Inner Node
+            const innerNode = {
+                name: type,
+                value: group.total,
+                itemStyle: { color: colors[type] },
+                label: {
+                    rotate: 'tangential',
+                    formatter: function(params) {
+                        return params.name + '\n' + (params.value / totalFreq * 100).toFixed(1) + '%';
+                    },
+                    color: 'white',
+                    fontSize: 14
+                },
+                children: []
+            };
+
+            // Outer Nodes
+            const palette = gradients[type];
+            group.children.forEach((child, i) => {
+                const color = palette[Math.min(i, palette.length - 1)];
+                
+                // Customize labels for long text
+                let labelName = child.name;
+                if(labelName === "Food quality and palatability") labelName = "Food quality";
+                if(labelName === "Satisfaction with sensory characteristics") labelName = "Satisfaction with\nsensory characteristics";
+                if(labelName === "Attitude towards food waste") labelName = "Attitude\ntowards\nfood waste";
+                
+                // Color for outer labels
+                let labelColor = '#885555';
+                if(type === 'Canteen') labelColor = '#C4A000';
+                if(type === 'Demographic') labelColor = '#367588';
+
+                innerNode.children.push({
+                    name: labelName,
+                    value: child.value,
+                    itemStyle: { color: color },
+                    label: {
+                        color: labelColor,
+                        formatter: function(params) {
+                            // Calculating percentage manually or use {d}
+                            const pct = (params.value / totalFreq * 100).toFixed(1);
+                            
+                            // Wrap long text manually if needed
+                            let name = params.name;
+                            if (name.length > 15 && !name.includes('\n')) {
+                                // Simple split logic or rely on ECharts auto-wrap (width)
+                                // ECharts supports width in label style
+                            }
+                            return `{name|${name}}\n{pct|${pct}%}`;
+                        },
+                        rich: {
+                            name: { fontSize: 12, lineHeight: 15, align: 'left' },
+                            pct: { fontSize: 12, fontWeight: 'bold', align: 'left' }
+                        },
+                        align: 'left' // General align
+                    }
+                });
+            });
+            chartData.push(innerNode);
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            series: {
+                type: 'sunburst',
+                data: chartData,
+                radius: [0, '90%'],
+                center: ['50%', '50%'],
+                sort: null, // Maintain input order
+                startAngle: 90, // 12 o'clock
+                label: {
+                    rotate: 'radial'
+                },
+                levels: [
+                    {},
+                    {
+                        r0: '30%',
+                        r: '60%',
+                        itemStyle: {
+                            borderWidth: 2,
+                            borderColor: 'white'
+                        },
+                        label: {
+                            rotate: 0, // Inner labels horizontal/tangential? Python code says rotate=0 mostly? No, Python computes rotation.
+                            // ECharts 'tangential' or 0.
+                            // In image, text is upright or slightly curved?
+                            // Image shows inner labels are mostly horizontal or following arc?
+                            // Let's try 0 (horizontal) if it fits, or 'tangential'.
+                            // Python: rotation calculated.
+                            // ECharts: let's try 0.
+                            rotate: 0,
+                            align: 'center'
+                        }
+                    },
+                    {
+                        r0: '60%',
+                        r: '75%', // Outer ring width
+                        itemStyle: {
+                            borderWidth: 1,
+                            borderColor: 'white'
+                        },
+                        label: {
+                            position: 'outside',
+                            padding: 3,
+                            silent: false,
+                            rotate: 'auto' // Let ECharts decide rotation or 0
+                        }
+                    }
+                ]
+            },
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'a',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

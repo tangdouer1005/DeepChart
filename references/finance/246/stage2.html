@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>TSLA 现金消耗跑道（零收入情景）2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js 最新稳定版 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f7f8fa;
+      color: #111827;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 1rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-weight: 400;
+      color: #4b5563;
+    }
+    .chart-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      /* 通过宽度 + 固定高度，避免纵向拉伸问题 */
+      width: 100%;
+      height: 420px; /* 关键：给图表一个合理固定高度 */
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+      position: relative;
+    }
+    canvas {
+      /* 让 Chart.js 自己根据 maintainAspectRatio 布局 */
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+    .note {
+      max-width: 960px;
+      margin: 0.75rem auto 0;
+      font-size: 0.85rem;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+    .note strong {
+      font-weight: 600;
+      color: #374151;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <div class="chart-container">
+      <h1>TSLA 现金消耗跑道（月）</h1>
+      <h2>零收入情景 · 2016–2024 财年</h2>
+      <canvas id="tslaRunwayChart"></canvas>
+    </div>
+  </div>
+  <div class="note">
+    <strong>说明：</strong>
+    “现金消耗跑道”表示在假设未来无新增收入的前提下，按当前现金消耗速度可维持运营的月数。
+    数据来源于用户提供的表格（单位：月）。
+  </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      const labels = [
+        "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+      ];
+
+      const runwayMonths = [
+        16.84391250625153,
+        9.424033578174187,
+        8.920673527792399,
+        16.09242618741977,
+        43.20356612184249,
+        28.193022323218823,
+        27.0432612312812,
+        22.047731092436976,
+        19.28964143426295
+      ];
+
+      const canvas = document.getElementById("tslaRunwayChart");
+      const ctx = canvas.getContext("2d");
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "现金消耗跑道（月）",
+              data: runwayMonths,
+              backgroundColor: function (context) {
+                const idx = context.dataIndex;
+                // 高亮显示 2024 年
+                if (labels[idx] === "2024") {
+                  return "rgba(37, 99, 235, 0.9)";
+                }
+                return "rgba(59, 130, 246, 0.65)";
+              },
+              borderColor: function (context) {
+                const idx = context.dataIndex;
+                if (labels[idx] === "2024") {
+                  return "rgba(30, 64, 175, 1)";
+                }
+                return "rgba(37, 99, 235, 1)";
+              },
+              borderWidth: 1.5,
+              borderRadius: 4,
+              hoverBackgroundColor: "rgba(37, 99, 235, 0.95)",
+              hoverBorderColor: "rgba(30, 64, 175, 1)"
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          // 关键：保持 Chart.js 的默认比例，而不是让容器控制纵横比
+          maintainAspectRatio: true,
+          aspectRatio: 2, // 宽:高 = 2:1，避免又高又窄
+          plugins: {
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                label: function (context) {
+                  const value = context.raw;
+                  return " 现金消耗跑道：" + Number(value).toFixed(2) + " 个月";
+                }
+              }
+            },
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                boxWidth: 8,
+                boxHeight: 8
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年",
+                color: "#4b5563",
+                font: {
+                  size: 12,
+                  weight: "500"
+                }
+              },
+              ticks: {
+                color: "#4b5563"
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "现金消耗跑道（月）",
+                color: "#4b5563",
+                font: {
+                  size: 12,
+                  weight: "500"
+                }
+              },
+              ticks: {
+                color: "#4b5563",
+                callback: function (value) {
+                  return value + " 个月";
+                }
+              },
+              beginAtZero: true,
+              grid: {
+                color: "rgba(209, 213, 219, 0.6)",
+                drawBorder: false
+              }
+            }
+          },
+          animation: {
+            duration: 800,
+            easing: "easeOutCubic"
+          },
+          interaction: {
+            mode: "index",
+            intersect: false
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

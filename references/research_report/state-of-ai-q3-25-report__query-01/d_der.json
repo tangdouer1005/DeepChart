@@ -1,0 +1,93 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a ranked bar chart for the top 12 markets by `2025 YTD average funding per deal`, computed as `(2025 Q1 + Q2 + Q3 funding) / (2025 Q1 + Q2 + Q3 deals)`, expressed in `$M per deal`, filtered to markets with at least `50` total deals in `2025 YTD`, and sorted descending.",
+  "status": "completed",
+  "title": "Top 12 markets by 2025 YTD average funding per deal",
+  "chart_kind": "horizontal_bar",
+  "chart_type": "ranked bar chart",
+  "value_unit": "$M per deal",
+  "sort_rule": "descending by avg_funding_per_deal_m",
+  "selection_rule": "top 12 with at least 50 total deals in 2025 YTD",
+  "metadata": {
+    "entity_field": "market",
+    "value_field": "avg_funding_per_deal_m",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "market": "Silicon Valley",
+      "avg_funding_per_deal_m": 103.3170731707317,
+      "funding_m": 105900.0,
+      "deals": 1025
+    },
+    {
+      "market": "US",
+      "avg_funding_per_deal_m": 56.87841817416912,
+      "funding_m": 135200.0,
+      "deals": 2377
+    },
+    {
+      "market": "Los Angeles",
+      "avg_funding_per_deal_m": 53.125,
+      "funding_m": 5100.0,
+      "deals": 96
+    },
+    {
+      "market": "France",
+      "avg_funding_per_deal_m": 28.75,
+      "funding_m": 2300.0,
+      "deals": 80
+    },
+    {
+      "market": "Israel",
+      "avg_funding_per_deal_m": 25.0,
+      "funding_m": 2000.0,
+      "deals": 80
+    },
+    {
+      "market": "New York",
+      "avg_funding_per_deal_m": 21.62162162162162,
+      "funding_m": 7200.0,
+      "deals": 333
+    },
+    {
+      "market": "Seattle",
+      "avg_funding_per_deal_m": 21.397590361445783,
+      "funding_m": 1776.0,
+      "deals": 83
+    },
+    {
+      "market": "Boston",
+      "avg_funding_per_deal_m": 21.296296296296298,
+      "funding_m": 2300.0,
+      "deals": 108
+    },
+    {
+      "market": "Canada",
+      "avg_funding_per_deal_m": 20.893333333333334,
+      "funding_m": 1567.0,
+      "deals": 75
+    },
+    {
+      "market": "Philadelphia",
+      "avg_funding_per_deal_m": 18.159663865546218,
+      "funding_m": 2161.0,
+      "deals": 119
+    },
+    {
+      "market": "Germany",
+      "avg_funding_per_deal_m": 18.054054054054053,
+      "funding_m": 2004.0,
+      "deals": 111
+    },
+    {
+      "market": "United Kingdom",
+      "avg_funding_per_deal_m": 18.0,
+      "funding_m": 4500.0,
+      "deals": 250
+    }
+  ]
+}

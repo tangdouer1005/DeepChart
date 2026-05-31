@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 500px; height: 800px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const data = [
+    {
+        "state":"AZ",
+        "number_of_HighAging_CBG":255,
+        "mean_coeff":-0.0214706,
+        "xerr_low":0.0273579,
+        "xerr_high":0.0273579
+    },
+    {
+        "state":"CA",
+        "number_of_HighAging_CBG":206,
+        "mean_coeff":-0.0207905,
+        "xerr_low":0.0237389,
+        "xerr_high":0.02373877
+    },
+    {
+        "state":"FL",
+        "number_of_HighAging_CBG":818,
+        "mean_coeff":0.0786451,
+        "xerr_low":0.0135114,
+        "xerr_high":0.0135114
+    },
+    {
+        "state":"IL",
+        "number_of_HighAging_CBG":35,
+        "mean_coeff":0.00272111,
+        "xerr_low":0.06127931,
+        "xerr_high":0.06127929
+    },
+    {
+        "state":"MA",
+        "number_of_HighAging_CBG":33,
+        "mean_coeff":0.040549,
+        "xerr_low":0.0643946,
+        "xerr_high":0.064395
+    },
+    {
+        "state":"MD",
+        "number_of_HighAging_CBG":35,
+        "mean_coeff":0.0453634,
+        "xerr_low":0.0582048,
+        "xerr_high":0.0582046
+    },
+    {
+        "state":"MI",
+        "number_of_HighAging_CBG":30,
+        "mean_coeff":-0.0687621,
+        "xerr_low":0.0758869,
+        "xerr_high":0.07588732
+    },
+    {
+        "state":"NC",
+        "number_of_HighAging_CBG":30,
+        "mean_coeff":-0.0706617,
+        "xerr_low":0.0672553,
+        "xerr_high":0.06725527
+    },
+    {
+        "state":"NJ",
+        "number_of_HighAging_CBG":104,
+        "mean_coeff":-0.0440962,
+        "xerr_low":0.034146,
+        "xerr_high":0.03414609
+    },
+    {
+        "state":"NV",
+        "number_of_HighAging_CBG":38,
+        "mean_coeff":0.0533485,
+        "xerr_low":0.06036925,
+        "xerr_high":0.0603695
+    },
+    {
+        "state":"NY",
+        "number_of_HighAging_CBG":72,
+        "mean_coeff":-0.0797929,
+        "xerr_low":0.0411841,
+        "xerr_high":0.041184
+    },
+    {
+        "state":"OH",
+        "number_of_HighAging_CBG":36,
+        "mean_coeff":0.023175,
+        "xerr_low":0.0648296,
+        "xerr_high":0.0648296
+    },
+    {
+        "state":"PA",
+        "number_of_HighAging_CBG":48,
+        "mean_coeff":-0.0436579,
+        "xerr_low":0.0535614,
+        "xerr_high":0.05356138
+    },
+    {
+        "state":"SC",
+        "number_of_HighAging_CBG":36,
+        "mean_coeff":0.0640834,
+        "xerr_low":0.06512206,
+        "xerr_high":0.0651216
+    },
+    {
+        "state":"TX",
+        "number_of_HighAging_CBG":54,
+        "mean_coeff":-0.0197506,
+        "xerr_low":0.0516141,
+        "xerr_high":0.051614
+    },
+    {
+        "state":"VA",
+        "number_of_HighAging_CBG":32,
+        "mean_coeff":0.103121,
+        "xerr_low":0.0599864,
+        "xerr_high":0.059987
+    },
+    {
+        "state":"WA",
+        "number_of_HighAging_CBG":30,
+        "mean_coeff":0.103172,
+        "xerr_low":0.0749258,
+        "xerr_high":0.074926
+    }
+];
+
+        // Sort by state ascending (A-Z)
+        data.sort((a, b) => a.state.localeCompare(b.state));
+
+        const states = data.map(d => d.state);
+        const scatterData = data.map(d => [d.mean_coeff, d.state, d.number_of_HighAging_CBG]);
+        
+        // Custom error bar data: [x, y, low, high]
+        // JSON has diffs in xerr_low/high
+        const errorData = data.map((d, i) => [
+            d.mean_coeff, 
+            i, 
+            d.mean_coeff - d.xerr_low, 
+            d.mean_coeff + d.xerr_high
+        ]);
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            title: {
+                text: 'GFS',
+                left: 'center',
+                top: 10,
+                textStyle: { fontSize: 16 }
+            },
+            grid: {
+                top: 50,
+                bottom: 60,
+                left: 60,
+                right: 40
+            },
+            xAxis: {
+                name: 'Coefficient of high-ageing CBGs',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: -0.3,
+                max: 0.3,
+                interval: 0.1,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black' },
+                nameTextStyle: { fontSize: 14 }
+            },
+            yAxis: {
+                name: 'State',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'category',
+                data: states,
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true, alignWithLabel: true },
+                axisLabel: { color: 'black', fontSize: 12 },
+                nameTextStyle: { fontSize: 14 }
+            },
+            series: [
+                {
+                    type: 'line',
+                    markLine: {
+                        symbol: 'none',
+                        data: [{ xAxis: 0 }],
+                        lineStyle: {
+                            color: '#d62728',
+                            type: 'dashed',
+                            width: 1.5
+                        },
+                        label: { show: false },
+                        animation: false
+                    }
+                },
+                {
+                    type: 'custom',
+                    name: 'error_bar',
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1.5,
+                            stroke: 'black'
+                        }
+                    },
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const yValue = api.value(1);
+                        const low = api.value(2);
+                        const high = api.value(3);
+                        
+                        const start = api.coord([low, yValue]);
+                        const end = api.coord([high, yValue]);
+                        const halfHeight = 4;
+
+                        const style = api.style({
+                            stroke: 'black',
+                            lineWidth: 1
+                        });
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1],
+                                        x2: end[0], y2: end[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1] - halfHeight,
+                                        x2: start[0], y2: start[1] + halfHeight
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: end[0], y1: end[1] - halfHeight,
+                                        x2: end[0], y2: end[1] + halfHeight
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 2
+                },
+                {
+                    type: 'scatter',
+                    name: 'scatter',
+                    data: scatterData,
+                    symbolSize: function (val) {
+                        // Python code: sizes = number * 0.35 (Area in points^2)
+                        // ECharts symbolSize is diameter in pixels.
+                        // D = 2 * sqrt(Area / pi) = 2 * sqrt( (N * 0.35) / pi ) approx 0.67 * sqrt(N)
+                        // Using 0.7 multiplier.
+                        return Math.sqrt(val[2]) * 0.7;
+                    },
+                    itemStyle: {
+                        color: 'black'
+                    },
+                    z: 3
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'b',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

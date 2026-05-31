@@ -1,0 +1,75 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a horizontal bar chart showing the top 15 countries in the 2024 country tables by multi-hub depth, defined as the share of each country's listed top-10 city score that comes from cities ranked 2-5, computed as `sum(score ranks 2-5) / sum(score ranks 1-10)`, expressed as a percentage, sorted descending, and limited to countries with 10 listed cities.",
+  "status": "complete",
+  "chart_type": "horizontal_bar",
+  "title": "2024 Multi-Hub Depth by Country",
+  "value_unit": "percent",
+  "sort_rule": "descending by multi_hub_depth_pct, tie-break alphabetically",
+  "selection_rule": "top 15 countries with 10 listed cities",
+  "records": [
+    {
+      "entity": "Switzerland",
+      "multi_hub_depth_pct": 59.1985
+    },
+    {
+      "entity": "India",
+      "multi_hub_depth_pct": 55.059582
+    },
+    {
+      "entity": "Australia",
+      "multi_hub_depth_pct": 53.083584
+    },
+    {
+      "entity": "China",
+      "multi_hub_depth_pct": 51.250607
+    },
+    {
+      "entity": "Canada",
+      "multi_hub_depth_pct": 49.457889
+    },
+    {
+      "entity": "Belgium",
+      "multi_hub_depth_pct": 47.76482
+    },
+    {
+      "entity": "Spain",
+      "multi_hub_depth_pct": 45.340692
+    },
+    {
+      "entity": "Poland",
+      "multi_hub_depth_pct": 42.105263
+    },
+    {
+      "entity": "Germany",
+      "multi_hub_depth_pct": 37.448873
+    },
+    {
+      "entity": "United States",
+      "multi_hub_depth_pct": 37.275843
+    },
+    {
+      "entity": "The Netherlands",
+      "multi_hub_depth_pct": 36.047815
+    },
+    {
+      "entity": "Italy",
+      "multi_hub_depth_pct": 35.790774
+    },
+    {
+      "entity": "Colombia",
+      "multi_hub_depth_pct": 33.888292
+    },
+    {
+      "entity": "Mexico",
+      "multi_hub_depth_pct": 33.173913
+    },
+    {
+      "entity": "Denmark",
+      "multi_hub_depth_pct": 27.563112
+    }
+  ],
+  "value_field": "multi_hub_depth_pct",
+  "x_label": "sum(score ranks 2-5) / sum(score ranks 1-10) (%)",
+  "y_label": "Country"
+}

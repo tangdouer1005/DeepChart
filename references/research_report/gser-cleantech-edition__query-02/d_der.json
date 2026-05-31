@@ -1,0 +1,47 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a horizontal bar chart showing the top 8 Cleantech ecosystems by `Ecosystem Value / Total Early-Stage Funding`, expressed in `x multiple`, sorted descending, and excluding ecosystems where `Total Early-Stage Funding` is given as a range.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by maturity_multiple",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "Cleantech Maturity Multiple",
+    "xlabel": "x multiple",
+    "value_field": "maturity_multiple"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "maturity_multiple": 46.7727
+    },
+    {
+      "entity": "Stockholm",
+      "maturity_multiple": 46.0
+    },
+    {
+      "entity": "Beijing",
+      "maturity_multiple": 41.2037
+    },
+    {
+      "entity": "Frankfurt",
+      "maturity_multiple": 37.176
+    },
+    {
+      "entity": "Pittsburgh",
+      "maturity_multiple": 28.8889
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "maturity_multiple": 24.4545
+    },
+    {
+      "entity": "Los Angeles",
+      "maturity_multiple": 23.8
+    },
+    {
+      "entity": "Boston",
+      "maturity_multiple": 20.7812
+    }
+  ]
+}

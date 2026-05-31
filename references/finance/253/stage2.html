@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UNH 可持续增长率 (SGR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #0f172a;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --grid-color: rgba(148, 163, 184, 0.4);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --card-bg: #020617;
+        --text-color: #e5e7eb;
+        --accent: #3b82f6;
+        --accent-soft: rgba(59, 130, 246, 0.25);
+        --grid-color: rgba(51, 65, 85, 0.9);
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 20px 20px 28px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.16),
+        0 1px 0 rgba(148, 163, 184, 0.35);
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 1.35rem;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      margin: 0 0 14px;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 18px;
+      margin-top: 14px;
+      font-size: 0.83rem;
+      color: #6b7280;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: linear-gradient(
+        135deg,
+        rgba(37, 99, 235, 0.95),
+        rgba(56, 189, 248, 0.9)
+      );
+    }
+
+    .note {
+      font-size: 0.78rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 16px 14px 22px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>UNH 可持续增长率 (SGR) 2016–2024</h1>
+      <p class="subtitle">
+        显示 UNH 在 2016–2024 财年的可持续增长率变化情况。鼠标悬停查看精确数值。
+      </p>
+
+      <div class="chart-wrapper">
+        <canvas id="sgrChart"></canvas>
+      </div>
+
+      <div class="legend-row">
+        <div class="legend-item">
+          <span class="legend-swatch"></span>
+          <span>SGR（可持续增长率）</span>
+        </div>
+        <span class="note">单位：百分比 (%)，数据来源于提供的财务结果。</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('sgrChart');
+
+    // Source data (as given)
+    const years = [
+      '2016',
+      '2017',
+      '2018',
+      '2019',
+      '2020',
+      '2021',
+      '2022',
+      '2023',
+      '2024'
+    ];
+
+    const sgrRaw = [
+      0.1318876348409639,
+      0.1764705882352941,
+      0.1707098464478129,
+      0.1812609777517564,
+      0.1757657972333011,
+      0.1749349731513796,
+      0.188976272637295,
+      0.1875960799385088,
+      0.0757604154034418
+    ];
+
+    // Convert to percentage values
+    const sgrPercent = sgrRaw.map(v => v * 100);
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: 'SGR (%)',
+            data: sgrPercent,
+            backgroundColor: function (context) {
+              const index = context.dataIndex;
+              const isLatest = index === sgrPercent.length - 1;
+              // Highlight latest year
+              return isLatest
+                ? 'rgba(239, 68, 68, 0.85)'
+                : 'rgba(37, 99, 235, 0.85)';
+            },
+            borderRadius: 6,
+            borderSkipped: false,
+            hoverBackgroundColor: function (context) {
+              const index = context.dataIndex;
+              const isLatest = index === sgrPercent.length - 1;
+              return isLatest
+                ? 'rgba(248, 113, 113, 0.95)'
+                : 'rgba(59, 130, 246, 0.95)';
+            }
+          },
+          {
+            // Simple line trend overlay for visual trajectory
+            type: 'line',
+            label: '趋势线',
+            data: sgrPercent,
+            borderColor: 'rgba(56, 189, 248, 0.9)',
+            borderWidth: 2,
+            pointRadius: 0,
+            pointHitRadius: 5,
+            tension: 0.25,
+            fill: false,
+            yAxisID: 'y'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15, 23, 42, 0.96)',
+            titleColor: '#e5e7eb',
+            bodyColor: '#e5e7eb',
+            borderColor: 'rgba(148, 163, 184, 0.6)',
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: (context) => {
+                const rawValue = sgrRaw[context.dataIndex];
+                const pct = rawValue * 100;
+                return `SGR: ${pct.toFixed(2)}%`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+              color: '#64748b',
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(148, 163, 184, 0.25)'
+            },
+            ticks: {
+              color: '#64748b',
+              font: {
+                size: 11
+              },
+              callback: function (value) {
+                return value + '%';
+              }
+            },
+            title: {
+              display: true,
+              text: '可持续增长率 (SGR, %)',
+              color: '#6b7280',
+              font: {
+                size: 11,
+                weight: '500'
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

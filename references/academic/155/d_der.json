@@ -1,0 +1,182 @@
+[
+    {
+        "Region": "China",
+        "Scenario": "S1",
+        "Label": "China-S1",
+        "Central": 0.154,
+        "Low": 0.114,
+        "High": 0.254,
+        "Percentiles": [
+            0.026,
+            0.04,
+            0.076,
+            0.235,
+            0.397
+        ]
+    },
+    {
+        "Region": "China",
+        "Scenario": "S2",
+        "Label": "China-S2",
+        "Central": 0.294,
+        "Low": 0.199,
+        "High": 0.394,
+        "Percentiles": [
+            0.049,
+            0.077,
+            0.144,
+            0.449,
+            0.757
+        ]
+    },
+    {
+        "Region": "China",
+        "Scenario": "S3",
+        "Label": "China-S3",
+        "Central": 0.439,
+        "Low": 0.297,
+        "High": 0.588,
+        "Percentiles": [
+            0.073,
+            0.115,
+            0.216,
+            0.67,
+            1.13
+        ]
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S1",
+        "Label": "EU27-S1",
+        "Central": 0.067,
+        "Low": 0.05,
+        "High": 0.113,
+        "Percentiles": [
+            0.007,
+            0.021,
+            0.056,
+            0.139,
+            0.328
+        ]
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S2",
+        "Label": "EU27-S2",
+        "Central": 0.13,
+        "Low": 0.087,
+        "High": 0.176,
+        "Percentiles": [
+            0.013,
+            0.04,
+            0.109,
+            0.269,
+            0.636
+        ]
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S3",
+        "Label": "EU27-S3",
+        "Central": 0.194,
+        "Low": 0.13,
+        "High": 0.263,
+        "Percentiles": [
+            0.02,
+            0.06,
+            0.162,
+            0.401,
+            0.95
+        ]
+    },
+    {
+        "Region": "United States",
+        "Scenario": "S1",
+        "Label": "US-S1",
+        "Central": 0.044,
+        "Low": 0.033,
+        "High": 0.075,
+        "Percentiles": [
+            0.006,
+            0.018,
+            0.064,
+            0.211,
+            0.592
+        ]
+    },
+    {
+        "Region": "United States",
+        "Scenario": "S2",
+        "Label": "US-S2",
+        "Central": 0.087,
+        "Low": 0.057,
+        "High": 0.119,
+        "Percentiles": [
+            0.011,
+            0.035,
+            0.127,
+            0.418,
+            1.17
+        ]
+    },
+    {
+        "Region": "United States",
+        "Scenario": "S3",
+        "Label": "US-S3",
+        "Central": 0.13,
+        "Low": 0.085,
+        "High": 0.178,
+        "Percentiles": [
+            0.017,
+            0.053,
+            0.189,
+            0.624,
+            1.747
+        ]
+    },
+    {
+        "Region": "India",
+        "Scenario": "S1",
+        "Label": "India-S1",
+        "Central": 0.376,
+        "Low": 0.278,
+        "High": 0.623,
+        "Percentiles": [
+            0.021,
+            0.042,
+            0.094,
+            0.223,
+            0.726
+        ]
+    },
+    {
+        "Region": "India",
+        "Scenario": "S2",
+        "Label": "India-S2",
+        "Central": 0.721,
+        "Low": 0.486,
+        "High": 0.97,
+        "Percentiles": [
+            0.04,
+            0.08,
+            0.179,
+            0.427,
+            1.393
+        ]
+    },
+    {
+        "Region": "India",
+        "Scenario": "S3",
+        "Label": "India-S3",
+        "Central": 1.076,
+        "Low": 0.725,
+        "High": 1.448,
+        "Percentiles": [
+            0.06,
+            0.12,
+            0.268,
+            0.637,
+            2.079
+        ]
+    }
+]

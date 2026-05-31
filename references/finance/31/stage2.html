@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AMZN 现金循环周期 (CCC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --grid: rgba(148, 163, 184, 0.35);
+      --border: #e5e7eb;
+      --negative: #dc2626;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --muted: #9ca3af;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.18);
+        --grid: rgba(148, 163, 184, 0.35);
+        --border: #1f2937;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: radial-gradient(circle at top left, #eff6ff 0, #ffffff 40%, #f9fafb 100%);
+      background-attachment: fixed;
+      color: var(--fg);
+    }
+
+    .shell {
+      max-width: 960px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 18px;
+      padding: 1.5rem 1.75rem 1.75rem;
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(148, 163, 184, 0.22);
+      backdrop-filter: blur(18px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .shell {
+        background: rgba(15, 23, 42, 0.94);
+        box-shadow:
+          0 22px 50px rgba(0, 0, 0, 0.75),
+          0 0 0 1px rgba(30, 64, 175, 0.55);
+      }
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    header .subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(248, 250, 252, 0.85);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .meta span {
+        background: rgba(15, 23, 42, 0.9);
+      }
+    }
+
+    .meta span::before {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .chart-wrap {
+      position: relative;
+      width: 100%;
+      height: 440px;
+    }
+
+    .legend {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .legend-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #4f46e5);
+    }
+
+    .legend-line {
+      width: 26px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+    }
+
+    .legend-right {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .badge {
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(249, 250, 251, 0.8);
+      color: var(--muted);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .badge {
+        background: rgba(15, 23, 42, 0.9);
+      }
+    }
+
+    footer {
+      margin-top: 1.25rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    footer strong {
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div>
+        <h1>Amazon (AMZN) 现金循环周期（CCC）</h1>
+        <p class="subtitle">年度 CCC 变化趋势（2016–2024，单位：天）</p>
+      </div>
+    </header>
+
+    <div class="meta">
+      <span>指标：现金循环周期 (Cash Conversion Cycle)</span>
+      <span>周期：2016–2024 财年</span>
+    </div>
+
+    <div class="chart-wrap">
+      <canvas id="cccChart"></canvas>
+    </div>
+
+    <div class="legend">
+      <div class="legend-left">
+        <span class="legend-dot"></span>
+        <span class="legend-line"></span>
+        <span>AMZN 现金循环周期（CCC，越低越好；负值表示“现金机器”特征）</span>
+      </div>
+      <div class="legend-right">
+        <span class="badge">交互提示：悬停查看精确数值</span>
+      </div>
+    </div>
+
+    <footer>
+      <div>数据来源：用户提供的 AMZN 2016–2024 财年 CCC 结果 (<strong>RESULT_CCC</strong>)。</div>
+      <div>说明：CCC = 存货周转天数 + 应收账款周转天数 − 应付账款周转天数。负的 CCC 通常意味着企业依靠供应商“融资”，资金周转效率很高。</div>
+    </footer>
+  </div>
+
+  <script>
+    // Data from the user-provided table
+    const labels = [
+      "2016", "2017", "2018", "2019",
+      "2020", "2021", "2022", "2023", "2024"
+    ];
+
+    const cccValues = [
+      -17.134590383357292,
+      -30.790264994034743,
+      -28.53281381384538,
+      -28.20074040190705,
+      -37.56208139504977,
+      -41.19527126911629,
+      -30.918017889787947,
+      -27.965077977208463,
+      -31.72816594062904
+    ];
+
+    // Helper to format numbers to 2 decimals, preserve sign
+    function formatDays(value) {
+      return (Math.round(value * 100) / 100).toFixed(2);
+    }
+
+    const ctx = document.getElementById("cccChart").getContext("2d");
+
+    // Compute min & max for a bit of padding on the y-axis
+    const minVal = Math.min(...cccValues);
+    const maxVal = Math.max(...cccValues);
+    const padding = (maxVal - minVal || 10) * 0.18;
+
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "AMZN 现金循环周期 (CCC)",
+            data: cccValues,
+            tension: 0.28,
+            borderColor: "rgba(37, 99, 235, 1)",
+            borderWidth: 2.4,
+            pointRadius: 4.2,
+            pointHoverRadius: 5.4,
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderWidth: 1.2,
+            pointHitRadius: 10,
+            fill: true,
+            backgroundColor: (ctx) => {
+              const { chart } = ctx;
+              const { ctx: canvasCtx, chartArea } = chart;
+              if (!chartArea) return "rgba(37, 99, 235, 0.12)";
+              const gradient = canvasCtx.createLinearGradient(
+                0,
+                chartArea.top,
+                0,
+                chartArea.bottom
+              );
+              gradient.addColorStop(0, "rgba(37, 99, 235, 0.25)");
+              gradient.addColorStop(1, "rgba(37, 99, 235, 0.02)");
+              return gradient;
+            }
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.96)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.6)",
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 10,
+            displayColors: false,
+            callbacks: {
+              title: (items) => {
+                const year = items[0].label;
+                return `财年：${year}`;
+              },
+              label: (item) => {
+                const value = item.parsed.y;
+                return `CCC：${formatDays(value)} 天`;
+              },
+              afterLabel: (item) => {
+                const v = item.parsed.y;
+                if (v < 0) {
+                  return "负的 CCC 说明公司能在支付供应商之前先从客户处收回现金。";
+                }
+                return "";
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "rgba(107, 114, 128, 0.95)",
+              maxRotation: 0,
+              autoSkipPadding: 12
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "CCC（天）",
+              color: "rgba(107, 114, 128, 1)",
+              font: {
+                size: 11.5,
+                weight: "500"
+              }
+            },
+            grid: {
+              color: (context) => {
+                if (context.tick.value === 0) {
+                  return "rgba(248, 113, 113, 0.75)"; // zero line emphasised
+                }
+                return "rgba(148, 163, 184, 0.35)";
+              },
+              borderDash: [4, 4]
+            },
+            ticks: {
+              color: "rgba(107, 114, 128, 0.95)",
+              callback: (value) => `${value} 天`
+            },
+            suggestedMin: minVal - padding,
+            suggestedMax: maxVal + padding
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

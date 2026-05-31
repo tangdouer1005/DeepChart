@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>MSFT 经济增加值 (EVA) 简化版 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f8fa;
+      color: #111827;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+    }
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #6b7280;
+      margin-top: 0;
+      margin-bottom: 1.2rem;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 18px 18px 24px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 460px;
+    }
+    .footer-note {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+    .toggle-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 6px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .toggle-container label {
+      font-size: 0.78rem;
+      color: #4b5563;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toggle-container input {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>微软 (MSFT) 经济增加值 EVA（简化版）</h1>
+    <h2>按财年统计，2016 — 2024</h2>
+
+    <div class="toggle-container">
+      <label>
+        <input type="checkbox" id="toggleLogScale" />
+        使用对数刻度 (log scale)
+      </label>
+      <label>
+        <input type="checkbox" id="toggleUnit" checked />
+        单位：十亿美元
+      </label>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="evaChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      数据：用户提供的 MSFT EVA 简化版结果值 (RESULT_EVA)，单位为美元。<br />
+      交互：悬停查看具体数值，拖拽缩放（在图中拖动），双击图表空白处重置缩放。
+    </div>
+  </div>
+
+  <!-- Chart.js zoom plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.umd.min.js"></script>
+
+  <script>
+    // 原始数据（单位：美元）
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const evaValues = [
+      9442976001.40411,
+      11237306947.928162,
+      1030827743.0498447,
+      23077021571.140816,
+      27656360894.486763,
+      42550733657.28109,
+      53033567566.53447,
+      50665151566.99623,
+      63454512364.19975
+    ];
+
+    // 单位：十亿美元的转换
+    const toBillions = (values) => values.map(v => v / 1e9);
+
+    // 当前单位是否为十亿美元
+    let useBillions = true;
+    let useLogScale = false;
+
+    const ctx = document.getElementById("evaChart").getContext("2d");
+
+    const createChartConfig = () => {
+      const dataValues = useBillions ? toBillions(evaValues) : evaValues;
+      const unitLabel = useBillions ? "十亿美元" : "美元";
+
+      return {
+        type: "line",
+        data: {
+          labels: fiscalYears,
+          datasets: [
+            {
+              label: `经济增加值 (EVA) - 简化版 (${unitLabel})`,
+              data: dataValues,
+              borderColor: "rgba(37, 99, 235, 1)",
+              backgroundColor: "rgba(37, 99, 235, 0.15)",
+              fill: true,
+              lineTension: 0.25,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointBackgroundColor: "rgba(37, 99, 235, 1)",
+              pointBorderWidth: 1.5,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                pointStyle: "circle",
+                font: {
+                  size: 11.5
+                }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const value = context.parsed.y;
+                  if (useBillions) {
+                    return ` EVA: ${value.toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })} 十亿美元`;
+                  } else {
+                    return ` EVA: ${value.toLocaleString("en-US", {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0
+                    })} 美元`;
+                  }
+                }
+              }
+            },
+            zoom: {
+              zoom: {
+                wheel: {
+                  enabled: false
+                },
+                drag: {
+                  enabled: true,
+                  borderColor: "rgba(37, 99, 235, 0.6)",
+                  borderWidth: 1,
+                  backgroundColor: "rgba(191, 219, 254, 0.3)"
+                },
+                mode: "xy"
+              },
+              pan: {
+                enabled: true,
+                mode: "xy",
+                modifierKey: "shift"
+              },
+              limits: {
+                y: { min: 0 }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年",
+                font: { size: 11.5 }
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              type: useLogScale ? "logarithmic" : "linear",
+              title: {
+                display: true,
+                text: `EVA (${unitLabel})`,
+                font: { size: 11.5 }
+              },
+              ticks: {
+                callback: function(value) {
+                  if (useLogScale) {
+                    // 对数刻度下，使用原始值标签
+                    return Number(value).toLocaleString("en-US");
+                  }
+                  if (useBillions) {
+                    return value.toLocaleString("en-US", {
+                      maximumFractionDigits: 1
+                    });
+                  }
+                  return value.toLocaleString("en-US", {
+                    maximumFractionDigits: 0
+                  });
+                }
+              },
+              grid: {
+                color: "rgba(249, 250, 251, 1)"
+              }
+            }
+          }
+        }
+      };
+    };
+
+    let evaChart = new Chart(ctx, createChartConfig());
+
+    // 单位切换
+    document.getElementById("toggleUnit").addEventListener("change", (e) => {
+      useBillions = e.target.checked;
+      evaChart.destroy();
+      evaChart = new Chart(ctx, createChartConfig());
+    });
+
+    // 线性 / 对数刻度切换
+    document.getElementById("toggleLogScale").addEventListener("change", (e) => {
+      useLogScale = e.target.checked;
+      evaChart.destroy();
+      evaChart = new Chart(ctx, createChartConfig());
+    });
+
+    // 双击重置缩放
+    document.getElementById("evaChart").addEventListener("dblclick", () => {
+      if (evaChart && evaChart.resetZoom) {
+        evaChart.resetZoom();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>GOOG 内部增长率 (IGR) 变化（2016-2024）</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-size: 15px;
+      font-weight: 400;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+    .chart-container {
+      position: relative;
+      margin: 0 auto;
+      max-width: 900px;
+      background: #fff;
+      padding: 18px 18px 8px 18px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .footnote {
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+      max-width: 900px;
+    }
+  </style>
+</head>
+<body>
+  <h1>GOOG 内部增长率 (IGR) 变化</h1>
+  <h2>2016 - 2024 财年（单位：小数形式）</h2>
+
+  <div class="chart-container">
+    <canvas id="igrChart"></canvas>
+  </div>
+
+  <div class="footnote">
+    数据来源（RESULT_IGR）：2016: 0.1411, 2017: 0.0746, 2022: 0.1984, 2023: 0.2380, 2024: 0.2781。
+    鼠标悬停可查看精确数值，点击图例可切换数据系列显示。
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // Source data
+    const labels = ["2016", "2017", "2022", "2023", "2024"];
+    const igrValues = [
+      0.1411439047543133,
+      0.0745990785582146,
+      0.1983896471646807,
+      0.238023049159283,
+      0.2780684056372145
+    ];
+
+    const ctx = document.getElementById('igrChart').getContext('2d');
+
+    const igrChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '内部增长率 (IGR)',
+            data: igrValues,
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1.5,
+            borderRadius: 6,
+            hoverBackgroundColor: 'rgba(37, 123, 179, 0.8)',
+            hoverBorderColor: 'rgba(37, 123, 179, 1)'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: true
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.raw;
+                // show both decimal and percentage for clarity
+                const pct = (value * 100).toFixed(2) + '%';
+                return ' IGR: ' + value.toFixed(6) + '  (' + pct + ')';
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财年',
+              font: { size: 13 }
+            },
+            ticks: {
+              font: { size: 12 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: '内部增长率 (IGR)',
+              font: { size: 13 }
+            },
+            ticks: {
+              font: { size: 12 },
+              callback: function(value) {
+                // show decimal and percentage on axis
+                return value.toFixed(2) + ' (' + (value * 100).toFixed(0) + '%)';
+              }
+            },
+            grid: {
+              color: 'rgba(0,0,0,0.06)'
+            }
+          }
+        }
+      }
+    });
+
+    // Make the container height adapt based on viewport for better layout
+    function resizeChartContainer() {
+      const container = document.querySelector('.chart-container');
+      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      const baseHeight = vw < 600 ? 320 : 420;
+      container.style.height = baseHeight + 'px';
+    }
+
+    window.addEventListener('resize', resizeChartContainer);
+    resizeChartContainer();
+  </script>
+</body>
+</html>

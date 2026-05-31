@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/REPLACE_ME/deepchart/schema/instance.schema.json",
+  "title": "DeepChart canonical instance",
+  "type": "object",
+  "required": ["uid", "domain", "orig_id", "source", "info", "query", "context", "references"],
+  "additionalProperties": false,
+  "properties": {
+    "uid": {
+      "type": "string",
+      "pattern": "^(academic|finance|research_report)/.+$",
+      "description": "Globally unique = '<domain>/<orig_id>'"
+    },
+    "domain": { "type": "string", "enum": ["academic", "finance", "research_report"] },
+    "orig_id": { "type": "string" },
+
+    "source": {
+      "type": "object",
+      "required": ["type", "doc_id"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string", "enum": ["nature", "annual_report", "cbinsights", "startupblink", "startupgenome"] },
+        "doc_id": { "type": "string" },
+        "url": { "type": "string" },
+        "fig": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+
+    "info": {
+      "type": "object",
+      "required": [],
+      "additionalProperties": false,
+      "properties": {
+        "level": { "type": ["string", "null"], "enum": ["easy", "medium", "hard", null] },
+        "chart_type": { "type": "string" },
+        "chart_type_subclass": { "type": "string" },
+        "topic_domain": { "type": "array", "items": { "type": "string" } },
+        "chart_description": { "type": ["object", "null"] }
+      }
+    },
+
+    "query": {
+      "type": "object",
+      "required": ["template", "code_types"],
+      "additionalProperties": false,
+      "properties": {
+        "template": { "type": "string" },
+        "code_types": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "enum": ["python", "html"] }
+        },
+        "metadata": { "type": ["object", "null"] }
+      }
+    },
+
+    "context": {
+      "type": "object",
+      "required": ["modality", "variants"],
+      "additionalProperties": false,
+      "properties": {
+        "modality": { "type": "string", "enum": ["text", "multimodal"] },
+        "variants": {
+          "type": "object",
+          "required": ["normal"],
+          "additionalProperties": false,
+          "properties": {
+            "normal": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "long": { "type": "array", "items": { "type": "string" } },
+            "ultra_long": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+
+    "references": {
+      "type": "object",
+      "required": ["d_src", "program", "chart_image"],
+      "additionalProperties": false,
+      "properties": {
+        "d_src": { "type": "string" },
+        "d_der": { "type": ["string", "null"] },
+        "program": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "stage1_extract": { "type": ["string", "null"] },
+            "stage2_python": { "type": ["string", "null"] },
+            "stage2_html": { "type": ["string", "null"] }
+          }
+        },
+        "chart_image": { "type": "string", "description": "'' => render on the fly from program.stage2_*" }
+      }
+    }
+  }
+}

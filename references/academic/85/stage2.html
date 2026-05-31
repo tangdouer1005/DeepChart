@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 800px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const df = [
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"-",
+        "Start":1048546,
+        "End":1053216,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"-",
+        "Start2":11609384,
+        "End2":11612798,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1064427,
+        "End":1064891,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11674635,
+        "End2":11678156,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"-",
+        "Start":1082580,
+        "End":1082678,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"-",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"-",
+        "Start":1083078,
+        "End":1086056,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"-",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1094524,
+        "End":1095750,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11674635,
+        "End2":11678156,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"-",
+        "Start":1096019,
+        "End":1099015,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"-",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1100683,
+        "End":1102143,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11830983,
+        "End2":11833670,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1102204,
+        "End":1103313,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11830983,
+        "End2":11833670,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1108335,
+        "End":1109288,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11830983,
+        "End2":11833670,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"-",
+        "Start":1111665,
+        "End":1114991,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"-",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1120206,
+        "End":1124101,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11812255,
+        "End2":11813277,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1125874,
+        "End":1127862,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11830983,
+        "End2":11833670,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1127898,
+        "End":1128719,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11830983,
+        "End2":11833670,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"-",
+        "Start":1130420,
+        "End":1132744,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"-",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"-",
+        "Start":1139249,
+        "End":1142139,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"-",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1143238,
+        "End":1144530,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11830983,
+        "End2":11833670,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1144559,
+        "End":1144819,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11830983,
+        "End2":11833670,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"-",
+        "Start":1145696,
+        "End":1148997,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"-",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1150996,
+        "End":1152794,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11830983,
+        "End2":11833670,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"-",
+        "Start":1163174,
+        "End":1168019,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"-",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"-",
+        "Start":1176481,
+        "End":1184129,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"-",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1189712,
+        "End":1191118,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11774586,
+        "End2":11778155,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1192165,
+        "End":1193036,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11774031,
+        "End2":11774531,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1200738,
+        "End":1201599,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11785416,
+        "End2":11786425,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1201683,
+        "End":1208117,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11774031,
+        "End2":11774531,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1209734,
+        "End":1211571,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11793330,
+        "End2":11795401,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1216149,
+        "End":1217012,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11796454,
+        "End2":11810900,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1217453,
+        "End":1220481,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1222124,
+        "End":1225879,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1226446,
+        "End":1228237,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11796454,
+        "End2":11810900,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1229726,
+        "End":1233213,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1235158,
+        "End":1238043,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1235158,
+        "End":1238043,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11830983,
+        "End2":11833670,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_americanum",
+        "Strand":"+",
+        "Start":1238702,
+        "End":1241332,
+        "Accession2":"Solanum_cardiophyllumC509",
+        "Strand2":"+",
+        "Start2":11740273,
+        "End2":11741433,
+        "Order":2
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"+",
+        "Start":11830983,
+        "End":11833670,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"+",
+        "Start2":17634417,
+        "End2":17635778,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"+",
+        "Start":11826683,
+        "End":11827849,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"+",
+        "Start2":17630335,
+        "End2":17631187,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"+",
+        "Start":11820569,
+        "End":11824771,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"+",
+        "Start2":17583421,
+        "End2":17585283,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"+",
+        "Start":11812255,
+        "End":11813277,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"+",
+        "Start2":17583421,
+        "End2":17585283,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"+",
+        "Start":11796454,
+        "End":11810900,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"+",
+        "Start2":17609303,
+        "End2":17613605,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"+",
+        "Start":11793330,
+        "End":11795401,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"+",
+        "Start2":17605216,
+        "End2":17607634,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"+",
+        "Start":11785416,
+        "End":11786425,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"+",
+        "Start2":17600997,
+        "End2":17601509,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"-",
+        "Start":11774586,
+        "End":11778155,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"-",
+        "Start2":17590181,
+        "End2":17591530,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"-",
+        "Start":11774031,
+        "End":11774531,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"-",
+        "Start2":17590181,
+        "End2":17591530,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"-",
+        "Start":11740273,
+        "End":11741433,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"-",
+        "Start2":17583421,
+        "End2":17585283,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"+",
+        "Start":11735363,
+        "End":11737621,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"+",
+        "Start2":17634417,
+        "End2":17635778,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"+",
+        "Start":11693783,
+        "End":11696440,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"+",
+        "Start2":17619016,
+        "End2":17619447,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"+",
+        "Start":11674635,
+        "End":11678156,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"+",
+        "Start2":17574286,
+        "End2":17580119,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_cardiophyllumC509",
+        "Strand":"-",
+        "Start":11609384,
+        "End":11612798,
+        "Accession2":"Solanum_jamesii",
+        "Strand2":"-",
+        "Start2":17539546,
+        "End2":17544833,
+        "Order":3
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"-",
+        "Start":17511594,
+        "End":17520035,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"-",
+        "Start2":7124878,
+        "End2":7133335,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"-",
+        "Start":17539546,
+        "End":17544833,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"-",
+        "Start2":7134673,
+        "End2":7140063,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17574286,
+        "End":17580119,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7147207,
+        "End2":7152979,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"-",
+        "Start":17583421,
+        "End":17585283,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"-",
+        "Start2":7274268,
+        "End2":7274705,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17587776,
+        "End":17589107,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7300442,
+        "End2":7301622,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17590181,
+        "End":17591530,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7298260,
+        "End2":7299777,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17600418,
+        "End":17600906,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7305556,
+        "End2":7308028,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17600997,
+        "End":17601509,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7305556,
+        "End2":7308028,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17605216,
+        "End":17607634,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7314431,
+        "End2":7317470,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17609303,
+        "End":17613605,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7318577,
+        "End2":7323535,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17609303,
+        "End":17613605,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7318577,
+        "End2":7323535,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17619016,
+        "End":17619447,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7346404,
+        "End2":7347039,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17619751,
+        "End":17621377,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7274268,
+        "End2":7274705,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17626645,
+        "End":17628495,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7243119,
+        "End2":7243346,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17630335,
+        "End":17631187,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7274769,
+        "End2":7275515,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_jamesii",
+        "Strand":"+",
+        "Start":17634417,
+        "End":17635778,
+        "Accession2":"Solanum_chacoense",
+        "Strand2":"+",
+        "Start2":7393341,
+        "End2":7395983,
+        "Order":4
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7124878,
+        "End":7133335,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":854070,
+        "End2":861510,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7134673,
+        "End":7140063,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":863350,
+        "End2":866518,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7153601,
+        "End":7157740,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":888357,
+        "End2":892571,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7228065,
+        "End":7230495,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":1015757,
+        "End2":1016147,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7230554,
+        "End":7236614,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":969428,
+        "End2":974780,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7238639,
+        "End":7241774,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":975719,
+        "End2":979385,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7243119,
+        "End":7243346,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":1043272,
+        "End2":1044192,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7274268,
+        "End":7274705,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":995975,
+        "End2":997753,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7274769,
+        "End":7275515,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":1043272,
+        "End2":1044192,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7289137,
+        "End":7292908,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":1015757,
+        "End2":1016147,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7292957,
+        "End":7293208,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":888357,
+        "End2":892571,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7298260,
+        "End":7299777,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":1054255,
+        "End2":1062520,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7300442,
+        "End":7301622,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":1054255,
+        "End2":1062520,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7305556,
+        "End":7308028,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":1054255,
+        "End2":1062520,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7318577,
+        "End":7323535,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":1074086,
+        "End2":1078487,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7346404,
+        "End":7347039,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":975719,
+        "End2":979385,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7347127,
+        "End":7347291,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":1043272,
+        "End2":1044192,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7365917,
+        "End":7368140,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":969428,
+        "End2":974780,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7374888,
+        "End":7380317,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":1015757,
+        "End2":1016147,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7393341,
+        "End":7395983,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":1114407,
+        "End2":1117205,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7398270,
+        "End":7398572,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":1160585,
+        "End2":1180077,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"-",
+        "Start":7400465,
+        "End":7400785,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"-",
+        "Start2":1125020,
+        "End2":1128974,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7404258,
+        "End":7404566,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":1160585,
+        "End2":1180077,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_chacoense",
+        "Strand":"+",
+        "Start":7407589,
+        "End":7407897,
+        "Accession2":"Solanum_cajamarquenseC534",
+        "Strand2":"+",
+        "Start2":1160585,
+        "End2":1180077,
+        "Order":5
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"+",
+        "Start":1160585,
+        "End":1180077,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"+",
+        "Start2":14185692,
+        "End2":14185913,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"+",
+        "Start":1118244,
+        "End":1120701,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"+",
+        "Start2":14105689,
+        "End2":14110175,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"+",
+        "Start":1114407,
+        "End":1117205,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"+",
+        "Start2":14175692,
+        "End2":14177662,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"+",
+        "Start":1091341,
+        "End":1096498,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"+",
+        "Start2":14115207,
+        "End2":14118452,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"+",
+        "Start":1079091,
+        "End":1084237,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"+",
+        "Start2":14078600,
+        "End2":14079391,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"+",
+        "Start":1074086,
+        "End":1078487,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"+",
+        "Start2":14071642,
+        "End2":14076315,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"+",
+        "Start":1054255,
+        "End":1062520,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"+",
+        "Start2":14056581,
+        "End2":14058134,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":1045330,
+        "End":1048098,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13989561,
+        "End2":13989797,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":1043272,
+        "End":1044192,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13984467,
+        "End2":13987258,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":1031236,
+        "End":1035512,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13989561,
+        "End2":13989797,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":1015757,
+        "End":1016147,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13984467,
+        "End2":13987258,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":995975,
+        "End":997753,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13989561,
+        "End2":13989797,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":975719,
+        "End":979385,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13956542,
+        "End2":13960915,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":969428,
+        "End":974780,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13989561,
+        "End2":13989797,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":899379,
+        "End":902002,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13989561,
+        "End2":13989797,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":888357,
+        "End":892571,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13989561,
+        "End2":13989797,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":863350,
+        "End":866518,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13887354,
+        "End2":13892701,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_cajamarquenseC534",
+        "Strand":"-",
+        "Start":854070,
+        "End":861510,
+        "Accession2":"Solanum_neorossii",
+        "Strand2":"-",
+        "Start2":13877290,
+        "End2":13885950,
+        "Order":6
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":13877290,
+        "End":13885950,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65746073,
+        "End2":65755310,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":13877290,
+        "End":13885950,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65746073,
+        "End2":65755310,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":13887354,
+        "End":13892701,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65756673,
+        "End2":65762045,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":13947211,
+        "End":13948483,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65797075,
+        "End2":65798631,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":13948598,
+        "End":13953366,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65928761,
+        "End2":65931385,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":13956542,
+        "End":13960915,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65932335,
+        "End2":65935861,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":13984467,
+        "End":13987258,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65874621,
+        "End2":65875100,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":13989561,
+        "End":13989797,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65928761,
+        "End2":65931385,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":13989831,
+        "End":13990697,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65928761,
+        "End2":65931385,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":14028553,
+        "End":14030447,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65856226,
+        "End2":65858852,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":14030504,
+        "End":14030851,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":65775940,
+        "End2":65778796,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"+",
+        "Start":14051198,
+        "End":14053771,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"+",
+        "Start2":65997692,
+        "End2":66000327,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"+",
+        "Start":14053898,
+        "End":14054800,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"+",
+        "Start2":66000375,
+        "End2":66005844,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"+",
+        "Start":14056581,
+        "End":14058134,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"+",
+        "Start2":66000375,
+        "End2":66005844,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"+",
+        "Start":14067701,
+        "End":14068850,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"+",
+        "Start2":66010734,
+        "End2":66011969,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"+",
+        "Start":14078600,
+        "End":14079391,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"+",
+        "Start2":65874621,
+        "End2":65875100,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"+",
+        "Start":14105689,
+        "End":14110175,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"+",
+        "Start2":65874621,
+        "End2":65875100,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"+",
+        "Start":14115207,
+        "End":14118452,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"+",
+        "Start2":66017517,
+        "End2":66022258,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"+",
+        "Start":14153466,
+        "End":14154728,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"+",
+        "Start2":65874621,
+        "End2":65875100,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"+",
+        "Start":14175692,
+        "End":14177662,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"+",
+        "Start2":66023386,
+        "End2":66026037,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"+",
+        "Start":14185692,
+        "End":14185913,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"+",
+        "Start2":66031586,
+        "End2":66031894,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":14187599,
+        "End":14195215,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":66038907,
+        "End2":66039215,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_neorossii",
+        "Strand":"-",
+        "Start":14197617,
+        "End":14197925,
+        "Accession2":"Solanum_candolleanum",
+        "Strand2":"-",
+        "Start2":66031586,
+        "End2":66031894,
+        "Order":7
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":66042245,
+        "End":66042553,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7423635,
+        "End2":7434823,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":66038907,
+        "End":66039215,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7423635,
+        "End2":7434823,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":66031586,
+        "End":66031894,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7423635,
+        "End2":7434823,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":66023386,
+        "End":66026037,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7415801,
+        "End2":7418140,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":66017517,
+        "End":66022258,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7411186,
+        "End2":7411926,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":66010734,
+        "End":66011969,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7378328,
+        "End2":7384114,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":66000375,
+        "End":66005844,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7364318,
+        "End2":7372609,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":65997692,
+        "End":66000327,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7364318,
+        "End2":7372609,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":65980851,
+        "End":65984654,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7407213,
+        "End2":7407647,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":65960513,
+        "End":65963164,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7407213,
+        "End2":7407647,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65940710,
+        "End":65941413,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7304020,
+        "End2":7304928,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65932335,
+        "End":65935861,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7295609,
+        "End2":7299297,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65928761,
+        "End":65931385,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7285255,
+        "End2":7288948,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65874621,
+        "End":65875100,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7295609,
+        "End2":7299297,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65872761,
+        "End":65874527,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7272197,
+        "End2":7273039,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":65869862,
+        "End":65870812,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7245227,
+        "End2":7246177,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65856226,
+        "End":65858852,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7239733,
+        "End2":7242315,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":65854492,
+        "End":65855442,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7245227,
+        "End2":7246177,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65831901,
+        "End":65836334,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7239733,
+        "End2":7242315,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":65823388,
+        "End":65827932,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7411186,
+        "End2":7411926,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65797075,
+        "End":65798631,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7282199,
+        "End2":7283033,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":65781720,
+        "End":65782670,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7245227,
+        "End2":7246177,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65775940,
+        "End":65778796,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7239733,
+        "End2":7242315,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":65774330,
+        "End":65775280,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7237706,
+        "End2":7238656,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"+",
+        "Start":65769622,
+        "End":65770854,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"+",
+        "Start2":7230547,
+        "End2":7231563,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65756673,
+        "End":65762045,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7218806,
+        "End2":7222015,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_candolleanum",
+        "Strand":"-",
+        "Start":65746073,
+        "End":65755310,
+        "Accession2":"Solanum_tuberosum_phurejaC118",
+        "Strand2":"-",
+        "Start2":7208751,
+        "End2":7217019,
+        "Order":8
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7208751,
+        "End":7217019,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3256461,
+        "End2":3264620,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7218806,
+        "End":7222015,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3265993,
+        "End2":3271438,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7230547,
+        "End":7231563,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3284302,
+        "End2":3285252,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7237706,
+        "End":7238656,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3284302,
+        "End2":3285252,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7239733,
+        "End":7242315,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3285972,
+        "End2":3288729,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7245227,
+        "End":7246177,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3284302,
+        "End2":3285252,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7247799,
+        "End":7250429,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3379619,
+        "End2":3381940,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7269468,
+        "End":7270420,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3314572,
+        "End2":3315279,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7272197,
+        "End":7273039,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3374537,
+        "End2":3377896,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7282199,
+        "End":7283033,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3320369,
+        "End2":3324124,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7285255,
+        "End":7288948,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3379619,
+        "End2":3381940,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7295609,
+        "End":7299297,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3386763,
+        "End2":3390420,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7304020,
+        "End":7304928,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3397325,
+        "End2":3399223,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7321339,
+        "End":7322408,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3285972,
+        "End2":3288729,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7327702,
+        "End":7328142,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3285972,
+        "End2":3288729,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7329327,
+        "End":7330220,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3374537,
+        "End2":3377896,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7345108,
+        "End":7346814,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3285972,
+        "End2":3288729,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7364318,
+        "End":7372609,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3458255,
+        "End2":3467153,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7378328,
+        "End":7384097,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3472397,
+        "End2":3474510,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7378328,
+        "End":7384114,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3472397,
+        "End2":3474510,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7389523,
+        "End":7392803,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3379619,
+        "End2":3381940,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7407213,
+        "End":7407647,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3329734,
+        "End2":3334925,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7407711,
+        "End":7410037,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3500514,
+        "End2":3502343,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7411186,
+        "End":7411926,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3504144,
+        "End2":3508775,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7412047,
+        "End":7413752,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3504144,
+        "End2":3508775,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"+",
+        "Start":7415801,
+        "End":7418140,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"+",
+        "Start2":3520422,
+        "End2":3524922,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7434840,
+        "End":7435448,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3556966,
+        "End2":3573710,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7453812,
+        "End":7455999,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3593743,
+        "End2":3595001,
+        "Order":9
+    },
+    {
+        "Accession":"Solanum_tuberosum_phurejaC118",
+        "Strand":"-",
+        "Start":7459783,
+        "End":7460091,
+        "Accession2":"Solanum_tuberosum_stenotomumC093",
+        "Strand2":"-",
+        "Start2":3556966,
+        "End2":3573710,
+        "Order":9
+    }
+];
+        
+        const accessionOrder = [
+            'Solanum_americanum',
+            'Solanum_cardiophyllumC509',
+            'Solanum_jamesii',
+            'Solanum_chacoense',
+            'Solanum_cajamarquenseC534',
+            'Solanum_neorossii',
+            'Solanum_candolleanum',
+            'Solanum_tuberosum_phurejaC118',
+            'Solanum_tuberosum_stenotomumC093'
+        ].reverse(); // ECharts Y-axis bottom-up logic, so reverse for top-down visual
+
+        const accessionLabels = {
+            'Solanum_americanum': 'S. americanum',
+            'Solanum_cardiophyllumC509': 'S. cardiophyllum',
+            'Solanum_jamesii': 'S. jamesii',
+            'Solanum_chacoense': 'S. chacoense',
+            'Solanum_cajamarquenseC534': 'S. cajamarquense',
+            'Solanum_neorossii': 'S. neorossii',
+            'Solanum_candolleanum': 'S. candolleanum',
+            'Solanum_tuberosum_phurejaC118': 'S. tuberosum Gp Phureja',
+            'Solanum_tuberosum_stenotomumC093': 'S. tuberosum Gp Stenotomum'
+        };
+
+        const yMap = {};
+        accessionOrder.forEach((acc, i) => yMap[acc] = i);
+
+        const offsets = {};
+        accessionOrder.forEach(acc => {
+            const starts = df.filter(d => d.Accession === acc || d.Accession2 === acc)
+                             .map(d => d.Accession === acc ? d.Start : d.Start2);
+            const ends = df.filter(d => d.Accession === acc || d.Accession2 === acc)
+                           .map(d => d.Accession === acc ? d.End : d.End2);
+            if (starts.length > 0) {
+                const min = Math.min(...starts);
+                const max = Math.max(...ends);
+                offsets[acc] = (min + max) / 2;
+            }
+        });
+
+        // Unique genes list
+        const geneList = [];
+        const seen = new Set();
+        df.forEach(row => {
+            // Gene 1
+            const key1 = row.Accession + '_' + row.Start;
+            if (!seen.has(key1)) {
+                geneList.push({
+                    acc: row.Accession,
+                    start: row.Start,
+                    end: row.End,
+                    strand: row.Strand
+                });
+                seen.add(key1);
+            }
+            // Gene 2
+            const key2 = row.Accession2 + '_' + row.Start2;
+            if (!seen.has(key2)) {
+                geneList.push({
+                    acc: row.Accession2,
+                    start: row.Start2,
+                    end: row.End2,
+                    strand: row.Strand2
+                });
+                seen.add(key2);
+            }
+        });
+
+        // NLR Ranges
+        const nlrRanges = {
+            'Solanum_americanum': [1080000, 1180000],
+            'Solanum_cardiophyllumC509': [11700000, 11800000],
+            'Solanum_jamesii': [17580000, 17620000],
+            'Solanum_chacoense': [7200000, 7350000],
+            'Solanum_cajamarquenseC534': [950000, 1100000],
+            'Solanum_neorossii': [13950000, 14150000],
+            'Solanum_candolleanum': [65800000, 66000000],
+            'Solanum_tuberosum_phurejaC118': [7250000, 7400000],
+            'Solanum_tuberosum_stenotomumC093': [3300000, 3500000]
+        };
+        const redGenes = {
+            'Solanum_americanum': [1150996],
+            'Solanum_cardiophyllumC509': [11812255]
+        };
+
+        const renderItem = function(params, api) {
+            const children = [];
+            
+            // Draw Links (Polygon)
+            // Links are passed as a separate series
+            // But we can iterate data manually if we pass everything.
+            // ECharts custom series iterates over data items.
+            // Let's create multiple series.
+            return;
+        };
+
+        // We will use multiple custom series
+        // 1. Links
+        // 2. Genes
+        // 3. Tracks (Lines)
+
+        // Prepare Link Data
+        const linkData = df.map(row => {
+            const y1 = yMap[row.Accession];
+            const y2 = yMap[row.Accession2];
+            const x1s = row.Start - offsets[row.Accession];
+            const x1e = row.End - offsets[row.Accession];
+            const x2s = row.Start2 - offsets[row.Accession2];
+            const x2e = row.End2 - offsets[row.Accession2];
+            return [x1s, x1e, x2s, x2e, y1, y2];
+        });
+
+        // Prepare Gene Data
+        const geneSeriesData = geneList.map(g => {
+            const y = yMap[g.acc];
+            const xStart = g.start - offsets[g.acc];
+            const xEnd = g.end - offsets[g.acc];
+            let color = '#7aa6d6'; // Blue
+            
+            // Check NLR
+            if (nlrRanges[g.acc]) {
+                const mid = (g.start + g.end) / 2;
+                if (mid >= nlrRanges[g.acc][0] && mid <= nlrRanges[g.acc][1]) {
+                    color = '#e8cf7d'; // Yellow
+                }
+            }
+            // Check Red
+            if (redGenes[g.acc]) {
+                if (redGenes[g.acc].some(r => Math.abs(g.start - r) < 500)) {
+                    color = '#d64f5d'; // Red
+                }
+            }
+            return {
+                value: [xStart, xEnd, y],
+                itemStyle: { color: color }
+            };
+        });
+
+        // Prepare Track Lines
+        const trackData = accessionOrder.map(acc => {
+            const genes = geneList.filter(g => g.acc === acc);
+            if (genes.length === 0) return null;
+            const xs = genes.map(g => g.start - offsets[acc]);
+            const xe = genes.map(g => g.end - offsets[acc]);
+            const minX = Math.min(...xs) - 20000;
+            const maxX = Math.max(...xe) + 20000;
+            return [minX, maxX, yMap[acc]];
+        }).filter(d => d);
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, bottom: 50, left: 200, right: 50 },
+            xAxis: {
+                type: 'value',
+                show: false,
+                min: -800000,
+                max: 400000
+            },
+            yAxis: {
+                type: 'value',
+                show: false,
+                min: -1,
+                max: 10
+            },
+            series: [
+                // Links
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const x1s = api.value(0);
+                        const x1e = api.value(1);
+                        const x2s = api.value(2);
+                        const x2e = api.value(3);
+                        const y1 = api.value(4);
+                        const y2 = api.value(5);
+                        
+                        const p1 = api.coord([x1s, y1 - 0.1]);
+                        const p2 = api.coord([x1e, y1 - 0.1]);
+                        const p3 = api.coord([x2e, y2 + 0.1]);
+                        const p4 = api.coord([x2s, y2 + 0.1]);
+                        
+                        return {
+                            type: 'polygon',
+                            shape: {
+                                points: [p1, p2, p3, p4]
+                            },
+                            style: {
+                                fill: '#d9d9d9',
+                                opacity: 0.6
+                            }
+                        };
+                    },
+                    data: linkData,
+                    z: 1
+                },
+                // Tracks
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const start = api.coord([api.value(0), api.value(2)]);
+                        const end = api.coord([api.value(1), api.value(2)]);
+                        return {
+                            type: 'line',
+                            shape: { x1: start[0], y1: start[1], x2: end[0], y2: end[1] },
+                            style: { stroke: 'grey', lineWidth: 2 }
+                        };
+                    },
+                    data: trackData,
+                    z: 2
+                },
+                // Genes
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const start = api.coord([api.value(0), api.value(2)]);
+                        const end = api.coord([api.value(1), api.value(2)]);
+                        const height = 15; // fixed pixel height or relative
+                        // ECharts y grows down? No, standard cartesian y grows up.
+                        // We want rect centered at y.
+                        
+                        const width = end[0] - start[0];
+                        // Ensure minimal width for visibility
+                        const visWidth = Math.max(width, 2);
+                        
+                        return {
+                            type: 'rect',
+                            shape: {
+                                x: start[0],
+                                y: start[1] - height/2,
+                                width: visWidth,
+                                height: height
+                            },
+                            style: api.style()
+                        };
+                    },
+                    data: geneSeriesData,
+                    z: 3
+                }
+            ],
+            graphic: [
+                // Labels
+                ...accessionOrder.map(acc => {
+                    const y = yMap[acc];
+                    // Pixel pos of y
+                    // Chart height 800. Grid top 50, bottom 50. Height 700.
+                    // Y range -1 to 10 (11 units). 
+                    // y val -> pixel: bottom + (val - min)/(max-min)*height
+                    // Better to use relative position logic or dummy series.
+                    // But we can approximate since layout is fixed.
+                    // Or add a scatter series with labels.
+                    // Let's add a scatter series for labels.
+                    return null;
+                }).filter(x => x),
+                // Legend and Scale bar manually added?
+                {
+                    type: 'group',
+                    left: 50, top: 20,
+                    children: [
+                        { type: 'rect', shape: {width: 30, height: 10}, style: {fill: '#7aa6d6'}, left: 0 },
+                        { type: 'text', style: {text: 'Non-NLR gene', font: '12px Arial'}, left: 40, top: -2 },
+                        { type: 'rect', shape: {width: 30, height: 10}, style: {fill: '#e8cf7d'}, left: 150 },
+                        { type: 'text', style: {text: 'NLR gene', font: '12px Arial'}, left: 190, top: -2 },
+                        { type: 'text', style: {text: 'b', font: 'bold 24px Arial'}, left: -10, top: -5 }
+                    ]
+                }
+            ]
+        };
+        
+        // Add Label Series
+        const labelData = accessionOrder.map(acc => {
+            const count = geneList.filter(g => g.acc === acc).length;
+            const name = accessionLabels[acc] + ` (${count})`;
+            return {
+                value: [-250000, yMap[acc]], 
+                label: { 
+                    show: true, 
+                    formatter: name, 
+                    position: 'left', 
+                    color: 'black',
+                    fontSize: 12
+                }
+            };
+        });
+        
+        option.series.push({
+            type: 'scatter',
+            data: labelData,
+            symbolSize: 0,
+            z: 4
+        });
+
+        // Add Annotations
+        option.graphic.push(
+            { type: 'text', style: {text: 'Rpi-amr3', font: 'italic 12px Arial'}, left: '60%', top: '15%' },
+            { type: 'text', style: {text: 'Rpi-cph1', font: 'italic 12px Arial'}, left: '60%', top: '22%' }
+        );
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

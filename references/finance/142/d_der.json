@@ -1,0 +1,96 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "Avg Receivables": 2328000000.0,
+            "Revenue": 10776000000.0,
+            "Avg Inventory": 1485000000.0,
+            "Cost of Revenue": 2225000000.0,
+            "Avg Payables": 540500000.0,
+            "DSO": 78.85300668151447,
+            "DIO": 243.60674157303373,
+            "DPO": 88.66629213483147
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "Avg Receivables": 2926500000.0,
+            "Revenue": 12497000000.0,
+            "Avg Inventory": 1582500000.0,
+            "Cost of Revenue": 2687000000.0,
+            "Avg Payables": 771000000.0,
+            "DSO": 85.47431383532047,
+            "DIO": 214.965574990696,
+            "DPO": 104.7320431708225
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "Avg Receivables": 4077500000.0,
+            "Revenue": 15301000000.0,
+            "Avg Inventory": 2118000000.0,
+            "Cost of Revenue": 3787000000.0,
+            "Avg Payables": 508000000.0,
+            "DSO": 97.26733546827003,
+            "DIO": 204.1378399788751,
+            "DPO": 48.96223923950357
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "Avg Receivables": 2826000000.0,
+            "Revenue": 18884000000.0,
+            "Avg Inventory": 2370500000.0,
+            "Cost of Revenue": 4489000000.0,
+            "Avg Payables": 632500000.0,
+            "DSO": 54.62243168820165,
+            "DIO": 192.7450434395188,
+            "DPO": 51.42849186901314
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Avg Receivables": 3215500000.0,
+            "Revenue": 22237000000.0,
+            "Avg Inventory": 2308000000.0,
+            "Cost of Revenue": 5263000000.0,
+            "Avg Payables": 832000000.0,
+            "DSO": 52.77948913972209,
+            "DIO": 160.06460193805813,
+            "DPO": 57.70093102793084
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Avg Receivables": 3742500000.0,
+            "Revenue": 25098000000.0,
+            "Avg Inventory": 2001000000.0,
+            "Cost of Revenue": 6022000000.0,
+            "Avg Payables": 880000000.0,
+            "DSO": 54.42714558928998,
+            "DIO": 121.2827964131518,
+            "DPO": 53.33776154101628
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": 233.79345611971678
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": 195.70784565519395
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": 252.4429362076416
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": 195.9389832587073
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": 155.14316004984937
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "现金循环周期 (Cash Conversion Cycle, CCC)": 122.3721804614255
+        }
+    ]
+}

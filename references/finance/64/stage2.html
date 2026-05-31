@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CSCO Sloan Ratio (Accruals Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f5f5f7;
+      color: #111827;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px 24px 28px;
+      border-radius: 12px;
+      box-shadow:
+        0 10px 15px -3px rgba(15, 23, 42, 0.1),
+        0 4px 6px -4px rgba(15, 23, 42, 0.05);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #4b5563;
+      margin: 0 0 14px;
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 14px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .container {
+        padding: 16px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CSCO Sloan Ratio (Accruals Ratio)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="meta">
+      Data: Sloan Ratio by fiscal year (negative values indicate lower accruals relative to cash flows).<br />
+      Ticker: CSCO &nbsp;|&nbsp; Units: Ratio (dimensionless)
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="sloanChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Source data provided
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const sloanRatio = [
+      -0.0240910541431762,
+      -0.0339364536525231,
+      -0.1136285529878207,
+      -0.0407596198996016,
+      -0.0437278739241925,
+      -0.0505640759033012,
+      -0.0147677011368205,
+      -0.074269608994455,
+      -0.0049499480697412
+    ];
+
+    const ctx = document.getElementById("sloanChart").getContext("2d");
+
+    // Determine dynamic y-axis limits with a small margin
+    const minVal = Math.min(...sloanRatio);
+    const maxVal = Math.max(...sloanRatio);
+    const padding = 0.02; // small margin for aesthetics
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "Sloan Ratio",
+            data: sloanRatio,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.18)",
+            pointBackgroundColor: "#2563eb",
+            pointBorderColor: "#ffffff",
+            pointHoverBackgroundColor: "#1d4ed8",
+            pointHoverBorderColor: "#ffffff",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointHitRadius: 8,
+            borderWidth: 2,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              padding: 16
+            }
+          },
+          tooltip: {
+            enabled: true,
+            usePointStyle: true,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return " Sloan Ratio: " + value.toFixed(4);
+              },
+              title: function(context) {
+                const year = context[0].label;
+                return "Fiscal Year " + year;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              color: "#4b5563",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#374151"
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Sloan Ratio (Accruals Ratio)",
+              color: "#4b5563",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            grid: {
+              color: "rgba(156, 163, 175, 0.25)",
+              drawBorder: false
+            },
+            ticks: {
+              color: "#374151"
+            },
+            suggestedMin: minVal - padding,
+            suggestedMax: maxVal + padding
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

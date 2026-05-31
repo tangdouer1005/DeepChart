@@ -1,0 +1,55 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a horizontal bar chart showing the top 10 `salary-adjusted funding ladder gap` values computed as `((Median Series A Round - Median Seed Round) / Software Engineer Salary)` among ecosystems where `Median Seed Round`, `Median Series A Round`, and `Software Engineer Salary` are all exact values, expressed in `salary-years`, sorted descending by the gap, and excluding `N/A` and any `<` range-valued items.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "salary-years",
+  "sort_rule": "descending by salary_adjusted_ladder_gap",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "2021 Salary-Adjusted Funding Ladder Gap",
+    "xlabel": "salary-years",
+    "value_field": "salary_adjusted_ladder_gap"
+  },
+  "records": [
+    {
+      "entity": "Abu Dhabi",
+      "salary_adjusted_ladder_gap": 686.4261
+    },
+    {
+      "entity": "Manila",
+      "salary_adjusted_ladder_gap": 556.1628
+    },
+    {
+      "entity": "Bangalore-Karnataka",
+      "salary_adjusted_ladder_gap": 263.0769
+    },
+    {
+      "entity": "Telangana",
+      "salary_adjusted_ladder_gap": 237.5
+    },
+    {
+      "entity": "Sri Lanka",
+      "salary_adjusted_ladder_gap": 168.3333
+    },
+    {
+      "entity": "Cairo",
+      "salary_adjusted_ladder_gap": 132.1429
+    },
+    {
+      "entity": "Buenos Aires",
+      "salary_adjusted_ladder_gap": 107.6923
+    },
+    {
+      "entity": "Shenzhen",
+      "salary_adjusted_ladder_gap": 97.7778
+    },
+    {
+      "entity": "Cape Town",
+      "salary_adjusted_ladder_gap": 89.375
+    },
+    {
+      "entity": "Shanghai",
+      "salary_adjusted_ladder_gap": 88.1081
+    }
+  ]
+}

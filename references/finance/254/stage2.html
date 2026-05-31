@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>UNH 2016-2024 EBITDA 变化（息税折旧摊销前利润）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1080px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 4px;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin: 0 0 20px;
+      color: #666;
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      background: #fff;
+      border-radius: 10px;
+      padding: 18px 16px 10px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+      box-sizing: border-box;
+    }
+    canvas {
+      max-height: 520px;
+    }
+    .footer-note {
+      font-size: 0.75rem;
+      color: #777;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: #eef2ff;
+      color: #4338ca;
+      margin-left: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>联合健康（UNH）EBITDA 变化趋势</h1>
+    <h2>2016 - 2024 年息税折旧摊销前利润（单位：十亿美元）</h2>
+
+    <div class="chart-wrapper">
+      <div class="controls">
+        <span>交互：</span>
+        <label>
+          <input type="checkbox" id="togglePoints" checked />
+          显示数据点
+        </label>
+        <label>
+          <input type="checkbox" id="toggleFill" />
+          填充面积
+        </label>
+        <span class="badge">悬停查看精确数值</span>
+      </div>
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      数据来源：用户提供的 UNH 2016–2024 财年 EBITDA（息税折旧摊销前利润）值。
+      金额已按十亿美元显示（保留两位小数），但图表内部计算使用精确原始数值。
+    </div>
+  </div>
+
+  <script>
+    // 原始数据（美元）
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+    const ebitdaRaw = [
+      14929000000, // 2016
+      17189000000, // 2017
+      19376000000, // 2018
+      22005000000, // 2019
+      24930000000, // 2020
+      26626000000, // 2021
+      31316000000, // 2022
+      35567000000, // 2023
+      27239000000, // 2024
+    ];
+
+    // 转换为十亿美元便于显示
+    const ebitdaInBillions = ebitdaRaw.map((v) => v / 1e9);
+
+    const ctx = document.getElementById("ebitdaChart").getContext("2d");
+
+    const primaryColor = "#2563eb";
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(37, 99, 235, 0.3)");
+    gradient.addColorStop(1, "rgba(37, 99, 235, 0)");
+
+    const chartConfig = {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "EBITDA（十亿美元）",
+            data: ebitdaInBillions,
+            borderColor: primaryColor,
+            backgroundColor: gradient,
+            tension: 0.25,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: primaryColor,
+            pointBorderWidth: 2,
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const idx = context.dataIndex;
+                const year = years[idx];
+                const rawValue = ebitdaRaw[idx];
+                const billions = rawValue / 1e9;
+
+                // 格式化原始数值为带千分位的美元
+                const formattedDollar = rawValue.toLocaleString("en-US");
+
+                return [
+                  `年份: ${year}`,
+                  `EBITDA: $${formattedDollar}`,
+                  `≈ ${billions.toFixed(2)} 十亿美元`,
+                ];
+              },
+            },
+          },
+          title: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+            },
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "EBITDA（十亿美元）",
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(1);
+              },
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+            },
+          },
+        },
+      },
+    };
+
+    const ebitdaChart = new Chart(ctx, chartConfig);
+
+    // 简单交互控制：切换点和面积填充
+    const togglePoints = document.getElementById("togglePoints");
+    const toggleFill = document.getElementById("toggleFill");
+
+    togglePoints.addEventListener("change", () => {
+      const ds = ebitdaChart.data.datasets[0];
+      ds.pointRadius = togglePoints.checked ? 4 : 0;
+      ds.pointHoverRadius = togglePoints.checked ? 6 : 0;
+      ebitdaChart.update();
+    });
+
+    toggleFill.addEventListener("change", () => {
+      const ds = ebitdaChart.data.datasets[0];
+      ds.fill = toggleFill.checked;
+      ebitdaChart.update();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+{
+    "data": [
+        {
+            "service_type": "Health Care Services",
+            "state": "AZ",
+            "fairnes_index": 0.0413625,
+            "number_HighAging_CBG": 274,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "CA",
+            "fairnes_index": -0.075969,
+            "number_HighAging_CBG": 215,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "FL",
+            "fairnes_index": 0.146886,
+            "number_HighAging_CBG": 851,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "IL",
+            "fairnes_index": 0.423423,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "MD",
+            "fairnes_index": 0.311111,
+            "number_HighAging_CBG": 40,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "MA",
+            "fairnes_index": -0.105105,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "MI",
+            "fairnes_index": 0.00740741,
+            "number_HighAging_CBG": 30,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "NV",
+            "fairnes_index": 0.255556,
+            "number_HighAging_CBG": 40,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "NJ",
+            "fairnes_index": -0.266055,
+            "number_HighAging_CBG": 109,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "NY",
+            "fairnes_index": 0.0896921,
+            "number_HighAging_CBG": 83,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "OH",
+            "fairnes_index": 0.160494,
+            "number_HighAging_CBG": 36,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "PA",
+            "fairnes_index": 0.106667,
+            "number_HighAging_CBG": 50,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "SC",
+            "fairnes_index": -0.045045,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "TX",
+            "fairnes_index": -0.100529,
+            "number_HighAging_CBG": 63,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "VA",
+            "fairnes_index": 0.117845,
+            "number_HighAging_CBG": 33,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Health Care Services",
+            "state": "WA",
+            "fairnes_index": 0.247312,
+            "number_HighAging_CBG": 31,
+            "service_type_abbr": "HCS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "AZ",
+            "fairnes_index": -0.0841503,
+            "number_HighAging_CBG": 272,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "CA",
+            "fairnes_index": -0.167186,
+            "number_HighAging_CBG": 214,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "FL",
+            "fairnes_index": 0.12178,
+            "number_HighAging_CBG": 854,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "IL",
+            "fairnes_index": 0.141141,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "MD",
+            "fairnes_index": 0.19883,
+            "number_HighAging_CBG": 38,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "MA",
+            "fairnes_index": -0.117284,
+            "number_HighAging_CBG": 36,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "MI",
+            "fairnes_index": -0.103704,
+            "number_HighAging_CBG": 30,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "NV",
+            "fairnes_index": -0.015873,
+            "number_HighAging_CBG": 42,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "NJ",
+            "fairnes_index": -0.323232,
+            "number_HighAging_CBG": 110,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "NY",
+            "fairnes_index": -0.259259,
+            "number_HighAging_CBG": 84,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "NC",
+            "fairnes_index": -0.25448,
+            "number_HighAging_CBG": 31,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "OH",
+            "fairnes_index": 0.123457,
+            "number_HighAging_CBG": 36,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "PA",
+            "fairnes_index": -0.12854,
+            "number_HighAging_CBG": 51,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "SC",
+            "fairnes_index": 0.00900901,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "TX",
+            "fairnes_index": -0.107584,
+            "number_HighAging_CBG": 63,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "VA",
+            "fairnes_index": 0.0505051,
+            "number_HighAging_CBG": 33,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Grocery and Food Supply",
+            "state": "WA",
+            "fairnes_index": 0.139785,
+            "number_HighAging_CBG": 31,
+            "service_type_abbr": "GFS"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "AZ",
+            "fairnes_index": 0.0178427,
+            "number_HighAging_CBG": 274,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "CA",
+            "fairnes_index": -0.00253678,
+            "number_HighAging_CBG": 219,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "FL",
+            "fairnes_index": 0.142783,
+            "number_HighAging_CBG": 856,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "IL",
+            "fairnes_index": 0.171171,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "MD",
+            "fairnes_index": 0.138889,
+            "number_HighAging_CBG": 40,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "MA",
+            "fairnes_index": -0.135135,
+            "number_HighAging_CBG": 37,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "NV",
+            "fairnes_index": 0.0757576,
+            "number_HighAging_CBG": 44,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "NJ",
+            "fairnes_index": -0.232143,
+            "number_HighAging_CBG": 112,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "NY",
+            "fairnes_index": 0.0534979,
+            "number_HighAging_CBG": 81,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "OH",
+            "fairnes_index": 0.117284,
+            "number_HighAging_CBG": 36,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "PA",
+            "fairnes_index": -0.0283224,
+            "number_HighAging_CBG": 51,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "SC",
+            "fairnes_index": -0.0643275,
+            "number_HighAging_CBG": 38,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "TX",
+            "fairnes_index": 0.00529101,
+            "number_HighAging_CBG": 63,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "VA",
+            "fairnes_index": 0.030303,
+            "number_HighAging_CBG": 33,
+            "service_type_abbr": "HRE"
+        },
+        {
+            "service_type": "Housing and Real Estate",
+            "state": "WA",
+            "fairnes_index": 0.194444,
+            "number_HighAging_CBG": 32,
+            "service_type_abbr": "HRE"
+        }
+    ],
+    "p_values": {
+        "p_hcs_gfs": 0.037674137986940824,
+        "p_gfs_hre": 0.12102733871022793,
+        "p_hcs_hre": 0.36285087090683965
+    }
+}

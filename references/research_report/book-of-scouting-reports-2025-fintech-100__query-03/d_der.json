@@ -1,0 +1,85 @@
+{
+  "status": "complete",
+  "chart_type": "dumbbell",
+  "title": "Rank disagreement: Mosaic vs funding",
+  "label_field": "label",
+  "left_field": "left",
+  "right_field": "right",
+  "left_label": "Mosaic rank",
+  "right_label": "Funding rank",
+  "x_label": "Rank (lower is better)",
+  "data": [
+    {
+      "label": "CredibleX",
+      "left": 100,
+      "right": 7,
+      "gap": 93
+    },
+    {
+      "label": "Zocks",
+      "left": 5,
+      "right": 74,
+      "gap": 69
+    },
+    {
+      "label": "Xelix",
+      "left": 74,
+      "right": 6,
+      "gap": 68
+    },
+    {
+      "label": "Aspora",
+      "left": 79,
+      "right": 15,
+      "gap": 64
+    },
+    {
+      "label": "Campfire",
+      "left": 75,
+      "right": 13,
+      "gap": 62
+    },
+    {
+      "label": "Finmo",
+      "left": 17,
+      "right": 76,
+      "gap": 59
+    },
+    {
+      "label": "Jump",
+      "left": 7,
+      "right": 63,
+      "gap": 56
+    },
+    {
+      "label": "Yaspa",
+      "left": 31,
+      "right": 85,
+      "gap": 54
+    },
+    {
+      "label": "Noah",
+      "left": 15,
+      "right": 65,
+      "gap": 50
+    },
+    {
+      "label": "Descartes Underwriting",
+      "left": 58,
+      "right": 9,
+      "gap": 49
+    },
+    {
+      "label": "9Fin",
+      "left": 70,
+      "right": 22,
+      "gap": 48
+    },
+    {
+      "label": "Enza",
+      "left": 50,
+      "right": 97,
+      "gap": 47
+    }
+  ]
+}

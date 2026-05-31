@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ko 的经济增加值 (EVA) 2016–2024 趋势图 - 简化版</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f7f8;
+      color: #111827;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px 0;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      margin: 0 0 16px 0;
+    }
+
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .chart-container {
+      position: relative;              /* needed for responsive canvas */
+      width: 100%;
+      max-width: 900px;
+      height: 420px;                   /* fixed, reasonable height for readability */
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      padding: 20px 20px 12px 20px;
+      box-sizing: border-box;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;         /* enforce normal aspect ratio */
+      display: block;
+    }
+
+    .footer-note {
+      max-width: 900px;
+      margin: 8px auto 0;
+      font-size: 11px;
+      color: #9ca3af;
+      text-align: right;
+    }
+
+    .legend-note {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <div class="chart-container">
+      <h1>ko 的经济增加值 (EVA) - 简化版</h1>
+      <h2>2016–2024 年度变化</h2>
+      <canvas id="evaChart"></canvas>
+      <div class="legend-note">
+        单位：以提供的数值为基准（未额外缩放）。负值表示经济增加值为负。
+      </div>
+    </div>
+    <div class="footer-note">
+      数据来源：用户提供 | 图表：交互式折线图（可悬停查看具体数值）
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const evaValues = [
+      835788298.9183874,
+      -4504276705.370102,
+      1663028662.6139812,
+      3019332996.4769144,
+      1610606646.8355722,
+      2533321991.9517107,
+      3411525962.690399,
+      3693145105.003088,
+      2239194253.4005814
+    ];
+
+    const canvas = document.getElementById("evaChart");
+    const ctx = canvas.getContext("2d");
+
+    // Create vertical gradient for fill
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, "rgba(59, 130, 246, 0.4)");
+    gradient.addColorStop(0.4, "rgba(59, 130, 246, 0.15)");
+    gradient.addColorStop(1, "rgba(59, 130, 246, 0)");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "经济增加值 (EVA)",
+            data: evaValues,
+            tension: 0.25,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: gradient,
+            borderWidth: 2,
+            pointRadius: 3.5,
+            pointHoverRadius: 5,
+            pointBackgroundColor: "white",
+            pointBorderColor: "rgba(37, 99, 235, 1)",
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // we control size via CSS container
+        layout: {
+          padding: {
+            top: 8,
+            right: 12,
+            bottom: 4,
+            left: 0
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 16,
+              usePointStyle: true
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function (context) {
+                const value = context.raw;
+                const formatted = new Intl.NumberFormat("zh-CN", {
+                  maximumFractionDigits: 2
+                }).format(value);
+                return "EVA: " + formatted;
+              },
+              title: function (tooltipItems) {
+                const item = tooltipItems[0];
+                return "年度：" + item.label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              autoSkip: false
+            },
+            title: {
+              display: true,
+              text: "财年",
+              color: "#4b5563",
+              font: {
+                size: 12
+              }
+            }
+          },
+          y: {
+            grid: {
+              color: "rgba(148, 163, 184, 0.2)"
+            },
+            ticks: {
+              callback: function (value) {
+                return new Intl.NumberFormat("zh-CN", {
+                  notation: "compact",
+                  maximumFractionDigits: 1
+                }).format(value);
+              }
+            },
+            title: {
+              display: true,
+              text: "经济增加值 (EVA)",
+              color: "#4b5563",
+              font: {
+                size: 12
+              }
+            }
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: "index"
+        },
+        elements: {
+          line: {
+            spanGaps: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

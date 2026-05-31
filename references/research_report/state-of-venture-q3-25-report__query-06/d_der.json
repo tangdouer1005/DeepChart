@@ -1,0 +1,38 @@
+{
+  "status": "complete",
+  "chart_type": "dumbbell",
+  "title": "Late-stage share vs top-5 deal concentration",
+  "label_field": "label",
+  "left_field": "left",
+  "right_field": "right",
+  "left_label": "Late-stage share (%)",
+  "right_label": "Top-5 deal concentration (%)",
+  "x_label": "Percent",
+  "data": [
+    {
+      "label": "AI",
+      "left": 8.0,
+      "right": 52.09205
+    },
+    {
+      "label": "Retail Tech",
+      "left": 12.0,
+      "right": 38.074074
+    },
+    {
+      "label": "CVC",
+      "left": 5.0,
+      "right": 26.22549
+    },
+    {
+      "label": "Digital Health",
+      "left": 11.0,
+      "right": 24.244444
+    },
+    {
+      "label": "Fintech",
+      "left": 10.0,
+      "right": 21.743119
+    }
+  ]
+}

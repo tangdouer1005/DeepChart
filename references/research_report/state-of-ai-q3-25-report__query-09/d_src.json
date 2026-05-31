@@ -1,0 +1,2782 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a bubble chart comparing markets by `2025 YTD top-5 deal concentration share` on the x-axis and `Early-stage minus Late-stage deal share` on the y-axis, with bubble size equal to `2025 YTD deal count`, expressed in percentage points for the y-axis, and label only markets whose concentration share is above `40%`.",
+  "source_summary_file": "/Users/tangjiahui/Desktop/chartbench/data/aim/016_State of AI Q3’25 Report_f991b830.md",
+  "source_query_file": "/Users/tangjiahui/Desktop/chartbench/data/aim/016_State of AI Q3’25 Report_f991b830_query_recommendations.md",
+  "report_title": "016_State of AI Q3’25 Report_f991b830",
+  "units": {
+    "funding_m": "USD millions",
+    "deal_count": "deals",
+    "share_pct": "percent",
+    "valuation_m": "USD millions"
+  },
+  "years": {
+    "2021": [
+      {
+        "market": "US",
+        "q1_funding_m": 17700.0,
+        "q1_deals": 608,
+        "q2_funding_m": 16600.0,
+        "q2_deals": 542,
+        "q3_funding_m": 17300.0,
+        "q3_deals": 671,
+        "q4_funding_m": 17400.0,
+        "q4_deals": 622
+      },
+      {
+        "market": "Silicon Valley",
+        "q1_funding_m": 10400.0,
+        "q1_deals": 230,
+        "q2_funding_m": 7900.0,
+        "q2_deals": 193,
+        "q3_funding_m": 8400.0,
+        "q3_deals": 228,
+        "q4_funding_m": 8600.0,
+        "q4_deals": 227
+      },
+      {
+        "market": "New York",
+        "q1_funding_m": 3100.0,
+        "q1_deals": 91,
+        "q2_funding_m": 1600.0,
+        "q2_deals": 74,
+        "q3_funding_m": 2700.0,
+        "q3_deals": 101,
+        "q4_funding_m": 2200.0,
+        "q4_deals": 78
+      },
+      {
+        "market": "Los Angeles",
+        "q1_funding_m": 200.0,
+        "q1_deals": 30,
+        "q2_funding_m": 1800.0,
+        "q2_deals": 33,
+        "q3_funding_m": 400.0,
+        "q3_deals": 39,
+        "q4_funding_m": 400.0,
+        "q4_deals": 39
+      },
+      {
+        "market": "Boston",
+        "q1_funding_m": 1200.0,
+        "q1_deals": 38,
+        "q2_funding_m": 1200.0,
+        "q2_deals": 51,
+        "q3_funding_m": 1500.0,
+        "q3_deals": 47,
+        "q4_funding_m": 1500.0,
+        "q4_deals": 47
+      },
+      {
+        "market": "Seattle",
+        "q1_funding_m": 397.0,
+        "q1_deals": 20,
+        "q2_funding_m": 296.0,
+        "q2_deals": 12,
+        "q3_funding_m": 343.0,
+        "q3_deals": 29,
+        "q4_funding_m": 360.0,
+        "q4_deals": 23
+      },
+      {
+        "market": "Austin",
+        "q1_funding_m": 413.0,
+        "q1_deals": 20,
+        "q2_funding_m": 263.0,
+        "q2_deals": 15,
+        "q3_funding_m": 382.0,
+        "q3_deals": 14,
+        "q4_funding_m": 436.0,
+        "q4_deals": 18
+      },
+      {
+        "market": "Miami",
+        "q1_funding_m": 18.0,
+        "q1_deals": 12,
+        "q2_funding_m": 209.0,
+        "q2_deals": 8,
+        "q3_funding_m": 193.0,
+        "q3_deals": 15,
+        "q4_funding_m": 569.0,
+        "q4_deals": 14
+      },
+      {
+        "market": "Philadelphia",
+        "q1_funding_m": 53.0,
+        "q1_deals": 23,
+        "q2_funding_m": 360.0,
+        "q2_deals": 16,
+        "q3_funding_m": 95.0,
+        "q3_deals": 20,
+        "q4_funding_m": 219.0,
+        "q4_deals": 32
+      },
+      {
+        "market": "Canada",
+        "q1_funding_m": 122.0,
+        "q1_deals": 41,
+        "q2_funding_m": 1049.0,
+        "q2_deals": 36,
+        "q3_funding_m": 572.0,
+        "q3_deals": 39,
+        "q4_funding_m": 181.0,
+        "q4_deals": 42
+      },
+      {
+        "market": "Asia",
+        "q1_funding_m": 5100.0,
+        "q1_deals": 362,
+        "q2_funding_m": 5400.0,
+        "q2_deals": 347,
+        "q3_funding_m": 5500.0,
+        "q3_deals": 464,
+        "q4_funding_m": 5200.0,
+        "q4_deals": 406
+      },
+      {
+        "market": "China",
+        "q1_funding_m": 4400.0,
+        "q1_deals": 182,
+        "q2_funding_m": 3900.0,
+        "q2_deals": 190,
+        "q3_funding_m": 3700.0,
+        "q3_deals": 177,
+        "q4_funding_m": 3800.0,
+        "q4_deals": 165
+      },
+      {
+        "market": "India",
+        "q1_funding_m": 69.0,
+        "q1_deals": 40,
+        "q2_funding_m": 162.0,
+        "q2_deals": 36,
+        "q3_funding_m": 398.0,
+        "q3_deals": 56,
+        "q4_funding_m": 454.0,
+        "q4_deals": 56
+      },
+      {
+        "market": "Singapore",
+        "q1_funding_m": 15.0,
+        "q1_deals": 20,
+        "q2_funding_m": 219.0,
+        "q2_deals": 23,
+        "q3_funding_m": 551.0,
+        "q3_deals": 24,
+        "q4_funding_m": 356.0,
+        "q4_deals": 25
+      },
+      {
+        "market": "Japan",
+        "q1_funding_m": 261.0,
+        "q1_deals": 43,
+        "q2_funding_m": 108.0,
+        "q2_deals": 21,
+        "q3_funding_m": 384.0,
+        "q3_deals": 28,
+        "q4_funding_m": 199.0,
+        "q4_deals": 40
+      },
+      {
+        "market": "Europe",
+        "q1_funding_m": 2200.0,
+        "q1_deals": 291,
+        "q2_funding_m": 4500.0,
+        "q2_deals": 275,
+        "q3_funding_m": 2800.0,
+        "q3_deals": 248,
+        "q4_funding_m": 3600.0,
+        "q4_deals": 299
+      },
+      {
+        "market": "United Kingdom",
+        "q1_funding_m": 400.0,
+        "q1_deals": 82,
+        "q2_funding_m": 1900.0,
+        "q2_deals": 69,
+        "q3_funding_m": 1100.0,
+        "q3_deals": 71,
+        "q4_funding_m": 900.0,
+        "q4_deals": 67
+      },
+      {
+        "market": "Germany",
+        "q1_funding_m": 301.0,
+        "q1_deals": 38,
+        "q2_funding_m": 353.0,
+        "q2_deals": 41,
+        "q3_funding_m": 319.0,
+        "q3_deals": 30,
+        "q4_funding_m": 503.0,
+        "q4_deals": 43
+      },
+      {
+        "market": "France",
+        "q1_funding_m": 200.0,
+        "q1_deals": 27,
+        "q2_funding_m": 1100.0,
+        "q2_deals": 29,
+        "q3_funding_m": 0.0,
+        "q3_deals": 13,
+        "q4_funding_m": 500.0,
+        "q4_deals": 24
+      },
+      {
+        "market": "Israel",
+        "q1_funding_m": 900.0,
+        "q1_deals": 43,
+        "q2_funding_m": 500.0,
+        "q2_deals": 29,
+        "q3_funding_m": 700.0,
+        "q3_deals": 30,
+        "q4_funding_m": 1200.0,
+        "q4_deals": 50
+      },
+      {
+        "market": "LatAm",
+        "q1_funding_m": 15.0,
+        "q1_deals": 19,
+        "q2_funding_m": 272.0,
+        "q2_deals": 16,
+        "q3_funding_m": 587.0,
+        "q3_deals": 27,
+        "q4_funding_m": 207.0,
+        "q4_deals": 23
+      },
+      {
+        "market": "Brazil",
+        "q1_funding_m": 7.0,
+        "q1_deals": 11,
+        "q2_funding_m": 241.0,
+        "q2_deals": 16,
+        "q3_funding_m": 282.0,
+        "q3_deals": 16,
+        "q4_funding_m": 93.0,
+        "q4_deals": 20
+      },
+      {
+        "market": "Oceania",
+        "q1_funding_m": 75.0,
+        "q1_deals": 14,
+        "q2_funding_m": 201.0,
+        "q2_deals": 19,
+        "q3_funding_m": 244.0,
+        "q3_deals": 14,
+        "q4_funding_m": 186.0,
+        "q4_deals": 17
+      }
+    ],
+    "2022": [
+      {
+        "market": "US",
+        "q1_funding_m": 16000.0,
+        "q1_deals": 755,
+        "q2_funding_m": 11900.0,
+        "q2_deals": 607,
+        "q3_funding_m": 8500.0,
+        "q3_deals": 566,
+        "q4_funding_m": 7800.0,
+        "q4_deals": 488
+      },
+      {
+        "market": "Silicon Valley",
+        "q1_funding_m": 8000.0,
+        "q1_deals": 264,
+        "q2_funding_m": 5300.0,
+        "q2_deals": 227,
+        "q3_funding_m": 3100.0,
+        "q3_deals": 195,
+        "q4_funding_m": 2300.0,
+        "q4_deals": 149
+      },
+      {
+        "market": "New York",
+        "q1_funding_m": 1100.0,
+        "q1_deals": 101,
+        "q2_funding_m": 1100.0,
+        "q2_deals": 67,
+        "q3_funding_m": 700.0,
+        "q3_deals": 76,
+        "q4_funding_m": 900.0,
+        "q4_deals": 71
+      },
+      {
+        "market": "Los Angeles",
+        "q1_funding_m": 700.0,
+        "q1_deals": 31,
+        "q2_funding_m": 500.0,
+        "q2_deals": 38,
+        "q3_funding_m": 1000.0,
+        "q3_deals": 25,
+        "q4_funding_m": 1900.0,
+        "q4_deals": 36
+      },
+      {
+        "market": "Boston",
+        "q1_funding_m": 1300.0,
+        "q1_deals": 49,
+        "q2_funding_m": 1300.0,
+        "q2_deals": 50,
+        "q3_funding_m": 700.0,
+        "q3_deals": 38,
+        "q4_funding_m": 700.0,
+        "q4_deals": 37
+      },
+      {
+        "market": "Seattle",
+        "q1_funding_m": 484.0,
+        "q1_deals": 23,
+        "q2_funding_m": 253.0,
+        "q2_deals": 17,
+        "q3_funding_m": 228.0,
+        "q3_deals": 25,
+        "q4_funding_m": 107.0,
+        "q4_deals": 14
+      },
+      {
+        "market": "Austin",
+        "q1_funding_m": 347.0,
+        "q1_deals": 23,
+        "q2_funding_m": 202.0,
+        "q2_deals": 16,
+        "q3_funding_m": 112.0,
+        "q3_deals": 14,
+        "q4_funding_m": 188.0,
+        "q4_deals": 16
+      },
+      {
+        "market": "Miami",
+        "q1_funding_m": 64.0,
+        "q1_deals": 19,
+        "q2_funding_m": 110.0,
+        "q2_deals": 20,
+        "q3_funding_m": 83.0,
+        "q3_deals": 13,
+        "q4_funding_m": 61.0,
+        "q4_deals": 10
+      },
+      {
+        "market": "Philadelphia",
+        "q1_funding_m": 298.0,
+        "q1_deals": 22,
+        "q2_funding_m": 245.0,
+        "q2_deals": 16,
+        "q3_funding_m": 113.0,
+        "q3_deals": 23,
+        "q4_funding_m": 157.0,
+        "q4_deals": 52
+      },
+      {
+        "market": "Canada",
+        "q1_funding_m": 909.0,
+        "q1_deals": 53,
+        "q2_funding_m": 593.0,
+        "q2_deals": 42,
+        "q3_funding_m": 159.0,
+        "q3_deals": 27,
+        "q4_funding_m": 238.0,
+        "q4_deals": 36
+      },
+      {
+        "market": "Asia",
+        "q1_funding_m": 4300.0,
+        "q1_deals": 428,
+        "q2_funding_m": 3300.0,
+        "q2_deals": 359,
+        "q3_funding_m": 2600.0,
+        "q3_deals": 379,
+        "q4_funding_m": 1700.0,
+        "q4_deals": 276
+      },
+      {
+        "market": "China",
+        "q1_funding_m": 1900.0,
+        "q1_deals": 132,
+        "q2_funding_m": 1900.0,
+        "q2_deals": 124,
+        "q3_funding_m": 1700.0,
+        "q3_deals": 106,
+        "q4_funding_m": 1200.0,
+        "q4_deals": 87
+      },
+      {
+        "market": "India",
+        "q1_funding_m": 1114.0,
+        "q1_deals": 81,
+        "q2_funding_m": 290.0,
+        "q2_deals": 45,
+        "q3_funding_m": 116.0,
+        "q3_deals": 47,
+        "q4_funding_m": 131.0,
+        "q4_deals": 40
+      },
+      {
+        "market": "Singapore",
+        "q1_funding_m": 342.0,
+        "q1_deals": 18,
+        "q2_funding_m": 358.0,
+        "q2_deals": 17,
+        "q3_funding_m": 68.0,
+        "q3_deals": 23,
+        "q4_funding_m": 86.0,
+        "q4_deals": 21
+      },
+      {
+        "market": "Japan",
+        "q1_funding_m": 102.0,
+        "q1_deals": 37,
+        "q2_funding_m": 373.0,
+        "q2_deals": 52,
+        "q3_funding_m": 221.0,
+        "q3_deals": 61,
+        "q4_funding_m": 70.0,
+        "q4_deals": 38
+      },
+      {
+        "market": "Europe",
+        "q1_funding_m": 4700.0,
+        "q1_deals": 384,
+        "q2_funding_m": 3300.0,
+        "q2_deals": 300,
+        "q3_funding_m": 2500.0,
+        "q3_deals": 253,
+        "q4_funding_m": 2300.0,
+        "q4_deals": 296
+      },
+      {
+        "market": "United Kingdom",
+        "q1_funding_m": 1100.0,
+        "q1_deals": 119,
+        "q2_funding_m": 600.0,
+        "q2_deals": 85,
+        "q3_funding_m": 600.0,
+        "q3_deals": 63,
+        "q4_funding_m": 700.0,
+        "q4_deals": 71
+      },
+      {
+        "market": "Germany",
+        "q1_funding_m": 233.0,
+        "q1_deals": 37,
+        "q2_funding_m": 500.0,
+        "q2_deals": 40,
+        "q3_funding_m": 153.0,
+        "q3_deals": 27,
+        "q4_funding_m": 251.0,
+        "q4_deals": 33
+      },
+      {
+        "market": "France",
+        "q1_funding_m": 700.0,
+        "q1_deals": 43,
+        "q2_funding_m": 400.0,
+        "q2_deals": 31,
+        "q3_funding_m": 200.0,
+        "q3_deals": 29,
+        "q4_funding_m": 200.0,
+        "q4_deals": 27
+      },
+      {
+        "market": "Israel",
+        "q1_funding_m": 1000.0,
+        "q1_deals": 60,
+        "q2_funding_m": 900.0,
+        "q2_deals": 35,
+        "q3_funding_m": 900.0,
+        "q3_deals": 35,
+        "q4_funding_m": 500.0,
+        "q4_deals": 40
+      },
+      {
+        "market": "LatAm",
+        "q1_funding_m": 48.0,
+        "q1_deals": 29,
+        "q2_funding_m": 199.0,
+        "q2_deals": 24,
+        "q3_funding_m": 47.0,
+        "q3_deals": 19,
+        "q4_funding_m": 147.0,
+        "q4_deals": 28
+      },
+      {
+        "market": "Brazil",
+        "q1_funding_m": 34.0,
+        "q1_deals": 16,
+        "q2_funding_m": 183.0,
+        "q2_deals": 14,
+        "q3_funding_m": 38.0,
+        "q3_deals": 11,
+        "q4_funding_m": 18.0,
+        "q4_deals": 10
+      },
+      {
+        "market": "Oceania",
+        "q1_funding_m": 85.0,
+        "q1_deals": 22,
+        "q2_funding_m": 69.0,
+        "q2_deals": 19,
+        "q3_funding_m": 94.0,
+        "q3_deals": 13,
+        "q4_funding_m": 122.0,
+        "q4_deals": 12
+      }
+    ],
+    "2023": [
+      {
+        "market": "US",
+        "q1_funding_m": 23300.0,
+        "q1_deals": 728,
+        "q2_funding_m": 9200.0,
+        "q2_deals": 639,
+        "q3_funding_m": 9900.0,
+        "q3_deals": 665,
+        "q4_funding_m": 7700.0,
+        "q4_deals": 569
+      },
+      {
+        "market": "Silicon Valley",
+        "q1_funding_m": 19900.0,
+        "q1_deals": 281,
+        "q2_funding_m": 5200.0,
+        "q2_deals": 213,
+        "q3_funding_m": 4900.0,
+        "q3_deals": 227,
+        "q4_funding_m": 2600.0,
+        "q4_deals": 187
+      },
+      {
+        "market": "New York",
+        "q1_funding_m": 700.0,
+        "q1_deals": 106,
+        "q2_funding_m": 1600.0,
+        "q2_deals": 81,
+        "q3_funding_m": 1200.0,
+        "q3_deals": 90,
+        "q4_funding_m": 1800.0,
+        "q4_deals": 78
+      },
+      {
+        "market": "Los Angeles",
+        "q1_funding_m": 200.0,
+        "q1_deals": 34,
+        "q2_funding_m": 300.0,
+        "q2_deals": 34,
+        "q3_funding_m": 200.0,
+        "q3_deals": 28,
+        "q4_funding_m": 400.0,
+        "q4_deals": 34
+      },
+      {
+        "market": "Boston",
+        "q1_funding_m": 300.0,
+        "q1_deals": 39,
+        "q2_funding_m": 400.0,
+        "q2_deals": 40,
+        "q3_funding_m": 1000.0,
+        "q3_deals": 49,
+        "q4_funding_m": 600.0,
+        "q4_deals": 38
+      },
+      {
+        "market": "Seattle",
+        "q1_funding_m": 80.0,
+        "q1_deals": 20,
+        "q2_funding_m": 224.0,
+        "q2_deals": 24,
+        "q3_funding_m": 278.0,
+        "q3_deals": 21,
+        "q4_funding_m": 279.0,
+        "q4_deals": 30
+      },
+      {
+        "market": "Austin",
+        "q1_funding_m": 107.0,
+        "q1_deals": 17,
+        "q2_funding_m": 109.0,
+        "q2_deals": 17,
+        "q3_funding_m": 200.0,
+        "q3_deals": 17,
+        "q4_funding_m": 221.0,
+        "q4_deals": 21
+      },
+      {
+        "market": "Miami",
+        "q1_funding_m": 63.0,
+        "q1_deals": 22,
+        "q2_funding_m": 23.0,
+        "q2_deals": 13,
+        "q3_funding_m": 99.0,
+        "q3_deals": 14,
+        "q4_funding_m": 49.0,
+        "q4_deals": 10
+      },
+      {
+        "market": "Philadelphia",
+        "q1_funding_m": 146.0,
+        "q1_deals": 35,
+        "q2_funding_m": 202.0,
+        "q2_deals": 33,
+        "q3_funding_m": 248.0,
+        "q3_deals": 31,
+        "q4_funding_m": 211.0,
+        "q4_deals": 40
+      },
+      {
+        "market": "Canada",
+        "q1_funding_m": 82.0,
+        "q1_deals": 37,
+        "q2_funding_m": 744.0,
+        "q2_deals": 44,
+        "q3_funding_m": 306.0,
+        "q3_deals": 41,
+        "q4_funding_m": 247.0,
+        "q4_deals": 40
+      },
+      {
+        "market": "Asia",
+        "q1_funding_m": 1100.0,
+        "q1_deals": 256,
+        "q2_funding_m": 2000.0,
+        "q2_deals": 287,
+        "q3_funding_m": 2200.0,
+        "q3_deals": 300,
+        "q4_funding_m": 3000.0,
+        "q4_deals": 309
+      },
+      {
+        "market": "China",
+        "q1_funding_m": 500.0,
+        "q1_deals": 99,
+        "q2_funding_m": 1300.0,
+        "q2_deals": 104,
+        "q3_funding_m": 1300.0,
+        "q3_deals": 112,
+        "q4_funding_m": 1600.0,
+        "q4_deals": 78
+      },
+      {
+        "market": "India",
+        "q1_funding_m": 108.0,
+        "q1_deals": 36,
+        "q2_funding_m": 174.0,
+        "q2_deals": 36,
+        "q3_funding_m": 361.0,
+        "q3_deals": 29,
+        "q4_funding_m": 322.0,
+        "q4_deals": 23
+      },
+      {
+        "market": "Singapore",
+        "q1_funding_m": 53.0,
+        "q1_deals": 20,
+        "q2_funding_m": 118.0,
+        "q2_deals": 24,
+        "q3_funding_m": 57.0,
+        "q3_deals": 24,
+        "q4_funding_m": 70.0,
+        "q4_deals": 23
+      },
+      {
+        "market": "Japan",
+        "q1_funding_m": 192.0,
+        "q1_deals": 44,
+        "q2_funding_m": 104.0,
+        "q2_deals": 52,
+        "q3_funding_m": 269.0,
+        "q3_deals": 60,
+        "q4_funding_m": 107.0,
+        "q4_deals": 51
+      },
+      {
+        "market": "Europe",
+        "q1_funding_m": 1900.0,
+        "q1_deals": 348,
+        "q2_funding_m": 2600.0,
+        "q2_deals": 284,
+        "q3_funding_m": 2200.0,
+        "q3_deals": 255,
+        "q4_funding_m": 2300.0,
+        "q4_deals": 277
+      },
+      {
+        "market": "United Kingdom",
+        "q1_funding_m": 500.0,
+        "q1_deals": 99,
+        "q2_funding_m": 1000.0,
+        "q2_deals": 71,
+        "q3_funding_m": 500.0,
+        "q3_deals": 87,
+        "q4_funding_m": 300.0,
+        "q4_deals": 71
+      },
+      {
+        "market": "Germany",
+        "q1_funding_m": 459.0,
+        "q1_deals": 38,
+        "q2_funding_m": 255.0,
+        "q2_deals": 26,
+        "q3_funding_m": 395.0,
+        "q3_deals": 29,
+        "q4_funding_m": 445.0,
+        "q4_deals": 36
+      },
+      {
+        "market": "France",
+        "q1_funding_m": 300.0,
+        "q1_deals": 40,
+        "q2_funding_m": 600.0,
+        "q2_deals": 36,
+        "q3_funding_m": 600.0,
+        "q3_deals": 20,
+        "q4_funding_m": 700.0,
+        "q4_deals": 37
+      },
+      {
+        "market": "Israel",
+        "q1_funding_m": 200.0,
+        "q1_deals": 38,
+        "q2_funding_m": 300.0,
+        "q2_deals": 29,
+        "q3_funding_m": 400.0,
+        "q3_deals": 23,
+        "q4_funding_m": 200.0,
+        "q4_deals": 20
+      },
+      {
+        "market": "LatAm",
+        "q1_funding_m": 14.0,
+        "q1_deals": 18,
+        "q2_funding_m": 14.0,
+        "q2_deals": 19,
+        "q3_funding_m": 22.0,
+        "q3_deals": 15,
+        "q4_funding_m": 18.0,
+        "q4_deals": 14
+      },
+      {
+        "market": "Brazil",
+        "q1_funding_m": 7.0,
+        "q1_deals": 9,
+        "q2_funding_m": 10.0,
+        "q2_deals": 8,
+        "q3_funding_m": 15.0,
+        "q3_deals": 13,
+        "q4_funding_m": 11.0,
+        "q4_deals": 11
+      },
+      {
+        "market": "Oceania",
+        "q1_funding_m": 42.0,
+        "q1_deals": 18,
+        "q2_funding_m": 106.0,
+        "q2_deals": 14,
+        "q3_funding_m": 103.0,
+        "q3_deals": 13,
+        "q4_funding_m": 90.0,
+        "q4_deals": 12
+      }
+    ],
+    "2024": [
+      {
+        "market": "US",
+        "q1_funding_m": 11300.0,
+        "q1_deals": 738,
+        "q2_funding_m": 18000.0,
+        "q2_deals": 686,
+        "q3_funding_m": 12600.0,
+        "q3_deals": 733,
+        "q4_funding_m": 39400.0,
+        "q4_deals": 676
+      },
+      {
+        "market": "Silicon Valley",
+        "q1_funding_m": 8500.0,
+        "q1_deals": 312,
+        "q2_funding_m": 11200.0,
+        "q2_deals": 258,
+        "q3_funding_m": 6500.0,
+        "q3_deals": 259,
+        "q4_funding_m": 33000.0,
+        "q4_deals": 249
+      },
+      {
+        "market": "New York",
+        "q1_funding_m": 700.0,
+        "q1_deals": 110,
+        "q2_funding_m": 4000.0,
+        "q2_deals": 115,
+        "q3_funding_m": 1200.0,
+        "q3_deals": 120,
+        "q4_funding_m": 1000.0,
+        "q4_deals": 72
+      },
+      {
+        "market": "Los Angeles",
+        "q1_funding_m": 100.0,
+        "q1_deals": 32,
+        "q2_funding_m": 500.0,
+        "q2_deals": 40,
+        "q3_funding_m": 1800.0,
+        "q3_deals": 34,
+        "q4_funding_m": 700.0,
+        "q4_deals": 37
+      },
+      {
+        "market": "Boston",
+        "q1_funding_m": 400.0,
+        "q1_deals": 37,
+        "q2_funding_m": 400.0,
+        "q2_deals": 38,
+        "q3_funding_m": 400.0,
+        "q3_deals": 37,
+        "q4_funding_m": 800.0,
+        "q4_deals": 51
+      },
+      {
+        "market": "Seattle",
+        "q1_funding_m": 56.0,
+        "q1_deals": 24,
+        "q2_funding_m": 125.0,
+        "q2_deals": 24,
+        "q3_funding_m": 489.0,
+        "q3_deals": 31,
+        "q4_funding_m": 298.0,
+        "q4_deals": 21
+      },
+      {
+        "market": "Austin",
+        "q1_funding_m": 38.0,
+        "q1_deals": 12,
+        "q2_funding_m": 112.0,
+        "q2_deals": 13,
+        "q3_funding_m": 313.0,
+        "q3_deals": 24,
+        "q4_funding_m": 206.0,
+        "q4_deals": 17
+      },
+      {
+        "market": "Miami",
+        "q1_funding_m": 53.0,
+        "q1_deals": 16,
+        "q2_funding_m": 48.0,
+        "q2_deals": 12,
+        "q3_funding_m": 52.0,
+        "q3_deals": 13,
+        "q4_funding_m": 122.0,
+        "q4_deals": 15
+      },
+      {
+        "market": "Philadelphia",
+        "q1_funding_m": 294.0,
+        "q1_deals": 28,
+        "q2_funding_m": 182.0,
+        "q2_deals": 41,
+        "q3_funding_m": 178.0,
+        "q3_deals": 28,
+        "q4_funding_m": 166.0,
+        "q4_deals": 38
+      },
+      {
+        "market": "Canada",
+        "q1_funding_m": 226.0,
+        "q1_deals": 27,
+        "q2_funding_m": 723.0,
+        "q2_deals": 37,
+        "q3_funding_m": 178.0,
+        "q3_deals": 34,
+        "q4_funding_m": 937.0,
+        "q4_deals": 31
+      },
+      {
+        "market": "Asia",
+        "q1_funding_m": 3100.0,
+        "q1_deals": 279,
+        "q2_funding_m": 3200.0,
+        "q2_deals": 292,
+        "q3_funding_m": 2300.0,
+        "q3_deals": 379,
+        "q4_funding_m": 3000.0,
+        "q4_deals": 339
+      },
+      {
+        "market": "China",
+        "q1_funding_m": 2300.0,
+        "q1_deals": 95,
+        "q2_funding_m": 700.0,
+        "q2_deals": 106,
+        "q3_funding_m": 1400.0,
+        "q3_deals": 101,
+        "q4_funding_m": 1900.0,
+        "q4_deals": 96
+      },
+      {
+        "market": "India",
+        "q1_funding_m": 198.0,
+        "q1_deals": 28,
+        "q2_funding_m": 230.0,
+        "q2_deals": 49,
+        "q3_funding_m": 305.0,
+        "q3_deals": 55,
+        "q4_funding_m": 186.0,
+        "q4_deals": 42
+      },
+      {
+        "market": "Singapore",
+        "q1_funding_m": 173.0,
+        "q1_deals": 30,
+        "q2_funding_m": 203.0,
+        "q2_deals": 25,
+        "q3_funding_m": 113.0,
+        "q3_deals": 25,
+        "q4_funding_m": 59.0,
+        "q4_deals": 19
+      },
+      {
+        "market": "Japan",
+        "q1_funding_m": 134.0,
+        "q1_deals": 60,
+        "q2_funding_m": 318.0,
+        "q2_deals": 49,
+        "q3_funding_m": 126.0,
+        "q3_deals": 73,
+        "q4_funding_m": 73.0,
+        "q4_deals": 57
+      },
+      {
+        "market": "Europe",
+        "q1_funding_m": 2200.0,
+        "q1_deals": 289,
+        "q2_funding_m": 4300.0,
+        "q2_deals": 317,
+        "q3_funding_m": 2700.0,
+        "q3_deals": 344,
+        "q4_funding_m": 2800.0,
+        "q4_deals": 353
+      },
+      {
+        "market": "United Kingdom",
+        "q1_funding_m": 400.0,
+        "q1_deals": 84,
+        "q2_funding_m": 1500.0,
+        "q2_deals": 84,
+        "q3_funding_m": 700.0,
+        "q3_deals": 99,
+        "q4_funding_m": 800.0,
+        "q4_deals": 91
+      },
+      {
+        "market": "Germany",
+        "q1_funding_m": 229.0,
+        "q1_deals": 31,
+        "q2_funding_m": 599.0,
+        "q2_deals": 28,
+        "q3_funding_m": 664.0,
+        "q3_deals": 39,
+        "q4_funding_m": 231.0,
+        "q4_deals": 34
+      },
+      {
+        "market": "France",
+        "q1_funding_m": 400.0,
+        "q1_deals": 31,
+        "q2_funding_m": 1000.0,
+        "q2_deals": 25,
+        "q3_funding_m": 300.0,
+        "q3_deals": 34,
+        "q4_funding_m": 700.0,
+        "q4_deals": 45
+      },
+      {
+        "market": "Israel",
+        "q1_funding_m": 300.0,
+        "q1_deals": 17,
+        "q2_funding_m": 500.0,
+        "q2_deals": 22,
+        "q3_funding_m": 500.0,
+        "q3_deals": 31,
+        "q4_funding_m": 300.0,
+        "q4_deals": 23
+      },
+      {
+        "market": "LatAm",
+        "q1_funding_m": 22.0,
+        "q1_deals": 16,
+        "q2_funding_m": 121.0,
+        "q2_deals": 17,
+        "q3_funding_m": 70.0,
+        "q3_deals": 32,
+        "q4_funding_m": 99.0,
+        "q4_deals": 19
+      },
+      {
+        "market": "Brazil",
+        "q1_funding_m": 14.0,
+        "q1_deals": 25,
+        "q2_funding_m": 110.0,
+        "q2_deals": 13,
+        "q3_funding_m": 52.0,
+        "q3_deals": 11,
+        "q4_funding_m": 85.0,
+        "q4_deals": 13
+      },
+      {
+        "market": "Oceania",
+        "q1_funding_m": 21.0,
+        "q1_deals": 8,
+        "q2_funding_m": 439.0,
+        "q2_deals": 18,
+        "q3_funding_m": 136.0,
+        "q3_deals": 19,
+        "q4_funding_m": 160.0,
+        "q4_deals": 15
+      }
+    ],
+    "2025": [
+      {
+        "market": "US",
+        "q1_funding_m": 55800.0,
+        "q1_deals": 819,
+        "q2_funding_m": 40600.0,
+        "q2_deals": 906,
+        "q3_funding_m": 38800.0,
+        "q3_deals": 652
+      },
+      {
+        "market": "Silicon Valley",
+        "q1_funding_m": 46100.0,
+        "q1_deals": 335,
+        "q2_funding_m": 29700.0,
+        "q2_deals": 418,
+        "q3_funding_m": 30100.0,
+        "q3_deals": 272
+      },
+      {
+        "market": "New York",
+        "q1_funding_m": 1700.0,
+        "q1_deals": 110,
+        "q2_funding_m": 2300.0,
+        "q2_deals": 119,
+        "q3_funding_m": 3200.0,
+        "q3_deals": 104
+      },
+      {
+        "market": "Los Angeles",
+        "q1_funding_m": 900.0,
+        "q1_deals": 34,
+        "q2_funding_m": 3100.0,
+        "q2_deals": 37,
+        "q3_funding_m": 1100.0,
+        "q3_deals": 25
+      },
+      {
+        "market": "Boston",
+        "q1_funding_m": 1100.0,
+        "q1_deals": 41,
+        "q2_funding_m": 600.0,
+        "q2_deals": 40,
+        "q3_funding_m": 600.0,
+        "q3_deals": 27
+      },
+      {
+        "market": "Seattle",
+        "q1_funding_m": 627.0,
+        "q1_deals": 30,
+        "q2_funding_m": 965.0,
+        "q2_deals": 33,
+        "q3_funding_m": 184.0,
+        "q3_deals": 20
+      },
+      {
+        "market": "Austin",
+        "q1_funding_m": 1371.0,
+        "q1_deals": 17,
+        "q2_funding_m": 140.0,
+        "q2_deals": 15,
+        "q3_funding_m": 453.0,
+        "q3_deals": 16
+      },
+      {
+        "market": "Miami",
+        "q1_funding_m": 164.0,
+        "q1_deals": 16,
+        "q2_funding_m": 139.0,
+        "q2_deals": 12,
+        "q3_funding_m": 74.0,
+        "q3_deals": 16
+      },
+      {
+        "market": "Philadelphia",
+        "q1_funding_m": 508.0,
+        "q1_deals": 38,
+        "q2_funding_m": 805.0,
+        "q2_deals": 46,
+        "q3_funding_m": 848.0,
+        "q3_deals": 35
+      },
+      {
+        "market": "Canada",
+        "q1_funding_m": 375.0,
+        "q1_deals": 21,
+        "q2_funding_m": 753.0,
+        "q2_deals": 33,
+        "q3_funding_m": 439.0,
+        "q3_deals": 21
+      },
+      {
+        "market": "Asia",
+        "q1_funding_m": 2100.0,
+        "q1_deals": 317,
+        "q2_funding_m": 2200.0,
+        "q2_deals": 337,
+        "q3_funding_m": 2900.0,
+        "q3_deals": 297
+      },
+      {
+        "market": "China",
+        "q1_funding_m": 800.0,
+        "q1_deals": 96,
+        "q2_funding_m": 1300.0,
+        "q2_deals": 137,
+        "q3_funding_m": 1600.0,
+        "q3_deals": 112
+      },
+      {
+        "market": "India",
+        "q1_funding_m": 382.0,
+        "q1_deals": 42,
+        "q2_funding_m": 358.0,
+        "q2_deals": 37,
+        "q3_funding_m": 229.0,
+        "q3_deals": 41
+      },
+      {
+        "market": "Singapore",
+        "q1_funding_m": 142.0,
+        "q1_deals": 25,
+        "q2_funding_m": 87.0,
+        "q2_deals": 19,
+        "q3_funding_m": 354.0,
+        "q3_deals": 29
+      },
+      {
+        "market": "Japan",
+        "q1_funding_m": 83.0,
+        "q1_deals": 60,
+        "q2_funding_m": 158.0,
+        "q2_deals": 64,
+        "q3_funding_m": 235.0,
+        "q3_deals": 49
+      },
+      {
+        "market": "Europe",
+        "q1_funding_m": 3800.0,
+        "q1_deals": 306,
+        "q2_funding_m": 4700.0,
+        "q2_deals": 353,
+        "q3_funding_m": 5400.0,
+        "q3_deals": 279
+      },
+      {
+        "market": "United Kingdom",
+        "q1_funding_m": 1500.0,
+        "q1_deals": 81,
+        "q2_funding_m": 1000.0,
+        "q2_deals": 99,
+        "q3_funding_m": 2000.0,
+        "q3_deals": 70
+      },
+      {
+        "market": "Germany",
+        "q1_funding_m": 397.0,
+        "q1_deals": 34,
+        "q2_funding_m": 1361.0,
+        "q2_deals": 44,
+        "q3_funding_m": 246.0,
+        "q3_deals": 33
+      },
+      {
+        "market": "France",
+        "q1_funding_m": 200.0,
+        "q1_deals": 23,
+        "q2_funding_m": 400.0,
+        "q2_deals": 38,
+        "q3_funding_m": 1700.0,
+        "q3_deals": 19
+      },
+      {
+        "market": "Israel",
+        "q1_funding_m": 400.0,
+        "q1_deals": 24,
+        "q2_funding_m": 1000.0,
+        "q2_deals": 28,
+        "q3_funding_m": 600.0,
+        "q3_deals": 28
+      },
+      {
+        "market": "LatAm",
+        "q1_funding_m": 59.0,
+        "q1_deals": 20,
+        "q2_funding_m": 53.0,
+        "q2_deals": 20,
+        "q3_funding_m": 126.0,
+        "q3_deals": 19
+      },
+      {
+        "market": "Brazil",
+        "q1_funding_m": 54.0,
+        "q1_deals": 11,
+        "q2_funding_m": 34.0,
+        "q2_deals": 13,
+        "q3_funding_m": 124.0,
+        "q3_deals": 15
+      },
+      {
+        "market": "Oceania",
+        "q1_funding_m": 175.0,
+        "q1_deals": 23,
+        "q2_funding_m": 326.0,
+        "q2_deals": 14,
+        "q3_funding_m": 93.0,
+        "q3_deals": 17
+      }
+    ]
+  },
+  "stage_shares": [
+    {
+      "market": "US",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 73.0,
+      "mid_stage_pct": 12.0,
+      "late_stage_pct": 7.0,
+      "other_pct": 8.0
+    },
+    {
+      "market": "Silicon Valley",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 78.0,
+      "mid_stage_pct": 11.0,
+      "late_stage_pct": 7.0,
+      "other_pct": 4.0
+    },
+    {
+      "market": "New York",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 70.0,
+      "mid_stage_pct": 14.0,
+      "late_stage_pct": 7.0,
+      "other_pct": 9.0
+    },
+    {
+      "market": "Los Angeles",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 59.0,
+      "mid_stage_pct": 15.0,
+      "late_stage_pct": 11.0,
+      "other_pct": 15.0
+    },
+    {
+      "market": "Boston",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 53.0,
+      "mid_stage_pct": 25.0,
+      "late_stage_pct": 6.0,
+      "other_pct": 17.0
+    },
+    {
+      "market": "Seattle",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 71.0,
+      "mid_stage_pct": 18.0,
+      "late_stage_pct": 4.0,
+      "other_pct": 7.0
+    },
+    {
+      "market": "Austin",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 58.0,
+      "mid_stage_pct": 15.0,
+      "late_stage_pct": 15.0,
+      "other_pct": 13.0
+    },
+    {
+      "market": "Miami",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 64.0,
+      "mid_stage_pct": 11.0,
+      "late_stage_pct": 5.0,
+      "other_pct": 20.0
+    },
+    {
+      "market": "Philadelphia",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 84.0,
+      "mid_stage_pct": 5.0,
+      "late_stage_pct": 8.0,
+      "other_pct": 3.0
+    },
+    {
+      "market": "Canada",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 75.0,
+      "mid_stage_pct": 13.0,
+      "late_stage_pct": 12.0,
+      "other_pct": 0.0
+    },
+    {
+      "market": "Asia",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 71.0,
+      "mid_stage_pct": 16.0,
+      "late_stage_pct": 10.0,
+      "other_pct": 3.0
+    },
+    {
+      "market": "China",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 63.0,
+      "mid_stage_pct": 24.0,
+      "late_stage_pct": 12.0,
+      "other_pct": 2.0
+    },
+    {
+      "market": "India",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 81.0,
+      "mid_stage_pct": 9.0,
+      "late_stage_pct": 7.0,
+      "other_pct": 3.0
+    },
+    {
+      "market": "Singapore",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 79.0,
+      "mid_stage_pct": 8.0,
+      "late_stage_pct": 4.0,
+      "other_pct": 8.0
+    },
+    {
+      "market": "Japan",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 64.0,
+      "mid_stage_pct": 16.0,
+      "late_stage_pct": 16.0,
+      "other_pct": 3.0
+    },
+    {
+      "market": "Europe",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 78.0,
+      "mid_stage_pct": 11.0,
+      "late_stage_pct": 6.0,
+      "other_pct": 6.0
+    },
+    {
+      "market": "United Kingdom",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 76.0,
+      "mid_stage_pct": 12.0,
+      "late_stage_pct": 6.0,
+      "other_pct": 6.0
+    },
+    {
+      "market": "Germany",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 82.0,
+      "mid_stage_pct": 13.0,
+      "late_stage_pct": 4.0,
+      "other_pct": 2.0
+    },
+    {
+      "market": "France",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 80.0,
+      "mid_stage_pct": 14.0,
+      "late_stage_pct": 4.0,
+      "other_pct": 3.0
+    },
+    {
+      "market": "Israel",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 65.0,
+      "mid_stage_pct": 21.0,
+      "late_stage_pct": 9.0,
+      "other_pct": 5.0
+    },
+    {
+      "market": "LatAm",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 88.0,
+      "mid_stage_pct": 3.0,
+      "late_stage_pct": 3.0,
+      "other_pct": 5.0
+    },
+    {
+      "market": "Brazil",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 85.0,
+      "mid_stage_pct": 5.0,
+      "late_stage_pct": 5.0,
+      "other_pct": 5.0
+    },
+    {
+      "market": "Oceania",
+      "time_window": "2025 YTD",
+      "early_stage_pct": 81.0,
+      "mid_stage_pct": 9.0,
+      "late_stage_pct": 2.0,
+      "other_pct": 7.0
+    }
+  ],
+  "top_deals": [
+    {
+      "market": "US",
+      "visible_order": 1,
+      "company": "Anthropic",
+      "amount_m": 13000.0,
+      "round": "Series F",
+      "date": "2025-09-02",
+      "valuation_m": 183000.0
+    },
+    {
+      "market": "US",
+      "visible_order": 2,
+      "company": "OpenAI",
+      "amount_m": 8300.0,
+      "round": "Private Equity",
+      "date": "2025-08-01",
+      "valuation_m": 300000.0
+    },
+    {
+      "market": "US",
+      "visible_order": 3,
+      "company": "Databricks",
+      "amount_m": 1000.0,
+      "round": "Series K",
+      "date": "2025-08-19",
+      "valuation_m": 100000.0
+    },
+    {
+      "market": "US",
+      "visible_order": 4,
+      "company": "Figure",
+      "amount_m": 1000.0,
+      "round": "Series C",
+      "date": "2025-09-16",
+      "valuation_m": 39000.0
+    },
+    {
+      "market": "US",
+      "visible_order": 5,
+      "company": "Groq",
+      "amount_m": 750.0,
+      "round": "Series E",
+      "date": "2025-09-17",
+      "valuation_m": 6900.0
+    },
+    {
+      "market": "US",
+      "visible_order": 6,
+      "company": "Ramp",
+      "amount_m": 500.0,
+      "round": "Series E",
+      "date": "2025-07-30",
+      "valuation_m": 22500.0
+    },
+    {
+      "market": "US",
+      "visible_order": 7,
+      "company": "Cognition",
+      "amount_m": 400.0,
+      "round": "Series C",
+      "date": "2025-08-14",
+      "valuation_m": 10200.0
+    },
+    {
+      "market": "US",
+      "visible_order": 8,
+      "company": "Sierra",
+      "amount_m": 350.0,
+      "round": "Series D",
+      "date": "2025-09-04",
+      "valuation_m": 10000.0
+    },
+    {
+      "market": "US",
+      "visible_order": 9,
+      "company": "FieldAI",
+      "amount_m": 314.0,
+      "round": "Series A",
+      "date": "2025-08-20",
+      "valuation_m": 2000.0
+    },
+    {
+      "market": "Silicon Valley",
+      "visible_order": 1,
+      "company": "Anthropic",
+      "amount_m": 13000.0,
+      "round": "Series F",
+      "date": "2025-09-02",
+      "valuation_m": 183000.0
+    },
+    {
+      "market": "Silicon Valley",
+      "visible_order": 2,
+      "company": "OpenAI",
+      "amount_m": 8300.0,
+      "round": "Private Equity",
+      "date": "2025-08-01",
+      "valuation_m": 300000.0
+    },
+    {
+      "market": "Silicon Valley",
+      "visible_order": 3,
+      "company": "Databricks",
+      "amount_m": 1000.0,
+      "round": "Series K",
+      "date": "2025-08-19",
+      "valuation_m": 100000.0
+    },
+    {
+      "market": "Silicon Valley",
+      "visible_order": 4,
+      "company": "Figure",
+      "amount_m": 1000.0,
+      "round": "Series C",
+      "date": "2025-09-16",
+      "valuation_m": 39000.0
+    },
+    {
+      "market": "Silicon Valley",
+      "visible_order": 5,
+      "company": "Groq",
+      "amount_m": 750.0,
+      "round": "Series E",
+      "date": "2025-09-17",
+      "valuation_m": 6900.0
+    },
+    {
+      "market": "New York",
+      "visible_order": 1,
+      "company": "Ramp",
+      "amount_m": 500.0,
+      "round": "Series E",
+      "date": "2025-07-30",
+      "valuation_m": 22500.0
+    },
+    {
+      "market": "New York",
+      "visible_order": 2,
+      "company": "Cognition",
+      "amount_m": 400.0,
+      "round": "Series C",
+      "date": "2025-08-14",
+      "valuation_m": 10200.0
+    },
+    {
+      "market": "New York",
+      "visible_order": 3,
+      "company": "Emergence AI",
+      "amount_m": 300.0,
+      "round": "Corporate Minority",
+      "date": "2025-09-24",
+      "valuation_m": null
+    },
+    {
+      "market": "New York",
+      "visible_order": 4,
+      "company": "EliseAI",
+      "amount_m": 250.0,
+      "round": "Series E",
+      "date": "2025-08-20",
+      "valuation_m": 2200.0
+    },
+    {
+      "market": "New York",
+      "visible_order": 5,
+      "company": "Aidoc",
+      "amount_m": 110.0,
+      "round": "Series D",
+      "date": "2025-07-23",
+      "valuation_m": null
+    },
+    {
+      "market": "Los Angeles",
+      "visible_order": 1,
+      "company": "FieldAI",
+      "amount_m": 314.0,
+      "round": "Series A",
+      "date": "2025-08-20",
+      "valuation_m": 2000.0
+    },
+    {
+      "market": "Los Angeles",
+      "visible_order": 2,
+      "company": "Vercel",
+      "amount_m": 300.0,
+      "round": "Series F",
+      "date": "2025-09-30",
+      "valuation_m": 9300.0
+    },
+    {
+      "market": "Los Angeles",
+      "visible_order": 3,
+      "company": "Divergent",
+      "amount_m": 250.0,
+      "round": "Series E",
+      "date": "2025-09-15",
+      "valuation_m": 2300.0
+    },
+    {
+      "market": "Los Angeles",
+      "visible_order": 4,
+      "company": "MarqVision",
+      "amount_m": 48.0,
+      "round": "Series B",
+      "date": "2025-09-15",
+      "valuation_m": null
+    },
+    {
+      "market": "Los Angeles",
+      "visible_order": 5,
+      "company": "ProRata.ai",
+      "amount_m": 40.0,
+      "round": "Series B",
+      "date": "2025-09-05",
+      "valuation_m": null
+    },
+    {
+      "market": "Boston",
+      "visible_order": 1,
+      "company": "Lila Sciences",
+      "amount_m": 235.0,
+      "round": "Series A",
+      "date": "2025-09-15",
+      "valuation_m": 1200.0
+    },
+    {
+      "market": "Boston",
+      "visible_order": 2,
+      "company": "OpenEvidence",
+      "amount_m": 210.0,
+      "round": "Series D",
+      "date": "2025-07-15",
+      "valuation_m": 3500.0
+    },
+    {
+      "market": "Boston",
+      "visible_order": 3,
+      "company": "Blue Water Autonomy",
+      "amount_m": 50.0,
+      "round": "Series A",
+      "date": "2025-08-26",
+      "valuation_m": null
+    },
+    {
+      "market": "Boston",
+      "visible_order": 4,
+      "company": "Ketryx",
+      "amount_m": 39.0,
+      "round": "Series B",
+      "date": "2025-09-04",
+      "valuation_m": null
+    },
+    {
+      "market": "Boston",
+      "visible_order": 5,
+      "company": "Method AI",
+      "amount_m": 20.0,
+      "round": "Series A",
+      "date": "2025-08-21",
+      "valuation_m": null
+    },
+    {
+      "market": "Seattle",
+      "visible_order": 1,
+      "company": "Augmodo",
+      "amount_m": 38.0,
+      "round": "Series A",
+      "date": "2025-07-10",
+      "valuation_m": null
+    },
+    {
+      "market": "Seattle",
+      "visible_order": 2,
+      "company": "Dropzone AI",
+      "amount_m": 37.0,
+      "round": "Series B",
+      "date": "2025-07-28",
+      "valuation_m": null
+    },
+    {
+      "market": "Seattle",
+      "visible_order": 3,
+      "company": "Vouched",
+      "amount_m": 17.0,
+      "round": "Series A",
+      "date": "2025-09-04",
+      "valuation_m": null
+    },
+    {
+      "market": "Seattle",
+      "visible_order": 4,
+      "company": "Envive",
+      "amount_m": 15.0,
+      "round": "Series A",
+      "date": "2025-09-16",
+      "valuation_m": null
+    },
+    {
+      "market": "Seattle",
+      "visible_order": 5,
+      "company": "Everlyn",
+      "amount_m": 15.0,
+      "round": "Series A",
+      "date": "2025-08-31",
+      "valuation_m": 250.0
+    },
+    {
+      "market": "Austin",
+      "visible_order": 1,
+      "company": "Anaconda",
+      "amount_m": 150.0,
+      "round": "Series C",
+      "date": "2025-07-31",
+      "valuation_m": 1500.0
+    },
+    {
+      "market": "Austin",
+      "visible_order": 2,
+      "company": "Augment",
+      "amount_m": 85.0,
+      "round": "Series A",
+      "date": "2025-09-04",
+      "valuation_m": null
+    },
+    {
+      "market": "Austin",
+      "visible_order": 3,
+      "company": "SEON",
+      "amount_m": 80.0,
+      "round": "Series C",
+      "date": "2025-09-16",
+      "valuation_m": null
+    },
+    {
+      "market": "Austin",
+      "visible_order": 4,
+      "company": "Pattern Bioscience",
+      "amount_m": 44.0,
+      "round": "Series D",
+      "date": "2025-08-18",
+      "valuation_m": null
+    },
+    {
+      "market": "Austin",
+      "visible_order": 5,
+      "company": "Hello Patient",
+      "amount_m": 23.0,
+      "round": "Series A",
+      "date": "2025-09-04",
+      "valuation_m": null
+    },
+    {
+      "market": "Miami",
+      "visible_order": 1,
+      "company": "Imagene AI",
+      "amount_m": 23.0,
+      "round": "Series B",
+      "date": "2025-07-01",
+      "valuation_m": null
+    },
+    {
+      "market": "Miami",
+      "visible_order": 2,
+      "company": "Osigu",
+      "amount_m": 10.0,
+      "round": "Series B",
+      "date": "2025-08-28",
+      "valuation_m": null
+    },
+    {
+      "market": "Miami",
+      "visible_order": 3,
+      "company": "Togal.AI",
+      "amount_m": 10.0,
+      "round": "Convertible Note",
+      "date": "2025-08-27",
+      "valuation_m": null
+    },
+    {
+      "market": "Miami",
+      "visible_order": 4,
+      "company": "EchoTwin AI",
+      "amount_m": 8.0,
+      "round": "Seed VC",
+      "date": "2025-09-24",
+      "valuation_m": null
+    },
+    {
+      "market": "Miami",
+      "visible_order": 5,
+      "company": "Kira",
+      "amount_m": 7.0,
+      "round": "Seed VC",
+      "date": "2025-08-25",
+      "valuation_m": null
+    },
+    {
+      "market": "Philadelphia",
+      "visible_order": 1,
+      "company": "Quavo",
+      "amount_m": 300.0,
+      "round": "Growth Equity",
+      "date": "2025-07-22",
+      "valuation_m": null
+    },
+    {
+      "market": "Philadelphia",
+      "visible_order": 2,
+      "company": "Lovable",
+      "amount_m": 200.0,
+      "round": "Series A",
+      "date": "2025-07-17",
+      "valuation_m": 1800.0
+    },
+    {
+      "market": "Philadelphia",
+      "visible_order": 3,
+      "company": "Decart",
+      "amount_m": 100.0,
+      "round": "Series B",
+      "date": "2025-08-07",
+      "valuation_m": 3100.0
+    },
+    {
+      "market": "Philadelphia",
+      "visible_order": 4,
+      "company": "Maisa AI",
+      "amount_m": 25.0,
+      "round": "Seed VC",
+      "date": "2025-08-28",
+      "valuation_m": null
+    },
+    {
+      "market": "Philadelphia",
+      "visible_order": 5,
+      "company": "Maisa AI",
+      "amount_m": 25.0,
+      "round": "Convertible Note",
+      "date": "2025-07-24",
+      "valuation_m": null
+    },
+    {
+      "market": "Canada",
+      "visible_order": 1,
+      "company": "Blue J",
+      "amount_m": 122.0,
+      "round": "Series D",
+      "date": "2025-07-25",
+      "valuation_m": 300.0
+    },
+    {
+      "market": "Canada",
+      "visible_order": 2,
+      "company": "Cohere",
+      "amount_m": 100.0,
+      "round": "Series D",
+      "date": "2025-09-24",
+      "valuation_m": 7000.0
+    },
+    {
+      "market": "Canada",
+      "visible_order": 3,
+      "company": "BinSentry",
+      "amount_m": 50.0,
+      "round": "Series C",
+      "date": "2025-08-11",
+      "valuation_m": null
+    },
+    {
+      "market": "Canada",
+      "visible_order": 4,
+      "company": "Valence",
+      "amount_m": 50.0,
+      "round": "Series B",
+      "date": "2025-09-25",
+      "valuation_m": null
+    },
+    {
+      "market": "Canada",
+      "visible_order": 5,
+      "company": "Congruence Therapeutics",
+      "amount_m": 32.0,
+      "round": "Series A",
+      "date": "2025-09-04",
+      "valuation_m": null
+    },
+    {
+      "market": "Canada",
+      "visible_order": 6,
+      "company": "4AG Robotics",
+      "amount_m": 29.0,
+      "round": "Series B",
+      "date": "2025-07-16",
+      "valuation_m": null
+    },
+    {
+      "market": "Canada",
+      "visible_order": 7,
+      "company": "BinSentry",
+      "amount_m": 20.0,
+      "round": "Series B",
+      "date": "2025-07-16",
+      "valuation_m": null
+    },
+    {
+      "market": "Canada",
+      "visible_order": 8,
+      "company": "Astrus",
+      "amount_m": 8.0,
+      "round": "Convertible Note",
+      "date": "2025-07-01",
+      "valuation_m": null
+    },
+    {
+      "market": "Canada",
+      "visible_order": 9,
+      "company": "Hyper",
+      "amount_m": 6.0,
+      "round": "Seed VC",
+      "date": "2025-07-21",
+      "valuation_m": null
+    },
+    {
+      "market": "Canada",
+      "visible_order": 10,
+      "company": "TATO",
+      "amount_m": 6.0,
+      "round": "Seed VC",
+      "date": "2025-09-22",
+      "valuation_m": null
+    },
+    {
+      "market": "Asia",
+      "visible_order": 1,
+      "company": "MiniMax",
+      "amount_m": 300.0,
+      "round": "Series B",
+      "date": "2025-07-14",
+      "valuation_m": 3700.0
+    },
+    {
+      "market": "Asia",
+      "visible_order": 2,
+      "company": "Rebellions",
+      "amount_m": 250.0,
+      "round": "Series C",
+      "date": "2025-09-30",
+      "valuation_m": 1400.0
+    },
+    {
+      "market": "Asia",
+      "visible_order": 3,
+      "company": "Lightelligence",
+      "amount_m": 210.0,
+      "round": "Series C",
+      "date": "2025-09-04",
+      "valuation_m": null
+    },
+    {
+      "market": "Asia",
+      "visible_order": 4,
+      "company": "UltraGreen",
+      "amount_m": 188.0,
+      "round": "Series A",
+      "date": "2025-09-15",
+      "valuation_m": 1300.0
+    },
+    {
+      "market": "Asia",
+      "visible_order": 5,
+      "company": "Z.ai",
+      "amount_m": 140.0,
+      "round": "Series E",
+      "date": "2025-07-02",
+      "valuation_m": null
+    },
+    {
+      "market": "Asia",
+      "visible_order": 6,
+      "company": "SiEngine Technology",
+      "amount_m": 139.0,
+      "round": "Series B",
+      "date": "2025-08-19",
+      "valuation_m": null
+    },
+    {
+      "market": "Asia",
+      "visible_order": 7,
+      "company": "TARS",
+      "amount_m": 125.0,
+      "round": "Seed VC",
+      "date": "2025-07-08",
+      "valuation_m": 822.0
+    },
+    {
+      "market": "Asia",
+      "visible_order": 8,
+      "company": "Galaxea AI",
+      "amount_m": 100.0,
+      "round": "Series A",
+      "date": "2025-07-09",
+      "valuation_m": null
+    },
+    {
+      "market": "Asia",
+      "visible_order": 9,
+      "company": "Lisuan Tech",
+      "amount_m": 70.0,
+      "round": "Corporate Minority",
+      "date": "2025-08-31",
+      "valuation_m": 589.0
+    },
+    {
+      "market": "Asia",
+      "visible_order": 10,
+      "company": "ZERON",
+      "amount_m": 70.0,
+      "round": "Series A",
+      "date": "2025-07-23",
+      "valuation_m": null
+    },
+    {
+      "market": "China",
+      "visible_order": 1,
+      "company": "MiniMax",
+      "amount_m": 300.0,
+      "round": "Series B",
+      "date": "2025-07-14",
+      "valuation_m": 3700.0
+    },
+    {
+      "market": "China",
+      "visible_order": 2,
+      "company": "Lightelligence",
+      "amount_m": 210.0,
+      "round": "Series C",
+      "date": "2025-09-04",
+      "valuation_m": null
+    },
+    {
+      "market": "China",
+      "visible_order": 3,
+      "company": "Z.ai",
+      "amount_m": 140.0,
+      "round": "Series E",
+      "date": "2025-07-02",
+      "valuation_m": null
+    },
+    {
+      "market": "China",
+      "visible_order": 4,
+      "company": "SiEngine Technology",
+      "amount_m": 139.0,
+      "round": "Series B",
+      "date": "2025-08-19",
+      "valuation_m": null
+    },
+    {
+      "market": "China",
+      "visible_order": 5,
+      "company": "TARS",
+      "amount_m": 125.0,
+      "round": "Seed VC",
+      "date": "2025-07-08",
+      "valuation_m": 822.0
+    },
+    {
+      "market": "India",
+      "visible_order": 1,
+      "company": "Amnex",
+      "amount_m": 53.0,
+      "round": "Undisclosed",
+      "date": "2025-08-18",
+      "valuation_m": null
+    },
+    {
+      "market": "India",
+      "visible_order": 2,
+      "company": "Darwinbox",
+      "amount_m": 40.0,
+      "round": "Series E",
+      "date": "2025-08-14",
+      "valuation_m": null
+    },
+    {
+      "market": "India",
+      "visible_order": 3,
+      "company": "QpiAI",
+      "amount_m": 32.0,
+      "round": "Series A",
+      "date": "2025-07-16",
+      "valuation_m": 162.0
+    },
+    {
+      "market": "India",
+      "visible_order": 4,
+      "company": "Ripplr",
+      "amount_m": 23.0,
+      "round": "Series C",
+      "date": "2025-09-13",
+      "valuation_m": null
+    },
+    {
+      "market": "India",
+      "visible_order": 5,
+      "company": "Netrasemi",
+      "amount_m": 12.0,
+      "round": "Series A",
+      "date": "2025-07-24",
+      "valuation_m": null
+    },
+    {
+      "market": "Singapore",
+      "visible_order": 1,
+      "company": "UltraGreen",
+      "amount_m": 188.0,
+      "round": "Series A",
+      "date": "2025-09-15",
+      "valuation_m": 1300.0
+    },
+    {
+      "market": "Singapore",
+      "visible_order": 2,
+      "company": "Haivivi",
+      "amount_m": 28.0,
+      "round": "Series A",
+      "date": "2025-08-25",
+      "valuation_m": null
+    },
+    {
+      "market": "Singapore",
+      "visible_order": 3,
+      "company": "AND Global",
+      "amount_m": 21.0,
+      "round": "Series B",
+      "date": "2025-08-18",
+      "valuation_m": null
+    },
+    {
+      "market": "Singapore",
+      "visible_order": 4,
+      "company": "Kite AI",
+      "amount_m": 18.0,
+      "round": "Series A",
+      "date": "2025-09-02",
+      "valuation_m": null
+    },
+    {
+      "market": "Singapore",
+      "visible_order": 5,
+      "company": "Atomionics",
+      "amount_m": 13.0,
+      "round": "Seed VC",
+      "date": "2025-09-08",
+      "valuation_m": null
+    },
+    {
+      "market": "Japan",
+      "visible_order": 1,
+      "company": "SkyDrive",
+      "amount_m": 58.0,
+      "round": "Series C",
+      "date": "2025-07-04",
+      "valuation_m": null
+    },
+    {
+      "market": "Japan",
+      "visible_order": 2,
+      "company": "LegalOn Technologies",
+      "amount_m": 50.0,
+      "round": "Series E",
+      "date": "2025-07-17",
+      "valuation_m": null
+    },
+    {
+      "market": "Japan",
+      "visible_order": 3,
+      "company": "T2",
+      "amount_m": 34.0,
+      "round": "Series A",
+      "date": "2025-08-18",
+      "valuation_m": null
+    },
+    {
+      "market": "Japan",
+      "visible_order": 4,
+      "company": "Helpfeel",
+      "amount_m": 18.0,
+      "round": "Series E",
+      "date": "2025-08-27",
+      "valuation_m": null
+    },
+    {
+      "market": "Japan",
+      "visible_order": 5,
+      "company": "Japan AI",
+      "amount_m": 13.0,
+      "round": "Series B",
+      "date": "2025-07-23",
+      "valuation_m": null
+    },
+    {
+      "market": "Europe",
+      "visible_order": 1,
+      "company": "Mistral AI",
+      "amount_m": 1500.0,
+      "round": "Series C",
+      "date": "2025-09-08",
+      "valuation_m": 13200.0
+    },
+    {
+      "market": "Europe",
+      "visible_order": 2,
+      "company": "Nscale",
+      "amount_m": 1100.0,
+      "round": "Series B",
+      "date": "2025-09-17",
+      "valuation_m": null
+    },
+    {
+      "market": "Europe",
+      "visible_order": 3,
+      "company": "Xelix",
+      "amount_m": 160.0,
+      "round": "Series B",
+      "date": "2025-07-21",
+      "valuation_m": null
+    },
+    {
+      "market": "Europe",
+      "visible_order": 4,
+      "company": "CuspAI",
+      "amount_m": 100.0,
+      "round": "Series A",
+      "date": "2025-09-10",
+      "valuation_m": 520.0
+    },
+    {
+      "market": "Europe",
+      "visible_order": 5,
+      "company": "Noma Security",
+      "amount_m": 100.0,
+      "round": "Series B",
+      "date": "2025-07-31",
+      "valuation_m": null
+    },
+    {
+      "market": "Europe",
+      "visible_order": 6,
+      "company": "Exodigo",
+      "amount_m": 96.0,
+      "round": "Series B",
+      "date": "2025-07-16",
+      "valuation_m": 700.0
+    },
+    {
+      "market": "Europe",
+      "visible_order": 7,
+      "company": "Charm Therapeutics",
+      "amount_m": 80.0,
+      "round": "Series B",
+      "date": "2025-09-02",
+      "valuation_m": null
+    },
+    {
+      "market": "Europe",
+      "visible_order": 8,
+      "company": "Irregular",
+      "amount_m": 80.0,
+      "round": "Series A",
+      "date": "2025-09-17",
+      "valuation_m": 450.0
+    },
+    {
+      "market": "Europe",
+      "visible_order": 9,
+      "company": "Makersite",
+      "amount_m": 70.0,
+      "round": "Series B",
+      "date": "2025-07-22",
+      "valuation_m": null
+    },
+    {
+      "market": "Europe",
+      "visible_order": 10,
+      "company": "Ultromics",
+      "amount_m": 55.0,
+      "round": "Series C",
+      "date": "2025-07-31",
+      "valuation_m": null
+    },
+    {
+      "market": "United Kingdom",
+      "visible_order": 1,
+      "company": "Nscale",
+      "amount_m": 1100.0,
+      "round": "Series B",
+      "date": "2025-09-17",
+      "valuation_m": null
+    },
+    {
+      "market": "United Kingdom",
+      "visible_order": 2,
+      "company": "Xelix",
+      "amount_m": 160.0,
+      "round": "Series B",
+      "date": "2025-07-21",
+      "valuation_m": null
+    },
+    {
+      "market": "United Kingdom",
+      "visible_order": 3,
+      "company": "CuspAI",
+      "amount_m": 100.0,
+      "round": "Series A",
+      "date": "2025-09-10",
+      "valuation_m": 520.0
+    },
+    {
+      "market": "United Kingdom",
+      "visible_order": 4,
+      "company": "Charm Therapeutics",
+      "amount_m": 80.0,
+      "round": "Series B",
+      "date": "2025-09-02",
+      "valuation_m": null
+    },
+    {
+      "market": "United Kingdom",
+      "visible_order": 5,
+      "company": "Ultromics",
+      "amount_m": 55.0,
+      "round": "Series C",
+      "date": "2025-07-31",
+      "valuation_m": null
+    },
+    {
+      "market": "Germany",
+      "visible_order": 1,
+      "company": "Makersite",
+      "amount_m": 70.0,
+      "round": "Series B",
+      "date": "2025-07-22",
+      "valuation_m": null
+    },
+    {
+      "market": "Germany",
+      "visible_order": 2,
+      "company": "Fernride",
+      "amount_m": 21.0,
+      "round": "Series A",
+      "date": "2025-09-04",
+      "valuation_m": null
+    },
+    {
+      "market": "Germany",
+      "visible_order": 3,
+      "company": "MOTOR Ai",
+      "amount_m": 20.0,
+      "round": "Seed VC",
+      "date": "2025-07-14",
+      "valuation_m": null
+    },
+    {
+      "market": "Germany",
+      "visible_order": 4,
+      "company": "Kertos",
+      "amount_m": 17.0,
+      "round": "Series A",
+      "date": "2025-09-17",
+      "valuation_m": null
+    },
+    {
+      "market": "Germany",
+      "visible_order": 5,
+      "company": "Born",
+      "amount_m": 15.0,
+      "round": "Series A",
+      "date": "2025-09-10",
+      "valuation_m": null
+    },
+    {
+      "market": "France",
+      "visible_order": 1,
+      "company": "Mistral AI",
+      "amount_m": 1500.0,
+      "round": "Series C",
+      "date": "2025-09-08",
+      "valuation_m": 13200.0
+    },
+    {
+      "market": "France",
+      "visible_order": 2,
+      "company": "SiPearl",
+      "amount_m": 37.0,
+      "round": "Series A",
+      "date": "2025-07-08",
+      "valuation_m": null
+    },
+    {
+      "market": "France",
+      "visible_order": 3,
+      "company": "Arago",
+      "amount_m": 26.0,
+      "round": "Seed VC",
+      "date": "2025-07-07",
+      "valuation_m": 60.0
+    },
+    {
+      "market": "France",
+      "visible_order": 4,
+      "company": "One Biosciences",
+      "amount_m": 17.0,
+      "round": "Series A",
+      "date": "2025-07-17",
+      "valuation_m": null
+    },
+    {
+      "market": "France",
+      "visible_order": 5,
+      "company": "ArcaScience",
+      "amount_m": 7.0,
+      "round": "Series A",
+      "date": "2025-09-03",
+      "valuation_m": null
+    },
+    {
+      "market": "Israel",
+      "visible_order": 1,
+      "company": "Noma Security",
+      "amount_m": 100.0,
+      "round": "Series B",
+      "date": "2025-07-31",
+      "valuation_m": null
+    },
+    {
+      "market": "Israel",
+      "visible_order": 2,
+      "company": "Exodigo",
+      "amount_m": 96.0,
+      "round": "Series B",
+      "date": "2025-07-16",
+      "valuation_m": 700.0
+    },
+    {
+      "market": "Israel",
+      "visible_order": 3,
+      "company": "Irregular",
+      "amount_m": 80.0,
+      "round": "Series A",
+      "date": "2025-09-17",
+      "valuation_m": 450.0
+    },
+    {
+      "market": "Israel",
+      "visible_order": 4,
+      "company": "proteanTecs",
+      "amount_m": 51.0,
+      "round": "Series D",
+      "date": "2025-09-09",
+      "valuation_m": null
+    },
+    {
+      "market": "Israel",
+      "visible_order": 5,
+      "company": "Blink",
+      "amount_m": 50.0,
+      "round": "Series B",
+      "date": "2025-07-28",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 1,
+      "company": "Enter",
+      "amount_m": 38.0,
+      "round": "Series A",
+      "date": "2025-09-24",
+      "valuation_m": 375.0
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 2,
+      "company": "Arvo",
+      "amount_m": 20.0,
+      "round": "Series A",
+      "date": "2025-09-17",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 3,
+      "company": "Tako",
+      "amount_m": 19.0,
+      "round": "Series A",
+      "date": "2025-07-30",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 4,
+      "company": "Lastro",
+      "amount_m": 16.0,
+      "round": "Series A",
+      "date": "2025-09-30",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 5,
+      "company": "BotCity",
+      "amount_m": 12.0,
+      "round": "Series A",
+      "date": "2025-09-25",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 6,
+      "company": "CAF",
+      "amount_m": 9.0,
+      "round": "Series A",
+      "date": "2025-09-24",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 7,
+      "company": "Ursula",
+      "amount_m": 4.0,
+      "round": "Seed VC",
+      "date": "2025-07-03",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 8,
+      "company": "Pipeimob",
+      "amount_m": 3.0,
+      "round": "Seed VC",
+      "date": "2025-08-12",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 9,
+      "company": "Liquid AI",
+      "amount_m": 2.0,
+      "round": "Seed VC",
+      "date": "2025-08-08",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 10,
+      "company": "ChambasAI",
+      "amount_m": 1.0,
+      "round": "Seed VC",
+      "date": "2025-09-23",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 11,
+      "company": "Hunty",
+      "amount_m": 1.0,
+      "round": "Seed VC",
+      "date": "2025-08-01",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 12,
+      "company": "Velum Labs",
+      "amount_m": 1.0,
+      "round": "Convertible Note",
+      "date": "2025-09-13",
+      "valuation_m": null
+    },
+    {
+      "market": "LatAm",
+      "visible_order": 13,
+      "company": "WorkAI",
+      "amount_m": 1.0,
+      "round": "Seed",
+      "date": "2025-09-23",
+      "valuation_m": null
+    },
+    {
+      "market": "Brazil",
+      "visible_order": 1,
+      "company": "Enter",
+      "amount_m": 38.0,
+      "round": "Series A",
+      "date": "2025-09-24",
+      "valuation_m": 375.0
+    },
+    {
+      "market": "Brazil",
+      "visible_order": 2,
+      "company": "Arvo",
+      "amount_m": 20.0,
+      "round": "Series A",
+      "date": "2025-09-17",
+      "valuation_m": null
+    },
+    {
+      "market": "Brazil",
+      "visible_order": 3,
+      "company": "Tako",
+      "amount_m": 19.0,
+      "round": "Series A",
+      "date": "2025-07-30",
+      "valuation_m": null
+    },
+    {
+      "market": "Brazil",
+      "visible_order": 4,
+      "company": "Lastro",
+      "amount_m": 16.0,
+      "round": "Series A",
+      "date": "2025-09-30",
+      "valuation_m": null
+    },
+    {
+      "market": "Brazil",
+      "visible_order": 5,
+      "company": "BotCity",
+      "amount_m": 12.0,
+      "round": "Series A",
+      "date": "2025-09-25",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 1,
+      "company": "Lorikeet",
+      "amount_m": 35.0,
+      "round": "Series A",
+      "date": "2025-08-06",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 2,
+      "company": "Andromeda",
+      "amount_m": 15.0,
+      "round": "Series A",
+      "date": "2025-09-09",
+      "valuation_m": 66.0
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 3,
+      "company": "Starboard Maritime Intelligence",
+      "amount_m": 14.0,
+      "round": "Series A",
+      "date": "2025-09-08",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 4,
+      "company": "Zypher Network",
+      "amount_m": 7.0,
+      "round": "Series A",
+      "date": "2025-07-02",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 5,
+      "company": "Brainfish",
+      "amount_m": 6.0,
+      "round": "Seed VC",
+      "date": "2025-07-08",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 6,
+      "company": "H3D",
+      "amount_m": 4.0,
+      "round": "Series A",
+      "date": "2025-09-16",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 7,
+      "company": "Alloy",
+      "amount_m": 3.0,
+      "round": "Pre-Seed",
+      "date": "2025-09-23",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 8,
+      "company": "Marloo",
+      "amount_m": 3.0,
+      "round": "Pre-Seed",
+      "date": "2025-09-09",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 9,
+      "company": "Apate",
+      "amount_m": 2.0,
+      "round": "Seed VC",
+      "date": "2025-08-25",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 10,
+      "company": "Hall",
+      "amount_m": 1.0,
+      "round": "Pre-Seed",
+      "date": "2025-07-28",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 11,
+      "company": "HeartLab",
+      "amount_m": 1.0,
+      "round": "Angel",
+      "date": "2025-07-21",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 12,
+      "company": "Mogoplus",
+      "amount_m": 1.0,
+      "round": "Venture Capital",
+      "date": "2025-07-04",
+      "valuation_m": null
+    },
+    {
+      "market": "Oceania",
+      "visible_order": 13,
+      "company": "Voqo AI",
+      "amount_m": 1.0,
+      "round": "Pre-Seed",
+      "date": "2025-07-14",
+      "valuation_m": null
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NFLX Altman Z-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f7f9;
+      color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 960px;
+      width: 100%;
+      padding: 24px 16px 40px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+      text-align: left;
+    }
+    h2 {
+      font-size: 1rem;
+      margin: 0 0 1.25rem;
+      font-weight: 400;
+      color: #555;
+    }
+    .chart-wrapper {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.12),
+        0 1px 2px rgba(15, 23, 42, 0.08);
+      padding: 18px 18px 10px;
+      box-sizing: border-box;
+    }
+    canvas {
+      max-height: 520px;
+    }
+    .note {
+      font-size: 0.78rem;
+      color: #555;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+    @media (max-width: 768px) {
+      .chart-wrapper {
+        padding: 14px 12px 8px;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      h2 {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>NFLX Altman Z-Score (2016–2024)</h1>
+    <h2>奥特曼破产预测模型走势 — Fiscal Years 2016–2024</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="zScoreChart"></canvas>
+    </div>
+    <div class="note">
+      Data source (provided): fiscal-year Altman Z-Score values for NFLX from 2016 to 2024.
+      Hover over the line to inspect the exact score for each year.
+    </div>
+  </div>
+
+  <script>
+    // Data from the prompt
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const zScores = [
+      1.106039441902758,
+      1.1663953696244755,
+      1.270345288477431,
+      1.1929253230187409,
+      1.5865361587391311,
+      1.8427074756231183,
+      2.0092328411319293,
+      2.27684538672407,
+      2.75174748178369
+    ];
+
+    // Compute min/max for nicer y-axis padding
+    const minZ = Math.min(...zScores);
+    const maxZ = Math.max(...zScores);
+    const padding = 0.2;
+    const suggestedMin = Math.max(0, minZ - padding);
+    const suggestedMax = maxZ + padding;
+
+    const ctx = document.getElementById("zScoreChart").getContext("2d");
+
+    // Create gradient for the line & fill
+    function createGradient(ctx, chartArea) {
+      const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+      gradient.addColorStop(0, "rgba(59, 130, 246, 0.0)");
+      gradient.addColorStop(1, "rgba(59, 130, 246, 0.18)");
+      return gradient;
+    }
+
+    let zScoreChart;
+
+    function renderChart() {
+      if (zScoreChart) {
+        zScoreChart.destroy();
+      }
+
+      zScoreChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "Altman Z-Score",
+              data: zScores,
+              tension: 0.3,
+              borderColor: "rgba(37, 99, 235, 1)",
+              borderWidth: 2.5,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointBackgroundColor: "#fff",
+              pointBorderColor: "rgba(37, 99, 235, 1)",
+              pointBorderWidth: 2,
+              fill: true,
+              backgroundColor: (context) => {
+                const chart = context.chart;
+                const { ctx, chartArea } = chart;
+                if (!chartArea) {
+                  return "rgba(59, 130, 246, 0.0)";
+                }
+                return createGradient(ctx, chartArea);
+              }
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            intersect: false,
+            mode: "index"
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                boxWidth: 7,
+                padding: 12
+              }
+            },
+            tooltip: {
+              backgroundColor: "rgba(15, 23, 42, 0.92)",
+              borderColor: "rgba(148, 163, 184, 0.5)",
+              borderWidth: 1,
+              cornerRadius: 6,
+              padding: 10,
+              titleFont: {
+                size: 12,
+                weight: "600"
+              },
+              bodyFont: {
+                size: 11
+              },
+              callbacks: {
+                label: (context) => {
+                  const value = context.parsed.y;
+                  return " Altman Z-Score: " + value.toFixed(3);
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Fiscal Year",
+                font: {
+                  size: 11,
+                  weight: "500"
+                }
+              },
+              ticks: {
+                autoSkip: false,
+                maxRotation: 0,
+                font: {
+                  size: 11
+                }
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Altman Z-Score",
+                font: {
+                  size: 11,
+                  weight: "500"
+                }
+              },
+              suggestedMin,
+              suggestedMax,
+              ticks: {
+                font: {
+                  size: 11
+                }
+              },
+              grid: {
+                color: "rgba(148, 163, 184, 0.2)",
+                drawBorder: false
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Render chart after layout is ready
+    window.addEventListener("load", renderChart);
+    window.addEventListener("resize", () => {
+      // Re-render to keep gradient correct on resize
+      renderChart();
+    });
+  </script>
+</body>
+</html>

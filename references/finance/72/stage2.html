@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CVX 防御区间比率 (DIR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: #1f2937;
+        --accent-soft: rgba(59, 130, 246, 0.2);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 45%, #000 100%);
+      color: var(--fg);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow:
+        0 20px 40px rgba(15, 23, 42, 0.8),
+        0 0 0 1px rgba(15, 23, 42, 0.6);
+      padding: 1.5rem 1.75rem 1.75rem;
+      backdrop-filter: blur(18px);
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.3rem;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .description {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 1rem;
+      max-width: 640px;
+      line-height: 1.5;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    .note {
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.25rem;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #60a5fa, #2563eb);
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem;
+      }
+      .card {
+        padding: 1.25rem 1.15rem 1.4rem;
+      }
+      .chart-container {
+        height: 320px;
+      }
+      h1 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <div class="header">
+        <h1>CVX 防御区间比率 (DIR)</h1>
+        <p class="subtitle">2016–2024 年度趋势（单位：%）</p>
+      </div>
+
+      <p class="description">
+        本图展示了 CVX 自 2016 至 2024 财年的防御区间比率（Defensive Interval Ratio, DIR）变化，
+        反映公司以高流动性资产覆盖日常运营现金支出的能力。鼠标悬停可查看各年度的精确数值。
+      </p>
+
+      <div class="chart-container">
+        <canvas id="dirChart"></canvas>
+      </div>
+
+      <div class="legend-row">
+        <span class="legend-dot"></span>
+        <span>防御区间比率（RESULT_DIR）</span>
+      </div>
+
+      <p class="note">
+        数据来源：用户提供的可靠财务数据。仅用于可视化展示。
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Raw data (from user-provided source)
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const dirValues = [
+      66.50934425946096,
+      55.95449500554939,
+      61.63177715013568,
+      49.64773011841305,
+      61.4265922514865,
+      62.94916918753852,
+      70.9923901622956,
+      62.873629101966,
+      61.00918966618994
+    ];
+
+    const ctx = document.getElementById("dirChart").getContext("2d");
+
+    // Gradient stroke for the line
+    const gradientStroke = ctx.createLinearGradient(0, 0, 0, 400);
+    gradientStroke.addColorStop(0, "#60a5fa");
+    gradientStroke.addColorStop(1, "#2563eb");
+
+    // Gradient fill under the line
+    const gradientFill = ctx.createLinearGradient(0, 0, 0, 400);
+    gradientFill.addColorStop(0, "rgba(96, 165, 250, 0.30)");
+    gradientFill.addColorStop(0.4, "rgba(37, 99, 235, 0.18)");
+    gradientFill.addColorStop(1, "rgba(15, 23, 42, 0)");
+
+    const data = {
+      labels,
+      datasets: [
+        {
+          label: "防御区间比率 (DIR)",
+          data: dirValues,
+          tension: 0.28,
+          borderColor: gradientStroke,
+          backgroundColor: gradientFill,
+          borderWidth: 2.4,
+          pointRadius: 4,
+          pointHoverRadius: 5.3,
+          pointBackgroundColor: "#1d4ed8",
+          pointBorderColor: "#e5e7eb",
+          pointBorderWidth: 1.4,
+          fill: true
+        }
+      ]
+    };
+
+    const config = {
+      type: "line",
+      data,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.96)",
+            borderColor: "rgba(148, 163, 184, 0.6)",
+            borderWidth: 1,
+            padding: 10,
+            titleColor: "#e5e7eb",
+            bodyColor: "#e5e7eb",
+            displayColors: false,
+            callbacks: {
+              label: (ctx) => {
+                const value = ctx.parsed.y;
+                return `DIR：${value.toFixed(2)}%`;
+              },
+              title: (items) => {
+                if (!items.length) return "";
+                return `财年：${items[0].label}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: true,
+              color: "rgba(55, 65, 81, 0.35)",
+              drawBorder: false
+            },
+            ticks: {
+              color: "#9ca3af"
+            }
+          },
+          y: {
+            suggestedMin: 45,
+            suggestedMax: 75,
+            grid: {
+              color: "rgba(31, 41, 55, 0.55)",
+              drawBorder: false
+            },
+            ticks: {
+              color: "#9ca3af",
+              callback: (value) => value + "%"
+            },
+            title: {
+              display: true,
+              text: "防御区间比率 (DIR, %)",
+              color: "#9ca3af",
+              font: {
+                size: 11
+              }
+            }
+          }
+        }
+      }
+    };
+
+    new Chart(ctx, config);
+  </script>
+</body>
+</html>

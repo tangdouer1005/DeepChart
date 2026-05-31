@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature 123 Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1200px; height: 700px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = {
+    "data": {
+        "Globe": {
+            "Energy": [
+                [
+                    "Transport",
+                    834432
+                ],
+                [
+                    "Processing",
+                    496434
+                ],
+                [
+                    "Packaging",
+                    956519
+                ],
+                [
+                    "Retail",
+                    313028
+                ],
+                [
+                    "Consumption",
+                    456845
+                ],
+                [
+                    "Production",
+                    729419
+                ]
+            ],
+            "Industry": [
+                [
+                    "Packaging",
+                    20982.2
+                ],
+                [
+                    "Processing",
+                    576.842
+                ],
+                [
+                    "Production",
+                    286377
+                ],
+                [
+                    "Retail",
+                    402981
+                ]
+            ],
+            "Waste": [
+                [
+                    "End of Life",
+                    1616490.0
+                ],
+                [
+                    "Processing",
+                    124474
+                ]
+            ],
+            "Land based": [
+                [
+                    "Production",
+                    6044190.0
+                ],
+                [
+                    "LULUC",
+                    5663020.0
+                ]
+            ]
+        },
+        "Industrialized": {
+            "Energy": [
+                [
+                    "Transport",
+                    481391
+                ],
+                [
+                    "Processing",
+                    225195
+                ],
+                [
+                    "Packaging",
+                    276552
+                ],
+                [
+                    "Retail",
+                    211656
+                ],
+                [
+                    "Consumption",
+                    127937
+                ],
+                [
+                    "Production",
+                    286551
+                ]
+            ],
+            "Industry": [
+                [
+                    "Packaging",
+                    10467.4
+                ],
+                [
+                    "Processing",
+                    235.675
+                ],
+                [
+                    "Production",
+                    128630
+                ],
+                [
+                    "Retail",
+                    385620
+                ]
+            ],
+            "Waste": [
+                [
+                    "End of Life",
+                    458636
+                ],
+                [
+                    "Processing",
+                    37152.5
+                ]
+            ],
+            "Land based": [
+                [
+                    "Production",
+                    1621670.0
+                ],
+                [
+                    "LULUC",
+                    681299
+                ]
+            ]
+        },
+        "Developing": {
+            "Energy": [
+                [
+                    "Transport",
+                    353041
+                ],
+                [
+                    "Processing",
+                    271239
+                ],
+                [
+                    "Packaging",
+                    679967
+                ],
+                [
+                    "Retail",
+                    101372
+                ],
+                [
+                    "Consumption",
+                    328908
+                ],
+                [
+                    "Production",
+                    442868
+                ]
+            ],
+            "Industry": [
+                [
+                    "Packaging",
+                    10514.8
+                ],
+                [
+                    "Processing",
+                    341.167
+                ],
+                [
+                    "Production",
+                    157747
+                ],
+                [
+                    "Retail",
+                    17360.2
+                ]
+            ],
+            "Waste": [
+                [
+                    "End of Life",
+                    1157850.0
+                ],
+                [
+                    "Processing",
+                    87321.7
+                ]
+            ],
+            "Land based": [
+                [
+                    "Production",
+                    4422520.0
+                ],
+                [
+                    "LULUC",
+                    4981720.0
+                ]
+            ]
+        }
+    },
+    "categories": [
+        "Energy",
+        "Industry",
+        "Waste",
+        "Land based"
+    ],
+    "regions": [
+        "Globe",
+        "Industrialized",
+        "Developing"
+    ]
+};
+
+        const data = {};
+        Object.keys(rawData.data).forEach(region => {
+            data[region] = {};
+            Object.keys(rawData.data[region]).forEach(cat => {
+                data[region][cat] = rawData.data[region][cat].map(item => ({
+                    name: item[0],
+                    value: item[1]
+                }));
+            });
+        });
+
+        const colorsOuter = {
+            "Land based": "#6B8E23",  
+            "Energy": "#CC7A3D",      
+            "Industry": "#A6AAB0",    
+            "Waste": "#EBC05C"        
+        };
+
+        const colorsInner = {
+            "LULUC": "#758C47",       
+            "Production": "#95B766",  
+            "Transport": "#1A3B5C",   
+            "Processing": "#46719E",  
+            "Packaging": "#6C9BC2",   
+            "Retail": "#8FBBD9",      
+            "Consumption": "#BBD6EB", 
+            "End of Life": "#B0B0B0"  
+        };
+
+        const regions = ["Globe", "Industrialized", "Developing"];
+        const centers = [['18%', '40%'], ['50%', '40%'], ['82%', '40%']];
+        const centerTexts = ["18\nGt CO₂e", "4.9\nGt CO₂e", "13\nGt CO₂e"];
+        const categories = ["Energy", "Industry", "Waste", "Land based"];
+
+        const series = [];
+        const titles = [];
+
+        regions.forEach((region, idx) => {
+            const regData = data[region];
+            const outerData = [];
+            const innerData = [];
+
+            categories.forEach(cat => {
+                const subcats = regData[cat];
+                let catTotal = 0;
+                
+                subcats.forEach(item => {
+                    catTotal += item.value;
+                    innerData.push({
+                        value: item.value,
+                        name: item.name,
+                        itemStyle: { color: colorsInner[item.name] || "#000000" }
+                    });
+                });
+
+                outerData.push({
+                    value: catTotal,
+                    name: cat,
+                    itemStyle: { color: colorsOuter[cat] }
+                });
+            });
+
+            // Inner Ring
+            series.push({
+                name: region + ' Inner',
+                type: 'pie',
+                radius: [0, '35%'],
+                center: centers[idx],
+                data: innerData,
+                label: { show: false },
+                itemStyle: { borderWidth: 0 },
+                silent: true
+            });
+
+            // Outer Ring
+            series.push({
+                name: region + ' Outer',
+                type: 'pie',
+                radius: ['35%', '55%'],
+                center: centers[idx],
+                data: outerData,
+                label: { show: false },
+                itemStyle: { borderWidth: 0 },
+                silent: true
+            });
+            
+            // Title for Region
+            titles.push({
+                text: region,
+                left: parseFloat(centers[idx][0]) + '%',
+                top: '5%',
+                textAlign: 'center',
+                textStyle: { fontSize: 18, fontWeight: 'bold' }
+            });
+            
+            // Center Text
+            titles.push({
+                text: centerTexts[idx],
+                left: parseFloat(centers[idx][0]) + '%',
+                top: '38%', // Approx center
+                textAlign: 'center',
+                textStyle: { fontSize: 14, lineHeight: 20 }
+            });
+        });
+
+        // Construct Legend using Graphic
+        // Layout:
+        // Outer circle: [Rect] Land based [Rect] Energy ...
+        // Inner circle: [Rect] LULUC ...
+        //               [Rect] Packaging ...
+        
+        const outerLegendItems = ["Land based", "Energy", "Industry", "Waste"];
+        const innerLegendRow1 = ["LULUC", "Production", "Transport", "Processing"];
+        const innerLegendRow2 = ["Packaging", "Retail", "Consumption", "End of Life"];
+
+        const graphicElements = [];
+        const startX = 150; 
+        const spacingX = 200;
+        const row1Y = 550;
+        const row2Y = 600;
+        const row3Y = 630;
+
+        // Row 1 Label
+        graphicElements.push({
+            type: 'text',
+            left: 50,
+            top: row1Y,
+            style: { text: 'Outer circle:', font: '16px Arial', fontWeight: 'bold' }
+        });
+
+        outerLegendItems.forEach((item, i) => {
+            graphicElements.push({
+                type: 'rect',
+                left: startX + i * spacingX,
+                top: row1Y - 12,
+                shape: { width: 20, height: 20 },
+                style: { fill: colorsOuter[item] }
+            });
+            graphicElements.push({
+                type: 'text',
+                left: startX + i * spacingX + 30,
+                top: row1Y,
+                style: { text: item, font: '14px Arial' }
+            });
+        });
+
+        // Row 2 Label
+        graphicElements.push({
+            type: 'text',
+            left: 50,
+            top: row2Y + 15, // Center between 2 rows
+            style: { text: 'Inner circle:', font: '16px Arial', fontWeight: 'bold' }
+        });
+
+        innerLegendRow1.forEach((item, i) => {
+            graphicElements.push({
+                type: 'rect',
+                left: startX + i * spacingX,
+                top: row2Y - 12,
+                shape: { width: 20, height: 20 },
+                style: { fill: colorsInner[item] }
+            });
+            graphicElements.push({
+                type: 'text',
+                left: startX + i * spacingX + 30,
+                top: row2Y,
+                style: { text: item, font: '14px Arial' }
+            });
+        });
+
+        innerLegendRow2.forEach((item, i) => {
+            graphicElements.push({
+                type: 'rect',
+                left: startX + i * spacingX,
+                top: row3Y - 12,
+                shape: { width: 20, height: 20 },
+                style: { fill: colorsInner[item] }
+            });
+            graphicElements.push({
+                type: 'text',
+                left: startX + i * spacingX + 30,
+                top: row3Y,
+                style: { text: item, font: '14px Arial' }
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            title: titles,
+            series: series,
+            graphic: graphicElements
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

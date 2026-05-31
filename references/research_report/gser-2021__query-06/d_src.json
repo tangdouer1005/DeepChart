@@ -1,0 +1,207 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a horizontal bar chart for ecosystems in the Middle East and North Africa section where `Median Series A Round` and `Software Engineer Salary` are both exact values, showing the top 6 `Series A affordability multiple` values computed as `Median Series A Round / Software Engineer Salary`, expressed in `salary-years`, sorted descending, and excluding `N/A` and `<` range values.",
+  "report_key": "gser-2021",
+  "source_summary_file": "/Users/tangjiahui/Desktop/chartbench/StartupGenome/summaries/gser-2021.md",
+  "source_query_file": "/Users/tangjiahui/Desktop/chartbench/StartupGenome/summaries/gser-2021_query_recommendations.md",
+  "records": [
+    {
+      "entity": "Abu Dhabi",
+      "source_page": 142,
+      "field_group": "Section 3 ecosystem table",
+      "field": "median_series_a_round",
+      "value": 20.6,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 142",
+      "source_note": "directly visible in summary as `$20.6 m`"
+    },
+    {
+      "entity": "Abu Dhabi",
+      "source_page": 142,
+      "field_group": "Section 3 ecosystem table",
+      "field": "software_engineer_salary",
+      "value": 29.1,
+      "value_unit": "USD thousands",
+      "value_type": "currency",
+      "source_section": "page 142",
+      "source_note": "directly visible in summary as `$29.1 k`"
+    },
+    {
+      "entity": "Bahrain",
+      "source_page": 144,
+      "field_group": "Section 3 ecosystem table",
+      "field": "median_series_a_round",
+      "value": 0.9,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 144",
+      "source_note": "directly visible in summary as `$0.9 m`"
+    },
+    {
+      "entity": "Bahrain",
+      "source_page": 144,
+      "field_group": "Section 3 ecosystem table",
+      "field": "software_engineer_salary",
+      "value": 33.4,
+      "value_unit": "USD thousands",
+      "value_type": "currency",
+      "source_section": "page 144",
+      "source_note": "directly visible in summary as `$33.4 k`"
+    },
+    {
+      "entity": "Cairo",
+      "source_page": 146,
+      "field_group": "Section 3 ecosystem table",
+      "field": "median_series_a_round",
+      "value": 1.0,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 146",
+      "source_note": "directly visible in summary as `$1 m`"
+    },
+    {
+      "entity": "Cairo",
+      "source_page": 146,
+      "field_group": "Section 3 ecosystem table",
+      "field": "software_engineer_salary",
+      "value": 7.0,
+      "value_unit": "USD thousands",
+      "value_type": "currency",
+      "source_section": "page 146",
+      "source_note": "directly visible in summary as `$7 k`"
+    },
+    {
+      "entity": "Dubai",
+      "source_page": 148,
+      "field_group": "Section 3 ecosystem table",
+      "field": "median_series_a_round",
+      "value": 3.3,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 148",
+      "source_note": "directly visible in summary as `$3.3 m`"
+    },
+    {
+      "entity": "Dubai",
+      "source_page": 148,
+      "field_group": "Section 3 ecosystem table",
+      "field": "software_engineer_salary",
+      "value": 37.0,
+      "value_unit": "USD thousands",
+      "value_type": "currency",
+      "source_section": "page 148",
+      "source_note": "directly visible in summary as `$37 k`"
+    },
+    {
+      "entity": "Palestine",
+      "source_page": 150,
+      "field_group": "Section 3 ecosystem table",
+      "field": "median_series_a_round",
+      "value": 0.475,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 150",
+      "source_note": "directly visible in summary as `$0.475 m`"
+    },
+    {
+      "entity": "Palestine",
+      "source_page": 150,
+      "field_group": "Section 3 ecosystem table",
+      "field": "software_engineer_salary",
+      "value": 13.0,
+      "value_unit": "USD thousands",
+      "value_type": "currency",
+      "source_section": "page 150",
+      "source_note": "directly visible in summary as `$13 k`"
+    },
+    {
+      "entity": "Riyadh",
+      "source_page": 152,
+      "field_group": "Section 3 ecosystem table",
+      "field": "median_series_a_round",
+      "value": 2.3,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 152",
+      "source_note": "directly visible in summary as `$2.3 m`"
+    },
+    {
+      "entity": "Riyadh",
+      "source_page": 152,
+      "field_group": "Section 3 ecosystem table",
+      "field": "software_engineer_salary",
+      "value": 36.6,
+      "value_unit": "USD thousands",
+      "value_type": "currency",
+      "source_section": "page 152",
+      "source_note": "directly visible in summary as `$36.6 k`"
+    },
+    {
+      "entity": "Sharjah",
+      "source_page": 154,
+      "field_group": "Section 3 ecosystem table",
+      "field": "median_series_a_round",
+      "value": 1.9,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 154",
+      "source_note": "directly visible in summary as `$1.9 m`"
+    },
+    {
+      "entity": "Sharjah",
+      "source_page": 154,
+      "field_group": "Section 3 ecosystem table",
+      "field": "software_engineer_salary",
+      "value": 50.3,
+      "value_unit": "USD thousands",
+      "value_type": "currency",
+      "source_section": "page 154",
+      "source_note": "directly visible in summary as `$50.3 k`"
+    },
+    {
+      "entity": "Tel Aviv",
+      "source_page": 156,
+      "field_group": "Section 3 ecosystem table",
+      "field": "median_series_a_round",
+      "value": 5.8,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 156",
+      "source_note": "directly visible in summary as `$5.8 m`"
+    },
+    {
+      "entity": "Tel Aviv",
+      "source_page": 156,
+      "field_group": "Section 3 ecosystem table",
+      "field": "software_engineer_salary",
+      "value": 90.0,
+      "value_unit": "USD thousands",
+      "value_type": "currency",
+      "source_section": "page 156",
+      "source_note": "directly visible in summary as `$90 k`"
+    },
+    {
+      "entity": "Tunisia",
+      "source_page": 158,
+      "field_group": "Section 3 ecosystem table",
+      "field": "median_series_a_round",
+      "value": 0.15,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 158",
+      "source_note": "directly visible in summary as `$0.15 m`"
+    },
+    {
+      "entity": "Tunisia",
+      "source_page": 158,
+      "field_group": "Section 3 ecosystem table",
+      "field": "software_engineer_salary",
+      "value": 8.3,
+      "value_unit": "USD thousands",
+      "value_type": "currency",
+      "source_section": "page 158",
+      "source_note": "directly visible in summary as `$8.3 k`"
+    }
+  ]
+}

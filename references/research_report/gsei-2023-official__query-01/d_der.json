@@ -1,0 +1,63 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a bar chart showing the top 12 countries by the share of each country's listed top-10 city score captured by its #1 city, computed as `score(rank 1) / sum(score ranks 1-10)`, expressed as a percentage, sorted from highest concentration to lowest, and limited to countries with 10 listed cities in the 2023 country tables.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2023 Top-City Score Concentration by Country",
+  "value_unit": "percent",
+  "sort_rule": "descending by top_city_share_pct, tie-break alphabetically",
+  "selection_rule": "top 12 countries with 10 listed cities",
+  "records": [
+    {
+      "entity": "Japan",
+      "top_city_share_pct": 75.191947
+    },
+    {
+      "entity": "Israel",
+      "top_city_share_pct": 74.943894
+    },
+    {
+      "entity": "Sweden",
+      "top_city_share_pct": 71.710244
+    },
+    {
+      "entity": "United Kingdom",
+      "top_city_share_pct": 70.995599
+    },
+    {
+      "entity": "France",
+      "top_city_share_pct": 69.842041
+    },
+    {
+      "entity": "Brazil",
+      "top_city_share_pct": 64.860335
+    },
+    {
+      "entity": "Colombia",
+      "top_city_share_pct": 58.142269
+    },
+    {
+      "entity": "The Netherlands",
+      "top_city_share_pct": 56.815817
+    },
+    {
+      "entity": "Mexico",
+      "top_city_share_pct": 56.63606
+    },
+    {
+      "entity": "Italy",
+      "top_city_share_pct": 49.20398
+    },
+    {
+      "entity": "Germany",
+      "top_city_share_pct": 47.444325
+    },
+    {
+      "entity": "United States",
+      "top_city_share_pct": 45.282628
+    }
+  ],
+  "value_field": "top_city_share_pct",
+  "x_label": "Country",
+  "y_label": "Top-city share of listed top-10 score (%)"
+}

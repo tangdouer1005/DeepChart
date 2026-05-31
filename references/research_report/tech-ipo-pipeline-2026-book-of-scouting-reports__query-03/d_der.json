@@ -1,0 +1,102 @@
+{
+  "report_id": "014",
+  "query_id": 3,
+  "query_text": "Create a dumbbell chart for the top 12 companies with the largest difference between `IPO probability rank` and `Commercial Maturity rank`, where one end of each dumbbell is the IPO-probability rank and the other is the Commercial-Maturity rank, limited to companies with numeric maturity scores and sorted by absolute rank gap.",
+  "chart_type": "dumbbell",
+  "value_unit": "rank position",
+  "sort_rule": "descending by absolute gap between IPO-probability rank and Commercial-Maturity rank",
+  "selection_rule": "top 12 companies with numeric Commercial Maturity",
+  "records": [
+    {
+      "label": "Intercom",
+      "left_value": 103.0,
+      "right_value": 1.0,
+      "delta": 102.0
+    },
+    {
+      "label": "Lightricks",
+      "left_value": 102.0,
+      "right_value": 1.0,
+      "delta": 101.0
+    },
+    {
+      "label": "o9 Solutions",
+      "left_value": 101.0,
+      "right_value": 1.0,
+      "delta": 100.0
+    },
+    {
+      "label": "Mapbox",
+      "left_value": 100.0,
+      "right_value": 1.0,
+      "delta": 99.0
+    },
+    {
+      "label": "Impact Tech",
+      "left_value": 98.0,
+      "right_value": 1.0,
+      "delta": 97.0
+    },
+    {
+      "label": "Sonar",
+      "left_value": 98.0,
+      "right_value": 1.0,
+      "delta": 97.0
+    },
+    {
+      "label": "Booksy",
+      "left_value": 97.0,
+      "right_value": 1.0,
+      "delta": 96.0
+    },
+    {
+      "label": "Anthropic",
+      "left_value": 1.0,
+      "right_value": 96.0,
+      "delta": -95.0
+    },
+    {
+      "label": "Kraken",
+      "left_value": 1.0,
+      "right_value": 96.0,
+      "delta": -95.0
+    },
+    {
+      "label": "Virta",
+      "left_value": 96.0,
+      "right_value": 1.0,
+      "delta": 95.0
+    },
+    {
+      "label": "Bloomreach",
+      "left_value": 94.0,
+      "right_value": 1.0,
+      "delta": 93.0
+    },
+    {
+      "label": "Rokt",
+      "left_value": 94.0,
+      "right_value": 1.0,
+      "delta": 93.0
+    }
+  ],
+  "plot_config": {
+    "title": "IPO rank vs Commercial Maturity rank",
+    "x_label": "Rank (lower is better)",
+    "left_label": "IPO-probability rank",
+    "right_label": "Commercial-Maturity rank"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with numeric Commercial Maturity.",
+    "Ranked companies by IPO probability and by Commercial Maturity.",
+    "Computed absolute rank gaps and selected the 12 largest divergences.",
+    "Plotted the two rank positions for each selected company."
+  ],
+  "stats": {
+    "eligible_count": 105,
+    "returned_count": 12
+  },
+  "open_issues": [
+    "Commercial Maturity is a low-cardinality 1-5 scale, so ties are resolved with the deterministic min-rank convention."
+  ]
+}

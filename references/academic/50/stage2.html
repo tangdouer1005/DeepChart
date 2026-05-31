@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = {
+            "data": [
+                {
+                    "day": 0,
+                    "Teff_mean": 1.0,
+                    "Teff_std": 0.0,
+                    "Tex_mean": 1.0,
+                    "Tex_std": 0.0
+                },
+                {
+                    "day": 2,
+                    "Teff_mean": 1.2075,
+                    "Teff_std": 0.19276496915501354,
+                    "Tex_mean": 1.2075,
+                    "Tex_std": 0.19276496915501354
+                },
+                {
+                    "day": 4,
+                    "Teff_mean": 6.615,
+                    "Teff_std": 1.625720353156307,
+                    "Tex_mean": 2.3025,
+                    "Tex_std": 0.2007278422807027
+                },
+                {
+                    "day": 6,
+                    "Teff_mean": 21.0,
+                    "Teff_std": 4.097966975627467,
+                    "Tex_mean": 5.2875000000000005,
+                    "Tex_std": 0.7874589936413618
+                },
+                {
+                    "day": 8,
+                    "Teff_mean": 83.375,
+                    "Teff_std": 13.468079546344635,
+                    "Tex_mean": 12.350000000000001,
+                    "Tex_std": 0.8062257748298551
+                }
+            ],
+            "p_value": 4.315334626152453e-05
+        };
+
+        const days = jsonData.data.map(d => d.day);
+        const teffMean = jsonData.data.map(d => d.Teff_mean);
+        const teffStd = jsonData.data.map(d => d.Teff_std);
+        const texMean = jsonData.data.map(d => d.Tex_mean);
+        const texStd = jsonData.data.map(d => d.Tex_std);
+
+        const colorTeff = '#7f9eb2';
+        const colorTex = '#dcb0b3';
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [
+            {
+                name: 'Teff',
+                type: 'line',
+                data: days.map((d, i) => [d, teffMean[i]]),
+                symbol: 'circle',
+                symbolSize: 6,
+                itemStyle: { color: colorTeff },
+                lineStyle: { width: 1.5 },
+                z: 2
+            },
+            {
+                type: 'custom',
+                name: 'Teff Error',
+                renderItem: (params, api) => {
+                    const x = api.value(0);
+                    const meanVal = api.value(1);
+                    const stdVal = api.value(2);
+                    
+                    const highPoint = api.coord([x, meanVal + stdVal]);
+                    const lowPoint = api.coord([x, meanVal - stdVal]);
+                    const capHalfWidth = 5; // Fixed to 5 pixels
+
+                    const style = api.style({ stroke: colorTeff, lineWidth: 1 });
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                        ]
+                    };
+                },
+                data: days.map((d, i) => ([d, teffMean[i], teffStd[i]])),
+                z: 3
+            },
+            {
+                name: 'Tex',
+                type: 'line',
+                data: days.map((d, i) => [d, texMean[i]]),
+                symbol: 'rect',
+                symbolSize: 6,
+                itemStyle: { color: colorTex },
+                lineStyle: { width: 1.5 },
+                z: 2
+            },
+            {
+                type: 'custom',
+                name: 'Tex Error',
+                renderItem: (params, api) => {
+                    const x = api.value(0);
+                    const meanVal = api.value(1);
+                    const stdVal = api.value(2);
+                    
+                    const highPoint = api.coord([x, meanVal + stdVal]);
+                    const lowPoint = api.coord([x, meanVal - stdVal]);
+                    const capHalfWidth = 5; // Fixed to 5 pixels
+
+                    const style = api.style({ stroke: colorTex, lineWidth: 1 });
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                        ]
+                    };
+                },
+                data: days.map((d, i) => ([d, texMean[i], texStd[i]])),
+                z: 3
+            }
+        ];
+
+        // Statistical Annotation (Bracket and P-value)
+        // Calculate P-value for Day 8
+
+        const pVal = jsonData.p_value;
+
+        let pValueText;
+        if (pVal < 1e-3) {
+            // E.g., P = 2.45 x 10-5
+            const exponent = Math.floor(Math.log10(pVal));
+            const mantissa = pVal / Math.pow(10, exponent);
+            pValueText = `P = ${mantissa.toFixed(2)} × 10{sup|${exponent}}`;
+        } else {
+            pValueText = `P = ${pVal.toFixed(2)}`;
+        }
+
+        // Add Statistical Annotation Series
+        series.push({
+            type: 'custom',
+            name: 'Statistical Annotation',
+            renderItem: (params, api) => {
+                const xVal = api.value(0);
+                const topVal = api.value(1);
+                const bottomVal = api.value(2);
+                
+                // Get coordinates
+                const topPoint = api.coord([xVal, topVal]);
+                const bottomPoint = api.coord([xVal, bottomVal]);
+                
+                // Bracket width (0.2 data units) converted to pixels
+                const widthPixels = api.size([0.2, 0])[0];
+                
+                const x = topPoint[0];
+                const yTop = topPoint[1];
+                const yBottom = bottomPoint[1];
+                
+                const style = api.style({ stroke: 'black', fill: null, lineWidth: 1 });
+                
+                return {
+                    type: 'group',
+                    children: [
+                        {
+                            type: 'polyline',
+                            shape: {
+                                points: [
+                                    [x - widthPixels, yTop],
+                                    [x, yTop],
+                                    [x, yBottom],
+                                    [x - widthPixels, yBottom]
+                                ]
+                            },
+                            style: style
+                        },
+                        {
+                            type: 'text',
+                            style: {
+                                text: pValueText,
+                                font: '12px Arial',
+                                fill: 'black',
+                                x: x + 5,
+                                y: (yTop + yBottom) / 2,
+                                align: 'left',
+                                verticalAlign: 'middle',
+                                rich: { // Add rich text style for superscript
+                                    sup: {
+                                        fontSize: 9,
+                                        verticalAlign: 'top',
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                };
+            },
+            data: [[9, teffMean[4], texMean[4]]],
+            z: 4
+        });
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            title: {
+                text: 'Proliferation',
+                left: 'center',
+                top: 20,
+                textStyle: { fontSize: 16, color: 'black' }
+            },
+            grid: { top: 100, right: 20, bottom: 60, left: 60 },
+            xAxis: {
+                type: 'value',
+                name: 'Days',
+                nameLocation: 'middle',
+                nameGap: 30,
+                min: -0.5,
+                max: 10.5,
+                interval: 2,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1 } },
+                axisTick: { alignWithLabel: true, length: 5, lineStyle: { width: 1 } }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Cell Number (× 10⁶)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                min: 0,
+                max: 100,
+                interval: 25,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1 } },
+                axisTick: { length: 5, lineStyle: { width: 1 } },
+                splitLine: { show: false }
+            },
+            legend: {
+                data: ['Teff', 'Tex'],
+                right: 20,
+                top: 100,
+                orient: 'vertical',
+                textStyle: { fontSize: 12 },
+                itemGap: 5
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'a',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a scatter plot for the 15 countries with the highest listed top-10 city-score totals in the 2024 country tables, where `x = sum(score ranks 1-10)`, `y = score(rank 1) / sum(score ranks 1-10)`, bubble size = `count(global_rank <= 200)`, values shown as score points, percentages, and city counts, and every plotted country is labeled.",
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "2024 Country Scale, Concentration, and Top-200 Breadth",
+  "value_unit": "mixed",
+  "sort_rule": "descending by listed_top10_score_total, tie-break alphabetically",
+  "selection_rule": "top 15 countries by listed top-10 city-score total",
+  "records": [
+    {
+      "entity": "United States",
+      "listed_top10_score_total": 1435.38,
+      "top_city_score_share_pct": 49.531831,
+      "cities_in_top200": 10
+    },
+    {
+      "entity": "China",
+      "listed_top10_score_total": 309.05,
+      "top_city_score_share_pct": 35.402039,
+      "cities_in_top200": 10
+    },
+    {
+      "entity": "India",
+      "listed_top10_score_total": 204.76,
+      "top_city_score_share_pct": 33.282868,
+      "cities_in_top200": 8
+    },
+    {
+      "entity": "United Kingdom",
+      "listed_top10_score_total": 196.2,
+      "top_city_score_share_pct": 73.588175,
+      "cities_in_top200": 9
+    },
+    {
+      "entity": "Canada",
+      "listed_top10_score_total": 115.29,
+      "top_city_score_share_pct": 31.858791,
+      "cities_in_top200": 9
+    },
+    {
+      "entity": "Germany",
+      "listed_top10_score_total": 105.13,
+      "top_city_score_share_pct": 47.484067,
+      "cities_in_top200": 8
+    },
+    {
+      "entity": "France",
+      "listed_top10_score_total": 85.73,
+      "top_city_score_share_pct": 70.908667,
+      "cities_in_top200": 5
+    },
+    {
+      "entity": "Israel",
+      "listed_top10_score_total": 81.59,
+      "top_city_score_share_pct": 78.08555,
+      "cities_in_top200": 3
+    },
+    {
+      "entity": "Japan",
+      "listed_top10_score_total": 61.84,
+      "top_city_score_share_pct": 79.915912,
+      "cities_in_top200": 3
+    },
+    {
+      "entity": "Australia",
+      "listed_top10_score_total": 56.59,
+      "top_city_score_share_pct": 39.30023,
+      "cities_in_top200": 4
+    },
+    {
+      "entity": "Brazil",
+      "listed_top10_score_total": 55.7,
+      "top_city_score_share_pct": 65.798923,
+      "cities_in_top200": 4
+    },
+    {
+      "entity": "The Netherlands",
+      "listed_top10_score_total": 53.54,
+      "top_city_score_share_pct": 55.416511,
+      "cities_in_top200": 5
+    },
+    {
+      "entity": "Spain",
+      "listed_top10_score_total": 47.11,
+      "top_city_score_share_pct": 46.656761,
+      "cities_in_top200": 3
+    },
+    {
+      "entity": "Sweden",
+      "listed_top10_score_total": 44.46,
+      "top_city_score_share_pct": 71.817364,
+      "cities_in_top200": 3
+    },
+    {
+      "entity": "Switzerland",
+      "listed_top10_score_total": 42.67,
+      "top_city_score_share_pct": 29.271151,
+      "cities_in_top200": 5
+    }
+  ],
+  "x_field": "listed_top10_score_total",
+  "y_field": "top_city_score_share_pct",
+  "size_field": "cities_in_top200",
+  "x_label": "Sum of listed city scores",
+  "y_label": "score(rank 1) / sum(score ranks 1-10) (%)",
+  "size_label": "Count of listed cities in global top 200",
+  "annotate_all": true
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>abbv 净资产收益率-杜邦分析 (ROE) 2016-2024</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #555;
+    }
+    #chartContainer {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 18px 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-radius: 8px;
+    }
+    canvas {
+      max-height: 480px;
+    }
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div id="chartContainer">
+    <h1>abbv 净资产收益率-杜邦分析 (ROE)</h1>
+    <h2>2016–2024 年度变化（基于 DuPont 分解结果）</h2>
+    <canvas id="roeChart"></canvas>
+  </div>
+  <div class="note">
+    注：ROE 为 “RESULT_DuPont_ROE” 列数据，单位为百分数（已按 100× 形式给出，可为负值）。
+  </div>
+
+  <script>
+    // Data extracted from source table (RESULT_DuPont_ROE)
+    const years = [
+      "2016","2017","2018","2019",
+      "2020","2021","2022","2023","2024"
+    ];
+
+    const dupontROE = [
+      1.3874839762265474,
+      1.0909277714990242,
+      -3.396237682890414,
+      -0.948609941027801,
+      1.882544861337684,
+      0.8104198848476338,
+      0.7247565978813301,
+      0.3522126457593974,
+      0.6252100840336134
+    ];
+
+    // Determine limits for better y-axis scaling with some padding
+    const minROE = Math.min(...dupontROE);
+    const maxROE = Math.max(...dupontROE);
+    const padding = (maxROE - minROE) * 0.15 || 1;
+
+    const ctx = document.getElementById('roeChart').getContext('2d');
+
+    // Create gradient for bars
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(46, 134, 222, 0.9)');   // top color
+    gradient.addColorStop(1, 'rgba(116, 185, 255, 0.3)'); // bottom color
+
+    const roeChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [{
+          label: 'DuPont ROE（%）',
+          data: dupontROE,
+          backgroundColor: gradient,
+          borderColor: 'rgba(46, 134, 222, 1)',
+          borderWidth: 1,
+          hoverBackgroundColor: 'rgba(46, 134, 222, 0.9)',
+          hoverBorderColor: 'rgba(46, 134, 222, 1)',
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          intersect: true
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return ' DuPont ROE: ' + value.toFixed(3) + '%';
+              }
+            }
+          },
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              padding: 16
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: '财报年度 (Fiscal Year)',
+              padding: { top: 8 }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            min: minROE - padding,
+            max: maxROE + padding,
+            grid: {
+              color: 'rgba(0,0,0,0.06)'
+            },
+            title: {
+              display: true,
+              text: 'ROE（%）'
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(1) + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

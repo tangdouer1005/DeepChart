@@ -1,0 +1,511 @@
+{
+  "report_code": "018",
+  "query_id": "03",
+  "source_fields": [
+    "Company",
+    "Total raised",
+    "Mosaic"
+  ],
+  "records": [
+    {
+      "company": "Affinity",
+      "total_raised_m": 11.0,
+      "mosaic": 694
+    },
+    {
+      "company": "interface.ai",
+      "total_raised_m": 40.0,
+      "mosaic": 799
+    },
+    {
+      "company": "Uzum",
+      "total_raised_m": 179.5,
+      "mosaic": 854
+    },
+    {
+      "company": "9Fin",
+      "total_raised_m": 83.9,
+      "mosaic": 736
+    },
+    {
+      "company": "Claira",
+      "total_raised_m": 7.0,
+      "mosaic": 703
+    },
+    {
+      "company": "Baanx",
+      "total_raised_m": 34.3,
+      "mosaic": 771
+    },
+    {
+      "company": "Beam",
+      "total_raised_m": 14.0,
+      "mosaic": 640
+    },
+    {
+      "company": "Breez Development",
+      "total_raised_m": 9.5,
+      "mosaic": 781
+    },
+    {
+      "company": "BVNK",
+      "total_raised_m": 91.7,
+      "mosaic": 872
+    },
+    {
+      "company": "Conduit",
+      "total_raised_m": 59.0,
+      "mosaic": 836
+    },
+    {
+      "company": "Crossmint",
+      "total_raised_m": 23.6,
+      "mosaic": 660
+    },
+    {
+      "company": "Due",
+      "total_raised_m": 7.3,
+      "mosaic": 644
+    },
+    {
+      "company": "Noah",
+      "total_raised_m": 22.7,
+      "mosaic": 868
+    },
+    {
+      "company": "Rain",
+      "total_raised_m": 88.8,
+      "mosaic": 897
+    },
+    {
+      "company": "RD Technologies",
+      "total_raised_m": 47.8,
+      "mosaic": 807
+    },
+    {
+      "company": "RedotPay",
+      "total_raised_m": 87.0,
+      "mosaic": 957
+    },
+    {
+      "company": "Relai",
+      "total_raised_m": 21.8,
+      "mosaic": 796
+    },
+    {
+      "company": "Transak",
+      "total_raised_m": 46.7,
+      "mosaic": 852
+    },
+    {
+      "company": "Banxware",
+      "total_raised_m": 44.0,
+      "mosaic": 738
+    },
+    {
+      "company": "BKN301",
+      "total_raised_m": 40.1,
+      "mosaic": 805
+    },
+    {
+      "company": "CredibleX",
+      "total_raised_m": 155.0,
+      "mosaic": 550
+    },
+    {
+      "company": "Fimple",
+      "total_raised_m": 20.5,
+      "mosaic": 782
+    },
+    {
+      "company": "FISPAN",
+      "total_raised_m": 44.5,
+      "mosaic": 789
+    },
+    {
+      "company": "NymCard",
+      "total_raised_m": 66.1,
+      "mosaic": 827
+    },
+    {
+      "company": "Abacum",
+      "total_raised_m": 92.2,
+      "mosaic": 794
+    },
+    {
+      "company": "Auditoria.AI",
+      "total_raised_m": 60.5,
+      "mosaic": 852
+    },
+    {
+      "company": "Campfire",
+      "total_raised_m": 104.0,
+      "mosaic": 721
+    },
+    {
+      "company": "Clara",
+      "total_raised_m": 550.0,
+      "mosaic": 871
+    },
+    {
+      "company": "Crowded",
+      "total_raised_m": 18.3,
+      "mosaic": 598
+    },
+    {
+      "company": "Datricks",
+      "total_raised_m": 15.0,
+      "mosaic": 730
+    },
+    {
+      "company": "Finmo",
+      "total_raised_m": 18.5,
+      "mosaic": 855
+    },
+    {
+      "company": "Mendel",
+      "total_raised_m": 130.6,
+      "mosaic": 762
+    },
+    {
+      "company": "Xelix",
+      "total_raised_m": 165.1,
+      "mosaic": 724
+    },
+    {
+      "company": "Amlyze",
+      "total_raised_m": 5.1,
+      "mosaic": 674
+    },
+    {
+      "company": "Casap",
+      "total_raised_m": 33.6,
+      "mosaic": 816
+    },
+    {
+      "company": "Greenlite",
+      "total_raised_m": 20.3,
+      "mosaic": 801
+    },
+    {
+      "company": "Hawk",
+      "total_raised_m": 84.0,
+      "mosaic": 850
+    },
+    {
+      "company": "Bolto",
+      "total_raised_m": 8.1,
+      "mosaic": 604
+    },
+    {
+      "company": "Borderless",
+      "total_raised_m": 32.0,
+      "mosaic": 646
+    },
+    {
+      "company": "Every",
+      "total_raised_m": 32.5,
+      "mosaic": 645
+    },
+    {
+      "company": "InstaPay",
+      "total_raised_m": 7.8,
+      "mosaic": 721
+    },
+    {
+      "company": "Jet HR",
+      "total_raised_m": 47.3,
+      "mosaic": 783
+    },
+    {
+      "company": "Khazna",
+      "total_raised_m": 54.7,
+      "mosaic": 791
+    },
+    {
+      "company": "Niural",
+      "total_raised_m": 41.5,
+      "mosaic": 753
+    },
+    {
+      "company": "SeamlessHR",
+      "total_raised_m": 19.1,
+      "mosaic": 671
+    },
+    {
+      "company": "Agora",
+      "total_raised_m": 69.7,
+      "mosaic": 812
+    },
+    {
+      "company": "Cryptio",
+      "total_raised_m": 26.2,
+      "mosaic": 693
+    },
+    {
+      "company": "DigiFT",
+      "total_raised_m": 21.5,
+      "mosaic": 836
+    },
+    {
+      "company": "Komainu",
+      "total_raised_m": 100.0,
+      "mosaic": 874
+    },
+    {
+      "company": "Maple Finance",
+      "total_raised_m": 11.4,
+      "mosaic": 772
+    },
+    {
+      "company": "Securitize",
+      "total_raised_m": 203.0,
+      "mosaic": 895
+    },
+    {
+      "company": "Utila",
+      "total_raised_m": 51.5,
+      "mosaic": 852
+    },
+    {
+      "company": "Delos",
+      "total_raised_m": 22.3,
+      "mosaic": 733
+    },
+    {
+      "company": "Descartes Underwriting",
+      "total_raised_m": 141.8,
+      "mosaic": 757
+    },
+    {
+      "company": "Further AI",
+      "total_raised_m": 30.5,
+      "mosaic": 826
+    },
+    {
+      "company": "Skarlett",
+      "total_raised_m": 13.6,
+      "mosaic": 693
+    },
+    {
+      "company": "Sixfold",
+      "total_raised_m": 21.5,
+      "mosaic": 763
+    },
+    {
+      "company": "Quandri",
+      "total_raised_m": 22.0,
+      "mosaic": 698
+    },
+    {
+      "company": "Casca",
+      "total_raised_m": 33.4,
+      "mosaic": 802
+    },
+    {
+      "company": "CrediLinq",
+      "total_raised_m": 11.9,
+      "mosaic": 702
+    },
+    {
+      "company": "InDebted",
+      "total_raised_m": 93.8,
+      "mosaic": 754
+    },
+    {
+      "company": "Murphy",
+      "total_raised_m": 15.0,
+      "mosaic": 717
+    },
+    {
+      "company": "Nada",
+      "total_raised_m": 30.3,
+      "mosaic": 695
+    },
+    {
+      "company": "Peach Finance",
+      "total_raised_m": 38.0,
+      "mosaic": 754
+    },
+    {
+      "company": "PostEx",
+      "total_raised_m": 15.9,
+      "mosaic": 742
+    },
+    {
+      "company": "Scienaptic",
+      "total_raised_m": 17.1,
+      "mosaic": 778
+    },
+    {
+      "company": "Versana",
+      "total_raised_m": 66.0,
+      "mosaic": 748
+    },
+    {
+      "company": "WonderLend Hubs",
+      "total_raised_m": 1.6,
+      "mosaic": 646
+    },
+    {
+      "company": "Aspora",
+      "total_raised_m": 94.3,
+      "mosaic": 714
+    },
+    {
+      "company": "Capi",
+      "total_raised_m": 19.5,
+      "mosaic": 737
+    },
+    {
+      "company": "Catena Labs",
+      "total_raised_m": 18.0,
+      "mosaic": 770
+    },
+    {
+      "company": "Easebuzz",
+      "total_raised_m": 34.0,
+      "mosaic": 878
+    },
+    {
+      "company": "Enza",
+      "total_raised_m": 6.8,
+      "mosaic": 781
+    },
+    {
+      "company": "Finom",
+      "total_raised_m": 345.5,
+      "mosaic": 874
+    },
+    {
+      "company": "Haball",
+      "total_raised_m": 52.0,
+      "mosaic": 793
+    },
+    {
+      "company": "Highnote",
+      "total_raised_m": 169.0,
+      "mosaic": 834
+    },
+    {
+      "company": "Payrails",
+      "total_raised_m": 52.8,
+      "mosaic": 870
+    },
+    {
+      "company": "PayTic",
+      "total_raised_m": 6.7,
+      "mosaic": 736
+    },
+    {
+      "company": "Toku",
+      "total_raised_m": 66.6,
+      "mosaic": 750
+    },
+    {
+      "company": "Yaspa",
+      "total_raised_m": 13.3,
+      "mosaic": 826
+    },
+    {
+      "company": "Yuno",
+      "total_raised_m": 35.0,
+      "mosaic": 790
+    },
+    {
+      "company": "Ziina",
+      "total_raised_m": 30.9,
+      "mosaic": 844
+    },
+    {
+      "company": "Candidly",
+      "total_raised_m": 42.1,
+      "mosaic": 718
+    },
+    {
+      "company": "Debbie",
+      "total_raised_m": 7.9,
+      "mosaic": 620
+    },
+    {
+      "company": "Grifin",
+      "total_raised_m": 11.0,
+      "mosaic": 705
+    },
+    {
+      "company": "Alpaca",
+      "total_raised_m": 138.9,
+      "mosaic": 918
+    },
+    {
+      "company": "Axyon AI",
+      "total_raised_m": 12.6,
+      "mosaic": 761
+    },
+    {
+      "company": "BridgeWise",
+      "total_raised_m": 40.5,
+      "mosaic": 781
+    },
+    {
+      "company": "Conquest Planning",
+      "total_raised_m": 106.1,
+      "mosaic": 849
+    },
+    {
+      "company": "Dub",
+      "total_raised_m": 54.5,
+      "mosaic": 754
+    },
+    {
+      "company": "Flanks",
+      "total_raised_m": 25.7,
+      "mosaic": 747
+    },
+    {
+      "company": "Jump",
+      "total_raised_m": 24.6,
+      "mosaic": 881
+    },
+    {
+      "company": "Lightyear",
+      "total_raised_m": 58.0,
+      "mosaic": 787
+    },
+    {
+      "company": "ModernFi",
+      "total_raised_m": 58.3,
+      "mosaic": 859
+    },
+    {
+      "company": "Retirable",
+      "total_raised_m": 26.4,
+      "mosaic": 737
+    },
+    {
+      "company": "Thndr",
+      "total_raised_m": 36.0,
+      "mosaic": 832
+    },
+    {
+      "company": "Wealth.com",
+      "total_raised_m": 46.0,
+      "mosaic": 877
+    },
+    {
+      "company": "Zocks",
+      "total_raised_m": 19.3,
+      "mosaic": 897
+    },
+    {
+      "company": "Unique",
+      "total_raised_m": 52.5,
+      "mosaic": 710
+    },
+    {
+      "company": "Upstage",
+      "total_raised_m": 143.8,
+      "mosaic": 937
+    }
+  ]
+}

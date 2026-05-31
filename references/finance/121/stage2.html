@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>KO 内部增长率 (IGR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --grid: #e5e7eb;
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.1);
+      --negative: #dc2626;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font);
+    }
+
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 0.25rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin-bottom: 1.25rem;
+      color: #4b5563;
+      font-size: 0.9rem;
+    }
+
+    .chart-card {
+      background: #fff;
+      border-radius: 0.75rem;
+      padding: 1rem 1rem 1.25rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+
+    .chart-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .chart-subtitle {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .legend-note {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.5rem;
+    }
+
+    /* Ensure the chart has height so Chart.js can render properly */
+    .chart-container {
+      position: relative;
+      height: 380px;
+      width: 100%;
+    }
+
+    canvas {
+      max-width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+
+      .chart-card {
+        padding: 0.75rem 0.75rem 1rem;
+      }
+
+      .chart-container {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1>KO 内部增长率 (Internal Growth Rate, IGR)</h1>
+    <div class="subtitle">Fiscal years 2016–2024 · 单位：比例 (e.g., 0.02 = 2%)</div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">IGR 趋势折线图</div>
+        <div class="chart-subtitle">悬停查看精确数值</div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="igrChart"></canvas>
+      </div>
+
+      <div class="legend-note">
+        数据来源：提供的 RESULT_IGR 数据。蓝色点表示 IGR ≥ 0，红色点表示 IGR &lt; 0。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Ensure Chart.js is loaded
+    if (typeof Chart === "undefined") {
+      console.error("Chart.js failed to load. Check the CDN URL or network connection.");
+    } else {
+      // Source data (as provided)
+      const labels = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ];
+
+      const igrValues = [
+        0.0054907032411031,
+        -0.0547407047649883,
+        -0.0024485227246228,
+        0.0250835615030795,
+        0.0081264475234651,
+        0.0285258079858673,
+        0.021018743349794,
+        0.0298688237393344,
+        0.0234579883123051
+      ];
+
+      // Compute y-axis bounds with padding
+      const minVal = Math.min(...igrValues);
+      const maxVal = Math.max(...igrValues);
+      const padding = (maxVal - minVal || 0.01) * 0.2;
+      const yMin = minVal - padding;
+      const yMax = maxVal + padding;
+
+      const canvas = document.getElementById("igrChart");
+      const ctx = canvas.getContext("2d");
+
+      // Gradient under the line
+      let areaGradient = null;
+
+      function createAreaGradient(chart) {
+        const { ctx, chartArea } = chart;
+        if (!chartArea) return null;
+        const gradient = ctx.createLinearGradient(
+          0,
+          chartArea.top,
+          0,
+          chartArea.bottom
+        );
+        gradient.addColorStop(0, "rgba(37, 99, 235, 0.18)");
+        gradient.addColorStop(1, "rgba(37, 99, 235, 0)");
+        return gradient;
+      }
+
+      const igrChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "内部增长率 (IGR)",
+              data: igrValues,
+              borderColor: "rgba(37, 99, 235, 1)",
+              // backgroundColor is set dynamically in beforeDraw (so we can use proper chartArea)
+              backgroundColor: function (context) {
+                const chart = context.chart;
+                const { chartArea } = chart;
+                if (!chartArea) {
+                  // Initial call: chartArea is not ready yet
+                  return "rgba(37, 99, 235, 0)";
+                }
+                if (!areaGradient) {
+                  areaGradient = createAreaGradient(chart);
+                }
+                return areaGradient;
+              },
+              borderWidth: 2,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointBackgroundColor: igrValues.map((v) =>
+                v >= 0 ? "rgba(37, 99, 235, 1)" : "rgba(220, 38, 38, 1)"
+              ),
+              pointBorderColor: "#ffffff",
+              pointBorderWidth: 1.5,
+              tension: 0.25,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: "#111827",
+              titleFont: { size: 12, weight: "600" },
+              bodyFont: { size: 12 },
+              padding: 10,
+              callbacks: {
+                label: (ctx) => {
+                  const value = ctx.parsed.y;
+                  const pct = (value * 100).toFixed(2) + "%";
+                  return ` IGR: ${pct} (${value.toFixed(6)})`;
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                font: { size: 11 }
+              }
+            },
+            y: {
+              beginAtZero: false,
+              min: yMin,
+              max: yMax,
+              grid: {
+                color: "#e5e7eb"
+              },
+              ticks: {
+                font: { size: 11 },
+                callback: (value) => (value * 100).toFixed(1) + "%"
+              }
+            }
+          }
+        }
+      });
+
+      // On resize, clear cached gradient so it adapts to new size
+      window.addEventListener("resize", () => {
+        areaGradient = null;
+        igrChart.update();
+      });
+    }
+  </script>
+</body>
+</html>

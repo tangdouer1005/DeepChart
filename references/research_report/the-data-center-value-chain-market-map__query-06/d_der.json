@@ -1,0 +1,102 @@
+{
+  "report_id": "010",
+  "query_id": 6,
+  "query_text": "Create a heatmap with value-chain segments on rows and funding-stage families on columns, where each cell shows the average `Mosaic score` for companies in that segment-stage combination, using stage-family normalization such as `equity VC`, `debt/loan/credit`, `grant/corporate`, and `N/A/other`, and include only cells with at least two companies.",
+  "chart_type": "heatmap",
+  "value_unit": "average Mosaic score",
+  "sort_rule": "report segment order on rows; normalized stage-family order on columns",
+  "selection_rule": "cells with at least two companies",
+  "records": [
+    {
+      "row": "Power generation",
+      "col": "equity VC",
+      "value": 833.846154,
+      "count": 13
+    },
+    {
+      "row": "AI computing hardware",
+      "col": "equity VC",
+      "value": 823.454545,
+      "count": 11
+    },
+    {
+      "row": "AI computing hardware",
+      "col": "grant/corporate",
+      "value": 829.25,
+      "count": 4
+    },
+    {
+      "row": "Supporting hardware infrastructure",
+      "col": "equity VC",
+      "value": 739.0,
+      "count": 7
+    },
+    {
+      "row": "Supporting hardware infrastructure",
+      "col": "debt/loan/credit",
+      "value": 796.5,
+      "count": 2
+    },
+    {
+      "row": "Supporting hardware infrastructure",
+      "col": "grant/corporate",
+      "value": 731.0,
+      "count": 3
+    },
+    {
+      "row": "Supporting hardware infrastructure",
+      "col": "N/A/other",
+      "value": 770.666667,
+      "count": 3
+    },
+    {
+      "row": "Networking & connectivity",
+      "col": "equity VC",
+      "value": 781.5,
+      "count": 8
+    },
+    {
+      "row": "Networking & connectivity",
+      "col": "N/A/other",
+      "value": 702.166667,
+      "count": 6
+    },
+    {
+      "row": "Data center facilities & operations",
+      "col": "equity VC",
+      "value": 760.666667,
+      "count": 6
+    },
+    {
+      "row": "Data center facilities & operations",
+      "col": "debt/loan/credit",
+      "value": 689.6,
+      "count": 5
+    },
+    {
+      "row": "Data center facilities & operations",
+      "col": "N/A/other",
+      "value": 650.333333,
+      "count": 3
+    }
+  ],
+  "plot_config": {
+    "title": "Average Mosaic by segment and normalized stage family",
+    "x_label": "Stage family",
+    "y_label": "Value-chain segment"
+  },
+  "reasoning_summary": [
+    "Assigned segment membership from section-2 boundaries.",
+    "Normalized raw stage labels into equity VC, debt/loan/credit, grant/corporate, and N/A/other.",
+    "Aggregated average Mosaic by segment-stage cell.",
+    "Excluded cells with fewer than two companies."
+  ],
+  "stats": {
+    "eligible_count": 74,
+    "returned_count": 12,
+    "cell_count": 12
+  },
+  "open_issues": [
+    "Stage-family mapping is a documented normalization step rather than a visible source field."
+  ]
+}

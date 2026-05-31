@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ABBV 格雷厄姆“烟蒂股”净值 (NNWC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #222222;
+      --axis: #666666;
+      --grid: #e0e0e0;
+      --line: #2563eb;
+      --line-hover: #1d4ed8;
+      --tooltip-bg: rgba(15, 23, 42, 0.9);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --axis: #9ca3af;
+        --grid: rgba(148, 163, 184, 0.25);
+        --line: #60a5fa;
+        --line-hover: #93c5fd;
+      }
+    }
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 1rem;
+      font-weight: 400;
+      color: var(--axis);
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background: radial-gradient(circle at top left, #eff6ff 0, transparent 55%),
+                  radial-gradient(circle at bottom right, #f9fafb 0, transparent 55%);
+      border-radius: 12px;
+      padding: 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--axis);
+    }
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .controls input[type="checkbox"] {
+      accent-color: var(--line);
+    }
+    .note {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      color: var(--axis);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>ABBV 格雷厄姆“烟蒂股”净值 (NNWC) 变化</h1>
+  <h2>2016–2024 年，每股 NNWC（美元）走势</h2>
+
+  <div class="chart-wrapper">
+    <div class="controls">
+      <span>图表选项：</span>
+      <label>
+        <input type="checkbox" id="toggleLineSmooth" checked>
+        平滑线条
+      </label>
+      <label>
+        <input type="checkbox" id="toggleFill">
+        区域填充
+      </label>
+    </div>
+    <canvas id="nnwcChart"></canvas>
+    <div class="note">
+      NNWC（Net-Net Working Capital）每股值使用提供的 RESULT_NNWC_Per_Share 数据；数值为负，表示净流动资产小于负债。
+    </div>
+  </div>
+</div>
+
+<script>
+  // Source data (from CSV)
+  const fiscalYears = [
+    "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+  ];
+  const nnwcPerShare = [
+    -27.759656652360515,
+    -27.73923892701185,
+    -32.89327296248383,
+    -32.18867924528302,
+    -67.71966527196653,
+    -58.05571187394485,
+    -52.33689538807649,
+    -51.50141003948111,
+    -59.90693739424704
+  ];
+
+  const ctx = document.getElementById("nnwcChart").getContext("2d");
+
+  // Compute a reasonable y-axis range with padding
+  const minVal = Math.min(...nnwcPerShare);
+  const maxVal = Math.max(...nnwcPerShare);
+  const padding = (Math.abs(minVal - maxVal) || 1) * 0.1;
+  const suggestedMin = Math.floor((minVal - padding) / 5) * 5;
+  const suggestedMax = Math.ceil((maxVal + padding) / 5) * 5;
+
+  let nnwcChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: fiscalYears,
+      datasets: [{
+        label: "每股 NNWC（美元）",
+        data: nnwcPerShare,
+        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--line').trim() || "#2563eb",
+        backgroundColor: "rgba(37,99,235,0.12)",
+        pointBackgroundColor: "#ffffff",
+        pointBorderColor: getComputedStyle(document.documentElement).getPropertyValue('--line').trim() || "#2563eb",
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointHitRadius: 8,
+        borderWidth: 2.2,
+        tension: 0.3,      // smoothed by default
+        fill: false        // no area fill by default
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "nearest",
+        axis: "x",
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            usePointStyle: true,
+            boxWidth: 8,
+            padding: 16
+          }
+        },
+        tooltip: {
+          enabled: true,
+          backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--tooltip-bg').trim() || "rgba(15,23,42,0.9)",
+          titleFont: { size: 13, weight: "600" },
+          bodyFont: { size: 12 },
+          padding: 10,
+          callbacks: {
+            label: function(ctx) {
+              const value = ctx.parsed.y;
+              return " 每股 NNWC: " + value.toFixed(2) + " 美元";
+            }
+          }
+        },
+        title: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "财年",
+            color: getComputedStyle(document.documentElement).getPropertyValue('--axis').trim() || "#666",
+            font: { size: 12 }
+          },
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: getComputedStyle(document.documentElement).getPropertyValue('--axis').trim() || "#666",
+            font: { size: 11 }
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: "每股 NNWC（美元）",
+            color: getComputedStyle(document.documentElement).getPropertyValue('--axis').trim() || "#666",
+            font: { size: 12 }
+          },
+          grid: {
+            color: getComputedStyle(document.documentElement).getPropertyValue('--grid').trim() || "rgba(224,224,224,0.8)",
+            drawBorder: false
+          },
+          ticks: {
+            color: getComputedStyle(document.documentElement).getPropertyValue('--axis').trim() || "#666",
+            font: { size: 11 },
+            callback: function(value) {
+              return value.toFixed(0);
+            }
+          },
+          suggestedMin: suggestedMin,
+          suggestedMax: suggestedMax
+        }
+      }
+    }
+  });
+
+  // Controls for smoothing and fill
+  const smoothCheckbox = document.getElementById("toggleLineSmooth");
+  const fillCheckbox = document.getElementById("toggleFill");
+
+  smoothCheckbox.addEventListener("change", () => {
+    nnwcChart.data.datasets[0].tension = smoothCheckbox.checked ? 0.3 : 0;
+    nnwcChart.update();
+  });
+
+  fillCheckbox.addEventListener("change", () => {
+    nnwcChart.data.datasets[0].fill = fillCheckbox.checked;
+    nnwcChart.update();
+  });
+</script>
+</body>
+</html>

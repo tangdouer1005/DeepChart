@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const chartData = {
+    "plot_data": [
+        {
+            "Model": "conch",
+            "Category": "Morphology",
+            "AUROC": 0.7659939108398429,
+            "Dataset": 1.2
+        },
+        {
+            "Model": "biomedclip",
+            "Category": "Morphology",
+            "AUROC": 0.7331658780868027,
+            "Dataset": 15.0
+        },
+        {
+            "Model": "plip",
+            "Category": "Morphology",
+            "AUROC": 0.6983860366946149,
+            "Dataset": 0.208
+        },
+        {
+            "Model": "conch",
+            "Category": "Biomarker",
+            "AUROC": 0.726168367463843,
+            "Dataset": 1.2
+        },
+        {
+            "Model": "biomedclip",
+            "Category": "Biomarker",
+            "AUROC": 0.667361737958213,
+            "Dataset": 15.0
+        },
+        {
+            "Model": "plip",
+            "Category": "Biomarker",
+            "AUROC": 0.6516216846643966,
+            "Dataset": 0.208
+        },
+        {
+            "Model": "conch",
+            "Category": "Prognosis",
+            "AUROC": 0.6318876255522493,
+            "Dataset": 1.2
+        },
+        {
+            "Model": "biomedclip",
+            "Category": "Prognosis",
+            "AUROC": 0.6051941716893544,
+            "Dataset": 15.0
+        },
+        {
+            "Model": "plip",
+            "Category": "Prognosis",
+            "AUROC": 0.5674663216946358,
+            "Dataset": 0.208
+        }
+    ],
+    "stats_data": [
+        {
+            "category": "Morphology",
+            "r": 0.07661250816855629,
+            "p": 0.9511791239949174
+        },
+        {
+            "category": "Biomarker",
+            "r": -0.25893321472137487,
+            "p": 0.8332580855389864
+        },
+        {
+            "category": "Prognosis",
+            "r": 0.1579282737538284,
+            "p": 0.8990370419326468
+        }
+    ]
+};
+
+        const rawData = chartData.plot_data.map(d => ({
+            model: d["Model"],
+            cat: d["Category"],
+            auroc: d["AUROC"],
+            dataset: d["Dataset"]
+        }));
+
+        const colors = {
+            'Morphology': '#684778',
+            'Biomarker': '#BC6C88',
+            'Prognosis': '#8D4E52'
+        };
+
+        const categories = ['Morphology', 'Biomarker', 'Prognosis'];
+        const series = [];
+        const datasets = [];
+
+        echarts.registerTransform(ecStat.transform.regression);
+
+        categories.forEach(cat => {
+            const catData = rawData.filter(d => d.cat === cat).map(d => [d.dataset, d.auroc]);
+            
+            const stat = chartData.stats_data.find(s => s.category === cat);
+            const r = stat ? stat.r : 0;
+            const p = stat ? stat.p : 0;
+            
+            let pStr = p.toFixed(2);
+            if (cat === 'Prognosis') pStr = p.toFixed(1);
+
+            const label = `${cat} (r = ${r.toFixed(2)}, P = ${pStr})`;
+
+            const sourceIdx = datasets.length;
+            datasets.push({ source: catData });
+            
+            const transformIdx = datasets.length;
+            datasets.push({
+                fromDatasetIndex: sourceIdx,
+                transform: {
+                    type: 'ecStat:regression',
+                    config: { method: 'linear' }
+                }
+            });
+
+            series.push({
+                name: label,
+                type: 'scatter',
+                datasetIndex: sourceIdx,
+                itemStyle: { color: colors[cat], opacity: 1 },
+                symbolSize: 15
+            });
+
+            series.push({
+                name: label,
+                type: 'line',
+                datasetIndex: transformIdx,
+                symbol: 'none',
+                lineStyle: { color: colors[cat], width: 3 },
+                silent: true,
+                tooltip: { show: false }
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 80, left: 80 },
+            xAxis: {
+                name: 'Pretraining dataset (M ICPs)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: -0.5,
+                max: 15.8,
+                interval: 2,
+                splitLine: { show: true, lineStyle: { color: '#E0E0E0' } },
+                axisLine: { show: true, lineStyle: { color: '#ccc' } },
+                axisLabel: { color: 'black' },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                name: 'Average downstream performance\nby task type (AUROC)',
+                nameLocation: 'middle',
+                nameGap: 60,
+                type: 'value',
+                min: 0.50,
+                max: 0.85,
+                interval: 0.05,
+                splitLine: { show: true, lineStyle: { color: '#E0E0E0' } },
+                axisLine: { show: true, lineStyle: { color: '#ccc' } },
+                axisLabel: { color: 'black' },
+                axisTick: { show: true }
+            },
+            legend: {
+                top: 20,
+                right: 20,
+                orient: 'vertical',
+                itemGap: 10,
+                textStyle: { fontSize: 12 },
+                backgroundColor: 'rgba(255,255,255,0.8)'
+            },
+            dataset: datasets,
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'b',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

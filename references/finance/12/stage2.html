@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ABT 现金循环周期 (CCC) 2016–2024 柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 使用 UMD 版本的 Chart.js，兼容性更好 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #fafafa;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 16px 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px; /* 固定高度，避免高度为 0 */
+    }
+    .note {
+      font-size: 11px;
+      color: #777;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>ABT 现金循环周期 (CCC)</h1>
+    <h2>2016–2024 财年变化（单位：天）</h2>
+    <div class="chart-wrapper">
+      <canvas id="cccChart"></canvas>
+    </div>
+    <div class="note">
+      数据来源：用户提供的 RESULT_CCC（单位：天）。鼠标悬停可查看精确数值。
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // 防止 Chart 未加载的报错
+      if (typeof Chart === 'undefined') {
+        console.error('Chart.js 未成功加载，请检查网络或 CDN 链接。');
+        return;
+      }
+
+      const canvas = document.getElementById('cccChart');
+      if (!canvas) {
+        console.error('未找到 id 为 "cccChart" 的 canvas 元素。');
+        return;
+      }
+
+      const ctx = canvas.getContext('2d');
+
+      // 数据：Fiscal Year, RESULT_CCC
+      const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+      const cccValues = [
+        111.02459107512902,
+        87.89444221760236,
+        87.24053940726195,
+        83.291106540028,
+        84.99078843363034,
+        71.33669448985013,
+        72.92296167644572,
+        93.08734151869892,
+        96.50555177520138
+      ];
+
+      // 简单统一配色，避免部分环境对渐变高度处理异常
+      const barColor = '#3b82f6';
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: years,
+          datasets: [{
+            label: '现金循环周期 (天)',
+            data: cccValues,
+            backgroundColor: barColor,
+            borderColor: '#1d4ed8',
+            borderWidth: 1,
+            hoverBackgroundColor: '#2563eb'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                boxWidth: 14
+              }
+            },
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                label: function (context) {
+                  const value = context.parsed.y;
+                  if (value == null || isNaN(value)) return '';
+                  return ' 现金循环周期：' + value.toFixed(2) + ' 天';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: '财年',
+                color: '#444'
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: '现金循环周期 (天)',
+                color: '#444'
+              },
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0,0,0,0.06)'
+              },
+              ticks: {
+                callback: function (value) {
+                  return value + ' 天';
+                }
+              }
+            }
+          },
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          animation: {
+            duration: 600
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a heatmap for the 18 ecosystems with the highest `balanced market maturity score`, defined as the average percentile rank of `Ecosystem Value`, `Total VC Funding`, `Exit Amount`, and `Exit Count` on a `0-100` scale, sorted by the composite score descending and excluding rows with any missing source field.",
+  "chart_type": "heatmap",
+  "value_unit": "0-100 percentile score",
+  "sort_rule": "descending by balanced_market_maturity_score",
+  "selection_rule": "top 18 ecosystems",
+  "plot_spec": {
+    "title": "2025 Balanced Market Maturity Heatmap",
+    "value_fields": [
+      "value_pct",
+      "vc_pct",
+      "exit_amount_pct",
+      "exit_count_pct",
+      "balanced_market_maturity_score"
+    ]
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley",
+      "value_pct": 100.0,
+      "vc_pct": 100.0,
+      "exit_amount_pct": 100.0,
+      "exit_count_pct": 100.0,
+      "balanced_market_maturity_score": 100.0
+    },
+    {
+      "entity": "New York City",
+      "value_pct": 98.0,
+      "vc_pct": 98.0,
+      "exit_amount_pct": 96.0,
+      "exit_count_pct": 96.0,
+      "balanced_market_maturity_score": 97.0
+    },
+    {
+      "entity": "London",
+      "value_pct": 92.0,
+      "vc_pct": 96.0,
+      "exit_amount_pct": 92.0,
+      "exit_count_pct": 98.0,
+      "balanced_market_maturity_score": 94.5
+    },
+    {
+      "entity": "Los Angeles",
+      "value_pct": 94.0,
+      "vc_pct": 94.0,
+      "exit_amount_pct": 88.0,
+      "exit_count_pct": 94.0,
+      "balanced_market_maturity_score": 92.5
+    },
+    {
+      "entity": "Boston",
+      "value_pct": 88.0,
+      "vc_pct": 92.0,
+      "exit_amount_pct": 90.0,
+      "exit_count_pct": 90.0,
+      "balanced_market_maturity_score": 90.0
+    },
+    {
+      "entity": "Beijing",
+      "value_pct": 96.0,
+      "vc_pct": 90.0,
+      "exit_amount_pct": 98.0,
+      "exit_count_pct": 64.0,
+      "balanced_market_maturity_score": 87.0
+    },
+    {
+      "entity": "Tel Aviv",
+      "value_pct": 90.0,
+      "vc_pct": 88.0,
+      "exit_amount_pct": 84.0,
+      "exit_count_pct": 86.0,
+      "balanced_market_maturity_score": 87.0
+    },
+    {
+      "entity": "Seoul",
+      "value_pct": 78.0,
+      "vc_pct": 82.0,
+      "exit_amount_pct": 94.0,
+      "exit_count_pct": 84.0,
+      "balanced_market_maturity_score": 84.5
+    },
+    {
+      "entity": "Paris",
+      "value_pct": 84.0,
+      "vc_pct": 84.0,
+      "exit_amount_pct": 64.0,
+      "exit_count_pct": 92.0,
+      "balanced_market_maturity_score": 81.0
+    },
+    {
+      "entity": "Shanghai",
+      "value_pct": 86.0,
+      "vc_pct": 86.0,
+      "exit_amount_pct": 86.0,
+      "exit_count_pct": 60.0,
+      "balanced_market_maturity_score": 79.5
+    },
+    {
+      "entity": "Bengaluru-Karnataka",
+      "value_pct": 80.0,
+      "vc_pct": 80.0,
+      "exit_amount_pct": 78.0,
+      "exit_count_pct": 70.0,
+      "balanced_market_maturity_score": 77.0
+    },
+    {
+      "entity": "Berlin",
+      "value_pct": 74.0,
+      "vc_pct": 76.0,
+      "exit_amount_pct": 73.0,
+      "exit_count_pct": 82.0,
+      "balanced_market_maturity_score": 76.25
+    },
+    {
+      "entity": "Tokyo",
+      "value_pct": 68.0,
+      "vc_pct": 70.0,
+      "exit_amount_pct": 73.0,
+      "exit_count_pct": 88.0,
+      "balanced_market_maturity_score": 74.75
+    },
+    {
+      "entity": "Singapore",
+      "value_pct": 82.0,
+      "vc_pct": 78.0,
+      "exit_amount_pct": 64.0,
+      "exit_count_pct": 74.0,
+      "balanced_market_maturity_score": 74.5
+    },
+    {
+      "entity": "Philadelphia",
+      "value_pct": 72.0,
+      "vc_pct": 73.0,
+      "exit_amount_pct": 64.0,
+      "exit_count_pct": 78.0,
+      "balanced_market_maturity_score": 71.75
+    },
+    {
+      "entity": "São Paulo",
+      "value_pct": 64.0,
+      "vc_pct": 66.0,
+      "exit_amount_pct": 82.0,
+      "exit_count_pct": 72.0,
+      "balanced_market_maturity_score": 71.0
+    },
+    {
+      "entity": "Shenzhen",
+      "value_pct": 76.0,
+      "vc_pct": 73.0,
+      "exit_amount_pct": 76.0,
+      "exit_count_pct": 54.0,
+      "balanced_market_maturity_score": 69.75
+    },
+    {
+      "entity": "Sydney",
+      "value_pct": 66.0,
+      "vc_pct": 64.0,
+      "exit_amount_pct": 60.0,
+      "exit_count_pct": 80.0,
+      "balanced_market_maturity_score": 67.5
+    }
+  ]
+}

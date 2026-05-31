@@ -1,0 +1,60 @@
+{
+  "query_id": 7,
+  "query_text": "Create a slope chart comparing, for each super-group, its share of companies founded in 2023 or later against its share of total disclosed Mosaic points, with both values expressed as percentages and sorted by the difference between youth share and Mosaic share.",
+  "status": "complete",
+  "chart": {
+    "type": "slope",
+    "title": "Youth-share vs Mosaic-share by super-group",
+    "entity_field": "super_group",
+    "left_field": "youth_share_pct",
+    "right_field": "mosaic_share_pct",
+    "x_categories": [
+      "Youth company share",
+      "Mosaic share"
+    ],
+    "y_label": "Share of total (%)",
+    "figsize": [
+      11,
+      7
+    ]
+  },
+  "data": [
+    {
+      "super_group": "Agent frameworks & development platforms",
+      "youth_share_pct": 35.483870967741936,
+      "mosaic_share_pct": 32.01037795386018,
+      "gap_pct": 3.4734930138817575
+    },
+    {
+      "super_group": "Context",
+      "youth_share_pct": 14.516129032258066,
+      "mosaic_share_pct": 11.503901750027548,
+      "gap_pct": 3.0122272822305174
+    },
+    {
+      "super_group": "Orchestration",
+      "youth_share_pct": 8.064516129032258,
+      "mosaic_share_pct": 5.778997665962114,
+      "gap_pct": 2.2855184630701437
+    },
+    {
+      "super_group": "Tool integration",
+      "youth_share_pct": 12.903225806451612,
+      "mosaic_share_pct": 11.882556823304316,
+      "gap_pct": 1.0206689831472957
+    },
+    {
+      "super_group": "Oversight",
+      "youth_share_pct": 20.967741935483872,
+      "mosaic_share_pct": 22.90362326825408,
+      "gap_pct": -1.935881332770208
+    },
+    {
+      "super_group": "Foundation models & infrastructure",
+      "youth_share_pct": 8.064516129032258,
+      "mosaic_share_pct": 15.920542538591764,
+      "gap_pct": -7.856026409559506
+    }
+  ],
+  "notes": []
+}

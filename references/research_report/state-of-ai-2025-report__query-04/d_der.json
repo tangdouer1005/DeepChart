@@ -1,0 +1,118 @@
+{
+  "status": "complete",
+  "chart_type": "bubble",
+  "title": "Markets with 100+ 2025 deals: early-stage share vs average funding per deal",
+  "x_label": "Early-stage share in 2025 (%)",
+  "y_label": "Average funding per deal ($M)",
+  "size_label": "Top-5 deal sum ($B)",
+  "data": [
+    {
+      "label": "US",
+      "x": 73,
+      "y": 51.66849015317287,
+      "size": 49.3
+    },
+    {
+      "label": "Silicon Valley",
+      "x": 77,
+      "y": 94.76439790575917,
+      "size": 48.8
+    },
+    {
+      "label": "New York",
+      "x": 72,
+      "y": 23.81930184804928,
+      "size": 2.871
+    },
+    {
+      "label": "Europe",
+      "x": 79,
+      "y": 14.123159303882195,
+      "size": 2.112
+    },
+    {
+      "label": "Asia",
+      "x": 72,
+      "y": 8.609738884968243,
+      "size": 1.964
+    },
+    {
+      "label": "China",
+      "x": 64,
+      "y": 14.52991452991453,
+      "size": 1.964
+    },
+    {
+      "label": "United Kingdom",
+      "x": 78,
+      "y": 17.293233082706767,
+      "size": 1.819
+    },
+    {
+      "label": "Philadelphia",
+      "x": 84,
+      "y": 17.536082474226806,
+      "size": 0.83
+    },
+    {
+      "label": "Boston",
+      "x": 63,
+      "y": 20.930232558139537,
+      "size": 0.666
+    },
+    {
+      "label": "Canada",
+      "x": 74,
+      "y": 16.923076923076923,
+      "size": 0.61
+    },
+    {
+      "label": "Germany",
+      "x": 83,
+      "y": 17.24074074074074,
+      "size": 0.579
+    },
+    {
+      "label": "Israel",
+      "x": 66,
+      "y": 23.529411764705884,
+      "size": 0.555
+    },
+    {
+      "label": "Japan",
+      "x": 62,
+      "y": 4.382470119521912,
+      "size": 0.41
+    },
+    {
+      "label": "Seattle",
+      "x": 70,
+      "y": 18.698275862068964,
+      "size": 0.222
+    },
+    {
+      "label": "France",
+      "x": 78,
+      "y": 21.52777777777778,
+      "size": 0.205
+    },
+    {
+      "label": "Los Angeles",
+      "x": 62,
+      "y": 36.734693877551024,
+      "size": 0.194
+    },
+    {
+      "label": "India",
+      "x": 82,
+      "y": 6.787878787878788,
+      "size": 0.163
+    },
+    {
+      "label": "Singapore",
+      "x": 82,
+      "y": 6.700854700854701,
+      "size": 0.16
+    }
+  ]
+}

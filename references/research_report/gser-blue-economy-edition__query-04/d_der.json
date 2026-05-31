@@ -1,0 +1,144 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a bubble chart for Blue Economy ecosystems with `Total Early-Stage Funding >= $1B` and non-missing `Median Series A Round`, with the x-axis showing `early-stage capital intensity = Total Early-Stage Funding / Ecosystem Value`, the y-axis showing `stage escalation multiple = Median Series A Round / Median Seed Round`, the two axes expressed in `%` and `x multiple` respectively, bubble size representing `Total VC Funding`, and labels added to the top 10 points by highest x-axis value.",
+  "chart_type": "bubble chart",
+  "value_unit": "% / x multiple / $B",
+  "sort_rule": "labels assigned to top 10 by early-stage capital intensity",
+  "selection_rule": "all ecosystems with early-stage funding >= $1B",
+  "plot_spec": {
+    "title": "Blue Economy Capital Intensity vs Stage Escalation",
+    "x_field": "x_early_stage_capital_intensity_percent",
+    "y_field": "y_stage_escalation_multiple",
+    "size_field": "size_total_vc_funding_busd",
+    "xlabel": "Total Early-Stage Funding / Ecosystem Value (%)",
+    "ylabel": "Median Series A / Median Seed (x)"
+  },
+  "records": [
+    {
+      "entity": "Singapore",
+      "x_early_stage_capital_intensity_percent": 3.5955,
+      "y_stage_escalation_multiple": 7.0588,
+      "size_total_vc_funding_busd": 17.0,
+      "label": true
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "x_early_stage_capital_intensity_percent": 1.25,
+      "y_stage_escalation_multiple": 7.3333,
+      "size_total_vc_funding_busd": 247.0,
+      "label": false
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "x_early_stage_capital_intensity_percent": 3.5185,
+      "y_stage_escalation_multiple": 7.3171,
+      "size_total_vc_funding_busd": 9.2,
+      "label": true
+    },
+    {
+      "entity": "London",
+      "x_early_stage_capital_intensity_percent": 4.4586,
+      "y_stage_escalation_multiple": 8.6835,
+      "size_total_vc_funding_busd": 68.0,
+      "label": true
+    },
+    {
+      "entity": "New York City",
+      "x_early_stage_capital_intensity_percent": 3.7736,
+      "y_stage_escalation_multiple": 6.75,
+      "size_total_vc_funding_busd": 88.0,
+      "label": true
+    },
+    {
+      "entity": "Denmark",
+      "x_early_stage_capital_intensity_percent": 2.8947,
+      "y_stage_escalation_multiple": 3.9167,
+      "size_total_vc_funding_busd": 5.9,
+      "label": false
+    },
+    {
+      "entity": "Los Angeles",
+      "x_early_stage_capital_intensity_percent": 1.9865,
+      "y_stage_escalation_multiple": 7.0,
+      "size_total_vc_funding_busd": 39.0,
+      "label": false
+    },
+    {
+      "entity": "Seoul",
+      "x_early_stage_capital_intensity_percent": 1.2994,
+      "y_stage_escalation_multiple": 5.0193,
+      "size_total_vc_funding_busd": 19.0,
+      "label": false
+    },
+    {
+      "entity": "Tokyo",
+      "x_early_stage_capital_intensity_percent": 4.8387,
+      "y_stage_escalation_multiple": 3.4221,
+      "size_total_vc_funding_busd": 15.0,
+      "label": true
+    },
+    {
+      "entity": "Boston",
+      "x_early_stage_capital_intensity_percent": 3.2707,
+      "y_stage_escalation_multiple": 5.5333,
+      "size_total_vc_funding_busd": 51.0,
+      "label": true
+    },
+    {
+      "entity": "Stockholm",
+      "x_early_stage_capital_intensity_percent": 2.0635,
+      "y_stage_escalation_multiple": 2.8421,
+      "size_total_vc_funding_busd": 5.7,
+      "label": false
+    },
+    {
+      "entity": "San Diego",
+      "x_early_stage_capital_intensity_percent": 2.9787,
+      "y_stage_escalation_multiple": 9.0909,
+      "size_total_vc_funding_busd": 16.0,
+      "label": true
+    },
+    {
+      "entity": "Miami",
+      "x_early_stage_capital_intensity_percent": 5.2778,
+      "y_stage_escalation_multiple": 5.8667,
+      "size_total_vc_funding_busd": 7.6,
+      "label": true
+    },
+    {
+      "entity": "Beijing",
+      "x_early_stage_capital_intensity_percent": 1.195,
+      "y_stage_escalation_multiple": 6.6667,
+      "size_total_vc_funding_busd": 86.0,
+      "label": false
+    },
+    {
+      "entity": "Tel Aviv",
+      "x_early_stage_capital_intensity_percent": 4.5833,
+      "y_stage_escalation_multiple": 3.75,
+      "size_total_vc_funding_busd": 30.0,
+      "label": true
+    },
+    {
+      "entity": "Paris",
+      "x_early_stage_capital_intensity_percent": 5.618,
+      "y_stage_escalation_multiple": 3.5714,
+      "size_total_vc_funding_busd": 23.0,
+      "label": true
+    },
+    {
+      "entity": "Sydney",
+      "x_early_stage_capital_intensity_percent": 1.9118,
+      "y_stage_escalation_multiple": 6.4671,
+      "size_total_vc_funding_busd": 5.9,
+      "label": false
+    },
+    {
+      "entity": "Philadelphia",
+      "x_early_stage_capital_intensity_percent": 2.8261,
+      "y_stage_escalation_multiple": 9.5238,
+      "size_total_vc_funding_busd": 10.0,
+      "label": false
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a bubble chart for the top 20 companies by `Mosaic` with non-`N/A` `Founded year`, `Total raised`, and `Headcount`, where the x-axis is `company age` in years, the y-axis is `Headcount`, bubble size is `Total raised` in `$M`, and bubble color shows whether `Mosaic` is above or below the median of its segment.",
+  "status": "completed",
+  "title": "Top 20 Mosaic companies by age and headcount",
+  "chart_kind": "bubble",
+  "chart_type": "bubble chart",
+  "value_unit": "x: years; y: employees; bubble size: $M",
+  "sort_rule": "top 20 by mosaic descending",
+  "selection_rule": "non-missing founded_year,total_raised_m,headcount,mosaic",
+  "metadata": {
+    "x_field": "company_age_years",
+    "y_field": "headcount",
+    "size_field": "total_raised_m",
+    "hue_field": "segment_mosaic_position",
+    "label_field": "entity",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "entity": "Helsing",
+      "segment": "Defense",
+      "company_age_years": 5.0,
+      "headcount": 530.0,
+      "total_raised_m": 1500.0,
+      "mosaic": 927,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Quantum Systems",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 11.0,
+      "headcount": 378.0,
+      "total_raised_m": 350.5,
+      "mosaic": 891,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "TEKEVER",
+      "segment": "Defense",
+      "company_age_years": 25.0,
+      "headcount": 626.0,
+      "total_raised_m": 96.3,
+      "mosaic": 882,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "ICEYE",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 11.0,
+      "headcount": 716.0,
+      "total_raised_m": 516.9,
+      "mosaic": 880,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "OroraTech",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 8.0,
+      "headcount": 177.0,
+      "total_raised_m": 84.2,
+      "mosaic": 849,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "ARX Robotics",
+      "segment": "Defense",
+      "company_age_years": 5.0,
+      "headcount": 76.0,
+      "total_raised_m": 58.8,
+      "mosaic": 826,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Meteomatics",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 14.0,
+      "headcount": 148.0,
+      "total_raised_m": 13.9,
+      "mosaic": 821,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Varjo",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 10.0,
+      "headcount": 217.0,
+      "total_raised_m": 171.7,
+      "mosaic": 804,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "D-Orbit",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 15.0,
+      "headcount": 419.0,
+      "total_raised_m": 256.8,
+      "mosaic": 799,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Neuraspace",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 6.0,
+      "headcount": 29.0,
+      "total_raised_m": 34.9,
+      "mosaic": 797,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Wingtra",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 10.0,
+      "headcount": 130.0,
+      "total_raised_m": 63.1,
+      "mosaic": 792,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Sees.ai",
+      "segment": "Aerospace (commercial)",
+      "company_age_years": 8.0,
+      "headcount": 30.0,
+      "total_raised_m": 5.1,
+      "mosaic": 786,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "LiveEO",
+      "segment": "Aerospace (commercial)",
+      "company_age_years": 8.0,
+      "headcount": 158.0,
+      "total_raised_m": 62.5,
+      "mosaic": 779,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Robin Radar",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 16.0,
+      "headcount": 166.0,
+      "total_raised_m": 26.0,
+      "mosaic": 770,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Wingcopter",
+      "segment": "Aerospace (commercial)",
+      "company_age_years": 9.0,
+      "headcount": 137.0,
+      "total_raised_m": 107.7,
+      "mosaic": 768,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Dronamics",
+      "segment": "Aerospace (commercial)",
+      "company_age_years": 12.0,
+      "headcount": 124.0,
+      "total_raised_m": 91.3,
+      "mosaic": 767,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Manna",
+      "segment": "Aerospace (commercial)",
+      "company_age_years": 7.0,
+      "headcount": 18.0,
+      "total_raised_m": 64.2,
+      "mosaic": 763,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "ReOrbit",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 7.0,
+      "headcount": 71.0,
+      "total_raised_m": 60.2,
+      "mosaic": 727,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "OKAPI:Orbits",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 8.0,
+      "headcount": 38.0,
+      "total_raised_m": 20.6,
+      "mosaic": 718,
+      "segment_mosaic_position": "Above segment median"
+    },
+    {
+      "entity": "Roseman Labs",
+      "segment": "Aerospace (dual-use)",
+      "company_age_years": 6.0,
+      "headcount": 37.0,
+      "total_raised_m": 10.5,
+      "mosaic": 716,
+      "segment_mosaic_position": "Above segment median"
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // Data Injected
+        const mean21 = [
+    100.00350773333332,
+    80.4658178,
+    81.44796380000001,
+    9.330386893333333,
+    75.80062436666667,
+    100.0004521,
+    91.63694226666667,
+    102.75814966666667,
+    9.58413013,
+    89.01486896666667,
+    99.99999989999999,
+    100.67415726666665,
+    97.752809,
+    9.5505618,
+    102.0973783,
+    100.0,
+    96.9253844,
+    94.75065616666667,
+    39.145106866666666,
+    101.91226110000001
+];
+        const mean1 = [
+    100.00000003333334,
+    92.0549902,
+    101.30333863333333,
+    5.445456166666666,
+    87.48437779999999,
+    100.00348760000001,
+    83.64720653333333,
+    101.10204386666668,
+    11.281997616666667,
+    74.5797587,
+    100.00359466666667,
+    113.87900366666668,
+    101.17186099999999,
+    13.551889000000001,
+    118.03084233333334,
+    100.03390966666666,
+    96.38860633333333,
+    107.23974233333333,
+    71.85486606666667,
+    106.44286166666666
+];
+
+        // P-values
+        const p21 = [
+            {idx1:0, idx2:3, text:'P = 2.6 × 10⁻¹²', y: 2.0}, {idx1:3, idx2:4, text:'P = 5.8 × 10⁻¹¹', y: 3.5},
+            {idx1:5, idx2:8, text:'P = 8.1 × 10⁻¹²', y: 2.0}, {idx1:8, idx2:9, text:'P = 2.9 × 10⁻¹¹', y: 3.5},
+            {idx1:10, idx2:13, text:'P = 2.2 × 10⁻¹⁰', y: 2.0}, {idx1:13, idx2:14, text:'P = 1.8 × 10⁻¹⁰', y: 3.5},
+            {idx1:15, idx2:18, text:'P = 3.7 × 10⁻⁷', y: 2.0},  {idx1:18, idx2:19, text:'P = 2.8 × 10⁻⁷', y: 3.5}
+        ];
+        const p1 = [
+            {idx1:0, idx2:3, text:'P = 4.8 × 10⁻⁹', y: 2.0}, {idx1:3, idx2:4, text:'P = 1.9 × 10⁻⁸', y: 3.5},
+            {idx1:5, idx2:8, text:'P = 3.2 × 10⁻⁹', y: 2.0}, {idx1:8, idx2:9, text:'P = 8.7 × 10⁻⁸', y: 3.5},
+            {idx1:10, idx2:13, text:'P = 3 × 10⁻⁹', y: 2.0},   {idx1:13, idx2:14, text:'P = 4.6 × 10⁻¹⁰', y: 3.5},
+            {idx1:15, idx2:18, text:'P = 0.0006', y: 2.0},     {idx1:18, idx2:19, text:'P = 0.0001', y: 3.5}
+        ];
+
+        // Matrix
+        const rowLabels = ["Vehicle", "viFSP1 (30 μM)", "L-BSO (1 mM)", "Liproxstatin-1 (1 μM)"];
+        const matrixCols = [
+            ['+', '-', '-', '-'], // 0: Veh
+            ['-', '+', '-', '-'], // 1: Inh
+            ['-', '-', '+', '-'], // 2: BSO
+            ['-', '+', '+', '-'], // 3: Inh+BSO
+            ['-', '+', '+', '+']  // 4: Inh+BSO+Lip
+        ];
+        // Python logic for matrix:
+        // Col 0: Veh -> Row 0 +, others -
+        // Col 1: Inh -> Row 1 +, others -
+        // Col 2: BSO -> Row 2 +, others -
+        // Col 3: Inh+BSO -> Row 1, 2 +
+        // Col 4: Inh+BSO+Lip -> Row 1, 2, 3 +
+        // Correct order based on script logic.
+        
+        // Wait, Python script logic for Matrix:
+        // Row 0 (Vehicle): Col 0 (+)
+        // Row 1 (FSP1 Inh): Col 1, 3, 4 (+)
+        // Row 2 (BSO): Col 2, 3, 4 (+)
+        // Row 3 (Liprox): Col 4 (+)
+        // My `matrixCols` above is transposed.
+        
+        const fullMatrix = [];
+        for(let r=0; r<4; r++) {
+            const row = [];
+            for(let g=0; g<4; g++) { // 4 groups
+                // Per group pattern: Veh, Inh, BSO, Inh+BSO, Inh+BSO+Lip
+                // Indices in group: 0, 1, 2, 3, 4
+                // r=0 (Veh): + - - - -
+                // r=1 (Inh): - + - + +
+                // r=2 (BSO): - - + + +
+                // r=3 (Lip): - - - - +
+                if(r===0) row.push('+','-','-','-','-');
+                else if(r===1) row.push('-','+','-','+','+');
+                else if(r===2) row.push('-','-','+','+','+');
+                else if(r===3) row.push('-','-','-','-','+');
+            }
+            fullMatrix.push(row);
+        }
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: [
+                { top: 100, right: 150, bottom: 350, left: 60, height: 20 }, // Top Heatmap (21%)
+                { top: 130, right: 150, bottom: 320, left: 60, height: 20 }  // Bottom Heatmap (1%)
+            ],
+            xAxis: [
+                {
+                    gridIndex: 0, type: 'category', data: Array.from({length:20},(_,i)=>i),
+                    show: false
+                },
+                {
+                    gridIndex: 1, type: 'category', data: Array.from({length:20},(_,i)=>i),
+                    show: false
+                }
+            ],
+            yAxis: [
+                {
+                    gridIndex: 0, type: 'category', data: ['21% O₂'],
+                    axisLine: { show: false }, axisTick: { show: false },
+                    axisLabel: { color: 'black', margin: 10 }
+                },
+                {
+                    gridIndex: 1, type: 'category', data: ['1% O₂'],
+                    axisLine: { show: false }, axisTick: { show: false },
+                    axisLabel: { color: 'black', margin: 10 }
+                }
+            ],
+            visualMap: {
+                min: 0, max: 100,
+                calculable: true,
+                orient: 'vertical',
+                right: 20,
+                top: 50,
+                inRange: { color: ['#440154', '#21918c', '#fde725'] },
+                formatter: function (value) { return value.toFixed(0); }
+            },
+            series: [
+                {
+                    type: 'heatmap', xAxisIndex: 0, yAxisIndex: 0,
+                    data: mean21.map((v, i) => [i, 0, v]),
+                    itemStyle: { borderColor: 'black', borderWidth: 1 }
+                },
+                {
+                    type: 'heatmap', xAxisIndex: 1, yAxisIndex: 1,
+                    data: mean1.map((v, i) => [i, 0, v]),
+                    itemStyle: { borderColor: 'black', borderWidth: 1 }
+                },
+                // Annotations 21%
+                {
+                    type: 'custom',
+                    renderItem: (params, api) => renderBracket(params, api, p21, 0),
+                    data: p21, z: 5, xAxisIndex: 0, yAxisIndex: 0
+                },
+                // Annotations 1%
+                {
+                    type: 'custom',
+                    renderItem: (params, api) => renderBracket(params, api, p1, 1),
+                    data: p1, z: 5, xAxisIndex: 1, yAxisIndex: 1
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'f', font: 'bold 24px Arial' } },
+                // Colorbar label
+                { type: 'text', right: 5, top: 120, style: { text: 'Relative\nviability\n(%)', textAlign: 'center', fontSize: 10 } }
+            ]
+        };
+
+        function renderBracket(params, api, annotations, gridIdx) {
+            const ann = annotations[params.dataIndex];
+            const p1 = api.coord([ann.idx1, 0]);
+            const p2 = api.coord([ann.idx2, 0]);
+            
+            // Grid Y
+            const gridRect = params.coordSys;
+            const topY = gridRect.y;
+            
+            const hScale = 10;
+            const yBase = topY - (ann.y * hScale);
+            
+            return {
+                type: 'group',
+                children: [
+                    {
+                        type: 'polyline',
+                        shape: {
+                            points: [[p1[0], yBase + 5], [p1[0], yBase], [p2[0], yBase], [p2[0], yBase + 5]]
+                        },
+                        style: { stroke: 'black', lineWidth: 1, fill: null }
+                    },
+                    {
+                        type: 'text',
+                        style: {
+                            text: ann.text, x: (p1[0] + p2[0]) / 2, y: yBase - 5,
+                            textAlign: 'center', textVerticalAlign: 'bottom',
+                            fill: 'black', fontSize: 10
+                        }
+                    }
+                ]
+            };
+        }
+
+        // Add Table and Labels
+        const tableTop = 180; 
+        const rowH = 30;
+        const colWidth = (1000 - 60 - 150) / 20;
+        const startX = 60;
+
+        // Rows
+        for(let r=0; r<4; r++) {
+            option.graphic.push({
+                type: 'text',
+                right: 20, top: tableTop + r * rowH,
+                style: { text: '+ ' + rowLabels[r], textAlign: 'left', fontSize: 11 }
+            });
+            for(let c=0; c<20; c++) {
+                const txt = fullMatrix[r][c];
+                const weight = txt === '+' ? 'bold' : 'normal';
+                option.graphic.push({
+                    type: 'text',
+                    left: startX + c * colWidth + colWidth/2,
+                    top: tableTop + r * rowH,
+                    style: { text: txt, textAlign: 'center', fontWeight: weight, fontSize: 11 }
+                });
+            }
+        }
+
+        // Separators
+        const lineBottom = tableTop + 4 * rowH + 10;
+        [5, 10, 15].forEach(idx => {
+            const x = startX + idx * colWidth;
+            option.graphic.push({
+                type: 'line',
+                shape: { x1: x, y1: 100, x2: x, y2: lineBottom },
+                style: { stroke: 'black', lineWidth: 1 }
+            });
+        });
+
+        // Group Labels
+        const groupLabels = ["iFSP1 (10 µM)", "FSEN1 (10 µM)", "icFSP1 (15 µM)", "viFSP1 (15 µM)"];
+        groupLabels.forEach((lbl, i) => {
+            const xCenter = startX + (i * 5 + 2.5) * colWidth;
+            option.graphic.push({
+                type: 'text',
+                left: xCenter, top: lineBottom + 5,
+                style: { text: lbl, textAlign: 'center', fontSize: 12 }
+            });
+            option.graphic.push({
+                type: 'line',
+                shape: { x1: startX + i*5*colWidth + 5, y1: lineBottom, x2: startX + (i+1)*5*colWidth - 5, y2: lineBottom },
+                style: { stroke: 'black', lineWidth: 1 }
+            });
+        });
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

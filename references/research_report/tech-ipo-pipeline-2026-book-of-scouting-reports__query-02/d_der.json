@@ -1,0 +1,187 @@
+{
+  "report_id": "014",
+  "query_id": 2,
+  "query_text": "Create a bubble chart of the top 20 companies after ranking by `IPO probability minus Mosaic rank percentile`, where the x-axis is `Mosaic score`, the y-axis is `IPO probability (%)`, bubble size is `Headcount`, and only companies with numeric `Headcount` are included.",
+  "chart_type": "bubble",
+  "value_unit": "IPO probability (%)",
+  "sort_rule": "descending by IPO probability minus Mosaic rank percentile",
+  "selection_rule": "top 20 companies with numeric headcount and Mosaic",
+  "records": [
+    {
+      "label": "Games24x7",
+      "x": 618,
+      "y": 58.3,
+      "size": 1201,
+      "color": "Selected",
+      "gap_score": 56.319802
+    },
+    {
+      "label": "Kaseya",
+      "x": 635,
+      "y": 58.3,
+      "size": 5385,
+      "color": "Selected",
+      "gap_score": 55.329703
+    },
+    {
+      "label": "Team Blue",
+      "x": 640,
+      "y": 35.0,
+      "size": 2960,
+      "color": "Selected",
+      "gap_score": 30.049505
+    },
+    {
+      "label": "ManyPets",
+      "x": 637,
+      "y": 31.3,
+      "size": 377,
+      "color": "Selected",
+      "gap_score": 27.339604
+    },
+    {
+      "label": "Formlabs",
+      "x": 721,
+      "y": 34.1,
+      "size": 721,
+      "color": "Selected",
+      "gap_score": 19.248515
+    },
+    {
+      "label": "FourKites",
+      "x": 699,
+      "y": 24.5,
+      "size": 576,
+      "color": "Selected",
+      "gap_score": 14.59901
+    },
+    {
+      "label": "Nextiva",
+      "x": 591,
+      "y": 14.1,
+      "size": 1709,
+      "color": "Selected",
+      "gap_score": 14.1
+    },
+    {
+      "label": "Lendable",
+      "x": 742,
+      "y": 35.8,
+      "size": 495,
+      "color": "Selected",
+      "gap_score": 14.017822
+    },
+    {
+      "label": "Included Health",
+      "x": 616,
+      "y": 14.7,
+      "size": 1672,
+      "color": "Selected",
+      "gap_score": 13.709901
+    },
+    {
+      "label": "RELEX",
+      "x": 799,
+      "y": 58.3,
+      "size": 2309,
+      "color": "Selected",
+      "gap_score": 10.775248
+    },
+    {
+      "label": "Zapier",
+      "x": 789,
+      "y": 49.2,
+      "size": 1315,
+      "color": "Selected",
+      "gap_score": 10.586139
+    },
+    {
+      "label": "MasterClass",
+      "x": 723,
+      "y": 25.4,
+      "size": 769,
+      "color": "Selected",
+      "gap_score": 9.558416
+    },
+    {
+      "label": "Grammarly",
+      "x": 802,
+      "y": 58.3,
+      "size": 1604,
+      "color": "Selected",
+      "gap_score": 7.80495
+    },
+    {
+      "label": "Cyara",
+      "x": 694,
+      "y": 15.6,
+      "size": 369,
+      "color": "Selected",
+      "gap_score": 6.689109
+    },
+    {
+      "label": "Automation Anywhere",
+      "x": 688,
+      "y": 14.1,
+      "size": 2626,
+      "color": "Selected",
+      "gap_score": 6.179208
+    },
+    {
+      "label": "Virta",
+      "x": 669,
+      "y": 13.1,
+      "size": 776,
+      "color": "Selected",
+      "gap_score": 6.169307
+    },
+    {
+      "label": "Headspace",
+      "x": 717,
+      "y": 19.6,
+      "size": 1539,
+      "color": "Selected",
+      "gap_score": 5.738614
+    },
+    {
+      "label": "Intercom",
+      "x": 656,
+      "y": 11.5,
+      "size": 1790,
+      "color": "Selected",
+      "gap_score": 5.559406
+    },
+    {
+      "label": "DataArt",
+      "x": 701,
+      "y": 14.3,
+      "size": 5328,
+      "color": "Selected",
+      "gap_score": 3.408911
+    },
+    {
+      "label": "Avathon",
+      "x": 717,
+      "y": 16.0,
+      "size": 286,
+      "color": "Selected",
+      "gap_score": 2.138614
+    }
+  ],
+  "plot_config": {
+    "title": "IPO probability vs Mosaic for the largest positive readiness gaps",
+    "x_label": "Mosaic score",
+    "y_label": "IPO probability (%)"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with numeric headcount and Mosaic.",
+    "Ranked companies by Mosaic and converted the ranks to percentiles.",
+    "Computed IPO probability minus Mosaic-rank percentile.",
+    "Kept the top 20 positive gaps for the bubble chart."
+  ],
+  "stats": {
+    "eligible_count": 102,
+    "returned_count": 20
+  },
+  "open_issues": []
+}

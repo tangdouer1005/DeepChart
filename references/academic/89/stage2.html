@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recreated Chart 89</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+        }
+        #chart-container {
+            width: 250px; /* Approx 2.5 inches */
+            height: 450px; /* Approx 4.5 inches */
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        // 1. Data
+        const jsonData = {
+    "Parental":{
+        "0":0.9405664903,
+        "1":1.0020154316,
+        "2":1.0574180781,
+        "3":0.98465942,
+        "4":1.04898903,
+        "5":1.10698891,
+        "6":1.0057907649,
+        "7":0.9572862232,
+        "8":1.037069752,
+        "9":0.990111064,
+        "10":0.9657994849,
+        "11":1.0440995063,
+        "12":0.9264813778,
+        "13":0.955494503,
+        "14":1.1180088762,
+        "15":0.9421485841,
+        "16":0.9878714806,
+        "17":1.0700523093,
+        "18":1.0055519008,
+        "19":0.9326038382,
+        "20":1.062106776,
+        "21":1.1032391006,
+        "22":0.8939311992,
+        "23":1.0030169073,
+        "24":1.0398765133,
+        "25":0.9317790704,
+        "26":1.0283641836,
+        "27":1.0000041663,
+        "28":1.00005172,
+        "29":1.0000517185,
+        "30":null,
+        "31":null,
+        "32":null,
+        "33":null,
+        "34":null,
+        "35":null,
+        "36":null,
+        "37":null,
+        "38":null,
+        "39":null,
+        "40":null,
+        "41":null,
+        "42":null,
+        "43":null,
+        "44":null,
+        "45":null,
+        "46":null,
+        "47":null,
+        "48":null,
+        "49":null,
+        "50":null,
+        "51":null,
+        "52":null,
+        "53":null,
+        "54":null,
+        "55":null,
+        "56":null,
+        "57":null,
+        "58":null,
+        "59":null,
+        "60":null,
+        "61":null,
+        "62":null,
+        "63":null,
+        "64":null,
+        "65":null,
+        "66":null,
+        "67":null,
+        "68":null,
+        "69":null,
+        "70":null,
+        "71":null,
+        "72":null,
+        "73":null,
+        "74":null
+    },
+    "LN":{
+        "0":0.3216683017,
+        "1":0.30659713,
+        "2":0.3898509787,
+        "3":0.3127913917,
+        "4":0.3402239891,
+        "5":0.4149112276,
+        "6":0.3317234042,
+        "7":0.5516546189,
+        "8":0.3174421209,
+        "9":0.4340943487,
+        "10":0.4216916045,
+        "11":0.4451561372,
+        "12":0.288822627,
+        "13":0.4216717607,
+        "14":0.4302036747,
+        "15":0.3488742788,
+        "16":0.6803316399,
+        "17":0.4481672288,
+        "18":0.33674783,
+        "19":0.32097013,
+        "20":0.40812685,
+        "21":0.4483543719,
+        "22":0.4879374403,
+        "23":0.4534993874,
+        "24":0.3251053746,
+        "25":0.7637741641,
+        "26":0.4353655624,
+        "27":0.402407938,
+        "28":0.3518128288,
+        "29":0.4293322803,
+        "30":0.3527666,
+        "31":0.3356863647,
+        "32":0.3516858971,
+        "33":0.4439137309,
+        "34":0.4454432252,
+        "35":0.3592625733,
+        "36":0.3062082024,
+        "37":0.4647499778,
+        "38":0.2677934168,
+        "39":0.5357849811,
+        "40":0.5127838632,
+        "41":0.5023965591,
+        "42":0.4265378929,
+        "43":0.456026094,
+        "44":0.4413513823,
+        "45":0.4763589388,
+        "46":0.4827273152,
+        "47":0.4496045713,
+        "48":0.3775688947,
+        "49":0.5652846266,
+        "50":0.3689008456,
+        "51":0.4544443095,
+        "52":0.4414601356,
+        "53":0.4660246648,
+        "54":0.3286913426,
+        "55":0.3489360512,
+        "56":0.3010659927,
+        "57":0.390546468,
+        "58":0.3450378952,
+        "59":0.3510093445,
+        "60":0.2521139553,
+        "61":0.4869817124,
+        "62":0.2826414093,
+        "63":0.3967565261,
+        "64":0.4751328403,
+        "65":0.4554532716,
+        "66":0.303815854,
+        "67":0.4279212489,
+        "68":0.3370200288,
+        "69":0.7007039428,
+        "70":0.4178179676,
+        "71":0.5382826255,
+        "72":0.4013400244,
+        "73":0.6889071955,
+        "74":0.3933389265
+    }
+};
+
+        const parentalRaw = Object.values(jsonData.Parental).filter(v => v !== null);
+        const lnRaw = Object.values(jsonData.LN).filter(v => v !== null);
+
+        // 2. Calculations
+        function calculateMean(data) {
+            return data.reduce((sum, val) => sum + val, 0) / data.length;
+        }
+
+        function calculateStd(data, mean) {
+            const squareDiffs = data.map(val => Math.pow(val - mean, 2));
+            const avgSquareDiff = squareDiffs.reduce((sum, val) => sum + val, 0) / (data.length - 1);
+            return Math.sqrt(avgSquareDiff);
+        }
+
+        const meanParental = calculateMean(parentalRaw);
+        const stdParental = calculateStd(parentalRaw, meanParental);
+        const meanLn = calculateMean(lnRaw);
+        const stdLn = calculateStd(lnRaw, meanLn);
+
+        // 3. ECharts Setup
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        // Prepare Scatter Data with Jitter
+        // We want 'Parental' at x=0, 'LN' at x=1. 
+        // We'll add random jitter between -0.15 and 0.15
+        function makeScatterData(data, xIndex) {
+            return data.map(val => {
+                const jitter = (Math.random() - 0.5) * 0.3; // -0.15 to 0.15
+                return [xIndex + jitter, val];
+            });
+        }
+
+        const parentalScatter = makeScatterData(parentalRaw, 0);
+        const lnScatter = makeScatterData(lnRaw, 1);
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: '15%',
+                bottom: '15%',
+                left: '20%',
+                right: '10%',
+                containLabel: false
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Parental', 'LN'],
+                axisLine: {
+                    lineStyle: { color: 'black' }
+                },
+                axisLabel: {
+                    color: 'black',
+                    fontSize: 12,
+                    rotate: 45,
+                    margin: 14 // adjust for rotation
+                },
+                axisTick: {
+                    alignWithLabel: true
+                }
+            },
+            yAxis: {
+                type: 'value',
+                min: 0,
+                max: 1.5,
+                interval: 0.5,
+                name: 'Relative GCLC levels',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: {
+                    color: 'black',
+                    fontSize: 12
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: { color: 'black' }
+                },
+                axisLabel: {
+                    color: 'black',
+                    fontSize: 11,
+                    formatter: function (value) {
+                        return value.toFixed(1);
+                    }
+                },
+                splitLine: { show: false }
+            },
+            series: [
+                // 1. Bars
+                {
+                    type: 'bar',
+                    data: [
+                        { value: meanParental, itemStyle: { color: '#d9d9d9', borderColor: 'black', borderWidth: 1 } },
+                        { value: meanLn, itemStyle: { color: '#98c992', borderColor: 'black', borderWidth: 1 } }
+                    ],
+                    barWidth: '60%',
+                    z: 1
+                },
+                // 2. Error Bars (Custom Series)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const meanValue = api.value(1);
+                        const stdValue = api.value(2);
+                        
+                        const pointStart = api.coord([xValue, meanValue - stdValue]);
+                        const pointEnd = api.coord([xValue, meanValue + stdValue]);
+                        
+                        // Error bar cap width
+                        const capWidth = 10; 
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: pointStart[0], y1: pointStart[1],
+                                        x2: pointEnd[0], y2: pointEnd[1]
+                                    },
+                                    style: {
+                                        stroke: 'black',
+                                        lineWidth: 1.5
+                                    }
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: pointStart[0] - capWidth / 2, y1: pointStart[1],
+                                        x2: pointStart[0] + capWidth / 2, y2: pointStart[1]
+                                    },
+                                    style: {
+                                        stroke: 'black',
+                                        lineWidth: 1.5
+                                    }
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: pointEnd[0] - capWidth / 2, y1: pointEnd[1],
+                                        x2: pointEnd[0] + capWidth / 2, y2: pointEnd[1]
+                                    },
+                                    style: {
+                                        stroke: 'black',
+                                        lineWidth: 1.5
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: [
+                        [0, meanParental, stdParental],
+                        [1, meanLn, stdLn]
+                    ],
+                    z: 3
+                },
+                // 3. Scatter Points (Swarm)
+                {
+                    type: 'scatter',
+                    data: parentalScatter,
+                    itemStyle: {
+                        color: 'black'
+                    },
+                    symbolSize: 5,
+                    z: 2
+                },
+                {
+                    type: 'scatter',
+                    data: lnScatter,
+                    itemStyle: {
+                        color: '#3a8e3a'
+                    },
+                    symbolSize: 5,
+                    z: 2
+                }
+            ],
+            graphic: [
+                // Significance Line
+                {
+                    type: 'line',
+                    shape: {
+                        x1: 0, y1: 0, x2: 0, y2: 0 // Will update in onresize or leave relative
+                    },
+                    // Using direct coordinate conversion might be tricky in 'graphic' component without listening to events.
+                    // Better to use a 'markLine' or 'custom' series for the line to be tied to axes.
+                    // Let's use another custom series item for the significance bracket to ensure it moves with zoom/resize.
+                },
+                // Text 'f'
+                {
+                    type: 'text',
+                    left: '5%',
+                    top: '2%',
+                    style: {
+                        text: 'f',
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        // Add Significance Line and Text as a Custom Series to stick to coordinates
+        option.series.push({
+            type: 'custom',
+            renderItem: function (params, api) {
+                // Coordinates for [0, 1.35] and [1, 1.35]
+                const p1 = api.coord([0, 1.35]);
+                const p2 = api.coord([1, 1.35]);
+
+                return {
+                    type: 'group',
+                    children: [
+                        {
+                            type: 'line',
+                            shape: {
+                                x1: p1[0], y1: p1[1],
+                                x2: p2[0], y2: p2[1]
+                            },
+                            style: {
+                                stroke: 'black',
+                                lineWidth: 1
+                            }
+                        },
+                        {
+                            type: 'text',
+                            style: {
+                                text: 'P < 1 × 10⁻¹⁵',
+                                fontSize: 11,
+                                textAlign: 'center',
+                                fill: 'black',
+                                x: (p1[0] + p2[0]) / 2,
+                                y: p1[1] - 5 // Slightly above
+                            }
+                        }
+                    ]
+                };
+            },
+            data: [[0]] // Dummy data to trigger render
+        });
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

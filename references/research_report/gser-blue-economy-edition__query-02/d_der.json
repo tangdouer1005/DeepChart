@@ -1,0 +1,47 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a horizontal bar chart comparing the top 8 Blue Economy ecosystems by `VC leverage ratio = Total VC Funding / Total Early-Stage Funding`, with the result expressed as `x multiple`, sorted descending by the ratio, and including only ecosystems where both funding fields are readable.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by vc_leverage_ratio",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "Blue Economy VC Leverage",
+    "xlabel": "x multiple",
+    "value_field": "vc_leverage_ratio"
+  },
+  "records": [
+    {
+      "entity": "Mississippi",
+      "vc_leverage_ratio": 36.6667
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "vc_leverage_ratio": 9.88
+    },
+    {
+      "entity": "Beijing",
+      "vc_leverage_ratio": 9.0526
+    },
+    {
+      "entity": "Seoul",
+      "vc_leverage_ratio": 8.2609
+    },
+    {
+      "entity": "Philadelphia",
+      "vc_leverage_ratio": 7.6923
+    },
+    {
+      "entity": "Los Angeles",
+      "vc_leverage_ratio": 6.6102
+    },
+    {
+      "entity": "New York City",
+      "vc_leverage_ratio": 6.2857
+    },
+    {
+      "entity": "Boston",
+      "vc_leverage_ratio": 5.8621
+    }
+  ]
+}

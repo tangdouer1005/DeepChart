@@ -1,0 +1,118 @@
+{
+  "query_id": 10,
+  "query_text": "Create a dumbbell chart for the 12 companies with the largest mismatch between funding rank and Mosaic rank within their own direction, where the two endpoints are the within-direction rank by Total raised and the within-direction rank by Mosaic, limited to directions with at least 4 companies and companies with both values disclosed.",
+  "status": "complete",
+  "chart": {
+    "type": "dumbbell",
+    "title": "Funding-rank vs Mosaic-rank mismatches within direction",
+    "entity_field": "company",
+    "left_field": "funding_rank",
+    "right_field": "mosaic_rank",
+    "x_label": "Within-direction rank",
+    "order": [
+      "Lyzr",
+      "AgentOps",
+      "Bland AI",
+      "Retell AI",
+      "Adept",
+      "Lindy",
+      "Mindset AI",
+      "aiXplain",
+      "Coval",
+      "Deepchecks",
+      "Vapi",
+      "VoiceFlow"
+    ],
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "company": "Lyzr",
+      "direction": "Low-code platforms",
+      "funding_rank": 12,
+      "mosaic_rank": 5,
+      "rank_gap": 7
+    },
+    {
+      "company": "AgentOps",
+      "direction": "Observability, evaluation, & governance",
+      "funding_rank": 13,
+      "mosaic_rank": 7,
+      "rank_gap": 6
+    },
+    {
+      "company": "Bland AI",
+      "direction": "Voice",
+      "funding_rank": 5,
+      "mosaic_rank": 11,
+      "rank_gap": 6
+    },
+    {
+      "company": "Retell AI",
+      "direction": "Voice",
+      "funding_rank": 12,
+      "mosaic_rank": 6,
+      "rank_gap": 6
+    },
+    {
+      "company": "Adept",
+      "direction": "Developer frameworks & platforms",
+      "funding_rank": 1,
+      "mosaic_rank": 6,
+      "rank_gap": 5
+    },
+    {
+      "company": "Lindy",
+      "direction": "Low-code platforms",
+      "funding_rank": 13,
+      "mosaic_rank": 8,
+      "rank_gap": 5
+    },
+    {
+      "company": "Mindset AI",
+      "direction": "Low-code platforms",
+      "funding_rank": 8,
+      "mosaic_rank": 13,
+      "rank_gap": 5
+    },
+    {
+      "company": "aiXplain",
+      "direction": "Low-code platforms",
+      "funding_rank": 6,
+      "mosaic_rank": 11,
+      "rank_gap": 5
+    },
+    {
+      "company": "Coval",
+      "direction": "Observability, evaluation, & governance",
+      "funding_rank": 11,
+      "mosaic_rank": 6,
+      "rank_gap": 5
+    },
+    {
+      "company": "Deepchecks",
+      "direction": "Observability, evaluation, & governance",
+      "funding_rank": 7,
+      "mosaic_rank": 12,
+      "rank_gap": 5
+    },
+    {
+      "company": "Vapi",
+      "direction": "Voice",
+      "funding_rank": 10,
+      "mosaic_rank": 5,
+      "rank_gap": 5
+    },
+    {
+      "company": "VoiceFlow",
+      "direction": "Voice",
+      "funding_rank": 7,
+      "mosaic_rank": 12,
+      "rank_gap": 5
+    }
+  ],
+  "notes": []
+}

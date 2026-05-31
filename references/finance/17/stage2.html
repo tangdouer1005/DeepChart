@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ABT 皮奥特罗斯基 F-Score (2016–2024)</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f7f7f9;
+      color: #111827;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .chart-container {
+      position: relative;
+      /* A clear, readable aspect ratio */
+      width: 100%;
+      max-width: 900px;
+      height: 500px;          /* fixed height for good readability */
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px 20px 10px 20px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      box-sizing: border-box;
+    }
+
+    canvas {
+      /* Let Chart.js control the drawing area inside the padded container */
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .footer-note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>ABT 皮奥特罗斯基 F-Score 变化</h1>
+    <h2>财政年度 2016–2024</h2>
+    <div class="chart-container">
+      <canvas id="fScoreChart"></canvas>
+    </div>
+    <div class="footer-note">
+      数据来源：用户提供；Piotroski F-Score 范围通常为 0–9，数值越高一般代表财务质量越好。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    window.addEventListener("load", function () {
+      const fiscalYears = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"];
+      const fScores = [6, 4, 7, 7, 6, 8, 6, 6, 7];
+
+      const canvas = document.getElementById("fScoreChart");
+      if (!canvas) return;
+
+      const ctx = canvas.getContext("2d");
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: fiscalYears,
+          datasets: [
+            {
+              label: "Piotroski F-Score",
+              data: fScores,
+              backgroundColor: function (context) {
+                const value = context.raw;
+                if (value >= 7) return "rgba(34, 197, 94, 0.85)";   // high
+                if (value >= 5) return "rgba(59, 130, 246, 0.85)";   // mid
+                return "rgba(239, 68, 68, 0.85)";                    // low
+              },
+              borderColor: "rgba(15, 23, 42, 0.85)",
+              borderWidth: 1,
+              hoverBackgroundColor: "rgba(234, 179, 8, 0.9)",
+              borderRadius: 4,
+              maxBarThickness: 50
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false, // we control size via CSS container
+          layout: {
+            padding: {
+              top: 10,
+              right: 10,
+              bottom: 10,
+              left: 10
+            }
+          },
+          interaction: {
+            mode: "nearest",
+            axis: "x",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                padding: 16,
+                font: {
+                  size: 13
+                }
+              }
+            },
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                title: function (items) {
+                  const item = items[0];
+                  return "财政年度: " + item.label;
+                },
+                label: function (context) {
+                  return "Piotroski F-Score: " + context.formattedValue;
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财政年度",
+                color: "#374151",
+                font: {
+                  size: 13,
+                  weight: "500"
+                }
+              },
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: "#374151",
+                font: {
+                  size: 12
+                }
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Piotroski F-Score",
+                color: "#374151",
+                font: {
+                  size: 13,
+                  weight: "500"
+                }
+              },
+              min: 0,
+              max: 9,
+              ticks: {
+                stepSize: 1,
+                color: "#374151",
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                color: "rgba(148, 163, 184, 0.35)"
+              }
+            }
+          },
+          animation: {
+            duration: 800,
+            easing: "easeOutCubic"
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

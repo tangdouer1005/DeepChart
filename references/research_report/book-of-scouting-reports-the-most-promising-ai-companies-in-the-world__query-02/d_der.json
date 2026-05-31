@@ -1,0 +1,120 @@
+{
+  "query_id": 2,
+  "query_text": "Create a ranked bar chart for the top 12 companies by valuation-per-year-since-founding, computed as Valuation in $M divided by company age in years, using only companies with disclosed Valuation and Founded year, sorted descending, with bars colored by whether Last Funded occurred in 2024 or earlier.",
+  "status": "complete",
+  "chart": {
+    "type": "ranked_bar",
+    "title": "Top companies by valuation per year since founding",
+    "entity_field": "company",
+    "value_field": "valuation_per_year",
+    "hue_field": "last_funded_bucket",
+    "orientation": "h",
+    "x_label": "Valuation per year ($M)",
+    "y_label": "Company",
+    "order": [
+      "OpenAI",
+      "Anthropic",
+      "Databricks",
+      "Figure",
+      "Cognition AI",
+      "Mistral AI",
+      "Hugging Face",
+      "Helsing",
+      "01.AI",
+      "Together AI",
+      "ElevenLabs",
+      "Sierra"
+    ],
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "company": "OpenAI",
+      "valuation_per_year": 7272.727272727273,
+      "company_age_years": 11,
+      "last_funded_bucket": "2024",
+      "valuation_value_m": 80000.0
+    },
+    {
+      "company": "Anthropic",
+      "valuation_per_year": 3680.0,
+      "company_age_years": 5,
+      "last_funded_bucket": "2024",
+      "valuation_value_m": 18400.0
+    },
+    {
+      "company": "Databricks",
+      "valuation_per_year": 3307.6923076923076,
+      "company_age_years": 13,
+      "last_funded_bucket": "2023 or earlier / undisclosed",
+      "valuation_value_m": 43000.0
+    },
+    {
+      "company": "Figure",
+      "valuation_per_year": 670.0,
+      "company_age_years": 4,
+      "last_funded_bucket": "2024",
+      "valuation_value_m": 2680.0
+    },
+    {
+      "company": "Cognition AI",
+      "valuation_per_year": 666.6666666666666,
+      "company_age_years": 3,
+      "last_funded_bucket": "2024",
+      "valuation_value_m": 2000.0
+    },
+    {
+      "company": "Mistral AI",
+      "valuation_per_year": 666.6666666666666,
+      "company_age_years": 3,
+      "last_funded_bucket": "2024",
+      "valuation_value_m": 2000.0
+    },
+    {
+      "company": "Hugging Face",
+      "valuation_per_year": 450.0,
+      "company_age_years": 10,
+      "last_funded_bucket": "2023 or earlier / undisclosed",
+      "valuation_value_m": 4500.0
+    },
+    {
+      "company": "Helsing",
+      "valuation_per_year": 364.0,
+      "company_age_years": 5,
+      "last_funded_bucket": "2023 or earlier / undisclosed",
+      "valuation_value_m": 1820.0
+    },
+    {
+      "company": "01.AI",
+      "valuation_per_year": 333.3333333333333,
+      "company_age_years": 3,
+      "last_funded_bucket": "2023 or earlier / undisclosed",
+      "valuation_value_m": 1000.0
+    },
+    {
+      "company": "Together AI",
+      "valuation_per_year": 312.5,
+      "company_age_years": 4,
+      "last_funded_bucket": "2024",
+      "valuation_value_m": 1250.0
+    },
+    {
+      "company": "ElevenLabs",
+      "valuation_per_year": 275.0,
+      "company_age_years": 4,
+      "last_funded_bucket": "2024",
+      "valuation_value_m": 1100.0
+    },
+    {
+      "company": "Sierra",
+      "valuation_per_year": 268.76666666666665,
+      "company_age_years": 3,
+      "last_funded_bucket": "2024",
+      "valuation_value_m": 806.3
+    }
+  ],
+  "notes": []
+}

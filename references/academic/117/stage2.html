@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 500px; height: 450px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const raw_data = [
+    [
+        5.614709844,
+        8.694183743
+    ],
+    [
+        5.722466024,
+        8.129283017
+    ],
+    [
+        5.730639956,
+        8.233140296
+    ],
+    [
+        5.902073579,
+        8.784634846
+    ],
+    [
+        5.902073579,
+        8.479780264
+    ],
+    [
+        6.38024459,
+        8.647458426
+    ],
+    [
+        5.916476644,
+        8.653919873
+    ],
+    [
+        5.746850183,
+        8.508190931
+    ],
+    [
+        7.483009577,
+        7.40599236
+    ],
+    [
+        7.721099189,
+        6.798309782
+    ],
+    [
+        7.654636029,
+        7.207502459
+    ],
+    [
+        5.951867504,
+        7.594697827
+    ],
+    [
+        7.997179481,
+        7.296457407
+    ],
+    [
+        7.24697806,
+        7.314696526
+    ],
+    [
+        6.437960088,
+        7.76420813
+    ],
+    [
+        6.343407822,
+        7.665335917
+    ],
+    [
+        6.563768278,
+        8.41869595
+    ],
+    [
+        7.663913842,
+        8.163901214
+    ],
+    [
+        5.956521363,
+        8.822411496
+    ],
+    [
+        6.037821465,
+        9.109047078
+    ],
+    [
+        6.074676686,
+        9.191799501
+    ],
+    [
+        6.920055055,
+        10.00982862
+    ],
+    [
+        6.223036338,
+        8.671010241
+    ],
+    [
+        5.902073579,
+        7.957682486
+    ],
+    [
+        5.145677455,
+        7.975561406
+    ],
+    [
+        5.669593751,
+        8.685449638
+    ],
+    [
+        5.189824559,
+        7.947198584
+    ],
+    [
+        5.786596362,
+        8.484218708
+    ],
+    [
+        5.666756592,
+        7.854245054
+    ],
+    [
+        5.569855608,
+        8.236014192
+    ],
+    [
+        5.560714954,
+        8.158862106
+    ],
+    [
+        5.652486495,
+        7.64096791
+    ],
+    [
+        5.523561956,
+        7.217230716
+    ],
+    [
+        5.842978832,
+        7.993221467
+    ],
+    [
+        7.147713722,
+        7.005624549
+    ],
+    [
+        6.263034406,
+        7.64385619
+    ],
+    [
+        6.875288598,
+        7.529040056
+    ],
+    [
+        7.054197294,
+        7.499845887
+    ],
+    [
+        6.770829046,
+        6.50779464
+    ],
+    [
+        6.388878339,
+        6.680886921
+    ],
+    [
+        7.306517445,
+        7.435461914
+    ],
+    [
+        6.404290064,
+        7.894817763
+    ],
+    [
+        7.203592714,
+        7.161887682
+    ],
+    [
+        5.925999419,
+        7.610286657
+    ],
+    [
+        6.137503524,
+        7.991521846
+    ],
+    [
+        5.997744026,
+        7.351380981
+    ],
+    [
+        6.055282436,
+        7.698357406
+    ],
+    [
+        6.002252452,
+        6.175923742
+    ],
+    [
+        5.794415866,
+        7.40599236
+    ],
+    [
+        6.307428525,
+        8.400879436
+    ],
+    [
+        6.493455201,
+        8.404290064
+    ],
+    [
+        5.465974465,
+        8.294620749
+    ],
+    [
+        5.575917361,
+        8.303780748
+    ],
+    [
+        5.375039431,
+        8.102238194
+    ],
+    [
+        5.510961919,
+        8.167418146
+    ],
+    [
+        6.171927354,
+        8.332707934
+    ],
+    [
+        4.892391026,
+        7.902073579
+    ],
+    [
+        5.593951284,
+        7.250772132
+    ],
+    [
+        6.62058641,
+        6.849248703
+    ],
+    [
+        5.224966365,
+        6.803485376
+    ],
+    [
+        7.438791853,
+        6.770829046
+    ],
+    [
+        6.0,
+        7.766197597
+    ],
+    [
+        6.963474124,
+        7.585713709
+    ],
+    [
+        7.184875343,
+        8.20994068
+    ],
+    [
+        7.516487981,
+        6.996614715
+    ],
+    [
+        5.773468928,
+        8.518849829
+    ],
+    [
+        6.298291731,
+        7.963474124
+    ],
+    [
+        6.400879436,
+        7.642412773
+    ],
+    [
+        7.5360529,
+        7.780047576
+    ],
+    [
+        7.330020516,
+        8.461479447
+    ],
+    [
+        6.563768278,
+        7.526694846
+    ],
+    [
+        7.053111336,
+        8.005624549
+    ],
+    [
+        6.246027981,
+        7.215290306
+    ],
+    [
+        6.783980414,
+        7.807998839
+    ],
+    [
+        6.366322214,
+        7.827183896
+    ],
+    [
+        6.729280846,
+        8.745170091
+    ],
+    [
+        6.860466259,
+        8.962317655
+    ],
+    [
+        6.73470962,
+        7.754887502
+    ],
+    [
+        7.107478647,
+        7.728600811
+    ],
+    [
+        7.031218731,
+        8.733354341
+    ],
+    [
+        6.059614856,
+        7.432959407
+    ],
+    [
+        8.232181058,
+        7.896635141
+    ],
+    [
+        5.741466986,
+        8.118422024
+    ],
+    [
+        5.491853096,
+        8.332707934
+    ],
+    [
+        8.034523875,
+        8.677719642
+    ],
+    [
+        5.539158811,
+        6.758889433
+    ],
+    [
+        7.945443836,
+        5.708739041
+    ]
+];
+
+        // Use raw_data as is, index 0 is X, index 1 is Y.
+        const data = raw_data;
+
+        // Stats
+        const x = data.map(p => p[0]);
+        const y = data.map(p => p[1]);
+        const r = jStat.corrcoeff(x, y);
+        const n = x.length;
+        const t = r * Math.sqrt((n - 2) / (1 - r * r));
+        const pVal = 2 * (1 - jStat.studentt.cdf(Math.abs(t), n - 2));
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        echarts.registerTransform(ecStat.transform.regression);
+
+        const option = {
+            backgroundColor: 'white',
+            title: {
+                text: 'Tumor Melanoma (Metastatic)',
+                left: 'center',
+                top: 15,
+                textStyle: { fontWeight: 'bold', fontSize: 16 }
+            },
+            grid: { top: 60, right: 40, bottom: 60, left: 60 },
+            xAxis: {
+                name: 'Log2 Gclc expression',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: 4, max: 9.2,
+                interval: 1,
+                axisLabel: { color: 'black', fontWeight: 'bold' },
+                axisLine: { show: true, lineStyle: { color: 'black', width: 1.5 } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: 'Log2 Fsp1 (AIFM2) expression',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: 5, max: 11,
+                interval: 1,
+                axisLabel: { color: 'black', fontWeight: 'bold' },
+                axisLine: { show: true, lineStyle: { color: 'black', width: 1.5 } },
+                splitLine: { show: false }
+            },
+            dataset: [
+                { source: data },
+                { transform: { type: 'ecStat:regression' } }
+            ],
+            series: [
+                {
+                    type: 'scatter',
+                    symbolSize: 10,
+                    itemStyle: { color: '#7385E0', opacity: 0.8 },
+                    datasetIndex: 0
+                },
+                {
+                    type: 'line',
+                    showSymbol: false,
+                    lineStyle: { color: '#E34A33', width: 2.5 },
+                    datasetIndex: 1
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'q', font: 'bold 24px Arial' } },
+                {
+                    type: 'text',
+                    left: 70, top: 70,
+                    style: {
+                        text: `r-value=${r.toFixed(3)}
+P=${pVal.toFixed(3)}`,
+                        font: 'bold 12px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

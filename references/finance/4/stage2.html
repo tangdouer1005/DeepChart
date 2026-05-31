@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>abbv 2016–2024 年 EBITDA 变化柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 0 0 16px;
+      color: #555;
+      font-weight: 400;
+    }
+    .chart-container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      padding: 16px 20px 24px;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: #444;
+    }
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .controls input[type="checkbox"] {
+      cursor: pointer;
+    }
+    .legend-note {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #777;
+      line-height: 1.4;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>abbv 2016–2024 年 EBITDA 变化</h1>
+    <h2>息税折旧摊销前利润（Earnings Before Interest, Taxes, Depreciation and Amortization）</h2>
+
+    <div class="controls">
+      <span>显示 / 隐藏：</span>
+      <label>
+        <input type="checkbox" id="toggle2016" checked />
+        2016–2020
+      </label>
+      <label>
+        <input type="checkbox" id="toggle2021" checked />
+        2021–2024
+      </label>
+      <label>
+        <input type="checkbox" id="toggleTrend" checked />
+        显示趋势线
+      </label>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <div class="legend-note">
+      数据来源：用户提供的 abbv 财务数据（单位：美元）。<br>
+      EBITDA = Net Income + Interest Expense + Income Tax + Depreciation &amp; Amortization。
+    </div>
+  </div>
+
+  <script>
+    // 原始数据（单位：美元）
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+    const ebitdaRaw = [
+      10120000000,
+      10378000000,
+      9290000000,
+      12227000000,
+      14765000000,
+      23926000000,
+      24165000000,
+      17162000000,
+      16042000000
+    ];
+
+    // 将数据转换为“十亿美元”单位，便于阅读
+    const ebitda = ebitdaRaw.map(v => v / 1e9);
+
+    // 简单线性回归计算趋势线
+    function linearRegression(x, y) {
+      const n = x.length;
+      const sumX = x.reduce((a, b) => a + b, 0);
+      const sumY = y.reduce((a, b) => a + b, 0);
+      const sumXY = x.reduce((acc, xi, i) => acc + xi * y[i], 0);
+      const sumX2 = x.reduce((acc, xi) => acc + xi * xi, 0);
+
+      const denom = n * sumX2 - sumX * sumX;
+      const slope = denom === 0 ? 0 : (n * sumXY - sumX * sumY) / denom;
+      const intercept = (sumY - slope * sumX) / n;
+
+      return { slope, intercept };
+    }
+
+    // x 序列使用 0,1,2,... 代表年份顺序
+    const xVals = years.map((_, i) => i);
+    const { slope, intercept } = linearRegression(xVals, ebitda);
+    const trendData = xVals.map(x => slope * x + intercept);
+
+    const ctx = document.getElementById("ebitdaChart").getContext("2d");
+
+    const barColorsEarly = "rgba(54, 162, 235, 0.75)";   // 2016–2020
+    const barColorsLate  = "rgba(75, 192, 192, 0.85)";  // 2021–2024
+
+    // 为了可以控制前半段与后半段数据的显示，拆分为两个 dataset
+    const ebitda2016_2020 = ebitda.map((v, i) => (i <= 4 ? v : null));
+    const ebitda2021_2024 = ebitda.map((v, i) => (i >= 5 ? v : null));
+
+    const chartConfig = {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "EBITDA 2016–2020",
+            data: ebitda2016_2020,
+            backgroundColor: barColorsEarly,
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+            borderRadius: 4,
+            maxBarThickness: 48
+          },
+          {
+            label: "EBITDA 2021–2024",
+            data: ebitda2021_2024,
+            backgroundColor: barColorsLate,
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+            borderRadius: 4,
+            maxBarThickness: 48
+          },
+          {
+            type: "line",
+            label: "趋势线（线性回归）",
+            data: trendData,
+            borderColor: "rgba(255, 99, 132, 0.95)",
+            borderWidth: 2,
+            fill: false,
+            pointRadius: 0,
+            pointHitRadius: 5,
+            tension: 0,
+            borderDash: [6, 4],
+            yAxisID: "y"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            position: "top",
+            labels: {
+              usePointStyle: true,
+              padding: 16,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: (context) => {
+                const value = context.parsed.y;
+                if (value == null || isNaN(value)) return "";
+                const bn = value.toFixed(2);
+                return `${context.dataset.label}: ${bn} 十亿美元`;
+              },
+              title: (items) => {
+                if (!items.length) return "";
+                return `财年 ${items[0].label}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 12
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "EBITDA（十亿美元）",
+              font: {
+                size: 13
+              }
+            },
+            ticks: {
+              callback: (value) => value.toFixed ? value.toFixed(0) : value,
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            }
+          }
+        }
+      }
+    };
+
+    const ebitdaChart = new Chart(ctx, chartConfig);
+
+    // 交互：切换前/后半段以及趋势线
+    const toggle2016 = document.getElementById("toggle2016");
+    const toggle2021 = document.getElementById("toggle2021");
+    const toggleTrend = document.getElementById("toggleTrend");
+
+    toggle2016.addEventListener("change", () => {
+      ebitdaChart.data.datasets[0].hidden = !toggle2016.checked;
+      ebitdaChart.update();
+    });
+
+    toggle2021.addEventListener("change", () => {
+      ebitdaChart.data.datasets[1].hidden = !toggle2021.checked;
+      ebitdaChart.update();
+    });
+
+    toggleTrend.addEventListener("change", () => {
+      ebitdaChart.data.datasets[2].hidden = !toggleTrend.checked;
+      ebitdaChart.update();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>AMZN 格雷厄姆“烟蒂股”净值 (NNWC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js 最新稳定版 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f7f7f9;
+      color: #111827;
+    }
+    h1 {
+      font-size: 1.35rem;
+      margin: 0 0 0.25rem;
+    }
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 1rem;
+      font-weight: 400;
+      color: #4b5563;
+    }
+    .chart-container {
+      max-width: 900px;
+      height: 480px; /* 确保有固定高度，避免图表高度为 0 */
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      box-sizing: border-box;
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .footer {
+      max-width: 900px;
+      margin: 0.75rem auto 0;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    .footer code {
+      background: #f3f4f6;
+      padding: 0.05rem 0.25rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #020617;
+        color: #e5e7eb;
+      }
+      .chart-container {
+        background: #020617;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        border: 1px solid #1e293b;
+      }
+      .footer {
+        color: #9ca3af;
+      }
+      .footer code {
+        background: #111827;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>AMZN 格雷厄姆“烟蒂股”净值 (NNWC) 每股</h1>
+    <h2>2016–2024 财年 · 单位：美元/股（负值表示净流动资产为负）</h2>
+    <canvas id="nnwcChart" aria-label="AMZN NNWC per share 2016–2024" role="img"></canvas>
+  </div>
+  <div class="footer">
+    数据来源于用户提供的每股 NNWC 序列：
+    <code>2016–2024</code>。
+  </div>
+
+  <!-- 将图表初始化放到 window.onload 中，确保 DOM 已就绪且 Chart.js 已加载 -->
+  <script>
+    window.onload = function () {
+      const years = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ];
+      const nnwcValues = [
+        -1.894214876033058,
+        -4.402028397565923,
+        -4.3998,
+        -6.63234126984127,
+        -9.319411764705883,
+        -11.720776699029129,
+        -16.669054863087645,
+        -14.642394205108657,
+        -13.809999067251187
+      ];
+
+      const canvas = document.getElementById("nnwcChart");
+      if (!canvas) {
+        console.error("找不到 canvas 元素 #nnwcChart");
+        return;
+      }
+      const ctx = canvas.getContext("2d");
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "NNWC 每股 (美元)",
+              data: nnwcValues,
+              backgroundColor: nnwcValues.map(v =>
+                v < 0 ? "rgba(239, 68, 68, 0.75)" : "rgba(34, 197, 94, 0.75)"
+              ),
+              borderColor: nnwcValues.map(v =>
+                v < 0 ? "rgb(185, 28, 28)" : "rgb(22, 163, 74)"
+              ),
+              borderWidth: 1.2,
+              borderRadius: 5,
+              hoverBackgroundColor: nnwcValues.map(v =>
+                v < 0 ? "rgba(248, 113, 113, 0.9)" : "rgba(74, 222, 128, 0.9)"
+              ),
+              hoverBorderColor: nnwcValues.map(v =>
+                v < 0 ? "rgb(248, 113, 113)" : "rgb(22, 163, 74)"
+              )
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                padding: 16
+              }
+            },
+            tooltip: {
+              usePointStyle: true,
+              callbacks: {
+                label: context => {
+                  const value = context.parsed.y;
+                  // 防止某些环境中 value 不是数字时报错
+                  if (typeof value === "number") {
+                    return " NNWC: " + value.toFixed(3) + " 美元/股";
+                  }
+                  return " NNWC: " + value + " 美元/股";
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年",
+                font: {
+                  size: 12,
+                  weight: "500"
+                }
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "每股 NNWC (美元)",
+                font: {
+                  size: 12,
+                  weight: "500"
+                }
+              },
+              grid: {
+                color: "rgba(148, 163, 184, 0.35)",
+                drawBorder: false
+              },
+              ticks: {
+                callback: value => {
+                  // 确保在一些老环境中不因 toFixed 报错
+                  return Number(value).toFixed(0);
+                }
+              }
+            }
+          }
+        }
+      });
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ORCL 资本再投资率 (Reinvestment Rate) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 16px 18px 22px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    /* Explicit chart area size to avoid tall/skinny stretching */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      height: 420px; /* fixed sensible height for desktop */
+      margin: 0 auto;
+    }
+
+    .chart-footer {
+      max-width: 900px;
+      margin: 8px auto 0;
+      font-size: 11px;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    .chart-footer span.label {
+      font-weight: 600;
+      color: #444;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      #chart-container {
+        padding: 12px 10px 16px;
+      }
+      .chart-wrapper {
+        height: 320px; /* smaller but still legible on mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>ORCL 资本再投资率 (Reinvestment Rate)</h1>
+    <h2>按财年 (2016–2024)</h2>
+    <div class="chart-wrapper">
+      <canvas id="reinvestmentChart"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-footer">
+    <div><span class="label">说明：</span>纵轴为资本再投资率（倍率），可为正或负；横轴为 ORCL 财年。</div>
+    <div><span class="label">交互：</span>鼠标悬停查看精确数值。</div>
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Source data (exact from user)
+    const fiscalYears = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const reinvestmentRates = [
+      0.4380441815433644,
+      0.9251850800462575,
+      0.8410973751548196,
+      -2.162236522680179,
+      -0.8650936877200964,
+      0.8102507887829582,
+      -1.1001895055319706,
+      0.5260186674762015,
+      0.5199799282950175
+    ];
+
+    const ctx = document.getElementById("reinvestmentChart").getContext("2d");
+
+    // Compute min/max with padding for a cleaner view
+    const minVal = Math.min(...reinvestmentRates);
+    const maxVal = Math.max(...reinvestmentRates);
+    const padding = (maxVal - minVal) * 0.15 || 0.2;
+    const suggestedMin = minVal - padding;
+    const suggestedMax = maxVal + padding;
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [{
+          label: "资本再投资率",
+          data: reinvestmentRates,
+          borderColor: "#2563eb",
+          backgroundColor: "rgba(37, 99, 235, 0.12)",
+          pointBackgroundColor: "#2563eb",
+          pointBorderColor: "#ffffff",
+          pointHoverBackgroundColor: "#1d4ed8",
+          pointHoverBorderColor: "#ffffff",
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          tension: 0.25,
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // use the wrapper's fixed height
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+              padding: 18,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const v = context.raw;
+                return "资本再投资率: " + v.toFixed(3);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年 (Fiscal Year)",
+              font: { size: 12 }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+              autoSkip: false,  // ensure all years are shown
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "资本再投资率 (倍)",
+              font: { size: 12 }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          }
+        },
+        layout: {
+          padding: {
+            top: 10,
+            right: 10,
+            bottom: 10,
+            left: 10
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

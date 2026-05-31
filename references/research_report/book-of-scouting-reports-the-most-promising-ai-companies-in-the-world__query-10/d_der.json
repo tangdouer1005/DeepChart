@@ -1,0 +1,129 @@
+{
+  "query_id": 10,
+  "query_text": "Create a stacked bar chart comparing, for the top 6 Stage families by company count, the percentage split of companies across three funding-recency buckets `funded in 2024`, `funded in 2023`, and `funded before 2023 or undisclosed`, with percentages computed within each Stage family and Stage families sorted by company count.",
+  "status": "complete",
+  "chart": {
+    "type": "stacked_bar",
+    "title": "Funding recency mix in top stage families",
+    "group_field": "stage_family",
+    "segment_field": "recency_bucket",
+    "value_field": "share_pct",
+    "group_order": [
+      "Series A",
+      "seed / pre-seed",
+      "strategic / alternative",
+      "Series B",
+      "Series C+",
+      "other / undisclosed"
+    ],
+    "segment_order": [
+      "funded in 2024",
+      "funded in 2023",
+      "funded before 2023 or undisclosed"
+    ],
+    "y_label": "Share of companies (%)",
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "stage_family": "Series A",
+      "recency_bucket": "funded before 2023 or undisclosed",
+      "share_pct": 6.896551724137931,
+      "family_count": 29
+    },
+    {
+      "stage_family": "Series A",
+      "recency_bucket": "funded in 2023",
+      "share_pct": 55.172413793103445,
+      "family_count": 29
+    },
+    {
+      "stage_family": "Series A",
+      "recency_bucket": "funded in 2024",
+      "share_pct": 37.93103448275862,
+      "family_count": 29
+    },
+    {
+      "stage_family": "Series B",
+      "recency_bucket": "funded before 2023 or undisclosed",
+      "share_pct": 6.25,
+      "family_count": 16
+    },
+    {
+      "stage_family": "Series B",
+      "recency_bucket": "funded in 2023",
+      "share_pct": 50.0,
+      "family_count": 16
+    },
+    {
+      "stage_family": "Series B",
+      "recency_bucket": "funded in 2024",
+      "share_pct": 43.75,
+      "family_count": 16
+    },
+    {
+      "stage_family": "Series C+",
+      "recency_bucket": "funded before 2023 or undisclosed",
+      "share_pct": 11.11111111111111,
+      "family_count": 9
+    },
+    {
+      "stage_family": "Series C+",
+      "recency_bucket": "funded in 2023",
+      "share_pct": 77.77777777777779,
+      "family_count": 9
+    },
+    {
+      "stage_family": "Series C+",
+      "recency_bucket": "funded in 2024",
+      "share_pct": 11.11111111111111,
+      "family_count": 9
+    },
+    {
+      "stage_family": "other / undisclosed",
+      "recency_bucket": "funded before 2023 or undisclosed",
+      "share_pct": 100.0,
+      "family_count": 1
+    },
+    {
+      "stage_family": "seed / pre-seed",
+      "recency_bucket": "funded before 2023 or undisclosed",
+      "share_pct": 3.571428571428571,
+      "family_count": 28
+    },
+    {
+      "stage_family": "seed / pre-seed",
+      "recency_bucket": "funded in 2023",
+      "share_pct": 67.85714285714286,
+      "family_count": 28
+    },
+    {
+      "stage_family": "seed / pre-seed",
+      "recency_bucket": "funded in 2024",
+      "share_pct": 28.57142857142857,
+      "family_count": 28
+    },
+    {
+      "stage_family": "strategic / alternative",
+      "recency_bucket": "funded before 2023 or undisclosed",
+      "share_pct": 11.76470588235294,
+      "family_count": 17
+    },
+    {
+      "stage_family": "strategic / alternative",
+      "recency_bucket": "funded in 2023",
+      "share_pct": 47.05882352941176,
+      "family_count": 17
+    },
+    {
+      "stage_family": "strategic / alternative",
+      "recency_bucket": "funded in 2024",
+      "share_pct": 41.17647058823529,
+      "family_count": 17
+    }
+  ],
+  "notes": []
+}

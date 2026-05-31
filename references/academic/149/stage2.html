@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "Category":"MSW transport",
+        "Value":2.2
+    },
+    {
+        "Category":"Pre-treatment+Gasification",
+        "Value":24.0
+    },
+    {
+        "Category":"Water gas shift reaction",
+        "Value":-13.6
+    },
+    {
+        "Category":"Rectisol Process",
+        "Value":92.6
+    },
+    {
+        "Category":"Fischer Tropsch",
+        "Value":5.7
+    },
+    {
+        "Category":"Hydrotreating",
+        "Value":0.4
+    },
+    {
+        "Category":"Hydrocracking",
+        "Value":0.5
+    },
+    {
+        "Category":"Others",
+        "Value":9.8
+    },
+    {
+        "Category":"Fuel transport",
+        "Value":0.4
+    },
+    {
+        "Category":"Operation",
+        "Value":73.2
+    },
+    {
+        "Category":"Biogenic content",
+        "Value":-176.7
+    },
+    {
+        "Category":"Credit",
+        "Value":-4.3
+    }
+];
+
+        const data = jsonData.map(d => ({
+            category: d.Category,
+            value: d.Value
+        }));
+        
+        // Prepare data for waterfall
+        // ECharts waterfall usually uses a transparent stack.
+        // But since we have specific colors per bar, we should use a single series with custom itemStyle per data point
+        // and compute the 'base' (transparent) bar values manually.
+        
+        const baseData = [];
+        const barData = [];
+        let currentPosition = 0;
+        
+        const colors = [
+            '#5F8D9B', '#D1E5EB', '#7FA4C0', '#1F548A', '#757575', '#C0C0C0', 
+            '#C0C0C0', '#757575', '#333333', '#EBC084', '#C65D48', '#5F8D9B'
+        ];
+        
+        const labelColors = [
+            '#5F8D9B', '#B0D0D9', '#7FA4C0', '#1F548A', '#BDBDBD', '#BDBDBD', 
+            '#BDBDBD', '#BDBDBD', '#5F8D9B', '#EBC084', '#FFFFFF', '#5F8D9B'
+        ];
+
+        data.forEach((item, i) => {
+            const val = item.value;
+            let barStart, barHeight;
+            
+            if (val >= 0) {
+                barStart = currentPosition;
+                barHeight = val;
+                currentPosition += val;
+            } else {
+                barStart = currentPosition + val; // e.g. curr=100, val=-20. start=80.
+                barHeight = Math.abs(val);        // height=20. bar goes 80->100.
+                currentPosition += val;
+            }
+            
+            baseData.push(barStart);
+            
+            // Customize Label position
+            // If val > 0, label on top. If val < 0, label on bottom (relative to the bar).
+            // But python code has specific logic.
+            // Value label: always outside? 
+            // "Biogenic content" (-176.7) is huge.
+            // Python: "Operation" (pos) and "Biogenic" (neg) have text INSIDE.
+            
+            const isInside = (item.category === 'Operation' || item.category === 'Biogenic content');
+            
+            const labelConfig = {
+                show: true,
+                position: isInside ? 'insideTop' : (val >= 0 ? 'top' : 'bottom'),
+                rotate: 90,
+                formatter: function(params) {
+                    // Category Name
+                    let name = item.category;
+                    if (name.includes("Pre-treatment")) name = "Pretreatment + gasification";
+                    if (name.includes("Rectisol")) name = "Rectisol process";
+                    return name;
+                },
+                color: labelColors[i],
+                fontSize: 12,
+                align: 'left',
+                verticalAlign: 'middle', 
+                distance: 15
+            };
+            
+            // Value Label (Numeric)
+            // We can use 'label' for the text, and 'markPoint' or another label for the number?
+            // Or use rich text.
+            // Let's use rich text in formatter.
+            // "{val|2.2}\n{name|MSW Transport}"
+            
+            const valStr = val.toFixed(1);
+            
+            // Adjust label position logic based on python
+            // Python: 
+            // - Value label: always distinct, bold black.
+            // - Category label: colored, rotated.
+            
+            // We can render the numeric value using `label` and the text using `label`? 
+            // ECharts only supports one label per item in standard config.
+            // We can use `graphic` for texts or `markPoint`.
+            // OR use a composite label.
+            
+            // Let's use the bar label for the NUMBER (value).
+            // And use a second "transparent scatter" series for the TEXT (category).
+            // Or just put everything in one label with rich text and newlines.
+            
+            // BUT: rotation.
+            // The number is horizontal (0 deg). The text is vertical (90 deg).
+            // ECharts label rotates the whole thing.
+            // We can't rotate parts of a label differently. 
+            
+            // SOLUTION:
+            // Bar label: Number (horizontal).
+            // Custom series / Scatter series: Category Text (vertical).
+            
+            barData.push({
+                value: barHeight,
+                itemStyle: {
+                    color: colors[i],
+                    borderColor: 'gray',
+                    borderWidth: 0.5
+                },
+                label: {
+                    show: true,
+                    position: val >= 0 ? 'top' : 'bottom',
+                    formatter: valStr,
+                    fontWeight: 'bold',
+                    color: 'black',
+                    fontSize: 14,
+                    distance: 5
+                },
+                // For the secondary text (Category)
+                categoryName: item.category,
+                isInside: isInside,
+                val: val,
+                base: barStart,
+                height: barHeight,
+                textColor: labelColors[i]
+            });
+        });
+
+        // Prepare Scatter data for category labels
+        const textSeriesData = barData.map((d, i) => {
+            // Calculate position
+            // If inside: near top of bar.
+            // If outside: above the bar (or below if negative bar).
+            // Wait, Python logic:
+            // "Operation" (pos): inside, top.
+            // "Biogenic" (neg): inside, top (relative to visual bar, which is bottom of stack?).
+            // Python: text_y = running_total - 5 (for neg biogenic). Running total is top of the bar (before subtraction).
+            // So it's at the top of the negative bar.
+            
+            let yPos;
+            if (d.isInside) {
+                // Inside, near top
+                yPos = d.base + d.height - 10; 
+            } else {
+                // Outside
+                if (d.val >= 0) {
+                    yPos = d.base + d.height + 25; // Above the number
+                } else {
+                    yPos = d.base + d.height + 25; // Wait, negative bar starts at `base`. `base` is the Top visually?
+                    // In ECharts stack:
+                    // If val < 0: base is `current + val`. This is the bottom Y value.
+                    // Height is abs(val).
+                    // So bar goes from `base` to `base + height`.
+                    // `base + height` is the Top Y value (previous total).
+                    
+                    // Python: text at `visual_top + offset`.
+                    // `visual_top` is `max(running_total, running_total + val)`.
+                    // For neg, running_total is Top.
+                    // So text is above the Top of the bar.
+                    yPos = d.base + d.height + 25;
+                }
+            }
+            
+            return {
+                value: [i, yPos],
+                name: d.categoryName,
+                label: {
+                    show: true,
+                    formatter: function() {
+                        let name = d.categoryName;
+                        if (name.includes("Pre-treatment")) name = "Pretreatment + gasification";
+                        if (name.includes("Rectisol")) name = "Rectisol process";
+                        if (name.includes("Water gas")) name = "Water gas shift reaction";
+                        return name;
+                    },
+                    rotate: 90,
+                    color: d.textColor,
+                    fontSize: 12,
+                    align: 'left',
+                    verticalAlign: 'middle'
+                }
+            };
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: 80,
+                bottom: 50,
+                left: 80,
+                right: 50
+            },
+            xAxis: {
+                type: 'category',
+                data: data.map(d => ''),
+                axisTick: { show: false },
+                axisLine: { show: false }, // Python hides ticks, but we might want line? Python: `ax.set_xticks([])`.
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: 'GHG emission intensity breakdown\n(gCO₂e MJ⁻¹)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: { fontSize: 16 },
+                type: 'value',
+                min: 0,
+                max: 250,
+                axisLabel: { color: 'black', fontSize: 12 },
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'gray' } }
+            },
+            series: [
+                {
+                    name: 'Placeholder',
+                    type: 'bar',
+                    stack: 'total',
+                    itemStyle: {
+                        borderColor: 'transparent',
+                        color: 'transparent'
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            borderColor: 'transparent',
+                            color: 'transparent'
+                        }
+                    },
+                    data: baseData
+                },
+                {
+                    name: 'Value',
+                    type: 'bar',
+                    stack: 'total',
+                    data: barData,
+                    barWidth: '96%'
+                },
+                {
+                    type: 'scatter',
+                    symbolSize: 0,
+                    data: textSeriesData,
+                    z: 10
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'a',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                },
+                {
+                    type: 'line',
+                    shape: { x1: 80, y1: 550, x2: 750, y2: 550 }, // Approximation of y=0 line?
+                    // ECharts y-axis 0 is automatically handled if min=0.
+                    // But data goes to -176.
+                    // Wait, Python: `ax.set_ylim(0, 250)`.
+                    // AND `val` for Biogenic is -176.
+                    // If ylim is 0, 250, then -176 is OFF CHART?
+                    // Let's re-read python carefully.
+                    // `bottom = running_total + val` (val is -176).
+                    // running_total before Biogenic is 73.2 + 0.4 + ... = ~200?
+                    // Sum of previous: 2.2+24-13.6+92.6+5.7+0.4+0.5+9.8+0.4+73.2 = 195.2.
+                    // Biogenic: 195.2 - 176.7 = 18.5.
+                    // So the bar goes from 18.5 to 195.2 (height 176.7).
+                    // It is fully visible within 0-250.
+                    // My logic `barStart = currentPosition + val` (195.2 - 176.7 = 18.5). Correct.
+                    style: {
+                        stroke: 'black',
+                        lineWidth: 1
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

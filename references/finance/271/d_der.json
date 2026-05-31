@@ -1,0 +1,102 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2017.0,
+            "Dividends": 6216000000.0,
+            "Net Income": 13643000000.0,
+            "Avg Total Assets": 199203000000.0,
+            "ROA(Avg)": 0.0684879243786489,
+            "Retention Ratio": 0.5443817342226782
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "Dividends": 6124000000.0,
+            "Net Income": 9862000000.0,
+            "Avg Total Assets": 201673500000.0,
+            "ROA(Avg)": 0.0489008223688288,
+            "Retention Ratio": 0.3790306225917663
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "Dividends": 6102000000.0,
+            "Net Income": 6670000000.0,
+            "Avg Total Assets": 211908500000.0,
+            "ROA(Avg)": 0.0314758492462548,
+            "Retention Ratio": 0.0851574212893553
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "Dividends": 6048000000.0,
+            "Net Income": 14881000000.0,
+            "Avg Total Assets": 227895000000.0,
+            "ROA(Avg)": 0.0652976151297746,
+            "Retention Ratio": 0.5935757005577582
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "Dividends": 6116000000.0,
+            "Net Income": 13510000000.0,
+            "Avg Total Assets": 244495500000.0,
+            "ROA(Avg)": 0.0552566407152687,
+            "Retention Ratio": 0.5472982975573649
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Dividends": 6152000000.0,
+            "Net Income": 13673000000.0,
+            "Avg Total Assets": 248678000000.0,
+            "ROA(Avg)": 0.0549827487755249,
+            "Retention Ratio": 0.550062166313172
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Dividends": 6114000000.0,
+            "Net Income": 11680000000.0,
+            "Avg Total Assets": 244158500000.0,
+            "ROA(Avg)": 0.0478377775092818,
+            "Retention Ratio": 0.4765410958904109
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "Dividends": 6140000000.0,
+            "Net Income": 15511000000.0,
+            "Avg Total Assets": 247928000000.0,
+            "ROA(Avg)": 0.0625625181504307,
+            "Retention Ratio": 0.6041518922055316
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2017.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.03872747371933922
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.01888493979099252
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.0026876060196696803
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.04032191799581854
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.03118495665358507
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.031187151938363807
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.023328478472709743
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "内部增长率 (Internal Growth Rate, IGR)": 0.03928201645728275
+        }
+    ]
+}

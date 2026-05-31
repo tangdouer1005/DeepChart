@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MSFT Altman Z-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.2);
+      --grid: rgba(148, 163, 184, 0.35);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --muted: #9ca3af;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.15);
+        --grid: rgba(75, 85, 99, 0.7);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #e5e7eb 0, var(--bg) 40%);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 960px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 18px;
+      padding: 1.5rem 1.75rem 1.75rem;
+      box-shadow:
+        0 20px 45px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(148, 163, 184, 0.15);
+      backdrop-filter: blur(12px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .card {
+        background: rgba(15, 23, 42, 0.9);
+      }
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .title-group h1 {
+      font-size: 1.25rem;
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .title-group p {
+      margin: 0.25rem 0 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .meta {
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .meta span {
+      display: block;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .legend {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-right: 1.5rem;
+    }
+
+    .legend-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #0ea5e9);
+    }
+
+    .threshold-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(148, 163, 184, 0.04);
+    }
+
+    .threshold-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #f97316;
+    }
+
+    .hint {
+      margin-left: auto;
+      font-style: italic;
+    }
+
+    .chart-wrap {
+      position: relative;
+      width: 100%;
+      height: min(60vh, 420px);
+    }
+
+    footer {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(148, 163, 184, 0.7);
+    }
+
+    footer a:hover {
+      border-bottom-style: solid;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header class="header">
+      <div class="title-group">
+        <h1>Microsoft (MSFT) Altman Z‑Score — 2016–2024</h1>
+        <p>奥特曼破产预测模型（Altman Z‑Score）年度变化（较高数值代表破产风险较低）</p>
+      </div>
+      <div class="meta">
+        <span>Metric: Z‑Score</span>
+        <span>Period: Fiscal Years 2016–2024</span>
+      </div>
+    </header>
+
+    <section class="controls">
+      <div class="legend">
+        <span class="legend-swatch"></span>
+        <span>MSFT Altman Z‑Score</span>
+      </div>
+      <div class="threshold-badge">
+        <span class="threshold-dot"></span>
+        <span>Distress threshold ≈ 1.8</span>
+      </div>
+      <span class="hint">Hint: hover bars or tap (mobile) to inspect exact values.</span>
+    </section>
+
+    <div class="chart-wrap">
+      <canvas id="zScoreChart" aria-label="MSFT Altman Z-Score bar chart" role="img"></canvas>
+    </div>
+
+    <footer>
+      <span>Data source: supplied Altman Z‑Score estimates for Microsoft fiscal years 2016–2024.</span>
+      <span>Visualization: interactive bar chart (Chart.js).</span>
+    </footer>
+  </div>
+
+  <script>
+    // Data from source
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const zScores = [
+      1.7838674896346476,
+      1.5452020723862976,
+      1.7444774360383386,
+      1.8295836594013235,
+      2.039642538898615,
+      2.2225781290104587,
+      2.3703480899756566,
+      2.4620559065829983,
+      2.3987487251272954
+    ];
+
+    // Determine colors: highlight whether each year is below or above ~1.8 distress threshold
+    const distressThreshold = 1.8;
+    const colors = zScores.map(v =>
+      v < distressThreshold
+        ? "rgba(239, 68, 68, 0.85)"     // red for below threshold
+        : "rgba(37, 99, 235, 0.9)"      // blue for above threshold
+    );
+    const borderColors = zScores.map(v =>
+      v < distressThreshold
+        ? "rgba(220, 38, 38, 1)"
+        : "rgba(37, 99, 235, 1)"
+    );
+
+    const ctx = document.getElementById("zScoreChart").getContext("2d");
+
+    const zScoreChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "Altman Z‑Score",
+            data: zScores,
+            backgroundColor: colors,
+            borderColor: borderColors,
+            borderWidth: 1,
+            borderRadius: 6,
+            hoverBorderWidth: 2,
+            hoverBackgroundColor: colors,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              title: (items) => {
+                const item = items[0];
+                return `Fiscal Year ${item.label}`;
+              },
+              label: (context) => {
+                const value = context.parsed.y;
+                const formatted = value.toFixed(3);
+                let riskNote = "";
+                if (value < 1.8) {
+                  riskNote = " (near distress zone)";
+                } else if (value >= 3.0) {
+                  riskNote = " (safe zone)";
+                } else {
+                  riskNote = " (gray zone)";
+                }
+                return `Z‑Score: ${formatted}${riskNote}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              color: "#6b7280",
+              font: {
+                size: 11
+              }
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: 1.4,
+            suggestedMax: 2.7,
+            grid: {
+              color: function() {
+                return getComputedStyle(document.documentElement)
+                  .getPropertyValue("--grid");
+              },
+              drawBorder: false
+            },
+            title: {
+              display: true,
+              text: "Altman Z‑Score",
+              color: "#6b7280",
+              font: {
+                size: 11
+              }
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(1);
+              }
+            }
+          }
+        },
+        animation: {
+          duration: 850,
+          easing: "easeOutCubic"
+        }
+      }
+    });
+
+    // Add distress threshold line dynamically
+    function addThresholdLine(chart, value, color, label) {
+      const yScale = chart.scales.y;
+      const ctx = chart.ctx;
+      const y = yScale.getPixelForValue(value);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1;
+      ctx.moveTo(chart.chartArea.left, y);
+      ctx.lineTo(chart.chartArea.right, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = color;
+      ctx.font = "10px system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI'";
+      ctx.textBaseline = "bottom";
+      ctx.fillText(label, chart.chartArea.right - 90, y - 2);
+      ctx.restore();
+    }
+
+    // Chart.js plugin to draw threshold line after chart is rendered
+    const thresholdPlugin = {
+      id: "distressThresholdLine",
+      afterDraw: (chart) => {
+        if (chart.chartArea) {
+          addThresholdLine(
+            chart,
+            distressThreshold,
+            "rgba(249, 115, 22, 0.85)",
+            "Distress ~1.8"
+          );
+        }
+      }
+    };
+
+    Chart.register(thresholdPlugin);
+    zScoreChart.update();
+  </script>
+</body>
+</html>

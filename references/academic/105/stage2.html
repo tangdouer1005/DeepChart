@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 400px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // 1. Data Source
+        const x_vals = [-2.0, -0.3, 0.0, 0.3979, 0.6989, 1.0];
+        
+        const raw_data = {
+            "LN9-1315BL WT": [
+                [100.0, 100.0, 100.0],
+                [102.763158, 100.938338, 99.6083551],
+                [100.657895, 99.463807, 94.1253264],
+                [90.7894737, 92.4932976, 88.381201],
+                [83.1578947, 82.30563, 86.8146214],
+                [85.0, 76.1394102, 80.5483029]
+            ],
+            "LN9-1315BL FSP1 KO 1": [
+                [100.0, 100.0, 100.0],
+                [86.3945578, 82.860262, 89.088729],
+                [80.1587302, 78.0567686, 86.0911271],
+                [68.1405896, 67.3580786, 76.0191847],
+                [65.9863946, 66.7030568, 70.263789],
+                [59.2970522, 54.5851528, 63.0695444]
+            ]
+        };
+
+        // 2. Statistics
+        function mean(arr) { return arr.reduce((a, b) => a + b, 0) / arr.length; }
+        function std(arr) {
+            const m = mean(arr);
+            const sumSq = arr.reduce((a, b) => a + Math.pow(b - m, 2), 0);
+            return Math.sqrt(sumSq / (arr.length - 1));
+        }
+
+        const processed = {};
+        for (const [key, replicates] of Object.entries(raw_data)) {
+            const means = replicates.map(r => mean(r));
+            const stds = replicates.map(r => std(r));
+            processed[key] = { means, stds };
+        }
+
+        // 3. Curve Fitting (4PL Sigmoid)
+        // Using simple Nelder-Mead optimization as previously defined
+        function sigmoid(x, [Top, Bottom, LogEC50, HillSlope]) {
+            return Bottom + (Top - Bottom) / (1 + Math.pow(10, (LogEC50 - x) * HillSlope));
+        }
+
+        function objective(params, xData, yData) {
+            let sse = 0;
+            for (let i = 0; i < xData.length; i++) {
+                const pred = sigmoid(xData[i], params);
+                sse += Math.pow(pred - yData[i], 2);
+            }
+            return sse;
+        }
+
+        function nelderMead(f, x0, args) {
+            const dim = x0.length;
+            const alpha = 1, gamma = 2, rho = 0.5, sigma = 0.5;
+            let simplex = [];
+            
+            simplex.push({ p: [...x0], v: f(x0, ...args) });
+            for (let i = 0; i < dim; i++) {
+                const p = [...x0];
+                p[i] = p[i] !== 0 ? p[i] * 1.05 : 0.00025;
+                simplex.push({ p: p, v: f(p, ...args) });
+            }
+
+            for (let iter = 0; iter < 2000; iter++) {
+                simplex.sort((a, b) => a.v - b.v);
+                const centroid = Array(dim).fill(0);
+                for (let i = 0; i < dim; i++) {
+                    for (let j = 0; j < dim; j++) {
+                        centroid[j] += simplex[i].p[j];
+                    }
+                }
+                for (let j = 0; j < dim; j++) {
+                    centroid[j] /= dim;
+                }
+                const reflected = centroid.map((c, j) => c + alpha * (c - simplex[dim].p[j]));
+                const vReflected = f(reflected, ...args);
+
+                if (vReflected < simplex[0].v) {
+                    const expanded = centroid.map((c, j) => c + gamma * (reflected[j] - centroid[j]));
+                    const vExpanded = f(expanded, ...args);
+                    if (vExpanded < vReflected) {
+                        simplex[dim] = { p: expanded, v: vExpanded };
+                    } else {
+                        simplex[dim] = { p: reflected, v: vReflected };
+                    }
+                } else if (vReflected < simplex[dim - 1].v) {
+                    simplex[dim] = { p: reflected, v: vReflected };
+                } else {
+                    let contracted;
+                    let vContracted;
+                    if (vReflected < simplex[dim].v) {
+                        contracted = centroid.map((c, j) => c + rho * (reflected[j] - centroid[j]));
+                        vContracted = f(contracted, ...args);
+                        if (vContracted < vReflected) {
+                            simplex[dim] = { p: contracted, v: vContracted };
+                        } else {
+                            for (let i = 1; i <= dim; i++) {
+                                simplex[i].p = simplex[0].p.map((c, j) => c + sigma * (simplex[i].p[j] - c));
+                                simplex[i].v = f(simplex[i].p, ...args);
+                            }
+                        }
+                    } else {
+                        contracted = centroid.map((c, j) => c + rho * (simplex[dim].p[j] - centroid[j]));
+                        vContracted = f(contracted, ...args);
+                        if (vContracted < simplex[dim].v) {
+                            simplex[dim] = { p: contracted, v: vContracted };
+                        } else {
+                            for (let i = 1; i <= dim; i++) {
+                                simplex[i].p = simplex[0].p.map((c, j) => c + sigma * (simplex[i].p[j] - c));
+                                simplex[i].v = f(simplex[i].p, ...args);
+                            }
+                        }
+                    }
+                }
+            }
+            return simplex[0].p;
+        }
+
+        const fittedCurves = {};
+        // Initial guesses customized per group for better convergence
+        const initialGuesses = {
+            "LN9-1315BL WT": [100, 70, 0.5, 1], 
+            "LN9-1315BL FSP1 KO 1": [100, 50, 0, 1]
+        };
+
+        for (const [key, data] of Object.entries(processed)) {
+            const p0 = initialGuesses[key];
+            const params = nelderMead(objective, p0, [x_vals, data.means]);
+            
+            const curvePoints = [];
+            for (let x = -2; x <= 1.2; x += 0.05) {
+                curvePoints.push([x, sigmoid(x, params)]);
+            }
+            fittedCurves[key] = curvePoints;
+        }
+
+        // 4. ECharts Config
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const colors = {
+            "LN9-1315BL WT": "black",
+            "LN9-1315BL FSP1 KO 1": "#89CFF0"
+        };
+        
+        const series = [];
+        
+        Object.keys(raw_data).forEach(key => {
+            const data = processed[key];
+            const color = colors[key];
+            const isWT = key.includes("WT");
+            
+            const scatterData = x_vals.map((x, i) => [x, data.means[i]]);
+            
+            // Scatter
+            series.push({
+                name: key,
+                type: 'scatter',
+                data: scatterData,
+                symbol: isWT ? 'triangle' : 'path://M50 80 L100 20 L0 20 Z', // Triangle up vs down(path)
+                symbolSize: 10,
+                itemStyle: {
+                    color: isWT ? 'gray' : 'white',
+                    borderColor: isWT ? 'black' : color,
+                    borderWidth: 1.5
+                },
+                z: 10
+            });
+
+            // Error bars
+            const errorData = x_vals.map((x, i) => {
+                const y = data.means[i];
+                const s = data.stds[i];
+                return {
+                    value: [x, y],
+                    high: y + s,
+                    low: y - s
+                };
+            });
+            
+            series.push({
+                type: 'custom',
+                renderItem: function(params, api) {
+                    const xValue = api.value(0);
+                    const high = errorData[params.dataIndex].high;
+                    const low = errorData[params.dataIndex].low;
+                    
+                    const start = api.coord([xValue, high]);
+                    const end = api.coord([xValue, low]);
+                    
+                    const style = api.style({ 
+                        stroke: isWT ? 'gray' : color, // WT Error bars are gray in python script
+                        lineWidth: 1.5 
+                    });
+                    
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: start[0], y1: start[1], x2: end[0], y2: end[1] }, style: style },
+                            { type: 'line', shape: { x1: start[0]-3, y1: start[1], x2: start[0]+3, y2: start[1] }, style: style },
+                            { type: 'line', shape: { x1: end[0]-3, y1: end[1], x2: end[0]+3, y2: end[1] }, style: style }
+                        ]
+                    };
+                },
+                data: scatterData,
+                z: 9
+            });
+
+            // Line
+            series.push({
+                name: key + '_line',
+                type: 'line',
+                data: fittedCurves[key],
+                showSymbol: false,
+                lineStyle: {
+                    color: color,
+                    width: 2.5,
+                    type: isWT ? 'solid' : 'dashed'
+                },
+                z: 8
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 60, left: 60 },
+            xAxis: {
+                name: 'log[RSL3 (μM)]',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: -2.2, max: 1.2,
+                interval: 1,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: 'Relative viability (%)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: 0, max: 110,
+                interval: 25,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            legend: {
+                data: Object.keys(raw_data),
+                left: 10, bottom: 10,
+                orient: 'vertical',
+                itemGap: 5,
+                textStyle: { fontSize: 12 },
+                icon: 'line'
+            },
+            series: series,
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'b', font: 'bold 20px Arial' } }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>GOOG 资本再投资率 (Reinvestment Rate) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      padding: 20px 24px 28px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    h2 {
+      font-size: 13px;
+      margin: 0 0 16px;
+      font-weight: 400;
+      color: #6b7280;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .container {
+        padding: 14px 14px 18px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GOOG 资本再投资率 (Reinvestment Rate)</h1>
+    <h2>按财年变化趋势（2016–2024）</h2>
+    <div class="chart-wrapper">
+      <canvas id="reinvestmentChart"></canvas>
+    </div>
+    <div class="note">
+      数据来源：用户提供的年度再投资率结果（RESULT_Reinvestment_Rate）。<br>
+      单位：倍（Reinvestment Rate = 再投资额 / 净收益）。
+    </div>
+  </div>
+
+  <script>
+    // 原始数据：Fiscal Year, RESULT_Reinvestment_Rate
+    const labels = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const reinvestmentRate = [
+      1.5171507636199737,
+      3.531434467351863,
+      0.1408525000962673,
+      0.9836181004657067,
+      0.7216140989011716,
+      0.5621847979513882,
+      0.0388548282260216,
+      0.3392217112413975,
+      0.4055428216912424
+    ];
+
+    const ctx = document.getElementById('reinvestmentChart');
+
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            type: 'bar',
+            label: '资本再投资率',
+            data: reinvestmentRate,
+            backgroundColor: 'rgba(37, 99, 235, 0.75)',
+            hoverBackgroundColor: 'rgba(37, 99, 235, 0.95)',
+            borderRadius: 6,
+            maxBarThickness: 42
+          },
+          {
+            type: 'line',
+            label: '趋势线',
+            data: reinvestmentRate,
+            borderColor: 'rgba(16, 185, 129, 1)',
+            backgroundColor: 'rgba(16, 185, 129, 0.15)',
+            borderWidth: 2,
+            tension: 0.25,
+            pointRadius: 3.5,
+            pointHoverRadius: 5,
+            yAxisID: 'y'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              usePointStyle: true,
+              padding: 16,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                if (value == null || isNaN(value)) return '';
+                // 显示到三位小数
+                return context.dataset.label + ': ' + value.toFixed(3);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: '再投资率（倍）',
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              // 控制刻度格式
+              callback: function(value) {
+                return value.toFixed(1);
+              }
+            },
+            grid: {
+              color: 'rgba(148, 163, 184, 0.25)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

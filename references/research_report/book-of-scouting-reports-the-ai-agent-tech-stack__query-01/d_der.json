@@ -1,0 +1,93 @@
+{
+  "query_id": 1,
+  "query_text": "Create a ranked bar chart for the top 10 directions by \"high-quality deployment density,\" where the plotted value is the share of companies in each direction with Mosaic >= 800 and Commercial Maturity of at least 3 / 5, computed from the section-3 company tables, expressed as a percentage, sorted descending, and restricted to directions with at least 3 companies.",
+  "status": "complete",
+  "chart": {
+    "type": "ranked_bar",
+    "title": "Top directions by high-quality deployment density",
+    "entity_field": "direction",
+    "value_field": "qualifying_share_pct",
+    "orientation": "h",
+    "x_label": "Share of companies (%)",
+    "y_label": "Direction",
+    "order": [
+      "LLM data preparation platforms",
+      "Large language model (LLM) developers",
+      "Browser infrastructure",
+      "Model deployment & serving",
+      "Vector databases",
+      "Voice",
+      "Developer frameworks & platforms",
+      "Multi-agent systems & orchestration",
+      "Security & risk management platforms",
+      "Observability, evaluation, & governance"
+    ],
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "data": [
+    {
+      "direction": "LLM data preparation platforms",
+      "total_companies": 4,
+      "qualifying_companies": 3,
+      "qualifying_share_pct": 75.0
+    },
+    {
+      "direction": "Large language model (LLM) developers",
+      "total_companies": 10,
+      "qualifying_companies": 7,
+      "qualifying_share_pct": 70.0
+    },
+    {
+      "direction": "Browser infrastructure",
+      "total_companies": 3,
+      "qualifying_companies": 2,
+      "qualifying_share_pct": 66.66666666666666
+    },
+    {
+      "direction": "Model deployment & serving",
+      "total_companies": 9,
+      "qualifying_companies": 6,
+      "qualifying_share_pct": 66.66666666666666
+    },
+    {
+      "direction": "Vector databases",
+      "total_companies": 6,
+      "qualifying_companies": 4,
+      "qualifying_share_pct": 66.66666666666666
+    },
+    {
+      "direction": "Voice",
+      "total_companies": 13,
+      "qualifying_companies": 7,
+      "qualifying_share_pct": 53.84615384615385
+    },
+    {
+      "direction": "Developer frameworks & platforms",
+      "total_companies": 9,
+      "qualifying_companies": 3,
+      "qualifying_share_pct": 33.33333333333333
+    },
+    {
+      "direction": "Multi-agent systems & orchestration",
+      "total_companies": 3,
+      "qualifying_companies": 1,
+      "qualifying_share_pct": 33.33333333333333
+    },
+    {
+      "direction": "Security & risk management platforms",
+      "total_companies": 13,
+      "qualifying_companies": 4,
+      "qualifying_share_pct": 30.76923076923077
+    },
+    {
+      "direction": "Observability, evaluation, & governance",
+      "total_companies": 15,
+      "qualifying_companies": 4,
+      "qualifying_share_pct": 26.666666666666668
+    }
+  ],
+  "notes": []
+}

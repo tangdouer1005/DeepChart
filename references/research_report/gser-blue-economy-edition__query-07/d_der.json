@@ -1,0 +1,57 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a slope chart showing differences between two salary-normalized funding-capacity metrics for the top 8 Blue Economy ecosystems by `Total Early-Stage Funding`: the starting point is `Median Seed Round / Software Engineer Salary`, the ending point is `Median Series A Round / Software Engineer Salary`, units are `engineer-years`, and items are ordered descending by the normalized `Series A` value.",
+  "chart_type": "slope chart",
+  "value_unit": "engineer-years",
+  "sort_rule": "descending by series_a_engineer_years",
+  "selection_rule": "top 8 by total early-stage funding",
+  "plot_spec": {
+    "title": "Blue Economy Salary-Adjusted Seed to Series A",
+    "left_field": "seed_engineer_years",
+    "right_field": "series_a_engineer_years",
+    "left_label": "Seed / Salary",
+    "right_label": "Series A / Salary"
+  },
+  "records": [
+    {
+      "entity": "Beijing",
+      "seed_engineer_years": 33.3333,
+      "series_a_engineer_years": 222.2222
+    },
+    {
+      "entity": "Paris",
+      "seed_engineer_years": 26.9231,
+      "series_a_engineer_years": 96.1538
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "seed_engineer_years": 12.605,
+      "series_a_engineer_years": 92.437
+    },
+    {
+      "entity": "Boston",
+      "seed_engineer_years": 16.6667,
+      "series_a_engineer_years": 92.2222
+    },
+    {
+      "entity": "London",
+      "seed_engineer_years": 10.3478,
+      "series_a_engineer_years": 89.8551
+    },
+    {
+      "entity": "Tel Aviv",
+      "seed_engineer_years": 23.5294,
+      "series_a_engineer_years": 88.2353
+    },
+    {
+      "entity": "New York City",
+      "seed_engineer_years": 11.7647,
+      "series_a_engineer_years": 79.4118
+    },
+    {
+      "entity": "Los Angeles",
+      "seed_engineer_years": 10.6383,
+      "series_a_engineer_years": 74.4681
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 500px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = {
+    "Vehicle": [
+        1.67691414,
+        0.85776341,
+        0.85776341,
+        1.52754235,
+        0.79955316,
+        0.98719009,
+        0.5492265,
+        0.90853999,
+        1.4973423,
+        0.33816465,
+        0.91338701,
+        1.08661299,
+        1.3186889,
+        0.72344104,
+        0.633546,
+        1.23962408,
+        0.7431799,
+        1.46442985,
+        0.87709022
+    ],
+    "icFSP1": [
+        0.63799637,
+        0.9680146,
+        0.82384558,
+        1.06462968,
+        0.21999558,
+        0.57015749,
+        1.46761419,
+        0.65525489
+    ],
+    "viFSP1": [
+        0.414588,
+        0.11516141,
+        0.86840956,
+        0.15949909,
+        0.07711164,
+        0.61260379,
+        0.72365508,
+        0.59192079,
+        0.70135255,
+        0.62916065
+    ],
+    "BSO": [
+        0.661774471,
+        1.4176097,
+        0.323789802,
+        1.406779054,
+        1.597920275,
+        1.487901399,
+        1.107086638,
+        1.572788207,
+        0.791496725,
+        0.879682758,
+        0.779937778,
+        0.924634707,
+        0.716008452,
+        1.334819278
+    ],
+    "icFSP1 + BSO": [
+        1.48194219,
+        0.91662165,
+        0.14804192,
+        0.83834204,
+        0.80823838,
+        0.57720985,
+        0.76833597,
+        0.72874142
+    ],
+    "viFSP1 + BSO": [
+        0.17624038,
+        0.29652135,
+        0.2772585,
+        1.12237907,
+        1.13213888,
+        0.76512095,
+        0.51511285,
+        0.71736243,
+        0.6371418,
+        0.54660466
+    ]
+};
+
+        const keys = [
+            "Vehicle", "icFSP1", "viFSP1", "BSO", "icFSP1 + BSO", "viFSP1 + BSO"
+        ];
+
+        const colors = [
+            "#C0C0C0",  // Vehicle (Grey)
+            "#6A6EA9",  // icFSP1 (Slate Blue/Purple)
+            "#5F9EA0",  // viFSP1 (Teal)
+            "#A4A048",  // BSO (Olive)
+            "#FFFFA0",  // icFSP1 + BSO (Pale Yellow)
+            "#9370DB"   // viFSP1 + BSO (Medium Purple)
+        ];
+
+        // Prepare Boxplot Data
+        const boxData = keys.map(k => {
+            const arr = rawData[k].sort((a,b)=>a-b);
+            // Min, Q1, Median, Q3, Max
+            return [
+                arr[0],
+                jStat.percentile(arr, 0.25),
+                jStat.median(arr),
+                jStat.percentile(arr, 0.75),
+                arr[arr.length-1]
+            ];
+        });
+
+        // Scatter Data
+        const scatterData = [];
+        keys.forEach((k, i) => {
+            rawData[k].forEach(val => {
+                const jitter = (Math.random() - 0.5) * 0.3;
+                scatterData.push([i + jitter, val, i]);
+            });
+        });
+
+        // Annotations
+        const annotations = [
+            { x1:0, x2:1, y:1.75, text: 'P = 0.7767' },
+            { x1:3, x2:4, y:1.75, text: 'P = 0.4194' },
+            { x1:0, x2:2, y:1.95, text: 'P = 0.0038' },
+            { x1:3, x2:5, y:1.95, text: 'P = 0.0232' },
+            { x1:0, x2:3, y:2.15, text: 'P = 0.9974' },
+            { x1:0, x2:4, y:2.35, text: 'P = 0.6975' },
+            { x1:0, x2:5, y:2.55, text: 'P = 0.0573' }
+        ];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 100, right: 20, bottom: 100, left: 60 },
+            xAxis: {
+                type: 'category',
+                data: keys,
+                axisLabel: { rotate: 45, interval: 0, color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                type: 'value',
+                min: 0, max: 2.8,
+                name: 'End-point tumour volume\n(compared with vehicle)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 12 },
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    type: 'boxplot',
+                    data: boxData.map((d, i) => ({
+                        value: d,
+                        itemStyle: {
+                            color: colors[i],
+                            borderColor: 'black',
+                            borderWidth: 1,
+                            opacity: 0.8
+                        }
+                    })),
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const val = api.value(1);
+                        const xIdx = api.value(0);
+                        const colorIdx = api.value(2);
+                        const pos = api.coord([xIdx, val]);
+                        
+                        return {
+                            type: 'circle',
+                            shape: { cx: pos[0], cy: pos[1], r: 4 },
+                            style: { fill: colors[colorIdx], stroke: 'black', lineWidth: 1 }
+                        };
+                    },
+                    data: scatterData,
+                    z: 2
+                },
+                // Annotations
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const ann = annotations[params.dataIndex];
+                        const p1 = api.coord([ann.x1, ann.y]);
+                        const p2 = api.coord([ann.x2, ann.y]);
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'polyline',
+                                    shape: {
+                                        points: [
+                                            [p1[0], p1[1] + 5],
+                                            [p1[0], p1[1]],
+                                            [p2[0], p2[1]],
+                                            [p2[0], p2[1] + 5]
+                                        ]
+                                    },
+                                    style: { stroke: 'black', lineWidth: 1, fill: null }
+                                },
+                                {
+                                    type: 'text',
+                                    style: {
+                                        text: ann.text,
+                                        x: (p1[0] + p2[0]) / 2,
+                                        y: p1[1] - 5,
+                                        textAlign: 'center',
+                                        textVerticalAlign: 'bottom',
+                                        fill: 'black',
+                                        fontSize: 10
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: annotations,
+                    z: 3
+                },
+                // Reference Line Y=1
+                {
+                    type: 'line',
+                    markLine: {
+                        silent: true,
+                        symbol: 'none',
+                        data: [{ yAxis: 1 }],
+                        lineStyle: { type: 'dashed', color: 'black', width: 1.5 }
+                    }
+                },
+                // Reference Line X=3.5 (Separator)
+                // MarkLine on xAxis is harder for categorical between bars.
+                // Use graphic line
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'g', font: 'bold 24px Arial' } },
+                // Vertical Separator
+                // 3.5 is between index 3 and 4.
+                // Grid left 60, width ~920. 6 cols -> ~153 each.
+                // 3.5 -> 60 + 3.5 * 153.
+                // Better use relative positioning?
+                // Let's use custom series to draw a vertical line.
+                {
+                    type: 'line',
+                    left: '58.3%', // (3.5 / 6) * width% + left%?
+                    // 3.5/6 = 0.5833. Grid starts at 60px.
+                    // Let's approximate or skip. Python uses data coordinates.
+                    // We can use a markLine on xAxis? xAxis is category.
+                    // markLine data: { xAxis: 3.5 } works for value axis, for category?
+                    // Category axis indices are integers. 
+                    // ECharts category axis supports values like 3.5 if 'boundaryGap' is true?
+                    // Yes, indices are 0,1,2... 3.5 is between 3 and 4.
+                }
+            ]
+        };
+        
+        // Add vertical line via markLine
+        option.series.push({
+            type: 'line',
+            markLine: {
+                silent: true,
+                symbol: 'none',
+                data: [{ xAxis: '3.5' }], // String index? Or number?
+                // For category axis, index is integer. But we can try pixel or coordinate.
+                // ECharts supports `xAxis: 3.5` for category axis as position.
+                data: [ { xAxis: 3.5 } ],
+                lineStyle: { type: 'dashed', color: 'black', width: 1 }
+            }
+        });
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

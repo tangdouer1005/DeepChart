@@ -1,0 +1,146 @@
+[
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Reduce the size of the plate, provide appropriate portion sizes",
+        "Frequency in literatures": 19,
+        "Percentage": 0.141791,
+        "ShortLabel": "Reduce portions",
+        "pct_display": 14.1791
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Plan and assess menus regularly",
+        "Frequency in literatures": 13,
+        "Percentage": 0.0970149,
+        "ShortLabel": "Assess menu",
+        "pct_display": 9.70149
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Improve sensory quality",
+        "Frequency in literatures": 11,
+        "Percentage": 0.0820896,
+        "ShortLabel": "Improve\nsensory\nquality",
+        "pct_display": 8.20896
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Go trayless",
+        "Frequency in literatures": 8,
+        "Percentage": 0.0597015,
+        "ShortLabel": "Trayless",
+        "pct_display": 5.970149999999999
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Supervise children's meals",
+        "Frequency in literatures": 6,
+        "Percentage": 0.0447761,
+        "ShortLabel": "Supervise\nchildren's\nmeals",
+        "pct_display": 4.47761
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Extend lunchtime",
+        "Frequency in literatures": 6,
+        "Percentage": 0.0447761,
+        "ShortLabel": "Extend\nlunchtime",
+        "pct_display": 4.47761
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Improve canteen atmosphere",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0373134,
+        "ShortLabel": "Improve canteen\natmosphere",
+        "pct_display": 3.7313399999999994
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Taste test",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0373134,
+        "ShortLabel": "Taste test",
+        "pct_display": 3.7313399999999994
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Survey student feedback",
+        "Frequency in literatures": 4,
+        "Percentage": 0.0298507,
+        "ShortLabel": "Survey feedback",
+        "pct_display": 2.98507
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Monitor food waste",
+        "Frequency in literatures": 4,
+        "Percentage": 0.0298507,
+        "ShortLabel": "Monitor food waste",
+        "pct_display": 2.98507
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Allow sharing and saving of leftovers",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0223881,
+        "ShortLabel": "Share and pack",
+        "pct_display": 2.23881
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Optimize food production plan",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0223881,
+        "ShortLabel": "Optimize\nproduction plan",
+        "pct_display": 2.23881
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Comprehensive food education",
+        "Frequency in literatures": 14,
+        "Percentage": 0.104478,
+        "ShortLabel": "Comprehensive\nfood education",
+        "pct_display": 10.4478
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Poster information",
+        "Frequency in literatures": 13,
+        "Percentage": 0.0970149,
+        "ShortLabel": "Poster\ninformation",
+        "pct_display": 9.70149
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Train canteen staff",
+        "Frequency in literatures": 10,
+        "Percentage": 0.0746269,
+        "ShortLabel": "Train canteen staff",
+        "pct_display": 7.462689999999999
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Course teaching",
+        "Frequency in literatures": 6,
+        "Percentage": 0.0447761,
+        "ShortLabel": "Course teaching",
+        "pct_display": 4.47761
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Train teacher",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0223881,
+        "ShortLabel": "Train teacher",
+        "pct_display": 2.23881
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Educational text messages",
+        "Frequency in literatures": 1,
+        "Percentage": 0.00746269,
+        "ShortLabel": "Text messages",
+        "pct_display": 0.746269
+    }
+]

@@ -1,0 +1,51 @@
+{
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "Sector dispersion vs concentration",
+  "x_field": "x",
+  "y_field": "y",
+  "size_field": "size",
+  "hue_field": "hue",
+  "label_field": "label",
+  "x_label": "Average / median deal size multiple",
+  "y_label": "Top-5 Q3 deal concentration share (%)",
+  "size_label": "2025 YTD funding ($B)",
+  "annotate": true,
+  "data": [
+    {
+      "label": "AI",
+      "x": 10.489362,
+      "y": 52.09205,
+      "size": 158.9,
+      "hue": "Above 65%"
+    },
+    {
+      "label": "Fintech",
+      "x": 3.541667,
+      "y": 21.743119,
+      "size": 32.6,
+      "hue": "Above 65%"
+    },
+    {
+      "label": "Retail Tech",
+      "x": 4.842105,
+      "y": 38.074074,
+      "size": 18.5,
+      "hue": "65% or below"
+    },
+    {
+      "label": "Digital Health",
+      "x": 3.583333,
+      "y": 24.244444,
+      "size": 15.9,
+      "hue": "65% or below"
+    },
+    {
+      "label": "CVC",
+      "x": 3.275229,
+      "y": 26.22549,
+      "size": 60.3,
+      "hue": "65% or below"
+    }
+  ]
+}

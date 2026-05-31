@@ -1,0 +1,207 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a bubble chart for all markets where the x-axis is `2025 YTD top-deal concentration share`, computed as `sum of the visible Top 5 equity deal amounts / total 2025 YTD funding`, the y-axis is `2025 YTD average funding per deal`, bubble size is total `2025 YTD funding` in `$B`, and points are labeled only for the top 10 markets by concentration share.",
+  "status": "completed",
+  "title": "Top-deal concentration vs average funding per deal",
+  "chart_kind": "bubble",
+  "chart_type": "bubble chart",
+  "value_unit": "x: concentration share %; y: $M per deal; bubble size: $B",
+  "sort_rule": "descending by concentration_share_pct for labels",
+  "selection_rule": "all markets; labels top 10 by concentration share",
+  "metadata": {
+    "x_field": "concentration_share_pct",
+    "y_field": "avg_funding_per_deal_m",
+    "size_field": "funding_b",
+    "label_field": "label",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "market": "France",
+      "concentration_share_pct": 69.0,
+      "avg_funding_per_deal_m": 28.75,
+      "funding_b": 2.3,
+      "label": "France",
+      "deals": 80
+    },
+    {
+      "market": "Brazil",
+      "concentration_share_pct": 49.528301886792455,
+      "avg_funding_per_deal_m": 5.435897435897436,
+      "funding_b": 0.212,
+      "label": "Brazil",
+      "deals": 39
+    },
+    {
+      "market": "Singapore",
+      "concentration_share_pct": 45.96912521440823,
+      "avg_funding_per_deal_m": 7.986301369863014,
+      "funding_b": 0.583,
+      "label": "Singapore",
+      "deals": 73
+    },
+    {
+      "market": "LatAm",
+      "concentration_share_pct": 44.11764705882353,
+      "avg_funding_per_deal_m": 4.033898305084746,
+      "funding_b": 0.238,
+      "label": "LatAm",
+      "deals": 59
+    },
+    {
+      "market": "Japan",
+      "concentration_share_pct": 36.34453781512605,
+      "avg_funding_per_deal_m": 2.7514450867052025,
+      "funding_b": 0.476,
+      "label": "Japan",
+      "deals": 173
+    },
+    {
+      "market": "United Kingdom",
+      "concentration_share_pct": 33.22222222222222,
+      "avg_funding_per_deal_m": 18.0,
+      "funding_b": 4.5,
+      "label": "United Kingdom",
+      "deals": 250
+    },
+    {
+      "market": "Philadelphia",
+      "concentration_share_pct": 30.07866728366497,
+      "avg_funding_per_deal_m": 18.159663865546218,
+      "funding_b": 2.161,
+      "label": "Philadelphia",
+      "deals": 119
+    },
+    {
+      "market": "China",
+      "concentration_share_pct": 24.7027027027027,
+      "avg_funding_per_deal_m": 10.72463768115942,
+      "funding_b": 3.7,
+      "label": "China",
+      "deals": 345
+    },
+    {
+      "market": "Boston",
+      "concentration_share_pct": 24.08695652173913,
+      "avg_funding_per_deal_m": 21.296296296296298,
+      "funding_b": 2.3,
+      "label": "Boston",
+      "deals": 108
+    },
+    {
+      "market": "Silicon Valley",
+      "concentration_share_pct": 22.71010387157696,
+      "avg_funding_per_deal_m": 103.3170731707317,
+      "funding_b": 105.9,
+      "label": "Silicon Valley",
+      "deals": 1025
+    },
+    {
+      "market": "Canada",
+      "concentration_share_pct": 22.59093809827696,
+      "avg_funding_per_deal_m": 20.893333333333334,
+      "funding_b": 1.567,
+      "label": "",
+      "deals": 75
+    },
+    {
+      "market": "New York",
+      "concentration_share_pct": 21.666666666666668,
+      "avg_funding_per_deal_m": 21.62162162162162,
+      "funding_b": 7.2,
+      "label": "",
+      "deals": 333
+    },
+    {
+      "market": "Europe",
+      "concentration_share_pct": 21.294964028776977,
+      "avg_funding_per_deal_m": 14.818763326226012,
+      "funding_b": 13.9,
+      "label": "",
+      "deals": 938
+    },
+    {
+      "market": "Austin",
+      "concentration_share_pct": 19.45010183299389,
+      "avg_funding_per_deal_m": 40.916666666666664,
+      "funding_b": 1.964,
+      "label": "",
+      "deals": 48
+    },
+    {
+      "market": "Israel",
+      "concentration_share_pct": 18.85,
+      "avg_funding_per_deal_m": 25.0,
+      "funding_b": 2.0,
+      "label": "",
+      "deals": 80
+    },
+    {
+      "market": "Los Angeles",
+      "concentration_share_pct": 18.666666666666668,
+      "avg_funding_per_deal_m": 53.125,
+      "funding_b": 5.1,
+      "label": "",
+      "deals": 96
+    },
+    {
+      "market": "US",
+      "concentration_share_pct": 17.78846153846154,
+      "avg_funding_per_deal_m": 56.87841817416912,
+      "funding_b": 135.2,
+      "label": "",
+      "deals": 2377
+    },
+    {
+      "market": "India",
+      "concentration_share_pct": 16.51186790505676,
+      "avg_funding_per_deal_m": 8.075,
+      "funding_b": 0.969,
+      "label": "",
+      "deals": 120
+    },
+    {
+      "market": "Miami",
+      "concentration_share_pct": 15.384615384615385,
+      "avg_funding_per_deal_m": 8.568181818181818,
+      "funding_b": 0.377,
+      "label": "",
+      "deals": 44
+    },
+    {
+      "market": "Asia",
+      "concentration_share_pct": 15.11111111111111,
+      "avg_funding_per_deal_m": 7.570977917981073,
+      "funding_b": 7.2,
+      "label": "",
+      "deals": 951
+    },
+    {
+      "market": "Oceania",
+      "concentration_share_pct": 12.962962962962964,
+      "avg_funding_per_deal_m": 11.0,
+      "funding_b": 0.594,
+      "label": "",
+      "deals": 54
+    },
+    {
+      "market": "Germany",
+      "concentration_share_pct": 7.135728542914172,
+      "avg_funding_per_deal_m": 18.054054054054053,
+      "funding_b": 2.004,
+      "label": "",
+      "deals": 111
+    },
+    {
+      "market": "Seattle",
+      "concentration_share_pct": 6.86936936936937,
+      "avg_funding_per_deal_m": 21.397590361445783,
+      "funding_b": 1.776,
+      "label": "",
+      "deals": 83
+    }
+  ]
+}

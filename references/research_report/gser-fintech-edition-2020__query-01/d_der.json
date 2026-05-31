@@ -1,0 +1,55 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a horizontal bar chart showing the top 10 Fintech ecosystems by `stage escalation multiple = Median Series A Round / Median Seed Round` after excluding `Nur-Sultan` and excluding ecosystems where `Total Early-Stage Funding` is `<$50 m`, expressed in `x multiple` and sorted descending by the multiple.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by stage_escalation_multiple",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "Fintech 2020 Stage Escalation",
+    "xlabel": "x multiple",
+    "value_field": "stage_escalation_multiple"
+  },
+  "records": [
+    {
+      "entity": "Riyadh",
+      "stage_escalation_multiple": 13.3333
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "stage_escalation_multiple": 10.6724
+    },
+    {
+      "entity": "Los Angeles",
+      "stage_escalation_multiple": 8.9286
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "stage_escalation_multiple": 8.6
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "stage_escalation_multiple": 8.0
+    },
+    {
+      "entity": "New York City",
+      "stage_escalation_multiple": 7.0588
+    },
+    {
+      "entity": "Sydney",
+      "stage_escalation_multiple": 6.9307
+    },
+    {
+      "entity": "Shanghai",
+      "stage_escalation_multiple": 6.6667
+    },
+    {
+      "entity": "Manila",
+      "stage_escalation_multiple": 6.3889
+    },
+    {
+      "entity": "London",
+      "stage_escalation_multiple": 6.1538
+    }
+  ]
+}

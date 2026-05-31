@@ -1,0 +1,63 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a bar chart of the 12 countries with the tightest rank compression in the 2024 country tables, where the metric is the average gap between consecutive listed `global_rank` values across the national city ladder, expressed in rank positions, sorted ascending, and limited to countries with at least 5 listed cities.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2024 Tightest Rank Compression",
+  "value_unit": "global rank positions",
+  "sort_rule": "ascending by avg_consecutive_rank_gap, tie-break alphabetically",
+  "selection_rule": "12 countries with at least 5 listed cities and the smallest average rank gap",
+  "records": [
+    {
+      "entity": "United States",
+      "avg_consecutive_rank_gap": 2.666667
+    },
+    {
+      "entity": "China",
+      "avg_consecutive_rank_gap": 15.666667
+    },
+    {
+      "entity": "Canada",
+      "avg_consecutive_rank_gap": 21.888889
+    },
+    {
+      "entity": "United Kingdom",
+      "avg_consecutive_rank_gap": 23.111111
+    },
+    {
+      "entity": "Germany",
+      "avg_consecutive_rank_gap": 23.555556
+    },
+    {
+      "entity": "India",
+      "avg_consecutive_rank_gap": 24.777778
+    },
+    {
+      "entity": "France",
+      "avg_consecutive_rank_gap": 31.777778
+    },
+    {
+      "entity": "Switzerland",
+      "avg_consecutive_rank_gap": 43.444444
+    },
+    {
+      "entity": "Spain",
+      "avg_consecutive_rank_gap": 46.888889
+    },
+    {
+      "entity": "Italy",
+      "avg_consecutive_rank_gap": 54.777778
+    },
+    {
+      "entity": "The Netherlands",
+      "avg_consecutive_rank_gap": 56.333333
+    },
+    {
+      "entity": "Brazil",
+      "avg_consecutive_rank_gap": 56.444444
+    }
+  ],
+  "value_field": "avg_consecutive_rank_gap",
+  "x_label": "Country",
+  "y_label": "Average gap between consecutive global ranks"
+}

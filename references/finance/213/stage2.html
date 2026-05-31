@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>pg 格雷厄姆“烟蒂股”净值 (NNWC) 2016-2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Use a recent stable Chart.js 4.x -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+        sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 6px 0;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 13px;
+      margin: 0 0 20px 0;
+      font-weight: 400;
+      color: #64748b;
+      text-align: center;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+      padding: 18px 18px 26px;
+      box-sizing: border-box;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 440px;
+    }
+
+    .note {
+      max-width: 900px;
+      margin: 12px auto 0;
+      font-size: 11px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    .note span.label {
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+
+      .chart-wrapper {
+        height: 360px;
+      }
+
+      h1 {
+        font-size: 17px;
+      }
+
+      h2 {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>pg 格雷厄姆“烟蒂股”净值（NNWC）变化</h1>
+    <h2>2016–2024 年每股 NNWC（单位：本币）</h2>
+    <div class="chart-wrapper">
+      <canvas id="nnwcChart"></canvas>
+    </div>
+  </div>
+
+  <div class="note">
+    <div><span class="label">说明：</span>本图展示 pg 的格雷厄姆“烟蒂股”净值（Net-Net Working Capital, NNWC）每股数值随时间的变化。数值为负代表净流动资产为负。</div>
+    <div><span class="label">数据来源（用户提供）：</span>2016–2024 财年的 RESULT_NNWC_Per_Share。</div>
+  </div>
+
+  <script>
+    // 数据（按用户提供）
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+
+    const nnwcPerShare = [
+      -12.43531148924202,
+      -13.9154867902496,
+      -15.849361990439268,
+      -17.736956093719236,
+      -17.455632569121793,
+      -19.05497885428681,
+      -19.180418258438028,
+      -20.57892829824067,
+      -19.055382499292044,
+    ];
+
+    const ctx = document.getElementById("nnwcChart");
+
+    // 颜色配置
+    const barColor = "rgba(59, 130, 246, 0.75)";
+    const barBorderColor = "rgba(37, 99, 235, 1)";
+    const barHoverColor = "rgba(37, 99, 235, 0.95)";
+    const gridColor = "rgba(148, 163, 184, 0.25)";
+    const zeroLineColor = "rgba(15, 23, 42, 0.75)";
+
+    // 为避免“空图”问题，这里不使用额外插件；Chart.js 默认就能绘制负值
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "NNWC 每股净值",
+            data: nnwcPerShare,
+            backgroundColor: barColor,
+            borderColor: barBorderColor,
+            borderWidth: 1,
+            hoverBackgroundColor: barHoverColor,
+            borderRadius: 4,
+            borderSkipped: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 16,
+              boxHeight: 16,
+              color: "#111827",
+              font: {
+                size: 12,
+              },
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return " " + value.toFixed(2) + " 每股";
+              },
+              title: function (items) {
+                if (!items.length) return "";
+                return "财年：" + items[0].label;
+              },
+            },
+          },
+        },
+        // 关键：为负值数据设置合理的 y 轴范围，确保条形在画布中可见
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 11,
+              },
+            },
+          },
+          y: {
+            beginAtZero: true, // 0 作为上界，可视化负值向下延伸
+            min: Math.min(...nnwcPerShare) - 1, // 稍微扩大下边界
+            max: 0, // 上界固定为 0，更清晰
+            grid: {
+              color: gridColor,
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 11,
+              },
+            },
+            title: {
+              display: true,
+              text: "NNWC 每股净值（负值表示净流动资产为负）",
+              color: "#374151",
+              font: {
+                size: 11,
+                weight: "500",
+              },
+            },
+          },
+        },
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        layout: {
+          padding: {
+            top: 6,
+            right: 8,
+            bottom: 6,
+            left: 4,
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>

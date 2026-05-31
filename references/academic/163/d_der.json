@@ -1,0 +1,82 @@
+[
+    {
+        "Category": "Vegetables and fruits",
+        "Observed diets": 46.800000000000004,
+        "Red and processed meat (25%)": 63.2,
+        "Red and processed meat (50%)": 64.5,
+        "Dairy (25%)": 60.35,
+        "Dairy (50%)": 62.74999999999999
+    },
+    {
+        "Category": "Whole-grain foods",
+        "Observed diets": 23.599999999999998,
+        "Red and processed meat (25%)": 19.2,
+        "Red and processed meat (50%)": 18.4,
+        "Dairy (25%)": 16.6,
+        "Dairy (50%)": 15.6
+    },
+    {
+        "Category": "Grain foods ratio",
+        "Observed diets": 28.199999999999996,
+        "Red and processed meat (25%)": 28.199999999999996,
+        "Red and processed meat (50%)": 28.199999999999996,
+        "Dairy (25%)": 28.199999999999996,
+        "Dairy (50%)": 28.199999999999996
+    },
+    {
+        "Category": "Protein foods",
+        "Observed diets": 71.39999999999999,
+        "Red and processed meat (25%)": 80.2,
+        "Red and processed meat (50%)": 81.39999999999999,
+        "Dairy (25%)": 84.8,
+        "Dairy (50%)": 86.6
+    },
+    {
+        "Category": "Plant-based protein foods",
+        "Observed diets": 28.199999999999996,
+        "Red and processed meat (25%)": 62.4,
+        "Red and processed meat (50%)": 65.0,
+        "Dairy (25%)": 76.0,
+        "Dairy (50%)": 79.4
+    },
+    {
+        "Category": "Beverages",
+        "Observed diets": 78.8,
+        "Red and processed meat (25%)": 78.8,
+        "Red and processed meat (50%)": 78.8,
+        "Dairy (25%)": 54.6,
+        "Dairy (50%)": 51.6
+    },
+    {
+        "Category": "Fatty acids ratio",
+        "Observed diets": 51.4,
+        "Red and processed meat (25%)": 56.8,
+        "Red and processed meat (50%)": 60.8,
+        "Dairy (25%)": 63.4,
+        "Dairy (50%)": 75.0
+    },
+    {
+        "Category": "Saturated fats",
+        "Observed diets": 71.2,
+        "Red and processed meat (25%)": 72.8,
+        "Red and processed meat (50%)": 74.6,
+        "Dairy (25%)": 78.8,
+        "Dairy (50%)": 86.4
+    },
+    {
+        "Category": "Free sugars",
+        "Observed diets": 74.1,
+        "Red and processed meat (25%)": 73.7,
+        "Red and processed meat (50%)": 73.9,
+        "Dairy (25%)": 73.6,
+        "Dairy (50%)": 73.4
+    },
+    {
+        "Category": "Sodium",
+        "Observed diets": 51.0,
+        "Red and processed meat (25%)": 53.400000000000006,
+        "Red and processed meat (50%)": 55.50000000000001,
+        "Dairy (25%)": 53.400000000000006,
+        "Dairy (50%)": 55.2
+    }
+]

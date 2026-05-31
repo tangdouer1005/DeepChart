@@ -1,0 +1,54 @@
+{
+  "report_id": "010",
+  "query_id": 10,
+  "query_text": "Create a ranked bar chart for the top 8 value-chain segments by `top-3 funding concentration`, where concentration is the share of each segment’s disclosed funding captured by its three most-funded companies, using company-to-segment assignment from section-2 page ranges, with values shown as percentages and segments sorted descending by concentration.",
+  "chart_type": "ranked_bar",
+  "value_unit": "top-3 funding concentration (%)",
+  "sort_rule": "descending by top-3 funding concentration",
+  "selection_rule": "all eligible segments with numeric funding; capped at the top 8 if available",
+  "records": [
+    {
+      "label": "Data center facilities & operations",
+      "value": 84.970156,
+      "eligible_companies": 11
+    },
+    {
+      "label": "Networking & connectivity",
+      "value": 80.238773,
+      "eligible_companies": 9
+    },
+    {
+      "label": "AI computing hardware",
+      "value": 73.001167,
+      "eligible_companies": 15
+    },
+    {
+      "label": "Supporting hardware infrastructure",
+      "value": 70.099016,
+      "eligible_companies": 14
+    },
+    {
+      "label": "Power generation",
+      "value": 50.897575,
+      "eligible_companies": 15
+    }
+  ],
+  "plot_config": {
+    "title": "Top-3 funding concentration by segment",
+    "x_label": "Top-3 funding concentration (%)",
+    "y_label": "Segment"
+  },
+  "reasoning_summary": [
+    "Assigned segment membership from section-2 boundaries.",
+    "Kept only companies with numeric disclosed funding.",
+    "Ranked companies within each segment by funding and summed the top three values.",
+    "Divided top-three funding by each segment’s total disclosed funding and sorted descending."
+  ],
+  "stats": {
+    "eligible_segment_count": 5,
+    "returned_count": 5
+  },
+  "open_issues": [
+    "Only 5 value-chain segments are available after de-duplication, so the chart includes all eligible segments instead of eight."
+  ]
+}

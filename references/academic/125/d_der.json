@@ -1,0 +1,759 @@
+{
+    "links": [
+        {
+            "source": "CH4",
+            "target": "Energy",
+            "value": 97270.74764,
+            "layer": 0
+        },
+        {
+            "source": "CH4",
+            "target": "Industry",
+            "value": 1.36274,
+            "layer": 0
+        },
+        {
+            "source": "CH4",
+            "target": "Land based",
+            "value": 1065261.99,
+            "layer": 0
+        },
+        {
+            "source": "CH4",
+            "target": "Waste",
+            "value": 362343.9,
+            "layer": 0
+        },
+        {
+            "source": "CO2",
+            "target": "Energy",
+            "value": 1414259.33,
+            "layer": 0
+        },
+        {
+            "source": "CO2",
+            "target": "Industry",
+            "value": 91578.592,
+            "layer": 0
+        },
+        {
+            "source": "CO2",
+            "target": "Land based",
+            "value": 715476.2,
+            "layer": 0
+        },
+        {
+            "source": "CO2",
+            "target": "Waste",
+            "value": 2254.99,
+            "layer": 0
+        },
+        {
+            "source": "F-gases",
+            "target": "Industry",
+            "value": 385622.15024,
+            "layer": 0
+        },
+        {
+            "source": "N2O",
+            "target": "Energy",
+            "value": 38134.1457,
+            "layer": 0
+        },
+        {
+            "source": "N2O",
+            "target": "Industry",
+            "value": 47751.27070000001,
+            "layer": 0
+        },
+        {
+            "source": "N2O",
+            "target": "Land based",
+            "value": 522226.476,
+            "layer": 0
+        },
+        {
+            "source": "N2O",
+            "target": "Waste",
+            "value": 41685.159999999996,
+            "layer": 0
+        },
+        {
+            "source": "Energy",
+            "target": "Consumption",
+            "value": 126870.78229,
+            "layer": 1
+        },
+        {
+            "source": "Energy",
+            "target": "Packaging",
+            "value": 218022.37689999997,
+            "layer": 1
+        },
+        {
+            "source": "Energy",
+            "target": "Processing",
+            "value": 225179.083,
+            "layer": 1
+        },
+        {
+            "source": "Energy",
+            "target": "Production",
+            "value": 286546.71015,
+            "layer": 1
+        },
+        {
+            "source": "Energy",
+            "target": "Retail",
+            "value": 211655.9393,
+            "layer": 1
+        },
+        {
+            "source": "Energy",
+            "target": "Transport",
+            "value": 481389.3317,
+            "layer": 1
+        },
+        {
+            "source": "Industry",
+            "target": "Packaging",
+            "value": 10467.420680000001,
+            "layer": 1
+        },
+        {
+            "source": "Industry",
+            "target": "Processing",
+            "value": 235.675,
+            "layer": 1
+        },
+        {
+            "source": "Industry",
+            "target": "Production",
+            "value": 128630.28,
+            "layer": 1
+        },
+        {
+            "source": "Industry",
+            "target": "Retail",
+            "value": 385620.0,
+            "layer": 1
+        },
+        {
+            "source": "Land based",
+            "target": "LULUC",
+            "value": 681298.986,
+            "layer": 1
+        },
+        {
+            "source": "Land based",
+            "target": "Production",
+            "value": 1621665.68,
+            "layer": 1
+        },
+        {
+            "source": "Waste",
+            "target": "End of life",
+            "value": 369131.54,
+            "layer": 1
+        },
+        {
+            "source": "Waste",
+            "target": "Processing",
+            "value": 37152.51,
+            "layer": 1
+        },
+        {
+            "source": "Consumption",
+            "target": "Energy for agriculture fishing",
+            "value": 87883.307,
+            "layer": 2
+        },
+        {
+            "source": "Consumption",
+            "target": "Energy for household",
+            "value": 4111.21579,
+            "layer": 2
+        },
+        {
+            "source": "Consumption",
+            "target": "Indirect emi",
+            "value": 14050.4,
+            "layer": 2
+        },
+        {
+            "source": "Consumption",
+            "target": "Residential",
+            "value": 20825.859500000002,
+            "layer": 2
+        },
+        {
+            "source": "End of life",
+            "target": "Solid waste",
+            "value": 250184.84,
+            "layer": 2
+        },
+        {
+            "source": "End of life",
+            "target": "Waste water",
+            "value": 118946.7,
+            "layer": 2
+        },
+        {
+            "source": "LULUC",
+            "target": "LULUC",
+            "value": 681298.986,
+            "layer": 2
+        },
+        {
+            "source": "Packaging",
+            "target": "Chemicals",
+            "value": 176.06044,
+            "layer": 2
+        },
+        {
+            "source": "Packaging",
+            "target": "Energy for packaging",
+            "value": 36880.1069,
+            "layer": 2
+        },
+        {
+            "source": "Packaging",
+            "target": "Industrial",
+            "value": 181142.27,
+            "layer": 2
+        },
+        {
+            "source": "Packaging",
+            "target": "Iron Steel",
+            "value": 560.61,
+            "layer": 2
+        },
+        {
+            "source": "Packaging",
+            "target": "Non-Ferrous",
+            "value": 4171.73024,
+            "layer": 2
+        },
+        {
+            "source": "Packaging",
+            "target": "Non-metallic",
+            "value": 5559.02,
+            "layer": 2
+        },
+        {
+            "source": "Processing",
+            "target": "Energy for production",
+            "value": 91032.28899999999,
+            "layer": 2
+        },
+        {
+            "source": "Processing",
+            "target": "Indirect emi",
+            "value": 235.675,
+            "layer": 2
+        },
+        {
+            "source": "Processing",
+            "target": "Industrial",
+            "value": 134146.794,
+            "layer": 2
+        },
+        {
+            "source": "Processing",
+            "target": "Waste water",
+            "value": 37152.51,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Agriculture",
+            "value": 484216.7,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Chemicals",
+            "value": 126125.40000000001,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Energy for agriculture fishing",
+            "value": 32418.2027,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Energy for aluminium,paper,glass",
+            "value": 1555.30305,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Energy for household",
+            "value": 51103.144400000005,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Enteric ferment",
+            "value": 819792.0,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Indirect N2O",
+            "value": 83877.8,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Manure",
+            "value": 223544.9,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Residential",
+            "value": 201470.06,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Solvents",
+            "value": 2504.88,
+            "layer": 2
+        },
+        {
+            "source": "Production",
+            "target": "Waste burning",
+            "value": 10234.28,
+            "layer": 2
+        },
+        {
+            "source": "Retail",
+            "target": "Energy for retail",
+            "value": 145189.112,
+            "layer": 2
+        },
+        {
+            "source": "Retail",
+            "target": "Products",
+            "value": 385620.0,
+            "layer": 2
+        },
+        {
+            "source": "Retail",
+            "target": "Residential",
+            "value": 66466.8273,
+            "layer": 2
+        },
+        {
+            "source": "Transport",
+            "target": "Energy for transport",
+            "value": 57087.261999999995,
+            "layer": 2
+        },
+        {
+            "source": "Transport",
+            "target": "Road transport",
+            "value": 407625.076,
+            "layer": 2
+        },
+        {
+            "source": "Transport",
+            "target": "Transport",
+            "value": 16676.9937,
+            "layer": 2
+        },
+        {
+            "source": "Agriculture",
+            "target": "CH4",
+            "value": 42177.5,
+            "layer": 3
+        },
+        {
+            "source": "Agriculture",
+            "target": "CO2",
+            "value": 38462.2,
+            "layer": 3
+        },
+        {
+            "source": "Agriculture",
+            "target": "N2O",
+            "value": 403577.0,
+            "layer": 3
+        },
+        {
+            "source": "Chemicals",
+            "target": "CH4",
+            "value": 1.36274,
+            "layer": 3
+        },
+        {
+            "source": "Chemicals",
+            "target": "CO2",
+            "value": 78784.50200000001,
+            "layer": 3
+        },
+        {
+            "source": "Chemicals",
+            "target": "N2O",
+            "value": 47515.595700000005,
+            "layer": 3
+        },
+        {
+            "source": "Energy for agriculture fishing",
+            "target": "CH4",
+            "value": 19712.627,
+            "layer": 3
+        },
+        {
+            "source": "Energy for agriculture fishing",
+            "target": "CO2",
+            "value": 100061.0,
+            "layer": 3
+        },
+        {
+            "source": "Energy for agriculture fishing",
+            "target": "N2O",
+            "value": 527.8827,
+            "layer": 3
+        },
+        {
+            "source": "Energy for aluminium,paper,glass",
+            "target": "CH4",
+            "value": 1.13454,
+            "layer": 3
+        },
+        {
+            "source": "Energy for aluminium,paper,glass",
+            "target": "CO2",
+            "value": 1544.68,
+            "layer": 3
+        },
+        {
+            "source": "Energy for aluminium,paper,glass",
+            "target": "N2O",
+            "value": 9.48851,
+            "layer": 3
+        },
+        {
+            "source": "Energy for household",
+            "target": "CH4",
+            "value": 2525.9544,
+            "layer": 3
+        },
+        {
+            "source": "Energy for household",
+            "target": "CO2",
+            "value": 52506.15,
+            "layer": 3
+        },
+        {
+            "source": "Energy for household",
+            "target": "N2O",
+            "value": 182.25579,
+            "layer": 3
+        },
+        {
+            "source": "Energy for packaging",
+            "target": "CH4",
+            "value": 14900.5,
+            "layer": 3
+        },
+        {
+            "source": "Energy for packaging",
+            "target": "CO2",
+            "value": 21964.5,
+            "layer": 3
+        },
+        {
+            "source": "Energy for packaging",
+            "target": "N2O",
+            "value": 15.1069,
+            "layer": 3
+        },
+        {
+            "source": "Energy for production",
+            "target": "CH4",
+            "value": 15353.9,
+            "layer": 3
+        },
+        {
+            "source": "Energy for production",
+            "target": "CO2",
+            "value": 75347.5,
+            "layer": 3
+        },
+        {
+            "source": "Energy for production",
+            "target": "N2O",
+            "value": 330.889,
+            "layer": 3
+        },
+        {
+            "source": "Energy for retail",
+            "target": "CH4",
+            "value": 8150.33,
+            "layer": 3
+        },
+        {
+            "source": "Energy for retail",
+            "target": "CO2",
+            "value": 136332.0,
+            "layer": 3
+        },
+        {
+            "source": "Energy for retail",
+            "target": "N2O",
+            "value": 706.782,
+            "layer": 3
+        },
+        {
+            "source": "Energy for transport",
+            "target": "CH4",
+            "value": 32191.3,
+            "layer": 3
+        },
+        {
+            "source": "Energy for transport",
+            "target": "CO2",
+            "value": 24678.3,
+            "layer": 3
+        },
+        {
+            "source": "Energy for transport",
+            "target": "N2O",
+            "value": 217.662,
+            "layer": 3
+        },
+        {
+            "source": "Enteric ferment",
+            "target": "CH4",
+            "value": 819792.0,
+            "layer": 3
+        },
+        {
+            "source": "Indirect N2O",
+            "target": "N2O",
+            "value": 83877.8,
+            "layer": 3
+        },
+        {
+            "source": "Indirect emi",
+            "target": "N2O",
+            "value": 14286.074999999999,
+            "layer": 3
+        },
+        {
+            "source": "Industrial",
+            "target": "CH4",
+            "value": 1339.3919999999998,
+            "layer": 3
+        },
+        {
+            "source": "Industrial",
+            "target": "CO2",
+            "value": 312087.0,
+            "layer": 3
+        },
+        {
+            "source": "Industrial",
+            "target": "N2O",
+            "value": 1862.672,
+            "layer": 3
+        },
+        {
+            "source": "Iron Steel",
+            "target": "CO2",
+            "value": 560.61,
+            "layer": 3
+        },
+        {
+            "source": "LULUC",
+            "target": "CH4",
+            "value": 4180.63,
+            "layer": 3
+        },
+        {
+            "source": "LULUC",
+            "target": "CO2",
+            "value": 677014.0,
+            "layer": 3
+        },
+        {
+            "source": "LULUC",
+            "target": "N2O",
+            "value": 104.356,
+            "layer": 3
+        },
+        {
+            "source": "Manure",
+            "target": "CH4",
+            "value": 190894.0,
+            "layer": 3
+        },
+        {
+            "source": "Manure",
+            "target": "N2O",
+            "value": 32650.9,
+            "layer": 3
+        },
+        {
+            "source": "Non-Ferrous",
+            "target": "CO2",
+            "value": 4169.58,
+            "layer": 3
+        },
+        {
+            "source": "Non-Ferrous",
+            "target": "F-gases",
+            "value": 2.15024,
+            "layer": 3
+        },
+        {
+            "source": "Non-metallic",
+            "target": "CO2",
+            "value": 5559.02,
+            "layer": 3
+        },
+        {
+            "source": "Products",
+            "target": "F-gases",
+            "value": 385620.0,
+            "layer": 3
+        },
+        {
+            "source": "Residential",
+            "target": "CH4",
+            "value": 2145.67,
+            "layer": 3
+        },
+        {
+            "source": "Residential",
+            "target": "CO2",
+            "value": 273336.3,
+            "layer": 3
+        },
+        {
+            "source": "Residential",
+            "target": "N2O",
+            "value": 13280.7768,
+            "layer": 3
+        },
+        {
+            "source": "Road transport",
+            "target": "CH4",
+            "value": 921.986,
+            "layer": 3
+        },
+        {
+            "source": "Road transport",
+            "target": "CO2",
+            "value": 400796.0,
+            "layer": 3
+        },
+        {
+            "source": "Road transport",
+            "target": "N2O",
+            "value": 5907.09,
+            "layer": 3
+        },
+        {
+            "source": "Solid waste",
+            "target": "CH4",
+            "value": 241386.0,
+            "layer": 3
+        },
+        {
+            "source": "Solid waste",
+            "target": "CO2",
+            "value": 2254.99,
+            "layer": 3
+        },
+        {
+            "source": "Solid waste",
+            "target": "N2O",
+            "value": 6543.85,
+            "layer": 3
+        },
+        {
+            "source": "Solvents",
+            "target": "CO2",
+            "value": 2504.88,
+            "layer": 3
+        },
+        {
+            "source": "Transport",
+            "target": "CH4",
+            "value": 27.9537,
+            "layer": 3
+        },
+        {
+            "source": "Transport",
+            "target": "CO2",
+            "value": 15605.9,
+            "layer": 3
+        },
+        {
+            "source": "Transport",
+            "target": "N2O",
+            "value": 1043.14,
+            "layer": 3
+        },
+        {
+            "source": "Waste burning",
+            "target": "CH4",
+            "value": 8217.86,
+            "layer": 3
+        },
+        {
+            "source": "Waste burning",
+            "target": "N2O",
+            "value": 2016.42,
+            "layer": 3
+        },
+        {
+            "source": "Waste water",
+            "target": "CH4",
+            "value": 120957.9,
+            "layer": 3
+        },
+        {
+            "source": "Waste water",
+            "target": "N2O",
+            "value": 35141.31,
+            "layer": 3
+        }
+    ],
+    "layer3_order": [
+        "LULUC",
+        "Agriculture",
+        "Enteric ferment",
+        "Manure",
+        "Indirect N2O",
+        "Road transport",
+        "Products",
+        "Industrial",
+        "Residential",
+        "Solid waste",
+        "Waste water",
+        "Energy for retail",
+        "Chemicals",
+        "Energy for agriculture fishing",
+        "Energy for production",
+        "Energy for transport",
+        "Energy for household",
+        "Energy for packaging",
+        "Transport",
+        "Indirect emi",
+        "Waste burning",
+        "Non-metallic",
+        "Non-Ferrous",
+        "Solvents",
+        "Energy for aluminium,paper,glass",
+        "Iron Steel"
+    ],
+    "total_flux": 4783866.31502
+}

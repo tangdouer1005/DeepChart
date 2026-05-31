@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>PG 经济增加值(EVA) 2016-2024 柱状图</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f7;
+      color: #333;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px 24px 28px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 6px;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 0 0 16px;
+      color: #666;
+      font-weight: 400;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 460px;
+      margin-top: 10px;
+    }
+    .note {
+      font-size: 12px;
+      color: #777;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PG 经济增加值（EVA）- 简化版</h1>
+    <h2>2016–2024 财年变化（单位：人民币元）</h2>
+    <div class="chart-wrapper">
+      <canvas id="evaChart"></canvas>
+    </div>
+    <div class="note">
+      数据来源：用户提供的 PG 自 2016 至 2024 财年的 EVA（简化版）结果。<br>
+      单位为绝对金额（元），柱状图颜色区分正负 EVA：正值为蓝色，负值为红色。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // 原始数据（元）
+    const years = [
+      "2016","2017","2018","2019",
+      "2020","2021","2022","2023","2024"
+    ];
+
+    const evaValues = [
+      1740851346.398384,
+      2481746696.085087,
+      1775779333.6334991,
+      -4118728225.40781,
+      6079327049.387394,
+      7974476014.760149,
+      7674884773.548208,
+      7340486544.434153,
+      7458250660.94558
+    ];
+
+    // 辅助函数：把数值格式化为更易读的字符串
+    function formatCurrency(value) {
+      const abs = Math.abs(value);
+      let unit = "元";
+      let scaled = value;
+
+      if (abs >= 1e8) {
+        scaled = value / 1e8;
+        unit = "亿元";
+      } else if (abs >= 1e4) {
+        scaled = value / 1e4;
+        unit = "万元";
+      }
+
+      return scaled.toLocaleString("zh-CN", {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 0
+      }) + unit;
+    }
+
+    const ctx = document.getElementById("evaChart").getContext("2d");
+
+    const evaChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [{
+          label: "经济增加值（EVA）",
+          data: evaValues,
+          backgroundColor: evaValues.map(v => v >= 0 ? "rgba(54, 162, 235, 0.75)" : "rgba(231, 76, 60, 0.80)"),
+          borderColor: evaValues.map(v => v >= 0 ? "rgba(54, 162, 235, 1)" : "rgba(192, 57, 43, 1)"),
+          borderWidth: 1.2,
+          borderRadius: 4,
+          hoverBackgroundColor: evaValues.map(v => v >= 0 ? "rgba(54, 162, 235, 0.95)" : "rgba(231, 76, 60, 0.95)")
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: true
+        },
+        plugins: {
+          title: {
+            display: false
+          },
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              padding: 16
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.raw;
+                return "EVA: " + formatCurrency(value);
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              color: "#444",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "经济增加值（EVA，元）",
+              color: "#444",
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              // 显示为简化单位的刻度标签
+              callback: function(value) {
+                return formatCurrency(value);
+              }
+            },
+            grid: {
+              color: "rgba(0,0,0,0.06)"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature 69 Replication</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body { font-family: sans-serif; }
+        .chart-container { width: 500px; height: 400px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+    <div id="chart" class="chart-container"></div>
+    <script>
+        // --- 1. Embedded Data ---
+        const chartData = {
+    "Vehicle": {
+        "x": [
+            -4.0,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0
+        ],
+        "y": [
+            0.004937571730744444,
+            0.004165990562877778,
+            0.0015121216930000002,
+            0.006435585442666666,
+            0.006562437574111111,
+            0.0052469660643333325,
+            0.006018360594333333,
+            0.003804390934222222
+        ],
+        "yerr": [
+            0.0013391275552276198,
+            0.0017623297944598633,
+            0.0011369314199352572,
+            0.0008983242339678341,
+            0.000904466638991473,
+            0.0005536689283328421,
+            0.0010698619836932892,
+            0.0007204567277958772
+        ],
+        "color": "#808080"
+    },
+    "Vehicle + NT": {
+        "x": [
+            -4.0,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0
+        ],
+        "y": [
+            0.024515465435555557,
+            0.022707250707777776,
+            0.023816126092222223,
+            0.020971974997,
+            0.022827138679999998,
+            0.02361203515777778,
+            0.02567493305,
+            0.025401132995555558
+        ],
+        "yerr": [
+            0.0015869773177352969,
+            0.0014462577802489415,
+            0.0011869502243931726,
+            0.0020896156241909684,
+            0.0009314842220423406,
+            0.0007770546197563096,
+            0.0016698956523939882,
+            0.001299313976936871
+        ],
+        "color": "#00008B"
+    },
+    "SBI-553": {
+        "x": [
+            -5.522878745280337,
+            -6.0,
+            -6.522878745280337,
+            -7.0,
+            -7.522878745280337,
+            -8.0,
+            -8.522878745280337,
+            -11.0
+        ],
+        "y": [
+            0.012044550774444445,
+            0.01024802385788889,
+            0.010974299765777776,
+            0.011494750366666666,
+            0.01412840212888889,
+            0.017858927723333334,
+            0.018549414605555554,
+            0.028982264718888887
+        ],
+        "yerr": [
+            0.001020023815870076,
+            0.0014103337159968833,
+            0.0011839994050661911,
+            0.0017284760097785136,
+            0.0008997090001040157,
+            0.0011393174800697866,
+            0.0014300463363924572,
+            0.0021486050717420373
+        ],
+        "color": "#B030B0"
+    },
+    "SR142948A": {
+        "x": [
+            -4.0,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0
+        ],
+        "y": [
+            0.0030688177612500003,
+            0.0036846660572,
+            0.00380029357725,
+            0.0054477837017500004,
+            0.012853468558625,
+            0.019948826934999997,
+            0.021934263606249997,
+            0.022225674348750002
+        ],
+        "yerr": [
+            0.003280201889876309,
+            0.0007579157011858704,
+            0.0017304595460286073,
+            0.0016114771847808057,
+            0.0023555447214259314,
+            0.0020382939015501293,
+            0.0018037338470241078,
+            0.001833092128304516
+        ],
+        "color": "#F58025"
+    }
+};
+
+        // --- 4. Curve Fitting Logic ---
+        
+        function sigmoid(x, top, bottom, log_ec50, hill_slope) {
+            return bottom + (top - bottom) / (1 + Math.pow(10, (log_ec50 - x) * hill_slope));
+        }
+        
+        // Simple optimization using Nelder-Mead method (Downhill Simplex)
+        // Adapted for minimizing sum of squared errors
+        function fitSigmoid(xData, yData, p0) {
+            // Objective function: Sum of Squared Residuals
+            const func = (params) => {
+                const [top, bottom, log_ec50, hill_slope] = params;
+                let rss = 0;
+                for (let i = 0; i < xData.length; i++) {
+                    const yPred = sigmoid(xData[i], top, bottom, log_ec50, hill_slope);
+                    rss += Math.pow(yData[i] - yPred, 2);
+                }
+                return rss;
+            };
+
+            // Initial Simplex
+            const dim = 4;
+            let simplex = [p0.slice()];
+            // Create initial simplex around p0
+            for (let i = 0; i < dim; i++) {
+                const p = p0.slice();
+                p[i] = p[i] !== 0 ? p[i] * 1.05 : 0.001; // Perturb
+                simplex.push(p);
+            }
+            
+            // Nelder-Mead Constants
+            const alpha = 1.0, gamma = 2.0, rho = 0.5, sigma = 0.5;
+            const maxIter = 1000;
+            const tol = 1e-6;
+
+            for (let iter = 0; iter < maxIter; iter++) {
+                // Sort simplex by cost
+                simplex.sort((a, b) => func(a) - func(b));
+                const best = simplex[0];
+                const worst = simplex[dim];
+                
+                if (Math.abs(func(best) - func(worst)) < tol) break;
+                
+                // Centroid
+                const centroid = new Array(dim).fill(0);
+                for (let i = 0; i < dim; i++) {
+                    for (let j = 0; j < dim; j++) { // Exclude worst
+                        centroid[i] += simplex[j][i];
+                    }
+                    centroid[i] /= dim;
+                }
+                
+                // Reflect
+                const reflected = centroid.map((c, i) => c + alpha * (c - worst[i]));
+                const fReflected = func(reflected);
+                
+                if (fReflected < func(simplex[dim-1]) && fReflected >= func(best)) {
+                    simplex[dim] = reflected;
+                    continue;
+                }
+                
+                // Expand
+                if (fReflected < func(best)) {
+                    const expanded = centroid.map((c, i) => c + gamma * (reflected[i] - centroid[i]));
+                    if (func(expanded) < fReflected) {
+                        simplex[dim] = expanded;
+                    } else {
+                        simplex[dim] = reflected;
+                    }
+                    continue;
+                }
+                
+                // Contract
+                const contracted = centroid.map((c, i) => c + rho * (worst[i] - centroid[i]));
+                if (func(contracted) < func(worst)) {
+                    simplex[dim] = contracted;
+                    continue;
+                }
+                
+                // Shrink
+                for (let i = 1; i <= dim; i++) {
+                    simplex[i] = simplex[i].map((val, j) => best[j] + sigma * (val - best[j]));
+                }
+            }
+            
+            return simplex[0]; // Return best parameters
+        }
+
+        function linear(x, m, c) {
+            return m * x + c;
+        }
+
+        // --- 5. Main Execution ---
+        const data = chartData;
+        const traces = [];
+        
+        // Loop through groups
+        for (const [name, groupData] of Object.entries(data)) {
+            const {x, y, yerr, color} = groupData;
+            
+            // 1. Scatter Plot with Error Bars
+            traces.push({
+                x: x,
+                y: y,
+                mode: 'markers',
+                error_y: {
+                    type: 'data',
+                    array: yerr,
+                    visible: true,
+                    color: color,
+                    thickness: 1.5,
+                    width: 3
+                },
+                marker: {
+                    color: color,
+                    size: 8,
+                    line: { width: 0 }
+                },
+                name: name, // Using label name
+                showlegend: true
+            });
+            
+            // 2. Curve Fitting
+            // p0 = [max(y), min(y), np.mean(x), 1.0]
+            const yMax = Math.max(...y);
+            const yMin = Math.min(...y);
+            const xMean = x.reduce((a, b) => a + b, 0) / x.length;
+            const p0 = [yMax, yMin, xMean, 1.0];
+            
+            try {
+                // Try Sigmoidal Fit
+                const popt = fitSigmoid(x, y, p0);
+                
+                // Generate fit line
+                const xFit = [];
+                const step = (Math.max(...x) - Math.min(...x) + 1.0) / 100;
+                for (let val = Math.min(...x) - 0.5; val <= Math.max(...x) + 0.5; val += step) {
+                    xFit.push(val);
+                }
+                
+                const yFit = xFit.map(val => sigmoid(val, ...popt));
+                
+                traces.push({
+                    x: xFit,
+                    y: yFit,
+                    mode: 'lines',
+                    line: {
+                        color: color,
+                        width: 2
+                    },
+                    showlegend: false,
+                    hoverinfo: 'skip'
+                });
+                
+            } catch (e) {
+                // Fallback Linear
+                // Simple linear regression
+                const n = x.length;
+                const sumX = x.reduce((a, b) => a + b, 0);
+                const sumY = y.reduce((a, b) => a + b, 0);
+                const sumXY = x.reduce((a, b, i) => a + b * y[i], 0);
+                const sumXX = x.reduce((a, b) => a + b * b, 0);
+                
+                const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+                const intercept = (sumY - slope * sumX) / n;
+                
+                const xFit = [Math.min(...x) - 0.5, Math.max(...x) + 0.5];
+                const yFit = xFit.map(val => linear(val, slope, intercept));
+                
+                traces.push({
+                    x: xFit,
+                    y: yFit,
+                    mode: 'lines',
+                    line: {
+                        color: color,
+                        width: 2
+                    },
+                    showlegend: false,
+                    hoverinfo: 'skip'
+                });
+            }
+        }
+        
+        // Layout
+        const layout = {
+            width: 500,
+            height: 400,
+            xaxis: {
+                range: [-11.5, -3.5],
+                tickvals: [-12, -10, -8, -6, -4],
+                tickfont: { size: 12 },
+                showline: true,
+                linewidth: 1,
+                linecolor: 'black',
+                mirror: false,
+                zeroline: false
+            },
+            yaxis: {
+                title: 'Mini G<sub>s</sub> recruitment<br>(Δ Net BRET)',
+                titlefont: { size: 12 },
+                range: [-0.005, 0.035],
+                tickvals: [0.00, 0.01, 0.02, 0.03],
+                tickfont: { size: 12 },
+                showline: true,
+                linewidth: 1,
+                linecolor: 'black',
+                zeroline: false
+            },
+            shapes: [
+                {
+                    type: 'line',
+                    x0: -11.5,
+                    y0: 0,
+                    x1: -3.5,
+                    y1: 0,
+                    line: {
+                        color: 'black',
+                        width: 1.5,
+                        dash: 'dot'
+                    }
+                }
+            ],
+            showlegend: true,
+            legend: {
+                x: 0.02,
+                y: 0.98,
+                bgcolor: 'rgba(255,255,255,0.5)'
+            },
+            plot_bgcolor: 'white',
+            paper_bgcolor: 'white',
+            margin: { l: 60, r: 20, t: 20, b: 40 }
+        };
+
+        // Fix spines (Plotly has box by default, we want bottom and left only)
+        // Plotly uses 'mirror' for box. If mirror is false, it might show only one.
+        // Actually, to hide top and right, we rely on layout.xaxis.showline which is bottom.
+        // But Plotly might show a border.
+        // The best way in Plotly is usually to set axis lines. 
+        
+        Plotly.newPlot('chart', traces, layout);
+        
+    </script> 
+</body>
+</html>

@@ -1,0 +1,94 @@
+{
+  "report_code": "021",
+  "query_id": "08",
+  "source_fields": [
+    "2024 Q3 funding/deals",
+    "2025 Q3 funding/deals"
+  ],
+  "records": [
+    {
+      "market": "New York",
+      "q3_2024_funding_m": 4000.0,
+      "q3_2024_deals": 459,
+      "q3_2025_funding_m": 7300.0,
+      "q3_2025_deals": 335
+    },
+    {
+      "market": "Los Angeles",
+      "q3_2024_funding_m": 2800.0,
+      "q3_2024_deals": 197,
+      "q3_2025_funding_m": 3100.0,
+      "q3_2025_deals": 117
+    },
+    {
+      "market": "Boston",
+      "q3_2024_funding_m": 3300.0,
+      "q3_2024_deals": 181,
+      "q3_2025_funding_m": 2900.0,
+      "q3_2025_deals": 120
+    },
+    {
+      "market": "Seattle",
+      "q3_2024_funding_m": 1300.0,
+      "q3_2024_deals": 81,
+      "q3_2025_funding_m": 400.0,
+      "q3_2025_deals": 53
+    },
+    {
+      "market": "Denver",
+      "q3_2024_funding_m": 700.0,
+      "q3_2024_deals": 58,
+      "q3_2025_funding_m": 900.0,
+      "q3_2025_deals": 54
+    },
+    {
+      "market": "Chicago",
+      "q3_2024_funding_m": 300.0,
+      "q3_2024_deals": 64,
+      "q3_2025_funding_m": 300.0,
+      "q3_2025_deals": 46
+    },
+    {
+      "market": "Dallas",
+      "q3_2024_funding_m": 200.0,
+      "q3_2024_deals": 50,
+      "q3_2025_funding_m": 300.0,
+      "q3_2025_deals": 42
+    },
+    {
+      "market": "Austin",
+      "q3_2024_funding_m": 700.0,
+      "q3_2024_deals": 80,
+      "q3_2025_funding_m": 1400.0,
+      "q3_2025_deals": 66
+    },
+    {
+      "market": "Miami",
+      "q3_2024_funding_m": 400.0,
+      "q3_2024_deals": 85,
+      "q3_2025_funding_m": 800.0,
+      "q3_2025_deals": 69
+    },
+    {
+      "market": "Atlanta",
+      "q3_2024_funding_m": 200.0,
+      "q3_2024_deals": 44,
+      "q3_2025_funding_m": 200.0,
+      "q3_2025_deals": 40
+    },
+    {
+      "market": "Philadelphia",
+      "q3_2024_funding_m": 700.0,
+      "q3_2024_deals": 139,
+      "q3_2025_funding_m": 1200.0,
+      "q3_2025_deals": 114
+    },
+    {
+      "market": "Raleigh",
+      "q3_2024_funding_m": 300.0,
+      "q3_2024_deals": 36,
+      "q3_2025_funding_m": 300.0,
+      "q3_2025_deals": 18
+    }
+  ]
+}

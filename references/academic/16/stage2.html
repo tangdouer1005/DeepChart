@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 900px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const chartData = {
+    "index": [
+        "NSCLC subtyping",
+        "Kiel STAD Lauren",
+        "Bern STAD Lauren",
+        "DACHS CRC sidedness",
+        "CPTAC CRC sidedness",
+        "Average"
+    ],
+    "columns": [
+        "CONCH",
+        "DinoSSLPath",
+        "Virchow2",
+        "H-optimus-0",
+        "UNI",
+        "BiomedCLIP",
+        "Panakeia*",
+        "Virchow",
+        "Hibou-L",
+        "Hibou-B",
+        "CTransPath",
+        "ProvGigaPath",
+        "Kaiko",
+        "Phikon",
+        "PLIP"
+    ],
+    "data": [
+        [
+            0.99268,
+            0.97072,
+            0.983386,
+            0.983421,
+            0.976415,
+            0.978721,
+            0.951695,
+            0.982075,
+            0.970615,
+            0.969672,
+            0.982058,
+            0.986583,
+            0.972414,
+            0.952446,
+            0.974092
+        ],
+        [
+            0.795917,
+            0.806003,
+            0.794557,
+            0.754781,
+            0.741579,
+            0.772257,
+            0.787877,
+            0.804057,
+            0.708738,
+            0.744629,
+            0.767198,
+            0.711356,
+            0.696902,
+            0.705138,
+            0.701759
+        ],
+        [
+            0.720555,
+            0.705261,
+            0.729027,
+            0.6772,
+            0.674646,
+            0.680686,
+            0.656958,
+            0.680314,
+            0.718225,
+            0.679581,
+            0.655981,
+            0.644662,
+            0.681257,
+            0.646098,
+            0.656523
+        ],
+        [
+            0.707539,
+            0.736509,
+            0.723064,
+            0.697698,
+            0.660742,
+            0.676409,
+            0.718146,
+            0.636007,
+            0.658513,
+            0.66922,
+            0.648967,
+            0.706909,
+            0.660542,
+            0.636486,
+            0.614253
+        ],
+        [
+            0.613278,
+            0.60289,
+            0.583832,
+            0.620846,
+            0.622291,
+            0.557757,
+            0.538493,
+            0.547781,
+            0.59257,
+            0.573856,
+            0.568627,
+            0.571655,
+            0.525628,
+            0.553285,
+            0.545304
+        ],
+        [
+            0.765994,
+            0.764277,
+            0.762773,
+            0.746789,
+            0.735135,
+            0.733166,
+            0.730634,
+            0.730047,
+            0.729732,
+            0.727391,
+            0.724566,
+            0.724233,
+            0.707349,
+            0.698691,
+            0.698386
+        ]
+    ]
+};
+
+        const xLabels = chartData.columns;
+        const yLabels = chartData.index;
+
+        const heatmapData = [];
+        
+        chartData.data.forEach((row, yIdx) => {
+            row.forEach((val, xIdx) => {
+                heatmapData.push([xIdx, yIdx, val]);
+            });
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            title: {
+                text: 'Morphology tasks',
+                left: 'center',
+                top: 10
+            },
+            grid: {
+                top: 60,
+                bottom: 80,
+                left: 150,
+                right: 20
+            },
+            visualMap: {
+                min: 0.5,
+                max: 1.0,
+                calculable: false,
+                show: false, // Image doesn't show colorbar
+                inRange: {
+                    color: ['#dcd0d9', '#3f224f']
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: xLabels,
+                axisLabel: { 
+                    rotate: 45, 
+                    color: 'black',
+                    interval: 0
+                },
+                axisLine: { show: false },
+                axisTick: { show: false },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'category',
+                data: yLabels,
+                inverse: true,
+                axisLabel: { color: 'black' },
+                axisLine: { show: false },
+                axisTick: { show: false },
+                splitLine: { show: false }
+            },
+            series: [{
+                type: 'heatmap',
+                data: heatmapData,
+                label: {
+                    show: true,
+                    formatter: function(params) {
+                        return params.value[2].toFixed(2);
+                    },
+                    color: 'auto' // Contrast color? ECharts usually handles it or we set specific
+                },
+                itemStyle: {
+                    borderColor: 'white',
+                    borderWidth: 1
+                }
+            }],
+            graphic: [
+                { type: 'text', left: 20, top: 20, style: { text: 'c', font: 'bold 24px Arial' } }
+            ]
+        };
+        
+        // Improve label color contrast manually if needed
+        option.series[0].label.color = function(params) {
+            return params.value[2] > 0.75 ? 'white' : 'black';
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

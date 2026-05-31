@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart 80 Reproduction</title>
+    <!-- Load Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fff;
+        }
+        #chart {
+            width: 500px;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. Source Data (Injected JSON)
+        // ---------------------------------------------------------
+        const sourceData = [
+    {
+        "x": 20.22,
+        "y": 0.07,
+        "xerr": 1.78,
+        "yerr": 0.01,
+        "label": "I",
+        "color": "#ea8c9f",
+        "text_offset": [
+            -0.5,
+            -0.003
+        ],
+        "ha": "right",
+        "va": "top"
+    },
+    {
+        "x": 15.52,
+        "y": 0.07,
+        "xerr": 1.0,
+        "yerr": 0.01,
+        "label": "R",
+        "color": "#d67fe2",
+        "text_offset": [
+            -0.5,
+            -0.003
+        ],
+        "ha": "right",
+        "va": "top"
+    },
+    {
+        "x": 20.73,
+        "y": 0.09,
+        "xerr": 6.58,
+        "yerr": 0.02,
+        "label": "SU",
+        "color": "#6fa8dc",
+        "text_offset": [
+            -1.0,
+            0.003
+        ],
+        "ha": "right",
+        "va": "bottom"
+    },
+    {
+        "x": 22.44,
+        "y": 0.12,
+        "xerr": 3.26,
+        "yerr": 0.01,
+        "label": "T",
+        "color": "#cdae63",
+        "text_offset": [
+            0.8,
+            0.003
+        ],
+        "ha": "left",
+        "va": "bottom"
+    },
+    {
+        "x": 21.91,
+        "y": 0.1,
+        "xerr": 0.99,
+        "yerr": 0.0,
+        "label": "U",
+        "color": "#7bc068",
+        "text_offset": [
+            0.8,
+            0.003
+        ],
+        "ha": "left",
+        "va": "bottom"
+    },
+    {
+        "x": 20.34,
+        "y": 0.1,
+        "xerr": 2.1,
+        "yerr": 0.01,
+        "label": "(V)",
+        "color": "#bdbdbd",
+        "text_offset": [
+            -1.5,
+            0.003
+        ],
+        "ha": "right",
+        "va": "bottom"
+    }
+];
+
+        // ---------------------------------------------------------
+        // 2. Data Processing Logic
+        // ---------------------------------------------------------
+        
+        const traces = [];
+        const annotations = [];
+
+        // Add "b" annotation
+        annotations.push({
+            xref: 'paper',
+            yref: 'paper',
+            x: -0.2,
+            y: 1.05,
+            text: '<b>b</b>',
+            showarrow: false,
+            font: { size: 24, family: "Arial, sans-serif" }
+        });
+
+        sourceData.forEach(row => {
+            const label = row.label;
+            const color = row.color;
+            const textOffset = { x: row.text_offset[0], y: row.text_offset[1] };
+            const ha = row.ha;
+            const va = row.va;
+
+            // Create Trace for this point
+            traces.push({
+                x: [row.x],
+                y: [row.y],
+                mode: 'markers',
+                type: 'scatter',
+                error_x: {
+                    type: 'data',
+                    array: [row.xerr],
+                    visible: true,
+                    color: color,
+                    thickness: 2,
+                    width: 0 // capsize 0
+                },
+                error_y: {
+                    type: 'data',
+                    array: [row.yerr],
+                    visible: true,
+                    color: color,
+                    thickness: 2,
+                    width: 0 // capsize 0
+                },
+                marker: {
+                    size: 12,
+                    color: color,
+                    opacity: 0.9
+                },
+                showlegend: false,
+                hoverinfo: 'x+y+text',
+                text: label
+            });
+
+            // Create Annotation for the label
+            // Calculate exact position
+            const annX = row.x + textOffset.x;
+            const annY = row.y + textOffset.y;
+            
+            // Map Python alignments to Plotly anchors
+            const xAnchor = ha; // 'left', 'right', 'center'
+            const yAnchor = va; // 'top', 'bottom', 'middle'
+
+            annotations.push({
+                x: annX,
+                y: annY,
+                text: label,
+                showarrow: false,
+                font: {
+                    size: 14,
+                    color: 'black',
+                    family: 'Arial, sans-serif'
+                },
+                xanchor: xAnchor,
+                yanchor: yAnchor
+            });
+        });
+
+        // ---------------------------------------------------------
+        // 3. Layout & Styling
+        // ---------------------------------------------------------
+        
+        const layout = {
+            width: 450,
+            height: 750,
+            autosize: false,
+            paper_bgcolor: 'white',
+            plot_bgcolor: 'white',
+            margin: {
+                l: 100,
+                r: 40,
+                t: 60,
+                b: 100
+            },
+            xaxis: {
+                range: [13, 28],
+                tickvals: [15, 20, 25],
+                title: {
+                    text: 'PM<sub>10</sub> (µg m<sup>-3</sup>)',
+                    font: { size: 16, family: 'Arial, sans-serif' },
+                    standoff: 20
+                },
+                showgrid: false,
+                zeroline: false,
+                showline: true,
+                linewidth: 1, // 0.8 in python
+                linecolor: 'black',
+                ticks: 'outside',
+                ticklen: 6,
+                tickfont: { size: 14, family: 'Arial, sans-serif' }
+            },
+            yaxis: {
+                range: [0.055, 0.13],
+                tick0: 0.06,
+                dtick: 0.01,
+                title: {
+                    text: 'OP<sub>m</sub><sup>DTT</sup> (nmolDTT min<sup>-1</sup> µg<sup>-1</sup>)',
+                    font: { size: 16, family: 'Arial, sans-serif' },
+                    standoff: 20
+                },
+                showgrid: false,
+                zeroline: false,
+                showline: true,
+                linewidth: 1,
+                linecolor: 'black',
+                ticks: 'outside',
+                ticklen: 6,
+                tickfont: { size: 14, family: 'Arial, sans-serif' }
+            },
+            annotations: annotations,
+            shapes: [] // No extra shapes needed
+        };
+
+        // Render
+        Plotly.newPlot('chart', traces, layout);
+        
+    </script>
+</body>
+</html>

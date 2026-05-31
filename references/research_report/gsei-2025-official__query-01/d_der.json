@@ -1,0 +1,63 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a horizontal bar chart showing the top 12 countries in the 2025 country tables by score-weighted average city growth, computed as `sum(score * numeric growth rate) / sum(score)` across each country's listed cities, expressed as a percentage, sorted descending, and limited to countries with at least 5 cities that have numeric growth values after excluding `New` and missing entries.",
+  "status": "complete",
+  "chart_type": "horizontal_bar",
+  "title": "2025 Score-Weighted Average City Growth",
+  "value_unit": "percent",
+  "sort_rule": "descending by score_weighted_avg_growth_pct, tie-break alphabetically",
+  "selection_rule": "top 12 countries with at least 5 numeric growth entries",
+  "records": [
+    {
+      "entity": "France",
+      "score_weighted_avg_growth_pct": 39.793858
+    },
+    {
+      "entity": "Taiwan",
+      "score_weighted_avg_growth_pct": 35.647743
+    },
+    {
+      "entity": "Belgium",
+      "score_weighted_avg_growth_pct": 35.63005
+    },
+    {
+      "entity": "Denmark",
+      "score_weighted_avg_growth_pct": 34.076998
+    },
+    {
+      "entity": "China",
+      "score_weighted_avg_growth_pct": 33.00404
+    },
+    {
+      "entity": "Spain",
+      "score_weighted_avg_growth_pct": 32.790798
+    },
+    {
+      "entity": "South Korea",
+      "score_weighted_avg_growth_pct": 32.358805
+    },
+    {
+      "entity": "Russia",
+      "score_weighted_avg_growth_pct": 31.772745
+    },
+    {
+      "entity": "Sweden",
+      "score_weighted_avg_growth_pct": 31.414458
+    },
+    {
+      "entity": "Ireland",
+      "score_weighted_avg_growth_pct": 31.219388
+    },
+    {
+      "entity": "Australia",
+      "score_weighted_avg_growth_pct": 30.579156
+    },
+    {
+      "entity": "Austria",
+      "score_weighted_avg_growth_pct": 28.850677
+    }
+  ],
+  "value_field": "score_weighted_avg_growth_pct",
+  "x_label": "Score-weighted average numeric growth (%)",
+  "y_label": "Country"
+}

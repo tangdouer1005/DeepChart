@@ -1,0 +1,63 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a bar chart of the top 12 countries in the 2025 country tables by the share of listed top-10 city score contributed by cities whose numeric growth exceeds `30%`, computed as `sum(score for cities with growth > 30%) / sum(score for all listed cities with numeric growth)`, expressed as a percentage, sorted descending, and limited to countries with at least 5 numeric growth entries.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2025 High-Growth Score Share by Country",
+  "value_unit": "percent",
+  "sort_rule": "descending by high_growth_score_share_pct, tie-break alphabetically",
+  "selection_rule": "top 12 countries with at least 5 numeric growth entries",
+  "records": [
+    {
+      "entity": "South Korea",
+      "high_growth_score_share_pct": 98.064656
+    },
+    {
+      "entity": "Denmark",
+      "high_growth_score_share_pct": 97.530912
+    },
+    {
+      "entity": "France",
+      "high_growth_score_share_pct": 94.558177
+    },
+    {
+      "entity": "Sweden",
+      "high_growth_score_share_pct": 79.161422
+    },
+    {
+      "entity": "The Netherlands",
+      "high_growth_score_share_pct": 75.500235
+    },
+    {
+      "entity": "Spain",
+      "high_growth_score_share_pct": 65.299109
+    },
+    {
+      "entity": "Belgium",
+      "high_growth_score_share_pct": 60.015296
+    },
+    {
+      "entity": "Australia",
+      "high_growth_score_share_pct": 47.316101
+    },
+    {
+      "entity": "China",
+      "high_growth_score_share_pct": 43.894463
+    },
+    {
+      "entity": "Taiwan",
+      "high_growth_score_share_pct": 37.998609
+    },
+    {
+      "entity": "Canada",
+      "high_growth_score_share_pct": 37.492575
+    },
+    {
+      "entity": "Pakistan",
+      "high_growth_score_share_pct": 36.728596
+    }
+  ],
+  "value_field": "high_growth_score_share_pct",
+  "x_label": "Country",
+  "y_label": "Score share from cities above 30% growth (%)"
+}

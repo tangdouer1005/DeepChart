@@ -1,0 +1,289 @@
+{
+    "plot_data": [
+        {
+            "Size": "300 patients",
+            "Model_ID": "bioptimus",
+            "AUROC": 0.6517158688410827
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "bioptimus",
+            "AUROC": 0.5802264312220263
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "bioptimus",
+            "AUROC": 0.5470019924276457
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "conch",
+            "AUROC": 0.672942774817434
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "conch",
+            "AUROC": 0.6154008166562007
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "conch",
+            "AUROC": 0.5791498585558393
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "ctranspath",
+            "AUROC": 0.6291062922684837
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "ctranspath",
+            "AUROC": 0.5710509089724938
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "ctranspath",
+            "AUROC": 0.5410367286336112
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "hibou",
+            "AUROC": 0.6379063476106139
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "hibou",
+            "AUROC": 0.5727761195225896
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "hibou",
+            "AUROC": 0.5562067331721074
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "hibou-l",
+            "AUROC": 0.6239549871461666
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "hibou-l",
+            "AUROC": 0.5751085656062501
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "hibou-l",
+            "AUROC": 0.5389014636946619
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "kaiko",
+            "AUROC": 0.6250757455645438
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "kaiko",
+            "AUROC": 0.5800004052945474
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "kaiko",
+            "AUROC": 0.5453298651189457
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "madeleine",
+            "AUROC": 0.6574321767991897
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "madeleine",
+            "AUROC": 0.6124805203499889
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "madeleine",
+            "AUROC": 0.5741346994196119
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "phikon",
+            "AUROC": 0.6057894992309325
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "phikon",
+            "AUROC": 0.5667616625139058
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "phikon",
+            "AUROC": 0.5298242015784663
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "prism",
+            "AUROC": 0.6553326870672026
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "prism",
+            "AUROC": 0.6137751964755708
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "prism",
+            "AUROC": 0.5809407507499376
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "prov-gigapath",
+            "AUROC": 0.6540952461683367
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "prov-gigapath",
+            "AUROC": 0.595442596902233
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "prov-gigapath",
+            "AUROC": 0.5452248273062075
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "prov-gigapath-slide",
+            "AUROC": 0.6505149933403137
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "prov-gigapath-slide",
+            "AUROC": 0.592498956404845
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "prov-gigapath-slide",
+            "AUROC": 0.5471431795435153
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "uni",
+            "AUROC": 0.661658662534097
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "uni",
+            "AUROC": 0.6027280013559551
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "uni",
+            "AUROC": 0.5646607760944191
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "virchow-class",
+            "AUROC": 0.6319207545553032
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "virchow-class",
+            "AUROC": 0.5653361780348889
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "virchow-class",
+            "AUROC": 0.543204342469331
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "virchow2-class",
+            "AUROC": 0.6760624066310988
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "virchow2-class",
+            "AUROC": 0.6175003942804516
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "virchow2-class",
+            "AUROC": 0.5673908442334521
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "panakeia",
+            "AUROC": 0.6421712650668627
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "panakeia",
+            "AUROC": 0.5803004315333413
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "panakeia",
+            "AUROC": 0.5503337091394822
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "chief",
+            "AUROC": 0.6140413449683532
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "chief",
+            "AUROC": 0.5547604174224477
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "chief",
+            "AUROC": 0.5348862707760792
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "dinosslpath",
+            "AUROC": 0.6450345007008265
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "dinosslpath",
+            "AUROC": 0.5917099194542511
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "dinosslpath",
+            "AUROC": 0.554353187518743
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "biomedclip",
+            "AUROC": 0.6114886974757219
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "biomedclip",
+            "AUROC": 0.5592247241978702
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "biomedclip",
+            "AUROC": 0.5518145094797684
+        },
+        {
+            "Size": "300 patients",
+            "Model_ID": "plip",
+            "AUROC": 0.5968990567399465
+        },
+        {
+            "Size": "150 patients",
+            "Model_ID": "plip",
+            "AUROC": 0.5499106728461921
+        },
+        {
+            "Size": "75 patients",
+            "Model_ID": "plip",
+            "AUROC": 0.5356388554287601
+        }
+    ]
+}

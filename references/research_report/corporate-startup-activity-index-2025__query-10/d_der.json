@@ -1,0 +1,66 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a ranked horizontal bar chart showing the top 12 countries by `top-two industry balance`, where the metric is `the second-largest industry subtotal divided by the largest industry subtotal within each country's visible company list`, values are percentages, countries must have at least 5 visible companies and at least 2 represented industries on pages 38-67, and bars are sorted from highest to lowest after the ratio is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by top_two_industry_balance_percent, ties by country",
+  "selection_rule": "top 12 eligible countries with at least 5 visible companies and at least 2 represented industries",
+  "plot_spec": {
+    "title": "Top-Two Industry Balance",
+    "xlabel": "Percent (second-largest subtotal / largest subtotal)",
+    "ylabel": "Country",
+    "value_field": "top_two_industry_balance_percent",
+    "label_suffix": "%",
+    "label_decimals": 1
+  },
+  "records": [
+    {
+      "entity": "Türkiye",
+      "top_two_industry_balance_percent": 96.6398
+    },
+    {
+      "entity": "India",
+      "top_two_industry_balance_percent": 94.925
+    },
+    {
+      "entity": "Japan",
+      "top_two_industry_balance_percent": 93.7214
+    },
+    {
+      "entity": "United Kingdom",
+      "top_two_industry_balance_percent": 80.3995
+    },
+    {
+      "entity": "United States",
+      "top_two_industry_balance_percent": 73.3048
+    },
+    {
+      "entity": "Canada",
+      "top_two_industry_balance_percent": 71.2252
+    },
+    {
+      "entity": "Germany",
+      "top_two_industry_balance_percent": 62.306
+    },
+    {
+      "entity": "The Netherlands",
+      "top_two_industry_balance_percent": 49.4753
+    },
+    {
+      "entity": "Sweden",
+      "top_two_industry_balance_percent": 44.9047
+    },
+    {
+      "entity": "China",
+      "top_two_industry_balance_percent": 44.8257
+    },
+    {
+      "entity": "France",
+      "top_two_industry_balance_percent": 39.3216
+    },
+    {
+      "entity": "Singapore",
+      "top_two_industry_balance_percent": 31.0132
+    }
+  ]
+}

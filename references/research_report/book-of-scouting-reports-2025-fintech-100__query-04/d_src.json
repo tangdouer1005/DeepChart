@@ -1,0 +1,611 @@
+{
+  "report_code": "018",
+  "query_id": "04",
+  "source_fields": [
+    "Company",
+    "Founded year",
+    "Commercial Maturity"
+  ],
+  "records": [
+    {
+      "company": "Affinity",
+      "founded_year": 2022,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "interface.ai",
+      "founded_year": 2019,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Uzum",
+      "founded_year": 2022,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "9Fin",
+      "founded_year": 2016,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Claira",
+      "founded_year": 2019,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Baanx",
+      "founded_year": 2018,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Beam",
+      "founded_year": 2022,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Breez Development",
+      "founded_year": 2018,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "BVNK",
+      "founded_year": 2021,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Conduit",
+      "founded_year": 2021,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Crossmint",
+      "founded_year": 2022,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Due",
+      "founded_year": 2022,
+      "commercial_maturity": null,
+      "commercial_maturity_raw": "N/A / 5"
+    },
+    {
+      "company": "Noah",
+      "founded_year": 2020,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Rain",
+      "founded_year": 2021,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "RD Technologies",
+      "founded_year": 2020,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "RedotPay",
+      "founded_year": 2023,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Relai",
+      "founded_year": 2020,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Transak",
+      "founded_year": 2019,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Banxware",
+      "founded_year": 2020,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "BKN301",
+      "founded_year": 2021,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "CredibleX",
+      "founded_year": 2023,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Fimple",
+      "founded_year": 2022,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "FISPAN",
+      "founded_year": 2016,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "NymCard",
+      "founded_year": 2018,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Abacum",
+      "founded_year": 2020,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Auditoria.AI",
+      "founded_year": 2019,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Campfire",
+      "founded_year": 2023,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "Clara",
+      "founded_year": 2020,
+      "commercial_maturity": 5,
+      "commercial_maturity_raw": "5 / 5"
+    },
+    {
+      "company": "Crowded",
+      "founded_year": 2021,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Datricks",
+      "founded_year": 2019,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Finmo",
+      "founded_year": 2021,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Mendel",
+      "founded_year": 2021,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Xelix",
+      "founded_year": 2018,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Amlyze",
+      "founded_year": 2019,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Casap",
+      "founded_year": 2023,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "Greenlite",
+      "founded_year": 2023,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Hawk",
+      "founded_year": 2018,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Bolto",
+      "founded_year": 2023,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Borderless",
+      "founded_year": 2022,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Every",
+      "founded_year": 2021,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "InstaPay",
+      "founded_year": 2017,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Jet HR",
+      "founded_year": 2012,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Khazna",
+      "founded_year": 2019,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Niural",
+      "founded_year": 2022,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "SeamlessHR",
+      "founded_year": 2017,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Agora",
+      "founded_year": 2023,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Cryptio",
+      "founded_year": 2018,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "DigiFT",
+      "founded_year": 2021,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Komainu",
+      "founded_year": 2018,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Maple Finance",
+      "founded_year": 2020,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Securitize",
+      "founded_year": 2017,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Utila",
+      "founded_year": 2022,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Delos",
+      "founded_year": 2017,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Descartes Underwriting",
+      "founded_year": 2019,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Further AI",
+      "founded_year": 2023,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "Skarlett",
+      "founded_year": 2023,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "Sixfold",
+      "founded_year": 2023,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Quandri",
+      "founded_year": 2020,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Casca",
+      "founded_year": 2023,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "CrediLinq",
+      "founded_year": 2021,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "InDebted",
+      "founded_year": 2016,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Murphy",
+      "founded_year": 2024,
+      "commercial_maturity": 1,
+      "commercial_maturity_raw": "1 / 5"
+    },
+    {
+      "company": "Nada",
+      "founded_year": 2019,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Peach Finance",
+      "founded_year": 2018,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "PostEx",
+      "founded_year": 2020,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Scienaptic",
+      "founded_year": 2014,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Versana",
+      "founded_year": 2021,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "WonderLend Hubs",
+      "founded_year": 2016,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Aspora",
+      "founded_year": 2022,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Capi",
+      "founded_year": 2023,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Catena Labs",
+      "founded_year": 2022,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "Easebuzz",
+      "founded_year": 2017,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Enza",
+      "founded_year": 2023,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Finom",
+      "founded_year": 2019,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Haball",
+      "founded_year": 2017,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Highnote",
+      "founded_year": 2020,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Payrails",
+      "founded_year": 2021,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "PayTic",
+      "founded_year": 2020,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Toku",
+      "founded_year": 2020,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Yaspa",
+      "founded_year": 2017,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Yuno",
+      "founded_year": 2022,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Ziina",
+      "founded_year": 2020,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Candidly",
+      "founded_year": 2016,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Debbie",
+      "founded_year": 2021,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Grifin",
+      "founded_year": 2016,
+      "commercial_maturity": null,
+      "commercial_maturity_raw": "N/A / 5"
+    },
+    {
+      "company": "Alpaca",
+      "founded_year": 2015,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Axyon AI",
+      "founded_year": 2016,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "BridgeWise",
+      "founded_year": 2019,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Conquest Planning",
+      "founded_year": 2018,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Dub",
+      "founded_year": 2021,
+      "commercial_maturity": null,
+      "commercial_maturity_raw": "N/A / 5"
+    },
+    {
+      "company": "Flanks",
+      "founded_year": 2019,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Jump",
+      "founded_year": 2023,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Lightyear",
+      "founded_year": 2020,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "ModernFi",
+      "founded_year": 2022,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Retirable",
+      "founded_year": 2019,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Thndr",
+      "founded_year": 2020,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Wealth.com",
+      "founded_year": 2021,
+      "commercial_maturity": null,
+      "commercial_maturity_raw": "N/A / 5"
+    },
+    {
+      "company": "Zocks",
+      "founded_year": 2022,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Unique",
+      "founded_year": 2021,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Upstage",
+      "founded_year": 2020,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    }
+  ]
+}

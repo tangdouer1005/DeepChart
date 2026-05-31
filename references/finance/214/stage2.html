@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>pg 现金消耗跑道（零收入情景）2016–2024</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      /* base aspect ratio, JS will refine height */
+      height: 400px;
+    }
+
+    canvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .chart-footer {
+      font-size: 12px;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    .chart-footer span.label {
+      font-weight: 600;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>pg 现金消耗跑道（月）</h1>
+    <h2>零收入情景（2016–2024 财年）</h2>
+    <div class="chart-wrapper">
+      <canvas id="runwayChart" aria-label="pg 现金消耗跑道零收入情景柱状图" role="img"></canvas>
+    </div>
+    <div class="chart-footer">
+      <span class="label">说明：</span>
+      柱状图展示在零收入情景下，pg 自 2016 至 2024 财年的现金消耗跑道（月数）变化。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable v4, no integrity attribute) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <script>
+    // 确保 DOM 和 Chart.js 都已加载
+    window.addEventListener("load", function () {
+      const labels = [
+        "2016", "2017", "2018", "2019", "2020",
+        "2021", "2022", "2023", "2024"
+      ];
+
+      const runwayMonths = [
+        6.022471910112359,
+        4.816432432432433,
+        2.1985451433461702,
+        3.5527308283279786,
+        13.334157395962093,
+        8.108235912255353,
+        6.129141886151232,
+        6.23594655911268,
+        7.194233687405159
+      ];
+
+      const canvas = document.getElementById("runwayChart");
+      if (!canvas) {
+        console.error("Canvas element #runwayChart not found.");
+        return;
+      }
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        console.error("Unable to get 2D context for #runwayChart.");
+        return;
+      }
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "现金消耗跑道（月）",
+            data: runwayMonths,
+            backgroundColor: "rgba(54, 162, 235, 0.55)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1.5,
+            hoverBackgroundColor: "rgba(54, 162, 235, 0.8)",
+            hoverBorderColor: "rgba(54, 162, 235, 1)"
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                boxWidth: 14,
+                usePointStyle: true,
+                pointStyle: "rectRounded"
+              }
+            },
+            title: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  const value = context.parsed.y;
+                  return "现金消耗跑道: " + value.toFixed(2) + " 个月";
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年"
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "现金消耗跑道（月）"
+              },
+              ticks: {
+                callback: function (value) {
+                  return value + " 月";
+                }
+              }
+            }
+          },
+          animation: {
+            duration: 800,
+            easing: "easeOutQuart"
+          },
+          hover: {
+            mode: "nearest",
+            intersect: true
+          }
+        }
+      });
+
+      // 让画布高度随宽度变化，防止在某些环境下高度为 0
+      function resizeCanvasHeight() {
+        const container = document.getElementById("chart-container");
+        const canvasEl = document.getElementById("runwayChart");
+        if (!container || !canvasEl) return;
+        const width = container.clientWidth || 600;
+        canvasEl.style.height = (width * 0.45) + "px";
+      }
+
+      resizeCanvasHeight();
+      window.addEventListener("resize", resizeCanvasHeight);
+    });
+  </script>
+</body>
+</html>

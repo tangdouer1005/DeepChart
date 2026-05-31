@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>tmo 现金消耗跑道（零收入情景）2016-2024</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px 0;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0 0 16px 0;
+      color: #555;
+    }
+    #chart-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 20px 24px 20px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+    .meta {
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 8px;
+    }
+
+    /* Fix aspect ratio: give the chart container a reasonable height */
+    #chart-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      height: 420px; /* <- key fix: explicit, balanced height */
+      margin: 0 auto;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important; /* respect the wrapper's aspect ratio */
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-card">
+    <h1>tmo 现金消耗跑道（月）</h1>
+    <h2>零收入情景，2016 - 2024</h2>
+    <div class="meta">单位：月（Runway Months）</div>
+    <div id="chart-wrapper">
+      <canvas id="runwayChart" aria-label="tmo 现金消耗跑道（零收入情景）2016-2024" role="img"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // Source data
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const runwayMonths = [
+      1.5212167153202265,
+      2.29776247848537,
+      3.281237810427773,
+      3.679918189952704,
+      14.3005540166205,
+      6.116120218579235,
+      10.970398970398971,
+      8.565524549629107,
+      4.133344789071226
+    ];
+
+    const ctx = document.getElementById("runwayChart").getContext("2d");
+
+    function getYoYChange(index) {
+      if (index === 0) return null;
+      const prev = runwayMonths[index - 1];
+      const curr = runwayMonths[index];
+      if (!prev) return null;
+      const diff = curr - prev;
+      const pct = (diff / prev) * 100;
+      return { diff, pct };
+    }
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "现金消耗跑道（月）",
+            data: runwayMonths,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            tension: 0.25,
+            fill: true,
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // we control size via CSS wrapper
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: { size: 12 }
+            }
+          },
+          title: {
+            display: false
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function (context) {
+                const value = context.raw;
+                const index = context.dataIndex;
+                const yoy = getYoYChange(index);
+                const base = "跑道：" + value.toFixed(2) + " 个月";
+                if (!yoy) return base;
+                const sign = yoy.diff >= 0 ? "+" : "";
+                return (
+                  base +
+                  " | 同比：" +
+                  sign +
+                  yoy.diff.toFixed(2) +
+                  " 月 (" +
+                  sign +
+                  yoy.pct.toFixed(1) +
+                  "%)"
+                );
+              }
+            }
+          }
+        },
+        layout: {
+          padding: {
+            top: 10,
+            bottom: 10,
+            left: 0,
+            right: 0
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              font: { size: 12 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "现金消耗跑道（月）",
+              font: { size: 12 }
+            },
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return value + " 月";
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

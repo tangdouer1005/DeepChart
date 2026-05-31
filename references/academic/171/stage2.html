@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = [
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 76.6
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 63.5
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 62.0
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 59.28
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 55.900000000000006
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 55.00000000000001
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 53.400000000000006
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 53.0
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 50.1
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 50.0
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 48.46
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 48.16
+    },
+    {
+        "Country": "Italy",
+        "Stage": "HIC",
+        "value": 47.0
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 47.0
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 46.2
+    },
+    {
+        "Country": "South Africa",
+        "Stage": "UMIC",
+        "value": 45.17
+    },
+    {
+        "Country": "South Africa",
+        "Stage": "UMIC",
+        "value": 45.17
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 44.6
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 44.6
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 44.142900000000004
+    },
+    {
+        "Country": "Spain",
+        "Stage": "HIC",
+        "value": 43.76
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 43.65
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 43.65
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 43.5
+    },
+    {
+        "Country": "Latvia",
+        "Stage": "HIC",
+        "value": 43.46
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 43.3
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 43.0
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 42.3333
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 41.8
+    },
+    {
+        "Country": "Italy",
+        "Stage": "HIC",
+        "value": 41.0
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 40.3667
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 39.800000000000004
+    },
+    {
+        "Country": "South Africa",
+        "Stage": "UMIC",
+        "value": 39.61
+    },
+    {
+        "Country": "South Africa",
+        "Stage": "UMIC",
+        "value": 39.61
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 38.6
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 38.3333
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 38.2
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 38.2
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 36.8
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 36.68
+    },
+    {
+        "Country": "South Africa",
+        "Stage": "UMIC",
+        "value": 36.47
+    },
+    {
+        "Country": "South Africa",
+        "Stage": "UMIC",
+        "value": 36.47
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 36.4
+    },
+    {
+        "Country": "Latvia",
+        "Stage": "HIC",
+        "value": 36.02
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 36.0
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 35.699999999999996
+    },
+    {
+        "Country": "UK",
+        "Stage": "HIC",
+        "value": 35.38
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 34.949999999999996
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 34.949999999999996
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 34.9
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 34.8167
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 34.8167
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 34.0
+    },
+    {
+        "Country": "Spain",
+        "Stage": "HIC",
+        "value": 34.0
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 34.0
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 32.800000000000004
+    },
+    {
+        "Country": "France",
+        "Stage": "HIC",
+        "value": 31.900000000000002
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 31.8
+    },
+    {
+        "Country": "Latvia",
+        "Stage": "HIC",
+        "value": 31.380000000000003
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 30.15
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 30.0
+    },
+    {
+        "Country": "UK",
+        "Stage": "HIC",
+        "value": 29.86
+    },
+    {
+        "Country": "UK",
+        "Stage": "HIC",
+        "value": 29.709999999999997
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 29.68
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 29.3333
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 29.3333
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 29.099999999999998
+    },
+    {
+        "Country": "Denmark",
+        "Stage": "HIC",
+        "value": 28.999999999999996
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 28.999999999999996
+    },
+    {
+        "Country": "Thailand",
+        "Stage": "UMIC",
+        "value": 28.999999999999996
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 28.76
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 28.74
+    },
+    {
+        "Country": "Italy",
+        "Stage": "HIC",
+        "value": 28.599999999999998
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 28.000000000000004
+    },
+    {
+        "Country": "Spain",
+        "Stage": "HIC",
+        "value": 28.000000000000004
+    },
+    {
+        "Country": "Italy",
+        "Stage": "HIC",
+        "value": 28.000000000000004
+    },
+    {
+        "Country": "Italy",
+        "Stage": "HIC",
+        "value": 28.000000000000004
+    },
+    {
+        "Country": "Canada",
+        "Stage": "HIC",
+        "value": 28.000000000000004
+    },
+    {
+        "Country": "Latvia",
+        "Stage": "HIC",
+        "value": 27.66
+    },
+    {
+        "Country": "Latvia",
+        "Stage": "HIC",
+        "value": 27.63
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 27.2143
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 27.0
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 27.0
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 26.75
+    },
+    {
+        "Country": "Hungary",
+        "Stage": "HIC",
+        "value": 26.584200000000003
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 26.1667
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 26.1
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 25.8
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 25.7
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 25.2
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 24.6084
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 24.48
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 24.42
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 24.3
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 24.0919
+    },
+    {
+        "Country": "Latvia",
+        "Stage": "HIC",
+        "value": 23.49
+    },
+    {
+        "Country": "Spain",
+        "Stage": "HIC",
+        "value": 23.3
+    },
+    {
+        "Country": "Latvia",
+        "Stage": "HIC",
+        "value": 23.28
+    },
+    {
+        "Country": "Latvia",
+        "Stage": "HIC",
+        "value": 23.28
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 23.0
+    },
+    {
+        "Country": "Latvia",
+        "Stage": "HIC",
+        "value": 22.88
+    },
+    {
+        "Country": "UK",
+        "Stage": "HIC",
+        "value": 22.84
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 22.1667
+    },
+    {
+        "Country": "Spain",
+        "Stage": "HIC",
+        "value": 22.0
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 22.0
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 21.3
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 21.279999999999998
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 21.015
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 21.015
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 20.9
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 20.7
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 20.599999999999998
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 20.5
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 19.8429
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 19.54
+    },
+    {
+        "Country": "Iran",
+        "Stage": "LMIC",
+        "value": 18.7
+    },
+    {
+        "Country": "UK",
+        "Stage": "HIC",
+        "value": 18.47
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 18.2
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 18.14
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 18.0
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 18.0
+    },
+    {
+        "Country": "Croatia",
+        "Stage": "UMIC",
+        "value": 17.5583
+    },
+    {
+        "Country": "UK",
+        "Stage": "HIC",
+        "value": 17.3438
+    },
+    {
+        "Country": "UK",
+        "Stage": "HIC",
+        "value": 17.3438
+    },
+    {
+        "Country": "UK",
+        "Stage": "HIC",
+        "value": 17.3438
+    },
+    {
+        "Country": "Iran",
+        "Stage": "LMIC",
+        "value": 17.34
+    },
+    {
+        "Country": "Thailand",
+        "Stage": "UMIC",
+        "value": 17.2
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 17.150000000000002
+    },
+    {
+        "Country": "Finland",
+        "Stage": "HIC",
+        "value": 16.9096
+    },
+    {
+        "Country": "South Africa",
+        "Stage": "UMIC",
+        "value": 16.900000000000002
+    },
+    {
+        "Country": "South Africa",
+        "Stage": "UMIC",
+        "value": 16.900000000000002
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 16.57
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 16.53
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 16.400000000000002
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 16.400000000000002
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 15.8
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 15.7997
+    },
+    {
+        "Country": "Iran",
+        "Stage": "LMIC",
+        "value": 15.61
+    },
+    {
+        "Country": "Iran",
+        "Stage": "LMIC",
+        "value": 15.09
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 14.971200000000001
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 14.851500000000001
+    },
+    {
+        "Country": "Iran",
+        "Stage": "LMIC",
+        "value": 14.680000000000001
+    },
+    {
+        "Country": "Iran",
+        "Stage": "LMIC",
+        "value": 14.649999999999999
+    },
+    {
+        "Country": "Germany",
+        "Stage": "HIC",
+        "value": 14.499999999999998
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 14.2
+    },
+    {
+        "Country": "Iran",
+        "Stage": "LMIC",
+        "value": 14.13
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 13.25
+    },
+    {
+        "Country": "Italy",
+        "Stage": "HIC",
+        "value": 13.0
+    },
+    {
+        "Country": "Jordan",
+        "Stage": "UMIC",
+        "value": 13.0
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 12.9771
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 12.86
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 12.001000000000001
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 12.0
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 11.8479
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 11.799999999999999
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 11.4
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 11.23
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 11.23
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 11.1871
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 11.01
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 10.7
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 10.7
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 10.7
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 10.7
+    },
+    {
+        "Country": "USA",
+        "Stage": "HIC",
+        "value": 10.7
+    },
+    {
+        "Country": "Turkey",
+        "Stage": "UMIC",
+        "value": 10.7
+    },
+    {
+        "Country": "Turkey",
+        "Stage": "UMIC",
+        "value": 10.7
+    },
+    {
+        "Country": "Turkey",
+        "Stage": "UMIC",
+        "value": 10.7
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 10.6
+    },
+    {
+        "Country": "Thailand",
+        "Stage": "UMIC",
+        "value": 10.299999999999999
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 10.25
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 10.15
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 10.0
+    },
+    {
+        "Country": "China",
+        "Stage": "UMIC",
+        "value": 10.0
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 9.9
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 9.9
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 9.9
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 9.5
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 9.5
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 9.5
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 9.12545
+    },
+    {
+        "Country": "Ethiopia",
+        "Stage": "LIC",
+        "value": 8.7
+    },
+    {
+        "Country": "Brazil",
+        "Stage": "UMIC",
+        "value": 8.68
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 8.6
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 8.6
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 8.6
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 8.450000000000001
+    },
+    {
+        "Country": "Thailand",
+        "Stage": "UMIC",
+        "value": 7.9
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 7.76
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 7.59
+    },
+    {
+        "Country": "Sweden",
+        "Stage": "HIC",
+        "value": 7.59
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 7.08
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 7.000000000000001
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 6.419999999999999
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 6.18762
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 6.0
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 5.62852
+    },
+    {
+        "Country": "Philippines",
+        "Stage": "LMIC",
+        "value": 5.4
+    },
+    {
+        "Country": "Portugal",
+        "Stage": "HIC",
+        "value": 4.72
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 4.5
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 4.23892
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 3.73832
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 1.8302800000000001
+    },
+    {
+        "Country": "Philippines",
+        "Stage": "LMIC",
+        "value": 1.7000000000000002
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 1.45396
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 1.3961599999999998
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 1.32548
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 1.21581
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 1.0416699999999999
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 0.917431
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 0.813008
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 0.2849
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 0.16750400000000001
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 0.146843
+    },
+    {
+        "Country": "Japan",
+        "Stage": "HIC",
+        "value": 0.142653
+    }
+];
+
+        // Process data
+        // rawData.forEach(d => d.value = d.value * 100); // Removed as JSON is already percentage
+        
+        const categories = ['LIC', 'LMIC', 'UMIC', 'HIC'];
+        const colors = {
+            'LIC': '#f9cb9c',   
+            'LMIC': '#e7a4d0',  
+            'UMIC': '#ccebc5',  
+            'HIC': '#80cdc1'
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Prepare data for boxplot and scatter
+        const boxplotData = [];
+        const scatterData = [];
+        const errorData = [];
+
+        categories.forEach((cat, idx) => {
+            const values = rawData.filter(d => d.Stage === cat).map(d => d.value);
+            
+            // Boxplot stats (Mean and CI for bar chart simulation)
+            // Python code uses Bar with CI error bar.
+            // ECharts doesn't have Bar with Error natively easily mixed with Scatter.
+            // We can simulate Bar + Error + Scatter.
+            
+            const n = values.length;
+            const mean = values.reduce((a, b) => a + b, 0) / n;
+            
+            // Standard Error
+            const std = Math.sqrt(values.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / (n - 1));
+            const se = std / Math.sqrt(n);
+            const ci = 1.96 * se; // 95% CI approx
+
+            boxplotData.push({
+                value: mean,
+                itemStyle: {
+                    color: '#e0e0e0',
+                    borderColor: 'black',
+                    borderWidth: 1
+                }
+            });
+
+            // Error bar data
+            errorData.push({
+                x: idx,
+                low: mean - ci,
+                high: mean + ci
+            });
+
+            // Scatter data
+            values.forEach(v => {
+                // Jitter
+                const jitter = (Math.random() - 0.5) * 0.5; // Wider jitter
+                scatterData.push({
+                    value: [idx + jitter, v],
+                    itemStyle: {
+                        color: colors[cat],
+                        borderColor: '#4d4d4d',
+                        borderWidth: 1,
+                        opacity: 0.6
+                    }
+                });
+            });
+        });
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: {
+                top: 50,
+                bottom: 50,
+                left: 60,
+                right: 20
+            },
+            xAxis: {
+                type: 'category',
+                data: categories,
+                axisLabel: { color: 'black', fontSize: 11 },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: false } // Python code removed ticks
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Plate waste rate (%)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                min: 0,
+                max: 80,
+                interval: 10,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                // Bar (Mean)
+                {
+                    type: 'bar',
+                    data: boxplotData,
+                    barWidth: '60%',
+                    z: 1
+                },
+                // Error Bars (Custom)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const idx = params.dataIndex;
+                        const err = errorData[idx];
+                        const x = api.coord([err.x, 0])[0];
+                        const yHigh = api.coord([err.x, err.high])[1];
+                        const yLow = api.coord([err.x, err.low])[1];
+                        const barWidth = api.size([0, 0])[0] * 0.6;
+                        
+                        // Cap width
+                        const capWidth = barWidth * 0.3;
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: { x1: x, y1: yHigh, x2: x, y2: yLow },
+                                    style: { stroke: 'black', lineWidth: 1.2 }
+                                },
+                                // Caps
+                                {
+                                    type: 'line',
+                                    shape: { x1: x - capWidth/2, y1: yHigh, x2: x + capWidth/2, y2: yHigh },
+                                    style: { stroke: 'black', lineWidth: 1.2 }
+                                },
+                                {
+                                    type: 'line',
+                                    shape: { x1: x - capWidth/2, y1: yLow, x2: x + capWidth/2, y2: yLow },
+                                    style: { stroke: 'black', lineWidth: 1.2 }
+                                }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 3
+                },
+                // Scatter
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    symbolSize: 9,
+                    z: 2
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'b',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

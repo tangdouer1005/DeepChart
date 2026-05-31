@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GOOG 投入资本回报率 (ROIC) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #475569;
+    }
+
+    #chartContainer {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px 24px 28px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 420px !important;
+    }
+
+    .meta {
+      max-width: 900px;
+      margin: 12px auto 0;
+      font-size: 0.8rem;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    .meta strong {
+      color: #475569;
+    }
+  </style>
+</head>
+<body>
+  <div id="chartContainer">
+    <h1>GOOG 投入资本回报率 (ROIC)</h1>
+    <h2>2016 – 2024 财年变化（单位：%）</h2>
+    <canvas id="roicChart"></canvas>
+  </div>
+
+  <div class="meta">
+    <div><strong>说明：</strong>柱状图展示了 Alphabet Inc.（GOOG）在 2016–2024 财年的投入资本回报率（ROIC）变化情况。</div>
+    <div><strong>提示：</strong>将鼠标悬停在柱子上查看精确数值；可以点击图例以切换数据系列显示。</div>
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+
+  <script>
+    // Source data (ROIC as decimal; will be shown as percentage)
+    const fiscalYears = ["2016","2017","2018","2019","2020","2021","2022","2023","2024"];
+    const roicValues = [
+      0.1596597838955143,
+      0.0831821053417716,
+      0.1480136694421674,
+      0.1680683789887619,
+      0.1727106578931536,
+      0.2871587878041528,
+      0.2530753074446799,
+      0.2771974991478725,
+      0.3186861912018215
+    ];
+
+    // Convert to percentages for display/scale
+    const roicPctValues = roicValues.map(v => v * 100);
+
+    const ctx = document.getElementById('roicChart').getContext('2d');
+
+    const roicChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: fiscalYears,
+        datasets: [{
+          label: 'ROIC',
+          data: roicPctValues,
+          backgroundColor: function(context) {
+            const index = context.dataIndex;
+            const baseColor = 'rgba(37, 99, 235, 0.85)';      // blue
+            const highlightColor = 'rgba(56, 189, 248, 0.95)'; // cyan for max
+            const maxVal = Math.max(...roicPctValues);
+            return roicPctValues[index] === maxVal ? highlightColor : baseColor;
+          },
+          borderRadius: 6,
+          borderSkipped: false,
+          hoverBackgroundColor: 'rgba(37, 99, 235, 1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 800,
+          easing: 'easeOutQuart'
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 16,
+              usePointStyle: true,
+              pointStyle: 'rectRounded',
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function(context) {
+                const val = context.raw;
+                return ' ROIC: ' + val.toFixed(2) + '%';
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 12
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(148, 163, 184, 0.2)'
+            },
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              },
+              font: {
+                size: 12
+              }
+            },
+            title: {
+              display: true,
+              text: 'ROIC（%）',
+              font: {
+                size: 13,
+                weight: '600'
+              },
+              color: '#475569'
+            }
+          }
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        }
+      }
+    });
+  </script>
+</body>
+</html>

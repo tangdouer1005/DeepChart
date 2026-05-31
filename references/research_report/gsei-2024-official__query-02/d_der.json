@@ -1,0 +1,75 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a bar chart of the top 15 countries in the 2024 country tables by the percentage of their listed cities that fall inside the global top 100, computed as `count(global_rank <= 100) / listed city count`, expressed as a percentage, sorted descending, and excluding countries with fewer than 5 listed cities.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2024 Listed-City Top-100 Breadth",
+  "value_unit": "percent",
+  "sort_rule": "descending by top100_city_share_pct, tie-break alphabetically",
+  "selection_rule": "top 15 countries with at least 5 listed cities",
+  "records": [
+    {
+      "entity": "United States",
+      "top100_city_share_pct": 100.0
+    },
+    {
+      "entity": "China",
+      "top100_city_share_pct": 70.0
+    },
+    {
+      "entity": "India",
+      "top100_city_share_pct": 60.0
+    },
+    {
+      "entity": "Canada",
+      "top100_city_share_pct": 50.0
+    },
+    {
+      "entity": "United Kingdom",
+      "top100_city_share_pct": 40.0
+    },
+    {
+      "entity": "Germany",
+      "top100_city_share_pct": 30.0
+    },
+    {
+      "entity": "Australia",
+      "top100_city_share_pct": 20.0
+    },
+    {
+      "entity": "Czechia",
+      "top100_city_share_pct": 20.0
+    },
+    {
+      "entity": "Israel",
+      "top100_city_share_pct": 20.0
+    },
+    {
+      "entity": "Spain",
+      "top100_city_share_pct": 20.0
+    },
+    {
+      "entity": "South Korea",
+      "top100_city_share_pct": 16.666667
+    },
+    {
+      "entity": "Taiwan",
+      "top100_city_share_pct": 16.666667
+    },
+    {
+      "entity": "Argentina",
+      "top100_city_share_pct": 14.285714
+    },
+    {
+      "entity": "Austria",
+      "top100_city_share_pct": 14.285714
+    },
+    {
+      "entity": "Indonesia",
+      "top100_city_share_pct": 14.285714
+    }
+  ],
+  "value_field": "top100_city_share_pct",
+  "x_label": "Country",
+  "y_label": "Share of listed cities in global top 100 (%)"
+}

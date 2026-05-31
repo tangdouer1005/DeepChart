@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>abt 资本再投资率 (2016-2024)</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f8fa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 16px 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      height: 480px; /* ensure visible height for chart */
+    }
+
+    canvas {
+      max-width: 100%;
+    }
+
+    .chart-legend {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .controls {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .controls button {
+      border: 1px solid #ccc;
+      background: #fff;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .controls button.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>abt 资本再投资率</h1>
+    <h2>2016 - 2024 财年（Bar 图）</h2>
+
+    <div class="controls">
+      <button id="btn-normal" class="active">正常比例</button>
+      <button id="btn-log">对数比例</button>
+    </div>
+
+    <canvas id="reinvestmentChart"></canvas>
+    <div class="chart-legend">
+      指标：资本再投资率 (Reinvestment Rate)。<br>
+      数据来源：用户提供；数值为比率（例如 0.35 ≈ 35%）。
+    </div>
+  </div>
+
+  <!-- Chart.js (stable 4.x); placed before our own script -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // Wrap in onload to avoid timing issues in some environments
+    window.addEventListener('load', function() {
+      // Source data (exactly as provided)
+      const fiscalYears = [
+        "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+      ];
+
+      const reinvestmentRates = [
+        0.3453040185749316,
+        2.7434163271638643,
+        0.2673855113790886,
+        0.5496369502080608,
+        0.3584863938252441,
+        0.2602651675859143,
+        0.2545938984173974,
+        0.5656550450539617,
+        4.258386869540718
+      ];
+
+      const canvas = document.getElementById('reinvestmentChart');
+      if (!canvas) {
+        console.error("Canvas element #reinvestmentChart not found.");
+        return;
+      }
+
+      const ctx = canvas.getContext('2d');
+
+      const barColor = 'rgba(37, 99, 235, 0.75)';
+      const barBorder = 'rgba(37, 99, 235, 1)';
+
+      function formatValue(value) {
+        return value.toFixed(2);
+      }
+
+      const data = {
+        labels: fiscalYears,
+        datasets: [{
+          label: '资本再投资率 (Reinvestment Rate)',
+          data: reinvestmentRates,
+          backgroundColor: barColor,
+          borderColor: barBorder,
+          borderWidth: 1.2,
+          borderRadius: 4,
+          hoverBackgroundColor: 'rgba(37, 99, 235, 0.95)'
+        }]
+      };
+
+      const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const v = context.parsed.y;
+                if (v == null || isNaN(v)) return '';
+                return ' ' + formatValue(v);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        layout: {
+          padding: {
+            top: 10,
+            right: 10,
+            bottom: 0,
+            left: 0
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财年 (Fiscal Year)',
+              font: { size: 12 }
+            },
+            ticks: {
+              maxRotation: 0
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            type: 'linear',
+            title: {
+              display: true,
+              text: '资本再投资率 (比率)',
+              font: { size: 12 }
+            },
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0,0,0,0.05)'
+            },
+            ticks: {
+              callback: function(value) {
+                // ensure numeric for formatting
+                const v = Number(value);
+                if (isNaN(v)) return value;
+                return v.toFixed(1);
+              }
+            }
+          }
+        }
+      };
+
+      const chart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+      });
+
+      // Controls to toggle between linear and logarithmic scale
+      const btnNormal = document.getElementById('btn-normal');
+      const btnLog = document.getElementById('btn-log');
+
+      function setScale(type) {
+        chart.options.scales.y.type = type;
+        chart.options.scales.y.beginAtZero = (type === 'linear');
+        // For log scale, ensure min > 0 (smallest positive value in dataset)
+        if (type === 'log') {
+          const minPositive = Math.min(
+            ...reinvestmentRates.filter(v => v > 0)
+          );
+          chart.options.scales.y.min = minPositive / 10;
+        } else {
+          delete chart.options.scales.y.min;
+        }
+        chart.update();
+
+        if (type === 'linear') {
+          btnNormal.classList.add('active');
+          btnLog.classList.remove('active');
+        } else {
+          btnLog.classList.add('active');
+          btnNormal.classList.remove('active');
+        }
+      }
+
+      if (btnNormal && btnLog) {
+        btnNormal.addEventListener('click', function() { setScale('linear'); });
+        btnLog.addEventListener('click', function() { setScale('log'); });
+      }
+    });
+  </script>
+</body>
+</html>

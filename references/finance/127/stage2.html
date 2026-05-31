@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8" />
+    <title>ko's 格雷厄姆“烟蒂股”净值 (NNWC) 2016–2024</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Chart.js (latest stable 4.x) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+                sans-serif;
+            background: #fafafa;
+            color: #222;
+        }
+        .container {
+            max-width: 960px;
+            margin: 24px auto 40px;
+            padding: 0 16px;
+        }
+        h1 {
+            font-size: 1.4rem;
+            margin: 0 0 4px;
+        }
+        h2 {
+            font-size: 1.0rem;
+            margin: 0 0 16px;
+            color: #666;
+            font-weight: 500;
+        }
+        .chart-wrapper {
+            /* Fixed aspect ratio so the chart is not stretched */
+            max-width: 100%;
+            height: 420px; /* reasonable fixed height */
+        }
+        canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .footer-note {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #111;
+                color: #eee;
+            }
+            h2 {
+                color: #aaa;
+            }
+            .footer-note {
+                color: #888;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ko's 格雷厄姆“烟蒂股”净值 (NNWC) 每股</h1>
+    <h2>2016–2024 年度变化（单位：每股 NNWC）</h2>
+
+    <!-- Give the canvas a fixed, sensible container so it does not stretch abnormally -->
+    <div class="chart-wrapper">
+        <canvas id="nnwcChart" aria-label="Graham NNWC per share from 2016 to 2024" role="img"></canvas>
+    </div>
+
+    <div class="footer-note">
+        数据来源：用户提供的年度 NNWC 每股数据。值为负数表示净流动资产为负。
+    </div>
+</div>
+
+<script>
+(() => {
+    const ctx = document.getElementById('nnwcChart').getContext('2d');
+
+    // Source data (exactly as provided)
+    const labels = [
+        '2016','2017','2018','2019','2020',
+        '2021','2022','2023','2024'
+    ];
+
+    const values = [
+        -6.87886420883902,
+        -7.487049028677151,
+        -9.124912770411724,
+        -10.401483541956422,
+        -10.819338422391857,
+        -10.817741935483872,
+        -10.19448275862069,
+        -10.023277252823233,
+        -11.15277777777778
+    ];
+
+    const barColor = 'rgba(52, 152, 219, 0.8)';
+    const barBorderColor = 'rgba(41, 128, 185, 1)';
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                label: 'NNWC 每股（Graham Net-Net Working Capital per share）',
+                data: values,
+                backgroundColor: barColor,
+                borderColor: barBorderColor,
+                borderWidth: 1.2,
+                hoverBackgroundColor: 'rgba(41, 128, 185, 0.9)',
+                hoverBorderColor: 'rgba(31, 97, 141, 1)',
+            }]
+        },
+        options: {
+            // Let Chart.js manage its own aspect ratio; container gives it height
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 2, // width:height = 2:1, improves readability
+            interaction: {
+                mode: 'nearest',
+                axis: 'x',
+                intersect: true
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: (ctx) => {
+                            const v = ctx.raw;
+                            return ` NNWC 每股: ${v.toFixed(3)}`;
+                        }
+                    }
+                },
+                legend: {
+                    display: true,
+                    labels: {
+                        usePointStyle: true,
+                        boxWidth: 10,
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                title: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: '财政年度',
+                        font: { weight: '600', size: 12 }
+                    },
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'NNWC 每股（负值：净流动资产为负）',
+                        font: { weight: '600', size: 12 }
+                    },
+                    beginAtZero: true,
+                    ticks: {
+                        font: { size: 11 },
+                        callback: (value) => (typeof value === 'number'
+                            ? value.toFixed(1)
+                            : value)
+                    }
+                }
+            },
+            layout: {
+                padding: {
+                    top: 10,
+                    right: 16,
+                    bottom: 10,
+                    left: 8
+                }
+            }
+        }
+    });
+})();
+</script>
+</body>
+</html>

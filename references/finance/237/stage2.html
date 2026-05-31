@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>T-Mobile US (TMUS) Altman Z-Score 2016–2024</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    .chart-container {
+      max-width: 900px;
+      height: 420px;              /* Fixed reasonable height for chart area */
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+      padding: 18px 20px 16px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .canvas-wrapper {
+      flex: 1;
+      min-height: 260px;          /* Ensures a usable plotting area */
+    }
+    .meta {
+      font-size: 11px;
+      color: #777;
+      line-height: 1.4;
+    }
+    .legend-note {
+      font-size: 12px;
+      color: #555;
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;    /* Let container determine height to avoid extreme stretching */
+    }
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+      }
+      .chart-container {
+        height: 380px;
+        padding: 12px 12px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <div>
+      <h1>T-Mobile US (TMUS) Altman Z-Score</h1>
+      <h2>奥特曼破产预测模型：2016–2024 年变化（Bar Chart）</h2>
+    </div>
+
+    <div class="canvas-wrapper">
+      <!-- No height attribute here; CSS controls size -->
+      <canvas id="zScoreChart"></canvas>
+    </div>
+
+    <div class="legend-note">
+      <strong>参考区间说明（制造业经典模型）：</strong>
+      Z &lt; 1.8：高风险区 &nbsp;|&nbsp;
+      1.8 ≤ Z ≤ 3.0：灰色区 &nbsp;|&nbsp;
+      Z &gt; 3.0：安全区<br>
+      <span style="font-size:11px;">
+        注：Altman Z-Score 模型原本基于特定行业与会计准则，阈值解释具有情境性，仅供风险相对变化参考。
+      </span>
+    </div>
+
+    <div class="meta">
+      数据来源：用户提供的 TMUS Altman Z-Score（RESULT_Z_Score）年度数据，2016–2024 财年。<br>
+      本图仅反映所给数据的可视化变化，不构成投资建议。
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    const years = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const zScores = [
+      0.658110974063302,
+      0.7228579559212528,
+      0.8668506046936911,
+      0.8456068377712658,
+      0.7141858979019826,
+      0.7653793390207202,
+      0.739959433051527,
+      0.9150105210641152,
+      1.016777321518799
+    ];
+
+    const ctx = document.getElementById("zScoreChart").getContext("2d");
+
+    const barBackgroundColors = zScores.map(v => {
+      if (v < 1.8) return "rgba(239, 68, 68, 0.75)";  // red
+      if (v <= 3.0) return "rgba(234, 179, 8, 0.8)";  // amber
+      return "rgba(34, 197, 94, 0.8)";                // green
+    });
+    const barBorderColors = zScores.map(v => {
+      if (v < 1.8) return "rgba(185, 28, 28, 1)";
+      if (v <= 3.0) return "rgba(161, 98, 7, 1)";
+      return "rgba(21, 128, 61, 1)";
+    });
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "Altman Z-Score",
+            data: zScores,
+            backgroundColor: barBackgroundColors,
+            borderColor: barBorderColors,
+            borderWidth: 1.4,
+            borderRadius: 5,
+            hoverBorderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // use container’s aspect ratio
+        layout: {
+          padding: { top: 5, right: 12, bottom: 5, left: 4 }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.92)",
+            titleFont: { weight: "600", size: 13 },
+            bodyFont: { weight: "400", size: 12 },
+            padding: 8,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                let zone = "";
+                if (value < 1.8) zone = "（高风险区）";
+                else if (value <= 3.0) zone = "（灰色区）";
+                else zone = "（安全区）";
+                return " Z-Score: " + value.toFixed(3) + " " + zone;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+              font: { size: 12 }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 1.4, // tight range around data so bars fill vertical space
+            title: {
+              display: true,
+              text: "Altman Z-Score",
+              font: { size: 13, weight: "500" }
+            },
+            ticks: {
+              stepSize: 0.2,
+              font: { size: 12 }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.35)"
+            }
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        animation: {
+          duration: 700,
+          easing: "easeOutQuart"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "status": "complete",
+  "chart_type": "slope",
+  "title": "Cohort Mosaic vs rescaled maturity",
+  "label_field": "label",
+  "left_field": "left",
+  "right_field": "right",
+  "left_label": "Average Mosaic",
+  "right_label": "Average maturity x 200",
+  "x_label": "0-1000 scale",
+  "data": [
+    {
+      "label": "2012-2016",
+      "left": 758.8,
+      "right": 777.777778
+    },
+    {
+      "label": "2017-2019",
+      "left": 780.413793,
+      "right": 717.241379
+    },
+    {
+      "label": "2020-2024",
+      "left": 773.918033,
+      "right": 672.413793
+    }
+  ]
+}

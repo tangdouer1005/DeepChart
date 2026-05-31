@@ -1,0 +1,118 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a ranked bar chart for the top 12 companies by `funding concentration per employee`, computed as `Total raised in $M / Headcount`, after filtering to companies with `Commercial Maturity >= 3 / 5`, non-`N/A` `Headcount`, and non-`N/A` `Total raised`, with bars grouped by segment.",
+  "status": "completed",
+  "title": "Top companies by funding concentration per employee",
+  "chart_kind": "horizontal_bar",
+  "chart_type": "ranked bar chart",
+  "value_unit": "$M per employee",
+  "sort_rule": "descending by funding_per_employee_m",
+  "selection_rule": "top 12 with commercial_maturity >= 3 and non-missing headcount,total_raised_m",
+  "metadata": {
+    "entity_field": "entity",
+    "value_field": "funding_per_employee_m",
+    "hue_field": "segment",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "entity": "Manna",
+      "segment": "Aerospace (commercial)",
+      "funding_per_employee_m": 3.566666666666667,
+      "commercial_maturity": 4.0,
+      "headcount": 18.0,
+      "total_raised_m": 64.2
+    },
+    {
+      "entity": "Helsing",
+      "segment": "Defense",
+      "funding_per_employee_m": 2.830188679245283,
+      "commercial_maturity": 4.0,
+      "headcount": 530.0,
+      "total_raised_m": 1500.0
+    },
+    {
+      "entity": "Neuraspace",
+      "segment": "Aerospace (dual-use)",
+      "funding_per_employee_m": 1.2034482758620688,
+      "commercial_maturity": 3.0,
+      "headcount": 29.0,
+      "total_raised_m": 34.9
+    },
+    {
+      "entity": "Quantum Systems",
+      "segment": "Aerospace (dual-use)",
+      "funding_per_employee_m": 0.9272486772486772,
+      "commercial_maturity": 4.0,
+      "headcount": 378.0,
+      "total_raised_m": 350.5
+    },
+    {
+      "entity": "Hadean",
+      "segment": "Aerospace (dual-use)",
+      "funding_per_employee_m": 0.8644736842105264,
+      "commercial_maturity": 4.0,
+      "headcount": 76.0,
+      "total_raised_m": 65.7
+    },
+    {
+      "entity": "ReOrbit",
+      "segment": "Aerospace (dual-use)",
+      "funding_per_employee_m": 0.8478873239436621,
+      "commercial_maturity": 4.0,
+      "headcount": 71.0,
+      "total_raised_m": 60.2
+    },
+    {
+      "entity": "Varjo",
+      "segment": "Aerospace (dual-use)",
+      "funding_per_employee_m": 0.7912442396313364,
+      "commercial_maturity": 4.0,
+      "headcount": 217.0,
+      "total_raised_m": 171.7
+    },
+    {
+      "entity": "Wingcopter",
+      "segment": "Aerospace (commercial)",
+      "funding_per_employee_m": 0.7861313868613139,
+      "commercial_maturity": 4.0,
+      "headcount": 137.0,
+      "total_raised_m": 107.7
+    },
+    {
+      "entity": "ARX Robotics",
+      "segment": "Defense",
+      "funding_per_employee_m": 0.7736842105263158,
+      "commercial_maturity": 4.0,
+      "headcount": 76.0,
+      "total_raised_m": 58.8
+    },
+    {
+      "entity": "Dronamics",
+      "segment": "Aerospace (commercial)",
+      "funding_per_employee_m": 0.7362903225806451,
+      "commercial_maturity": 4.0,
+      "headcount": 124.0,
+      "total_raised_m": 91.3
+    },
+    {
+      "entity": "ICEYE",
+      "segment": "Aerospace (dual-use)",
+      "funding_per_employee_m": 0.721927374301676,
+      "commercial_maturity": 5.0,
+      "headcount": 716.0,
+      "total_raised_m": 516.9
+    },
+    {
+      "entity": "D-Orbit",
+      "segment": "Aerospace (dual-use)",
+      "funding_per_employee_m": 0.6128878281622911,
+      "commercial_maturity": 5.0,
+      "headcount": 419.0,
+      "total_raised_m": 256.8
+    }
+  ]
+}

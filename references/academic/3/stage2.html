@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // 1. Data Source (Embedded JSON)
+        const chartData = {
+    "means": {
+        "WT naive": 78.7871611111111,
+        "WT saline": 58.94090588235294,
+        "WT K": 76.41952666666666,
+        "A1 ko naive": 79.30172941176471,
+        "A1ko saline": 64.73307777777778,
+        "A1ko K": 69.16162727272727,
+        "A2a ko naive": 80.41595000000001,
+        "A2a ko saline": 68.60035833333333,
+        "A2a ko K": 69.42009999999999
+    },
+    "sems": {
+        "WT naive": 2.6143027747342003,
+        "WT saline": 2.560113761524352,
+        "WT K": 4.251886532861638,
+        "A1 ko naive": 2.7116091436766725,
+        "A1ko saline": 6.870126363846304,
+        "A1ko K": 4.026632015787137,
+        "A2a ko naive": 2.8985841843044677,
+        "A2a ko saline": 4.322905659189345,
+        "A2a ko K": 5.2529738158834505
+    },
+    "raw_data": {
+        "WT naive": [
+            55.5556,
+            95.9821,
+            74.0458,
+            71.9512,
+            80.2691,
+            79.0941,
+            76.0563,
+            74.6114,
+            89.0,
+            92.4603,
+            91.4062,
+            75.8755,
+            92.7185,
+            76.7933,
+            69.9531,
+            71.5026,
+            88.6598,
+            62.234
+        ],
+        "WT saline": [
+            65.5914,
+            57.2072,
+            58.1673,
+            44.9735,
+            72.1774,
+            54.1936,
+            63.587,
+            48.731,
+            35.3591,
+            59.6154,
+            69.0196,
+            61.6601,
+            81.0127,
+            54.0909,
+            60.4938,
+            62.3037,
+            53.8117
+        ],
+        "WT K": [
+            82.2878,
+            88.8393,
+            48.1081,
+            86.1925,
+            63.8743,
+            86.9565,
+            84.188,
+            78.0172,
+            95.0226,
+            73.5178,
+            93.609,
+            52.7094,
+            44.6237,
+            88.421,
+            79.9257
+        ],
+        "A1 ko naive": [
+            97.2881,
+            96.4169,
+            82.3708,
+            92.9578,
+            77.6786,
+            80.8725,
+            86.0656,
+            84.9582,
+            70.7395,
+            86.6667,
+            70.1492,
+            71.0191,
+            56.3319,
+            74.6988,
+            65.942,
+            70.3971,
+            83.5766
+        ],
+        "A1ko saline": [
+            40.5512,
+            76.4463,
+            68.75,
+            53.7234,
+            83.3333,
+            73.0337,
+            25.1724,
+            76.1468,
+            85.4406
+        ],
+        "A1ko K": [
+            49.7382,
+            57.5758,
+            61.6541,
+            75.3927,
+            66.8293,
+            85.1282,
+            78.7879,
+            47.541,
+            75.6493,
+            84.5902,
+            77.8912
+        ],
+        "A2a ko naive": [
+            80.2198,
+            79.5322,
+            96.6258,
+            71.5596,
+            70.5882,
+            61.6601,
+            77.1784,
+            86.2069,
+            87.5598,
+            95.6522,
+            83.7963,
+            82.5911,
+            84.5745,
+            75.5245,
+            56.5217,
+            96.8641
+        ],
+        "A2a ko saline": [
+            80.0,
+            55.9322,
+            81.1225,
+            74.8603,
+            81.8182,
+            58.9226,
+            88.835,
+            80.1136,
+            60.9091,
+            46.25,
+            43.949,
+            70.4918
+        ],
+        "A2a ko K": [
+            54.5455,
+            83.3333,
+            79.2627,
+            47.9245,
+            66.3158,
+            57.7092,
+            78.2101,
+            88.0597
+        ]
+    },
+    "columns": [
+        "WT naive",
+        "WT saline",
+        "WT K",
+        "A1 ko naive",
+        "A1ko saline",
+        "A1ko K",
+        "A2a ko naive",
+        "A2a ko saline",
+        "A2a ko K"
+    ],
+    "comparisons": [
+        {
+            "group_start": 0,
+            "group_end": 3,
+            "col1_idx": 0,
+            "col2_idx": 1,
+            "col1": "WT naive",
+            "col2": "WT saline",
+            "p_val": 5.403952453882359e-06
+        },
+        {
+            "group_start": 0,
+            "group_end": 3,
+            "col1_idx": 1,
+            "col2_idx": 2,
+            "col1": "WT saline",
+            "col2": "WT K",
+            "p_val": 0.0010777515811896492
+        },
+        {
+            "group_start": 3,
+            "group_end": 6,
+            "col1_idx": 3,
+            "col2_idx": 4,
+            "col1": "A1 ko naive",
+            "col2": "A1ko saline",
+            "p_val": 0.026952492116580948
+        },
+        {
+            "group_start": 3,
+            "group_end": 6,
+            "col1_idx": 4,
+            "col2_idx": 5,
+            "col1": "A1ko saline",
+            "col2": "A1ko K",
+            "p_val": 0.5686359313990721
+        },
+        {
+            "group_start": 6,
+            "group_end": 9,
+            "col1_idx": 6,
+            "col2_idx": 7,
+            "col1": "A2a ko naive",
+            "col2": "A2a ko saline",
+            "p_val": 0.02627694885737223
+        },
+        {
+            "group_start": 6,
+            "group_end": 9,
+            "col1_idx": 7,
+            "col2_idx": 8,
+            "col1": "A2a ko saline",
+            "col2": "A2a ko K",
+            "p_val": 0.9055807837761114
+        }
+    ]
+};
+
+        const columns = chartData.columns;
+        
+        const stats = {};
+        columns.forEach(col => {
+            const arr = chartData.raw_data[col];
+            // Variance not provided in JSON but means/sems are. 
+            // We need raw data for finding max value for bracket positioning.
+            // variance is not needed for stats unless used for calculation, but we have p-values.
+            stats[col] = { 
+                mean: chartData.means[col], 
+                sem: chartData.sems[col], 
+                arr: arr
+            };
+        });
+
+        const annotations = [];
+        let groupMaxH = {0:0, 1:0, 2:0}; // Groups: 0-2, 3-5, 6-8
+
+        // Calculate max height per group for bracket base
+        [0, 1, 2].forEach(gIdx => {
+            const start = gIdx * 3;
+            const end = start + 3;
+            let maxVal = 0;
+            for(let i=start; i<end; i++) {
+                const s = stats[columns[i]];
+                maxVal = Math.max(maxVal, s.mean + s.sem);
+                // Also check raw data max (though usually mean+sem is close to top for error bars, raw points might be higher)
+                // In old code: s.arr.forEach(v => maxVal = Math.max(maxVal, v));
+                s.arr.forEach(v => maxVal = Math.max(maxVal, v));
+            }
+            groupMaxH[gIdx] = maxVal + 5;
+        });
+
+        chartData.comparisons.forEach(comp => {
+            const idx1 = comp.col1_idx;
+            const idx2 = comp.col2_idx;
+            const pVal = comp.p_val;
+            
+            let sigText = "";
+            if (pVal < 0.001) sigText = "***";
+            else if (pVal < 0.01) sigText = "**";
+            else if (pVal < 0.05) sigText = "*";
+            else sigText = `P = ${pVal.toFixed(2)}`;
+
+            const groupIdx = Math.floor(idx1 / 3);
+            const yPos = groupMaxH[groupIdx];
+            groupMaxH[groupIdx] += 12; // stack
+
+            annotations.push({ x1: idx1, x2: idx2, y: yPos, text: sigText });
+        });
+
+        const colors = [
+            '#468FA3', '#1A1A1A', '#9E2A2B',
+            '#5DAcc0', '#444444', '#E85A55',
+            '#66C2D9', '#808080', '#F08080'
+        ];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        
+        const scatterData = [];
+        columns.forEach((col, idx) => {
+            stats[col].arr.forEach(val => {
+                const jitter = (Math.random() - 0.5) * 0.3;
+                scatterData.push([idx + jitter, val]);
+            });
+        });
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 100, left: 60 },
+            xAxis: [
+                { type: 'category', data: columns, show: false }, 
+                {
+                    type: 'category', 
+                    data: ['-', '+', '+', '-', '+', '+', '-', '+', '+'], 
+                    position: 'bottom', offset: 15, 
+                    axisLine: {show: false}, axisTick: {show: false}, 
+                    axisLabel: { color: 'black' } 
+                }, // CRS
+                {
+                    type: 'category', 
+                    data: ['-', '-', '+', '-', '-', '+', '-', '-', '+'], 
+                    position: 'bottom', offset: 35, 
+                    axisLine: {show: false}, axisTick: {show: false}, 
+                    axisLabel: { color: 'black' } 
+                } // Ketamine
+            ],
+            yAxis: {
+                type: 'value',
+                max: 145,
+                axisLabel: { color: 'black', fontSize: 12 },
+                name: 'Immobility time (s)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } } 
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: columns.map((col, i) => ({ value: stats[col].mean, itemStyle: { color: colors[i] } })),
+                    barWidth: '70%',
+                    z: 1,
+                    xAxisIndex: 0
+                },
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const x = api.value(0);
+                        const mean = api.value(1);
+                        const sem = api.value(2);
+                        const p1 = api.coord([x, mean - sem]);
+                        const p2 = api.coord([x, mean + sem]);
+                        const style = api.style({ stroke: 'gray', lineWidth: 1.5 });
+                        return { type: 'line', shape: { x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1] }, style: style };
+                    },
+                    data: columns.map((col, i) => [i, stats[col].mean, stats[col].sem]),
+                    z: 2,
+                    xAxisIndex: 0
+                },
+                {
+                    type: 'scatter',
+                    symbolSize: 6,
+                    itemStyle: { color: '#555555', opacity: 0.7 },
+                    data: scatterData,
+                    z: 3,
+                    xAxisIndex: 0
+                },
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const ann = annotations[params.dataIndex];
+                        const p1 = api.coord([ann.x1, ann.y]);
+                        const p2 = api.coord([ann.x2, ann.y]);
+                        const style = api.style({ stroke: 'black', lineWidth: 1, fill: null });
+                        return {
+                            type: 'group',
+                            children: [
+                                { type: 'polyline', shape: { points: [[p1[0], p1[1]+2], [p1[0], p1[1]], [p2[0], p2[1]], [p2[0], p2[1]+2]] }, style: style },
+                                { type: 'text', style: { text: ann.text, x: (p1[0]+p2[0])/2, y: p1[1]-2, textAlign: 'center', textVerticalAlign: 'bottom', fill: 'black', font: '10px Arial' } }
+                            ]
+                        };
+                    },
+                    data: annotations.map((a, i) => i), // Dummy data
+                    z: 4,
+                    xAxisIndex: 0
+                }
+            ],
+            graphic: [
+                // 'b' label
+                { type: 'text', left: 0, top: 0, style: { text: 'b', font: 'bold 20px Arial' } },
+                // X-axis table
+                // Rows: CRS, Ketamine
+                { type: 'text', left: 20, bottom: 65, style: { text: 'CRS', textAlign: 'right', font: '12px Arial' } },
+                { type: 'text', left: 20, bottom: 45, style: { text: 'Ketamine', textAlign: 'right', font: '12px Arial' } },
+                // Group labels (WT, Adora1, Adora2a)
+                { type: 'line', shape: { x1: 95, y1: 470, x2: 215, y2: 470 }, style: { stroke: 'black' } }, 
+                { type: 'text', left: 155, bottom: 10, style: { text: 'WT', textAlign: 'center', font: '12px Arial' } },
+
+                { type: 'line', shape: { x1: 235, y1: 470, x2: 355, y2: 470 }, style: { stroke: 'black' } }, 
+                { type: 'text', left: 295, bottom: 10, style: { text: 'Adora1-/-', textAlign: 'center', font: '12px Arial' } },
+                
+                { type: 'line', shape: { x1: 375, y1: 470, x2: 495, y2: 470 }, style: { stroke: 'black' } }, 
+                { type: 'text', left: 435, bottom: 10, style: { text: 'Adora2a-/-', textAlign: 'center', font: '12px Arial' } }
+            ]
+        };
+        
+        chart.setOption(option);
+    </script>
+</body>
+</html>

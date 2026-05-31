@@ -1,0 +1,185 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a horizontal bar chart comparing `maturity multiple = Ecosystem Value / Total Early-Stage Funding` across the U.S. ecosystems `Silicon Valley - Bay Area`, `New York City`, `Los Angeles`, `Boston`, `San Diego`, `Miami`, `Philadelphia`, and `Mississippi`, with the result expressed as `x multiple`, sorted descending, and keeping all U.S. items.",
+  "report_key": "gser-blue-economy-edition",
+  "source_summary_file": "/Users/tangjiahui/Desktop/chartbench/StartupGenome/summaries/gser-blue-economy-edition.md",
+  "source_query_file": "/Users/tangjiahui/Desktop/chartbench/StartupGenome/summaries/gser-blue-economy-edition_queries.md",
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "source_page": 49,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 2.0,
+      "value_unit": "USD trillions",
+      "value_type": "currency",
+      "source_section": "page 49",
+      "source_note": "directly visible in summary as `$2 tn`"
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "source_page": 49,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 25.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 49",
+      "source_note": "directly visible in summary as `$25 bn`"
+    },
+    {
+      "entity": "New York City",
+      "source_page": 55,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 371.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 55",
+      "source_note": "directly visible in summary as `$371 bn`"
+    },
+    {
+      "entity": "New York City",
+      "source_page": 55,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 14.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 55",
+      "source_note": "directly visible in summary as `$14 bn`"
+    },
+    {
+      "entity": "Los Angeles",
+      "source_page": 61,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 297.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 61",
+      "source_note": "directly visible in summary as `$297 bn`"
+    },
+    {
+      "entity": "Los Angeles",
+      "source_page": 61,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 5.9,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 61",
+      "source_note": "directly visible in summary as `$5.9 bn`"
+    },
+    {
+      "entity": "Boston",
+      "source_page": 72,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 266.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 72",
+      "source_note": "directly visible in summary as `$266 bn`"
+    },
+    {
+      "entity": "Boston",
+      "source_page": 72,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 8.7,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 72",
+      "source_note": "directly visible in summary as `$8.7 bn`"
+    },
+    {
+      "entity": "San Diego",
+      "source_page": 76,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 94.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 76",
+      "source_note": "directly visible in summary as `$94 bn`"
+    },
+    {
+      "entity": "San Diego",
+      "source_page": 76,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 2.8,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 76",
+      "source_note": "directly visible in summary as `$2.8 bn`"
+    },
+    {
+      "entity": "Miami",
+      "source_page": 78,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 36.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 78",
+      "source_note": "directly visible in summary as `$36 bn`"
+    },
+    {
+      "entity": "Miami",
+      "source_page": 78,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 1.9,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 78",
+      "source_note": "directly visible in summary as `$1.9 bn`"
+    },
+    {
+      "entity": "Philadelphia",
+      "source_page": 91,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 46.0,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 91",
+      "source_note": "directly visible in summary as `$46 bn`"
+    },
+    {
+      "entity": "Philadelphia",
+      "source_page": 91,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 1.3,
+      "value_unit": "USD billions",
+      "value_type": "currency",
+      "source_section": "page 91",
+      "source_note": "directly visible in summary as `$1.3 bn`"
+    },
+    {
+      "entity": "Mississippi",
+      "source_page": 97,
+      "field_group": "Section 3 ecosystem table",
+      "field": "ecosystem_value",
+      "value": 30.0,
+      "value_unit": "USD millions",
+      "value_type": "currency",
+      "source_section": "page 97",
+      "source_note": "directly visible in summary as `$30 m`"
+    },
+    {
+      "entity": "Mississippi",
+      "source_page": 97,
+      "field_group": "Section 3 ecosystem table",
+      "field": "total_early_stage_funding",
+      "value": 90.0,
+      "value_unit": "USD thousands",
+      "value_type": "currency",
+      "source_section": "page 97",
+      "source_note": "directly visible in summary as `$90 k`"
+    }
+  ]
+}

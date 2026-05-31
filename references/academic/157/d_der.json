@@ -1,0 +1,191 @@
+[
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2027.0,
+        "central estimate of SAF cost": 641.1,
+        "low SAF cost": 357.2,
+        "high SAF cost": 1947.5
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2028.0,
+        "central estimate of SAF cost": 453.3,
+        "low SAF cost": 164.1,
+        "high SAF cost": 1905.5
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2029.0,
+        "central estimate of SAF cost": 257.2,
+        "low SAF cost": -51.4,
+        "high SAF cost": 1859.0
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2030.0,
+        "central estimate of SAF cost": 61.3,
+        "low SAF cost": -285.3,
+        "high SAF cost": 1815.9
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2031.0,
+        "central estimate of SAF cost": -125.5,
+        "low SAF cost": -533.5,
+        "high SAF cost": 1784.8
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2032.0,
+        "central estimate of SAF cost": -397.3,
+        "low SAF cost": -791.8,
+        "high SAF cost": 1677.8
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2033.0,
+        "central estimate of SAF cost": -695.4,
+        "low SAF cost": -1073.1,
+        "high SAF cost": 1585.9
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2034.0,
+        "central estimate of SAF cost": -1026.5,
+        "low SAF cost": -1342.4,
+        "high SAF cost": 1433.8
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2035.0,
+        "central estimate of SAF cost": -1398.6,
+        "low SAF cost": -1607.1,
+        "high SAF cost": 1246.9
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2027.0,
+        "central estimate of SAF cost": 1012.4,
+        "low SAF cost": 728.5,
+        "high SAF cost": 2318.8
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2028.0,
+        "central estimate of SAF cost": 913.1,
+        "low SAF cost": 623.8,
+        "high SAF cost": 2365.3
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2029.0,
+        "central estimate of SAF cost": 816.2,
+        "low SAF cost": 507.7,
+        "high SAF cost": 2418.0
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2030.0,
+        "central estimate of SAF cost": 730.8,
+        "low SAF cost": 384.2,
+        "high SAF cost": 2485.4
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2031.0,
+        "central estimate of SAF cost": 666.1,
+        "low SAF cost": 258.0,
+        "high SAF cost": 2576.4
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2032.0,
+        "central estimate of SAF cost": 528.4,
+        "low SAF cost": 133.9,
+        "high SAF cost": 2603.5
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2033.0,
+        "central estimate of SAF cost": 395.0,
+        "low SAF cost": 17.3,
+        "high SAF cost": 2676.3
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2034.0,
+        "central estimate of SAF cost": 227.1,
+        "low SAF cost": -88.8,
+        "high SAF cost": 2687.4
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2035.0,
+        "central estimate of SAF cost": 32.2,
+        "low SAF cost": -176.3,
+        "high SAF cost": 2677.6
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2027.0,
+        "central estimate of SAF cost": 217.5,
+        "low SAF cost": -66.4,
+        "high SAF cost": 1523.9
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2028.0,
+        "central estimate of SAF cost": -72.5,
+        "low SAF cost": -361.7,
+        "high SAF cost": 1379.8
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2029.0,
+        "central estimate of SAF cost": -383.2,
+        "low SAF cost": -691.8,
+        "high SAF cost": 1218.6
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2030.0,
+        "central estimate of SAF cost": -706.7,
+        "low SAF cost": -1053.3,
+        "high SAF cost": 1047.9
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2031.0,
+        "central estimate of SAF cost": -1034.6,
+        "low SAF cost": -1442.6,
+        "high SAF cost": 875.7
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2032.0,
+        "central estimate of SAF cost": -1461.6,
+        "low SAF cost": -1856.1,
+        "high SAF cost": 613.5
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2033.0,
+        "central estimate of SAF cost": -1950.0,
+        "low SAF cost": -2327.7,
+        "high SAF cost": 331.2
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2034.0,
+        "central estimate of SAF cost": -2470.1,
+        "low SAF cost": -2786.0,
+        "high SAF cost": -9.8
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2035.0,
+        "central estimate of SAF cost": -3047.2,
+        "low SAF cost": -3255.7,
+        "high SAF cost": -401.7
+    }
+]

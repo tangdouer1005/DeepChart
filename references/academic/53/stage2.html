@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = {
+    "raw_data": {
+        "DMSO": [
+            62,
+            65,
+            65,
+            59
+        ],
+        "Rapamycin_40nM": [
+            70,
+            67,
+            66,
+            64
+        ],
+        "Rapamycin_100nM": [
+            71,
+            72,
+            71,
+            68
+        ],
+        "Rapamycin_200nM": [
+            70,
+            70,
+            72,
+            66
+        ],
+        "LY294002_1uM": [
+            66,
+            67,
+            66,
+            62
+        ],
+        "LY294002_5uM": [
+            74,
+            74,
+            68,
+            63
+        ],
+        "LY294002_10uM": [
+            80,
+            72,
+            69,
+            65
+        ],
+        "MK2206_0.2uM": [
+            84,
+            85,
+            85,
+            85
+        ],
+        "MK2206_1uM": [
+            80,
+            80,
+            84,
+            79
+        ]
+    },
+    "means": {
+        "DMSO": 62.75,
+        "Rapamycin_40nM": 66.75,
+        "Rapamycin_100nM": 70.5,
+        "Rapamycin_200nM": 69.5,
+        "LY294002_1uM": 65.25,
+        "LY294002_5uM": 69.75,
+        "LY294002_10uM": 71.5,
+        "MK2206_0.2uM": 84.75,
+        "MK2206_1uM": 80.75
+    },
+    "stds": {
+        "DMSO": 2.8722813232690143,
+        "Rapamycin_40nM": 2.5,
+        "Rapamycin_100nM": 1.7320508075688772,
+        "Rapamycin_200nM": 2.516611478423583,
+        "LY294002_1uM": 2.217355782608345,
+        "LY294002_5uM": 5.315072906367325,
+        "LY294002_10uM": 6.3508529610858835,
+        "MK2206_0.2uM": 0.5,
+        "MK2206_1uM": 2.217355782608345
+    },
+    "p_values": {
+        "DMSO_vs_Rapamycin_40nM": 0.08037728322287066,
+        "DMSO_vs_Rapamycin_100nM": 0.003610785102100977,
+        "DMSO_vs_Rapamycin_200nM": 0.012291131047763866,
+        "DMSO_vs_LY294002_1uM": 0.2174041927292239,
+        "DMSO_vs_MK2206_0.2uM": 5.335707158102529e-06
+    },
+    "columns": [
+        "DMSO",
+        "Rapamycin_40nM",
+        "Rapamycin_100nM",
+        "Rapamycin_200nM",
+        "LY294002_1uM",
+        "LY294002_5uM",
+        "LY294002_10uM",
+        "MK2206_0.2uM",
+        "MK2206_1uM"
+    ]
+};
+        const rawData = jsonData.raw_data;
+        const categories = jsonData.columns;
+        const means = jsonData.means;
+        const stds = jsonData.stds;
+
+        // Define Colors based on the image
+        const colorsFill = [
+            '#808080', // DMSO
+            '#F4C2C2', '#E699A8', '#D8708F', // Rapamycin
+            '#D6EAF8', '#AED6F1', '#5D8AA8', // LY294002
+            '#D7BDE2', '#8E44AD'  // MK2206
+        ];
+        
+        // Edge colors
+        const colorsEdge = [
+            '#404040', // DMSO
+            '#D98896', '#C76B7E', '#B04060', // Rapamycin
+            '#85C1E9', '#5DADE2', '#2E5A88', // LY294002
+            '#AF7AC5', '#6C3483'  // MK2206
+        ];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [];
+
+        // Bars
+        series.push({
+            type: 'bar',
+            data: categories.map((cat, i) => ({
+                value: means[cat],
+                itemStyle: { color: colorsFill[i], borderColor: colorsEdge[i], borderWidth: 1.5, opacity: 0.8 },
+            })),
+            barWidth: '50%',
+            z: 1
+        });
+
+        // Error bars
+        series.push({
+            type: 'custom',
+            name: 'Error',
+            renderItem: (params, api) => {
+                const xIndex = api.value(0);
+                const meanVal = api.value(1);
+                const stdVal = api.value(2);
+                
+                const highPoint = api.coord([xIndex, meanVal + stdVal]);
+                const lowPoint = api.coord([xIndex, meanVal - stdVal]);
+                const capHalfWidth = 10; // Fixed pixel width for cap
+
+                const style = api.style({ stroke: 'black', lineWidth: 1.5 });
+                return {
+                    type: 'group',
+                    children: [
+                        { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                    ]
+                };
+            },
+            data: categories.map((cat, i) => ([i, means[cat], stds[cat]])),
+            z: 2
+        });
+
+        // Scatter points
+        const scatterData = [];
+        categories.forEach((cat, i) => {
+            const yVals = rawData[cat];
+            yVals.forEach(y => {
+                const jitter = (Math.random() - 0.5) * 0.3; // Small jitter for x
+                scatterData.push([i + jitter, y, colorsEdge[i]]); // Store color for itemStyle
+            });
+        });
+
+        series.push({
+            type: 'scatter',
+            name: 'Data Points',
+            data: scatterData.map(d => ({
+                value: [d[0], d[1]],
+                itemStyle: { color: d[2] }, // Use stored color
+                symbolSize: 8 // default scatter size
+            })),
+            z: 3
+        });
+        // Statistical Annotation
+        const annotations = [];
+        const getPText = (group1, group2) => {
+            const key = `${group1}_vs_${group2}`;
+            const pVal = jsonData.p_values[key];
+            if (pVal < 0.0001) return "P < 0.0001";
+            return `P = ${pVal.toFixed(4)}`;
+        };
+
+        const startY = 85; // Base height for lines
+        const stepY = 30; // Increment per line
+        
+        annotations.push({ x1: 0, x2: 1, y: startY, text: getPText('DMSO', 'Rapamycin_40nM') });
+        annotations.push({ x1: 0, x2: 2, y: startY + stepY, text: getPText('DMSO', 'Rapamycin_100nM') });
+        annotations.push({ x1: 0, x2: 3, y: startY + 2 * stepY, text: getPText('DMSO', 'Rapamycin_200nM') });
+        annotations.push({ x1: 0, x2: 4, y: startY + 3 * stepY, text: getPText('DMSO', 'LY294002_1uM') });
+        annotations.push({ x1: 0, x2: 7, y: startY + 4 * stepY, text: getPText('DMSO', 'MK2206_0.2uM') });
+
+        series.push({
+            type: 'custom',
+            name: 'Statistical Annotations',
+            renderItem: (params, api) => {
+                const children = [];
+                const yTextOffset = 5; // offset for text above line
+
+                annotations.forEach(ann => {
+                    const x1Coord = api.coord([ann.x1, 0])[0]; // X pixel for start bar (category index)
+                    const x2Coord = api.coord([ann.x2, 0])[0]; // X pixel for end bar (category index)
+                    const yCoord = api.coord([0, ann.y])[1]; // Y pixel for annotation line value
+
+                    children.push({ // Horizontal line
+                        type: 'line',
+                        shape: { x1: x1Coord, y1: yCoord, x2: x2Coord, y2: yCoord },
+                        style: { stroke: 'black', lineWidth: 0.8 },
+                        z: 0
+                    });
+                    children.push({ // P-value text
+                        type: 'text',
+                        x: (x1Coord + x2Coord) / 2, y: yCoord - yTextOffset, 
+                        style: { text: ann.text, fill: 'black', fontSize: 10, align: 'center', verticalAlign: 'bottom' },
+                        z: 10
+                    });
+                });
+                
+                return {
+                    type: 'group',
+                    children: children
+                };
+            },
+            data: [0], // Dummy data item to trigger renderItem
+            z: 10 // Ensure annotations are on top
+        });
+        
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            title: {
+                text: 'Ki-67⁺',
+                left: 'center',
+                top: 20,
+                textStyle: { fontSize: 16, color: 'black' }
+            },
+            grid: { top: 60, right: 20, bottom: 60, left: 60 },
+            xAxis: {
+                type: 'category',
+                data: categories,
+                axisLabel: { show: false }, // Hidden x-axis labels
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                axisTick: { alignWithLabel: true, length: 5, lineStyle: { width: 1.2 } }
+            },
+            yAxis: {
+                name: '% of live CD8+',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                type: 'value',
+                min: 0,
+                max: 230, // Extended to fit annotations
+                interval: 50,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                splitLine: { show: false }
+            },
+            series: series,
+            graphic: []
+        };
+        chart.setOption(option);
+
+
+    </script>
+</body>
+</html>

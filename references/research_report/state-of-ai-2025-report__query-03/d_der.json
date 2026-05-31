@@ -1,0 +1,70 @@
+{
+  "status": "complete",
+  "chart_type": "dumbbell",
+  "title": "Top 10 markets by 2024-2025 funding/deal growth divergence",
+  "x_label": "Growth rate (%)",
+  "left_label": "Funding growth",
+  "right_label": "Deal growth",
+  "data": [
+    {
+      "label": "Philadelphia",
+      "left": 296.5034965034965,
+      "right": 9.604519774011289,
+      "abs_gap": 286.8989767294852
+    },
+    {
+      "label": "Miami",
+      "left": 277.3993808049536,
+      "right": 1.4705882352941124,
+      "abs_gap": 275.9287925696595
+    },
+    {
+      "label": "Sweden",
+      "left": 184.38538205980066,
+      "right": -4.761904761904767,
+      "abs_gap": 189.14728682170542
+    },
+    {
+      "label": "Silicon Valley",
+      "left": 142.5460636515913,
+      "right": 13.353115727002972,
+      "abs_gap": 129.19294792458834
+    },
+    {
+      "label": "US",
+      "left": 121.9741480611046,
+      "right": 4.636519748139678,
+      "abs_gap": 117.33762831296492
+    },
+    {
+      "label": "Seattle",
+      "left": 99.72375690607736,
+      "right": -4.1322314049586755,
+      "abs_gap": 103.85598831103603
+    },
+    {
+      "label": "Netherlands",
+      "left": 106.22837370242215,
+      "right": 4.109589041095885,
+      "abs_gap": 102.11878466132626
+    },
+    {
+      "label": "United Kingdom",
+      "left": 86.48648648648648,
+      "right": -10.738255033557042,
+      "abs_gap": 97.22474152004352
+    },
+    {
+      "label": "Los Angeles",
+      "left": 80.0,
+      "right": -9.259259259259256,
+      "abs_gap": 89.25925925925925
+    },
+    {
+      "label": "Japan",
+      "left": 83.33333333333333,
+      "right": -1.5686274509803977,
+      "abs_gap": 84.90196078431373
+    }
+  ]
+}

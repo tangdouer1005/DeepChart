@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "Cash & Equiv": 19334000000.0,
+            "Receivables": 8339000000.0,
+            "Operating Expenses": 131801000000.0,
+            "Cost of Revenue": 121969000000.0,
+            "Quick Assets": 27673000000.0,
+            "Daily Burn": 695260273.9726027
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "Cash & Equiv": 20522000000.0,
+            "Receivables": 13164000000.0,
+            "Operating Expenses": 173760000000.0,
+            "Cost of Revenue": 111934000000.0,
+            "Quick Assets": 33686000000.0,
+            "Daily Burn": 782723287.6712328
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "Cash & Equiv": 31750000000.0,
+            "Receivables": 16677000000.0,
+            "Operating Expenses": 220466000000.0,
+            "Cost of Revenue": 139156000000.0,
+            "Quick Assets": 48427000000.0,
+            "Daily Burn": 985265753.4246576
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "Cash & Equiv": 36092000000.0,
+            "Receivables": 20816000000.0,
+            "Operating Expenses": 265981000000.0,
+            "Cost of Revenue": 165536000000.0,
+            "Quick Assets": 56908000000.0,
+            "Daily Burn": 1182238356.1643836
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "Cash & Equiv": 42122000000.0,
+            "Receivables": 24542000000.0,
+            "Operating Expenses": 363165000000.0,
+            "Cost of Revenue": 233307000000.0,
+            "Quick Assets": 66664000000.0,
+            "Daily Burn": 1634169863.0136986
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "Cash & Equiv": 36220000000.0,
+            "Receivables": 32891000000.0,
+            "Operating Expenses": 444943000000.0,
+            "Cost of Revenue": 272344000000.0,
+            "Quick Assets": 69111000000.0,
+            "Daily Burn": 1965169863.0136983
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Cash & Equiv": 53888000000.0,
+            "Receivables": 42360000000.0,
+            "Operating Expenses": 501735000000.0,
+            "Cost of Revenue": 288831000000.0,
+            "Quick Assets": 96248000000.0,
+            "Daily Burn": 2165934246.5753427
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Cash & Equiv": 73387000000.0,
+            "Receivables": 52253000000.0,
+            "Operating Expenses": 232427000000.0,
+            "Cost of Revenue": 304739000000.0,
+            "Quick Assets": 125640000000.0,
+            "Daily Burn": 1471687671.2328768
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "Cash & Equiv": 78779000000.0,
+            "Receivables": 55451000000.0,
+            "Operating Expenses": 243078000000.0,
+            "Cost of Revenue": 326288000000.0,
+            "Quick Assets": 134230000000.0,
+            "Daily Burn": 1559906849.3150685
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 39.80236040509123
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 43.03692062136412
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 49.151205988510156
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 48.13580924969352
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 40.79380088252257
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 35.16795229803412
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 44.43717539079596
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 85.37137495671729
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 86.0500100111352
+        }
+    ]
+}

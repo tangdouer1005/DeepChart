@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>wmt 经济增加值 (EVA) 简化版 2017-2024 趋势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #222222;
+      --grid-color: rgba(0, 0, 0, 0.08);
+      --line-color: #1565c0;
+      --line-hover-color: #0d47a1;
+      --point-color: #1976d2;
+      --point-hover-color: #0d47a1;
+      --tooltip-bg: rgba(33, 33, 33, 0.9);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 0 16px 32px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666666;
+      margin-bottom: 24px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+      padding: 16px 16px 8px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      color: #555555;
+    }
+
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--line-color);
+    }
+
+    canvas {
+      max-height: 480px;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #777777;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin-top: 16px;
+      }
+      h1 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>wmt 经济增加值 (EVA) - 简化版</h1>
+  <div class="subtitle">2017–2024 财年趋势（单位：人民币元）</div>
+
+  <div class="chart-wrapper">
+    <div class="chart-header">
+      <div>时间跨度：2017 财年至 2024 财年</div>
+      <div class="chart-legend">
+        <span class="legend-dot"></span>
+        <span>EVA（经济增加值）</span>
+      </div>
+    </div>
+    <canvas id="evaChart"></canvas>
+  </div>
+
+  <div class="note">
+    数据来源：用户提供的 wmt 2017–2024 财年 EVA 简化版数值。<br />
+    说明：为便于阅读，图中 Y 轴以“十亿”为单位展示。
+  </div>
+</div>
+
+<script>
+  // 原始数据（单位：元）
+  const fiscalYears = [
+    "2017", "2018", "2019", "2020",
+    "2021", "2022", "2023", "2024"
+  ];
+
+  const evaRaw = [
+    4527577974.825584,
+    3136327587.118957,
+    2407538481.675394,
+    3878411543.05031,
+    3668045069.052712,
+    8412169298.245613,
+    2675039774.330042,
+    8873332204.320763
+  ];
+
+  // 转换为“十亿”为单位，保留两位小数以便展示
+  const BILLION = 1e9;
+  const evaInBillion = evaRaw.map(v => v / BILLION);
+
+  const ctx = document.getElementById("evaChart").getContext("2d");
+
+  const evaChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: fiscalYears,
+      datasets: [
+        {
+          label: "EVA（十亿人民币）",
+          data: evaInBillion,
+          borderColor: getComputedStyle(document.documentElement)
+                        .getPropertyValue("--line-color").trim() || "#1565c0",
+          backgroundColor: "rgba(21, 101, 192, 0.12)",
+          pointBackgroundColor: getComputedStyle(document.documentElement)
+                        .getPropertyValue("--point-color").trim() || "#1976d2",
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          borderWidth: 2,
+          tension: 0.25,
+          fill: true,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        intersect: false,
+        mode: "index"
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: getComputedStyle(document.documentElement)
+                            .getPropertyValue("--tooltip-bg").trim() || "rgba(33,33,33,0.9)",
+          titleFont: {
+            family: "system-ui",
+            size: 12,
+            weight: "600"
+          },
+          bodyFont: {
+            family: "system-ui",
+            size: 12
+          },
+          padding: 10,
+          callbacks: {
+            label: function(context) {
+              const valueBillion = context.raw;
+              const rawValue = evaRaw[context.dataIndex];
+
+              // 格式化为带千分位的字符串
+              const formatter = new Intl.NumberFormat("zh-CN", {
+                maximumFractionDigits: 2
+              });
+
+              const billionStr = formatter.format(valueBillion);
+              const rawStr = new Intl.NumberFormat("zh-CN", {
+                maximumFractionDigits: 0
+              }).format(rawValue);
+
+              return [
+                `EVA（十亿）：${billionStr}`,
+                `EVA（元）：${rawStr}`
+              ];
+            }
+          }
+        },
+        title: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: "#555555",
+            font: {
+              size: 11
+            }
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: getComputedStyle(document.documentElement)
+                      .getPropertyValue("--grid-color").trim() || "rgba(0,0,0,0.08)"
+          },
+          ticks: {
+            color: "#555555",
+            font: {
+              size: 11
+            },
+            // 以十亿为单位显示
+            callback: function(value) {
+              return value + " 十亿";
+            }
+          },
+          title: {
+            display: true,
+            text: "EVA（十亿人民币）",
+            color: "#444444",
+            font: {
+              size: 12,
+              weight: "500"
+            }
+          }
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

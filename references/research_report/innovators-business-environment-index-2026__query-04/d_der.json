@@ -1,0 +1,103 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a ranked horizontal bar chart showing the top 15 countries by `overall-rank outperformance`, where the metric is `the average of the three pillar global ranks minus the country's overall global_rank`, values are expressed in rank positions, all 125 countries are eligible, and bars are sorted from highest to lowest so countries whose overall standing beats their average pillar rank appear first.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by average_pillar_global_rank minus overall_global_rank",
+  "selection_rule": "top 15 countries out of all 125",
+  "records": [
+    {
+      "entity": "Saudi Arabia",
+      "overall_rank_outperformance": 35.666667,
+      "average_pillar_global_rank": 44.666667,
+      "overall_global_rank": 9
+    },
+    {
+      "entity": "South Korea",
+      "overall_rank_outperformance": 20.666667,
+      "average_pillar_global_rank": 52.666667,
+      "overall_global_rank": 32
+    },
+    {
+      "entity": "United Arab Emirates",
+      "overall_rank_outperformance": 19.666667,
+      "average_pillar_global_rank": 24.666667,
+      "overall_global_rank": 5
+    },
+    {
+      "entity": "Switzerland",
+      "overall_rank_outperformance": 17.666667,
+      "average_pillar_global_rank": 21.666667,
+      "overall_global_rank": 4
+    },
+    {
+      "entity": "The Netherlands",
+      "overall_rank_outperformance": 16.333333,
+      "average_pillar_global_rank": 23.333333,
+      "overall_global_rank": 7
+    },
+    {
+      "entity": "Colombia",
+      "overall_rank_outperformance": 16.0,
+      "average_pillar_global_rank": 63.0,
+      "overall_global_rank": 47
+    },
+    {
+      "entity": "Austria",
+      "overall_rank_outperformance": 14.0,
+      "average_pillar_global_rank": 40.0,
+      "overall_global_rank": 26
+    },
+    {
+      "entity": "Canada",
+      "overall_rank_outperformance": 13.0,
+      "average_pillar_global_rank": 19.0,
+      "overall_global_rank": 6
+    },
+    {
+      "entity": "Denmark",
+      "overall_rank_outperformance": 13.0,
+      "average_pillar_global_rank": 33.0,
+      "overall_global_rank": 20
+    },
+    {
+      "entity": "Norway",
+      "overall_rank_outperformance": 12.666667,
+      "average_pillar_global_rank": 33.666667,
+      "overall_global_rank": 21
+    },
+    {
+      "entity": "Cyprus",
+      "overall_rank_outperformance": 11.666667,
+      "average_pillar_global_rank": 26.666667,
+      "overall_global_rank": 15
+    },
+    {
+      "entity": "Japan",
+      "overall_rank_outperformance": 11.666667,
+      "average_pillar_global_rank": 19.666667,
+      "overall_global_rank": 8
+    },
+    {
+      "entity": "Luxembourg",
+      "overall_rank_outperformance": 11.0,
+      "average_pillar_global_rank": 24.0,
+      "overall_global_rank": 13
+    },
+    {
+      "entity": "Finland",
+      "overall_rank_outperformance": 10.333333,
+      "average_pillar_global_rank": 29.333333,
+      "overall_global_rank": 19
+    },
+    {
+      "entity": "Iceland",
+      "overall_rank_outperformance": 9.666667,
+      "average_pillar_global_rank": 36.666667,
+      "overall_global_rank": 27
+    }
+  ],
+  "chart_title": "IBEI 2026 Top 15 by Overall-Rank Outperformance",
+  "metric_field": "overall_rank_outperformance",
+  "x_label": "average pillar global rank minus overall global rank"
+}

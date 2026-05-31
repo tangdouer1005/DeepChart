@@ -1,0 +1,117 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a heatmap showing `median Mosaic minus segment median Mosaic` for each combination of `segment` and `stage family`, where stage families are derived as `Seed/Pre-Seed`, `Series A-B`, `Series C+`, `Debt/Loan/Grant/Corporate/Other`, using only companies with non-`N/A` `Mosaic`, and expressing values in `Mosaic points`.",
+  "status": "completed",
+  "title": "Median Mosaic residuals by segment and stage family",
+  "chart_kind": "heatmap",
+  "chart_type": "heatmap",
+  "value_unit": "Mosaic points",
+  "sort_rule": "segment and stage_family order preserved",
+  "selection_rule": "use non-missing mosaic only",
+  "metadata": {
+    "row_field": "segment",
+    "col_field": "stage_family",
+    "value_field": "delta_mosaic",
+    "row_order": [
+      "Aerospace (commercial)",
+      "Aerospace (dual-use)",
+      "Defense"
+    ],
+    "col_order": [
+      "Seed/Pre-Seed",
+      "Series A-B",
+      "Series C+",
+      "Debt/Loan/Grant/Corporate/Other"
+    ],
+    "figsize": [
+      11,
+      5
+    ]
+  },
+  "records": [
+    {
+      "segment": "Aerospace (commercial)",
+      "stage_family": "Seed/Pre-Seed",
+      "median_mosaic": 444.0,
+      "segment_median_mosaic": 559.5,
+      "delta_mosaic": -115.5
+    },
+    {
+      "segment": "Aerospace (commercial)",
+      "stage_family": "Series A-B",
+      "median_mosaic": 677.0,
+      "segment_median_mosaic": 559.5,
+      "delta_mosaic": 117.5
+    },
+    {
+      "segment": "Aerospace (commercial)",
+      "stage_family": "Series C+",
+      "median_mosaic": 662.0,
+      "segment_median_mosaic": 559.5,
+      "delta_mosaic": 102.5
+    },
+    {
+      "segment": "Aerospace (commercial)",
+      "stage_family": "Debt/Loan/Grant/Corporate/Other",
+      "median_mosaic": 475.0,
+      "segment_median_mosaic": 559.5,
+      "delta_mosaic": -84.5
+    },
+    {
+      "segment": "Aerospace (dual-use)",
+      "stage_family": "Seed/Pre-Seed",
+      "median_mosaic": 526.0,
+      "segment_median_mosaic": 585.0,
+      "delta_mosaic": -59.0
+    },
+    {
+      "segment": "Aerospace (dual-use)",
+      "stage_family": "Series A-B",
+      "median_mosaic": 691.0,
+      "segment_median_mosaic": 585.0,
+      "delta_mosaic": 106.0
+    },
+    {
+      "segment": "Aerospace (dual-use)",
+      "stage_family": "Series C+",
+      "median_mosaic": 821.0,
+      "segment_median_mosaic": 585.0,
+      "delta_mosaic": 236.0
+    },
+    {
+      "segment": "Aerospace (dual-use)",
+      "stage_family": "Debt/Loan/Grant/Corporate/Other",
+      "median_mosaic": 534.0,
+      "segment_median_mosaic": 585.0,
+      "delta_mosaic": -51.0
+    },
+    {
+      "segment": "Defense",
+      "stage_family": "Seed/Pre-Seed",
+      "median_mosaic": 533.5,
+      "segment_median_mosaic": 542.0,
+      "delta_mosaic": -8.5
+    },
+    {
+      "segment": "Defense",
+      "stage_family": "Series A-B",
+      "median_mosaic": 753.0,
+      "segment_median_mosaic": 542.0,
+      "delta_mosaic": 211.0
+    },
+    {
+      "segment": "Defense",
+      "stage_family": "Series C+",
+      "median_mosaic": 927.0,
+      "segment_median_mosaic": 542.0,
+      "delta_mosaic": 385.0
+    },
+    {
+      "segment": "Defense",
+      "stage_family": "Debt/Loan/Grant/Corporate/Other",
+      "median_mosaic": 457.0,
+      "segment_median_mosaic": 542.0,
+      "delta_mosaic": -85.0
+    }
+  ]
+}

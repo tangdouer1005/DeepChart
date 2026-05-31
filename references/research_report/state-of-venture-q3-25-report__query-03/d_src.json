@@ -1,0 +1,35 @@
+{
+  "report_code": "021",
+  "query_id": "03",
+  "source_fields": [
+    "2024 average deal size",
+    "2025 YTD average deal size"
+  ],
+  "records": [
+    {
+      "sector": "AI",
+      "avg_2024_m": 26.5,
+      "avg_2025_ytd_m": 49.3
+    },
+    {
+      "sector": "Fintech",
+      "avg_2024_m": 12.4,
+      "avg_2025_ytd_m": 17.0
+    },
+    {
+      "sector": "Retail Tech",
+      "avg_2024_m": 15.0,
+      "avg_2025_ytd_m": 18.4
+    },
+    {
+      "sector": "Digital Health",
+      "avg_2024_m": 16.3,
+      "avg_2025_ytd_m": 21.5
+    },
+    {
+      "sector": "CVC",
+      "avg_2024_m": 29.5,
+      "avg_2025_ytd_m": 35.7
+    }
+  ]
+}

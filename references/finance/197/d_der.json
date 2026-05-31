@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016,
+            "CFO": 1175000000.0,
+            "Net Income": 614000000.0,
+            "Total Assets": 7370000000.0,
+            "Avg Total Assets": 7285684000.0,
+            "CFO per Asset": 0.1612751802027098,
+            "NI per Asset": 0.0842748601229479
+        },
+        {
+            "Fiscal Year": 2017,
+            "CFO": 1672000000.0,
+            "Net Income": 1666000000.0,
+            "Total Assets": 9841000000.0,
+            "Avg Total Assets": 8605500000.0,
+            "CFO per Asset": 0.1942943466387775,
+            "NI per Asset": 0.1935971181221312
+        },
+        {
+            "Fiscal Year": 2018,
+            "CFO": 3502000000.0,
+            "Net Income": 3047000000.0,
+            "Total Assets": 11241000000.0,
+            "Avg Total Assets": 10541000000.0,
+            "CFO per Asset": 0.3322265439711602,
+            "NI per Asset": 0.2890617588464093
+        },
+        {
+            "Fiscal Year": 2019,
+            "CFO": 3743000000.0,
+            "Net Income": 4141000000.0,
+            "Total Assets": 13292000000.0,
+            "Avg Total Assets": 12266500000.0,
+            "CFO per Asset": 0.3051400154893409,
+            "NI per Asset": 0.337586108506909
+        },
+        {
+            "Fiscal Year": 2020,
+            "CFO": 4761000000.0,
+            "Net Income": 2796000000.0,
+            "Total Assets": 17315000000.0,
+            "Avg Total Assets": 15303500000.0,
+            "CFO per Asset": 0.3111053027085307,
+            "NI per Asset": 0.1827033031659424
+        },
+        {
+            "Fiscal Year": 2021,
+            "CFO": 5822000000.0,
+            "Net Income": 4332000000.0,
+            "Total Assets": 28791000000.0,
+            "Avg Total Assets": 23053000000.0,
+            "CFO per Asset": 0.2525484752526786,
+            "NI per Asset": 0.1879148050145317
+        },
+        {
+            "Fiscal Year": 2022,
+            "CFO": 9108000000.0,
+            "Net Income": 9752000000.0,
+            "Total Assets": 44187000000.0,
+            "Avg Total Assets": 36489000000.0,
+            "CFO per Asset": 0.2496094713475294,
+            "NI per Asset": 0.2672586258872537
+        },
+        {
+            "Fiscal Year": 2023,
+            "CFO": 5641000000.0,
+            "Net Income": 4368000000.0,
+            "Total Assets": 41182000000.0,
+            "Avg Total Assets": 42684500000.0,
+            "CFO per Asset": 0.1321557005470369,
+            "NI per Asset": 0.1023322283264416
+        },
+        {
+            "Fiscal Year": 2024,
+            "CFO": 28090000000.0,
+            "Net Income": 29760000000.0,
+            "Total Assets": 65728000000.0,
+            "Avg Total Assets": 53455000000.0,
+            "CFO per Asset": 0.5254887288373398,
+            "NI per Asset": 0.5567299597792535
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.07611940298507462
+        },
+        {
+            "Fiscal Year": 2017,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.0006096941367746966
+        },
+        {
+            "Fiscal Year": 2018,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.0404768259051686
+        },
+        {
+            "Fiscal Year": 2019,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": -0.029942822750526676
+        },
+        {
+            "Fiscal Year": 2020,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.11348541726826453
+        },
+        {
+            "Fiscal Year": 2021,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.05175228369976728
+        },
+        {
+            "Fiscal Year": 2022,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": -0.014574422341412652
+        },
+        {
+            "Fiscal Year": 2023,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.030911563304356265
+        },
+        {
+            "Fiscal Year": 2024,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": -0.025407740993184047
+        }
+    ]
+}

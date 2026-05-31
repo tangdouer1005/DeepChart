@@ -1,0 +1,73 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a ranked horizontal bar chart showing the 12 countries with the largest `market perception deficit`, where the plotted value is `market_perception minus ease_of_operating_business`, values are expressed in index points, only countries whose simple three-pillar average is at least 50 are included, and the bars are sorted from lowest to highest so the most negative gaps appear first.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "index points",
+  "sort_rule": "ascending by market_perception_deficit after filtering to three-pillar average >= 50",
+  "selection_rule": "12 countries with the most negative eligible deficits",
+  "records": [
+    {
+      "entity": "Mexico",
+      "market_perception_deficit": -39.003,
+      "three_pillar_average": 52.269667
+    },
+    {
+      "entity": "Thailand",
+      "market_perception_deficit": -36.74,
+      "three_pillar_average": 59.948667
+    },
+    {
+      "entity": "Brazil",
+      "market_perception_deficit": -34.488,
+      "three_pillar_average": 58.711333
+    },
+    {
+      "entity": "Colombia",
+      "market_perception_deficit": -31.872,
+      "three_pillar_average": 52.36
+    },
+    {
+      "entity": "India",
+      "market_perception_deficit": -30.242,
+      "three_pillar_average": 52.458333
+    },
+    {
+      "entity": "Panama",
+      "market_perception_deficit": -29.451,
+      "three_pillar_average": 50.734667
+    },
+    {
+      "entity": "Puerto Rico",
+      "market_perception_deficit": -27.816,
+      "three_pillar_average": 61.051667
+    },
+    {
+      "entity": "Georgia",
+      "market_perception_deficit": -26.982,
+      "three_pillar_average": 61.110333
+    },
+    {
+      "entity": "North Macedonia",
+      "market_perception_deficit": -26.958,
+      "three_pillar_average": 58.976
+    },
+    {
+      "entity": "Kosovo",
+      "market_perception_deficit": -26.852,
+      "three_pillar_average": 52.080667
+    },
+    {
+      "entity": "Kazakhstan",
+      "market_perception_deficit": -26.692,
+      "three_pillar_average": 52.381333
+    },
+    {
+      "entity": "Armenia",
+      "market_perception_deficit": -25.052,
+      "three_pillar_average": 58.018333
+    }
+  ],
+  "chart_title": "IBEI 2026 Largest Market Perception Deficits",
+  "metric_field": "market_perception_deficit",
+  "x_label": "market perception minus ease of operating a business"
+}

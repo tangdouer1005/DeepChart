@@ -1,0 +1,166 @@
+{
+  "query_key": "006_q06",
+  "query_text": "Create a slope chart comparing each sector’s 2024 average deal size with its 2025 average deal size, restricted to the four Sector Spotlights, with values in `$M`, and sort sectors by 2025 average deal size descending.",
+  "size_rows": [
+    {
+      "entity": "AI",
+      "year": 2021,
+      "average_value": 26.7,
+      "average_unit": "M",
+      "median_value": 4.8,
+      "median_unit": "M"
+    },
+    {
+      "entity": "AI",
+      "year": 2022,
+      "average_value": 17.3,
+      "average_unit": "M",
+      "median_value": 3.7,
+      "median_unit": "M"
+    },
+    {
+      "entity": "AI",
+      "year": 2023,
+      "average_value": 15.7,
+      "average_unit": "M",
+      "median_value": 2.8,
+      "median_unit": "M"
+    },
+    {
+      "entity": "AI",
+      "year": 2024,
+      "average_value": 24.6,
+      "average_unit": "M",
+      "median_value": 3.0,
+      "median_unit": "M"
+    },
+    {
+      "entity": "AI",
+      "year": 2025,
+      "average_value": 44.8,
+      "average_unit": "M",
+      "median_value": 4.1,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Fintech",
+      "year": 2021,
+      "average_value": 27.5,
+      "average_unit": "M",
+      "median_value": 4.0,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Fintech",
+      "year": 2022,
+      "average_value": 16.4,
+      "average_unit": "M",
+      "median_value": 3.5,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Fintech",
+      "year": 2023,
+      "average_value": 13.6,
+      "average_unit": "M",
+      "median_value": 2.8,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Fintech",
+      "year": 2024,
+      "average_value": 12.9,
+      "average_unit": "M",
+      "median_value": 3.5,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Fintech",
+      "year": 2025,
+      "average_value": 20.0,
+      "average_unit": "M",
+      "median_value": 5.0,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Retail Tech",
+      "year": 2021,
+      "average_value": 33.4,
+      "average_unit": "M",
+      "median_value": 3.4,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Retail Tech",
+      "year": 2022,
+      "average_value": 18.0,
+      "average_unit": "M",
+      "median_value": 2.7,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Retail Tech",
+      "year": 2023,
+      "average_value": 12.6,
+      "average_unit": "M",
+      "median_value": 2.0,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Retail Tech",
+      "year": 2024,
+      "average_value": 14.9,
+      "average_unit": "M",
+      "median_value": 2.5,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Retail Tech",
+      "year": 2025,
+      "average_value": 20.0,
+      "average_unit": "M",
+      "median_value": 3.6,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Digital Health",
+      "year": 2021,
+      "average_value": 22.5,
+      "average_unit": "M",
+      "median_value": 3.6,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Digital Health",
+      "year": 2022,
+      "average_value": 14.5,
+      "average_unit": "M",
+      "median_value": 4.0,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Digital Health",
+      "year": 2023,
+      "average_value": 12.0,
+      "average_unit": "M",
+      "median_value": 3.6,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Digital Health",
+      "year": 2024,
+      "average_value": 15.8,
+      "average_unit": "M",
+      "median_value": 5.0,
+      "median_unit": "M"
+    },
+    {
+      "entity": "Digital Health",
+      "year": 2025,
+      "average_value": 20.3,
+      "average_unit": "M",
+      "median_value": 5.1,
+      "median_unit": "M"
+    }
+  ]
+}

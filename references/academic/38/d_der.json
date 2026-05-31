@@ -1,0 +1,90 @@
+[
+    {
+        "Electrolyte": "LiAsF6 electrolyte",
+        "SSL ratio (%)": 90.0,
+        "m1": 2.9,
+        "m2": 2.6,
+        "m3": 2.6,
+        "m4": 2.7,
+        "Label": "LiAsF6",
+        "Mean_Size": 2.7,
+        "Std_Size": 0.14142135623730942
+    },
+    {
+        "Electrolyte": "LiPF6 electrolyte",
+        "SSL ratio (%)": 80.0,
+        "m1": 3.0,
+        "m2": 3.3,
+        "m3": 2.8,
+        "m4": 3.3,
+        "Label": "LiPF6",
+        "Mean_Size": 3.0999999999999996,
+        "Std_Size": 0.2449489742783178
+    },
+    {
+        "Electrolyte": "LiFSI electrolyte",
+        "SSL ratio (%)": 78.33333,
+        "m1": 3.2,
+        "m2": 3.1,
+        "m3": 3.3,
+        "m4": 3.0,
+        "Label": "LiFSI",
+        "Mean_Size": 3.1500000000000004,
+        "Std_Size": 0.12909944487358052
+    },
+    {
+        "Electrolyte": "LiTFSI electrolyte",
+        "SSL ratio (%)": 76.66667,
+        "m1": 3.9,
+        "m2": 3.4,
+        "m3": 3.0,
+        "m4": 3.7,
+        "Label": "LiTFSI",
+        "Mean_Size": 3.5,
+        "Std_Size": 0.3915780041490244
+    },
+    {
+        "Electrolyte": "LiClO4 electrolyte",
+        "SSL ratio (%)": 71.66667,
+        "m1": 4.1,
+        "m2": 4.8,
+        "m3": 4.2,
+        "m4": 3.8,
+        "Label": "LiClO4",
+        "Mean_Size": 4.225,
+        "Std_Size": 0.4193248541803042
+    },
+    {
+        "Electrolyte": "LiBF4 electrolyte",
+        "SSL ratio (%)": 75.0,
+        "m1": 3.9,
+        "m2": 4.1,
+        "m3": 5.4,
+        "m4": 4.4,
+        "Label": "LiBF4",
+        "Mean_Size": 4.45,
+        "Std_Size": 0.6658328118479395
+    },
+    {
+        "Electrolyte": "LiDFOB electrolyte",
+        "SSL ratio (%)": 70.4918,
+        "m1": 4.7,
+        "m2": 4.5,
+        "m3": 4.9,
+        "m4": 5.4,
+        "Label": "LiDFOB",
+        "Mean_Size": 4.875,
+        "Std_Size": 0.3862210075418824
+    },
+    {
+        "Electrolyte": "LiNO3 electrolyte",
+        "SSL ratio (%)": 68.33333,
+        "m1": 5.2,
+        "m2": 5.2,
+        "m3": 6.2,
+        "m4": 5.3,
+        "Label": "LiNO3",
+        "Mean_Size": 5.4750000000000005,
+        "Std_Size": 0.48562674281111556
+    }
+]

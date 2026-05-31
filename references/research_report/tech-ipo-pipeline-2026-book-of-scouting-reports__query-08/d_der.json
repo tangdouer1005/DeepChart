@@ -1,0 +1,54 @@
+{
+  "report_id": "014",
+  "query_id": 8,
+  "query_text": "Create a slope chart comparing each founded-year cohort’s share of all pipeline companies with its share of the pipeline’s total disclosed funding, using cohorts `pre-2010`, `2010-2014`, `2015-2019`, and `2020+`, with funding converted to `$B` and cohorts sorted by the increase from company share to funding share.",
+  "chart_type": "slope",
+  "value_unit": "share (%)",
+  "sort_rule": "descending by increase from company share to funding share",
+  "selection_rule": "all companies with numeric Founded year; funding shares use disclosed funding only",
+  "records": [
+    {
+      "label": "2015-2019",
+      "left_value": 20.0,
+      "right_value": 42.029273,
+      "delta": 22.029273
+    },
+    {
+      "label": "2020+",
+      "left_value": 0.952381,
+      "right_value": 16.037374,
+      "delta": 15.084993
+    },
+    {
+      "label": "pre-2010",
+      "left_value": 25.714286,
+      "right_value": 8.604178,
+      "delta": -17.110107
+    },
+    {
+      "label": "2010-2014",
+      "left_value": 53.333333,
+      "right_value": 33.329175,
+      "delta": -20.004158
+    }
+  ],
+  "plot_config": {
+    "title": "Cohort share of companies vs disclosed funding",
+    "left_label": "Share of pipeline companies",
+    "right_label": "Share of disclosed funding",
+    "y_label": "Share (%)"
+  },
+  "reasoning_summary": [
+    "Assigned companies to the pre-2010, 2010-2014, 2015-2019, and 2020+ cohorts.",
+    "Computed each cohort’s share of all pipeline companies.",
+    "Summed disclosed funding by cohort and converted those sums to funding shares.",
+    "Sorted cohorts by the increase from company share to funding share."
+  ],
+  "stats": {
+    "cohort_count": 4,
+    "returned_count": 4
+  },
+  "open_issues": [
+    "Funding-share denominators exclude rows with N/A Total raised."
+  ]
+}

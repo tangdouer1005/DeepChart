@@ -1,0 +1,47 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a horizontal bar chart showing the top 8 Blue Economy ecosystems by `exit-adjusted early-stage funding = Total Early-Stage Funding / Time to Exit`, expressed in `$B per exit-year`, sorted descending by the derived metric, and including only ecosystems with readable `Time to Exit` and `Total Early-Stage Funding >= $1B`.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "$B per exit-year",
+  "sort_rule": "descending by exit_adjusted_early_stage_funding_busd_per_year",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "Blue Economy Exit-Adjusted Early Funding",
+    "xlabel": "$B per exit-year",
+    "value_field": "exit_adjusted_early_stage_funding_busd_per_year"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "exit_adjusted_early_stage_funding_busd_per_year": 3.2895
+    },
+    {
+      "entity": "New York City",
+      "exit_adjusted_early_stage_funding_busd_per_year": 1.6279
+    },
+    {
+      "entity": "London",
+      "exit_adjusted_early_stage_funding_busd_per_year": 1.4737
+    },
+    {
+      "entity": "Beijing",
+      "exit_adjusted_early_stage_funding_busd_per_year": 1.1875
+    },
+    {
+      "entity": "Boston",
+      "exit_adjusted_early_stage_funding_busd_per_year": 0.9775
+    },
+    {
+      "entity": "Tel Aviv",
+      "exit_adjusted_early_stage_funding_busd_per_year": 0.7857
+    },
+    {
+      "entity": "Los Angeles",
+      "exit_adjusted_early_stage_funding_busd_per_year": 0.6277
+    },
+    {
+      "entity": "Paris",
+      "exit_adjusted_early_stage_funding_busd_per_year": 0.5435
+    }
+  ]
+}

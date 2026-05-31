@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>MRK 资本再投资率 (Reinvestment Rate) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #f7f8fa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px 0;
+      text-align: left;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: 400;
+      margin: 0 0 20px 0;
+      color: #555;
+      text-align: left;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 18px 18px 26px 18px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 450px !important;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #666;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .legend-note {
+      font-size: 11px;
+      color: #444;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>MRK 资本再投资率（Reinvestment Rate）</h1>
+    <h2>2016–2024 年度变化</h2>
+    <canvas id="reinvestmentChart" aria-label="MRK Reinvestment Rate 2016–2024" role="img"></canvas>
+    <div class="legend-note">
+      说明：纵轴以倍数（x）表示资本再投资率，数值为年度结果。
+    </div>
+    <div class="note">
+      数据来源：用户提供的 MRK 2016–2024 年资本再投资率（RESULT_Reinvestment_Rate）。
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <script>
+    const ctx = document.getElementById('reinvestmentChart').getContext('2d');
+
+    // Data from the user (Fiscal Year, RESULT_Reinvestment_Rate)
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const reinvestmentRates = [
+      0.960540586858564,
+      -0.975264716236777,
+      0.0802302555232507,
+      0.2675821181821971,
+      1.073833316250627,
+      0.540564861067503,
+      0.2718330411931975,
+      7.0172288081260135,
+      0.1227418984847101
+    ];
+
+    // Determine a y-axis range with a bit of padding
+    const minVal = Math.min(...reinvestmentRates);
+    const maxVal = Math.max(...reinvestmentRates);
+    const padding = (maxVal - minVal) * 0.1 || 0.5; // handle edge case when range is tiny
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: '资本再投资率（倍数）',
+            data: reinvestmentRates,
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37, 99, 235, 0.12)',
+            pointBackgroundColor: '#2563eb',
+            pointBorderColor: '#ffffff',
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointHitRadius: 10,
+            borderWidth: 2,
+            fill: true,
+            tension: 0.25
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 12
+              },
+              color: '#111'
+            }
+          },
+          tooltip: {
+            padding: 10,
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            titleColor: '#f9fafb',
+            bodyColor: '#e5e7eb',
+            borderColor: '#0f172a',
+            borderWidth: 1,
+            displayColors: false,
+            callbacks: {
+              label: function(context) {
+                const v = context.parsed.y;
+                // show up to 3 decimal places when large, 4 when small magnitude
+                const decimals = Math.abs(v) < 1 ? 4 : 3;
+                return '资本再投资率：' + v.toFixed(decimals) + 'x';
+              },
+              title: function(context) {
+                return '财政年度：' + context[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财政年度',
+              font: { size: 12 },
+              color: '#374151'
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#4b5563',
+              font: { size: 11 }
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: '资本再投资率（倍数，x）',
+              font: { size: 12 },
+              color: '#374151'
+            },
+            ticks: {
+              color: '#4b5563',
+              font: { size: 11 },
+              callback: function(value) {
+                return value.toFixed(1) + 'x';
+              }
+            },
+            grid: {
+              color: 'rgba(209, 213, 219, 0.6)'
+            },
+            suggestedMin: minVal - padding,
+            suggestedMax: maxVal + padding
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

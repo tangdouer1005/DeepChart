@@ -1,0 +1,63 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a bar chart of the top 12 countries in the 2024 country tables by lower-half strength, defined as `sum(score ranks 6-10) / sum(score ranks 1-5)`, expressed as a ratio, sorted descending, and restricted to countries with 10 listed cities.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2024 Lower-Half Strength by Country",
+  "value_unit": "ratio",
+  "sort_rule": "descending by lower_half_strength_ratio, tie-break alphabetically",
+  "selection_rule": "top 12 countries with 10 listed cities",
+  "records": [
+    {
+      "entity": "Canada",
+      "lower_half_strength_ratio": 0.22976
+    },
+    {
+      "entity": "Germany",
+      "lower_half_strength_ratio": 0.177399
+    },
+    {
+      "entity": "China",
+      "lower_half_strength_ratio": 0.154033
+    },
+    {
+      "entity": "United States",
+      "lower_half_strength_ratio": 0.151972
+    },
+    {
+      "entity": "Poland",
+      "lower_half_strength_ratio": 0.148352
+    },
+    {
+      "entity": "India",
+      "lower_half_strength_ratio": 0.131959
+    },
+    {
+      "entity": "Switzerland",
+      "lower_half_strength_ratio": 0.130331
+    },
+    {
+      "entity": "France",
+      "lower_half_strength_ratio": 0.116421
+    },
+    {
+      "entity": "Italy",
+      "lower_half_strength_ratio": 0.108676
+    },
+    {
+      "entity": "United Kingdom",
+      "lower_half_strength_ratio": 0.105228
+    },
+    {
+      "entity": "The Netherlands",
+      "lower_half_strength_ratio": 0.093322
+    },
+    {
+      "entity": "Spain",
+      "lower_half_strength_ratio": 0.086987
+    }
+  ],
+  "value_field": "lower_half_strength_ratio",
+  "x_label": "Country",
+  "y_label": "sum(score ranks 6-10) / sum(score ranks 1-5)"
+}

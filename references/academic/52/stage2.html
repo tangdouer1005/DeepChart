@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = {
+    "raw_data": {
+        "DMSO": [
+            16.4,
+            18.8,
+            18.2,
+            17.6
+        ],
+        "Rapamycin_40nM": [
+            32.0,
+            28.7,
+            30.1,
+            28.7
+        ],
+        "Rapamycin_100nM": [
+            31.6,
+            31.1,
+            31.5,
+            27.2
+        ],
+        "Rapamycin_200nM": [
+            30.5,
+            30.4,
+            32.1,
+            29.5
+        ],
+        "LY294002_1uM": [
+            19.0,
+            19.7,
+            20.3,
+            19.1
+        ],
+        "LY294002_5uM": [
+            32.4,
+            31.1,
+            28.5,
+            27.8
+        ],
+        "LY294002_10uM": [
+            44.3,
+            40.8,
+            43.6,
+            39.8
+        ],
+        "MK2206_0.2uM": [
+            29.9,
+            30.3,
+            30.8,
+            29.0
+        ],
+        "MK2206_1uM": [
+            27.8,
+            30.5,
+            35.3,
+            30.4
+        ],
+        "MK2206_5uM": [
+            1.59,
+            1.34,
+            1.49,
+            1.77
+        ]
+    },
+    "means": {
+        "DMSO": 17.75,
+        "Rapamycin_40nM": 29.875000000000004,
+        "Rapamycin_100nM": 30.35,
+        "Rapamycin_200nM": 30.625,
+        "LY294002_1uM": 19.525,
+        "LY294002_5uM": 29.95,
+        "LY294002_10uM": 42.125,
+        "MK2206_0.2uM": 30.0,
+        "MK2206_1uM": 31.0,
+        "MK2206_5uM": 1.5474999999999999
+    },
+    "stds": {
+        "DMSO": 1.0246950765959606,
+        "Rapamycin_40nM": 1.5628499608087787,
+        "Rapamycin_100nM": 2.111081871142536,
+        "Rapamycin_200nM": 1.081280105553907,
+        "LY294002_1uM": 0.6020797289396147,
+        "LY294002_5uM": 2.1641010450839238,
+        "LY294002_10uM": 2.165448375433289,
+        "MK2206_0.2uM": 0.7615773105863912,
+        "MK2206_1uM": 3.1272991542223765,
+        "MK2206_5uM": 0.18043927879852914
+    },
+    "p_val": 7.277044752540747e-08,
+    "columns": [
+        "DMSO",
+        "Rapamycin_40nM",
+        "Rapamycin_100nM",
+        "Rapamycin_200nM",
+        "LY294002_1uM",
+        "LY294002_5uM",
+        "LY294002_10uM",
+        "MK2206_0.2uM",
+        "MK2206_1uM",
+        "MK2206_5uM"
+    ]
+};
+        const rawData = jsonData.raw_data;
+        const categories = jsonData.columns;
+        const means = jsonData.means;
+        const stds = jsonData.stds;
+
+        // Define Colors (matching the chart image)
+        const barColors = [
+            '#808080', // DMSO
+            '#D8A6B8', '#D8A6B8', '#D8A6B8', // Rapamycin (Uniform pinkish)
+            '#CDE4F3', '#90CAF9', '#5C6BC0', // LY294002 (Gradient Blue)
+            '#D1C4E9', '#9575CD', '#4527A0'  // MK2206 (Gradient Purple)
+        ];
+        
+        // Edge colors (darker versions for borders and points)
+        const edgeColors = [
+            '#404040', // DMSO
+            '#C06080', '#C06080', '#C06080', // Rapamycin
+            '#82B1FF', '#42A5F5', '#303F9F', // LY
+            '#B39DDB', '#7E57C2', '#311B92'  // MK
+        ];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [];
+
+        // Bars
+        series.push({
+            type: 'bar',
+            data: categories.map((cat, i) => ({
+                value: means[cat],
+                itemStyle: { color: barColors[i], borderColor: edgeColors[i], borderWidth: 1.5 },
+            })),
+            barWidth: '50%',
+            z: 1
+        });
+
+        // Error bars
+        series.push({
+            type: 'custom',
+            name: 'Error',
+            renderItem: (params, api) => {
+                const xIndex = api.value(0);
+                const meanVal = api.value(1);
+                const stdVal = api.value(2);
+                
+                const highPoint = api.coord([xIndex, meanVal + stdVal]);
+                const lowPoint = api.coord([xIndex, meanVal - stdVal]);
+                const capHalfWidth = 8; // Fixed pixel width for error bar caps
+
+                const style = api.style({ stroke: 'black', lineWidth: 1.5 });
+                return {
+                    type: 'group',
+                    children: [
+                        { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                    ]
+                };
+            },
+            data: categories.map((cat, i) => ([i, means[cat], stds[cat]])),
+            z: 2
+        });
+
+        // Scatter points
+        const scatterData = [];
+        categories.forEach((cat, i) => {
+            const yVals = rawData[cat];
+            yVals.forEach(y => {
+                const jitter = (Math.random() - 0.5) * 0.3; // Small jitter for x
+                scatterData.push([i + jitter, y, edgeColors[i]]); // Store color for itemStyle
+            });
+        });
+
+        series.push({
+            type: 'scatter',
+            name: 'Data Points',
+            data: scatterData.map(d => ({
+                value: [d[0], d[1]],
+                itemStyle: { color: d[2] } // Use stored color
+            })),
+            symbolSize: 8,
+            z: 3
+        });
+        
+        // Custom Lines for Annotation logic
+        const annotations = [];
+        const startY = 39;
+        const stepY = 1.8;
+        for (let i = 1; i < 10; i++) {
+            annotations.push({ x1: 0, x2: i, y: startY + (i * stepY) });
+        }
+
+        // P-value Text Logic
+        const pVal = jsonData.p_val;
+        let pValueText;
+        if (pVal < 0.0001) {
+            pValueText = 'P < 0.0001';
+        } else {
+            pValueText = `P = ${pVal.toFixed(4)}`;
+        }
+
+        // Annotation Series (Groups + Stat Lines + P-value)
+        series.push({
+            type: 'custom',
+            name: 'Annotations',
+            renderItem: (params, api) => {
+                const children = [];
+
+                // 1. Group Labels (Rapamycin, LY, MK)
+                const groupLabels = [
+                    { range: [1, 3], text: 'Rapamycin' },
+                    { range: [4, 6], text: 'LY294002' },
+                    { range: [7, 9], text: 'MK2206' }
+                ];
+                
+                const yZero = api.coord([0, 0])[1]; // Y pixel of value 0
+                const yLinePos = yZero + 30;
+                const yTextPos = yZero + 35;
+
+                groupLabels.forEach(group => {
+                    const p1 = api.coord([group.range[0], 0]);
+                    const p2 = api.coord([group.range[1], 0]);
+                    
+                    children.push({
+                        type: 'line',
+                        shape: { x1: p1[0], y1: yLinePos, x2: p2[0], y2: yLinePos },
+                        style: { stroke: 'black', lineWidth: 1.2 }
+                    });
+                    
+                    const centerX = (p1[0] + p2[0]) / 2;
+                    children.push({
+                        type: 'text',
+                        style: {
+                            text: group.text,
+                            x: centerX,
+                            y: yTextPos,
+                            fill: 'black',
+                            fontSize: 14,
+                            align: 'center',
+                            verticalAlign: 'top'
+                        }
+                    });
+                });
+
+                // 2. Statistical Lines
+                annotations.forEach(ann => {
+                    const pStart = api.coord([ann.x1, ann.y]);
+                    const pEnd = api.coord([ann.x2, ann.y]);
+                    
+                    children.push({
+                        type: 'line',
+                        shape: { x1: pStart[0], y1: pStart[1], x2: pEnd[0], y2: pEnd[1] },
+                        style: { stroke: 'black', lineWidth: 0.8 }
+                    });
+                });
+
+                // 3. P-value Text
+                const topLineYVal = startY + (9 * stepY);
+                const pTextPos = api.coord([4.5, topLineYVal]); 
+                
+                children.push({
+                    type: 'text',
+                    style: {
+                        text: pValueText,
+                        x: pTextPos[0],
+                        y: pTextPos[1] - 5, // 5 pixels above
+                        fill: 'black',
+                        fontSize: 12,
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                });
+
+                return {
+                    type: 'group',
+                    children: children
+                };
+            },
+            data: [0], // Dummy data
+            z: 10
+        });
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: { top: 60, right: 20, bottom: 200, left: 60 }, // Increased bottom for labels
+            xAxis: {
+                type: 'category',
+                data: categories,
+                axisLabel: { show: false }, // Hidden x-axis labels
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                axisTick: { alignWithLabel: true, length: 5, lineStyle: { width: 1.2 } }
+            },
+            yAxis: {
+                name: '% of Total',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                type: 'value',
+                min: 0,
+                max: 65,
+                interval: 5,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                splitLine: { show: false }
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'a', // Figure label 'a'
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+        chart.setOption(option);
+    </script>
+</body>
+</html>

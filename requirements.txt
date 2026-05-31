@@ -1,0 +1,14 @@
+# Versions pinned in Phase 5. Loose deps for now:
+
+# schema / ETL
+pydantic>=2
+jsonschema>=4
+
+# eval harness
+requests>=2          # VLM / LLM HTTP calls
+pyyaml>=6            # prompt configs
+jinja2>=3            # prompt templating
+matplotlib>=3.7      # executing/rendering python chart programs (ER)
+# openai>=1          # optional: streaming text client (run_generation uses raw requests by default)
+# tiktoken>=0.5      # optional: context-length truncation
+# playwright>=1.40   # optional: html chart rendering (run `playwright install chromium`)

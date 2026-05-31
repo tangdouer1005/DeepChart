@@ -1,0 +1,130 @@
+{
+  "query_id": 4,
+  "query_text": "Create a heatmap showing valuation-disclosure rate by founded-year cohort and Stage family, where the plotted value is the percentage of companies in each cohort-stage cell with a disclosed Valuation, restricted to cells with at least 2 companies.",
+  "status": "complete",
+  "chart": {
+    "type": "heatmap",
+    "title": "Valuation disclosure by founded-year cohort and stage family",
+    "x_field": "stage_family",
+    "y_field": "founded_year_cohort",
+    "value_field": "valuation_disclosure_pct",
+    "x_order": [
+      "seed / pre-seed",
+      "Series A",
+      "Series B",
+      "Series C+",
+      "strategic / alternative",
+      "other / undisclosed"
+    ],
+    "y_order": [
+      "pre-2018",
+      "2018-2020",
+      "2021-2022",
+      "2023+",
+      "Unknown"
+    ],
+    "figsize": [
+      12,
+      6
+    ]
+  },
+  "data": [
+    {
+      "founded_year_cohort": "2018-2020",
+      "stage_family": "Series A",
+      "company_count": 5,
+      "valuation_disclosure_pct": 20.0
+    },
+    {
+      "founded_year_cohort": "2018-2020",
+      "stage_family": "Series B",
+      "company_count": 3,
+      "valuation_disclosure_pct": 100.0
+    },
+    {
+      "founded_year_cohort": "2018-2020",
+      "stage_family": "Series C+",
+      "company_count": 3,
+      "valuation_disclosure_pct": 66.66666666666666
+    },
+    {
+      "founded_year_cohort": "2018-2020",
+      "stage_family": "seed / pre-seed",
+      "company_count": 7,
+      "valuation_disclosure_pct": 28.57142857142857
+    },
+    {
+      "founded_year_cohort": "2018-2020",
+      "stage_family": "strategic / alternative",
+      "company_count": 4,
+      "valuation_disclosure_pct": 25.0
+    },
+    {
+      "founded_year_cohort": "2021-2022",
+      "stage_family": "Series A",
+      "company_count": 16,
+      "valuation_disclosure_pct": 62.5
+    },
+    {
+      "founded_year_cohort": "2021-2022",
+      "stage_family": "Series B",
+      "company_count": 7,
+      "valuation_disclosure_pct": 100.0
+    },
+    {
+      "founded_year_cohort": "2021-2022",
+      "stage_family": "seed / pre-seed",
+      "company_count": 13,
+      "valuation_disclosure_pct": 30.76923076923077
+    },
+    {
+      "founded_year_cohort": "2021-2022",
+      "stage_family": "strategic / alternative",
+      "company_count": 7,
+      "valuation_disclosure_pct": 42.857142857142854
+    },
+    {
+      "founded_year_cohort": "2023+",
+      "stage_family": "Series A",
+      "company_count": 5,
+      "valuation_disclosure_pct": 60.0
+    },
+    {
+      "founded_year_cohort": "2023+",
+      "stage_family": "seed / pre-seed",
+      "company_count": 8,
+      "valuation_disclosure_pct": 37.5
+    },
+    {
+      "founded_year_cohort": "2023+",
+      "stage_family": "strategic / alternative",
+      "company_count": 2,
+      "valuation_disclosure_pct": 100.0
+    },
+    {
+      "founded_year_cohort": "pre-2018",
+      "stage_family": "Series A",
+      "company_count": 3,
+      "valuation_disclosure_pct": 33.33333333333333
+    },
+    {
+      "founded_year_cohort": "pre-2018",
+      "stage_family": "Series B",
+      "company_count": 5,
+      "valuation_disclosure_pct": 60.0
+    },
+    {
+      "founded_year_cohort": "pre-2018",
+      "stage_family": "Series C+",
+      "company_count": 5,
+      "valuation_disclosure_pct": 100.0
+    },
+    {
+      "founded_year_cohort": "pre-2018",
+      "stage_family": "strategic / alternative",
+      "company_count": 4,
+      "valuation_disclosure_pct": 100.0
+    }
+  ],
+  "notes": []
+}

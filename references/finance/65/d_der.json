@@ -1,0 +1,177 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "Net Income": 10739000000.0,
+            "Pretax Income": 12920000000.0,
+            "Operating Income": 12660000000.0,
+            "Revenue": 49247000000.0,
+            "Avg Total Assets": 117512500000.0,
+            "Avg Total Equity": 61642000000.0,
+            "Tax Burden": 0.8311919504643963,
+            "Interest Burden": 1.0205371248025277,
+            "Operating Margin": 0.2570714967409182,
+            "Asset Turnover": 0.4190788214019785,
+            "Equity Multiplier": 1.9063706563706564,
+            "RESULT_DuPont_ROE": 0.1742156321988255
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "Net Income": 9609000000.0,
+            "Pretax Income": 12287000000.0,
+            "Operating Income": 11973000000.0,
+            "Revenue": 48005000000.0,
+            "Avg Total Assets": 125735000000.0,
+            "Avg Total Equity": 64861500000.0,
+            "Tax Burden": 0.7820460649466916,
+            "Interest Burden": 1.0262256744341436,
+            "Operating Margin": 0.2494115196333715,
+            "Asset Turnover": 0.3817950451346085,
+            "Equity Multiplier": 1.9385151438064183,
+            "RESULT_DuPont_ROE": 0.1481464350963206
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "Net Income": 110000000.0,
+            "Pretax Income": 13039000000.0,
+            "Operating Income": 12309000000.0,
+            "Revenue": 49330000000.0,
+            "Avg Total Assets": 119301000000.0,
+            "Avg Total Equity": 54670500000.0,
+            "Tax Burden": 0.0084362297722217,
+            "Interest Burden": 1.0593061987163863,
+            "Operating Margin": 0.2495236164605716,
+            "Asset Turnover": 0.4134919237894066,
+            "Equity Multiplier": 2.1821823469695723,
+            "RESULT_DuPont_ROE": 0.0020120540327964
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "Net Income": 11621000000.0,
+            "Pretax Income": 14571000000.0,
+            "Operating Income": 14219000000.0,
+            "Revenue": 51904000000.0,
+            "Avg Total Assets": 103288500000.0,
+            "Avg Total Equity": 38387500000.0,
+            "Tax Burden": 0.7975430649921076,
+            "Interest Burden": 1.0247556086925944,
+            "Operating Margin": 0.2739480579531442,
+            "Asset Turnover": 0.5025148007764659,
+            "Equity Multiplier": 2.6906805600781505,
+            "RESULT_DuPont_ROE": 0.3027287528492347
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "Net Income": 11214000000.0,
+            "Pretax Income": 13970000000.0,
+            "Operating Income": 13620000000.0,
+            "Revenue": 49301000000.0,
+            "Avg Total Assets": 96323000000.0,
+            "Avg Total Equity": 35745500000.0,
+            "Tax Burden": 0.8027201145311381,
+            "Interest Burden": 1.025697503671072,
+            "Operating Margin": 0.2762621447840814,
+            "Asset Turnover": 0.5118299886839073,
+            "Equity Multiplier": 2.694688841952134,
+            "RESULT_DuPont_ROE": 0.3137178106335063
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "Net Income": 10591000000.0,
+            "Pretax Income": 13262000000.0,
+            "Operating Income": 12833000000.0,
+            "Revenue": 49818000000.0,
+            "Avg Total Assets": 96175000000.0,
+            "Avg Total Equity": 39597500000.0,
+            "Tax Burden": 0.7985974966068466,
+            "Interest Burden": 1.033429439725707,
+            "Operating Margin": 0.2575976554658958,
+            "Asset Turnover": 0.5179932414868729,
+            "Equity Multiplier": 2.4288149504387904,
+            "RESULT_DuPont_ROE": 0.2674663804533114
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Net Income": 11812000000.0,
+            "Pretax Income": 14477000000.0,
+            "Operating Income": 13969000000.0,
+            "Revenue": 51557000000.0,
+            "Avg Total Assets": 95749500000.0,
+            "Avg Total Equity": 40524000000.0,
+            "Tax Burden": 0.8159148994957519,
+            "Interest Burden": 1.0363662395303888,
+            "Operating Margin": 0.2709428399635355,
+            "Asset Turnover": 0.5384571198805216,
+            "Equity Multiplier": 2.362785016286645,
+            "RESULT_DuPont_ROE": 0.2914815911558583
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Net Income": 12613000000.0,
+            "Pretax Income": 15318000000.0,
+            "Operating Income": 15031000000.0,
+            "Revenue": 56998000000.0,
+            "Avg Total Assets": 97927000000.0,
+            "Avg Total Equity": 42063000000.0,
+            "Tax Burden": 0.8234103668886278,
+            "Interest Burden": 1.0190938726631629,
+            "Operating Margin": 0.2637110074037685,
+            "Asset Turnover": 0.5820458096337068,
+            "Equity Multiplier": 2.328103083470033,
+            "RESULT_DuPont_ROE": 0.2998597342082116
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "Net Income": 10320000000.0,
+            "Pretax Income": 12234000000.0,
+            "Operating Income": 12181000000.0,
+            "Revenue": 53803000000.0,
+            "Avg Total Assets": 113132500000.0,
+            "Avg Total Equity": 44905000000.0,
+            "Tax Burden": 0.8435507601765572,
+            "Interest Burden": 1.004351038502586,
+            "Operating Margin": 0.2264000148690593,
+            "Asset Turnover": 0.4755750999933706,
+            "Equity Multiplier": 2.519374234495045,
+            "RESULT_DuPont_ROE": 0.229818505734328
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "净资产收益率-杜邦分析 (Return on Equity - DuPont Analysis, ROE)": 0.1742156321988255
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "净资产收益率-杜邦分析 (Return on Equity - DuPont Analysis, ROE)": 0.1481464350963206
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "净资产收益率-杜邦分析 (Return on Equity - DuPont Analysis, ROE)": 0.002012054032796481
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "净资产收益率-杜邦分析 (Return on Equity - DuPont Analysis, ROE)": 0.30272875284923473
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "净资产收益率-杜邦分析 (Return on Equity - DuPont Analysis, ROE)": 0.31371781063350634
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "净资产收益率-杜邦分析 (Return on Equity - DuPont Analysis, ROE)": 0.26746638045331145
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "净资产收益率-杜邦分析 (Return on Equity - DuPont Analysis, ROE)": 0.2914815911558583
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "净资产收益率-杜邦分析 (Return on Equity - DuPont Analysis, ROE)": 0.2998597342082116
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "净资产收益率-杜邦分析 (Return on Equity - DuPont Analysis, ROE)": 0.22981850573432805
+        }
+    ]
+}

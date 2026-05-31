@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016,
+            "CFO": 13570000000,
+            "Net Income": 10739000000,
+            "Total Assets": 121652000000,
+            "Avg Total Assets": 117512500000.0,
+            "CFO per Asset": 0.115477076906712,
+            "NI per Asset": 0.0913860227635357
+        },
+        {
+            "Fiscal Year": 2017,
+            "CFO": 13876000000,
+            "Net Income": 9609000000,
+            "Total Assets": 129818000000,
+            "Avg Total Assets": 125735000000.0,
+            "CFO per Asset": 0.1103590885592714,
+            "NI per Asset": 0.0764226349067483
+        },
+        {
+            "Fiscal Year": 2018,
+            "CFO": 13666000000,
+            "Net Income": 110000000,
+            "Total Assets": 108784000000,
+            "Avg Total Assets": 119301000000.0,
+            "CFO per Asset": 0.1145505905231305,
+            "NI per Asset": 0.0009220375353098
+        },
+        {
+            "Fiscal Year": 2019,
+            "CFO": 15831000000,
+            "Net Income": 11621000000,
+            "Total Assets": 97793000000,
+            "Avg Total Assets": 103288500000.0,
+            "CFO per Asset": 0.1532697250904021,
+            "NI per Asset": 0.1125101051908005
+        },
+        {
+            "Fiscal Year": 2020,
+            "CFO": 15426000000,
+            "Net Income": 11214000000,
+            "Total Assets": 94853000000,
+            "Avg Total Assets": 96323000000.0,
+            "CFO per Asset": 0.1601486664659531,
+            "NI per Asset": 0.1164207925417605
+        },
+        {
+            "Fiscal Year": 2021,
+            "CFO": 15454000000,
+            "Net Income": 10591000000,
+            "Total Assets": 97497000000,
+            "Avg Total Assets": 96175000000.0,
+            "CFO per Asset": 0.1606862490252144,
+            "NI per Asset": 0.1101221731219131
+        },
+        {
+            "Fiscal Year": 2022,
+            "CFO": 13226000000,
+            "Net Income": 11812000000,
+            "Total Assets": 94002000000,
+            "Avg Total Assets": 95749500000.0,
+            "CFO per Asset": 0.1381312696149849,
+            "NI per Asset": 0.1233635684781643
+        },
+        {
+            "Fiscal Year": 2023,
+            "CFO": 19886000000,
+            "Net Income": 12613000000,
+            "Total Assets": 101852000000,
+            "Avg Total Assets": 97927000000.0,
+            "CFO per Asset": 0.2030696335025069,
+            "NI per Asset": 0.1288000245080519
+        },
+        {
+            "Fiscal Year": 2024,
+            "CFO": 10880000000,
+            "Net Income": 10320000000,
+            "Total Assets": 124413000000,
+            "Avg Total Assets": 113132500000.0,
+            "CFO per Asset": 0.0961704196406868,
+            "NI per Asset": 0.0912204715709455
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.0232712984578963
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.032869093654192785
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.12461391381085453
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.043050116061476795
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.04440555385702086
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.049878457798701495
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.015042233143975653
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.07140753249813454
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.004501137340953115
+        }
+    ]
+}

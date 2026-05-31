@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016,
+            "Cash & Equiv": 4582100000,
+            "Receivables": 4766300000,
+            "Operating Expenses": 11640700000,
+            "Cost of Revenue": 5710100000,
+            "Quick Assets": 9348400000,
+            "Daily Burn": 47536438.35616438
+        },
+        {
+            "Fiscal Year": 2017,
+            "Cash & Equiv": 6536200000,
+            "Receivables": 5262200000,
+            "Operating Expenses": 11276300000,
+            "Cost of Revenue": 4447700000,
+            "Quick Assets": 11798400000,
+            "Daily Burn": 43079452.05479452
+        },
+        {
+            "Fiscal Year": 2018,
+            "Cash & Equiv": 7320700000,
+            "Receivables": 5776800000,
+            "Operating Expenses": 10785800000,
+            "Cost of Revenue": 4681700000,
+            "Quick Assets": 13097500000,
+            "Daily Burn": 42376712.32876712
+        },
+        {
+            "Fiscal Year": 2019,
+            "Cash & Equiv": 2337500000,
+            "Receivables": 5541500000,
+            "Operating Expenses": 11598900000,
+            "Cost of Revenue": 4721200000,
+            "Quick Assets": 7879000000,
+            "Daily Burn": 44712602.73972603
+        },
+        {
+            "Fiscal Year": 2020,
+            "Cash & Equiv": 3657100000,
+            "Receivables": 6929000000,
+            "Operating Expenses": 11845700000,
+            "Cost of Revenue": 5483300000,
+            "Quick Assets": 10586100000,
+            "Daily Burn": 47476712.32876712
+        },
+        {
+            "Fiscal Year": 2021,
+            "Cash & Equiv": 3818500000,
+            "Receivables": 8127200000,
+            "Operating Expenses": 13072600000,
+            "Cost of Revenue": 7312800000,
+            "Quick Assets": 11945700000,
+            "Daily Burn": 55850410.95890411
+        },
+        {
+            "Fiscal Year": 2022,
+            "Cash & Equiv": 2067000000,
+            "Receivables": 8558900000,
+            "Operating Expenses": 13258300000,
+            "Cost of Revenue": 6629800000,
+            "Quick Assets": 10625900000,
+            "Daily Burn": 54487945.20547945
+        },
+        {
+            "Fiscal Year": 2023,
+            "Cash & Equiv": 2818600000,
+            "Receivables": 11336200000,
+            "Operating Expenses": 16254600000,
+            "Cost of Revenue": 7082200000,
+            "Quick Assets": 14154800000,
+            "Daily Burn": 63936438.35616438
+        },
+        {
+            "Fiscal Year": 2024,
+            "Cash & Equiv": 3268400000,
+            "Receivables": 13275400000,
+            "Operating Expenses": 19122700000,
+            "Cost of Revenue": 8418300000,
+            "Quick Assets": 16543800000,
+            "Daily Burn": 75454794.52054794
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 196.65756045830742
+        },
+        {
+            "Fiscal Year": 2017,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 273.87534978377005
+        },
+        {
+            "Fiscal Year": 2018,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 309.0730564085987
+        },
+        {
+            "Fiscal Year": 2019,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 176.21430015747453
+        },
+        {
+            "Fiscal Year": 2020,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 222.9745801835074
+        },
+        {
+            "Fiscal Year": 2021,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 213.88741452215802
+        },
+        {
+            "Fiscal Year": 2022,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 195.01377708277815
+        },
+        {
+            "Fiscal Year": 2023,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 221.3886222618354
+        },
+        {
+            "Fiscal Year": 2024,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 219.25445699139465
+        }
+    ]
+}

@@ -1,0 +1,105 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016,
+            "Net Income": 16540000000,
+            "Interest Expense": 726000000,
+            "Income Tax": 3263000000,
+            "Depreciation & Amortization": 3754000000
+        },
+        {
+            "Fiscal Year": 2017,
+            "Net Income": 1300000000,
+            "Interest Expense": 934000000,
+            "Income Tax": 16373000000,
+            "Depreciation & Amortization": 5642000000
+        },
+        {
+            "Fiscal Year": 2018,
+            "Net Income": 15297000000,
+            "Interest Expense": 1005000000,
+            "Income Tax": 2702000000,
+            "Depreciation & Amortization": 6929000000
+        },
+        {
+            "Fiscal Year": 2019,
+            "Net Income": 15119000000,
+            "Interest Expense": 318000000,
+            "Income Tax": 2209000000,
+            "Depreciation & Amortization": 7009000000
+        },
+        {
+            "Fiscal Year": 2020,
+            "Net Income": 14714000000,
+            "Interest Expense": 201000000,
+            "Income Tax": 1783000000,
+            "Depreciation & Amortization": 7231000000
+        },
+        {
+            "Fiscal Year": 2021,
+            "Net Income": 20878000000,
+            "Interest Expense": 183000000,
+            "Income Tax": 1377000000,
+            "Depreciation & Amortization": 7390000000
+        },
+        {
+            "Fiscal Year": 2022,
+            "Net Income": 17941000000,
+            "Interest Expense": 276000000,
+            "Income Tax": 2989000000,
+            "Depreciation & Amortization": 6970000000
+        },
+        {
+            "Fiscal Year": 2023,
+            "Net Income": 35153000000,
+            "Interest Expense": 1247000000,
+            "Income Tax": 1736000000,
+            "Depreciation & Amortization": 7486000000
+        },
+        {
+            "Fiscal Year": 2024,
+            "Net Income": 14066000000,
+            "Interest Expense": 755000000,
+            "Income Tax": 2621000000,
+            "Depreciation & Amortization": 7339000000
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016,
+            "息税折旧摊销前利润 (Earnings Before Interest, Taxes, Depreciation, and Amortization, EBITDA)": 24283000000
+        },
+        {
+            "Fiscal Year": 2017,
+            "息税折旧摊销前利润 (Earnings Before Interest, Taxes, Depreciation, and Amortization, EBITDA)": 24249000000
+        },
+        {
+            "Fiscal Year": 2018,
+            "息税折旧摊销前利润 (Earnings Before Interest, Taxes, Depreciation, and Amortization, EBITDA)": 25933000000
+        },
+        {
+            "Fiscal Year": 2019,
+            "息税折旧摊销前利润 (Earnings Before Interest, Taxes, Depreciation, and Amortization, EBITDA)": 24655000000
+        },
+        {
+            "Fiscal Year": 2020,
+            "息税折旧摊销前利润 (Earnings Before Interest, Taxes, Depreciation, and Amortization, EBITDA)": 23929000000
+        },
+        {
+            "Fiscal Year": 2021,
+            "息税折旧摊销前利润 (Earnings Before Interest, Taxes, Depreciation, and Amortization, EBITDA)": 29828000000
+        },
+        {
+            "Fiscal Year": 2022,
+            "息税折旧摊销前利润 (Earnings Before Interest, Taxes, Depreciation, and Amortization, EBITDA)": 28176000000
+        },
+        {
+            "Fiscal Year": 2023,
+            "息税折旧摊销前利润 (Earnings Before Interest, Taxes, Depreciation, and Amortization, EBITDA)": 45622000000
+        },
+        {
+            "Fiscal Year": 2024,
+            "息税折旧摊销前利润 (Earnings Before Interest, Taxes, Depreciation, and Amortization, EBITDA)": 24781000000
+        }
+    ]
+}

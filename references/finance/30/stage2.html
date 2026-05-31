@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ACN 资本再投资率 (2016–2024)</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f7;
+      color: #222;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px 24px 28px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px; /* 固定高度，避免 0 高度导致渲染失败 */
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .note {
+      font-size: 12px;
+      color: #777;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>ACN 资本再投资率</h1>
+    <h2>2016–2024 财年变化（Bar Chart）</h2>
+    <div class="chart-wrapper">
+      <canvas id="reinvestmentRateChart"></canvas>
+    </div>
+    <div class="note">
+      说明：资本再投资率 = 再投资金额 / 税后经营利润。图中数值以百分比显示，负值表示净撤资或资本回收。
+    </div>
+  </div>
+
+  <!-- 使用 Chart.js 3.x（语法稳定且常见），不做 integrity 校验 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+  <script>
+    (function () {
+      // 防止脚本在 DOM 未就绪时执行
+      function initChart() {
+        const canvas = document.getElementById("reinvestmentRateChart");
+        if (!canvas) {
+          console.error("未找到 canvas 元素 #reinvestmentRateChart");
+          return;
+        }
+        if (typeof Chart === "undefined") {
+          console.error("Chart.js 未正确加载");
+          return;
+        }
+
+        const fiscalYears = [
+          "2016","2017","2018","2019",
+          "2020","2021","2022","2023","2024"
+        ];
+
+        const reinvestmentRateRaw = [
+          0.2251972452188492,
+          0.1150960476094578,
+          0.1980924894791882,
+          0.1001499724844235,
+         -0.0468168038013103,
+         -0.0526733646276539,
+          0.15263519413284,
+          0.1091596415131209,
+          0.2647172698385912
+        ];
+
+        const reinvestmentRatePct = reinvestmentRateRaw.map(v => v * 100);
+
+        const ctx = canvas.getContext("2d");
+
+        const barColors = reinvestmentRatePct.map(v =>
+          v >= 0 ? "rgba(37, 99, 235, 0.85)" : "rgba(220, 38, 38, 0.85)"
+        );
+        const barBorderColors = reinvestmentRatePct.map(v =>
+          v >= 0 ? "rgba(37, 99, 235, 1)" : "rgba(185, 28, 28, 1)"
+        );
+
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: fiscalYears,
+            datasets: [{
+              label: "资本再投资率",
+              data: reinvestmentRatePct,
+              backgroundColor: barColors,
+              borderColor: barBorderColors,
+              borderWidth: 1.2,
+              borderRadius: 4,
+              hoverBackgroundColor: barColors,
+              hoverBorderColor: barBorderColors
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                mode: "index",
+                intersect: false,
+                callbacks: {
+                  label: function(context) {
+                    const val = context.parsed.y;
+                    if (val === null || val === undefined) return "";
+                    return "资本再投资率: " + val.toFixed(1) + "%";
+                  }
+                }
+              },
+              title: {
+                display: false
+              }
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "财年",
+                  color: "#444",
+                  font: { size: 12 }
+                },
+                grid: {
+                  display: false
+                },
+                ticks: {
+                  color: "#444"
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "资本再投资率（%）",
+                  color: "#444",
+                  font: { size: 12 }
+                },
+                ticks: {
+                  callback: function(value) {
+                    return value + "%";
+                  },
+                  color: "#444"
+                },
+                grid: {
+                  color: "rgba(148, 163, 184, 0.25)"
+                },
+                beginAtZero: true
+              }
+            },
+            animation: {
+              duration: 800,
+              easing: "easeOutQuart"
+            },
+            hover: {
+              mode: "nearest",
+              intersect: true
+            }
+          }
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initChart);
+      } else {
+        initChart();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a dumbbell chart for the 8 countries with the largest positive city-over-country rank advantage in the 2020 report, where each country has one point for `covid_rank` and one point for the best visible city rank from `city_rankings`, the plotted selection metric is `covid_rank - best visible city rank`, values are expressed in rank positions, countries with `city_rankings = unavailable` are excluded, and countries are sorted by the largest positive advantage after the gap is derived.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "rank position",
+  "sort_rule": "descending by best_city_advantage",
+  "selection_rule": "positive advantages only, capped at top 8 after excluding unavailable city_rankings",
+  "plot_spec": {
+    "title": "2020 Best-City vs Country Rank Advantage",
+    "left_field": "covid_rank",
+    "right_field": "best_city_rank",
+    "left_label": "Country rank",
+    "right_label": "Best visible city rank",
+    "invert_rank_axis": true
+  },
+  "records": [
+    {
+      "entity": "Russia",
+      "covid_rank": 27,
+      "best_city_rank": 17,
+      "best_city_advantage": 10
+    },
+    {
+      "entity": "Taiwan",
+      "covid_rank": 17,
+      "best_city_rank": 10,
+      "best_city_advantage": 7
+    },
+    {
+      "entity": "France",
+      "covid_rank": 16,
+      "best_city_rank": 14,
+      "best_city_advantage": 2
+    },
+    {
+      "entity": "Kenya",
+      "covid_rank": 23,
+      "best_city_rank": 22,
+      "best_city_advantage": 1
+    }
+  ]
+}

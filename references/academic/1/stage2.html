@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            background-color: #ffffff; 
+            font-family: Arial, sans-serif;
+        }
+        #chart-container { 
+            width: 500px; 
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // 1. Data Source (Embedded JSON)
+        const chartData = {
+    "means": {
+        "saline": 5.467111666666667,
+        "K5": 8.863207777777777,
+        "K10": 17.373408333333334,
+        "K20": 30.219199999999997,
+        "K30": 33.764841666666676,
+        "K50": 35.14913636363636
+    },
+    "sems": {
+        "saline": 0.7180627404161769,
+        "K5": 0.7555903039617763,
+        "K10": 1.0991008969772116,
+        "K20": 1.7468333996293424,
+        "K30": 2.223402620182202,
+        "K50": 2.9289296857779643
+    },
+    "raw_data": {
+        "saline": [
+            2.61617,
+            2.36168,
+            7.15327,
+            5.95655,
+            8.7249,
+            10.075,
+            4.65983,
+            5.17181,
+            4.41222,
+            3.4727,
+            3.31779,
+            7.68342
+        ],
+        "K5": [
+            10.9128,
+            8.18393,
+            7.4796,
+            6.79138,
+            6.06007,
+            10.8698,
+            11.254,
+            6.60699,
+            11.6103
+        ],
+        "K10": [
+            17.0236,
+            10.8045,
+            19.7571,
+            11.4857,
+            20.58,
+            22.387,
+            17.5725,
+            19.0825,
+            20.2917,
+            20.6828,
+            13.9655,
+            14.848
+        ],
+        "K20": [
+            27.166,
+            24.2927,
+            40.8666,
+            33.6696,
+            28.6541,
+            32.8038,
+            36.9777,
+            35.9643,
+            30.9105,
+            27.4061,
+            21.5009,
+            22.4181
+        ],
+        "K30": [
+            29.3987,
+            25.5928,
+            43.1267,
+            38.4147,
+            34.1275,
+            38.4792,
+            41.937,
+            39.0227,
+            37.767,
+            35.177,
+            20.7624,
+            21.3724
+        ],
+        "K50": [
+            24.7485,
+            32.7675,
+            30.3007,
+            35.1756,
+            45.9113,
+            50.5032,
+            50.1651,
+            33.9109,
+            23.291,
+            25.8906,
+            33.9761
+        ]
+    },
+    "comparisons": [
+        {
+            "col1": "saline",
+            "col2": "K5",
+            "x1": 0,
+            "x2": 1,
+            "y_pos": 14,
+            "p_val": 0.004578555524183749
+        },
+        {
+            "col1": "K5",
+            "col2": "K10",
+            "x1": 1,
+            "x2": 2,
+            "y_pos": 26,
+            "p_val": 1.019976560569198e-05
+        },
+        {
+            "col1": "K10",
+            "col2": "K20",
+            "x1": 2,
+            "x2": 3,
+            "y_pos": 44,
+            "p_val": 2.8976449385670735e-06
+        },
+        {
+            "col1": "K20",
+            "col2": "K30",
+            "x1": 3,
+            "x2": 4,
+            "y_pos": 51,
+            "p_val": 0.2230143210251554
+        },
+        {
+            "col1": "K30",
+            "col2": "K50",
+            "x1": 4,
+            "x2": 5,
+            "y_pos": 59,
+            "p_val": 0.7074831449421184
+        }
+    ],
+    "columns": [
+        "saline",
+        "K5",
+        "K10",
+        "K20",
+        "K30",
+        "K50"
+    ],
+    "x_labels": [
+        "0",
+        "5",
+        "10",
+        "20",
+        "30",
+        "50"
+    ]
+};
+        
+        // Configuration
+        const columns = chartData.columns;
+        const xLabels = chartData.x_labels;
+        const colorPalette = [
+            '#000000', 
+            '#F08080', 
+            '#A52A2A', 
+            '#800000', 
+            '#500000', 
+            '#400000'
+        ];
+
+        // 3. Prepare Data Structure
+        const stats = {};
+        
+        columns.forEach(col => {
+            stats[col] = { 
+                mean: chartData.means[col], 
+                sem: chartData.sems[col], 
+                arr: chartData.raw_data[col]
+            };
+        });
+
+        const sigAnnotations = [];
+        
+        chartData.comparisons.forEach(comp => {
+            const pVal = comp.p_val;
+            
+            let sigText = "";
+            if (pVal < 0.001) sigText = "***";
+            else if (pVal < 0.01) sigText = "**";
+            else if (pVal < 0.05) sigText = "*";
+            else sigText = `P = ${pVal.toFixed(2)}`;
+            
+            sigAnnotations.push({
+                x1: comp.x1,
+                x2: comp.x2,
+                y: comp.y_pos,
+                text: sigText
+            });
+        });
+
+        // 4. ECharts Rendering
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Prepare scatter data with jitter
+        const scatterData = [];
+        // Seeded random for consistent jitter if possible, but JS Math.random is sufficient for visual
+        columns.forEach((col, colIdx) => {
+            stats[col].arr.forEach(val => {
+                // Jitter +/- 0.15
+                const jitter = (Math.random() - 0.5) * 0.3; 
+                scatterData.push([colIdx + jitter, val]);
+            });
+        });
+
+        const option = {
+            animation: false, // Static look
+            backgroundColor: 'white',
+            grid: {
+                top: '10%',
+                right: '5%',
+                bottom: '15%',
+                left: '15%'
+            },
+            xAxis: {
+                type: 'category',
+                data: xLabels,
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black', fontSize: 16, fontFamily: 'Arial' },
+                name: 'Ketamine (mg kg⁻¹)',
+                nameLocation: 'middle',
+                nameGap: 35,
+                nameTextStyle: { color: 'black', fontSize: 16, fontFamily: 'Arial' }
+            },
+            yAxis: {
+                type: 'value',
+                min: 0,
+                max: 65,
+                interval: 20,
+                axisLine: { show: true, lineStyle: { color: 'black' } }, // Show left axis line
+                axisTick: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black', fontSize: 16, fontFamily: 'Arial' },
+                splitLine: { show: false }, // No grid lines
+                name: 'Ado peak (ΔF/F %)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: { color: 'black', fontSize: 16, fontFamily: 'Arial' }
+            },
+            series: [
+                // 1. Bars
+                {
+                    type: 'bar',
+                    data: columns.map((col, i) => ({
+                        value: stats[col].mean,
+                        itemStyle: { color: colorPalette[i] }
+                    })),
+                    barWidth: '65%',
+                    z: 1
+                },
+                // 2. Error Bars (Custom Render)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const xIdx = api.value(0);
+                        // We access mean and sem from 'data' passed below
+                        const mean = api.value(1);
+                        const sem = api.value(2);
+                        
+                        const highPoint = api.coord([xIdx, mean + sem]);
+                        const lowPoint = api.coord([xIdx, mean - sem]);
+                        
+                        const style = api.style({
+                            stroke: 'gray',
+                            fill: null,
+                            lineWidth: 1.5
+                        });
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                // Vertical line
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0], y1: highPoint[1],
+                                        x2: lowPoint[0], y2: lowPoint[1]
+                                    },
+                                    style: style
+                                },
+                                // Top cap
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0] - 5, y1: highPoint[1],
+                                        x2: highPoint[0] + 5, y2: highPoint[1]
+                                    },
+                                    style: style
+                                },
+                                // Bottom cap
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0] - 5, y1: lowPoint[1],
+                                        x2: lowPoint[0] + 5, y2: lowPoint[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: columns.map((col, i) => [i, stats[col].mean, stats[col].sem]),
+                    z: 3
+                },
+                // 3. Scatter Points
+                {
+                    type: 'scatter',
+                    symbolSize: 6,
+                    itemStyle: {
+                        color: '#555555',
+                        opacity: 0.8,
+                        borderWidth: 0
+                    },
+                    data: scatterData,
+                    z: 4
+                },
+                // 4. Significance Annotations (Custom Render)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const idx = params.dataIndex;
+                        const annotation = sigAnnotations[idx];
+                        
+                        const start = api.coord([annotation.x1, annotation.y]);
+                        const end = api.coord([annotation.x2, annotation.y]);
+                        
+                        const style = api.style({
+                            stroke: 'black',
+                            lineWidth: 0.8,
+                            fill: null
+                        });
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                // Horizontal line
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1],
+                                        x2: end[0], y2: end[1]
+                                    },
+                                    style: style
+                                },
+                                // Text
+                                {
+                                    type: 'text',
+                                    style: {
+                                        text: annotation.text,
+                                        x: (start[0] + end[0]) / 2,
+                                        y: start[1] - 5,
+                                        textAlign: 'center',
+                                        textVerticalAlign: 'bottom',
+                                        font: '14px Arial',
+                                        fill: 'black'
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: sigAnnotations.map(a => [a.x1, a.x2, a.y]), 
+                    z: 5
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 20,
+                    top: 20,
+                    style: {
+                        text: 'f',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

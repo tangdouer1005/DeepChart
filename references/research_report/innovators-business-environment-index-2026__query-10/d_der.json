@@ -1,0 +1,83 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a ranked dumbbell chart showing the 12 countries with the largest absolute gap between `overall global_rank` and `market_perception global rank`, with the two endpoints plotted as the two ranks for each country, the selection determined after computing the absolute rank difference, values expressed in rank positions, and countries sorted from the largest gap to the smallest.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by absolute_rank_gap",
+  "selection_rule": "12 countries with the largest absolute gap between overall and market perception rank",
+  "records": [
+    {
+      "entity": "Saudi Arabia",
+      "absolute_rank_gap": 44,
+      "overall_global_rank": 9,
+      "market_perception_global_rank": 53
+    },
+    {
+      "entity": "Namibia",
+      "absolute_rank_gap": 32,
+      "overall_global_rank": 83,
+      "market_perception_global_rank": 51
+    },
+    {
+      "entity": "China",
+      "absolute_rank_gap": 30,
+      "overall_global_rank": 85,
+      "market_perception_global_rank": 55
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "absolute_rank_gap": 28,
+      "overall_global_rank": 84,
+      "market_perception_global_rank": 112
+    },
+    {
+      "entity": "Thailand",
+      "absolute_rank_gap": 27,
+      "overall_global_rank": 56,
+      "market_perception_global_rank": 83
+    },
+    {
+      "entity": "Costa Rica",
+      "absolute_rank_gap": 26,
+      "overall_global_rank": 73,
+      "market_perception_global_rank": 47
+    },
+    {
+      "entity": "Jamaica",
+      "absolute_rank_gap": 26,
+      "overall_global_rank": 76,
+      "market_perception_global_rank": 50
+    },
+    {
+      "entity": "Vietnam",
+      "absolute_rank_gap": 26,
+      "overall_global_rank": 52,
+      "market_perception_global_rank": 78
+    },
+    {
+      "entity": "Brazil",
+      "absolute_rank_gap": 25,
+      "overall_global_rank": 42,
+      "market_perception_global_rank": 67
+    },
+    {
+      "entity": "Bulgaria",
+      "absolute_rank_gap": 25,
+      "overall_global_rank": 18,
+      "market_perception_global_rank": 43
+    },
+    {
+      "entity": "United Arab Emirates",
+      "absolute_rank_gap": 25,
+      "overall_global_rank": 5,
+      "market_perception_global_rank": 30
+    },
+    {
+      "entity": "Cyprus",
+      "absolute_rank_gap": 24,
+      "overall_global_rank": 15,
+      "market_perception_global_rank": 39
+    }
+  ],
+  "chart_title": "IBEI 2026 Largest Overall vs Market-Perception Rank Gaps"
+}

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta 净资产收益率-杜邦分析 (ROE) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --accent-hover: #1d4ed8;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: #1f2937;
+        --accent-soft: rgba(37, 99, 235, 0.3);
+      }
+    }
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: radial-gradient(circle at top, #eff6ff 0, var(--bg) 55%);
+      color: var(--fg);
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background-color: color-mix(in srgb, var(--bg) 90%, #ffffff 10%);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem 1.75rem;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(148, 163, 184, 0.12);
+    }
+    h1 {
+      margin: 0 0 0.4rem;
+      font-size: 1.35rem;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+    }
+    .subtitle {
+      font-size: 0.92rem;
+      color: #6b7280;
+      margin-bottom: 0.9rem;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      justify-content: space-between;
+    }
+    .left-controls,
+    .right-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 0.2rem 0.7rem;
+      font-size: 0.8rem;
+      color: #4b5563;
+      background: rgba(248, 250, 252, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .pill strong {
+      font-weight: 600;
+      color: #111827;
+    }
+    .toggle-group {
+      display: inline-flex;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(248, 250, 252, 0.85);
+    }
+    .toggle-group button {
+      border: none;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.8rem;
+      background: transparent;
+      cursor: pointer;
+      color: #4b5563;
+      min-width: 3.2rem;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toggle-group button.active {
+      background: var(--accent);
+      color: #f9fafb;
+    }
+    .toggle-group button:not(:last-child) {
+      border-right: 1px solid rgba(148, 163, 184, 0.6);
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: min(420px, 70vh);
+    }
+    .footnote {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .footnote span {
+      white-space: nowrap;
+    }
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem;
+      }
+      .container {
+        padding: 1.1rem 1.1rem 1.3rem;
+      }
+      h1 {
+        font-size: 1.1rem;
+      }
+      .subtitle {
+        font-size: 0.82rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Meta 净资产收益率（ROE）- 杜邦分析</h1>
+    <div class="subtitle">年度变化趋势（2016–2024，基于平均 ROE）</div>
+
+    <div class="controls">
+      <div class="left-controls">
+        <div class="pill">
+          <span>时间范围：</span>
+          <strong>2016–2024</strong>
+        </div>
+        <div class="pill">
+          <span>单位：</span><strong>百分比 (%)</strong>
+        </div>
+      </div>
+      <div class="right-controls">
+        <div class="toggle-group" aria-label="切换 ROE 显示方式">
+          <button id="mode-absolute" class="active" type="button">绝对值</button>
+          <button id="mode-growth" type="button">同比增速</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="roeChart"></canvas>
+    </div>
+
+    <div class="footnote">
+      <div>说明：ROE 为净资产收益率（杜邦分析口径），这里使用年度平均值。</div>
+      <span>数据区间：2016–2024 财年 | 数据来源：用户提供</span>
+    </div>
+  </div>
+
+  <script>
+    // Source data (as decimals)
+    const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const roeRaw = [
+      0.1975979576838278,
+      0.2386383208153301,
+      0.2790615495286293,
+      0.1996425119207694,
+      0.254168410771592,
+      0.3110175416421442,
+      0.1851615374792491,
+      0.2803919951520541,
+      0.371406024329596
+    ];
+
+    // Convert to percentage with 2 decimal precision
+    const roePct = roeRaw.map(v => +(v * 100).toFixed(2));
+
+    // Year-over-year growth of ROE in percentage points and %
+    const yoyChangePctPoint = roePct.map((val, idx) => {
+      if (idx === 0) return null;
+      return +(val - roePct[idx - 1]).toFixed(2);
+    });
+
+    const yoyChangePercent = roePct.map((val, idx) => {
+      if (idx === 0) return null;
+      const prev = roePct[idx - 1];
+      if (prev === 0) return null;
+      return +(((val - prev) / prev) * 100).toFixed(1);
+    });
+
+    const ctx = document.getElementById('roeChart').getContext('2d');
+
+    const gridColor = getComputedStyle(document.documentElement)
+      .getPropertyValue('--grid')
+      .trim() || '#e5e7eb';
+
+    const accent = getComputedStyle(document.documentElement)
+      .getPropertyValue('--accent')
+      .trim() || '#2563eb';
+
+    const accentSoft = getComputedStyle(document.documentElement)
+      .getPropertyValue('--accent-soft')
+      .trim() || 'rgba(37, 99, 235, 0.15)';
+
+    let displayMode = 'absolute'; // 'absolute' or 'growth'
+
+    function buildChartConfig(mode) {
+      const isAbsolute = mode === 'absolute';
+
+      const dataValues = isAbsolute ? roePct : yoyChangePercent;
+      const label =
+        isAbsolute
+          ? 'ROE（净资产收益率，年度平均）'
+          : 'ROE 同比变动（%）';
+      const tooltipSuffix = isAbsolute ? '%' : '%';
+      const yTitle = isAbsolute ? 'ROE (%)' : '同比变化 (%)';
+
+      // Determine reasonable suggested min/max for y-axis
+      const validValues = dataValues.filter(v => v !== null && !isNaN(v));
+      let minVal = Math.min(...validValues);
+      let maxVal = Math.max(...validValues);
+
+      if (isAbsolute) {
+        // Pad a bit around min/max
+        const padding = 5;
+        minVal = Math.floor((minVal - padding) / 5) * 5;
+        maxVal = Math.ceil((maxVal + padding) / 5) * 5;
+        if (minVal < 0) minVal = 0;
+      } else {
+        // For YoY, center around 0
+        const absMax = Math.max(Math.abs(minVal), Math.abs(maxVal));
+        maxVal = Math.ceil((absMax + 5) / 5) * 5;
+        minVal = -maxVal;
+      }
+
+      return {
+        type: 'line',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label,
+              data: dataValues,
+              spanGaps: false,
+              borderColor: accent,
+              backgroundColor: accentSoft,
+              tension: 0.3,
+              fill: true,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointBorderWidth: 1.5,
+              pointBackgroundColor: '#ffffff',
+              pointBorderColor: accent,
+              pointHoverBackgroundColor: '#ffffff',
+              pointHoverBorderColor: accent,
+              borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'nearest',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                padding: 16,
+                font: {
+                  size: 11
+                }
+              }
+            },
+            tooltip: {
+              usePointStyle: true,
+              callbacks: {
+                label: function (context) {
+                  const label = context.dataset.label || '';
+                  let value = context.raw;
+                  if (value === null || value === undefined) return label;
+                  return `${label}: ${value}${tooltipSuffix}`;
+                },
+                footer: function (items) {
+                  const idx = items[0].dataIndex;
+                  if (idx === 0 || !isAbsolute) return '';
+                  const pointChange = yoyChangePctPoint[idx];
+                  const growth = yoyChangePercent[idx];
+                  if (pointChange == null || growth == null) return '';
+                  return `较上年变化: ${pointChange} 个百分点 (${growth}%)`;
+                }
+              },
+              footerFont: {
+                size: 10
+              },
+              padding: 10
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                color: gridColor,
+                drawBorder: false
+              },
+              ticks: {
+                maxRotation: 0,
+                autoSkipPadding: 12
+              }
+            },
+            y: {
+              grid: {
+                color: gridColor
+              },
+              title: {
+                display: true,
+                text: yTitle
+              },
+              suggestedMin: minVal,
+              suggestedMax: maxVal
+            }
+          }
+        }
+      };
+    }
+
+    let roeChart = new Chart(ctx, buildChartConfig(displayMode));
+
+    // Toggle buttons logic
+    const btnAbsolute = document.getElementById('mode-absolute');
+    const btnGrowth = document.getElementById('mode-growth');
+
+    function setMode(mode) {
+      if (mode === displayMode) return;
+      displayMode = mode;
+
+      btnAbsolute.classList.toggle('active', mode === 'absolute');
+      btnGrowth.classList.toggle('active', mode === 'growth');
+
+      // Update chart configuration
+      const newConfig = buildChartConfig(mode);
+      roeChart.data = newConfig.data;
+      roeChart.options = newConfig.options;
+      roeChart.update();
+    }
+
+    btnAbsolute.addEventListener('click', () => setMode('absolute'));
+    btnGrowth.addEventListener('click', () => setMode('growth'));
+  </script>
+</body>
+</html>

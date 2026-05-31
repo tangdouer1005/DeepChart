@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JNJ Piotroski F-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px 28px 32px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #4b5563;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #f3f4f6;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    .footer-note {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    .footer-note strong {
+      color: #111827;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .container {
+        padding: 16px 14px 22px;
+      }
+      h1 {
+        font-size: 1.15rem;
+      }
+      h2 {
+        font-size: 0.9rem;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JNJ 皮奥特罗斯基 F-Score 趋势</h1>
+    <h2>Fiscal years 2016–2024 · Piotroski F-Score (0–9)</h2>
+
+    <div class="meta">
+      <span><strong>Ticker:</strong> JNJ</span>
+      <span><strong>Metric:</strong> Piotroski F-Score</span>
+      <span><strong>Source range:</strong> 2016–2024</span>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="jnjPiotroskiChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      <strong>Note:</strong> F-Score values range from 0 (weak) to 9 (strong).
+      Data used in this chart:
+      2016: 7, 2017: 4, 2018: 9, 2019: 6, 2020: 4, 2021: 7, 2022: 5, 2023: 6, 2024: 6.
+    </div>
+  </div>
+
+  <script>
+    // Data from source
+    const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const fScores = [7, 4, 9, 6, 4, 7, 5, 6, 6];
+
+    const ctx = document.getElementById("jnjPiotroskiChart").getContext("2d");
+
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "Piotroski F-Score",
+            data: fScores,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.1)",
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#2563eb",
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 1.5,
+            tension: 0.25,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+              padding: 16,
+              font: {
+                size: 11,
+              },
+            },
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              title: (items) => {
+                const year = items[0].label;
+                return `Fiscal Year ${year}`;
+              },
+              label: (ctx) => `F-Score: ${ctx.parsed.y}`,
+            },
+          },
+          title: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+              autoSkip: false,
+              font: {
+                size: 11,
+              },
+            },
+          },
+          y: {
+            min: 0,
+            max: 9,
+            ticks: {
+              stepSize: 1,
+              font: {
+                size: 11,
+              },
+            },
+            title: {
+              display: true,
+              text: "Piotroski F-Score",
+              font: {
+                size: 12,
+                weight: "500",
+              },
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.2)",
+            },
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>

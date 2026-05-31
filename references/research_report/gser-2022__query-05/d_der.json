@@ -1,0 +1,77 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a dumbbell chart showing the top 10 ecosystems with the largest absolute disagreement between `Funding rank` and `Value rank` among ecosystems where `Total Early-Stage Funding` and `Ecosystem Value` are both exact values; the left endpoint is the global rank by `Total Early-Stage Funding`, the right endpoint is the global rank by `Ecosystem Value`, values are expressed in `rank position`, and items are sorted descending by absolute rank gap.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "rank position",
+  "sort_rule": "descending by absolute rank gap, ties broken by lower funding_rank then entity",
+  "selection_rule": "top 10 after deterministic tie-break",
+  "plot_spec": {
+    "title": "2022 Funding vs Value Rank Gap",
+    "left_field": "funding_rank",
+    "right_field": "value_rank",
+    "left_label": "funding_rank",
+    "right_label": "value_rank"
+  },
+  "records": [
+    {
+      "entity": "Kuala Lumpur",
+      "funding_rank": 46,
+      "value_rank": 17,
+      "abs_rank_gap": 29
+    },
+    {
+      "entity": "Lille",
+      "funding_rank": 55,
+      "value_rank": 37,
+      "abs_rank_gap": 18
+    },
+    {
+      "entity": "Pittsburgh",
+      "funding_rank": 47,
+      "value_rank": 33,
+      "abs_rank_gap": 14
+    },
+    {
+      "entity": "Cairo",
+      "funding_rank": 33,
+      "value_rank": 46,
+      "abs_rank_gap": 13
+    },
+    {
+      "entity": "Manila",
+      "funding_rank": 37,
+      "value_rank": 50,
+      "abs_rank_gap": 13
+    },
+    {
+      "entity": "Shenzhen",
+      "funding_rank": 23,
+      "value_rank": 12,
+      "abs_rank_gap": 11
+    },
+    {
+      "entity": "Abu Dhabi",
+      "funding_rank": 53,
+      "value_rank": 43,
+      "abs_rank_gap": 10
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "funding_rank": 15,
+      "value_rank": 24,
+      "abs_rank_gap": 9
+    },
+    {
+      "entity": "Miami",
+      "funding_rank": 19,
+      "value_rank": 28,
+      "abs_rank_gap": 9
+    },
+    {
+      "entity": "Seoul",
+      "funding_rank": 16,
+      "value_rank": 8,
+      "abs_rank_gap": 8
+    }
+  ]
+}

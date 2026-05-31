@@ -1,0 +1,65 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a dumbbell chart for the top 12 Fintech ecosystems by `Ecosystem Value`, comparing each ecosystem's rank by `Funding Growth Index` with its rank by `Exit Growth Index`, with values expressed as `rank position`, sorted by absolute rank gap descending, and showing only the top 8 ecosystems with the largest gaps.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "rank position",
+  "sort_rule": "descending by absolute rank gap, ties broken by lower funding_growth_rank then entity",
+  "selection_rule": "top 8 after deterministic tie-break",
+  "plot_spec": {
+    "title": "Fintech 2020 Funding Growth Rank vs Exit Growth Rank",
+    "left_field": "funding_growth_rank",
+    "right_field": "exit_growth_rank",
+    "left_label": "funding_growth_rank",
+    "right_label": "exit_growth_rank"
+  },
+  "records": [
+    {
+      "entity": "Amsterdam-Delta",
+      "funding_growth_rank": 10,
+      "exit_growth_rank": 1,
+      "abs_rank_gap": 9
+    },
+    {
+      "entity": "Stockholm",
+      "funding_growth_rank": 12,
+      "exit_growth_rank": 3,
+      "abs_rank_gap": 9
+    },
+    {
+      "entity": "Tokyo",
+      "funding_growth_rank": 3,
+      "exit_growth_rank": 10,
+      "abs_rank_gap": 7
+    },
+    {
+      "entity": "Los Angeles",
+      "funding_growth_rank": 4,
+      "exit_growth_rank": 11,
+      "abs_rank_gap": 7
+    },
+    {
+      "entity": "Tel Aviv",
+      "funding_growth_rank": 9,
+      "exit_growth_rank": 3,
+      "abs_rank_gap": 6
+    },
+    {
+      "entity": "Boston",
+      "funding_growth_rank": 4,
+      "exit_growth_rank": 1,
+      "abs_rank_gap": 3
+    },
+    {
+      "entity": "Beijing",
+      "funding_growth_rank": 1,
+      "exit_growth_rank": 3,
+      "abs_rank_gap": 2
+    },
+    {
+      "entity": "Shanghai",
+      "funding_growth_rank": 1,
+      "exit_growth_rank": 3,
+      "abs_rank_gap": 2
+    }
+  ]
+}

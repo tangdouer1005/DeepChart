@@ -1,0 +1,201 @@
+{
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "Q3 funding growth vs deal growth by market",
+  "x_field": "x",
+  "y_field": "y",
+  "size_field": "size",
+  "hue_field": "hue",
+  "label_field": "label",
+  "x_label": "Funding growth vs Q3 2024 (%)",
+  "y_label": "Deal growth vs Q3 2024 (%)",
+  "size_label": "Q3 2025 funding ($B)",
+  "annotate": false,
+  "data": [
+    {
+      "label": "Silicon Valley",
+      "x": 206.722689,
+      "y": -18.991098,
+      "size": 36.5,
+      "hue": "child market"
+    },
+    {
+      "label": "New York",
+      "x": 82.5,
+      "y": -27.015251,
+      "size": 7.3,
+      "hue": "child market"
+    },
+    {
+      "label": "Los Angeles",
+      "x": 10.714286,
+      "y": -40.609137,
+      "size": 3.1,
+      "hue": "child market"
+    },
+    {
+      "label": "Boston",
+      "x": -12.121212,
+      "y": -33.701657,
+      "size": 2.9,
+      "hue": "child market"
+    },
+    {
+      "label": "Seattle",
+      "x": -69.230769,
+      "y": -34.567901,
+      "size": 0.4,
+      "hue": "child market"
+    },
+    {
+      "label": "Denver",
+      "x": 28.571429,
+      "y": -6.896552,
+      "size": 0.9,
+      "hue": "child market"
+    },
+    {
+      "label": "Chicago",
+      "x": 0.0,
+      "y": -28.125,
+      "size": 0.3,
+      "hue": "child market"
+    },
+    {
+      "label": "Dallas",
+      "x": 50.0,
+      "y": -16.0,
+      "size": 0.3,
+      "hue": "child market"
+    },
+    {
+      "label": "Austin",
+      "x": 100.0,
+      "y": -17.5,
+      "size": 1.4,
+      "hue": "child market"
+    },
+    {
+      "label": "Miami",
+      "x": 100.0,
+      "y": -18.823529,
+      "size": 0.8,
+      "hue": "child market"
+    },
+    {
+      "label": "Atlanta",
+      "x": 0.0,
+      "y": -9.090909,
+      "size": 0.2,
+      "hue": "child market"
+    },
+    {
+      "label": "Philadelphia",
+      "x": 71.428571,
+      "y": -17.985612,
+      "size": 1.2,
+      "hue": "child market"
+    },
+    {
+      "label": "Raleigh",
+      "x": 0.0,
+      "y": -50.0,
+      "size": 0.3,
+      "hue": "child market"
+    },
+    {
+      "label": "Toronto",
+      "x": 0.0,
+      "y": -53.448276,
+      "size": 0.3,
+      "hue": "child market"
+    },
+    {
+      "label": "China",
+      "x": 40.0,
+      "y": -9.501558,
+      "size": 4.9,
+      "hue": "child market"
+    },
+    {
+      "label": "India",
+      "x": -30.952381,
+      "y": -7.54717,
+      "size": 2.9,
+      "hue": "child market"
+    },
+    {
+      "label": "Singapore",
+      "x": 214.285714,
+      "y": -30.0,
+      "size": 2.2,
+      "hue": "child market"
+    },
+    {
+      "label": "Japan",
+      "x": -18.181818,
+      "y": -12.051282,
+      "size": 0.9,
+      "hue": "child market"
+    },
+    {
+      "label": "United Kingdom",
+      "x": 24.242424,
+      "y": -35.629921,
+      "size": 4.1,
+      "hue": "child market"
+    },
+    {
+      "label": "Germany",
+      "x": -33.333333,
+      "y": -36.078431,
+      "size": 1.4,
+      "hue": "child market"
+    },
+    {
+      "label": "France",
+      "x": 127.272727,
+      "y": -43.243243,
+      "size": 2.5,
+      "hue": "child market"
+    },
+    {
+      "label": "Israel",
+      "x": 30.0,
+      "y": -29.032258,
+      "size": 1.3,
+      "hue": "child market"
+    },
+    {
+      "label": "Netherlands",
+      "x": 133.333333,
+      "y": -27.619048,
+      "size": 0.7,
+      "hue": "child market"
+    },
+    {
+      "label": "Sweden",
+      "x": -60.0,
+      "y": -37.362637,
+      "size": 0.2,
+      "hue": "child market"
+    },
+    {
+      "label": "Brazil",
+      "x": 80.0,
+      "y": -31.29771,
+      "size": 0.9,
+      "hue": "child market"
+    },
+    {
+      "label": "South Africa",
+      "x": 3465.217391,
+      "y": 33.333333,
+      "size": 0.82,
+      "hue": "child market"
+    }
+  ],
+  "notes": [
+    "No parent-geography metric rows are explicit in section 3.2; all plotted rows are child markets."
+  ]
+}

@@ -1,0 +1,122 @@
+[
+    {
+        "Country": "USA",
+        "Plate waste amount": 133.085,
+        "sd": 80.0026
+    },
+    {
+        "Country": "Denmark",
+        "Plate waste amount": 106.572,
+        "sd": 0.0
+    },
+    {
+        "Country": "South Africa",
+        "Plate waste amount": 105.772,
+        "sd": 26.4915
+    },
+    {
+        "Country": "China",
+        "Plate waste amount": 87.2099,
+        "sd": 18.7216
+    },
+    {
+        "Country": "Latvia",
+        "Plate waste amount": 86.3343,
+        "sd": 16.0132
+    },
+    {
+        "Country": "Portugal",
+        "Plate waste amount": 84.9073,
+        "sd": 37.5819
+    },
+    {
+        "Country": "Spain",
+        "Plate waste amount": 75.6494,
+        "sd": 53.1506
+    },
+    {
+        "Country": "Jordan",
+        "Plate waste amount": 73.6009,
+        "sd": 0.0
+    },
+    {
+        "Country": "France",
+        "Plate waste amount": 72.1517,
+        "sd": 16.4234
+    },
+    {
+        "Country": "Turkey",
+        "Plate waste amount": 64.4366,
+        "sd": 21.9458
+    },
+    {
+        "Country": "UK",
+        "Plate waste amount": 55.5429,
+        "sd": 4.695
+    },
+    {
+        "Country": "Italy",
+        "Plate waste amount": 55.445,
+        "sd": 34.3162
+    },
+    {
+        "Country": "Finland",
+        "Plate waste amount": 48.337,
+        "sd": 21.5668
+    },
+    {
+        "Country": "Brazil",
+        "Plate waste amount": 46.7486,
+        "sd": 12.487
+    },
+    {
+        "Country": "India",
+        "Plate waste amount": 43.5447,
+        "sd": 0.0
+    },
+    {
+        "Country": "Russia",
+        "Plate waste amount": 42.9844,
+        "sd": 47.3762
+    },
+    {
+        "Country": "Indonesia",
+        "Plate waste amount": 39.8112,
+        "sd": 9.40734
+    },
+    {
+        "Country": "Ethiopia",
+        "Plate waste amount": 35.2404,
+        "sd": 0.0
+    },
+    {
+        "Country": "Sweden",
+        "Plate waste amount": 32.8335,
+        "sd": 10.9777
+    },
+    {
+        "Country": "Thailand",
+        "Plate waste amount": 31.2178,
+        "sd": 26.9765
+    },
+    {
+        "Country": "Japan",
+        "Plate waste amount": 21.9694,
+        "sd": 27.4253
+    },
+    {
+        "Country": "Philippines",
+        "Plate waste amount": 17.0031,
+        "sd": 15.3442
+    },
+    {
+        "Country": "Switzerland",
+        "Plate waste amount": 16.0593,
+        "sd": 6.52803
+    },
+    {
+        "Country": "Malaysia",
+        "Plate waste amount": 8.92205,
+        "sd": 3.64655
+    }
+]

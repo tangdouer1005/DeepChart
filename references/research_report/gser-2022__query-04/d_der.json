@@ -1,0 +1,55 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a horizontal bar chart showing the top 10 `stage-step intensity per exit-year` values computed as `(Median Series A Round / Median Seed Round) / Time to Exit` among ecosystems where `Median Seed Round`, `Median Series A Round`, and `Time to Exit` are all exact values, expressed in `x multiple per year`, sorted descending, and excluding items with any missing field.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple per year",
+  "sort_rule": "descending by stage_step_intensity_per_year",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "2022 Stage-Step Intensity",
+    "xlabel": "x multiple per year",
+    "value_field": "stage_step_intensity_per_year"
+  },
+  "records": [
+    {
+      "entity": "Lagos",
+      "stage_step_intensity_per_year": 9.6047
+    },
+    {
+      "entity": "Pittsburgh",
+      "stage_step_intensity_per_year": 9.0385
+    },
+    {
+      "entity": "Manila",
+      "stage_step_intensity_per_year": 3.9683
+    },
+    {
+      "entity": "Mexico City",
+      "stage_step_intensity_per_year": 2.5333
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "stage_step_intensity_per_year": 1.8718
+    },
+    {
+      "entity": "Bogota",
+      "stage_step_intensity_per_year": 1.506
+    },
+    {
+      "entity": "Nairobi",
+      "stage_step_intensity_per_year": 1.4873
+    },
+    {
+      "entity": "Rio de Janeiro",
+      "stage_step_intensity_per_year": 1.3102
+    },
+    {
+      "entity": "Cairo",
+      "stage_step_intensity_per_year": 1.2759
+    },
+    {
+      "entity": "Bangalore - Karnataka",
+      "stage_step_intensity_per_year": 1.2312
+    }
+  ]
+}

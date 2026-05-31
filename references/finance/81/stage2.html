@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GE 内部增长率 (IGR) 2016–2024 - Bar Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 20px;
+      background-color: #fafafa;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 0.25rem;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 16px 20px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    canvas {
+      max-height: 480px;
+    }
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>GE 内部增长率 (Internal Growth Rate, IGR)</h1>
+    <h2>2016–2024 财年变化（柱状图）</h2>
+    <canvas id="igrBarChart"></canvas>
+  </div>
+  <div class="note">
+    数据单位：相对增长率（小数形式）。工具提示中显示为百分比，保留两位小数。
+  </div>
+
+  <script>
+    // Source data (exact from prompt)
+    const fiscalYears = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const igrValues = [
+      -0.0030339918597951,
+      -0.0438163212855924,
+      -0.0719881187003017,
+      -0.0191965290710762,
+      0.0197461818906109,
+      -0.0294811999769678,
+      -0.0017867303092794,
+      0.0512312376321755,
+      0.0381606143666321
+    ];
+
+    // Helper to format as percent
+    function toPercent(value, decimals = 2) {
+      return (value * 100).toFixed(decimals) + "%";
+    }
+
+    // Determine dynamic y-axis range with padding
+    const minVal = Math.min(...igrValues);
+    const maxVal = Math.max(...igrValues);
+    const padding = 0.01; // 1 percentage point on each side
+    const yMin = minVal - padding;
+    const yMax = maxVal + padding;
+
+    const ctx = document.getElementById("igrBarChart").getContext("2d");
+
+    const igrBarChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [{
+          label: "内部增长率 (IGR)",
+          data: igrValues,
+          borderWidth: 1,
+          borderRadius: 4,
+          backgroundColor: igrValues.map(v =>
+            v >= 0 ? "rgba(46, 204, 113, 0.7)" : "rgba(231, 76, 60, 0.7)"
+          ),
+          borderColor: igrValues.map(v =>
+            v >= 0 ? "rgba(39, 174, 96, 1)" : "rgba(192, 57, 43, 1)"
+          ),
+          hoverBackgroundColor: igrValues.map(v =>
+            v >= 0 ? "rgba(46, 204, 113, 0.9)" : "rgba(231, 76, 60, 0.9)"
+          )
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return " " + toPercent(value);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              color: "#444",
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              color: "#444"
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "内部增长率 (IGR, %)",
+              color: "#444",
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              color: "#444",
+              callback: function(value) {
+                return toPercent(value, 1);
+              }
+            },
+            grid: {
+              color: "rgba(0,0,0,0.06)"
+            },
+            suggestedMin: yMin,
+            suggestedMax: yMax
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        hover: {
+          mode: "index",
+          intersect: false
+        }
+      }
+    });
+  </script>
+</body>
+</html>

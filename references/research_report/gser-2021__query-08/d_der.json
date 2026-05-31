@@ -1,0 +1,52 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a heatmap aggregating all ecosystems with exact values within each regional section, showing the median of two derived metrics per region: `Median(Ecosystem Value / Total Early-Stage Funding)` and `Median(Median Series A Round / Median Seed Round)`; colors are expressed in `x multiple`, and regions are sorted descending by the median of the first metric.",
+  "chart_type": "heatmap",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by regional median capital efficiency",
+  "selection_rule": "all regions with exact rows",
+  "plot_spec": {
+    "title": "2021 Regional Median Efficiency Heatmap",
+    "value_fields": [
+      "capital_efficiency_median",
+      "stage_multiple_median"
+    ]
+  },
+  "records": [
+    {
+      "entity": "Latin America",
+      "capital_efficiency_median": 19.3182,
+      "stage_multiple_median": 8.0
+    },
+    {
+      "entity": "Asia",
+      "capital_efficiency_median": 18.88,
+      "stage_multiple_median": 6.8041
+    },
+    {
+      "entity": "North America",
+      "capital_efficiency_median": 18.5294,
+      "stage_multiple_median": 7.4074
+    },
+    {
+      "entity": "Oceania",
+      "capital_efficiency_median": 16.6194,
+      "stage_multiple_median": 8.1845
+    },
+    {
+      "entity": "Europe",
+      "capital_efficiency_median": 14.7503,
+      "stage_multiple_median": 4.2724
+    },
+    {
+      "entity": "MENA",
+      "capital_efficiency_median": 12.8146,
+      "stage_multiple_median": 7.1333
+    },
+    {
+      "entity": "Africa",
+      "capital_efficiency_median": 10.9143,
+      "stage_multiple_median": 12.9849
+    }
+  ]
+}

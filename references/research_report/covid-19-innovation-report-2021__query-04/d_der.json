@@ -1,0 +1,55 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a ranked horizontal bar chart for the top 10 countries by dominant-category concentration in the 2021 report, where the plotted value is `max(the six category counts) / total sampled innovations`, values are percentages, countries must have at least 10 total sampled innovations, and bars are sorted from highest to lowest after the concentration score is derived.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by dominant_category_share_pct",
+  "selection_rule": "top 10 after total_innovations >= 10",
+  "plot_spec": {
+    "title": "2021 Dominant-Category Concentration",
+    "xlabel": "Dominant category share (%)",
+    "value_field": "dominant_category_share_pct"
+  },
+  "records": [
+    {
+      "entity": "South Korea",
+      "dominant_category_share_pct": 85.2941
+    },
+    {
+      "entity": "Taiwan",
+      "dominant_category_share_pct": 66.6667
+    },
+    {
+      "entity": "Poland",
+      "dominant_category_share_pct": 63.6364
+    },
+    {
+      "entity": "Nigeria",
+      "dominant_category_share_pct": 54.5455
+    },
+    {
+      "entity": "China",
+      "dominant_category_share_pct": 54.1667
+    },
+    {
+      "entity": "Philippines",
+      "dominant_category_share_pct": 46.1538
+    },
+    {
+      "entity": "Estonia",
+      "dominant_category_share_pct": 45.4545
+    },
+    {
+      "entity": "The Netherlands",
+      "dominant_category_share_pct": 41.6667
+    },
+    {
+      "entity": "Belgium",
+      "dominant_category_share_pct": 41.3793
+    },
+    {
+      "entity": "Finland",
+      "dominant_category_share_pct": 40.0
+    }
+  ]
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>GE 投入资本回报率（ROIC）2016–2024 趋势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f7f8fa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 14px;
+      margin: 0 0 20px;
+      text-align: center;
+      font-weight: normal;
+      color: #555;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px 18px 10px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      width: 100%;
+    }
+
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .chart-container {
+        padding: 14px 12px 8px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>GE 投入资本回报率（ROIC）</h1>
+    <h2>2016–2024 财年变化趋势</h2>
+    <div class="chart-wrapper">
+      <canvas id="roicChart"></canvas>
+    </div>
+  </div>
+  <div class="note">
+    数据来源：用户提供的 GE 2016–2024 财年 ROIC（投入资本回报率）。<br />
+    说明：ROIC 已按比例转换为百分比展示；图表可悬停查看精确数值，可缩放/拖动查看局部区间（在图内拖动选择区域，或双击/双指点击重置）。
+  </div>
+
+  <script>
+    // 原始数据（比率形式）
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const roicRaw = [
+      0.0419798360564411,
+      -0.0147483254000732,
+      0.0428403514163421,
+      0.0378619153674833,
+      0.0042412638273887,
+      0.0158207973203337,
+      0.0337993323813248,
+      0.1021721251113732,
+      0.2016021135315598
+    ];
+
+    // 转换为百分比
+    const roicPercent = roicRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("roicChart").getContext("2d");
+
+    // 简单拖动缩放：基于 Chart.js 的内置缩放插件不默认加载，
+    // 这里实现一个轻量级的拖动缩放逻辑（仅 X 轴）。
+    // 为保证兼容性和简洁性，使用鼠标/触摸框选缩放。
+    let isDragging = false;
+    let dragStartX = null;
+    let dragEndX = null;
+
+    const roicChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "ROIC（%）",
+            data: roicPercent,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.10)",
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderColor: "#fff",
+            pointHoverRadius: 5,
+            pointRadius: 4,
+            pointHitRadius: 8,
+            pointBorderWidth: 1.5,
+            borderWidth: 2.2,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+              padding: 20
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return " ROIC: " + value.toFixed(2) + "%";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              color: "#374151",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            ticks: {
+              maxRotation: 0,
+              autoSkipPadding: 20
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "ROIC（%）",
+              color: "#374151",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(0) + "%";
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            }
+          }
+        }
+      }
+    });
+
+    // 轻量级框选缩放实现
+    const canvas = document.getElementById("roicChart");
+
+    function getRelativePositionX(event) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+      return clientX - rect.left;
+    }
+
+    function applyZoom(startX, endX) {
+      const chart = roicChart;
+      const xScale = chart.scales.x;
+      if (!xScale) return;
+
+      const minPixel = Math.min(startX, endX);
+      const maxPixel = Math.max(startX, endX);
+
+      const startIndex = xScale.getValueForPixel(minPixel);
+      const endIndex = xScale.getValueForPixel(maxPixel);
+
+      const labels = chart.data.labels;
+      const newMinIndex = Math.max(0, Math.floor(startIndex));
+      const newMaxIndex = Math.min(labels.length - 1, Math.ceil(endIndex));
+
+      chart.options.scales.x.min = labels[newMinIndex];
+      chart.options.scales.x.max = labels[newMaxIndex];
+      chart.update();
+    }
+
+    function resetZoom() {
+      roicChart.options.scales.x.min = undefined;
+      roicChart.options.scales.x.max = undefined;
+      roicChart.update();
+    }
+
+    // 鼠标事件
+    canvas.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      dragStartX = getRelativePositionX(e);
+      dragEndX = null;
+    });
+
+    canvas.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      dragEndX = getRelativePositionX(e);
+    });
+
+    canvas.addEventListener("mouseup", (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      dragEndX = getRelativePositionX(e);
+      if (dragStartX !== null && dragEndX !== null && Math.abs(dragEndX - dragStartX) > 10) {
+        applyZoom(dragStartX, dragEndX);
+      }
+      dragStartX = null;
+      dragEndX = null;
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+      isDragging = false;
+      dragStartX = null;
+      dragEndX = null;
+    });
+
+    // 触摸事件
+    canvas.addEventListener("touchstart", (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        dragStartX = getRelativePositionX(e);
+        dragEndX = null;
+      }
+    });
+
+    canvas.addEventListener("touchmove", (e) => {
+      if (!isDragging || e.touches.length !== 1) return;
+      dragEndX = getRelativePositionX(e);
+    });
+
+    canvas.addEventListener("touchend", (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      if (dragStartX !== null && dragEndX !== null && Math.abs(dragEndX - dragStartX) > 10) {
+        applyZoom(dragStartX, dragEndX);
+      }
+      dragStartX = null;
+      dragEndX = null;
+    });
+
+    // 双击 / 双指轻点重置缩放
+    canvas.addEventListener("dblclick", resetZoom);
+
+    let lastTap = 0;
+    canvas.addEventListener("touchend", (e) => {
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTap;
+      if (tapLength < 300 && tapLength > 0) {
+        resetZoom();
+      }
+      lastTap = currentTime;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WMT Defensive Interval Ratio (DIR) 2017–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 0;
+      margin-bottom: 18px;
+      color: #555;
+    }
+
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 20px 26px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .legend-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>Walmart (WMT) Defensive Interval Ratio (DIR)</h1>
+    <h2>Fiscal Years 2017–2024</h2>
+    <div class="chart-wrapper">
+      <canvas id="dirChart"></canvas>
+    </div>
+    <div class="legend-inline">
+      <span class="legend-color"></span>
+      <span>Defensive Interval Ratio (DIR)</span>
+    </div>
+    <div class="note">
+      Data source: Provided dataset. Values shown as days (Defensive Interval Ratio).
+      Hover over bars to see exact values; click items in the legend to toggle visibility.
+    </div>
+  </div>
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Data from the provided source
+    const fiscalYears = ["2017","2018","2019","2020","2021","2022","2023","2024"];
+    const dirValues = [
+      10.011098898963311,
+      9.408196605168513,
+      10.380436106959516,
+      11.419210720784433,
+      16.49973071339519,
+      15.37932598406765,
+      10.38919475138823,
+      10.967400456921688
+    ];
+
+    const ctx = document.getElementById("dirChart").getContext("2d");
+
+    // Create gradient for nicer bar styling
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(37, 99, 235, 0.9)");   // top
+    gradient.addColorStop(1, "rgba(37, 99, 235, 0.25)"); // bottom
+
+    const dirChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [{
+          label: "Defensive Interval Ratio (DIR)",
+          data: dirValues,
+          backgroundColor: gradient,
+          borderColor: "#1d4ed8",
+          borderWidth: 1.2,
+          borderRadius: 6,
+          hoverBackgroundColor: "#1d4ed8",
+          hoverBorderColor: "#1d4ed8"
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+            labels: {
+              usePointStyle: true,
+              pointStyle: "rectRounded",
+              boxWidth: 10,
+              boxHeight: 10
+            },
+            onClick: (e, legendItem, legend) => {
+              const index = legendItem.datasetIndex;
+              const ci = legend.chart;
+              const meta = ci.getDatasetMeta(index);
+              meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+              ci.update();
+            }
+          },
+          title: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: (context) => {
+                const value = context.parsed.y;
+                return `DIR: ${value.toFixed(2)} days`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              color: "#444",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#444"
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Defensive Interval Ratio (days)",
+              color: "#444",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            beginAtZero: true,
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            ticks: {
+              color: "#444",
+              callback: (value) => value.toFixed(0)
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

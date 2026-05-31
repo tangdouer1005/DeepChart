@@ -1,0 +1,47 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a horizontal bar chart comparing the top 8 Fintech ecosystems by `growth-investor divergence = Funding Growth Index - Investor Activity Index`, with values expressed in `index-point gap`, sorted descending by the difference, and including only items with exact `Total Early-Stage Funding >= $100M`.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "index-point gap",
+  "sort_rule": "descending by growth_investor_divergence",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "Fintech 2020 Growth-Investor Divergence",
+    "xlabel": "index-point gap",
+    "value_field": "growth_investor_divergence"
+  },
+  "records": [
+    {
+      "entity": "Curitiba",
+      "growth_investor_divergence": 4.0
+    },
+    {
+      "entity": "Riyadh",
+      "growth_investor_divergence": 2.0
+    },
+    {
+      "entity": "Manila",
+      "growth_investor_divergence": 1.0
+    },
+    {
+      "entity": "Beijing",
+      "growth_investor_divergence": -1.0
+    },
+    {
+      "entity": "Shanghai",
+      "growth_investor_divergence": -1.0
+    },
+    {
+      "entity": "Sydney",
+      "growth_investor_divergence": -2.0
+    },
+    {
+      "entity": "Tokyo",
+      "growth_investor_divergence": -2.0
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "growth_investor_divergence": -3.0
+    }
+  ]
+}

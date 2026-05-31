@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>NFLX 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f8fafc;
+      color: #111827;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+      padding: 18px 20px 22px;
+      box-sizing: border-box;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .chart-footer {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .legend-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, #2563eb, #22c55e);
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>NFLX 自由现金流收益质量（Quality of Income Ratio）</h1>
+    <h2>按财年显示：2016 – 2024</h2>
+    <canvas id="qoiChart"></canvas>
+    <div class="chart-footer">
+      <div class="legend-note">
+        <div class="legend-color"></div>
+        <span>柱状图表示各年度的自由现金流收益质量（QoI Ratio）。</span>
+      </div>
+      <span>数据来源：用户提供的 NFLX 历史财务数据</span>
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable 4.x at time of creation) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('qoiChart').getContext('2d');
+
+    // Source data
+    const fiscalYears = [
+      '2016',
+      '2017',
+      '2018',
+      '2019',
+      '2020',
+      '2021',
+      '2022',
+      '2023',
+      '2024'
+    ];
+
+    const qoiValues = [
+      -0.2778600621968413,
+      -0.2512444771381267,
+      -0.2907095526898788,
+      -0.2421421191404284,
+       0.156505734395819,
+       0.0210703553768932,
+       0.1013349156778888,
+       0.3382076489510812,
+       0.282607159193713
+    ];
+
+    // Color settings: negative values in red, positive in blue/green gradient
+    const positiveColor = 'rgba(37, 99, 235, 0.85)'; // blue
+    const negativeColor = 'rgba(239, 68, 68, 0.85)'; // red
+
+    const barColors = qoiValues.map(v => v >= 0 ? positiveColor : negativeColor);
+    const borderColors = qoiValues.map(v => v >= 0 ? 'rgba(37, 99, 235, 1)' : 'rgba(220, 38, 38, 1)');
+
+    const qoiChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: fiscalYears,
+        datasets: [{
+          label: '自由现金流收益质量 (QoI Ratio)',
+          data: qoiValues,
+          backgroundColor: barColors,
+          borderColor: borderColors,
+          borderWidth: 1.2,
+          borderRadius: 4,
+          hoverBackgroundColor: barColors,
+          hoverBorderColor: borderColors,
+          barPercentage: 0.6,
+          categoryPercentage: 0.7
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        aspectRatio: 2.1,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function(context) {
+                const value = context.raw;
+                const formatted = (value * 100).toFixed(2) + '%';
+                return ' QoI Ratio: ' + formatted;
+              },
+              title: function(context) {
+                return '财政年度 ' + context[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#374151',
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(148, 163, 184, 0.25)'
+            },
+            ticks: {
+              color: '#374151',
+              font: {
+                size: 11
+              },
+              callback: function(value) {
+                return (value * 100).toFixed(0) + '%';
+              }
+            },
+            title: {
+              display: true,
+              text: '自由现金流收益质量（QoI Ratio，百分比）',
+              color: '#4b5563',
+              font: {
+                size: 12,
+                weight: '500'
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        },
+        animation: {
+          duration: 800,
+          easing: 'easeOutCubic'
+        }
+      }
+    });
+
+    // Resize canvas container height based on width for better responsiveness
+    function resizeChartContainer() {
+      const canvas = document.getElementById('qoiChart');
+      const parent = canvas.parentElement;
+      const width = parent.clientWidth;
+      // Keep a reasonable aspect ratio for bar charts
+      parent.style.height = Math.max(260, width * 0.45) + 'px';
+      qoiChart.resize();
+    }
+
+    window.addEventListener('load', resizeChartContainer);
+    window.addEventListener('resize', resizeChartContainer);
+  </script>
+</body>
+</html>

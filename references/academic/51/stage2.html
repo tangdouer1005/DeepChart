@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = {
+    "days": [
+        0,
+        2,
+        4,
+        6,
+        8
+    ],
+    "teff_means": [
+        98.25,
+        87.0,
+        79.25,
+        90.75,
+        94.25
+    ],
+    "teff_stds": [
+        0.9574271077563381,
+        3.8297084310253524,
+        4.924428900898052,
+        2.9860788111948193,
+        1.707825127659933
+    ],
+    "tex_means": [
+        98.25,
+        87.0,
+        53.5,
+        55.5,
+        57.5
+    ],
+    "tex_stds": [
+        0.9574271077563381,
+        3.8297084310253524,
+        3.1091263510296048,
+        6.4031242374328485,
+        2.3804761428476167
+    ],
+    "p_val": 2.6407661984055885e-07,
+    "raw_acute_day8": [
+        96,
+        92,
+        94,
+        95
+    ],
+    "raw_chronic_day8": [
+        59,
+        54,
+        59,
+        58
+    ]
+};
+
+        const days = jsonData.days;        
+        const teffMeans = jsonData.teff_means;
+        const teffStds = jsonData.teff_stds;
+        const texMeans = jsonData.tex_means;
+        const texStds = jsonData.tex_stds;
+
+        const colorTeff = '#7793A8';
+        const colorTex = '#D59CA0';
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Statistical Annotation (Bracket and P-value)
+        const pVal = jsonData.p_val;
+        let pValueText;
+        if (pVal < 0.0001) {
+            const exponent = Math.floor(Math.log10(pVal));
+            const mantissa = pVal / Math.pow(10, exponent);
+            pValueText = `P = ${mantissa.toFixed(2)} × 10{sup|${exponent}}`;
+        } else {
+            pValueText = `P = ${pVal.toFixed(4)}`;
+        }
+
+        const series = [
+            {
+                name: 'Teff',
+                type: 'line',
+                data: days.map((d, i) => [d, teffMeans[i]]),
+                symbol: 'circle',
+                symbolSize: 7,
+                itemStyle: { color: colorTeff },
+                lineStyle: { width: 2 },
+                z: 2
+            },
+            {
+                type: 'custom',
+                name: 'Teff Error',
+                renderItem: (params, api) => {
+                    const x = api.value(0);
+                    const meanVal = api.value(1);
+                    const stdVal = api.value(2);
+                    
+                    const highPoint = api.coord([x, meanVal + stdVal]);
+                    const lowPoint = api.coord([x, meanVal - stdVal]);
+                    const capHalfWidth = 5; // Fixed to 5 pixels
+
+                    const style = api.style({ stroke: colorTeff, lineWidth: 1.5 });
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                        ]
+                    };
+                },
+                data: days.map((d, i) => ([d, teffMeans[i], teffStds[i]])),
+                z: 3
+            },
+            {
+                name: 'Tex',
+                type: 'line',
+                data: days.map((d, i) => [d, texMeans[i]]),
+                symbol: 'rect',
+                symbolSize: 7,
+                itemStyle: { color: colorTex },
+                lineStyle: { width: 2 },
+                z: 2
+            },
+            {
+                type: 'custom',
+                name: 'Tex Error',
+                renderItem: (params, api) => {
+                    const x = api.value(0);
+                    const meanVal = api.value(1);
+                    const stdVal = api.value(2);
+                    
+                    const highPoint = api.coord([x, meanVal + stdVal]);
+                    const lowPoint = api.coord([x, meanVal - stdVal]);
+                    const capHalfWidth = 5; // Fixed to 5 pixels
+
+                    const style = api.style({ stroke: colorTex, lineWidth: 1.5 });
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                        ]
+                    };
+                },
+                data: days.map((d, i) => ([d, texMeans[i], texStds[i]])),
+                z: 3
+            },
+            {
+                type: 'custom',
+                name: 'Annotation',
+                renderItem: (params, api) => {
+                    // Coordinates: Day 8
+                    // We use hardcoded logic based on known indices or values passed in data
+                    const xVal = api.value(0); // 8
+                    const yTopVal = api.value(1); // Teff at Day 8
+                    const yBottomVal = api.value(2); // Tex at Day 8
+                    
+                    const topPoint = api.coord([xVal, yTopVal]);
+                    const bottomPoint = api.coord([xVal, yBottomVal]);
+                    
+                    const xPx = topPoint[0];
+                    const yTopPx = topPoint[1];
+                    const yBottomPx = bottomPoint[1];
+                    
+                    const startX = xPx + 10;
+                    const endX = startX + 15;
+                    const yMidPx = (yTopPx + yBottomPx) / 2;
+                    
+                    return {
+                        type: 'group',
+                        children: [
+                            {
+                                type: 'polyline',
+                                shape: {
+                                    points: [
+                                        [startX, yTopPx],
+                                        [endX, yTopPx],
+                                        [endX, yBottomPx],
+                                        [startX, yBottomPx]
+                                    ]
+                                },
+                                style: {
+                                    stroke: 'black',
+                                    fill: 'none',
+                                    lineWidth: 1.5
+                                }
+                            },
+                            {
+                                type: 'text',
+                                x: endX + 5,
+                                y: yMidPx,
+                                style: {
+                                    text: pValueText,
+                                    fill: 'black',
+                                    fontSize: 12,
+                                    align: 'left',
+                                    verticalAlign: 'middle',
+                                    rich: {
+                                        sup: {
+                                            fontSize: 9,
+                                            verticalAlign: 'top'
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    };
+                },
+                data: [[8, teffMeans[4], texMeans[4]]],
+                z: 100
+            }
+        ];
+
+
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            title: {
+                text: 'Viability',
+                left: 'center',
+                top: 20,
+                textStyle: { fontSize: 16, color: 'black' }
+            },
+            grid: { top: 100, right: 20, bottom: 60, left: 60 },
+            xAxis: {
+                type: 'value',
+                name: 'Days',
+                nameLocation: 'middle',
+                nameGap: 30,
+                min: -0.5,
+                max: 10.5,
+                interval: 2,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1.5 } },
+                axisTick: { alignWithLabel: true, length: 5, lineStyle: { width: 1.5 } }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'live cells (%)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                min: 0,
+                max: 120,
+                interval: 40,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1.5 } },
+                axisTick: { length: 5, lineStyle: { width: 1.5 } },
+                splitLine: { show: false }
+            },
+            legend: {
+                data: ['Teff', 'Tex'],
+                right: 20,
+                top: 100,
+                orient: 'vertical',
+                textStyle: { fontSize: 12 },
+                itemGap: 5
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'b', // Correct label is 'b' not 'a' for Viability based on Figure 3 panel.
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

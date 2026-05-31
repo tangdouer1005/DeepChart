@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature 140 Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1200px; height: 800px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = [
+    {
+        "Year":2004,
+        "FeedTotal":26.2354,
+        "FoodAnimal":14.2261,
+        "BrazilSoyFeed":2.15769,
+        "BrazilSoyFood":0.465671
+    },
+    {
+        "Year":2005,
+        "FeedTotal":28.4349,
+        "FoodAnimal":14.791,
+        "BrazilSoyFeed":2.72217,
+        "BrazilSoyFood":0.576672
+    },
+    {
+        "Year":2006,
+        "FeedTotal":28.9785,
+        "FoodAnimal":15.3504,
+        "BrazilSoyFeed":4.09963,
+        "BrazilSoyFood":0.958516
+    },
+    {
+        "Year":2007,
+        "FeedTotal":29.839,
+        "FoodAnimal":16.0642,
+        "BrazilSoyFeed":3.82731,
+        "BrazilSoyFood":0.966658
+    },
+    {
+        "Year":2008,
+        "FeedTotal":32.1302,
+        "FoodAnimal":16.9052,
+        "BrazilSoyFeed":4.49326,
+        "BrazilSoyFood":1.15234
+    },
+    {
+        "Year":2009,
+        "FeedTotal":34.9477,
+        "FoodAnimal":17.4956,
+        "BrazilSoyFeed":6.05794,
+        "BrazilSoyFood":1.49994
+    },
+    {
+        "Year":2010,
+        "FeedTotal":40.4937,
+        "FoodAnimal":20.7835,
+        "BrazilSoyFeed":6.02379,
+        "BrazilSoyFood":1.59375
+    },
+    {
+        "Year":2011,
+        "FeedTotal":41.0089,
+        "FoodAnimal":20.825,
+        "BrazilSoyFeed":8.40924,
+        "BrazilSoyFood":2.34197
+    },
+    {
+        "Year":2012,
+        "FeedTotal":45.7656,
+        "FoodAnimal":21.2629,
+        "BrazilSoyFeed":8.57994,
+        "BrazilSoyFood":2.26413
+    },
+    {
+        "Year":2013,
+        "FeedTotal":43.7183,
+        "FoodAnimal":21.7786,
+        "BrazilSoyFeed":12.2675,
+        "BrazilSoyFood":3.5376
+    },
+    {
+        "Year":2014,
+        "FeedTotal":45.5764,
+        "FoodAnimal":22.5388,
+        "BrazilSoyFeed":12.4644,
+        "BrazilSoyFood":3.60462
+    },
+    {
+        "Year":2015,
+        "FeedTotal":52.4634,
+        "FoodAnimal":22.7761,
+        "BrazilSoyFeed":15.5524,
+        "BrazilSoyFood":4.04271
+    },
+    {
+        "Year":2016,
+        "FeedTotal":51.9704,
+        "FoodAnimal":23.3249,
+        "BrazilSoyFeed":14.6582,
+        "BrazilSoyFood":4.0763
+    },
+    {
+        "Year":2017,
+        "FeedTotal":57.9228,
+        "FoodAnimal":23.3663,
+        "BrazilSoyFeed":20.449,
+        "BrazilSoyFood":4.93425
+    },
+    {
+        "Year":2018,
+        "FeedTotal":58.5285,
+        "FoodAnimal":23.6365,
+        "BrazilSoyFeed":26.2001,
+        "BrazilSoyFood":6.44131
+    },
+    {
+        "Year":2019,
+        "FeedTotal":57.3791,
+        "FoodAnimal":24.1356,
+        "BrazilSoyFeed":22.0359,
+        "BrazilSoyFood":5.80095
+    },
+    {
+        "Year":2020,
+        "FeedTotal":64.8526,
+        "FoodAnimal":23.7371,
+        "BrazilSoyFeed":24.4349,
+        "BrazilSoyFood":5.86864
+    }
+];
+
+        const years = [2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020];
+        const c_orange = '#E69F00';
+        const c_blue = '#0072B2';
+
+        // Extract data from JSON
+        const feedTotal = years.map(y => rawData.find(d => d.Year === y)?.FeedTotal || 0);
+        const foodAnimal = years.map(y => rawData.find(d => d.Year === y)?.FoodAnimal || 0);
+        const brazilFeed = years.map(y => rawData.find(d => d.Year === y)?.BrazilSoyFeed || 0);
+        const brazilFood = years.map(y => rawData.find(d => d.Year === y)?.BrazilSoyFood || 0);
+
+        // Calculate "Rest" parts for stacking
+        // Note: If foodAnimal is 0 (missing data), restFood will be negative.
+        // We preserve the logic as is to reflect the provided data.
+        const restFeed = feedTotal.map((v, i) => v - brazilFeed[i]);
+        const restFood = foodAnimal.map((v, i) => v - brazilFood[i]);
+
+        const option = {
+            backgroundColor: 'white',
+            legend: {
+                top: 20,
+                data: [
+                    'BRA soybean to CHN (feed)', 
+                    'CHN total feed supply',
+                    'BRA soybean to CHN (food)',
+                    'CHN total animal food supply'
+                ]
+            },
+            grid: { top: 80, bottom: 50, left: 60, right: 20 },
+            xAxis: {
+                type: 'category',
+                data: years,
+                axisLine: { show: true },
+                axisTick: { show: false },
+                axisLabel: { color: 'black' }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Protein supply quantity (10⁶ t yr⁻¹)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                axisLine: { show: true },
+                splitLine: { show: false }
+            },
+            series: [
+                // FEED Stack (Left Bars)
+                {
+                    name: 'BRA soybean to CHN (feed)',
+                    type: 'bar',
+                    stack: 'feed_stack',
+                    data: brazilFeed,
+                    itemStyle: {
+                        color: c_orange,
+                        borderColor: 'red',
+                        borderWidth: 1.5,
+                        decal: {
+                            symbol: 'rect', // ECharts uses `rect` for line patterns
+                            symbolSize: 1,
+                            rotation: Math.PI / 4,
+                            color: 'white', // Hatch lines color
+                            backgroundColor: c_orange, // Base color for hatch
+                            dashArrayX: [1, 0],
+                            dashArrayY: [2, 5]
+                        }
+                    },
+                    barWidth: '35%',
+                    barGap: '10%' // Gap between feed and food groups
+                },
+                {
+                    name: 'CHN total feed supply',
+                    type: 'bar',
+                    stack: 'feed_stack',
+                    data: restFeed,
+                    itemStyle: {
+                        color: c_orange
+                    }
+                },
+                
+                // FOOD Stack (Right Bars)
+                {
+                    name: 'BRA soybean to CHN (food)',
+                    type: 'bar',
+                    stack: 'food_stack',
+                    data: brazilFood,
+                    itemStyle: {
+                        color: c_blue,
+                        borderColor: 'red',
+                        borderWidth: 1.5,
+                        decal: {
+                            symbol: 'rect',
+                            symbolSize: 1,
+                            rotation: Math.PI / 4,
+                            color: 'white',
+                            backgroundColor: c_blue,
+                            dashArrayX: [1, 0],
+                            dashArrayY: [2, 5]
+                        }
+                    },
+                    barWidth: '35%'
+                },
+                {
+                    name: 'CHN total animal food supply',
+                    type: 'bar',
+                    stack: 'food_stack',
+                    data: restFood,
+                    itemStyle: {
+                        color: c_blue,
+                        decal: {
+                            symbol: 'rect',
+                            symbolSize: 1,
+                            rotation: Math.PI / 4,
+                            color: 'white',
+                            backgroundColor: c_blue,
+                            dashArrayX: [1, 0],
+                            dashArrayY: [2, 5]
+                        }
+                    }
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: '25%', // Centered above feed bars
+                    top: '8%',
+                    style: { text: 'Feed protein supply', fontSize: 12, fill: 'black' }
+                },
+                {
+                    type: 'text',
+                    left: '65%', // Centered above food bars
+                    top: '8%',
+                    style: { text: 'Food protein supply', fontSize: 12, fill: 'black' }
+                }
+            ]
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

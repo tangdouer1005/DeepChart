@@ -1,0 +1,102 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a bubble chart for the 12 countries with the highest sampled-innovation density in the 2020 report, where the x-axis is `diagnostics / total sampled innovations`, the y-axis is `(grants_support_initiatives + life_business_adaptation) / total sampled innovations`, both axes are percentages, bubble size represents `total sampled innovations`, and countries are selected only after sampled-innovation density has been computed as `total sampled innovations / population in millions`.",
+  "chart_type": "bubble chart",
+  "value_unit": "x/y in percent; bubble size in sampled innovations",
+  "sort_rule": "selected by descending innovation_density",
+  "selection_rule": "top 12 by innovation_density",
+  "plot_spec": {
+    "title": "2020 Diagnostics vs Support-Adaptation Mix",
+    "x_field": "diagnostics_share_pct",
+    "y_field": "support_adaptation_share_pct",
+    "size_field": "total_innovations",
+    "xlabel": "Diagnostics share (%)",
+    "ylabel": "Support + adaptation share (%)"
+  },
+  "records": [
+    {
+      "entity": "Estonia",
+      "diagnostics_share_pct": 9.0909,
+      "support_adaptation_share_pct": 36.3636,
+      "total_innovations": 11,
+      "innovation_density": 8.4615
+    },
+    {
+      "entity": "Israel",
+      "diagnostics_share_pct": 21.2121,
+      "support_adaptation_share_pct": 12.1212,
+      "total_innovations": 33,
+      "innovation_density": 3.7079
+    },
+    {
+      "entity": "Belgium",
+      "diagnostics_share_pct": 38.2353,
+      "support_adaptation_share_pct": 20.5882,
+      "total_innovations": 34,
+      "innovation_density": 2.9825
+    },
+    {
+      "entity": "Switzerland",
+      "diagnostics_share_pct": 30.4348,
+      "support_adaptation_share_pct": 26.087,
+      "total_innovations": 23,
+      "innovation_density": 2.7059
+    },
+    {
+      "entity": "Croatia",
+      "diagnostics_share_pct": 25.0,
+      "support_adaptation_share_pct": 0.0,
+      "total_innovations": 8,
+      "innovation_density": 1.9512
+    },
+    {
+      "entity": "Canada",
+      "diagnostics_share_pct": 27.5362,
+      "support_adaptation_share_pct": 23.1884,
+      "total_innovations": 69,
+      "innovation_density": 1.8598
+    },
+    {
+      "entity": "Ireland",
+      "diagnostics_share_pct": 11.1111,
+      "support_adaptation_share_pct": 33.3333,
+      "total_innovations": 9,
+      "innovation_density": 1.8367
+    },
+    {
+      "entity": "Finland",
+      "diagnostics_share_pct": 10.0,
+      "support_adaptation_share_pct": 60.0,
+      "total_innovations": 10,
+      "innovation_density": 1.8182
+    },
+    {
+      "entity": "Singapore",
+      "diagnostics_share_pct": 30.0,
+      "support_adaptation_share_pct": 30.0,
+      "total_innovations": 10,
+      "innovation_density": 1.7857
+    },
+    {
+      "entity": "United States",
+      "diagnostics_share_pct": 25.495,
+      "support_adaptation_share_pct": 25.9901,
+      "total_innovations": 404,
+      "innovation_density": 1.2366
+    },
+    {
+      "entity": "Denmark",
+      "diagnostics_share_pct": 16.6667,
+      "support_adaptation_share_pct": 33.3333,
+      "total_innovations": 6,
+      "innovation_density": 1.0345
+    },
+    {
+      "entity": "Portugal",
+      "diagnostics_share_pct": 0.0,
+      "support_adaptation_share_pct": 44.4444,
+      "total_innovations": 9,
+      "innovation_density": 0.8738
+    }
+  ]
+}

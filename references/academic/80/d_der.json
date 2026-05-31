@@ -1,0 +1,86 @@
+[
+    {
+        "x": 20.22,
+        "y": 0.07,
+        "xerr": 1.78,
+        "yerr": 0.01,
+        "label": "I",
+        "color": "#ea8c9f",
+        "text_offset": [
+            -0.5,
+            -0.003
+        ],
+        "ha": "right",
+        "va": "top"
+    },
+    {
+        "x": 15.52,
+        "y": 0.07,
+        "xerr": 1.0,
+        "yerr": 0.01,
+        "label": "R",
+        "color": "#d67fe2",
+        "text_offset": [
+            -0.5,
+            -0.003
+        ],
+        "ha": "right",
+        "va": "top"
+    },
+    {
+        "x": 20.73,
+        "y": 0.09,
+        "xerr": 6.58,
+        "yerr": 0.02,
+        "label": "SU",
+        "color": "#6fa8dc",
+        "text_offset": [
+            -1.0,
+            0.003
+        ],
+        "ha": "right",
+        "va": "bottom"
+    },
+    {
+        "x": 22.44,
+        "y": 0.12,
+        "xerr": 3.26,
+        "yerr": 0.01,
+        "label": "T",
+        "color": "#cdae63",
+        "text_offset": [
+            0.8,
+            0.003
+        ],
+        "ha": "left",
+        "va": "bottom"
+    },
+    {
+        "x": 21.91,
+        "y": 0.1,
+        "xerr": 0.99,
+        "yerr": 0.0,
+        "label": "U",
+        "color": "#7bc068",
+        "text_offset": [
+            0.8,
+            0.003
+        ],
+        "ha": "left",
+        "va": "bottom"
+    },
+    {
+        "x": 20.34,
+        "y": 0.1,
+        "xerr": 2.1,
+        "yerr": 0.01,
+        "label": "(V)",
+        "color": "#bdbdbd",
+        "text_offset": [
+            -1.5,
+            0.003
+        ],
+        "ha": "right",
+        "va": "bottom"
+    }
+]

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>GE 2016–2024 年 EBITDA 变化柱状图</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f8fa;
+      color: #222;
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 13px;
+      font-weight: 400;
+      color: #666;
+    }
+    .chart-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      /* 固定一个正常的宽高比，避免画布被拉得过高过窄 */
+      max-width: 960px;
+      height: 480px; /* 关键：显式高度，防止极端纵向拉伸 */
+      margin: 0 auto;
+      background: #fff;
+      padding: 16px 20px 24px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      box-sizing: border-box;
+    }
+    canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important; /* 跟随容器固定比例 */
+    }
+    .note {
+      max-width: 960px;
+      margin: 12px auto 0;
+      font-size: 11px;
+      color: #777;
+      line-height: 1.5;
+    }
+    .note span {
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>通用电气 (GE) 2016–2024 年 EBITDA 变化</h1>
+    <h2>单位：十亿美元（按报告值粗略换算）</h2>
+
+    <div class="chart-container">
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <div class="note">
+      <span>说明：</span>数据来自用户提供的 GE 2016–2024 财年 EBITDA
+     （息税折旧摊销前利润，RESULT_EBITDA 字段）。原始单位为美元，图中为十亿美元。
+    </div>
+  </div>
+
+  <!-- Chart.js 最新稳定版 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // 原始数据（单位：美元）
+    const rawData = [
+      { year: 2016, value: 20727000000 },
+      { year: 2017, value: 5173000000 },
+      { year: 2018, value: -10914000000 },
+      { year: 2019, value: 2041000000 },
+      { year: 2020, value: 13170000000 },
+      { year: 2021, value: -1430000000 },
+      { year: 2022, value: 5147000000 },
+      { year: 2023, value: 12684000000 },
+      { year: 2024, value: 9688000000 }
+    ];
+
+    // 转换为“十亿美元”
+    const labels = rawData.map(d => d.year.toString());
+    const dataInBillions = rawData.map(d => d.value / 1e9);
+
+    const ctx = document.getElementById('ebitdaChart').getContext('2d');
+
+    function formatBillions(value) {
+      return value.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'EBITDA（十亿美元）',
+          data: dataInBillions,
+          backgroundColor: dataInBillions.map(v =>
+            v >= 0 ? 'rgba(33, 150, 243, 0.75)' : 'rgba(244, 67, 54, 0.75)'
+          ),
+          borderColor: dataInBillions.map(v =>
+            v >= 0 ? 'rgba(33, 150, 243, 1)' : 'rgba(244, 67, 54, 1)'
+          ),
+          borderWidth: 1.5,
+          borderRadius: 4,
+          hoverBackgroundColor: dataInBillions.map(v =>
+            v >= 0 ? 'rgba(30, 136, 229, 0.9)' : 'rgba(229, 57, 53, 0.9)'
+          )
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // 重要：使用容器的固定高度与宽度
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const v = context.raw;
+                const sign = v >= 0 ? '' : '-';
+                return 'EBITDA: ' + sign + formatBillions(Math.abs(v)) + ' 十亿美元';
+              },
+              afterLabel: function(context) {
+                const original = rawData[context.dataIndex].value;
+                return '(原始值: ' + original.toLocaleString('en-US') + ' USD)';
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0,0,0,0.06)'
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              callback: function(value) {
+                return value + 'B';
+              }
+            },
+            title: {
+              display: true,
+              text: 'EBITDA（十亿美元，USD）',
+              font: {
+                size: 12
+              }
+            }
+          }
+        },
+        animation: {
+          duration: 700,
+          easing: 'easeOutCubic'
+        }
+      }
+    });
+  </script>
+</body>
+</html>

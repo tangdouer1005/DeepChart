@@ -1,0 +1,47 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a horizontal bar chart showing the top 8 Blue Economy ecosystems by `VC-to-seed reach = Total VC Funding / Median Seed Round`, expressed as `approximate number of seed rounds`, sorted descending by the derived value, and excluding ecosystems with missing `Median Seed Round` or `Total VC Funding`.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "approximate number of seed rounds",
+  "sort_rule": "descending by vc_to_seed_reach",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "Blue Economy VC-to-Seed Reach",
+    "xlabel": "approximate number of seed rounds",
+    "value_field": "vc_to_seed_reach"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "vc_to_seed_reach": 164666.6667
+    },
+    {
+      "entity": "London",
+      "vc_to_seed_reach": 95238.0952
+    },
+    {
+      "entity": "New York City",
+      "vc_to_seed_reach": 73333.3333
+    },
+    {
+      "entity": "Beijing",
+      "vc_to_seed_reach": 57333.3333
+    },
+    {
+      "entity": "Los Angeles",
+      "vc_to_seed_reach": 39000.0
+    },
+    {
+      "entity": "Seoul",
+      "vc_to_seed_reach": 36679.5367
+    },
+    {
+      "entity": "Boston",
+      "vc_to_seed_reach": 34000.0
+    },
+    {
+      "entity": "Singapore",
+      "vc_to_seed_reach": 20000.0
+    }
+  ]
+}

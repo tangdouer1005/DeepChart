@@ -1,0 +1,65 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a dumbbell chart for the top 10 Cleantech ecosystems by `Total Early-Stage Funding`, comparing `Funding rank` with rank by `Median Seed Round / Software Engineer Salary`, with values expressed as `rank position`, and showing the top 8 items with the largest absolute rank gaps.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "rank position",
+  "sort_rule": "descending by absolute rank gap, ties broken by lower funding_rank then entity",
+  "selection_rule": "top 8 after deterministic tie-break",
+  "plot_spec": {
+    "title": "Cleantech Funding Rank vs Seed Affordability Rank",
+    "left_field": "funding_rank",
+    "right_field": "seed_affordability_rank",
+    "left_label": "funding_rank",
+    "right_label": "seed_affordability_rank"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "funding_rank": 1,
+      "seed_affordability_rank": 7,
+      "abs_rank_gap": 6
+    },
+    {
+      "entity": "Paris",
+      "funding_rank": 8,
+      "seed_affordability_rank": 2,
+      "abs_rank_gap": 6
+    },
+    {
+      "entity": "New York City",
+      "funding_rank": 3,
+      "seed_affordability_rank": 8,
+      "abs_rank_gap": 5
+    },
+    {
+      "entity": "Seattle",
+      "funding_rank": 9,
+      "seed_affordability_rank": 4,
+      "abs_rank_gap": 5
+    },
+    {
+      "entity": "Los Angeles",
+      "funding_rank": 6,
+      "seed_affordability_rank": 10,
+      "abs_rank_gap": 4
+    },
+    {
+      "entity": "Tel Aviv - Jerusalem",
+      "funding_rank": 7,
+      "seed_affordability_rank": 3,
+      "abs_rank_gap": 4
+    },
+    {
+      "entity": "London",
+      "funding_rank": 4,
+      "seed_affordability_rank": 6,
+      "abs_rank_gap": 2
+    },
+    {
+      "entity": "Beijing",
+      "funding_rank": 2,
+      "seed_affordability_rank": 1,
+      "abs_rank_gap": 1
+    }
+  ]
+}

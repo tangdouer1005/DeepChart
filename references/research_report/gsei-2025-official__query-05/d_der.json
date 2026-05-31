@@ -1,0 +1,583 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a heatmap for the 15 countries with the highest score-weighted average numeric growth in the 2025 country tables, where each cell shows the count of listed cities in growth buckets `<0%`, `0-10%`, `10-25%`, `25-50%`, `>50%`, and `New/Missing`, and countries are ordered by the derived score-weighted average numeric growth.",
+  "status": "complete",
+  "chart_type": "heatmap",
+  "title": "2025 Growth-Bucket Composition by Country",
+  "value_unit": "count",
+  "sort_rule": "descending by score_weighted_avg_growth_pct, tie-break alphabetically",
+  "selection_rule": "top 15 countries by score-weighted average numeric growth",
+  "records": [
+    {
+      "entity": "Kuwait",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 137.3
+    },
+    {
+      "entity": "Kuwait",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 137.3
+    },
+    {
+      "entity": "Kuwait",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 137.3
+    },
+    {
+      "entity": "Kuwait",
+      "bucket": "25-50%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 137.3
+    },
+    {
+      "entity": "Kuwait",
+      "bucket": ">50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 137.3
+    },
+    {
+      "entity": "Kuwait",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 137.3
+    },
+    {
+      "entity": "Uzbekistan",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 132.3
+    },
+    {
+      "entity": "Uzbekistan",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 132.3
+    },
+    {
+      "entity": "Uzbekistan",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 132.3
+    },
+    {
+      "entity": "Uzbekistan",
+      "bucket": "25-50%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 132.3
+    },
+    {
+      "entity": "Uzbekistan",
+      "bucket": ">50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 132.3
+    },
+    {
+      "entity": "Uzbekistan",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 132.3
+    },
+    {
+      "entity": "Saudi Arabia",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 129.84785
+    },
+    {
+      "entity": "Saudi Arabia",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 129.84785
+    },
+    {
+      "entity": "Saudi Arabia",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 129.84785
+    },
+    {
+      "entity": "Saudi Arabia",
+      "bucket": "25-50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 129.84785
+    },
+    {
+      "entity": "Saudi Arabia",
+      "bucket": ">50%",
+      "count": 6,
+      "score_weighted_avg_growth_pct": 129.84785
+    },
+    {
+      "entity": "Saudi Arabia",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 129.84785
+    },
+    {
+      "entity": "Namibia",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 74.2
+    },
+    {
+      "entity": "Namibia",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 74.2
+    },
+    {
+      "entity": "Namibia",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 74.2
+    },
+    {
+      "entity": "Namibia",
+      "bucket": "25-50%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 74.2
+    },
+    {
+      "entity": "Namibia",
+      "bucket": ">50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 74.2
+    },
+    {
+      "entity": "Namibia",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 74.2
+    },
+    {
+      "entity": "Cape Verde",
+      "bucket": "<0%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 72.053097
+    },
+    {
+      "entity": "Cape Verde",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 72.053097
+    },
+    {
+      "entity": "Cape Verde",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 72.053097
+    },
+    {
+      "entity": "Cape Verde",
+      "bucket": "25-50%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 72.053097
+    },
+    {
+      "entity": "Cape Verde",
+      "bucket": ">50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 72.053097
+    },
+    {
+      "entity": "Cape Verde",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 72.053097
+    },
+    {
+      "entity": "Sri Lanka",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 63.031298
+    },
+    {
+      "entity": "Sri Lanka",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 63.031298
+    },
+    {
+      "entity": "Sri Lanka",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 63.031298
+    },
+    {
+      "entity": "Sri Lanka",
+      "bucket": "25-50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 63.031298
+    },
+    {
+      "entity": "Sri Lanka",
+      "bucket": ">50%",
+      "count": 4,
+      "score_weighted_avg_growth_pct": 63.031298
+    },
+    {
+      "entity": "Sri Lanka",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 63.031298
+    },
+    {
+      "entity": "Bahrain",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 61.7
+    },
+    {
+      "entity": "Bahrain",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 61.7
+    },
+    {
+      "entity": "Bahrain",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 61.7
+    },
+    {
+      "entity": "Bahrain",
+      "bucket": "25-50%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 61.7
+    },
+    {
+      "entity": "Bahrain",
+      "bucket": ">50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 61.7
+    },
+    {
+      "entity": "Bahrain",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 61.7
+    },
+    {
+      "entity": "Uganda",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 54.6
+    },
+    {
+      "entity": "Uganda",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 54.6
+    },
+    {
+      "entity": "Uganda",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 54.6
+    },
+    {
+      "entity": "Uganda",
+      "bucket": "25-50%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 54.6
+    },
+    {
+      "entity": "Uganda",
+      "bucket": ">50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 54.6
+    },
+    {
+      "entity": "Uganda",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 54.6
+    },
+    {
+      "entity": "Oman",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 53.1
+    },
+    {
+      "entity": "Oman",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 53.1
+    },
+    {
+      "entity": "Oman",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 53.1
+    },
+    {
+      "entity": "Oman",
+      "bucket": "25-50%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 53.1
+    },
+    {
+      "entity": "Oman",
+      "bucket": ">50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 53.1
+    },
+    {
+      "entity": "Oman",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 53.1
+    },
+    {
+      "entity": "Singapore",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 50.5
+    },
+    {
+      "entity": "Singapore",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 50.5
+    },
+    {
+      "entity": "Singapore",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 50.5
+    },
+    {
+      "entity": "Singapore",
+      "bucket": "25-50%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 50.5
+    },
+    {
+      "entity": "Singapore",
+      "bucket": ">50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 50.5
+    },
+    {
+      "entity": "Singapore",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 50.5
+    },
+    {
+      "entity": "Azerbaijan",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 44.8
+    },
+    {
+      "entity": "Azerbaijan",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 44.8
+    },
+    {
+      "entity": "Azerbaijan",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 44.8
+    },
+    {
+      "entity": "Azerbaijan",
+      "bucket": "25-50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 44.8
+    },
+    {
+      "entity": "Azerbaijan",
+      "bucket": ">50%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 44.8
+    },
+    {
+      "entity": "Azerbaijan",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 44.8
+    },
+    {
+      "entity": "Kazakhstan",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 41.017176
+    },
+    {
+      "entity": "Kazakhstan",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 41.017176
+    },
+    {
+      "entity": "Kazakhstan",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 41.017176
+    },
+    {
+      "entity": "Kazakhstan",
+      "bucket": "25-50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 41.017176
+    },
+    {
+      "entity": "Kazakhstan",
+      "bucket": ">50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 41.017176
+    },
+    {
+      "entity": "Kazakhstan",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 41.017176
+    },
+    {
+      "entity": "Armenia",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 40.9
+    },
+    {
+      "entity": "Armenia",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 40.9
+    },
+    {
+      "entity": "Armenia",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 40.9
+    },
+    {
+      "entity": "Armenia",
+      "bucket": "25-50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 40.9
+    },
+    {
+      "entity": "Armenia",
+      "bucket": ">50%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 40.9
+    },
+    {
+      "entity": "Armenia",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 40.9
+    },
+    {
+      "entity": "France",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 39.793858
+    },
+    {
+      "entity": "France",
+      "bucket": "0-10%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 39.793858
+    },
+    {
+      "entity": "France",
+      "bucket": "10-25%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 39.793858
+    },
+    {
+      "entity": "France",
+      "bucket": "25-50%",
+      "count": 6,
+      "score_weighted_avg_growth_pct": 39.793858
+    },
+    {
+      "entity": "France",
+      "bucket": ">50%",
+      "count": 2,
+      "score_weighted_avg_growth_pct": 39.793858
+    },
+    {
+      "entity": "France",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 39.793858
+    },
+    {
+      "entity": "Slovakia",
+      "bucket": "<0%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 37.566002
+    },
+    {
+      "entity": "Slovakia",
+      "bucket": "0-10%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 37.566002
+    },
+    {
+      "entity": "Slovakia",
+      "bucket": "10-25%",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 37.566002
+    },
+    {
+      "entity": "Slovakia",
+      "bucket": "25-50%",
+      "count": 3,
+      "score_weighted_avg_growth_pct": 37.566002
+    },
+    {
+      "entity": "Slovakia",
+      "bucket": ">50%",
+      "count": 1,
+      "score_weighted_avg_growth_pct": 37.566002
+    },
+    {
+      "entity": "Slovakia",
+      "bucket": "New/Missing",
+      "count": 0,
+      "score_weighted_avg_growth_pct": 37.566002
+    }
+  ],
+  "row_field": "entity",
+  "column_field": "bucket",
+  "value_field": "count",
+  "row_order": [
+    "Kuwait",
+    "Uzbekistan",
+    "Saudi Arabia",
+    "Namibia",
+    "Cape Verde",
+    "Sri Lanka",
+    "Bahrain",
+    "Uganda",
+    "Oman",
+    "Singapore",
+    "Azerbaijan",
+    "Kazakhstan",
+    "Armenia",
+    "France",
+    "Slovakia"
+  ],
+  "column_order": [
+    "<0%",
+    "0-10%",
+    "10-25%",
+    "25-50%",
+    ">50%",
+    "New/Missing"
+  ],
+  "x_label": "Growth bucket",
+  "y_label": "Country",
+  "cmap": "YlOrRd"
+}

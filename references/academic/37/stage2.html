@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "name": "LiAsF₆",
+        "x_mean": 2.7,
+        "y_mean": 36.0,
+        "x_err": 0.14142135623730942,
+        "y_err": 0.0,
+        "color": "#D32F2F",
+        "label_pos": [-10, 20]
+    },
+    {
+        "name": "LiPF₆",
+        "x_mean": 3.0999999999999996,
+        "y_mean": 30.0,
+        "x_err": 0.2449489742783178,
+        "y_err": 2.8284271247461903,
+        "color": "#305496",
+        "label_pos": [15, 15]
+    },
+    {
+        "name": "LiFSI",
+        "x_mean": 3.1500000000000004,
+        "y_mean": 25.5,
+        "x_err": 0.12909944487358052,
+        "y_err": 4.949747468305833,
+        "color": "#F4C63D",
+        "label_pos": [-35, -5]
+    },
+    {
+        "name": "LiTFSI",
+        "x_mean": 3.5,
+        "y_mean": 19.0,
+        "x_err": 0.3915780041490244,
+        "y_err": 1.4142135623730951,
+        "color": "#6AA84F",
+        "label_pos": [-40, -15]
+    },
+    {
+        "name": "LiClO₄",
+        "x_mean": 4.225,
+        "y_mean": 24.5,
+        "x_err": 0.4193248541803042,
+        "y_err": 2.1213203435596424,
+        "color": "#674EA7",
+        "label_pos": [-10, 10]
+    },
+    {
+        "name": "LiBF₄",
+        "x_mean": 4.45,
+        "y_mean": 19.0,
+        "x_err": 0.6658328118479395,
+        "y_err": 2.8284271247461903,
+        "color": "#8E8E8E",
+        "label_pos": [-35, -25]
+    },
+    {
+        "name": "LiDFOB",
+        "x_mean": 4.875,
+        "y_mean": 18.0,
+        "x_err": 0.3862210075418824,
+        "y_err": 2.8284271247461903,
+        "color": "#E06666",
+        "label_pos": [15, 15]
+    },
+    {
+        "name": "LiNO₃",
+        "x_mean": 5.4750000000000005,
+        "y_mean": 15.0,
+        "x_err": 0.48562674281111556,
+        "y_err": 0.0,
+        "color": "#6D9EEB",
+        "label_pos": [10, -15]
+    }
+];
+
+        // Process data
+        const scatterData = [];
+        const errorData = [];
+        const xMeans = [];
+        const yMeans = [];
+
+        jsonData.forEach(item => {
+            const xMean = item.x_mean;
+            const yMean = item.y_mean;
+            const xStd = item.x_err;
+            const yStd = item.y_err;
+            
+            xMeans.push(xMean);
+            yMeans.push(yMean);
+
+            scatterData.push({
+                name: item.name,
+                value: [xMean, yMean],
+                itemStyle: { color: item.color },
+                label: {
+                    show: true,
+                    formatter: item.name,
+                    offset: item.label_pos,
+                    color: 'black',
+                    fontSize: 12
+                }
+            });
+
+            errorData.push({
+                value: [xMean, yMean, xStd, yStd], // Custom format
+                itemStyle: { color: 'black' }
+            });
+        });
+
+        // Stats
+        // Use Spearman correlation as per the reference Python script (scipy.stats.spearmanr)
+        const corr = jStat.spearmancoeff(xMeans, yMeans);
+        
+        // p-value calculation using t-distribution approximation (consistent with scipy for n=8)
+        const n = xMeans.length;
+        const t = corr * Math.sqrt((n - 2) / (1 - corr * corr));
+        // 2-tailed p-value
+        const pVal = 2 * (1 - jStat.studentt.cdf(Math.abs(t), n - 2));
+        
+        // Formatting for display: "1.8 × 10⁻⁴"
+        // Calculate coefficient and exponent
+        const exp = Math.floor(Math.log10(pVal));
+        const coeff = (pVal / Math.pow(10, exp)).toFixed(1);
+        
+        // Map numbers to superscripts
+        const superscripts = {
+            '-': '⁻', '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', 
+            '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹'
+        };
+        const expStr = exp.toString().split('').map(c => superscripts[c] || c).join('');
+        const pLabel = `P value: ${coeff} × 10${expStr}`;
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 50, bottom: 60, left: 60 },
+            xAxis: {
+                type: 'value',
+                name: 'Crystallite size in SEI (nm)',
+                nameLocation: 'middle',
+                nameGap: 35,
+                min: 2.0,
+                max: 6.0,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'J_crit (mA cm⁻²)', // Simplified name
+                nameLocation: 'middle',
+                nameGap: 40,
+                min: 10,
+                max: 40,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    symbol: 'rect', // Square
+                    symbolSize: 15,
+                    z: 10
+                },
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const xVal = api.value(0);
+                        const yVal = api.value(1);
+                        const xErr = api.value(2);
+                        const yErr = api.value(3);
+                        
+                        const pt = api.coord([xVal, yVal]);
+                        const left = api.coord([xVal - xErr, yVal]);
+                        const right = api.coord([xVal + xErr, yVal]);
+                        const top = api.coord([xVal, yVal + yErr]);
+                        const bottom = api.coord([xVal, yVal - yErr]);
+                        
+                        const style = api.style({ stroke: 'black', lineWidth: 1 });
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                // Horizontal Error Bar
+                                { type: 'line', shape: { x1: left[0], y1: left[1], x2: right[0], y2: right[1] }, style: style },
+                                // Vertical Error Bar
+                                { type: 'line', shape: { x1: top[0], y1: top[1], x2: bottom[0], y2: bottom[1] }, style: style },
+                                // Caps
+                                { type: 'line', shape: { x1: left[0], y1: left[1]-3, x2: left[0], y2: left[1]+3 }, style: style },
+                                { type: 'line', shape: { x1: right[0], y1: right[1]-3, x2: right[0], y2: right[1]+3 }, style: style },
+                                { type: 'line', shape: { x1: top[0]-3, y1: top[1], x2: top[0]+3, y2: top[1] }, style: style },
+                                { type: 'line', shape: { x1: bottom[0]-3, y1: bottom[1], x2: bottom[0]+3, y2: bottom[1] }, style: style }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 5
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 10, top: 10, style: { text: 'd', font: 'bold 24px Arial' } },
+                {
+                    type: 'text', 
+                    right: 60, 
+                    top: 60, 
+                    style: { 
+                        text: `Correlation coefficient: ${corr.toFixed(2)}
+${pLabel}`, 
+                        font: '14px Arial',
+                        textAlign: 'right',
+                        lineHeight: 20
+                    } 
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

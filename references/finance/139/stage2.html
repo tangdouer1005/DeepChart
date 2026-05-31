@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>lly 经济增加值 (EVA) 2016–2024 变化趋势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js 最新稳定版 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f7;
+      color: #222;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px 24px 28px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      font-weight: 600;
+      color: #111827;
+    }
+    h2 {
+      font-size: 13px;
+      margin: 0 0 16px;
+      font-weight: 400;
+      color: #4b5563;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 480px;
+      margin-top: 10px;
+    }
+    .note {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+    .legend-inline {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #4b5563;
+    }
+    .legend-color-box {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>lly 经济增加值 (EVA) - 简化版</h1>
+    <h2>2016–2024 年度 EVA 变化趋势</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="evaChart"></canvas>
+    </div>
+
+    <div class="legend-inline">
+      <span class="legend-color-box" style="background: rgba(37, 99, 235, 0.65); border: 1px solid rgba(37, 99, 235, 0.9);"></span>
+      经济增加值 (EVA) - 简化版（单位：亿元）
+    </div>
+
+    <div class="note">
+      数据来源：用户提供财务数据（RESULT_EVA）。<br />
+      纵轴单位为亿元；鼠标悬停可查看折算为元的精确数值。
+    </div>
+  </div>
+
+  <script>
+    // 确保在 DOM 加载后执行
+    window.addEventListener('DOMContentLoaded', function () {
+      // 原始数据（单位：元）
+      const evaData = [
+        { year: 2016, value: 1210389845.880261 },
+        { year: 2017, value: -1921695000.0 },
+        { year: 2018, value: 3461146087.062851 },
+        { year: 2019, value: 3742099354.811144 },
+        { year: 2020, value: 4469017440.351872 },
+        { year: 2021, value: 5162245986.516124 },
+        { year: 2022, value: 5595971212.976023 },
+        { year: 2023, value: 5724441906.44738 },
+        { year: 2024, value: 10729169984.38535 }
+      ];
+
+      const labels = evaData.map(d => d.year.toString());
+      const valuesYuan = evaData.map(d => d.value);
+      const valuesYiYuan = valuesYuan.map(v => v / 1e8); // 转为亿元
+
+      const canvas = document.getElementById('evaChart');
+      if (!canvas) {
+        console.error('无法找到画布元素 #evaChart');
+        return;
+      }
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        console.error('无法获取 2D 上下文');
+        return;
+      }
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'EVA（亿元）',
+              data: valuesYiYuan,
+              tension: 0.25,
+              borderColor: 'rgba(37, 99, 235, 0.9)',
+              backgroundColor: 'rgba(37, 99, 235, 0.10)',
+              pointBackgroundColor: 'rgba(37, 99, 235, 1)',
+              pointBorderColor: '#ffffff',
+              pointHoverRadius: 5,
+              pointRadius: 4,
+              pointBorderWidth: 1.5,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'nearest',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              usePointStyle: true,
+              callbacks: {
+                title: function(tooltipItems) {
+                  const item = tooltipItems[0];
+                  return '年度：' + item.label;
+                },
+                label: function(context) {
+                  const index = context.dataIndex;
+                  const rawYuan = valuesYuan[index]; // 元
+                  const valueYi = context.parsed.y;   // 亿元（已换算）
+                  const yiFormatted = valueYi.toLocaleString('zh-CN', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  });
+                  const yuanFormatted = rawYuan.toLocaleString('zh-CN', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 2
+                  });
+                  return [
+                    'EVA：' + yiFormatted + ' 亿元',
+                    '折合：' + yuanFormatted + ' 元'
+                  ];
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                autoSkip: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'EVA（亿元）',
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                color: 'rgba(209, 213, 219, 0.6)'
+              },
+              ticks: {
+                callback: function(value) {
+                  return value.toLocaleString('zh-CN');
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

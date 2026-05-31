@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature 122 Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+                // Data from JSON
+                const chartData = {
+            "heatmap_values": [
+                [
+                    100.0,
+                    100.0,
+                    100.00000000000001,
+                    100.0,
+                    99.99999999999999,
+                    99.99999999999999,
+                    100.0,
+                    99.99999999999999,
+                    100.00000000000001,
+                    100.0,
+                    100.0,
+                    99.99999999999999,
+                    100.00000000000001,
+                    100.0,
+                    100.0,
+                    100.0,
+                    100.0,
+                    100.0
+                ],
+                [
+                    86.33628318584071,
+                    85.38135593220336,
+                    73.3446519524618,
+                    48.64085667215815,
+                    35.08341511285574,
+                    69.08023483365949,
+                    78.23691460055097,
+                    78.96117523609652,
+                    74.48512585812358,
+                    98.55475264035573,
+                    106.52482269503547,
+                    107.73391022174148,
+                    96.39203015616586,
+                    92.13169642857143,
+                    97.24483406386973,
+                    109.81848184818483,
+                    111.08179419525067,
+                    102.01149425287356
+                ],
+                [
+                    65.66371681415929,
+                    74.41737288135592,
+                    56.19694397283532,
+                    30.0658978583196,
+                    21.49165848871442,
+                    49.11937377690803,
+                    52.8236914600551,
+                    64.84784889821616,
+                    36.44164759725401,
+                    91.99555308504726,
+                    88.08510638297872,
+                    96.53866955110868,
+                    78.89068389876145,
+                    77.67857142857143,
+                    79.7119599248591,
+                    86.22112211221122,
+                    88.98416886543536,
+                    90.01436781609196
+                ],
+                [
+                    57.48672566371683,
+                    65.94279661016948,
+                    51.918505942275054,
+                    22.116968698517297,
+                    17.419038272816483,
+                    36.007827788649706,
+                    48.48484848484849,
+                    54.66946484784889,
+                    25.343249427917627,
+                    82.82379099499722,
+                    73.12056737588652,
+                    93.40183883180096,
+                    64.72805600430803,
+                    60.825892857142854,
+                    67.50156543519097,
+                    73.51485148514851,
+                    73.02110817941953,
+                    72.05459770114943
+                ]
+            ],
+            "y_labels": [
+                "0",
+                "0.25",
+                "0.5",
+                "1"
+            ],
+            "cell_lines": [
+                "B16-F0",
+                "LN7 1112AR",
+                "LN7 1120BL",
+                "LN7 1134BL",
+                "LN8 1194BR",
+                "LN8 1198AR",
+                "LN8 1205BL",
+                "LN9 1315BL",
+                "LN9 1358IR"
+            ],
+            "p_values": [
+                "P=3.8x10\u207b\u00b9\u00b9",
+                "P=6x10\u207b\u2075",
+                "P<1x10\u207b\u00b9\u2075",
+                "P<1x10\u207b\u00b9\u2075",
+                "P<1x10\u207b\u00b9\u2075",
+                "P=5.8x10\u207b\u00b9\u00b3",
+                "P=4.4x10\u207b\u00b9\u2074",
+                "P=3.7x10\u207b\u00b9\u2070",
+                "P<1x10\u207b\u00b9\u2075"
+            ]
+        };
+        
+                const pValues = chartData.p_values;
+                const cellLines = chartData.cell_lines;
+                const concentrations = chartData.y_labels;
+                const heatmapValues = chartData.heatmap_values;
+        
+                // Process Data
+                const heatmapData = [];
+                
+                for (let y = 0; y < heatmapValues.length; y++) {
+                    for (let x = 0; x < heatmapValues[y].length; x++) {
+                        heatmapData.push([x, y, heatmapValues[y][x]]);
+                    }
+                }
+                
+                const option = {
+                    backgroundColor: 'white',
+                    grid: {
+                        top: 130, 
+                        bottom: 150,
+                        left: 100,
+                        right: 150
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: [...cellLines, ...cellLines],
+                            axisLabel: {
+                                rotate: 90,
+                                interval: 0,
+                                fontWeight: 'bold',
+                                color: 'black',
+                                fontSize: 10
+                            },
+                            axisTick: { alignWithLabel: true },
+                            splitLine: { 
+                                show: true, 
+                                interval: 0,
+                                lineStyle: { color: 'black' }
+                            }
+                        },
+                        {
+                            type: 'category',
+                            position: 'top',
+                            data: Array(cellLines.length).fill('').concat(pValues),
+                            axisLabel: {
+                                rotate: 90,
+                                interval: 0,
+                                color: 'black',
+                                fontSize: 10,
+                                verticalAlign: 'bottom',
+                                distance: 10
+                            },
+                            axisTick: { show: false },
+                            axisLine: { show: false },
+                            splitLine: { show: false }
+                        }
+                    ],
+                    yAxis: {
+                        type: 'category',
+                        data: concentrations,
+                        name: 'Erastin 2 (µM)',
+                        nameLocation: 'middle',
+                        nameGap: 60,
+                        nameTextStyle: { fontWeight: 'bold', fontSize: 12, color: 'black' },
+                        axisLabel: { fontWeight: 'bold', color: 'black' },
+                        inverse: true, 
+                        splitLine: { 
+                            show: true, 
+                            interval: 0,
+                            lineStyle: { color: 'black' }
+                        }
+                    },
+                    visualMap: {
+                min: 20,
+                max: 100,
+                calculable: false,
+                orient: 'vertical',
+                right: 20,
+                top: 'center',
+                inRange: {
+                    color: ['#440154', '#482878', '#3e4989', '#31688e', '#26828e', '#1f9e89', '#35b779', '#6dcd59', '#b4de2c', '#fde725']
+                },
+                text: ['Relative viability (%)', ''],
+                textStyle: { fontWeight: 'bold' }
+            },
+            series: [{
+                type: 'heatmap',
+                data: heatmapData,
+                label: { show: false },
+                itemStyle: {
+                    borderColor: 'black',
+                    borderWidth: 1
+                },
+                markLine: {
+                    silent: true,
+                    symbol: 'none',
+                    label: { show: false },
+                    lineStyle: { color: 'black', width: 2, type: 'solid' },
+                    data: [
+                        { xAxis: 8.5 }
+                    ]
+                }
+            }],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'k',
+                        fontSize: 24,
+                        fontWeight: 'bold'
+                    }
+                },
+                {
+                    type: 'group',
+                    left: 100,
+                    bottom: 20,
+                    children: [
+                        {
+                            type: 'line',
+                            shape: { x1: 0, y1: 0, x2: 360, y2: 0 },
+                            style: { stroke: 'black', lineWidth: 2 }
+                        },
+                        {
+                            type: 'text',
+                            position: [180, 10],
+                            style: { text: '21% O₂', fontSize: 14, fontWeight: 'bold', textAlign: 'center' }
+                        }
+                    ]
+                },
+                {
+                    type: 'group',
+                    left: 490, 
+                    bottom: 20,
+                    children: [
+                        {
+                            type: 'line',
+                            shape: { x1: 0, y1: 0, x2: 360, y2: 0 },
+                            style: { stroke: 'black', lineWidth: 2 }
+                        },
+                        {
+                            type: 'text',
+                            position: [180, 10],
+                            style: { text: '1% O₂', fontSize: 14, fontWeight: 'bold', textAlign: 'center' }
+                        }
+                    ]
+                }
+            ]
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>GE 现金消耗跑道（零收入情景）2016–2024</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f8fa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #555;
+      margin: 0 0 16px;
+    }
+
+    #chartContainer {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 16px 20px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Fix aspect ratio: wide, not tall */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      /* 16:9 aspect ratio box to avoid extreme tall/narrow distortion */
+      aspect-ratio: 16 / 9;
+      margin: 0 auto 6px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: center;
+      font-size: 12px;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .controls input[type="checkbox"] {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="chartContainer">
+    <h1>GE 现金消耗跑道（月数）</h1>
+    <h2>零收入情景：2016–2024</h2>
+
+    <div class="controls">
+      <label>
+        <input type="checkbox" id="togglePoints" checked />
+        显示数据点
+      </label>
+      <label>
+        <input type="checkbox" id="toggleSmooth" checked />
+        平滑曲线
+      </label>
+      <span>（鼠标悬停可查看具体数值）</span>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="runwayChart"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：用户提供的 GE 在零收入情景下的现金消耗跑道估算结果（单位：月份）。<br />
+      Fiscal Year: 2016–2024；RESULT_Runway_Months: 39.34, 14.73, 32.28, 44.02, 20.81, 13.69, 11.11, 20.92, 18.96。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Data from the source (kept as numbers, not rounded)
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+
+    const runwayMonths = [
+      39.34286626689848,
+      14.730135685967948,
+      32.27922230030452,
+      44.01814646791964,
+      20.80592339456073,
+      13.69022643420386,
+      11.113584441450412,
+      20.920536635706917,
+      18.96136442742777,
+    ];
+
+    const ctx = document.getElementById("runwayChart").getContext("2d");
+
+    const chartConfig = {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "现金消耗跑道（月）",
+            data: runwayMonths,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.10)",
+            borderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#2563eb",
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 1.5,
+            tension: 0.35,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // we control via CSS aspect-ratio
+        interaction: {
+          mode: "nearest",
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 6,
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const v = context.parsed.y;
+                return `现金消耗跑道：${v.toFixed(2)} 个月`;
+              },
+            },
+          },
+        },
+        layout: {
+          padding: {
+            left: 8,
+            right: 8,
+            top: 8,
+            bottom: 4,
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年（Fiscal Year）",
+              color: "#374151",
+              font: {
+                size: 12,
+              },
+            },
+            grid: {
+              display: false,
+            },
+            ticks: {
+              maxRotation: 0,
+              autoSkip: false,
+              font: {
+                size: 11,
+              },
+            },
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "现金消耗跑道（月数）",
+              color: "#374151",
+              font: {
+                size: 12,
+              },
+            },
+            ticks: {
+              callback: function (value) {
+                return value + " 个月";
+              },
+              font: {
+                size: 11,
+              },
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+            },
+          },
+        },
+      },
+    };
+
+    const runwayChart = new Chart(ctx, chartConfig);
+
+    // Interactivity: toggle points & smoothing
+    document.getElementById("togglePoints").addEventListener("change", (e) => {
+      const show = e.target.checked;
+      runwayChart.data.datasets[0].pointRadius = show ? 4 : 0;
+      runwayChart.data.datasets[0].pointHoverRadius = show ? 6 : 0;
+      runwayChart.update();
+    });
+
+    document.getElementById("toggleSmooth").addEventListener("change", (e) => {
+      const smooth = e.target.checked;
+      runwayChart.data.datasets[0].tension = smooth ? 0.35 : 0;
+      runwayChart.update();
+    });
+  </script>
+</body>
+</html>

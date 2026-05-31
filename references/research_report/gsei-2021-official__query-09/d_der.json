@@ -1,0 +1,90 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a bubble chart for the top 12 qualifying countries after ranking them by momentum breadth, where the x-axis is national startup-score concentration defined as `top-1 city score / national listed score sum`, the y-axis is momentum breadth defined as `positive numeric rank_change count / numeric rank_change count`, both axes are percentages, bubble size is the number of listed cities in the 3.2 national block, and only countries with at least 5 listed cities and at least 4 numeric `rank_change` values are eligible.",
+  "chart_type": "bubble chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by momentum_breadth_pct",
+  "selection_rule": "top 12 qualifying countries ranked by breadth",
+  "plot_spec": {
+    "title": "Concentration vs Momentum Breadth",
+    "x_field": "national_startup_score_concentration_pct",
+    "y_field": "momentum_breadth_pct",
+    "size_field": "listed_city_count",
+    "xlabel": "startup-score concentration (%)",
+    "ylabel": "momentum breadth pct (%)"
+  },
+  "records": [
+    {
+      "entity": "Denmark",
+      "national_startup_score_concentration_pct": 70.3881,
+      "momentum_breadth_pct": 100.0,
+      "listed_city_count": 5
+    },
+    {
+      "entity": "China",
+      "national_startup_score_concentration_pct": 39.1501,
+      "momentum_breadth_pct": 87.5,
+      "listed_city_count": 8
+    },
+    {
+      "entity": "Belgium",
+      "national_startup_score_concentration_pct": 50.1659,
+      "momentum_breadth_pct": 80.0,
+      "listed_city_count": 5
+    },
+    {
+      "entity": "Pakistan",
+      "national_startup_score_concentration_pct": 41.6445,
+      "momentum_breadth_pct": 80.0,
+      "listed_city_count": 5
+    },
+    {
+      "entity": "Japan",
+      "national_startup_score_concentration_pct": 64.3648,
+      "momentum_breadth_pct": 75.0,
+      "listed_city_count": 5
+    },
+    {
+      "entity": "Portugal",
+      "national_startup_score_concentration_pct": 48.8064,
+      "momentum_breadth_pct": 75.0,
+      "listed_city_count": 5
+    },
+    {
+      "entity": "France",
+      "national_startup_score_concentration_pct": 59.1342,
+      "momentum_breadth_pct": 71.4286,
+      "listed_city_count": 8
+    },
+    {
+      "entity": "Israel",
+      "national_startup_score_concentration_pct": 61.5559,
+      "momentum_breadth_pct": 71.4286,
+      "listed_city_count": 10
+    },
+    {
+      "entity": "Switzerland",
+      "national_startup_score_concentration_pct": 24.3056,
+      "momentum_breadth_pct": 71.4286,
+      "listed_city_count": 8
+    },
+    {
+      "entity": "India",
+      "national_startup_score_concentration_pct": 29.0803,
+      "momentum_breadth_pct": 62.5,
+      "listed_city_count": 8
+    },
+    {
+      "entity": "Sweden",
+      "national_startup_score_concentration_pct": 61.9342,
+      "momentum_breadth_pct": 62.5,
+      "listed_city_count": 8
+    },
+    {
+      "entity": "Finland",
+      "national_startup_score_concentration_pct": 79.5263,
+      "momentum_breadth_pct": 60.0,
+      "listed_city_count": 6
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recreated Chart 102</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+        }
+        #chart-container {
+            width: 1050px; /* Approx 7 inches * 150 dpi */
+            height: 900px; /* Approx 6 inches * 150 dpi */
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        // 1. Data Preparation
+        
+        const data = {"raw_data": {"B16-F0": [1.0524294, 0.99642126, 0.95114935], "LN7-1134BL": [0.74170805, 0.7873782, 0.75957924], "LN8-1194BR": [0.57713831, 0.54398637, 0.56088287], "LN9-1315BL": [0.54237196, 0.53865737, 0.50458335], "F0Luc, -Cys": [0.03989584, 0.0410516, 0.03855378], "LN7-1134BL, -Cys": [0.01544157, 0.0159137, 0.01655506], "LN8-1194BR, -Cys": [0.01384739, 0.01401451, 0.01451768], "LN9-1315BL, -Cys": [0.01376061, 0.01339609, 0.01397419]}, "means": {"B16-F0": 1.0000000033333334, "LN7-1134BL": 0.7628884966666667, "LN8-1194BR": 0.5606691833333334, "LN9-1315BL": 0.5285375600000001, "F0Luc, -Cys": 0.039833740000000006, "LN7-1134BL, -Cys": 0.01597011, "LN8-1194BR, -Cys": 0.014126526666666667, "LN9-1315BL, -Cys": 0.013710296666666665}, "stds": {"B16-F0": 0.050734777863759656, "LN7-1134BL": 0.023014213760631386, "LN8-1194BR": 0.016577002984090133, "LN9-1315BL": 0.020827930220261935, "F0Luc, -Cys": 0.0012500673964230878, "LN7-1134BL, -Cys": 0.0005588842108165161, "LN8-1194BR, -Cys": 0.00034890252397099875, "LN9-1315BL, -Cys": 0.00029231571311397767}, "labels": ["B16-F0", "LN7-1134BL", "LN8-1194BR", "LN9-1315BL", "F0Luc, -Cys", "LN7-1134BL, -Cys", "LN8-1194BR, -Cys", "LN9-1315BL, -Cys"]};
+        const rawData = data.raw_data;
+        const labels = data.labels;
+        
+        const means = labels.map(l => data.means[l]);
+        const stds = labels.map(l => data.stds[l]);
+        const dataValues = labels.map(l => rawData[l]);
+
+        // Colors
+        const barColors = [
+            '#D9D9D9', '#78C679', '#78C679', '#78C679',
+            '#D9D9D9', '#78C679', '#78C679', '#78C679'
+        ];
+        const scatterColors = [
+            'black', '#2E7D32', '#2E7D32', '#2E7D32',
+            'black', '#2E7D32', '#2E7D32', '#2E7D32'
+        ];
+
+        // 2. Chart Configuration
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Prepare Scatter Data (flattened with x-coordinates)
+        const scatterData = [];
+        dataValues.forEach((group, index) => {
+            group.forEach(val => {
+                scatterData.push({
+                    value: [index, val],
+                    itemStyle: { color: scatterColors[index] }
+                });
+            });
+        });
+
+        // Prepare Significance Data
+        // x1, x2, y_line, text
+        const sigData = [
+            // Group 1
+            { x1: 0, x2: 1, y: 1.15, text: 'P = 3.6 × 10⁻⁵' },
+            { x1: 0, x2: 2, y: 1.30, text: 'P = 3.2 × 10⁻⁷' },
+            { x1: 0, x2: 3, y: 1.45, text: 'P = 1.8 × 10⁻⁷' },
+            // Group 2
+            { x1: 4, x2: 5, y: 0.25, text: 'P = 4.1 × 10⁻¹⁰' },
+            { x1: 4, x2: 6, y: 0.38, text: 'P = 2.2 × 10⁻¹⁰' },
+            { x1: 4, x2: 7, y: 0.52, text: 'P = 2 × 10⁻¹⁰' }
+        ];
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: 100, // Space for "j" label
+                bottom: 100, // Space for rotated labels
+                left: 80,
+                right: 50,
+                containLabel: false
+            },
+            xAxis: {
+                type: 'category',
+                data: labels,
+                axisLabel: {
+                    rotate: 45,
+                    fontSize: 12,
+                    align: 'right', // Helps with rotation alignment
+                    verticalAlign: 'top',
+                    padding: [10, 0, 0, -10], // Adjust position slightly
+                    color: 'black'
+                },
+                axisTick: { show: true },
+                axisLine: { show: true, lineStyle: { color: 'black' } }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Relative GSH levels',
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: {
+                    fontSize: 14,
+                    color: 'black'
+                },
+                min: 0,
+                max: 1.6,
+                interval: 0.5,
+                axisLabel: {
+                    fontSize: 12,
+                    color: 'black'
+                },
+                splitLine: { show: false }, // No grid lines in original
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true }
+            },
+            graphic: [
+                {
+                    type: 'text',
+                    left: 20,
+                    top: 20,
+                    style: {
+                        text: 'j',
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        fill: 'black'
+                    }
+                }
+            ],
+            series: [
+                // 1. Bars
+                {
+                    type: 'bar',
+                    data: means.map((val, i) => ({
+                        value: val,
+                        itemStyle: {
+                            color: barColors[i],
+                            borderColor: 'black',
+                            borderWidth: 1
+                        }
+                    })),
+                    barWidth: '60%',
+                    z: 1
+                },
+                // 2. Error Bars (Custom)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const mean = means[xValue];
+                        const std = stds[xValue];
+                        const lowPoint = api.coord([xValue, mean - std]);
+                        const highPoint = api.coord([xValue, mean + std]);
+                        const halfWidth = 5; // Width of cap
+
+                        const style = api.style({
+                            stroke: 'black',
+                            fill: null,
+                            lineWidth: 1.5
+                        });
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0], y1: lowPoint[1],
+                                        x2: highPoint[0], y2: highPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0] - halfWidth, y1: lowPoint[1],
+                                        x2: lowPoint[0] + halfWidth, y2: lowPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0] - halfWidth, y1: highPoint[1],
+                                        x2: highPoint[0] + halfWidth, y2: highPoint[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: means.map((v, i) => [i, v]),
+                    z: 3
+                },
+                // 3. Scatter Points
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    symbolSize: 8, // Adjusted size
+                    z: 4
+                },
+                // 4. Significance Brackets (Custom)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const idx = params.dataIndex;
+                        const item = sigData[idx];
+                        
+                        const start = api.coord([item.x1, item.y]);
+                        const end = api.coord([item.x2, item.y]);
+                        const legHeight = 5; // px
+
+                        const style = api.style({
+                            stroke: 'black',
+                            fill: null,
+                            lineWidth: 1
+                        });
+
+                        return {
+                            type: 'group',
+                            children: [
+                                // Bracket line
+                                {
+                                    type: 'polyline',
+                                    shape: {
+                                        points: [
+                                            [start[0], start[1] + legHeight],
+                                            [start[0], start[1]],
+                                            [end[0], end[1]],
+                                            [end[0], end[1] + legHeight]
+                                        ]
+                                    },
+                                    style: style
+                                },
+                                // Text
+                                {
+                                    type: 'text',
+                                    style: {
+                                        text: item.text,
+                                        x: (start[0] + end[0]) / 2,
+                                        y: start[1] - 5, // Just above the line
+                                        textAlign: 'center',
+                                        textVerticalAlign: 'bottom',
+                                        fill: 'black',
+                                        fontSize: 11
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: sigData,
+                    z: 5
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

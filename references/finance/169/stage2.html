@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>MRK 经济增加值 (EVA) 简化版 2016-2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f7;
+      color: #222;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 20px 24px 28px;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #555;
+      margin: 0 0 16px;
+    }
+    .note {
+      font-size: 12px;
+      color: #777;
+      margin-top: 8px;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      margin-top: 8px;
+    }
+    @media (max-width: 600px) {
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>MRK 经济增加值 (EVA) - 简化版</h1>
+    <h2>2016 - 2024 财年变化</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="evaChart"></canvas>
+    </div>
+
+    <div class="note">
+      单位：按源数据原始数值绘制（未缩放）。鼠标悬停可查看具体数值。
+    </div>
+  </div>
+
+  <script>
+    // Source data (exactly as provided)
+    const years = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+
+    const evaValues = [
+      -1402402672.247263,
+      -3033108641.312682,
+      1531504171.9342604,
+      1874878698.9262304,
+      -316306140.201262,
+      6110371219.108006,
+      9761468827.53588,
+      -5927901032.292218,
+      10550729022.873192
+    ];
+
+    // Helper for compact number formatting with thousand separators
+    function formatNumber(value) {
+      if (Math.abs(value) >= 1e9) {
+        return (value / 1e9).toLocaleString("zh-CN", {
+          maximumFractionDigits: 2
+        }) + " 十亿";
+      } else if (Math.abs(value) >= 1e6) {
+        return (value / 1e6).toLocaleString("zh-CN", {
+          maximumFractionDigits: 2
+        }) + " 百万";
+      }
+      return value.toLocaleString("zh-CN", {
+        maximumFractionDigits: 2
+      });
+    }
+
+    const ctx = document.getElementById("evaChart").getContext("2d");
+
+    const evaChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "经济增加值 (EVA)",
+            data: evaValues,
+            fill: false,
+            borderColor: "#0066cc",
+            backgroundColor: "#0066cc",
+            borderWidth: 2,
+            tension: 0.25,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointHitRadius: 10,
+            pointBorderWidth: 1.5,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+            labels: {
+              usePointStyle: true
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return " EVA: " + formatNumber(value);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              color: "#444",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "EVA 数值（原始单位）",
+              color: "#444",
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              callback: function(value) {
+                return formatNumber(value);
+              }
+            },
+            grid: {
+              color: "rgba(0,0,0,0.06)"
+            },
+            beginAtZero: false
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

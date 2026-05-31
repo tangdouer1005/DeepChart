@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta 资本再投资率 (2016-2024)</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      /* FIX: use a clear fixed height instead of purely responsive ratio */
+      height: 420px;
+      background: #fff;
+      padding: 16px 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      box-sizing: border-box;
+    }
+    .note {
+      max-width: 900px;
+      margin: 8px auto 0;
+      font-size: 12px;
+      color: #555;
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important; /* respect the fixed container height */
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .chart-container {
+        padding: 12px 12px 18px;
+        height: 360px; /* slightly smaller but still clear on mobile */
+      }
+      h1 {
+        font-size: 18px;
+      }
+      h2 {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <div class="chart-container">
+      <h1>Meta 资本再投资率变化</h1>
+      <h2>2016 - 2024 财年</h2>
+      <canvas id="reinvestmentRateChart"></canvas>
+    </div>
+    <div class="note">
+      数据来源：用户提供数据。<br />
+      注：资本再投资率为无单位比率（&gt;1 表示再投资金额超过当期收益）。
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <script>
+    const ctx = document.getElementById('reinvestmentRateChart').getContext('2d');
+
+    const data = {
+      labels: [
+        '2016',
+        '2017',
+        '2018',
+        '2019',
+        '2020',
+        '2021',
+        '2022',
+        '2023',
+        '2024'
+      ],
+      datasets: [
+        {
+          label: '资本再投资率',
+          data: [
+            1.3145379685859102,
+            1.3861775428254728,
+            0.4168240898006684,
+            0.7863062397254046,
+            0.9184329307621588,
+            0.1152901378974533,
+            0.8833667465474352,
+            0.5506759860907835,
+            0.7948682844902648
+          ],
+          backgroundColor: '#2563eb',
+          borderColor: '#1d4ed8',
+          borderWidth: 1,
+          borderRadius: 4,
+          hoverBackgroundColor: '#1d4ed8',
+          hoverBorderColor: '#1e40af'
+        }
+      ]
+    };
+
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false, // let the fixed height drive the aspect ratio
+      plugins: {
+        title: {
+          display: false
+        },
+        legend: {
+          display: true,
+          labels: {
+            font: {
+              size: 12
+            }
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              const value = context.parsed.y;
+              return '资本再投资率: ' + value.toFixed(3);
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: '财年',
+            font: {
+              size: 12
+            }
+          },
+          grid: {
+            display: false
+          },
+          ticks: {
+            maxRotation: 0,
+            minRotation: 0
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: '资本再投资率（比率）',
+            font: {
+              size: 12
+            }
+          },
+          beginAtZero: true,
+          ticks: {
+            stepSize: 0.2,
+            callback: function (value) {
+              return value.toFixed(1);
+            }
+          }
+        }
+      },
+      interaction: {
+        mode: 'nearest',
+        axis: 'x',
+        intersect: false
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuad'
+      }
+    };
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: options
+    });
+  </script>
+</body>
+</html>

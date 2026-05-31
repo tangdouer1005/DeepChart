@@ -1,0 +1,65 @@
+{
+  "query_id": 7,
+  "query_text": "Create a ranked bar chart of the top 10 founded-year cohorts by median disclosed valuation in $M, restricted to cohorts with at least 3 companies that disclose valuation, sorted descending by the median valuation.",
+  "status": "complete",
+  "chart": {
+    "type": "ranked_bar",
+    "title": "Top founded-year cohorts by median disclosed valuation",
+    "entity_field": "founded_year_cohort",
+    "value_field": "median_valuation_m",
+    "orientation": "h",
+    "x_label": "Median disclosed valuation ($M)",
+    "y_label": "Founded year cohort",
+    "order": [
+      "2015",
+      "2016",
+      "2017",
+      "2022",
+      "2023",
+      "2021",
+      "2019"
+    ],
+    "figsize": [
+      11,
+      7
+    ]
+  },
+  "data": [
+    {
+      "founded_year_cohort": "2015",
+      "median_valuation_m": 2800.0,
+      "disclosed_count": 3
+    },
+    {
+      "founded_year_cohort": "2016",
+      "median_valuation_m": 1000.0,
+      "disclosed_count": 4
+    },
+    {
+      "founded_year_cohort": "2017",
+      "median_valuation_m": 750.0,
+      "disclosed_count": 5
+    },
+    {
+      "founded_year_cohort": "2022",
+      "median_valuation_m": 265.0,
+      "disclosed_count": 14
+    },
+    {
+      "founded_year_cohort": "2023",
+      "median_valuation_m": 200.0,
+      "disclosed_count": 9
+    },
+    {
+      "founded_year_cohort": "2021",
+      "median_valuation_m": 63.3,
+      "disclosed_count": 11
+    },
+    {
+      "founded_year_cohort": "2019",
+      "median_valuation_m": 57.1,
+      "disclosed_count": 5
+    }
+  ],
+  "notes": []
+}

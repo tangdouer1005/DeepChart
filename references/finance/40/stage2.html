@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>AMZN 资本再投资率（Reinvestment Rate）2016-2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --card-bg: #ffffff;
+      --text-color: #111827;
+      --grid-color: rgba(156, 163, 175, 0.3);
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --card-bg: #020617;
+        --text-color: #e5e7eb;
+        --grid-color: rgba(148, 163, 184, 0.35);
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.15);
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 45%, #020617 100%);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(8, 47, 73, 0.7), #020617 55%);
+      border-radius: 18px;
+      padding: 20px 22px 18px;
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.85),
+        0 0 0 1px rgba(148, 163, 184, 0.2);
+      color: #e5e7eb;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.72rem;
+      opacity: 0.85;
+    }
+
+    .meta span {
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      margin-top: 8px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 0.7rem;
+      opacity: 0.8;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .note {
+      max-width: 80%;
+    }
+
+    .badge-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 14px 12px 12px;
+      }
+      .chart-container {
+        height: 300px;
+      }
+      .title {
+        font-size: 1rem;
+      }
+      .subtitle {
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <div class="header">
+        <div>
+          <div class="title">AMZN 资本再投资率（Reinvestment Rate）</div>
+          <div class="subtitle">按财年：2016 – 2024</div>
+        </div>
+        <div class="meta">
+          <span><span class="dot"></span>单位：倍（Times）</span>
+          <span>图表类型：柱状图</span>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="reinvestmentChart"></canvas>
+      </div>
+
+      <div class="footer">
+        <div class="note">
+          注：根据提供的财报数据计算，每一年为该财年的资本再投资率（Reinvestment Rate）。
+        </div>
+        <div class="badge-group">
+          <div class="badge">数据区间：2016–2024</div>
+          <div class="badge">交互：悬停查看精确数值</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data from source
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const reinvestmentRates = [
+      3.5675573083091456,
+      4.989704113241103,
+      0.9073418700849712,
+      0.5083245763149598,
+      2.3154979053803126,
+      3.6649097206016688,
+      1.387328543435663,
+      1.7865673411575853,
+      1.0589680475300542
+    ];
+
+    const ctx = document.getElementById("reinvestmentChart").getContext("2d");
+
+    // Compute min/max for a nicer Y-axis range
+    const minVal = Math.min(...reinvestmentRates);
+    const maxVal = Math.max(...reinvestmentRates);
+    const padding = (maxVal - minVal) * 0.15 || 0.5;
+
+    // Gradient for bars
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "#60a5fa");
+    gradient.addColorStop(0.45, "#2563eb");
+    gradient.addColorStop(1, "#0b1120");
+
+    const borderGradient = ctx.createLinearGradient(0, 0, 0, 400);
+    borderGradient.addColorStop(0, "#bfdbfe");
+    borderGradient.addColorStop(1, "#1d4ed8");
+
+    const chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "资本再投资率（倍）",
+            data: reinvestmentRates,
+            backgroundColor: gradient,
+            borderColor: borderGradient,
+            borderWidth: 1.4,
+            borderRadius: {
+              topLeft: 6,
+              topRight: 6,
+              bottomLeft: 0,
+              bottomRight: 0
+            },
+            hoverBackgroundColor: "#38bdf8",
+            hoverBorderColor: "#e0f2fe",
+            hoverBorderWidth: 1.8,
+            maxBarThickness: 42
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 900,
+          easing: "easeOutQuart"
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.96)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.65)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              title: (items) => `财年：${items[0].label}`,
+              label: (item) => {
+                const val = item.raw;
+                return `资本再投资率：${val.toFixed(3)} 倍`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#e5e7eb",
+              font: {
+                size: 11.5
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            min: Math.max(0, minVal - padding),
+            max: maxVal + padding,
+            grid: {
+              color: "rgba(51, 65, 85, 0.6)",
+              drawBorder: false
+            },
+            ticks: {
+              color: "#cbd5f5",
+              font: {
+                size: 11
+              },
+              callback: function (value) {
+                return value.toFixed(1) + "";
+              }
+            },
+            title: {
+              display: true,
+              text: "资本再投资率（倍）",
+              color: "#e5e7eb",
+              font: {
+                size: 11.5,
+                weight: "500"
+              },
+              padding: { top: 4, bottom: 0 }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

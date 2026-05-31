@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>MSFT EBITDA 2016–2024 柱状图</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f7;
+      color: #111827;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #6b7280;
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      padding: 20px 20px 28px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 460px;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 12px;
+      line-height: 1.4;
+    }
+
+    .legend-inline {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #4b5563;
+      margin-bottom: 8px;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      #chart-container {
+        padding: 14px 12px 20px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>微软 (MSFT) 息税折旧摊销前利润 (EBITDA)</h1>
+    <h2>2016–2024 财年变化（单位：十亿美元, Fiscal Year）</h2>
+
+    <div class="legend-inline">
+      <span class="legend-color"></span>
+      <span>EBITDA（经四舍五入，以十亿美元计）</span>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：用户提供的微软 2016–2024 财年 EBITDA（单位为美元）。图表中数值已按十亿美元进行缩放并四舍五入显示，工具提示中保留两位小数。
+    </div>
+  </div>
+
+  <!-- Chart.js 4.x -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+
+  <script>
+    // 为了兼容一些较旧环境，不使用数字分隔符（1_000_000_000）
+    var fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    // 原始数据（单位：美元）
+    var ebitdaRaw = [
+      33504000000,
+      40901000000,
+      49468000000,
+      58056000000,
+      68423000000,
+      85134000000,
+      100239000000,
+      105140000000,
+      133009000000
+    ];
+
+    // 转换为十亿美元
+    function toBillions(v) {
+      return v / 1000000000;
+    }
+    var ebitdaBillions = ebitdaRaw.map(toBillions);
+
+    var canvas = document.getElementById("ebitdaChart");
+    var ctx = canvas.getContext("2d");
+
+    var barGradient = null;
+
+    function createBarGradient(ctx, chartArea) {
+      var gradient = ctx.createLinearGradient(
+        0,
+        chartArea.bottom,
+        0,
+        chartArea.top
+      );
+      gradient.addColorStop(0, "rgba(37, 99, 235, 0.85)");
+      gradient.addColorStop(0.6, "rgba(79, 70, 229, 0.9)");
+      gradient.addColorStop(1, "rgba(124, 58, 237, 0.95)");
+      return gradient;
+    }
+
+    var chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "EBITDA",
+            data: ebitdaBillions,
+            borderWidth: 0,
+            borderRadius: 6,
+            backgroundColor: function (context) {
+              var chart = context.chart;
+              var chartArea = chart.chartArea;
+              if (!chartArea) {
+                // 初始时 chartArea 还没计算出来
+                return "rgba(37, 99, 235, 0.9)";
+              }
+              if (!barGradient) {
+                barGradient = createBarGradient(chart.ctx, chartArea);
+              }
+              return barGradient;
+            },
+            hoverBackgroundColor: function (context) {
+              var chart = context.chart;
+              var chartArea = chart.chartArea;
+              if (!chartArea) {
+                return "rgba(59, 130, 246, 0.95)";
+              }
+              var gradient = chart.ctx.createLinearGradient(
+                0,
+                chartArea.bottom,
+                0,
+                chartArea.top
+              );
+              gradient.addColorStop(0, "rgba(59, 130, 246, 0.95)");
+              gradient.addColorStop(0.6, "rgba(99, 102, 241, 0.98)");
+              gradient.addColorStop(1, "rgba(139, 92, 246, 1)");
+              return gradient;
+            },
+            maxBarThickness: 42
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 10,
+            right: 18,
+            bottom: 4,
+            left: 10
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(17, 24, 39, 0.96)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#f9fafb",
+            borderColor: "rgba(55, 65, 81, 0.8)",
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 6,
+            displayColors: false,
+            callbacks: {
+              title: function (items) {
+                var fy = items[0].label;
+                return "财年: " + fy;
+              },
+              label: function (item) {
+                var value = item.raw;
+                return "EBITDA: " + value.toFixed(2) + " 十亿美元";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 12
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: "rgba(209, 213, 219, 0.5)",
+              drawBorder: false
+            },
+            ticks: {
+              color: "#6b7280",
+              font: {
+                size: 11
+              },
+              callback: function (value) {
+                return value + "B";
+              }
+            },
+            title: {
+              display: true,
+              text: "单位：十亿美元",
+              color: "#4b5563",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            }
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: "index"
+        },
+        animation: {
+          duration: 900,
+          easing: "easeOutCubic"
+        },
+        hover: {
+          mode: "nearest",
+          intersect: true
+        }
+      }
+    });
+
+    // 当窗口大小变化时重置渐变，保证显示效果
+    window.addEventListener("resize", function () {
+      barGradient = null;
+      chart.update();
+    });
+  </script>
+</body>
+</html>

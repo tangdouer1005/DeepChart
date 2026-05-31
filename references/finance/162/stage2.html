@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MRK 投入资本回报率 (ROIC) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #fafafa;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 13px;
+      font-weight: 400;
+      margin-top: 0;
+      color: #555;
+    }
+    .chart-container {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 16px 20px 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .note {
+      max-width: 900px;
+      margin: 12px auto 0;
+      font-size: 11px;
+      color: #666;
+      line-height: 1.4;
+    }
+    .legend-inline {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-size: 12px;
+      margin-bottom: 8px;
+      color: #444;
+      flex-wrap: wrap;
+    }
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      margin-right: 4px;
+      display: inline-block;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>MRK 投入资本回报率 (ROIC) 变化</h1>
+    <h2>2016–2024 财年（单位：%）</h2>
+    <div class="legend-inline">
+      <div class="legend-item">
+        <span class="legend-swatch" style="background:#2D9CDB;"></span>
+        <span>ROIC（柱状图）</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch" style="background:#F2994A;"></span>
+        <span>ROIC（趋势线）</span>
+      </div>
+    </div>
+    <canvas id="roicChart" height="120"></canvas>
+  </div>
+
+  <div class="note">
+    数据来源：用户提供。<br>
+    说明：ROIC 原始值为小数形式，图中已换算为百分比显示并四舍五入到小数点后两位。
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script>
+    // Source data (decimal)
+    const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const roicRaw = [
+      0.0768349148531576,
+      0.0453833447440297,
+      0.1317397034720687,
+      0.1433864116289176,
+      0.0931182442355533,
+      0.2082986311797454,
+      0.2528058800675607,
+      0.0090456998934826,
+      0.2545396212630828
+    ];
+
+    // Convert to percentage values
+    const roicPercent = roicRaw.map(v => v * 100);
+
+    const ctx = document.getElementById('roicChart').getContext('2d');
+
+    // Determine a sensible max for y-axis (a bit above max value)
+    const maxVal = Math.max(...roicPercent);
+    const suggestedMax = Math.ceil((maxVal + 2) / 5) * 5; // round up to nearest 5%
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            type: 'bar',
+            label: 'ROIC (%)',
+            data: roicPercent,
+            backgroundColor: '#2D9CDB',
+            hoverBackgroundColor: '#1B76A8',
+            borderRadius: 4,
+            borderSkipped: false
+          },
+          {
+            type: 'line',
+            label: 'ROIC 趋势',
+            data: roicPercent,
+            borderColor: '#F2994A',
+            borderWidth: 2,
+            tension: 0.25,
+            pointRadius: 3.5,
+            pointHoverRadius: 5,
+            fill: false,
+            yAxisID: 'y'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                if (value == null || isNaN(value)) return '';
+                return 'ROIC：' + value.toFixed(2) + '%';
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              autoSkipPadding: 16
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: suggestedMax,
+            title: {
+              display: true,
+              text: 'ROIC (%)'
+            },
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

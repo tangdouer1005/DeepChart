@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NVDA Piotroski F-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: #f5f5f7;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .chart-container {
+      background: #ffffff;
+      padding: 1.5rem 1.75rem;
+      border-radius: 14px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+      max-width: 900px;
+      width: 95%;
+    }
+    h1 {
+      margin: 0 0 0.25rem;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .subtitle {
+      margin: 0 0 1.1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    .meta span {
+      padding: 0.15rem 0.45rem;
+      border-radius: 999px;
+      background: #f3f4f6;
+    }
+    canvas {
+      max-height: 480px;
+    }
+    @media (max-width: 600px) {
+      .chart-container {
+        padding: 1rem 1.1rem;
+      }
+      h1 {
+        font-size: 1.15rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>NVDA Piotroski F-Score (皮奥特罗斯基 F-Score)</h1>
+    <p class="subtitle">Fiscal years 2016–2024</p>
+    <div class="meta">
+      <span>Source: Provided dataset</span>
+      <span>Score range: 0–9 (higher = stronger fundamentals)</span>
+      <span>Interactive: hover / tap for details</span>
+    </div>
+    <canvas id="nvdaFScoreChart"></canvas>
+  </div>
+
+  <script>
+    // Data from the provided source
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const fScores = [6, 7, 9, 7, 6, 6, 6, 5, 8];
+
+    const ctx = document.getElementById("nvdaFScoreChart").getContext("2d");
+
+    // Create gradient for the line fill (subtle)
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(56, 189, 248, 0.25)");
+    gradient.addColorStop(1, "rgba(56, 189, 248, 0)");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "Piotroski F-Score",
+            data: fScores,
+            borderColor: "rgba(56, 189, 248, 1)",       // sky-400
+            backgroundColor: gradient,
+            tension: 0.3,
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "white",
+            pointBorderColor: "rgba(56, 189, 248, 1)",
+            pointBorderWidth: 2,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            usePointStyle: true,
+            backgroundColor: "rgba(15, 23, 42, 0.9)",
+            titleFont: { family: "system-ui", weight: "600" },
+            bodyFont: { family: "system-ui" },
+            padding: 10,
+            callbacks: {
+              label: (context) => {
+                return ` F-Score: ${context.parsed.y}`;
+              },
+              title: (items) => {
+                if (!items.length) return "";
+                return `Fiscal Year ${items[0].label}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              color: "#6b7280",
+              font: { size: 11 }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#4b5563"
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Piotroski F-Score (0–9)",
+              color: "#6b7280",
+              font: { size: 11 }
+            },
+            min: 0,
+            max: 9,
+            ticks: {
+              stepSize: 1,
+              color: "#4b5563"
+            },
+            grid: {
+              color: "rgba(209, 213, 219, 0.5)"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Chart Reproduction</title>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+    <style>
+        body { font-family: sans-serif; }
+        .chart-container {
+            width: 600px; /* 4 inches * 150 dpi */
+            height: 525px; /* 3.5 inches * 150 dpi */
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart" class="chart-container"></div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. Source Data (Embedded from JSON)
+        // ---------------------------------------------------------
+        const data = {
+    "0 \u00b5M": {
+        "x": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y": [
+            0.25869166666666665,
+            0.23692166666666667,
+            0.24718666666666667,
+            0.14228833333333332,
+            0.01815266666666666,
+            0.007675500000000001,
+            -0.000243166666666667,
+            0.0113194
+        ],
+        "y_err": [
+            0.01964649271781381,
+            0.023382290651497585,
+            0.01812197757175279,
+            0.02969298170911399,
+            0.018298474447644843,
+            0.007811664627337763,
+            0.011844629084995069,
+            0.004858986241319617
+        ]
+    },
+    "1 \u00b5M": {
+        "x": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y": [
+            0.21625833333333336,
+            0.2061616666666667,
+            0.1991833333333333,
+            0.06857166666666668,
+            -0.013618333333333335,
+            -0.010488833333333334,
+            -0.0064595,
+            0.030571666666666667
+        ],
+        "y_err": [
+            0.01779154919555287,
+            0.020211574310555605,
+            0.017879557538646697,
+            0.02709820847911865,
+            0.015282717504132277,
+            0.010856607798683918,
+            0.006921095649052493,
+            0.009892611187705253
+        ]
+    },
+    "3 \u00b5M": {
+        "x": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y": [
+            0.23008333333333333,
+            0.21406000000000003,
+            0.19991833333333334,
+            0.06522383333333333,
+            -0.0130595,
+            -0.015605000000000003,
+            -0.008243666666666667,
+            -0.0018551666666666656
+        ],
+        "y_err": [
+            0.025665204806854316,
+            0.025347042694036977,
+            0.026679046136955077,
+            0.019350990104585807,
+            0.018618745721718205,
+            0.014958448248397963,
+            0.014005030921462158,
+            0.008723404841446817
+        ]
+    },
+    "10 \u00b5M": {
+        "x": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y": [
+            0.21295833333333336,
+            0.205715,
+            0.19795333333333334,
+            0.06514666666666667,
+            -0.004510333333333332,
+            -0.01562866666666667,
+            -0.011005000000000001,
+            0.0022638333333333317
+        ],
+        "y_err": [
+            0.02126207537952127,
+            0.020996974186772727,
+            0.021006200142920768,
+            0.0205667173959396,
+            0.014592439505137965,
+            0.014114950682796517,
+            0.015451575278915742,
+            0.015643565570582402
+        ]
+    },
+    "30 \u00b5M": {
+        "x": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y": [
+            0.18875000000000003,
+            0.19536599999999998,
+            0.177992,
+            0.095248,
+            0.042912,
+            0.025662200000000003,
+            0.039032,
+            0.0256598
+        ],
+        "y_err": [
+            0.014762979712781562,
+            0.01295650400378127,
+            0.015079576718197365,
+            0.01622364490489113,
+            0.009716911237631019,
+            0.01194185232030609,
+            0.011478064470981158,
+            0.01912730824606536
+        ]
+    }
+};
+
+        // ---------------------------------------------------------
+        // 3. Curve Fitting (Nelder-Mead Optimizer & Sigmoid)
+        // ---------------------------------------------------------
+
+        function sigmoid(x, bottom, top, log_ec50, hill_slope) {
+            return bottom + (top - bottom) / (1 + Math.pow(10, (log_ec50 - x) * hill_slope));
+        }
+
+        // Simple Nelder-Mead Optimizer
+        // Ported/Adapted for JS
+        function fmin(f, x0) {
+            // Parameters
+            const rho = 1, chi = 2, psi = 0.5, sigma = 0.5;
+            const tol = 1e-4;
+            const maxIter = 1000;
+            
+            const n = x0.length;
+            // Create initial simplex
+            let simplex = [];
+            simplex.push({ x: x0.slice(), fx: f(x0) });
+            
+            for (let i = 0; i < n; i++) {
+                let x = x0.slice();
+                x[i] = x[i] !== 0 ? x[i] * 1.05 : 0.00025;
+                simplex.push({ x: x, fx: f(x) });
+            }
+
+            for (let iter = 0; iter < maxIter; iter++) {
+                // Sort simplex
+                simplex.sort((a, b) => a.fx - b.fx);
+                
+                if (Math.abs(simplex[n].fx - simplex[0].fx) < tol) break;
+
+                // Centroid of best n vertices
+                const centroid = new Array(n).fill(0);
+                for (let i = 0; i < n; i++) {
+                    for (let j = 0; j < n; j++) {
+                        centroid[j] += simplex[i].x[j];
+                    }
+                }
+                for (let j = 0; j < n; j++) centroid[j] /= n;
+
+                // Reflect
+                const xr = new Array(n);
+                for (let j = 0; j < n; j++) xr[j] = centroid[j] + rho * (centroid[j] - simplex[n].x[j]);
+                const fxr = f(xr);
+
+                if (fxr < simplex[0].fx) {
+                    // Expand
+                    const xe = new Array(n);
+                    for (let j = 0; j < n; j++) xe[j] = centroid[j] + chi * (xr[j] - centroid[j]);
+                    const fxe = f(xe);
+                    if (fxe < fxr) {
+                        simplex[n] = { x: xe, fx: fxe };
+                    } else {
+                        simplex[n] = { x: xr, fx: fxr };
+                    }
+                } else if (fxr < simplex[n - 1].fx) {
+                    simplex[n] = { x: xr, fx: fxr };
+                } else {
+                    // Contract
+                    let xc = new Array(n);
+                    let fxc;
+                    if (fxr < simplex[n].fx) {
+                        // Outside contraction
+                        for (let j = 0; j < n; j++) xc[j] = centroid[j] + psi * (xr[j] - centroid[j]);
+                        fxc = f(xc);
+                        if (fxc <= fxr) {
+                            simplex[n] = { x: xc, fx: fxc };
+                        } else {
+                            // Shrink
+                            shrink();
+                        }
+                    } else {
+                        // Inside contraction
+                        for (let j = 0; j < n; j++) xc[j] = centroid[j] - psi * (centroid[j] - simplex[n].x[j]);
+                        fxc = f(xc);
+                        if (fxc < simplex[n].fx) {
+                            simplex[n] = { x: xc, fx: fxc };
+                        } else {
+                            shrink();
+                        }
+                    }
+                }
+
+                function shrink() {
+                    for (let i = 1; i < n + 1; i++) {
+                        for (let j = 0; j < n; j++) {
+                            simplex[i].x[j] = simplex[0].x[j] + sigma * (simplex[i].x[j] - simplex[0].x[j]);
+                        }
+                        simplex[i].fx = f(simplex[i].x);
+                    }
+                }
+            }
+            return simplex[0].x;
+        }
+
+        function fitCurve(xData, yData) {
+            // Objective function: Sum of Squared Errors
+            const objective = (params) => {
+                const [bottom, top, log_ec50, hill_slope] = params;
+                let sse = 0;
+                for (let i = 0; i < xData.length; i++) {
+                    const pred = sigmoid(xData[i], bottom, top, log_ec50, hill_slope);
+                    sse += Math.pow(yData[i] - pred, 2);
+                }
+                return sse;
+            };
+
+            // Initial guess: [min, max, median, 1.0]
+            const yMin = Math.min(...yData);
+            const yMax = Math.max(...yData);
+            const xSorted = [...xData].sort((a, b) => a - b);
+            const median = xSorted[Math.floor(xSorted.length / 2)];
+            
+            const p0 = [yMin, yMax, median, 1.0];
+            
+            return fmin(objective, p0);
+        }
+        
+        // ---------------------------------------------------------
+        // 4. Plotting
+        // ---------------------------------------------------------
+        
+        // const data = parseAndProcess(csvData); // Removed
+        const colors = {
+            '0 µM':  '#000080', // Navy
+            '1 µM':  '#4B0082', // Indigo
+            '3 µM':  '#8A2BE2', // BlueViolet
+            '10 µM': '#9932CC', // DarkOrchid
+            '30 µM': '#BA55D3' // MediumOrchid
+        };
+        const order = ['0 µM', '1 µM', '3 µM', '10 µM', '30 µM'];
+        
+        const plotTraces = [];
+        
+        order.forEach(label => {
+            const series = data[label];
+            const color = colors[label];
+            
+            // Scatter with Error Bars
+            plotTraces.push({
+                x: series.x,
+                y: series.y,
+                error_y: {
+                    type: 'data',
+                    array: series.y_err,
+                    visible: true,
+                    color: color,
+                    thickness: 1.5,
+                    width: 3
+                },
+                mode: 'markers',
+                type: 'scatter',
+                marker: {
+                    color: color,
+                    size: 6
+                },
+                name: label,
+                showlegend: false // Legend logic is implied or we can show it
+            });
+
+            // Fit Curve
+            const popt = fitCurve(series.x, series.y);
+            
+            // Generate smooth line
+            const xMin = Math.min(...series.x);
+            const xMax = Math.max(...series.x);
+            const xSmooth = [];
+            const steps = 100; // 200 in python
+            const step = (xMax - xMin) / steps;
+            for(let i=0; i<=steps; i++) xSmooth.push(xMin + i*step);
+            
+            const ySmooth = xSmooth.map(x => sigmoid(x, ...popt));
+            
+            plotTraces.push({
+                x: xSmooth,
+                y: ySmooth,
+                mode: 'lines',
+                line: {
+                    color: color,
+                    width: 1.5
+                },
+                showlegend: false,
+                hoverinfo: 'skip'
+            });
+        });
+
+        // Annotations (Arrows and Text)
+        const annotations = [
+            // Title inside plot
+            {
+                x: 0.05,
+                y: 0.95,
+                xref: 'paper',
+                yref: 'paper',
+                text: 'G<sub>i2</sub>',
+                showarrow: false,
+                font: { size: 14, color: 'black' },
+                xanchor: 'left',
+                yanchor: 'top'
+            },
+            // Arrow 1 (Upward): Tip at (-13, 0.05), Tail at (-13, 0.01)
+            {
+                x: -13, y: 0.05, // Head
+                ax: -13, ay: 0.01, // Tail
+                xref: 'x', yref: 'y',
+                axref: 'x', ayref: 'y',
+                arrowhead: 2, // simple triangle
+                arrowsize: 1,
+                arrowwidth: 3, // Width of arrow shaft? Plotly has arrowwidth in pixels
+                arrowcolor: '#BA55D3'
+            },
+            // Arrow 2 (Downward): Tip at (-4, 0.19), Tail at (-4, 0.23)
+            {
+                x: -4, y: 0.19,
+                ax: -4, ay: 0.23,
+                xref: 'x', yref: 'y',
+                axref: 'x', ayref: 'y',
+                arrowhead: 2,
+                arrowsize: 1,
+                arrowwidth: 3,
+                arrowcolor: '#BA55D3'
+            }
+        ];
+
+        // Shapes (Dashed line at y=0)
+        const shapes = [
+            {
+                type: 'line',
+                x0: -14.5,
+                y0: 0,
+                x1: -3.5,
+                y1: 0,
+                line: {
+                    color: 'black',
+                    width: 0.8,
+                    dash: 'dash'
+                }
+            }
+        ];
+
+        const layout = {
+            width: 600,
+            height: 525,
+            margin: { t: 20, r: 20, b: 50, l: 60 }, // approx tight_layout
+            xaxis: {
+                range: [-14.5, -3.5],
+                tickvals: [-14, -12, -10, -8, -6, -4],
+                ticktext: ['-14', '-12', '-10', '-8', '-6', '-4'],
+                tickfont: { size: 14 },
+                zeroline: false,
+                showgrid: false,
+                showline: true,
+                linecolor: 'black',
+                linewidth: 1
+            },
+            yaxis: {
+                range: [-0.05, 0.4],
+                tickvals: [0.0, 0.1, 0.2, 0.3, 0.4],
+                tickfont: { size: 14 },
+                title: {
+                    text: 'G protein activation<br>(-Δ Net BRET)',
+                    font: { size: 14 }
+                },
+                zeroline: false,
+                showgrid: false,
+                showline: true,
+                linecolor: 'black',
+                linewidth: 1
+            },
+            annotations: annotations,
+            shapes: shapes,
+            showlegend: false, // Per visual code in python
+            plot_bgcolor: 'white'
+        };
+
+        Plotly.newPlot('chart', plotTraces, layout);
+    </script>
+</body>
+</html>

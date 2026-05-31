@@ -1,0 +1,55 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a ranked horizontal bar chart showing the top 10 countries by local-versus-global divergence, where the plotted value is `average absolute difference between national_rank_change and global_rank_change across cities with numeric values in both fields within each 3.2 national block`, values are expressed in rank positions, only countries with at least 4 cities having both numeric change values are eligible, and bars are sorted from highest to lowest after the divergence is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by local_versus_global_divergence",
+  "selection_rule": "top 10 among countries with at least 4 cities having both numeric change fields",
+  "plot_spec": {
+    "title": "Local-versus-Global Divergence",
+    "xlabel": "average absolute gap in rank positions",
+    "value_field": "local_versus_global_divergence"
+  },
+  "records": [
+    {
+      "entity": "Sweden",
+      "local_versus_global_divergence": 100.25,
+      "paired_numeric_city_count": 4
+    },
+    {
+      "entity": "Spain",
+      "local_versus_global_divergence": 86.25,
+      "paired_numeric_city_count": 4
+    },
+    {
+      "entity": "Israel",
+      "local_versus_global_divergence": 76.3333,
+      "paired_numeric_city_count": 6
+    },
+    {
+      "entity": "Italy",
+      "local_versus_global_divergence": 57.5,
+      "paired_numeric_city_count": 4
+    },
+    {
+      "entity": "United Kingdom",
+      "local_versus_global_divergence": 53.25,
+      "paired_numeric_city_count": 4
+    },
+    {
+      "entity": "Germany",
+      "local_versus_global_divergence": 50.0,
+      "paired_numeric_city_count": 7
+    },
+    {
+      "entity": "China",
+      "local_versus_global_divergence": 37.75,
+      "paired_numeric_city_count": 4
+    },
+    {
+      "entity": "France",
+      "local_versus_global_divergence": 9.0,
+      "paired_numeric_city_count": 6
+    }
+  ]
+}

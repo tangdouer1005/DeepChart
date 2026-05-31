@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>2016–2024 自由现金流收益质量（QoI）变化</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js 最新稳定版 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #fafafa;
+      --card-bg: #ffffff;
+      --text-color: #222222;
+      --accent: #1f77b4;
+      --accent-soft: rgba(31, 119, 180, 0.15);
+      --grid-color: rgba(0, 0, 0, 0.08);
+      --tick-color: #666666;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #111827;
+        --card-bg: #020617;
+        --text-color: #e5e7eb;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.15);
+        --grid-color: rgba(148, 163, 184, 0.25);
+        --tick-color: #9ca3af;
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 16px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+      padding: 20px 20px 28px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--tick-color);
+      margin-bottom: 16px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      margin-top: 8px;
+    }
+
+    .note {
+      font-size: 11px;
+      color: var(--tick-color);
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .legend-inline {
+      font-size: 12px;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      background: var(--accent);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>自由现金流收益质量（Quality of Income Ratio）</h1>
+      <div class="subtitle">2016–2024 年度变化（Cost）</div>
+
+      <div class="chart-wrapper">
+        <canvas id="qoiChart"></canvas>
+      </div>
+
+      <div class="legend-inline">
+        <div class="legend-item">
+          <span class="legend-color"></span>
+          <span>QoI 比率（自由现金流 / 收益）</span>
+        </div>
+      </div>
+
+      <div class="note">
+        数据来源：用户提供的财务数据。<br />
+        提示：QoI &gt; 1 通常表示自由现金流高于收益，现金质量较好；QoI &lt; 1 表示收益中非现金成分较多。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 确保在 DOM 加载完成后再初始化图表，避免获取不到 canvas 产生错误
+    window.addEventListener("load", function () {
+      const canvas = document.getElementById("qoiChart");
+      if (!canvas) return;
+
+      const ctx = canvas.getContext("2d");
+
+      const years = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+      ];
+
+      const qoiValues = [
+        0.668155063933428,
+        1.2271483305966064,
+        0.9758323474733818,
+        1.0203885053780704,
+        1.2181743194940886,
+        1.0208547008547009,
+        0.7340615690168818,
+        1.0438555125907762,
+        0.984117340739455,
+      ];
+
+      // 渐变色（垂直方向）
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, "rgba(37, 99, 235, 0.9)");
+      gradient.addColorStop(1, "rgba(59, 130, 246, 0.5)");
+
+      const qoiReference = 1.0;
+
+      // 自定义插件：QoI=1 参考线
+      const qoiReferenceLinePlugin = {
+        id: "qoiReferenceLine",
+        afterDraw(chart) {
+          const yScale = chart.scales.y;
+          if (!yScale) return;
+
+          const yPos = yScale.getPixelForValue(qoiReference);
+          const { ctx, chartArea } = chart;
+          const { left, right, top, bottom } = chartArea;
+
+          if (yPos < top || yPos > bottom) return;
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(left, yPos);
+          ctx.lineTo(right, yPos);
+          ctx.lineWidth = 1;
+          ctx.setLineDash([4, 4]);
+          ctx.strokeStyle = "rgba(148, 163, 184, 0.8)";
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.fillStyle = "rgba(148, 163, 184, 0.9)";
+          ctx.font = "11px system-ui, -apple-system, BlinkMacSystemFont";
+          ctx.textBaseline = "bottom";
+          ctx.fillText("QoI = 1 参考线", left + 4, yPos - 2);
+          ctx.restore();
+        },
+      };
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "自由现金流收益质量（QoI）",
+              data: qoiValues,
+              backgroundColor: gradient,
+              borderColor: "rgba(37, 99, 235, 1)",
+              borderWidth: 1,
+              borderRadius: 6,
+              hoverBackgroundColor: "rgba(37, 99, 235, 0.95)",
+              hoverBorderColor: "rgba(15, 23, 42, 0.9)",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false,
+          },
+          plugins: {
+            tooltip: {
+              backgroundColor: "rgba(15, 23, 42, 0.95)",
+              titleColor: "#e5e7eb",
+              bodyColor: "#f9fafb",
+              borderColor: "rgba(148, 163, 184, 0.5)",
+              borderWidth: 1,
+              padding: 10,
+              cornerRadius: 8,
+              callbacks: {
+                label: function (context) {
+                  const v = context.raw;
+                  return " QoI：" + Number(v).toFixed(3);
+                },
+              },
+            },
+            legend: {
+              display: false,
+            },
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false,
+              },
+              ticks: {
+                color:
+                  getComputedStyle(document.documentElement).getPropertyValue(
+                    "--tick-color"
+                  ) || "#666",
+              },
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                color:
+                  getComputedStyle(document.documentElement).getPropertyValue(
+                    "--grid-color"
+                  ) || "rgba(0,0,0,0.08)",
+              },
+              ticks: {
+                color:
+                  getComputedStyle(document.documentElement).getPropertyValue(
+                    "--tick-color"
+                  ) || "#666",
+                callback: function (value) {
+                  return Number(value).toFixed(1);
+                },
+              },
+              suggestedMax: 1.4,
+            },
+          },
+          animation: {
+            duration: 900,
+            easing: "easeOutCubic",
+          },
+        },
+        plugins: [qoiReferenceLinePlugin],
+      });
+    });
+  </script>
+</body>
+</html>

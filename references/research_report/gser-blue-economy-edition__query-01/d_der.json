@@ -1,0 +1,47 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a horizontal bar chart showing the top 8 Blue Economy ecosystems by `stage escalation multiple = Median Series A Round / Median Seed Round` after excluding ecosystems where `Median Series A Round = N/A`, with values expressed in `x multiple` and sorted descending by the multiple.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by stage_escalation_multiple",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "Blue Economy Stage Escalation",
+    "xlabel": "x multiple",
+    "value_field": "stage_escalation_multiple"
+  },
+  "records": [
+    {
+      "entity": "Philadelphia",
+      "stage_escalation_multiple": 9.5238
+    },
+    {
+      "entity": "San Diego",
+      "stage_escalation_multiple": 9.0909
+    },
+    {
+      "entity": "London",
+      "stage_escalation_multiple": 8.6835
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "stage_escalation_multiple": 7.3333
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "stage_escalation_multiple": 7.3171
+    },
+    {
+      "entity": "Singapore",
+      "stage_escalation_multiple": 7.0588
+    },
+    {
+      "entity": "Los Angeles",
+      "stage_escalation_multiple": 7.0
+    },
+    {
+      "entity": "New York City",
+      "stage_escalation_multiple": 6.75
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "NOPAT": 4651547327.752737,
+            "Avg Invested Capital": 60539500000.0,
+            "WACC": 0.1,
+            "Capital Charge": 6053950000.0
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "NOPAT": 2520341358.687318,
+            "Avg Invested Capital": 55534500000.0,
+            "WACC": 0.1,
+            "Capital Charge": 5553450000.0
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "NOPAT": 6356704171.93426,
+            "Avg Invested Capital": 48252000000.0,
+            "WACC": 0.1,
+            "Capital Charge": 4825200000.0
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "NOPAT": 6196228698.92623,
+            "Avg Invested Capital": 43213500000.0,
+            "WACC": 0.1,
+            "Capital Charge": 4321350000.0
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "NOPAT": 4279993859.798738,
+            "Avg Invested Capital": 45963000000.0,
+            "WACC": 0.1,
+            "Capital Charge": 4596300000.0
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "NOPAT": 11752521219.108006,
+            "Avg Invested Capital": 56421500000.0,
+            "WACC": 0.1,
+            "Capital Charge": 5642150000.0
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "NOPAT": 16149618827.53588,
+            "Avg Invested Capital": 63881500000.0,
+            "WACC": 0.1,
+            "Capital Charge": 6388150000.0
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "NOPAT": 589548967.7077819,
+            "Avg Invested Capital": 65174500000.0,
+            "WACC": 0.1,
+            "Capital Charge": 6517450000.0
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "NOPAT": 17377929022.87319,
+            "Avg Invested Capital": 68272000000.0,
+            "WACC": 0.1,
+            "Capital Charge": 6827200000.0
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": -1402402672.247263
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": -3033108641.312682
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 1531504171.9342604
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 1874878698.9262304
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": -316306140.201262
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 6110371219.108006
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 9761468827.53588
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": -5927901032.292218
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 10550729022.873192
+        }
+    ]
+}

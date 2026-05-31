@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = {
+    "data": [
+        {
+            "Generation": 0,
+            "TPM": 5.86566848
+        },
+        {
+            "Generation": 0,
+            "TPM": 8.15498
+        },
+        {
+            "Generation": 0,
+            "TPM": 8.072314491
+        },
+        {
+            "Generation": 1,
+            "TPM": 10.08575711
+        },
+        {
+            "Generation": 1,
+            "TPM": 10.8043
+        },
+        {
+            "Generation": 1,
+            "TPM": 8.624570815
+        },
+        {
+            "Generation": 1,
+            "TPM": 7.92934
+        },
+        {
+            "Generation": 2,
+            "TPM": 8.299775685
+        },
+        {
+            "Generation": 2,
+            "TPM": 10.4507
+        },
+        {
+            "Generation": 2,
+            "TPM": 9.935653318
+        },
+        {
+            "Generation": 3,
+            "TPM": 10.21662252
+        },
+        {
+            "Generation": 3,
+            "TPM": 8.68885
+        },
+        {
+            "Generation": 3,
+            "TPM": 12.23267
+        },
+        {
+            "Generation": 4,
+            "TPM": 13.14692214
+        },
+        {
+            "Generation": 4,
+            "TPM": 11.2483
+        },
+        {
+            "Generation": 4,
+            "TPM": 17.66730274
+        },
+        {
+            "Generation": 5,
+            "TPM": 11.23320993
+        },
+        {
+            "Generation": 5,
+            "TPM": 11.317
+        },
+        {
+            "Generation": 5,
+            "TPM": 14.40373849
+        },
+        {
+            "Generation": 6,
+            "TPM": 16.84068224
+        },
+        {
+            "Generation": 6,
+            "TPM": 20.4273
+        },
+        {
+            "Generation": 6,
+            "TPM": 9.949043375
+        },
+        {
+            "Generation": 6,
+            "TPM": 10.8217
+        },
+        {
+            "Generation": 6,
+            "TPM": 10.8965
+        },
+        {
+            "Generation": 7,
+            "TPM": 16.60248485
+        },
+        {
+            "Generation": 7,
+            "TPM": 12.4377
+        },
+        {
+            "Generation": 7,
+            "TPM": 13.09089132
+        },
+        {
+            "Generation": 8,
+            "TPM": 8.269548139
+        },
+        {
+            "Generation": 8,
+            "TPM": 12.3538
+        },
+        {
+            "Generation": 8,
+            "TPM": 17.2109045
+        },
+        {
+            "Generation": 9,
+            "TPM": 9.73430569
+        },
+        {
+            "Generation": 9,
+            "TPM": 16.1348
+        }
+    ],
+    "stats": {
+        "slope": 0.676,
+        "intercept": 8.724,
+        "r_squared": 0.3089,
+        "syx": 2.879
+    }
+};
+
+        const flatData = jsonData.data.map(d => [d.Generation, d.TPM]);
+
+        // Regression params from json
+        const slope = jsonData.stats.slope;
+        const intercept = jsonData.stats.intercept;
+        const r_squared = jsonData.stats.r_squared;
+        const syx = jsonData.stats.syx;
+        const n = flatData.length;
+        
+        // Calculate statistics for CI
+        const xVals = flatData.map(d => d[0]);
+        const xMean = jStat.mean(xVals);
+        const sXX = jStat.sum(xVals.map(x => Math.pow(x - xMean, 2)));
+        const tVal = jStat.studentt.inv(0.975, n - 2); // 95% CI
+
+        const lineData = [];
+        const ciUpper = [];
+        const ciLower = [];
+
+        for (let x = 0; x <= 9; x += 0.1) {
+            const yHat = slope * x + intercept;
+            const ciOffset = tVal * syx * Math.sqrt(1/n + Math.pow(x - xMean, 2) / sXX);
+            lineData.push([x, yHat]);
+            ciUpper.push([x, yHat + ciOffset]);
+            ciLower.push([x, yHat - ciOffset]);
+        }
+
+        const colors = {
+            'Zero': 'black',
+            'Early': '#E040FB',
+            'Mid': '#F5A623',
+            'Mid-late': '#8B572A',
+            'Late': '#417505'
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 100, bottom: 60, left: 60 },
+            xAxis: {
+                name: 'Generation',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: 0, max: 9,
+                interval: 1,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true },
+                axisLabel: { color: 'black' }
+            },
+            yAxis: {
+                name: '{italic|Fsp1} TPM',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: 0, max: 20,
+                interval: 5,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true },
+                axisLabel: { color: 'black' },
+                nameTextStyle: {
+                    rich: {
+                        italic: { fontStyle: 'italic', fontSize: 12 }
+                    },
+                    fontSize: 12
+                }
+            },
+            legend: {
+                data: ['Early', 'Mid', 'Mid-late', 'Late'],
+                right: 'auto', left: 60, top: 60,
+                orient: 'vertical',
+                itemGap: 10,
+                textStyle: { fontSize: 11 },
+                align: 'left'
+            },
+            series: [
+                // Scatter Points
+                {
+                    type: 'scatter',
+                    data: flatData.map(d => {
+                        const g = d[0];
+                        let cat = '';
+                        if (g === 0) cat = 'Zero';
+                        else if (g <= 2) cat = 'Early';
+                        else if (g <= 5) cat = 'Mid';
+                        else if (g === 6) cat = 'Mid-late';
+                        else cat = 'Late';
+                        return { value: d, itemStyle: { color: colors[cat] } };
+                    }),
+                    symbolSize: 10,
+                    z: 3
+                },
+                // Regression Line
+                {
+                    type: 'line',
+                    data: lineData,
+                    showSymbol: false,
+                    lineStyle: { color: 'black', width: 1.5 },
+                    z: 2,
+                    silent: true
+                },
+                // CI Upper
+                {
+                    type: 'line',
+                    data: ciUpper,
+                    showSymbol: false,
+                    lineStyle: { color: 'black', width: 1, type: 'dashed' },
+                    z: 2,
+                    silent: true
+                },
+                // CI Lower
+                {
+                    type: 'line',
+                    data: ciLower,
+                    showSymbol: false,
+                    lineStyle: { color: 'black', width: 1, type: 'dashed' },
+                    z: 2,
+                    silent: true
+                },
+                // Legend proxies
+                { name: 'Early', type: 'scatter', itemStyle: { color: colors['Early'] }, data: [] },
+                { name: 'Mid', type: 'scatter', itemStyle: { color: colors['Mid'] }, data: [] },
+                { name: 'Mid-late', type: 'scatter', itemStyle: { color: colors['Mid-late'] }, data: [] },
+                { name: 'Late', type: 'scatter', itemStyle: { color: colors['Late'] }, data: [] }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10, top: 10,
+                    style: { text: 'c', font: 'bold 20px Arial', fill: 'black' }
+                },
+                {
+                    type: 'text',
+                    left: 'center', top: '80%',
+                    style: { text: `R² = ${r_squared}`, font: '12px Arial', fill: 'black' }
+                },
+                {
+                    type: 'text',
+                    left: 60, top: 45,
+                    style: { text: 'Stage', font: 'bold 12px Arial', fill: 'black' }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a ranked bar chart showing the 10 markets with the largest `2025 YTD stage-capital mismatch`, defined as `Top 5 equity deal concentration share minus Late-stage deal share`, with values expressed in percentage points and sorted descending.",
+  "status": "completed",
+  "title": "Top 10 markets by stage-capital mismatch",
+  "chart_kind": "horizontal_bar",
+  "chart_type": "ranked bar chart",
+  "value_unit": "percentage points",
+  "sort_rule": "descending by stage_capital_mismatch_pp",
+  "selection_rule": "top 10 markets",
+  "metadata": {
+    "entity_field": "market",
+    "value_field": "stage_capital_mismatch_pp",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "market": "France",
+      "stage_capital_mismatch_pp": 65.0,
+      "concentration_share_pct": 69.0,
+      "late_stage_pct": 4.0
+    },
+    {
+      "market": "Brazil",
+      "stage_capital_mismatch_pp": 44.528301886792455,
+      "concentration_share_pct": 49.528301886792455,
+      "late_stage_pct": 5.0
+    },
+    {
+      "market": "Singapore",
+      "stage_capital_mismatch_pp": 41.96912521440823,
+      "concentration_share_pct": 45.96912521440823,
+      "late_stage_pct": 4.0
+    },
+    {
+      "market": "LatAm",
+      "stage_capital_mismatch_pp": 41.11764705882353,
+      "concentration_share_pct": 44.11764705882353,
+      "late_stage_pct": 3.0
+    },
+    {
+      "market": "United Kingdom",
+      "stage_capital_mismatch_pp": 27.22222222222222,
+      "concentration_share_pct": 33.22222222222222,
+      "late_stage_pct": 6.0
+    },
+    {
+      "market": "Philadelphia",
+      "stage_capital_mismatch_pp": 22.07866728366497,
+      "concentration_share_pct": 30.07866728366497,
+      "late_stage_pct": 8.0
+    },
+    {
+      "market": "Japan",
+      "stage_capital_mismatch_pp": 20.344537815126053,
+      "concentration_share_pct": 36.34453781512605,
+      "late_stage_pct": 16.0
+    },
+    {
+      "market": "Boston",
+      "stage_capital_mismatch_pp": 18.08695652173913,
+      "concentration_share_pct": 24.08695652173913,
+      "late_stage_pct": 6.0
+    },
+    {
+      "market": "Silicon Valley",
+      "stage_capital_mismatch_pp": 15.710103871576958,
+      "concentration_share_pct": 22.71010387157696,
+      "late_stage_pct": 7.0
+    },
+    {
+      "market": "Europe",
+      "stage_capital_mismatch_pp": 15.294964028776977,
+      "concentration_share_pct": 21.294964028776977,
+      "late_stage_pct": 6.0
+    }
+  ]
+}

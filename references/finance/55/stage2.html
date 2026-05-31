@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRM 现金消耗跑道（零收入情景）2016-2023</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f4f4f5;
+      color: var(--fg);
+    }
+
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 960px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+      padding: 18px 20px 20px;
+      box-sizing: border-box;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px 12px;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      align-items: center;
+      font-size: 11px;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 500;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #2563eb;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    .footer-note {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .legend-inline {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .legend-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #2563eb;
+    }
+
+    canvas {
+      user-select: none;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 14px 12px 16px;
+      }
+      .chart-container {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="card">
+    <div class="header">
+      <div class="title">CRM 现金消耗跑道（零收入情景）</div>
+      <div class="subtitle">2016–2023 年（月数）</div>
+    </div>
+
+    <div class="meta-row">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>零收入情景 - 现金跑道（月）</span>
+      </div>
+      <div>单位：月</div>
+      <div>交互：鼠标悬停查看精确值；滚轮缩放；双击图表区域恢复</div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="runwayChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      <div class="legend-inline">
+        <span class="legend-swatch"></span>
+        <span>RESULT_Runway_Months：在零收入情况下，根据当期现金余额与现金消耗估算的可支撑月数</span>
+      </div>
+      <div>数据来源：用户提供，财年：2016–2023</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---- 数据 ----
+  const labels = [
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023"
+  ];
+
+  const runwayMonths = [
+    8.033002659491473,
+    8.519040212107821,
+    11.323535271353634,
+    9.537820131030376,
+    10.860262008733624,
+    12.82830025884383,
+    9.00783074598159,
+    10.663964534515516
+  ];
+
+  const ctx = document.getElementById("runwayChart");
+
+  function formatMonths(value) {
+    if (value === null || value === undefined || isNaN(value)) return "";
+    return parseFloat(value.toFixed(3)).toString();
+  }
+
+  const chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "现金消耗跑道（月，零收入情景）",
+          data: runwayMonths,
+          borderColor: "#2563eb",
+          backgroundColor: "rgba(37, 99, 235, 0.16)",
+          pointBackgroundColor: "#2563eb",
+          pointBorderColor: "#ffffff",
+          pointHoverBackgroundColor: "#1d4ed8",
+          pointHoverBorderColor: "#ffffff",
+          borderWidth: 2,
+          pointRadius: 4,
+          pointHoverRadius: 5,
+          tension: 0.25,
+          fill: "origin"
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "nearest",
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: "rgba(15,23,42,0.95)",
+          borderColor: "rgba(148,163,184,0.6)",
+          borderWidth: 1,
+          padding: 10,
+          titleFont: {
+            weight: "600",
+            size: 13
+          },
+          bodyFont: {
+            size: 12
+          },
+          callbacks: {
+            label: function (context) {
+              const value = context.parsed.y;
+              return "跑道：" + formatMonths(value) + " 个月";
+            }
+          }
+        },
+        title: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            color: "rgba(148,163,184,0.25)",
+            drawBorder: false,
+            tickLength: 4
+          },
+          title: {
+            display: true,
+            text: "财年",
+            color: "#4b5563",
+            font: {
+              size: 11
+            }
+          },
+          ticks: {
+            color: "#4b5563"
+          }
+        },
+        y: {
+          beginAtZero: false,
+          grace: "5%",
+          grid: {
+            color: "rgba(148,163,184,0.22)",
+            drawBorder: false
+          },
+          title: {
+            display: true,
+            text: "现金跑道（月）",
+            color: "#4b5563",
+            font: {
+              size: 11
+            }
+          },
+          ticks: {
+            color: "#4b5563",
+            callback: function (value) {
+              return value + " 个月";
+            }
+          }
+        }
+      }
+    }
+  });
+
+  // ---- 简单缩放：滚轮横向缩放，双击重置 ----
+  (function addSimpleWheelZoom(canvas, chartInstance) {
+    const totalPoints = chartInstance.data.labels.length;
+
+    canvas.addEventListener("wheel", function (e) {
+      e.preventDefault();
+
+      const xScale = chartInstance.scales.x;
+      let min = xScale.min ?? 0;
+      let max = xScale.max ?? (totalPoints - 1);
+
+      const zoomFactor = e.deltaY < 0 ? 0.8 : 1.25; // 放大 / 缩小
+      const center = (min + max) / 2;
+
+      let newMin = center + (min - center) * zoomFactor;
+      let newMax = center + (max - center) * zoomFactor;
+
+      // 保证边界与最小宽度
+      const minWidth = 1;
+      if (newMax - newMin < minWidth) {
+        const mid = (newMin + newMax) / 2;
+        newMin = mid - minWidth / 2;
+        newMax = mid + minWidth / 2;
+      }
+      if (newMin < 0) newMin = 0;
+      if (newMax > totalPoints - 1) newMax = totalPoints - 1;
+
+      chartInstance.options.scales.x.min = newMin;
+      chartInstance.options.scales.x.max = newMax;
+      chartInstance.update("none");
+    });
+
+    // 双击重置
+    canvas.addEventListener("dblclick", function () {
+      chartInstance.options.scales.x.min = undefined;
+      chartInstance.options.scales.x.max = undefined;
+      chartInstance.update();
+    });
+  })(document.getElementById("runwayChart"), chart);
+</script>
+</body>
+</html>

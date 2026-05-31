@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ABT 盈余-现金质量剪刀差（2016-2024）</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    .chart-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 16px 20px 24px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+      height: 420px; /* fixed height so Chart.js can compute layout */
+      box-sizing: border-box;
+    }
+    .meta {
+      font-size: 12px;
+      color: #888;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    .meta span.label {
+      font-weight: 600;
+      color: #555;
+    }
+    canvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .chart-container {
+        padding: 12px 12px 16px;
+        height: 380px;
+      }
+      h1 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>ABT 盈余-现金质量剪刀差变动</h1>
+    <h2>Fiscal Years 2016 – 2024</h2>
+
+    <div class="chart-container">
+      <canvas id="spreadChart"></canvas>
+    </div>
+
+    <div class="meta">
+      <div><span class="label">指标：</span>盈余-现金质量剪刀差（Earnings Quality Spread）</div>
+      <div><span class="label">单位：</span>比率（无量纲）</div>
+      <div><span class="label">数据范围：</span>2016 – 2024 财年</div>
+      <div><span class="label">数据来源：</span>用户提供的结构化数据</div>
+    </div>
+  </div>
+
+  <!-- Use Chart.js 3.x explicitly for compatibility and stability -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+  <script>
+    // Ensure everything runs after the page and library are loaded
+    window.addEventListener("DOMContentLoaded", function () {
+      // Guard: check Chart is available
+      if (typeof Chart === "undefined") {
+        console.error("Chart.js did not load. Check the CDN URL or network connectivity.");
+        return;
+      }
+
+      const labels = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ];
+
+      const dataValues = [
+        0.0364198278996485,
+        0.0776011153350957,
+        0.0548308151412256,
+        0.0362653635421294,
+        0.0485064264606401,
+        0.0468648473034438,
+        0.0353930256492508,
+        0.0208327689431907,
+        -0.062653594433091
+      ];
+
+      const canvas = document.getElementById("spreadChart");
+      if (!canvas) {
+        console.error("Canvas element #spreadChart not found");
+        return;
+      }
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        console.error("2D context not available");
+        return;
+      }
+
+      // Build a vertical gradient for the line fill
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height || 400);
+      gradient.addColorStop(0, "rgba(37, 99, 235, 0.35)");
+      gradient.addColorStop(0.5, "rgba(37, 99, 235, 0.08)");
+      gradient.addColorStop(1, "rgba(37, 99, 235, 0)");
+
+      // Compute reasonable y-axis bounds
+      const minVal = Math.min(...dataValues);
+      const maxVal = Math.max(...dataValues);
+      const padding = (maxVal - minVal || 0.01) * 0.2;
+      const suggestedMin = minVal - padding;
+      const suggestedMax = maxVal + padding;
+
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "盈余-现金质量剪刀差",
+              data: dataValues,
+              borderColor: "rgba(37, 99, 235, 1)",
+              backgroundColor: gradient,
+              tension: 0.25,
+              borderWidth: 2.2,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointBackgroundColor: "rgba(37, 99, 235, 1)",
+              pointBorderColor: "#ffffff",
+              pointBorderWidth: 1.5,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "nearest",
+            axis: "x",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                boxWidth: 14,
+                boxHeight: 14,
+                usePointStyle: true
+              }
+            },
+            tooltip: {
+              usePointStyle: true,
+              callbacks: {
+                label: function (context) {
+                  const v = context.raw;
+                  return " " + context.dataset.label + ": " + Number(v).toFixed(4);
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Fiscal Year",
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Earnings Quality Spread",
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                color: "rgba(148, 163, 184, 0.25)"
+              },
+              ticks: {
+                callback: function (value) {
+                  return Number(value).toFixed(2);
+                }
+              },
+              suggestedMin: suggestedMin,
+              suggestedMax: suggestedMax
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

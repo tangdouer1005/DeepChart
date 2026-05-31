@@ -1,0 +1,90 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a stacked bar chart showing, for each segment, the share of companies in three founder cohorts (`founded before 2015`, `2015-2019`, `2020 or later`) after filtering to companies with non-`N/A` `Founded year`, with bar segments expressed as percentages of companies inside each segment.",
+  "status": "completed",
+  "title": "Founder cohort shares by segment",
+  "chart_kind": "stacked_bar",
+  "chart_type": "stacked bar chart",
+  "value_unit": "percent of companies within segment",
+  "sort_rule": "segment order preserved",
+  "selection_rule": "exclude missing founded_year",
+  "metadata": {
+    "x_field": "segment",
+    "stack_field": "cohort",
+    "value_field": "share_pct",
+    "stack_order": [
+      "Founded before 2015",
+      "2015-2019",
+      "2020 or later"
+    ],
+    "figsize": [
+      10,
+      7
+    ]
+  },
+  "records": [
+    {
+      "segment": "Aerospace (commercial)",
+      "cohort": "Founded before 2015",
+      "company_count": 3,
+      "segment_total": 30,
+      "share_pct": 10.0
+    },
+    {
+      "segment": "Aerospace (commercial)",
+      "cohort": "2015-2019",
+      "company_count": 21,
+      "segment_total": 30,
+      "share_pct": 70.0
+    },
+    {
+      "segment": "Aerospace (commercial)",
+      "cohort": "2020 or later",
+      "company_count": 6,
+      "segment_total": 30,
+      "share_pct": 20.0
+    },
+    {
+      "segment": "Aerospace (dual-use)",
+      "cohort": "Founded before 2015",
+      "company_count": 11,
+      "segment_total": 46,
+      "share_pct": 23.91304347826087
+    },
+    {
+      "segment": "Aerospace (dual-use)",
+      "cohort": "2015-2019",
+      "company_count": 20,
+      "segment_total": 46,
+      "share_pct": 43.47826086956522
+    },
+    {
+      "segment": "Aerospace (dual-use)",
+      "cohort": "2020 or later",
+      "company_count": 15,
+      "segment_total": 46,
+      "share_pct": 32.608695652173914
+    },
+    {
+      "segment": "Defense",
+      "cohort": "Founded before 2015",
+      "company_count": 6,
+      "segment_total": 20,
+      "share_pct": 30.0
+    },
+    {
+      "segment": "Defense",
+      "cohort": "2015-2019",
+      "company_count": 1,
+      "segment_total": 20,
+      "share_pct": 5.0
+    },
+    {
+      "segment": "Defense",
+      "cohort": "2020 or later",
+      "company_count": 13,
+      "segment_total": 20,
+      "share_pct": 65.0
+    }
+  ]
+}

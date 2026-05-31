@@ -1,0 +1,34 @@
+[
+    {
+        "Category":"Combustion",
+        "Value":73.2
+    },
+    {
+        "Category":"Others",
+        "Value":4.7
+    },
+    {
+        "Category":"Transport",
+        "Value":2.6
+    },
+    {
+        "Category":"Loss",
+        "Value":103.5
+    },
+    {
+        "Category":"Electricity",
+        "Value":10.5
+    },
+    {
+        "Category":"Heat",
+        "Value":0.6
+    },
+    {
+        "Category":"Credits",
+        "Value":-4.3
+    },
+    {
+        "Category":"Biogenic",
+        "Value":-176.7
+    }
+]

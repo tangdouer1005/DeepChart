@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>2016-2024 奥特曼Z值（破产预测模型）变化趋势 - 柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js latest stable -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f7fb;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      /* Fixed but reasonable height to avoid extreme stretching */
+      height: 420px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      padding: 20px 20px 10px 20px;
+      box-sizing: border-box;
+    }
+    .footer-note {
+      font-size: 12px;
+      color: #666;
+      max-width: 900px;
+      margin: 10px auto 0 auto;
+    }
+    canvas {
+      /* Let Chart.js handle responsiveness inside the fixed-height container */
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <div class="chart-container">
+      <h1>奥特曼破产预测模型 (Altman Z-Score)</h1>
+      <h2>2016 - 2024 年度变化（柱状图）</h2>
+      <canvas id="zScoreChart"></canvas>
+    </div>
+  </div>
+  <div class="footer-note">
+    数据来源：用户提供的年度 Altman Z-Score 结果。<br>
+    常见阈值（制造业标准模型）仅供参考：Z &lt; 1.81 破产风险高；1.81 – 2.99 灰色地带；Z ≥ 2.99 风险较低。
+  </div>
+
+  <script>
+    // Raw data from source
+    const fiscalYears = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const zScores = [
+      1.622434617866301,
+      1.7729504268030465,
+      1.843265678918448,
+      1.9333240864306005,
+      1.7686881363707554,
+      1.84877499433224,
+      1.891705793280196,
+      1.992932209632843,
+      1.979580676908435
+    ];
+
+    // Determine bar color based on simple Altman Z-Score risk zones (manufacturing model)
+    const barColors = zScores.map(v => {
+      if (v < 1.81) return "rgba(231, 76, 60, 0.7)";
+      if (v < 2.99) return "rgba(243, 156, 18, 0.7)";
+      return "rgba(46, 204, 113, 0.7)";
+    });
+
+    const borderColors = barColors.map(c =>
+      c.replace("0.7", "1").replace("0.6", "1")
+    );
+
+    const ctx = document.getElementById("zScoreChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "Altman Z-Score",
+            data: zScores,
+            backgroundColor: barColors,
+            borderColor: borderColors,
+            borderWidth: 1.2,
+            hoverBackgroundColor: barColors.map(c => c.replace("0.7", "0.9")),
+            hoverBorderWidth: 1.5
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // Use container's fixed height
+        layout: {
+          padding: {
+            top: 10,
+            right: 10,
+            bottom: 10,
+            left: 10
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 16,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return " Z-Score: " + value.toFixed(3);
+              },
+              afterLabel: function(context) {
+                const v = context.parsed.y;
+                if (v < 1.81) return "（高风险区）";
+                if (v < 2.99) return "（灰色地带）";
+                return "（低风险区）";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财政年度",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Altman Z-Score",
+              font: {
+                size: 12
+              }
+            },
+            beginAtZero: false,
+            suggestedMin: 1.4,
+            suggestedMax: 2.2,
+            ticks: {
+              precision: 2
+            },
+            grid: {
+              color: "rgba(0,0,0,0.05)"
+            }
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutCubic"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

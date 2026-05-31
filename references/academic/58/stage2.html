@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const csvData = `
+| Unnamed: 0       | Gq              | Unnamed: 2      | Unnamed: 3      | Unnamed: 4     | Unnamed: 5     | Unnamed: 6      | Unnamed: 7   | Unnamed: 8   | Unnamed: 9   |   Unnamed: 10 | Unnamed: 11        | Unnamed: 12     | Unnamed: 13     | Unnamed: 14    | Unnamed: 15     | Unnamed: 16     | Unnamed: 17     | Unnamed: 18   | Unnamed: 19   | Unnamed: 20   |
+|:-----------------|:----------------|:----------------|:----------------|:---------------|:---------------|:----------------|:-------------|:-------------|:-------------|--------------:|:-------------------|:----------------|:----------------|:---------------|:----------------|:----------------|:----------------|:--------------|:--------------|:--------------|
+| Log [NT], M      | nan             | nan             | nan             | nan            | nan            | nan             | nan          | nan          | nan          |           nan | Log [SR142948A], M | nan             | nan             | nan            | nan             | nan             | nan             | nan           | nan           | nan           |
+| nan              | 9-29-2022       | 9-29-2022       | 9-29-2022       | 9-30-2022      | 9-30-2022      | 9-30-2022       | 10-20-22     | 10-20-22     | 10-20-22     |           nan | nan                | 9-29-2022       | 9-29-2022       | 9-29-2022      | 9-30-2022       | 9-30-2022       | 9-30-2022       | 10-20-22      | 10-20-22      | 10-20-22      |
+| 1e-05            | -0.2846707733   | -0.2922985717   | -0.3193177434   | -0.3065884008  | -0.3204788423  | -0.325865056    | -0.2960383   | -0.31831     | -0.31534     |           nan | 0.0001             | 0.01551835518   | -0.009531307549 | 0.02556414581  | 0.03727658243   | 0.04267700414   | 0.03471723089   | 0.003298      | -0.01579      | 0.008178      |
+| 1e-06            | -0.2837755147   | -0.2790089656   | -0.3184799264   | -0.3001126777  | -0.3363730402  | -0.329891852    | -0.29029718  | -0.31151     | -0.31947     |           nan | 1e-05              | -0.006806356965 | 0.00325625729   | 0.0282819784   | 0.04511932267   | 0.03243180303   | 0.01454354078   | -0.02388      | -0.0164       | 0.011033      |
+| 1e-07            | -0.2845085962   | -0.2884077651   | -0.3221942222   | -0.302998495   | -0.3220711242  | -0.2961996195   | -0.30170406  | -0.31268     | -0.31973     |           nan | 1e-06              | 0.01871456628   | 0.0009482251578 | 0.02596617074  | 0.02877222398   | 0.02188480918   | 0.0318877293    | -0.00356      | -0.0346       | -0.00949      |
+| 1e-08            | -0.2861371087   | -0.2937983124   | -0.3064097402   | -0.1745302564  | -0.196284247   | -0.1691147899   | -0.25900445  | -0.31037     | -0.27897     |           nan | 1e-07              | 0.01906760018   | 0.00254628934   | 0.02176789121  | 0.009862852531  | 0.02745551133   | -0.003120962184 | -0.01416      | -0.03401      | -0.00575      |
+| 1e-09            | -0.1364206378   | -0.1539867212   | -0.08216952403  | 0.005149619583 | 0.01530646611  | 0.02295521923   | -0.06382135  | -0.09468     | -0.07666     |           nan | 1e-08              | 0.01653917056   | -0.01479382846  | 0.005373306705 | 0.01719663542   | -0.006388936239 | 0.0006392670214 | -0.00387      | -0.03053      | -0.00429      |
+| 1e-10            | -0.01474690403  | -0.002808660416 | -0.01810853665  | 0.006762902844 | 0.02158308969  | 0.005950253723  | -0.02435792  | -0.00096     | 0.011162     |           nan | 1e-09              | 0.01125208223   | -0.01402880121  | 0.001006920087 | 0.02193310818   | 0.002682548168  | -0.01002280404  | -0.00749      | -0.02674      | -0.00044      |
+| 1e-11            | -0.01579522443  | 0.004394906898  | -0.01337023148  | 0.01556749636  | 0.002418979757 | -0.01260954458  | -0.00932098  | 0.001582     | 0.007514     |           nan | 1e-10              | 0.01279465807   | -0.02011770642  | 0.01028645084  | 0.0272334621    | -0.01156297641  | -0.02599588148  | -0.00415      | -0.02971      | -0.00589      |
+| 1e-12            | 0               | 0               | 0               | 0              | 0              | 0               | 0            | 0            | 0            |           nan | 1e-12              | 0               | 0               | 0              | 0               | 0               | 0               | 0             | 0             | 0             |
+| nan              | nan             | nan             | nan             | nan            | nan            | nan             | nan          | nan          | nan          |           nan | nan                | nan             | nan             | nan            | nan             | nan             | nan             | nan           | nan           | nan           |
+| nan              | nan             | nan             | nan             | nan            | nan            | nan             | nan          | nan          | nan          |           nan | nan                | nan             | nan             | nan            | nan             | nan             | nan             | nan           | nan           | nan           |
+| Log [SBI-553], M | nan             | nan             | nan             | nan            | nan            | nan             | nan          | nan          | nan          |           nan | Log [PD149163], M  | nan             | nan             | nan            | nan             | nan             | nan             | nan           | nan           | nan           |
+| nan              | 9-29-2022       | 9-29-2022       | 9-29-2022       | 9-30-2022      | 9-30-2022      | 9-30-2022       | 10-20-22     | 10-20-22     | 10-20-22     |           nan | nan                | 9-29-2022       | 9-29-2022       | 9-29-2022      | 9-30-2022       | 9-30-2022       | 9-30-2022       | 10-20-22      | 10-20-22      | 10-20-22      |
+| 3e-05            | -0.01784590087  | -0.01786160807  | 0.01066236004   | 0.02248613077  | 0.01276301501  | 6.222282921e-05 | -0.01537     | 0.00931      | 0.00336      |           nan | 3e-05              | -0.338614818    | -0.3405346276   | -0.3328287892  | -0.3257737864   | -0.3081186091   | -0.3407366527   | -0.33512      | -0.34039006   | -0.34201      |
+| 1e-05            | -0.01078614784  | -0.01783481942  | 0.01053609922   | 0.03255674649  | 0.004401341327 | 0.02165624513   | -0.01002     | -0.00154     | 0.00063      |           nan | 1e-05              | -0.3418162118   | -0.3367490733   | -0.3211403983  | -0.259265497    | -0.2453636257   | -0.2986696077   | -0.30747      | -0.289431762  | -0.30654      |
+| 3e-06            | -0.002834037491 | -0.005377666716 | 0.00834612671   | 0.03628485793  | 0.006906849447 | 0.01410939454   | -0.01118     | -0.01431     | -0.01113     |           nan | 3e-06              | -0.3046899353   | -0.3092269811   | -0.3031103094  | -0.191687865    | -0.1868550215   | -0.233524305    | -0.27924      | -0.269188268  | -0.26957      |
+| 1e-06            | 0.003823173438  | -0.01830586944  | -0.001833846773 | 0.03465847306  | 0.002538107204 | 0.03278517843   | -0.01912     | -0.01871     | -0.00198     |           nan | 1e-06              | -0.2334956111   | -0.2564710655   | -0.2683567328  | -0.08709610759  | -0.07243301327  | -0.1110112919   | -0.20001      | -0.183127389  | -0.19983      |
+| 3e-07            | -0.003435117025 | 0.0005049550199 | -0.005930616238 | 0.01571439573  | 0.01389873352  | 0.01591047888   | -0.01264     | -0.00377     | 0.00266      |           nan | 3e-07              | -0.08323249529  | -0.1507142521   | -0.1939446581  | -0.006178763395 | -0.02816936576  | -0.04315777776  | -0.08875      | -0.072633535  | -0.10661      |
+| 1e-07            | -0.01297468774  | -0.00693527962  | 0.003296560107  | 0.03097132517  | -0.01082877846 | -0.003031684702 | -0.01612     | 0.001852     | -0.01071     |           nan | 1e-07              | -0.02705875732  | -0.05281870506  | -0.113820769   | -0.005425441483 | -0.04175331565  | 0.0008431300221 | -0.01583      | -0.030061404  | -0.03099      |
+| 1e-12            | 0               | 0               | 0               | 0              | 0              | 0               | 0            | 0            | 0            |           nan | 1e-12              | 0               | 0               | 0              | 0               | 0               | 0               | 0             | 0             | 0             |
+`;
+
+        const parseDatasets = (csvText) => {
+            const lines = csvText.trim().split('\n').filter(l => l.trim().length > 0 && !l.startsWith('|:'));
+            
+            const cleanAndNum = (val) => {
+                const num = parseFloat(val);
+                return isNaN(num) ? null : num;
+            };
+
+            const datasets = {};
+
+            const extractData = (startLineIdx, endLineIdx, colIndexConc, colIndexDataStart, colIndexDataEnd) => {
+                const results = [];
+                for(let i = startLineIdx; i <= endLineIdx; i++) {
+                    const line = lines[i];
+                    if(!line) continue;
+                    const parts = line.split('|');
+                    
+                    const concVal = parts[colIndexConc] ? parts[colIndexConc].trim() : '';
+                    const conc = cleanAndNum(concVal);
+                    if (conc === null) continue;
+
+                    const vals = [];
+                    for(let j = colIndexDataStart; j <= colIndexDataEnd; j++) {
+                        if(parts[j]) {
+                            const v = cleanAndNum(parts[j].trim());
+                            if(v !== null) vals.push(v);
+                        }
+                    }
+                    if(vals.length > 0) {
+                        results.push({ conc: conc, vals: vals });
+                    }
+                }
+                return processDataForPlot(results);
+            };
+
+            let header1Index = -1;
+            let header2Index = -1;
+            
+            for(let i=0; i<lines.length; i++) {
+                if(lines[i].includes('Log [NT], M')) header1Index = i;
+                if(lines[i].includes('Log [SBI-553], M')) header2Index = i;
+            }
+
+            if(header1Index !== -1) {
+                const start = header1Index + 2;
+                const end = start + 7;
+                datasets['NT'] = extractData(start, end, 1, 2, 10);
+                datasets['SR'] = extractData(start, end, 12, 13, 21);
+            }
+
+            if(header2Index !== -1) {
+                const start = header2Index + 2;
+                const end = start + 6;
+                datasets['SBI'] = extractData(start, end, 1, 2, 10);
+                datasets['PD'] = extractData(start, end, 12, 13, 21);
+            }
+
+            return datasets;
+        };
+
+        const processDataForPlot = (data) => {
+            const processed = data.map(row => {
+                const vals = row.vals.map(v => -1 * v);
+                const mean = jStat.mean(vals);
+                const sem = jStat.stdev(vals, true) / Math.sqrt(vals.length);
+                return { log_conc: Math.log10(row.conc), mean: mean, sem: sem, vals: vals };
+            });
+            return processed.sort((a, b) => a.log_conc - b.log_conc);
+        }; 
+        
+        const datasets = parseDatasets(csvData);
+
+        const styles = {
+            'NT': { color: '#0000B2', name: 'NT' },
+            'PD': { color: '#4C9F70', name: 'PD149163' },
+            'SR': { color: '#B200B2', name: 'SR142948A' },
+            'SBI': { color: '#F59B00', name: 'SBI-553' }
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [];
+
+        ['NT', 'PD', 'SBI', 'SR'].forEach(key => {
+            const data = datasets[key];
+            if (!data) return;
+
+            const plotData = data.map(d => [d.log_conc, d.mean]);
+            const errorData = data.map(d => [d.log_conc, d.mean, d.sem]);
+            const style = styles[key];
+
+            series.push({
+                name: style.name,
+                type: 'scatter',
+                data: plotData,
+                itemStyle: { color: style.color, borderColor: style.color },
+                symbolSize: 8,
+                z: 5
+            });
+
+            series.push({
+                type: 'custom',
+                name: style.name + ' Error',
+                renderItem: (params, api) => {
+                    const x = api.value(0);
+                    const y = api.value(1);
+                    const sem = api.value(2);
+
+                    if (x === undefined || y === undefined || isNaN(x) || isNaN(y)) {
+                        return { type: 'group', children: [] };
+                    }
+
+                    const highPoint = api.coord([x, y + sem]);
+                    const lowPoint = api.coord([x, y - sem]);
+                    
+                    if (!highPoint || !lowPoint) return { type: 'group', children: [] };
+
+                    const capHalfWidth = 2.5; 
+                    const styleItem = api.style({ stroke: style.color, lineWidth: 1.5 });
+                    
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: styleItem },
+                            { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: styleItem },
+                            { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: styleItem }
+                        ]
+                    };
+                },
+                data: errorData,
+                z: 6
+            });
+
+            series.push({
+                name: style.name + ' Curve',
+                type: 'line',
+                data: plotData,
+                smooth: true,
+                showSymbol: false,
+                lineStyle: { color: style.color, width: 2 },
+                z: 4
+            });
+        });
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: { top: 60, right: 20, bottom: 60, left: 80 },
+            xAxis: {
+                type: 'value',
+                min: -12.5,
+                max: -3.5,
+                interval: 2,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1 } },
+                axisTick: { alignWithLabel: true, length: 4, width: 1, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Transducer activation\n(± Δ Net BRET)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: { color: 'black', fontSize: 14, align: 'center' },
+                min: -0.1,
+                max: 0.6,
+                interval: 0.2,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1 } },
+                axisTick: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false },
+                markLine: {
+                    symbol: 'none',
+                    lineStyle: { type: 'dashed', color: 'black', width: 0.8 },
+                    data: [{ yAxis: 0 }],
+                    animation: false,
+                    silent: true
+                }
+            },
+            legend: {
+                data: ['NT', 'PD149163', 'SR142948A', 'SBI-553'],
+                left: 'right',
+                top: 'middle',
+                orient: 'vertical',
+                textStyle: { fontSize: 12 },
+                itemGap: 15
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'group',
+                    id: 'gq-label-group',
+                    left: '5%',
+                    top: '5%',
+                    children: [
+                        { type: 'text', style: { text: 'G', font: '16px Arial', fill: 'black' }, left: 0, top: 0 },
+                        { type: 'text', style: { text: 'q', font: '12px Arial', fill: 'black' }, left: 12, top: 5 }
+                    ]
+                }
+            ]
+        };
+        
+        chart.setOption(option);
+    </script>
+</body>
+</html>

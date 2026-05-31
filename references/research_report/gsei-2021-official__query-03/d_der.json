@@ -1,0 +1,75 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a ranked lollipop chart showing the top 10 countries by regional flagship outperformance gap, where the plotted value is `average numeric rank_change of that country's cities appearing in the 3.1 regional city top-10 table minus the country's own numeric rank_change in the matching 3.1 regional country table`, values are expressed in rank positions, only countries with numeric change values in both sources are eligible, and the countries are sorted from highest to lowest after the gap is derived.",
+  "chart_type": "lollipop chart",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by regional_flagship_outperformance_gap",
+  "selection_rule": "top 10 among countries with numeric city and country rank_change values",
+  "plot_spec": {
+    "title": "Regional Flagship Outperformance Gap",
+    "xlabel": "rank positions",
+    "value_field": "regional_flagship_outperformance_gap"
+  },
+  "records": [
+    {
+      "entity": "United Arab Emirates",
+      "regional_flagship_outperformance_gap": 14.0,
+      "avg_regional_city_rank_change": 32.0,
+      "country_rank_change": 18
+    },
+    {
+      "entity": "Brazil",
+      "regional_flagship_outperformance_gap": 2.0,
+      "avg_regional_city_rank_change": -2.0,
+      "country_rank_change": -4
+    },
+    {
+      "entity": "Sweden",
+      "regional_flagship_outperformance_gap": 1.0,
+      "avg_regional_city_rank_change": 5.0,
+      "country_rank_change": 4
+    },
+    {
+      "entity": "India",
+      "regional_flagship_outperformance_gap": 0.6667,
+      "avg_regional_city_rank_change": 3.6667,
+      "country_rank_change": 3
+    },
+    {
+      "entity": "Mexico",
+      "regional_flagship_outperformance_gap": 0.0,
+      "avg_regional_city_rank_change": 3.0,
+      "country_rank_change": 3
+    },
+    {
+      "entity": "China",
+      "regional_flagship_outperformance_gap": -1.5,
+      "avg_regional_city_rank_change": 5.5,
+      "country_rank_change": 7
+    },
+    {
+      "entity": "Finland",
+      "regional_flagship_outperformance_gap": -4.0,
+      "avg_regional_city_rank_change": -5.0,
+      "country_rank_change": -1
+    },
+    {
+      "entity": "Spain",
+      "regional_flagship_outperformance_gap": -4.0,
+      "avg_regional_city_rank_change": -10.0,
+      "country_rank_change": -6
+    },
+    {
+      "entity": "The Netherlands",
+      "regional_flagship_outperformance_gap": -4.0,
+      "avg_regional_city_rank_change": -9.0,
+      "country_rank_change": -5
+    },
+    {
+      "entity": "Singapore",
+      "regional_flagship_outperformance_gap": -5.0,
+      "avg_regional_city_rank_change": 1.0,
+      "country_rank_change": 6
+    }
+  ]
+}

@@ -1,0 +1,2947 @@
+{
+    "raw_data": [
+        {
+            "G_Protein": "Gq",
+            "Treatment": "NT",
+            "Value": 0.2846707733
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "NT",
+            "Value": 0.292299
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "NT",
+            "Value": 0.319318
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "NT",
+            "Value": 0.306588
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "NT",
+            "Value": 0.320479
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "NT",
+            "Value": 0.325865
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "NT",
+            "Value": 0.296038
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "NT",
+            "Value": 0.31831
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "NT",
+            "Value": 0.31534
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SBI-553",
+            "Value": 0.01784590087
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SBI-553",
+            "Value": 0.01786160807
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SBI-553",
+            "Value": -0.01066236004
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SBI-553",
+            "Value": -0.0224861
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SBI-553",
+            "Value": -0.012763
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SBI-553",
+            "Value": -6.22228e-05
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SBI-553",
+            "Value": 0.01537
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SBI-553",
+            "Value": -0.00931
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SBI-553",
+            "Value": -0.00336
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "PD142948A",
+            "Value": 0.338614818
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "PD142948A",
+            "Value": 0.340535
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "PD142948A",
+            "Value": 0.332829
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "PD142948A",
+            "Value": 0.325774
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "PD142948A",
+            "Value": 0.308119
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "PD142948A",
+            "Value": 0.340737
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "PD142948A",
+            "Value": 0.33512
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "PD142948A",
+            "Value": 0.34039
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "PD142948A",
+            "Value": 0.34201
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SR142948A",
+            "Value": -0.01551835518
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SR142948A",
+            "Value": 0.00953131
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SR142948A",
+            "Value": -0.02556414581
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SR142948A",
+            "Value": -0.0372766
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SR142948A",
+            "Value": -0.042677
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SR142948A",
+            "Value": -0.0347172
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SR142948A",
+            "Value": -0.003298
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SR142948A",
+            "Value": 0.01579
+        },
+        {
+            "G_Protein": "Gq",
+            "Treatment": "SR142948A",
+            "Value": -0.008178
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "NT",
+            "Value": 0.30303
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "NT",
+            "Value": 0.30282
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "NT",
+            "Value": 0.28583
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "NT",
+            "Value": 0.30089
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "NT",
+            "Value": 0.28729
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "NT",
+            "Value": 0.30189
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "NT",
+            "Value": 0.25323
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "NT",
+            "Value": 0.25536
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "NT",
+            "Value": 0.25034
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SBI-553",
+            "Value": -0.005378
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SBI-553",
+            "Value": -0.042057
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SBI-553",
+            "Value": -0.007707
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SBI-553",
+            "Value": -0.020865
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SBI-553",
+            "Value": -0.0239
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SBI-553",
+            "Value": -0.006675
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SBI-553",
+            "Value": -0.004195
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SBI-553",
+            "Value": -0.001597
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SBI-553",
+            "Value": 0.00743
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "PD142948A",
+            "Value": 0.27204
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "PD142948A",
+            "Value": 0.29712
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "PD142948A",
+            "Value": 0.29818
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "PD142948A",
+            "Value": 0.29176
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "PD142948A",
+            "Value": 0.2658
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SR142948A",
+            "Value": -0.020088
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SR142948A",
+            "Value": -0.002293
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SR142948A",
+            "Value": -0.012814
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SR142948A",
+            "Value": 0.00333
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SR142948A",
+            "Value": 0.02885
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SR142948A",
+            "Value": 0.02846
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SR142948A",
+            "Value": 0.01216
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SR142948A",
+            "Value": 0.00682
+        },
+        {
+            "G_Protein": "G11",
+            "Treatment": "SR142948A",
+            "Value": 0.00417
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "NT",
+            "Value": 0.15699
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "NT",
+            "Value": 0.15583
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "NT",
+            "Value": 0.13842
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "NT",
+            "Value": 0.17349
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "NT",
+            "Value": 0.1744
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "NT",
+            "Value": 0.1799
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "NT",
+            "Value": 0.15584
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "NT",
+            "Value": 0.16021
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "NT",
+            "Value": 0.16043
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SBI-553",
+            "Value": 0.09861
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SBI-553",
+            "Value": -0.023013
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SBI-553",
+            "Value": -0.015358
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SBI-553",
+            "Value": 0.1157
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SBI-553",
+            "Value": 0.13439
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SBI-553",
+            "Value": 0.1263
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SBI-553",
+            "Value": 0.119
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SBI-553",
+            "Value": 0.12425
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SBI-553",
+            "Value": 0.12537
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "PD142948A",
+            "Value": 0.17917
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "PD142948A",
+            "Value": 0.17341
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "PD142948A",
+            "Value": 0.18797
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "PD142948A",
+            "Value": 0.17452
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "PD142948A",
+            "Value": 0.17156
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "PD142948A",
+            "Value": 0.17573
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "PD142948A",
+            "Value": 0.17123
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "PD142948A",
+            "Value": 0.17414
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SR142948A",
+            "Value": 0.08855
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SR142948A",
+            "Value": 0.07396
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SR142948A",
+            "Value": -0.014147
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SR142948A",
+            "Value": 0.00459
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SR142948A",
+            "Value": -0.020789
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SR142948A",
+            "Value": -0.001533
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SR142948A",
+            "Value": 0.01233
+        },
+        {
+            "G_Protein": "G15",
+            "Treatment": "SR142948A",
+            "Value": -0.013925
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "NT",
+            "Value": 0.30525
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "NT",
+            "Value": 0.2849
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "NT",
+            "Value": 0.30172
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "NT",
+            "Value": 0.26812
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "NT",
+            "Value": 0.28318
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "NT",
+            "Value": 0.28059
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "NT",
+            "Value": 0.30777
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "NT",
+            "Value": 0.32078
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "NT",
+            "Value": 0.32351
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SBI-553",
+            "Value": 0.06814
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SBI-553",
+            "Value": 0.06494
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SBI-553",
+            "Value": 0.05948
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SBI-553",
+            "Value": 0.12041
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SBI-553",
+            "Value": 0.09415
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SBI-553",
+            "Value": 0.08036
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SBI-553",
+            "Value": 0.10172
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SBI-553",
+            "Value": 0.10296
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SBI-553",
+            "Value": 0.09427
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "PD142948A",
+            "Value": 0.26685
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "PD142948A",
+            "Value": 0.24502
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "PD142948A",
+            "Value": 0.25037
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "PD142948A",
+            "Value": 0.25657
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "PD142948A",
+            "Value": 0.27286
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "PD142948A",
+            "Value": 0.28462
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "PD142948A",
+            "Value": 0.33929
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "PD142948A",
+            "Value": 0.26061
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "PD142948A",
+            "Value": 0.26781
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SR142948A",
+            "Value": 0.02508
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SR142948A",
+            "Value": 0.01225
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SR142948A",
+            "Value": -0.142854
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SR142948A",
+            "Value": -0.029168
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SR142948A",
+            "Value": -0.013614
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SR142948A",
+            "Value": -0.004764
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SR142948A",
+            "Value": -0.01587
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SR142948A",
+            "Value": 0.01077
+        },
+        {
+            "G_Protein": "Gi1",
+            "Treatment": "SR142948A",
+            "Value": -0.036917
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "NT",
+            "Value": 0.27902
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "NT",
+            "Value": 0.27537
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "NT",
+            "Value": 0.31485
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "NT",
+            "Value": 0.23921
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "NT",
+            "Value": 0.22001
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "NT",
+            "Value": 0.28503
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "NT",
+            "Value": 0.24759
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "NT",
+            "Value": 0.24646
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "NT",
+            "Value": 0.24492
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SBI-553",
+            "Value": 0.08891
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SBI-553",
+            "Value": 0.044
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SBI-553",
+            "Value": 0.01846
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SBI-553",
+            "Value": 0.11885
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SBI-553",
+            "Value": 0.13439
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SBI-553",
+            "Value": 0.06992
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SBI-553",
+            "Value": 0.05124
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SBI-553",
+            "Value": 0.09507
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SBI-553",
+            "Value": 0.08165
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "PD142948A",
+            "Value": 0.2846
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "PD142948A",
+            "Value": 0.24565
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "PD142948A",
+            "Value": 0.25727
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "PD142948A",
+            "Value": 0.2644
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "PD142948A",
+            "Value": 0.26116
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "PD142948A",
+            "Value": 0.27153
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "PD142948A",
+            "Value": 0.29018
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "PD142948A",
+            "Value": 0.30717
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "PD142948A",
+            "Value": 0.30623
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SR142948A",
+            "Value": 0.02943
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SR142948A",
+            "Value": 0.04316
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SR142948A",
+            "Value": 0.00801
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SR142948A",
+            "Value": 0.01547
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SR142948A",
+            "Value": 0.0115
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SR142948A",
+            "Value": -0.034461
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SR142948A",
+            "Value": -0.001233
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SR142948A",
+            "Value": 0.02146
+        },
+        {
+            "G_Protein": "Gi2",
+            "Treatment": "SR142948A",
+            "Value": -0.015333
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.43355
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.42365
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.43938
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.40592
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.44062
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.44493
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.43686
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.49373
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.06451
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.46201
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.04742
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.441
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.42537
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.40677
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.39352
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.41644
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.42132
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.41324
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.39712
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.37433
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "NT",
+            "Value": 0.38148
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SBI-553",
+            "Value": 0.09049
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SBI-553",
+            "Value": 0.06925
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SBI-553",
+            "Value": 0.03538
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SBI-553",
+            "Value": 0.08063
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SBI-553",
+            "Value": 0.04822
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SBI-553",
+            "Value": 0.07984
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SBI-553",
+            "Value": 0.0521
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SBI-553",
+            "Value": 0.06316
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SBI-553",
+            "Value": 0.07738
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "PD142948A",
+            "Value": 0.12087
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "PD142948A",
+            "Value": 0.11301
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "PD142948A",
+            "Value": 0.1787
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "PD142948A",
+            "Value": 0.25196
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "PD142948A",
+            "Value": 0.257
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "PD142948A",
+            "Value": 0.2381
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "PD142948A",
+            "Value": 0.22052
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "PD142948A",
+            "Value": 0.24358
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "PD142948A",
+            "Value": 0.25883
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SR142948A",
+            "Value": -0.024718
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SR142948A",
+            "Value": 0.01053
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SR142948A",
+            "Value": -0.002401
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SR142948A",
+            "Value": 0.05339
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SR142948A",
+            "Value": 0.05144
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SR142948A",
+            "Value": 0.07885
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SR142948A",
+            "Value": -0.00019
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SR142948A",
+            "Value": 0.02022
+        },
+        {
+            "G_Protein": "Gi3",
+            "Treatment": "SR142948A",
+            "Value": 0.03942
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "NT",
+            "Value": 0.32753
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "NT",
+            "Value": 0.31772
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "NT",
+            "Value": 0.32589
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "NT",
+            "Value": 0.25696
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "NT",
+            "Value": 0.24481
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "NT",
+            "Value": 0.26138
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "NT",
+            "Value": 0.2363
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "NT",
+            "Value": 0.22968
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "NT",
+            "Value": 0.226
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SBI-553",
+            "Value": 0.10739
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SBI-553",
+            "Value": 0.13261
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SBI-553",
+            "Value": 0.10043
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SBI-553",
+            "Value": 0.12215
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SBI-553",
+            "Value": 0.13214
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SBI-553",
+            "Value": 0.14922
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SBI-553",
+            "Value": 0.08009
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SBI-553",
+            "Value": 0.10627
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SBI-553",
+            "Value": 0.10338
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "PD142948A",
+            "Value": 0.24458
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "PD142948A",
+            "Value": 0.26345
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "PD142948A",
+            "Value": 0.25076
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "PD142948A",
+            "Value": 0.22962
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "PD142948A",
+            "Value": 0.23693
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "PD142948A",
+            "Value": 0.23592
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "PD142948A",
+            "Value": 0.21233
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "PD142948A",
+            "Value": 0.23604
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "PD142948A",
+            "Value": 0.23758
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SR142948A",
+            "Value": -0.030675
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SR142948A",
+            "Value": -0.100572
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SR142948A",
+            "Value": -0.015349
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SR142948A",
+            "Value": -0.029544
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SR142948A",
+            "Value": -0.031592
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SR142948A",
+            "Value": -0.039946
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SR142948A",
+            "Value": -0.053358
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SR142948A",
+            "Value": -0.072311
+        },
+        {
+            "G_Protein": "GoA",
+            "Treatment": "SR142948A",
+            "Value": -0.042234
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.32094
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.29863
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.33031
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.27415
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.29257
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.29184
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.10345
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.15108
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.21049
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.30079
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.32936
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "NT",
+            "Value": 0.31418
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.10066
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.12493
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.10246
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.11339
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.15058
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.13409
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.17886
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.19844
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.17703
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.14779
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.18754
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SBI-553",
+            "Value": 0.17204
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.21565
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.2475
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.23078
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.23662
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.21349
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.21194
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.17067
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.24972
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.21572
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.2646
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.27095
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "PD142948A",
+            "Value": 0.28125
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": 0.02714
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": 0.03371
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": 0.02948
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": -0.00201
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": 0.00238
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": -0.005824
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": -0.06733
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": -0.070805
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": -0.106119
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": 0.01032
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": -0.009234
+        },
+        {
+            "G_Protein": "GoB",
+            "Treatment": "SR142948A",
+            "Value": -0.021891
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "NT",
+            "Value": 0.28434
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "NT",
+            "Value": 0.29787
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "NT",
+            "Value": 0.325
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "NT",
+            "Value": 0.25992
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "NT",
+            "Value": 0.27109
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "NT",
+            "Value": 0.26217
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "NT",
+            "Value": 0.30777
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "NT",
+            "Value": 0.32107
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "NT",
+            "Value": 0.30418
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SBI-553",
+            "Value": 0.08182
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SBI-553",
+            "Value": 0.06284
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SBI-553",
+            "Value": 0.03348
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SBI-553",
+            "Value": 0.01465
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SBI-553",
+            "Value": 0.00899
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SBI-553",
+            "Value": 0.02701
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SBI-553",
+            "Value": 0.03291
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SBI-553",
+            "Value": 0.02168
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SBI-553",
+            "Value": 0.03232
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "PD142948A",
+            "Value": 0.28719
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "PD142948A",
+            "Value": 0.27265
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "PD142948A",
+            "Value": 0.28466
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "PD142948A",
+            "Value": 0.2568
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "PD142948A",
+            "Value": 0.24313
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "PD142948A",
+            "Value": 0.25
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "PD142948A",
+            "Value": 0.31341
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "PD142948A",
+            "Value": 0.31194
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "PD142948A",
+            "Value": 0.32147
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SR142948A",
+            "Value": 0.00902
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SR142948A",
+            "Value": 0.018
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SR142948A",
+            "Value": 0.01697
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SR142948A",
+            "Value": 0.00322
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SR142948A",
+            "Value": 0.006
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SR142948A",
+            "Value": -0.004898
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SR142948A",
+            "Value": 0.01114
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SR142948A",
+            "Value": 0.00952
+        },
+        {
+            "G_Protein": "Gz",
+            "Treatment": "SR142948A",
+            "Value": 0.0203391
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.08616
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.13332
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.09008
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.11592
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.10045
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.09847
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.09824
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.08728
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.13025
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.12163
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.10716
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.11404
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.11069
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.08789
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.07917
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.05663
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.06215
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.07287
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.09913
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.09441
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.11313
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.10353
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.08365
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "NT",
+            "Value": 0.06201
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.05587
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.03747
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.02696
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.06502
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.06803
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.05858
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.04931
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.03871
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.04315
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.04863
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.07383
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SBI-553",
+            "Value": 0.04347
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.04829
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.03881
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.06813
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.03368
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.01093
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.01855
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.05158
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.05192
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.04162
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.04748
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.0619
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "PD142948A",
+            "Value": 0.06898
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": -0.001028
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": -0.014938
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": 0.01375
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": -0.006535
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": -0.002664
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": 0.01621
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": 0.01351
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": 0.00155
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": -0.010167
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": 0.00336
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": 0.00581
+        },
+        {
+            "G_Protein": "Gg",
+            "Treatment": "SR142948A",
+            "Value": -0.000696
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "NT",
+            "Value": 0.1512820513
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "NT",
+            "Value": 0.0701632
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "NT",
+            "Value": 0.03521
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "NT",
+            "Value": -0.007501
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "NT",
+            "Value": 0.017448
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "NT",
+            "Value": 0.0274145
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "NT",
+            "Value": 0.00657296
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "NT",
+            "Value": -0.064873
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "NT",
+            "Value": -0.034575
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "NT",
+            "Value": -0.075671
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SBI-553",
+            "Value": -0.07074993082
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SBI-553",
+            "Value": -0.04435902911
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SBI-553",
+            "Value": 0.001268423857
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SBI-553",
+            "Value": 0.0477161
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SBI-553",
+            "Value": 0.03709
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SBI-553",
+            "Value": 0.0083
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SBI-553",
+            "Value": 0.06821
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SBI-553",
+            "Value": 0.01462
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SBI-553",
+            "Value": 0.03691
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SBI-553",
+            "Value": -0.069942
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "PD142948A",
+            "Value": 0.24358819564
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "PD142948A",
+            "Value": -0.00641913
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "PD142948A",
+            "Value": -0.0296497
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "PD142948A",
+            "Value": -0.102284
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "PD142948A",
+            "Value": -0.056093
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "PD142948A",
+            "Value": -0.10236
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "PD142948A",
+            "Value": -0.041376
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "PD142948A",
+            "Value": -0.057526
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "PD142948A",
+            "Value": -0.049415
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SR142948A",
+            "Value": 0.004539442039
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SR142948A",
+            "Value": 0.0129572
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SR142948A",
+            "Value": 0.1495348412
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SR142948A",
+            "Value": 0.0896496
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SR142948A",
+            "Value": 0.07944
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SR142948A",
+            "Value": -0.004145
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SR142948A",
+            "Value": -0.070974
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SR142948A",
+            "Value": -0.042298
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SR142948A",
+            "Value": 0.0007
+        },
+        {
+            "G_Protein": "GsS",
+            "Treatment": "SR142948A",
+            "Value": -0.007781
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "NT",
+            "Value": 0.02372
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "NT",
+            "Value": -0.067471
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "NT",
+            "Value": -0.026654
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "NT",
+            "Value": 0.04449
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "NT",
+            "Value": 0.00183
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "NT",
+            "Value": -0.01759
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "NT",
+            "Value": 0.065
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "NT",
+            "Value": 0.02171
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "NT",
+            "Value": 0.04754
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SBI-553",
+            "Value": 0.02459
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SBI-553",
+            "Value": 0.04051
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SBI-553",
+            "Value": 0.01625
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SBI-553",
+            "Value": 0.02451
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SBI-553",
+            "Value": -0.035925
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SBI-553",
+            "Value": -0.031375
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SBI-553",
+            "Value": 0.00925
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SBI-553",
+            "Value": -0.011868
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SBI-553",
+            "Value": 0.00021
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "PD142948A",
+            "Value": -0.002462
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "PD142948A",
+            "Value": 0.0231
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "PD142948A",
+            "Value": 0.00417
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "PD142948A",
+            "Value": 0.01961
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "PD142948A",
+            "Value": -0.0116
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "PD142948A",
+            "Value": 0.04169
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "PD142948A",
+            "Value": 0.01574
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "PD142948A",
+            "Value": -0.018155
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "PD142948A",
+            "Value": 0.01917
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SR142948A",
+            "Value": 0.09745
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SR142948A",
+            "Value": 0.02336
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SR142948A",
+            "Value": -0.012817
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SR142948A",
+            "Value": -0.024219
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SR142948A",
+            "Value": 0.04555
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SR142948A",
+            "Value": 0.01188
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SR142948A",
+            "Value": 0.01557
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SR142948A",
+            "Value": 0.00455
+        },
+        {
+            "G_Protein": "GsL",
+            "Treatment": "SR142948A",
+            "Value": 0.01358
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "NT",
+            "Value": 0.44781
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "NT",
+            "Value": 0.47717
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "NT",
+            "Value": 0.48431
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "NT",
+            "Value": 0.2664
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "NT",
+            "Value": 0.27723
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "NT",
+            "Value": 0.31533
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "NT",
+            "Value": 0.38206
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "NT",
+            "Value": 0.34229
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "NT",
+            "Value": 0.38905
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SBI-553",
+            "Value": 0.10272
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SBI-553",
+            "Value": 0.14475
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SBI-553",
+            "Value": 0.10265
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SBI-553",
+            "Value": 0.12409
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SBI-553",
+            "Value": 0.14208
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SBI-553",
+            "Value": 0.15277
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SBI-553",
+            "Value": 0.20006
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SBI-553",
+            "Value": 0.23637
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SBI-553",
+            "Value": 0.2368
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "PD142948A",
+            "Value": 0.19918
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "PD142948A",
+            "Value": 0.20125
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "PD142948A",
+            "Value": 0.19894
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "PD142948A",
+            "Value": 0.2399
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "PD142948A",
+            "Value": 0.23548
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "PD142948A",
+            "Value": 0.24706
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "PD142948A",
+            "Value": 0.232
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "PD142948A",
+            "Value": 0.22781
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "PD142948A",
+            "Value": 0.19062
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SR142948A",
+            "Value": 0.02508
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SR142948A",
+            "Value": 0.01225
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SR142948A",
+            "Value": -0.142854
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SR142948A",
+            "Value": -0.029168
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SR142948A",
+            "Value": -0.013614
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SR142948A",
+            "Value": -0.004764
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SR142948A",
+            "Value": -0.01587
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SR142948A",
+            "Value": 0.01077
+        },
+        {
+            "G_Protein": "G12",
+            "Treatment": "SR142948A",
+            "Value": -0.036917
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "NT",
+            "Value": 0.53424
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "NT",
+            "Value": 0.55248
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "NT",
+            "Value": 0.56423
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "NT",
+            "Value": 0.51491
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "NT",
+            "Value": 0.54987
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "NT",
+            "Value": 0.56031
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "NT",
+            "Value": 0.52557
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "NT",
+            "Value": 0.51876
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "NT",
+            "Value": 0.53246
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SBI-553",
+            "Value": 0.18362
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SBI-553",
+            "Value": 0.18632
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SBI-553",
+            "Value": 0.15875
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SBI-553",
+            "Value": 0.27634
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SBI-553",
+            "Value": 0.24043
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SBI-553",
+            "Value": 0.24637
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SBI-553",
+            "Value": 0.28347
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SBI-553",
+            "Value": 0.29985
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SBI-553",
+            "Value": 0.26862
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "PD142948A",
+            "Value": 0.47563
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "PD142948A",
+            "Value": 0.45336
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "PD142948A",
+            "Value": 0.45068
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "PD142948A",
+            "Value": 0.51756
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "PD142948A",
+            "Value": 0.51631
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "PD142948A",
+            "Value": 0.46289
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "PD142948A",
+            "Value": 0.49389
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "PD142948A",
+            "Value": 0.49164
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "PD142948A",
+            "Value": 0.49578
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SR142948A",
+            "Value": 0.04482
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SR142948A",
+            "Value": 0.05838
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SR142948A",
+            "Value": 0.05864
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SR142948A",
+            "Value": 0.09508
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SR142948A",
+            "Value": 0.05099
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SR142948A",
+            "Value": 0.06262
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SR142948A",
+            "Value": 0.04498
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SR142948A",
+            "Value": 0.06763
+        },
+        {
+            "G_Protein": "G13",
+            "Treatment": "SR142948A",
+            "Value": 0.03998
+        }
+    ],
+    "tukey_results": {
+        "Gq": {
+            "NT-PD142948A": 0.0098,
+            "PD142948A-NT": 0.0098,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.0,
+            "SBI-553-PD142948A": 0.0,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.203,
+            "SR142948A-SBI-553": 0.203
+        },
+        "G11": {
+            "NT-PD142948A": 0.9931,
+            "PD142948A-NT": 0.9931,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.0,
+            "SBI-553-PD142948A": 0.0,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.2073,
+            "SR142948A-SBI-553": 0.2073
+        },
+        "G15": {
+            "NT-PD142948A": 0.8725,
+            "PD142948A-NT": 0.8725,
+            "NT-SBI-553": 0.0023,
+            "SBI-553-NT": 0.0023,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.0004,
+            "SBI-553-PD142948A": 0.0004,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.0027,
+            "SR142948A-SBI-553": 0.0027
+        },
+        "Gi1": {
+            "NT-PD142948A": 0.3302,
+            "PD142948A-NT": 0.3302,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.0,
+            "SBI-553-PD142948A": 0.0,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.0,
+            "SR142948A-SBI-553": 0.0
+        },
+        "Gi2": {
+            "NT-PD142948A": 0.6753,
+            "PD142948A-NT": 0.6753,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.0,
+            "SBI-553-PD142948A": 0.0,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.0001,
+            "SR142948A-SBI-553": 0.0001
+        },
+        "Gi3": {
+            "NT-PD142948A": 0.0,
+            "PD142948A-NT": 0.0,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.0034,
+            "SBI-553-PD142948A": 0.0034,
+            "PD142948A-SR142948A": 0.0001,
+            "SR142948A-PD142948A": 0.0001,
+            "SBI-553-SR142948A": 0.7151,
+            "SR142948A-SBI-553": 0.7151
+        },
+        "GoA": {
+            "NT-PD142948A": 0.1054,
+            "PD142948A-NT": 0.1054,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.0,
+            "SBI-553-PD142948A": 0.0,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.0,
+            "SR142948A-SBI-553": 0.0
+        },
+        "GoB": {
+            "NT-PD142948A": 0.3303,
+            "PD142948A-NT": 0.3303,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.0006,
+            "SBI-553-PD142948A": 0.0006,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.0,
+            "SR142948A-SBI-553": 0.0
+        },
+        "Gz": {
+            "NT-PD142948A": 0.7719,
+            "PD142948A-NT": 0.7719,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.0,
+            "SBI-553-PD142948A": 0.0,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.1052,
+            "SR142948A-SBI-553": 0.1052
+        },
+        "Gg": {
+            "NT-PD142948A": 0.0,
+            "PD142948A-NT": 0.0,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.8545,
+            "SBI-553-PD142948A": 0.8545,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.0,
+            "SR142948A-SBI-553": 0.0
+        },
+        "GsS": {
+            "NT-PD142948A": 0.729,
+            "PD142948A-NT": 0.729,
+            "NT-SBI-553": 0.991,
+            "SBI-553-NT": 0.991,
+            "NT-SR142948A": 0.9935,
+            "SR142948A-NT": 0.9935,
+            "PD142948A-SBI-553": 0.8756,
+            "SBI-553-PD142948A": 0.8756,
+            "PD142948A-SR142948A": 0.5734,
+            "SR142948A-PD142948A": 0.5734,
+            "SBI-553-SR142948A": 0.9441,
+            "SR142948A-SBI-553": 0.9441
+        },
+        "GsL": {
+            "NT-PD142948A": 1.0,
+            "PD142948A-NT": 1.0,
+            "NT-SBI-553": 0.9751,
+            "SBI-553-NT": 0.9751,
+            "NT-SR142948A": 0.9284,
+            "SR142948A-NT": 0.9284,
+            "PD142948A-SBI-553": 0.9767,
+            "SBI-553-PD142948A": 0.9767,
+            "PD142948A-SR142948A": 0.9253,
+            "SR142948A-PD142948A": 0.9253,
+            "SBI-553-SR142948A": 0.7353,
+            "SR142948A-SBI-553": 0.7353
+        },
+        "G12": {
+            "NT-PD142948A": 0.0,
+            "PD142948A-NT": 0.0,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.1331,
+            "SBI-553-PD142948A": 0.1331,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.0,
+            "SR142948A-SBI-553": 0.0
+        },
+        "G13": {
+            "NT-PD142948A": 0.0032,
+            "PD142948A-NT": 0.0032,
+            "NT-SBI-553": 0.0,
+            "SBI-553-NT": 0.0,
+            "NT-SR142948A": 0.0,
+            "SR142948A-NT": 0.0,
+            "PD142948A-SBI-553": 0.0,
+            "SBI-553-PD142948A": 0.0,
+            "PD142948A-SR142948A": 0.0,
+            "SR142948A-PD142948A": 0.0,
+            "SBI-553-SR142948A": 0.0,
+            "SR142948A-SBI-553": 0.0
+        }
+    }
+}

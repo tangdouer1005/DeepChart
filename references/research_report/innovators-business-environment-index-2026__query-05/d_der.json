@@ -1,0 +1,103 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a ranked horizontal bar chart comparing the top 15 countries by `pillar-rank dispersion`, defined as `worst pillar global rank minus best pillar global rank`, values shown in rank positions, using all 125 country cards on pages 30-294, and sorting the bars from highest to lowest after the spread is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by pillar_rank_dispersion",
+  "selection_rule": "top 15 countries out of all 125",
+  "records": [
+    {
+      "entity": "Puerto Rico",
+      "pillar_rank_dispersion": 93,
+      "best_pillar_global_rank": 5,
+      "worst_pillar_global_rank": 98
+    },
+    {
+      "entity": "Denmark",
+      "pillar_rank_dispersion": 85,
+      "best_pillar_global_rank": 2,
+      "worst_pillar_global_rank": 87
+    },
+    {
+      "entity": "Chile",
+      "pillar_rank_dispersion": 83,
+      "best_pillar_global_rank": 17,
+      "worst_pillar_global_rank": 100
+    },
+    {
+      "entity": "Slovenia",
+      "pillar_rank_dispersion": 81,
+      "best_pillar_global_rank": 21,
+      "worst_pillar_global_rank": 102
+    },
+    {
+      "entity": "Norway",
+      "pillar_rank_dispersion": 79,
+      "best_pillar_global_rank": 3,
+      "worst_pillar_global_rank": 82
+    },
+    {
+      "entity": "Malta",
+      "pillar_rank_dispersion": 74,
+      "best_pillar_global_rank": 27,
+      "worst_pillar_global_rank": 101
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "pillar_rank_dispersion": 73,
+      "best_pillar_global_rank": 29,
+      "worst_pillar_global_rank": 102
+    },
+    {
+      "entity": "Saudi Arabia",
+      "pillar_rank_dispersion": 73,
+      "best_pillar_global_rank": 4,
+      "worst_pillar_global_rank": 77
+    },
+    {
+      "entity": "Finland",
+      "pillar_rank_dispersion": 72,
+      "best_pillar_global_rank": 3,
+      "worst_pillar_global_rank": 75
+    },
+    {
+      "entity": "Iraq",
+      "pillar_rank_dispersion": 70,
+      "best_pillar_global_rank": 53,
+      "worst_pillar_global_rank": 123
+    },
+    {
+      "entity": "China",
+      "pillar_rank_dispersion": 67,
+      "best_pillar_global_rank": 15,
+      "worst_pillar_global_rank": 82
+    },
+    {
+      "entity": "Portugal",
+      "pillar_rank_dispersion": 66,
+      "best_pillar_global_rank": 7,
+      "worst_pillar_global_rank": 73
+    },
+    {
+      "entity": "Thailand",
+      "pillar_rank_dispersion": 66,
+      "best_pillar_global_rank": 17,
+      "worst_pillar_global_rank": 83
+    },
+    {
+      "entity": "Russia",
+      "pillar_rank_dispersion": 65,
+      "best_pillar_global_rank": 46,
+      "worst_pillar_global_rank": 111
+    },
+    {
+      "entity": "Bahrain",
+      "pillar_rank_dispersion": 64,
+      "best_pillar_global_rank": 3,
+      "worst_pillar_global_rank": 67
+    }
+  ],
+  "chart_title": "IBEI 2026 Top 15 by Pillar-Rank Dispersion",
+  "metric_field": "pillar_rank_dispersion",
+  "x_label": "worst pillar global rank minus best pillar global rank"
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>ABT 自由现金流收益质量（Quality of Income Ratio）2016-2024</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 简化：使用 Chart.js 3.x（兼容性较好且 API 清晰） -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f7f7f9;
+            color: #222;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px 24px 28px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+        }
+        h1 {
+            font-size: 20px;
+            margin: 0 0 4px;
+        }
+        h2 {
+            font-size: 14px;
+            margin: 0 0 16px;
+            font-weight: 400;
+            color: #666;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 420px;
+        }
+        .note {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #555;
+        }
+        .legend-note {
+            margin-top: 6px;
+            font-size: 12px;
+            color: #777;
+        }
+        @media (max-width: 600px) {
+            .chart-wrapper {
+                height: 360px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ABT 自由现金流收益质量（Quality of Income Ratio）</h1>
+    <h2>Fiscal Years 2016 - 2024</h2>
+
+    <div class="chart-wrapper">
+        <canvas id="qoiChart"></canvas>
+    </div>
+
+    <div class="legend-note">
+        提示：将鼠标悬停在柱状条上可查看精确数值。
+    </div>
+    <div class="note">
+        数据来源：用户提供的 ABT 2016–2024 年自由现金流收益质量（Quality of Income Ratio）结果。
+    </div>
+</div>
+
+<script>
+(function() {
+    // 检查 Chart 是否成功加载
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js 未成功加载。请检查网络或 CDN 访问。');
+        return;
+    }
+
+    var canvas = document.getElementById('qoiChart');
+    if (!canvas) {
+        console.error('未找到 canvas 元素 #qoiChart');
+        return;
+    }
+
+    var ctx = canvas.getContext('2d');
+
+    var fiscalYears = [
+        "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+
+    var qoiValues = [
+        0.6960017383746198,
+        1.1155617865011016,
+        0.8845829823083403,
+        0.8068376068376069,
+        0.916802042237178,
+        0.8268959020254357,
+        0.8238885544758793,
+        0.7502583178342633,
+        0.8521358159912377
+    ];
+
+    function formatRatio(value) {
+        var num = Number(value);
+        if (isNaN(num)) return '';
+        return num.toFixed(2);
+    }
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: fiscalYears,
+            datasets: [{
+                label: '自由现金流收益质量 (QoI Ratio)',
+                data: qoiValues,
+                backgroundColor: 'rgba(56, 149, 211, 0.65)',
+                borderColor: 'rgba(56, 149, 211, 1)',
+                borderWidth: 1.5,
+                hoverBackgroundColor: 'rgba(31, 119, 180, 0.85)',
+                hoverBorderColor: 'rgba(31, 119, 180, 1)',
+                borderRadius: 6,
+                barPercentage: 0.6,
+                categoryPercentage: 0.7
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: 'rgba(15, 23, 42, 0.92)',
+                    padding: 10,
+                    titleFont: { size: 12, weight: '600' },
+                    bodyFont: { size: 12 },
+                    callbacks: {
+                        label: function(context) {
+                            var value = context.parsed.y;
+                            return ' QoI Ratio: ' + formatRatio(value);
+                        }
+                    }
+                },
+                title: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(148, 163, 184, 0.35)',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 11
+                        },
+                        callback: function(value) {
+                            return Number(value).toFixed(1);
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: '质量比率 (倍数)',
+                        font: {
+                            size: 12,
+                            weight: '500'
+                        }
+                    },
+                    suggestedMax: 1.3
+                }
+            }
+        }
+    });
+})();
+</script>
+</body>
+</html>

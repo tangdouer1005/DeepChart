@@ -1,0 +1,103 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a ranked horizontal bar chart showing the top 15 countries in the 2026 IBEI by `balance-adjusted pillar strength`, where the plotted value is `the average of ease_of_operating_business, business_incentives, and market_perception minus the spread between the country's highest and lowest pillar scores`, values are expressed in index points, all 125 countries on pages 30-294 are eligible, and bars are sorted from highest to lowest after the derived metric is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "index points",
+  "sort_rule": "descending by balance_adjusted_pillar_strength",
+  "selection_rule": "top 15 countries out of all 125",
+  "records": [
+    {
+      "entity": "Singapore",
+      "balance_adjusted_pillar_strength": 79.833333,
+      "three_pillar_average": 94.958333,
+      "pillar_spread": 15.125
+    },
+    {
+      "entity": "United Kingdom",
+      "balance_adjusted_pillar_strength": 73.025,
+      "three_pillar_average": 83.39,
+      "pillar_spread": 10.365
+    },
+    {
+      "entity": "Estonia",
+      "balance_adjusted_pillar_strength": 67.474333,
+      "three_pillar_average": 80.241333,
+      "pillar_spread": 12.767
+    },
+    {
+      "entity": "Taiwan",
+      "balance_adjusted_pillar_strength": 67.412,
+      "three_pillar_average": 78.117,
+      "pillar_spread": 10.705
+    },
+    {
+      "entity": "United States",
+      "balance_adjusted_pillar_strength": 64.872,
+      "three_pillar_average": 88.353,
+      "pillar_spread": 23.481
+    },
+    {
+      "entity": "Israel",
+      "balance_adjusted_pillar_strength": 64.521,
+      "three_pillar_average": 72.545,
+      "pillar_spread": 8.024
+    },
+    {
+      "entity": "Malaysia",
+      "balance_adjusted_pillar_strength": 62.593667,
+      "three_pillar_average": 71.912667,
+      "pillar_spread": 9.319
+    },
+    {
+      "entity": "Cyprus",
+      "balance_adjusted_pillar_strength": 59.544333,
+      "three_pillar_average": 73.190333,
+      "pillar_spread": 13.646
+    },
+    {
+      "entity": "Hungary",
+      "balance_adjusted_pillar_strength": 58.077667,
+      "three_pillar_average": 69.249667,
+      "pillar_spread": 11.172
+    },
+    {
+      "entity": "Switzerland",
+      "balance_adjusted_pillar_strength": 57.791,
+      "three_pillar_average": 79.054,
+      "pillar_spread": 21.263
+    },
+    {
+      "entity": "Lithuania",
+      "balance_adjusted_pillar_strength": 55.284,
+      "three_pillar_average": 72.207,
+      "pillar_spread": 16.923
+    },
+    {
+      "entity": "Qatar",
+      "balance_adjusted_pillar_strength": 54.614,
+      "three_pillar_average": 67.016,
+      "pillar_spread": 12.402
+    },
+    {
+      "entity": "Luxembourg",
+      "balance_adjusted_pillar_strength": 54.264,
+      "three_pillar_average": 77.309,
+      "pillar_spread": 23.045
+    },
+    {
+      "entity": "Bulgaria",
+      "balance_adjusted_pillar_strength": 53.888667,
+      "three_pillar_average": 72.947667,
+      "pillar_spread": 19.059
+    },
+    {
+      "entity": "United Arab Emirates",
+      "balance_adjusted_pillar_strength": 53.861333,
+      "three_pillar_average": 80.854333,
+      "pillar_spread": 26.993
+    }
+  ],
+  "chart_title": "IBEI 2026 Top 15 by Balance-Adjusted Pillar Strength",
+  "metric_field": "balance_adjusted_pillar_strength",
+  "x_label": "balance-adjusted pillar strength (index points)"
+}

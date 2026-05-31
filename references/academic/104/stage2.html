@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 400px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // 1. Data Source
+        
+        const data = {"x_vals": [-2.0, -0.3, 0.0, 0.3979, 0.6989, 1.0], "raw_data": {"B16-F0 WT": [[100, 100, 100], [106.5217, 104.9917, 129.6482], [109.9638, 116.4725, 116.9179], [86.23188, 89.35108, 92.62982], [61.23188, 55.24126, 53.76884], [36.41304, 31.78037, 30.48576]], "B16-F0 Fsp1 KO": [[100, 100, 100], [110.9756, 105.0715, 107.0423], [100.813, 89.20676, 99.37402], [61.11111, 56.69701, 62.28482], [36.99187, 38.23147, 40.37559], [30.4878, 27.56827, 30.51643]], "LN7-1134BL WT": [[100, 100, 100], [83.71336, 88.78101, 83.44444], [70.03257, 76.05178, 74], [44.84256, 48.00431, 51], [28.77307, 30.52859, 31.44444], [23.88708, 24.59547, 26.88889]], "LN7-1134BL Fsp1 KO": [[100, 100, 100], [66.82879, 68.39482, 56.55022], [58.85214, 55.2343, 43.34061], [33.07393, 32.00399, 31.33188], [21.49805, 25.92223, 21.61572], [17.89883, 17.54736, 16.48472]]}, "stats": {"B16-F0 WT": {"mean": [100.0, 113.72053333333334, 114.45139999999999, 89.40426000000001, 56.74732666666667, 32.893056666666666], "std": [0.0, 13.814961059783464, 3.8927510336521616, 3.199301508954724, 3.9529000890148147, 3.1163625853281807]}, "B16-F0 Fsp1 KO": {"mean": [100.0, 107.69646666666667, 96.46459333333333, 60.03098, 38.53297666666667, 29.524166666666662], "std": [0.0, 3.0059191145693416, 6.326513603947543, 2.9463393833195806, 1.7118907564834094, 1.6939166883980263]}, "LN7-1134BL WT": {"mean": [100.0, 85.31293666666666, 73.36145, 47.94895666666667, 30.2487, 25.123813333333334], "std": [0.0, 3.0064479000364073, 3.0599888615646886, 3.079093183395614, 1.3575007286554213, 1.5691003242091732]}, "LN7-1134BL Fsp1 KO": {"mean": [100.0, 63.92461, 52.475683333333336, 32.1366, 23.012, 17.310303333333334], "std": [0.0, 6.434231375564603, 8.115378313451156, 0.8785633783057405, 2.5210197434570003, 0.7362565248833686]}}};
+        const x_vals = data.x_vals;
+        const raw_data = data.raw_data;
+        const stats = data.stats;
+        
+        // Populate processedData from stats
+        const processedData = {};
+        for (const [key, stat] of Object.entries(stats)) {
+            processedData[key] = { means: stat.mean, stds: stat.std };
+        }
+
+        // 3. Curve Fitting (Nelder-Mead implementation for 4PL)
+        // 4PL Function: Bottom + (Top - Bottom) / (1 + 10^((x - LogEC50) * HillSlope))
+        // Note: Using (x - LogEC50) to ensure positive HillSlope results in a decreasing curve (Top -> Bottom)
+        function sigmoid(x, [Top, Bottom, LogEC50, HillSlope]) {
+            return Bottom + (Top - Bottom) / (1 + Math.pow(10, (x - LogEC50) * HillSlope));
+        }
+
+        function objective(params, xData, yData) {
+            // Apply bounds to match Python implementation and ensure stability
+            // Top: 80-130, Bottom: 0-50, LogEC50: -2 to 1.5, HillSlope: 0.1 to 10
+            if (params[0] < 80 || params[0] > 130 ||
+                params[1] < 0 || params[1] > 50 ||
+                params[2] < -2 || params[2] > 1.5 ||
+                params[3] < 0.1 || params[3] > 10) {
+                return 1e9; // Penalty
+            }
+
+            let sse = 0;
+            for (let i = 0; i < xData.length; i++) {
+                const pred = sigmoid(xData[i], params);
+                sse += Math.pow(pred - yData[i], 2);
+            }
+            return sse;
+        }
+
+        // Simple Nelder-Mead Optimizer
+        function nelderMead(f, x0, args) {
+            const dim = x0.length;
+            const alpha = 1, gamma = 2, rho = 0.5, sigma = 0.5;
+            let simplex = [];
+            
+            // Initial simplex
+            simplex.push({ p: [...x0], v: f(x0, ...args) });
+            for (let i = 0; i < dim; i++) {
+                const p = [...x0];
+                p[i] = p[i] !== 0 ? p[i] * 1.05 : 0.00025;
+                simplex.push({ p: p, v: f(p, ...args) });
+            }
+
+            const maxIter = 10000;
+            for (let iter = 0; iter < maxIter; iter++) {
+                simplex.sort((a, b) => a.v - b.v);
+                
+                // Centroid
+                const centroid = Array(dim).fill(0);
+                for (let i = 0; i < dim; i++) {
+                    for (let j = 0; j < dim; j++) {
+                        centroid[j] += simplex[i].p[j];
+                    }
+                }
+                for (let j = 0; j < dim; j++) {
+                    centroid[j] /= dim;
+                }
+
+                // Reflection
+                const reflected = centroid.map((c, j) => c + alpha * (c - simplex[dim].p[j]));
+                const vReflected = f(reflected, ...args);
+
+                if (vReflected < simplex[0].v) {
+                    // Expansion
+                    const expanded = centroid.map((c, j) => c + gamma * (reflected[j] - centroid[j]));
+                    const vExpanded = f(expanded, ...args);
+                    if (vExpanded < vReflected) {
+                        simplex[dim] = { p: expanded, v: vExpanded };
+                    } else {
+                        simplex[dim] = { p: reflected, v: vReflected };
+                    }
+                } else if (vReflected < simplex[dim - 1].v) {
+                    simplex[dim] = { p: reflected, v: vReflected };
+                } else {
+                    // Contraction
+                    let contracted;
+                    let vContracted;
+                    if (vReflected < simplex[dim].v) {
+                        contracted = centroid.map((c, j) => c + rho * (reflected[j] - centroid[j]));
+                        vContracted = f(contracted, ...args);
+                        if (vContracted < vReflected) {
+                            simplex[dim] = { p: contracted, v: vContracted };
+                        } else {
+                            // Shrink
+                            for (let i = 1; i <= dim; i++) {
+                                simplex[i].p = simplex[0].p.map((c, j) => c + sigma * (simplex[i].p[j] - c));
+                                simplex[i].v = f(simplex[i].p, ...args);
+                            }
+                        }
+                    } else {
+                        contracted = centroid.map((c, j) => c + rho * (simplex[dim].p[j] - centroid[j]));
+                        vContracted = f(contracted, ...args);
+                        if (vContracted < simplex[dim].v) {
+                            simplex[dim] = { p: contracted, v: vContracted };
+                        } else {
+                            // Shrink
+                            for (let i = 1; i <= dim; i++) {
+                                simplex[i].p = simplex[0].p.map((c, j) => c + sigma * (simplex[i].p[j] - c));
+                                simplex[i].v = f(simplex[i].p, ...args);
+                            }
+                        }
+                    }
+                }
+                
+                if (simplex[dim].v - simplex[0].v < 1e-6) break;
+            }
+            return simplex[0].p;
+        }
+
+        // Fit data
+        const fittedCurves = {};
+        for (const [key, data] of Object.entries(processedData)) {
+            // Provide better initial guesses to help optimizer
+            let initialLogEC50 = 0.0;
+            if (key.includes("LN7")) {
+                initialLogEC50 = key.includes("KO") ? -0.5 : 0.0;
+            } else {
+                initialLogEC50 = 0.5;
+            }
+            
+            const p0 = [100, 20, initialLogEC50, 1.0]; // Top, Bottom, LogEC50, HillSlope
+            const params = nelderMead(objective, p0, [x_vals, data.means]);
+            
+            // Generate curve points
+            const curvePoints = [];
+            for (let x = -2; x <= 1.1; x += 0.05) {
+                curvePoints.push([x, sigmoid(x, params)]);
+            }
+            fittedCurves[key] = curvePoints;
+        }
+
+        // 4. ECharts Configuration
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const colors = {
+            "B16-F0 WT": "black",
+            "B16-F0 Fsp1 KO": "black",
+            "LN7-1134BL WT": "gray",
+            "LN7-1134BL Fsp1 KO": "#87CEFA"
+        };
+
+        const series = [];
+        
+        Object.keys(raw_data).forEach(key => {
+            const data = processedData[key];
+            const color = colors[key];
+            const isHollow = key.includes("KO");
+            const isTriangle = key.includes("LN7");
+            const isInverted = isTriangle && isHollow; 
+            
+            // Scatter points (Means)
+            const scatterData = x_vals.map((x, i) => [x, data.means[i]]);
+            
+            series.push({
+                name: key,
+                type: 'scatter',
+                data: scatterData,
+                symbol: isTriangle ? 'triangle' : 'circle', 
+                symbolSize: 8,
+                itemStyle: {
+                    color: isHollow ? 'white' : color,
+                    borderColor: color,
+                    borderWidth: 1.5
+                },
+                symbolRotate: isInverted ? 180 : 0, 
+                z: 10
+            });
+
+            // Error bars
+            const errorData = x_vals.map((x, i) => {
+                const y = data.means[i];
+                const s = data.stds[i];
+                return {
+                    value: [x, y], 
+                    high: y + s,
+                    low: y - s
+                };
+            });
+            
+            series.push({
+                type: 'custom',
+                renderItem: function(params, api) {
+                    const xValue = api.value(0);
+                    const high = errorData[params.dataIndex].high;
+                    const low = errorData[params.dataIndex].low;
+                    
+                    const start = api.coord([xValue, high]);
+                    const end = api.coord([xValue, low]);
+                    
+                    const style = api.style({ stroke: color, lineWidth: 1.5 });
+                    
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: start[0], y1: start[1], x2: end[0], y2: end[1] }, style: style },
+                            { type: 'line', shape: { x1: start[0]-3, y1: start[1], x2: start[0]+3, y2: start[1] }, style: style },
+                            { type: 'line', shape: { x1: end[0]-3, y1: end[1], x2: end[0]+3, y2: end[1] }, style: style }
+                        ]
+                    };
+                },
+                data: scatterData,
+                z: 9
+            });
+
+            // Fitted Line
+            series.push({
+                name: key + '_line',
+                type: 'line',
+                data: fittedCurves[key],
+                showSymbol: false,
+                lineStyle: {
+                    color: color,
+                    width: 2,
+                    type: key.includes("KO") ? 'dashed' : 'solid'
+                },
+                z: 8
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 60, left: 60 },
+            xAxis: {
+                name: 'log[RSL3 (μM)]',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: -2.0, max: 1.1,
+                interval: 1,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: 'Relative viability (%)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: 0, max: 135,
+                interval: 25,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            legend: {
+                data: Object.keys(raw_data),
+                left: 10, bottom: 10,
+                orient: 'vertical',
+                itemGap: 5,
+                textStyle: { fontSize: 10 },
+                icon: 'line' 
+            },
+            series: series,
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'a', font: 'bold 20px Arial' } }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

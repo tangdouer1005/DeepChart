@@ -1,0 +1,511 @@
+{
+  "report_code": "018",
+  "query_id": "06",
+  "source_fields": [
+    "Company",
+    "Stage",
+    "Total raised"
+  ],
+  "records": [
+    {
+      "company": "Affinity",
+      "stage": "Seed VC",
+      "total_raised_m": 11.0
+    },
+    {
+      "company": "interface.ai",
+      "stage": "Debt",
+      "total_raised_m": 40.0
+    },
+    {
+      "company": "Uzum",
+      "stage": "Series B",
+      "total_raised_m": 179.5
+    },
+    {
+      "company": "9Fin",
+      "stage": "Series B",
+      "total_raised_m": 83.9
+    },
+    {
+      "company": "Claira",
+      "stage": "Seed VC - II",
+      "total_raised_m": 7.0
+    },
+    {
+      "company": "Baanx",
+      "stage": "Series A",
+      "total_raised_m": 34.3
+    },
+    {
+      "company": "Beam",
+      "stage": "Seed VC - II",
+      "total_raised_m": 14.0
+    },
+    {
+      "company": "Breez Development",
+      "stage": "Seed VC - II",
+      "total_raised_m": 9.5
+    },
+    {
+      "company": "BVNK",
+      "stage": "Series B - III",
+      "total_raised_m": 91.7
+    },
+    {
+      "company": "Conduit",
+      "stage": "Series A",
+      "total_raised_m": 59.0
+    },
+    {
+      "company": "Crossmint",
+      "stage": "Series A - II",
+      "total_raised_m": 23.6
+    },
+    {
+      "company": "Due",
+      "stage": "Seed VC - III",
+      "total_raised_m": 7.3
+    },
+    {
+      "company": "Noah",
+      "stage": "Seed VC - III",
+      "total_raised_m": 22.7
+    },
+    {
+      "company": "Rain",
+      "stage": "Series B",
+      "total_raised_m": 88.8
+    },
+    {
+      "company": "RD Technologies",
+      "stage": "Series A - II",
+      "total_raised_m": 47.8
+    },
+    {
+      "company": "RedotPay",
+      "stage": "Series A - II",
+      "total_raised_m": 87.0
+    },
+    {
+      "company": "Relai",
+      "stage": "Series A - IV",
+      "total_raised_m": 21.8
+    },
+    {
+      "company": "Transak",
+      "stage": "Series B",
+      "total_raised_m": 46.7
+    },
+    {
+      "company": "Banxware",
+      "stage": "Series A - II",
+      "total_raised_m": 44.0
+    },
+    {
+      "company": "BKN301",
+      "stage": "Series B",
+      "total_raised_m": 40.1
+    },
+    {
+      "company": "CredibleX",
+      "stage": "Line of Credit",
+      "total_raised_m": 155.0
+    },
+    {
+      "company": "Fimple",
+      "stage": "Series A",
+      "total_raised_m": 20.5
+    },
+    {
+      "company": "FISPAN",
+      "stage": "Series B",
+      "total_raised_m": 44.5
+    },
+    {
+      "company": "NymCard",
+      "stage": "Series B - II",
+      "total_raised_m": 66.1
+    },
+    {
+      "company": "Abacum",
+      "stage": "Series B",
+      "total_raised_m": 92.2
+    },
+    {
+      "company": "Auditoria.AI",
+      "stage": "Series B",
+      "total_raised_m": 60.5
+    },
+    {
+      "company": "Campfire",
+      "stage": "Series B",
+      "total_raised_m": 104.0
+    },
+    {
+      "company": "Clara",
+      "stage": "Debt",
+      "total_raised_m": 550.0
+    },
+    {
+      "company": "Crowded",
+      "stage": "Series A",
+      "total_raised_m": 18.3
+    },
+    {
+      "company": "Datricks",
+      "stage": "Series A",
+      "total_raised_m": 15.0
+    },
+    {
+      "company": "Finmo",
+      "stage": "Series A",
+      "total_raised_m": 18.5
+    },
+    {
+      "company": "Mendel",
+      "stage": "Series B",
+      "total_raised_m": 130.6
+    },
+    {
+      "company": "Xelix",
+      "stage": "Series B",
+      "total_raised_m": 165.1
+    },
+    {
+      "company": "Amlyze",
+      "stage": "Seed VC - II",
+      "total_raised_m": 5.1
+    },
+    {
+      "company": "Casap",
+      "stage": "Series A",
+      "total_raised_m": 33.6
+    },
+    {
+      "company": "Greenlite",
+      "stage": "Series A",
+      "total_raised_m": 20.3
+    },
+    {
+      "company": "Hawk",
+      "stage": "Series C",
+      "total_raised_m": 84.0
+    },
+    {
+      "company": "Bolto",
+      "stage": "Seed VC",
+      "total_raised_m": 8.1
+    },
+    {
+      "company": "Borderless",
+      "stage": "Seed VC - III",
+      "total_raised_m": 32.0
+    },
+    {
+      "company": "Every",
+      "stage": "Series A",
+      "total_raised_m": 32.5
+    },
+    {
+      "company": "InstaPay",
+      "stage": "Series A - II",
+      "total_raised_m": 7.8
+    },
+    {
+      "company": "Jet HR",
+      "stage": "Series A",
+      "total_raised_m": 47.3
+    },
+    {
+      "company": "Khazna",
+      "stage": "Series A - II",
+      "total_raised_m": 54.7
+    },
+    {
+      "company": "Niural",
+      "stage": "Series A",
+      "total_raised_m": 41.5
+    },
+    {
+      "company": "SeamlessHR",
+      "stage": "Series A - II",
+      "total_raised_m": 19.1
+    },
+    {
+      "company": "Agora",
+      "stage": "Series A",
+      "total_raised_m": 69.7
+    },
+    {
+      "company": "Cryptio",
+      "stage": "Series A - II",
+      "total_raised_m": 26.2
+    },
+    {
+      "company": "DigiFT",
+      "stage": "Seed VC - II",
+      "total_raised_m": 21.5
+    },
+    {
+      "company": "Komainu",
+      "stage": "Series B",
+      "total_raised_m": 100.0
+    },
+    {
+      "company": "Maple Finance",
+      "stage": "Seed VC - III",
+      "total_raised_m": 11.4
+    },
+    {
+      "company": "Securitize",
+      "stage": "Series C - III",
+      "total_raised_m": 203.0
+    },
+    {
+      "company": "Utila",
+      "stage": "Series A - II",
+      "total_raised_m": 51.5
+    },
+    {
+      "company": "Delos",
+      "stage": "Series A",
+      "total_raised_m": 22.3
+    },
+    {
+      "company": "Descartes Underwriting",
+      "stage": "Series B - II",
+      "total_raised_m": 141.8
+    },
+    {
+      "company": "Further AI",
+      "stage": "Series A",
+      "total_raised_m": 30.5
+    },
+    {
+      "company": "Skarlett",
+      "stage": "Seed VC",
+      "total_raised_m": 13.6
+    },
+    {
+      "company": "Sixfold",
+      "stage": "Series A",
+      "total_raised_m": 21.5
+    },
+    {
+      "company": "Quandri",
+      "stage": "Series A - II",
+      "total_raised_m": 22.0
+    },
+    {
+      "company": "Casca",
+      "stage": "Series A",
+      "total_raised_m": 33.4
+    },
+    {
+      "company": "CrediLinq",
+      "stage": "Series A",
+      "total_raised_m": 11.9
+    },
+    {
+      "company": "InDebted",
+      "stage": "Series C",
+      "total_raised_m": 93.8
+    },
+    {
+      "company": "Murphy",
+      "stage": "Seed VC",
+      "total_raised_m": 15.0
+    },
+    {
+      "company": "Nada",
+      "stage": "Series A",
+      "total_raised_m": 30.3
+    },
+    {
+      "company": "Peach Finance",
+      "stage": "Series A - II",
+      "total_raised_m": 38.0
+    },
+    {
+      "company": "PostEx",
+      "stage": "Seed VC - IV",
+      "total_raised_m": 15.9
+    },
+    {
+      "company": "Scienaptic",
+      "stage": "Unattributed",
+      "total_raised_m": 17.1
+    },
+    {
+      "company": "Versana",
+      "stage": "Series B",
+      "total_raised_m": 66.0
+    },
+    {
+      "company": "WonderLend Hubs",
+      "stage": "Seed VC - II",
+      "total_raised_m": 1.6
+    },
+    {
+      "company": "Aspora",
+      "stage": "Series B",
+      "total_raised_m": 94.3
+    },
+    {
+      "company": "Capi",
+      "stage": "Series A",
+      "total_raised_m": 19.5
+    },
+    {
+      "company": "Catena Labs",
+      "stage": "Series A",
+      "total_raised_m": 18.0
+    },
+    {
+      "company": "Easebuzz",
+      "stage": "Series A",
+      "total_raised_m": 34.0
+    },
+    {
+      "company": "Enza",
+      "stage": "Seed VC",
+      "total_raised_m": 6.8
+    },
+    {
+      "company": "Finom",
+      "stage": "Series C",
+      "total_raised_m": 345.5
+    },
+    {
+      "company": "Haball",
+      "stage": "Seed VC",
+      "total_raised_m": 52.0
+    },
+    {
+      "company": "Highnote",
+      "stage": "Series B",
+      "total_raised_m": 169.0
+    },
+    {
+      "company": "Payrails",
+      "stage": "Series A",
+      "total_raised_m": 52.8
+    },
+    {
+      "company": "PayTic",
+      "stage": "Incubator/Accelerator",
+      "total_raised_m": 6.7
+    },
+    {
+      "company": "Toku",
+      "stage": "Series A",
+      "total_raised_m": 66.6
+    },
+    {
+      "company": "Yaspa",
+      "stage": "Series A",
+      "total_raised_m": 13.3
+    },
+    {
+      "company": "Yuno",
+      "stage": "Series A",
+      "total_raised_m": 35.0
+    },
+    {
+      "company": "Ziina",
+      "stage": "Series A",
+      "total_raised_m": 30.9
+    },
+    {
+      "company": "Candidly",
+      "stage": "Series B",
+      "total_raised_m": 42.1
+    },
+    {
+      "company": "Debbie",
+      "stage": "Seed VC",
+      "total_raised_m": 7.9
+    },
+    {
+      "company": "Grifin",
+      "stage": "Series A",
+      "total_raised_m": 11.0
+    },
+    {
+      "company": "Alpaca",
+      "stage": "Series C",
+      "total_raised_m": 138.9
+    },
+    {
+      "company": "Axyon AI",
+      "stage": "Series B - III",
+      "total_raised_m": 12.6
+    },
+    {
+      "company": "BridgeWise",
+      "stage": "Series A - II",
+      "total_raised_m": 40.5
+    },
+    {
+      "company": "Conquest Planning",
+      "stage": "Series B",
+      "total_raised_m": 106.1
+    },
+    {
+      "company": "Dub",
+      "stage": "Series A",
+      "total_raised_m": 54.5
+    },
+    {
+      "company": "Flanks",
+      "stage": "Series B",
+      "total_raised_m": 25.7
+    },
+    {
+      "company": "Jump",
+      "stage": "Series A",
+      "total_raised_m": 24.6
+    },
+    {
+      "company": "Lightyear",
+      "stage": "Series B",
+      "total_raised_m": 58.0
+    },
+    {
+      "company": "ModernFi",
+      "stage": "Series B - II",
+      "total_raised_m": 58.3
+    },
+    {
+      "company": "Retirable",
+      "stage": "Series A",
+      "total_raised_m": 26.4
+    },
+    {
+      "company": "Thndr",
+      "stage": "Series A - II",
+      "total_raised_m": 36.0
+    },
+    {
+      "company": "Wealth.com",
+      "stage": "Series A - II",
+      "total_raised_m": 46.0
+    },
+    {
+      "company": "Zocks",
+      "stage": "Corporate Minority",
+      "total_raised_m": 19.3
+    },
+    {
+      "company": "Unique",
+      "stage": "Series A",
+      "total_raised_m": 52.5
+    },
+    {
+      "company": "Upstage",
+      "stage": "Series B - IV",
+      "total_raised_m": 143.8
+    }
+  ]
+}

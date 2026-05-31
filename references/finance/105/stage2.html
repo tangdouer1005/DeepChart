@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <title>hd 斯隆比率（Sloan Ratio / Accruals Ratio）2016-2024</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #555;
+    }
+
+    .chart-container {
+      position: relative;
+      max-width: 900px;
+      height: 420px; /* explicit height helps avoid layout issues */
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 18px 18px 10px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      box-sizing: border-box;
+    }
+
+    canvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .legend-hint {
+      font-size: 11px;
+      color: #777;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>hd 斯隆比率（Sloan Ratio / Accruals Ratio）变化</h1>
+    <h2>2016–2024 年度</h2>
+    <canvas id="sloanRatioChart" aria-label="hd 斯隆比率 2016 至 2024 的变化柱状图" role="img"></canvas>
+    <div class="legend-hint">提示：将鼠标悬停在柱子上查看精确数值。</div>
+  </div>
+
+  <div class="note">
+    数据来源：用户提供的年度 hd 斯隆比率（RESULT_Sloan）。<br>
+    单位：绝对数值（无量纲），通常用于衡量盈余质量（应计项占比）。
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script>
+    // Wrap in DOMContentLoaded to ensure canvas and Chart are ready
+    document.addEventListener('DOMContentLoaded', function () {
+      const canvas = document.getElementById('sloanRatioChart');
+      if (!canvas) {
+        console.error('Canvas element #sloanRatioChart not found.');
+        return;
+      }
+
+      const ctx = canvas.getContext('2d');
+
+      const years = [
+        '2016',
+        '2017',
+        '2018',
+        '2019',
+        '2020',
+        '2021',
+        '2022',
+        '2023',
+        '2024'
+      ];
+
+      const sloanValues = [
+        -0.0573125643978422,
+        -0.0427059580190609,
+        -0.0777415852334419,
+        -0.046175394207744,
+        -0.052100505045202,
+        -0.0980651304826091,
+        -0.0019374267322771,
+        0.0335758254057078,
+        -0.0788233371465925
+      ];
+
+      // Compute y-axis padding
+      const minVal = Math.min(...sloanValues);
+      const maxVal = Math.max(...sloanValues);
+      const baseRange = maxVal - minVal;
+      const padding = (baseRange || 0.05) * 0.25;
+      const suggestedMin = minVal - padding;
+      const suggestedMax = maxVal + padding;
+
+      // Colors: positive orange, negative blue
+      const backgroundColors = sloanValues.map(function (v) {
+        return v >= 0
+          ? 'rgba(249, 115, 22, 0.65)'
+          : 'rgba(37, 99, 235, 0.65)';
+      });
+
+      const borderColors = sloanValues.map(function (v) {
+        return v >= 0
+          ? 'rgba(234, 88, 12, 1)'
+          : 'rgba(30, 64, 175, 1)';
+      });
+
+      const hoverBackgroundColors = sloanValues.map(function (v) {
+        return v >= 0
+          ? 'rgba(249, 115, 22, 0.9)'
+          : 'rgba(37, 99, 235, 0.9)';
+      });
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: '斯隆比率（RESULT_Sloan）',
+              data: sloanValues,
+              backgroundColor: backgroundColors,
+              borderColor: borderColors,
+              hoverBackgroundColor: hoverBackgroundColors,
+              borderWidth: 1.3,
+              borderRadius: 4,
+              maxBarThickness: 42
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'nearest',
+            intersect: true
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                pointStyle: 'rectRounded',
+                boxWidth: 14,
+                padding: 16
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(15, 23, 42, 0.95)',
+              titleColor: '#e5e7eb',
+              bodyColor: '#f9fafb',
+              borderColor: 'rgba(148, 163, 184, 0.8)',
+              borderWidth: 1,
+              padding: 10,
+              displayColors: true,
+              callbacks: {
+                label: function (context) {
+                  const value = context.parsed.y;
+                  return '  ' + value.toFixed(6);
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                maxRotation: 0,
+                minRotation: 0
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: '斯隆比率（Sloan Ratio）',
+                font: {
+                  size: 11
+                }
+              },
+              grid: {
+                color: 'rgba(203, 213, 225, 0.6)'
+              },
+              suggestedMin: suggestedMin,
+              suggestedMax: suggestedMax,
+              ticks: {
+                callback: function (value) {
+                  return Number(value).toFixed(2);
+                }
+              }
+            }
+          },
+          animation: {
+            duration: 800,
+            easing: 'easeOutCubic'
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

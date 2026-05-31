@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MSFT 现金消耗跑道（零收入情景） 2016–2024</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Chart.js (latest 4.x) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            margin: 0;
+            padding: 24px;
+            background: #fafafa;
+            color: #222;
+        }
+        h1 {
+            font-size: 20px;
+            margin: 0 0 4px 0;
+        }
+        h2 {
+            font-size: 14px;
+            font-weight: normal;
+            margin: 0 0 16px 0;
+            color: #555;
+        }
+        .chart-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 16px 20px 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+        }
+        canvas {
+            max-width: 100%;
+        }
+        .footer-note {
+            max-width: 900px;
+            margin: 10px auto 0;
+            font-size: 11px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="chart-container">
+    <h1>MSFT 现金消耗跑道（月）</h1>
+    <h2>零收入情景（Fiscal Year 2016–2024）</h2>
+    <canvas id="runwayChart"></canvas>
+</div>
+<div class="footer-note">
+    数据来源：用户提供的计算结果（RESULT_Runway_Months），单位为月。
+</div>
+
+<script>
+    // Data from the source provided
+    const fiscalYears = [
+        "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+
+    const runwayMonths = [
+        4.390243902439025,
+        4.658358662613982,
+        6.453518210057174,
+        5.574180881089704,
+        6.040265470319973,
+        6.059427029713516,
+        5.147713625866051,
+        11.33561979421852,
+        5.487092425225945
+    ];
+
+    const ctx = document.getElementById('runwayChart');
+
+    // Create gradient for a cleaner modern look
+    function createGradient(ctx, area) {
+        const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+        gradient.addColorStop(0, 'rgba(59, 130, 246, 0.02)');
+        gradient.addColorStop(1, 'rgba(59, 130, 246, 0.18)');
+        return gradient;
+    }
+
+    let runwayChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: fiscalYears,
+            datasets: [{
+                label: '现金消耗跑道（月）',
+                data: runwayMonths,
+                borderColor: '#2563eb',
+                borderWidth: 2.2,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointBackgroundColor: '#2563eb',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 1.5,
+                tension: 0.25,
+                fill: true,
+                backgroundColor: function(context) {
+                    const chart = context.chart;
+                    const {ctx, chartArea} = chart;
+                    if (!chartArea) {
+                        // Chart has not been drawn yet
+                        return null;
+                    }
+                    return createGradient(ctx, chartArea);
+                }
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            // Give some height in JS to ensure good layout
+            // (canvas will respect container but this helps sizing)
+            layout: {
+                padding: {
+                    top: 10,
+                    right: 16,
+                    bottom: 10,
+                    left: 4
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Fiscal Year',
+                        color: '#374151',
+                        font: {
+                            size: 12
+                        }
+                    },
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: '#4b5563'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Runway（月）',
+                        color: '#374151',
+                        font: {
+                            size: 12
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(148, 163, 184, 0.2)'
+                    },
+                    ticks: {
+                        color: '#4b5563'
+                    },
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        boxWidth: 14,
+                        color: '#111827'
+                    }
+                },
+                tooltip: {
+                    usePointStyle: true,
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.parsed.y;
+                            return ' ' + value.toFixed(2) + ' 个月';
+                        },
+                        title: function(context) {
+                            return 'Fiscal Year ' + context[0].label;
+                        }
+                    }
+                },
+                title: {
+                    display: false
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+                axis: 'x',
+                intersect: false
+            }
+        }
+    });
+</script>
+</body>
+</html>

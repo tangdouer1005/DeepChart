@@ -1,0 +1,57 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a slope chart for the top 8 Cleantech ecosystems by `Ecosystem Value`, comparing `Median Seed Round / Software Engineer Salary` with `Median Series A Round / Software Engineer Salary`, expressed in `engineer-years`, and ordering items descending by the latter.",
+  "chart_type": "slope chart",
+  "value_unit": "engineer-years",
+  "sort_rule": "descending by series_a_engineer_years",
+  "selection_rule": "top 8 ecosystems by Ecosystem Value",
+  "plot_spec": {
+    "title": "Cleantech Salary-Adjusted Funding Ladder",
+    "left_field": "seed_engineer_years",
+    "right_field": "series_a_engineer_years",
+    "left_label": "Seed / Salary",
+    "right_label": "Series A / Salary"
+  },
+  "records": [
+    {
+      "entity": "Beijing",
+      "seed_engineer_years": 34.6429,
+      "series_a_engineer_years": 102.381
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "seed_engineer_years": 8.4034,
+      "series_a_engineer_years": 73.9496
+    },
+    {
+      "entity": "Boston",
+      "seed_engineer_years": 11.0132,
+      "series_a_engineer_years": 66.0793
+    },
+    {
+      "entity": "Tel Aviv - Jerusalem",
+      "seed_engineer_years": 16.6667,
+      "series_a_engineer_years": 64.4444
+    },
+    {
+      "entity": "New York City",
+      "seed_engineer_years": 7.6415,
+      "series_a_engineer_years": 56.6038
+    },
+    {
+      "entity": "Los Angeles",
+      "seed_engineer_years": 6.5312,
+      "series_a_engineer_years": 54.1667
+    },
+    {
+      "entity": "London",
+      "seed_engineer_years": 8.5921,
+      "series_a_engineer_years": 52.6316
+    },
+    {
+      "entity": "Seattle",
+      "seed_engineer_years": 11.4286,
+      "series_a_engineer_years": 42.8571
+    }
+  ]
+}

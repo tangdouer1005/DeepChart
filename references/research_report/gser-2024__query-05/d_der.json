@@ -1,0 +1,55 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a horizontal bar chart for the top 10 ecosystems by `exit realization ratio`, defined as `Exit Amount / Ecosystem Value`, using 2024 card values normalized to percentages, sorted descending by the derived ratio, but include only ecosystems with `Ecosystem Value >= $10B` to avoid tiny-base distortions.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by exit_realization_ratio_percent",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "2024 Exit Realization Ratio",
+    "xlabel": "percent",
+    "value_field": "exit_realization_ratio_percent"
+  },
+  "records": [
+    {
+      "entity": "Kuala Lumpur",
+      "exit_realization_ratio_percent": 87.234
+    },
+    {
+      "entity": "Beijing",
+      "exit_realization_ratio_percent": 63.2381
+    },
+    {
+      "entity": "Tamil Nadu",
+      "exit_realization_ratio_percent": 56.5693
+    },
+    {
+      "entity": "Buenos Aires",
+      "exit_realization_ratio_percent": 55.1181
+    },
+    {
+      "entity": "São Paulo",
+      "exit_realization_ratio_percent": 46.1538
+    },
+    {
+      "entity": "Seoul",
+      "exit_realization_ratio_percent": 43.8819
+    },
+    {
+      "entity": "Boston",
+      "exit_realization_ratio_percent": 40.6886
+    },
+    {
+      "entity": "Melbourne",
+      "exit_realization_ratio_percent": 36.6038
+    },
+    {
+      "entity": "Washington, D.C.",
+      "exit_realization_ratio_percent": 36.2573
+    },
+    {
+      "entity": "Shanghai",
+      "exit_realization_ratio_percent": 31.8015
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GOOG 盈余-现金质量剪刀差 (Earnings Quality Spread) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #222222;
+      --axis: #666666;
+      --bar: #2b8ae2;
+      --bar-hover: #1763a8;
+      --grid: rgba(0, 0, 0, 0.06);
+      --border: rgba(0, 0, 0, 0.12);
+      --tooltip-bg: rgba(0, 0, 0, 0.84);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111827;
+        --fg: #e5e7eb;
+        --axis: #9ca3af;
+        --bar: #3b82f6;
+        --bar-hover: #60a5fa;
+        --grid: rgba(148, 163, 184, 0.35);
+        --border: rgba(148, 163, 184, 0.5);
+        --tooltip-bg: rgba(15, 23, 42, 0.95);
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .chart-wrapper {
+      width: min(960px, 100vw - 2rem);
+      height: 520px; /* Explicit height so Chart.js can compute chartArea */
+      padding: 1.5rem 1.25rem 1.75rem;
+      background: var(--bg);
+      border-radius: 14px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.18),
+        0 0 0 1px var(--border);
+      box-sizing: border-box;
+    }
+
+    .chart-header {
+      margin-bottom: 1rem;
+    }
+
+    .chart-title {
+      margin: 0 0 0.25rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .chart-subtitle {
+      margin: 0;
+      font-size: 0.86rem;
+      color: var(--axis);
+    }
+
+    .chart-legend-inline {
+      margin-top: 0.65rem;
+      font-size: 0.8rem;
+      color: var(--axis);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--bar), var(--bar-hover));
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.1);
+    }
+
+    .chart-canvas-container {
+      position: relative;
+      height: calc(100% - 90px); /* leave space for headers */
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <div class="chart-header">
+      <h1 class="chart-title">
+        GOOG 盈余-现金质量剪刀差 (Earnings Quality Spread)
+      </h1>
+      <p class="chart-subtitle">
+        Fiscal years 2016–2024 · Unit: ratio (Earnings vs. Cash Flow quality)
+      </p>
+      <div class="chart-legend-inline">
+        <span class="legend-dot"></span>
+        <span>年度剪刀差 (RESULT_Spread)</span>
+      </div>
+    </div>
+    <div class="chart-canvas-container">
+      <canvas id="spreadChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Data from source (RESULT_Spread by fiscal year)
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const spreadValues = [
+      0.1051441779538859,
+      0.1339338581986447,
+      0.0801465749952916,
+      0.0793275421121641,
+      0.0834725662230804,
+      0.0460137519811926,
+      0.0870161704382967,
+      0.0728216805444105,
+      0.0590654056539158
+    ];
+
+    // Simple percentage formatter
+    const formatPercent = (value) => (value * 100).toFixed(2) + "%";
+
+    function createChart() {
+      const canvas = document.getElementById("spreadChart");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      // Fallback colors if CSS variables are not available
+      const rootStyles = getComputedStyle(document.documentElement);
+      const axisColor =
+        rootStyles.getPropertyValue("--axis").trim() || "#666666";
+      const gridColor =
+        rootStyles.getPropertyValue("--grid").trim() ||
+        "rgba(0, 0, 0, 0.06)";
+      const borderColor =
+        rootStyles.getPropertyValue("--border").trim() ||
+        "rgba(0, 0, 0, 0.12)";
+      const tooltipBg =
+        rootStyles.getPropertyValue("--tooltip-bg").trim() ||
+        "rgba(15, 23, 42, 0.92)";
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Earnings Quality Spread",
+              data: spreadValues,
+              // Use a solid color to avoid chartArea timing issues
+              backgroundColor: "rgba(59,130,246,0.85)",
+              hoverBackgroundColor: "rgba(37,99,235,0.95)",
+              borderColor: "rgba(15,23,42,0.12)",
+              borderWidth: 1,
+              borderRadius: 6,
+              barPercentage: 0.6,
+              categoryPercentage: 0.7
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: tooltipBg,
+              padding: 10,
+              borderColor: "rgba(148,163,184,0.55)",
+              borderWidth: 1,
+              displayColors: false,
+              callbacks: {
+                title: (items) => `Fiscal Year ${items[0].label}`,
+                label: (ctx) => `剪刀差: ${formatPercent(ctx.raw)}`
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: axisColor,
+                font: {
+                  size: 11
+                }
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grace: "5%",
+              grid: {
+                color: gridColor
+              },
+              border: {
+                color: borderColor
+              },
+              ticks: {
+                color: axisColor,
+                font: {
+                  size: 11
+                },
+                callback: (value) => formatPercent(value)
+              },
+              title: {
+                display: true,
+                text: "RESULT_Spread (ratio)",
+                color: axisColor,
+                font: {
+                  size: 11,
+                  weight: "500"
+                }
+              }
+            }
+          },
+          animation: {
+            duration: 900,
+            easing: "easeOutQuart"
+          }
+        }
+      });
+    }
+
+    // Ensure DOM is ready before creating the chart
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", createChart);
+    } else {
+      createChart();
+    }
+  </script>
+</body>
+</html>

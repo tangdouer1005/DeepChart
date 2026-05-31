@@ -1,0 +1,129 @@
+{
+  "query_id": 9,
+  "query_text": "Create a bubble chart for the top 15 companies after filtering to Stage families with at least 5 companies, where the x-axis is company age in years, the y-axis is whether Valuation is disclosed as 1 for yes and 0 for no, bubble size is months since Last Funded, and color encodes Stage family, to show disclosure patterns by company maturity and funding recency.",
+  "status": "complete",
+  "chart": {
+    "type": "bubble",
+    "title": "Disclosure patterns by age and funding recency",
+    "x_field": "company_age_years",
+    "y_field": "valuation_disclosed_flag",
+    "size_field": "months_since_last_funded",
+    "hue_field": "stage_family",
+    "x_label": "Company age (years)",
+    "y_label": "Valuation disclosed (1=yes, 0=no)",
+    "label_field": "company",
+    "annotate": false,
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "company": "Anthropic",
+      "stage_family": "Series C+",
+      "company_age_years": 5,
+      "valuation_disclosed_flag": 1,
+      "months_since_last_funded": 23
+    },
+    {
+      "company": "Binarly",
+      "stage_family": "seed / pre-seed",
+      "company_age_years": 5,
+      "valuation_disclosed_flag": 1,
+      "months_since_last_funded": 23
+    },
+    {
+      "company": "Cognition AI",
+      "stage_family": "Series A",
+      "company_age_years": 3,
+      "valuation_disclosed_flag": 1,
+      "months_since_last_funded": 23
+    },
+    {
+      "company": "Gather AI",
+      "stage_family": "Series A",
+      "company_age_years": 9,
+      "valuation_disclosed_flag": 0,
+      "months_since_last_funded": 23
+    },
+    {
+      "company": "Iambic Therapeutics",
+      "stage_family": "Series B",
+      "company_age_years": 7,
+      "valuation_disclosed_flag": 1,
+      "months_since_last_funded": 23
+    },
+    {
+      "company": "OpenAI",
+      "stage_family": "strategic / alternative",
+      "company_age_years": 11,
+      "valuation_disclosed_flag": 1,
+      "months_since_last_funded": 23
+    },
+    {
+      "company": "Perplexity AI",
+      "stage_family": "Series B",
+      "company_age_years": 4,
+      "valuation_disclosed_flag": 1,
+      "months_since_last_funded": 23
+    },
+    {
+      "company": "TrojAI",
+      "stage_family": "seed / pre-seed",
+      "company_age_years": 7,
+      "valuation_disclosed_flag": 0,
+      "months_since_last_funded": 23
+    },
+    {
+      "company": "Adaptive ML",
+      "stage_family": "seed / pre-seed",
+      "company_age_years": 3,
+      "valuation_disclosed_flag": 1,
+      "months_since_last_funded": 24
+    },
+    {
+      "company": "Ema Unlimited",
+      "stage_family": "Series A",
+      "company_age_years": 3,
+      "valuation_disclosed_flag": 0,
+      "months_since_last_funded": 24
+    },
+    {
+      "company": "Gesund.ai",
+      "stage_family": "strategic / alternative",
+      "company_age_years": 5,
+      "valuation_disclosed_flag": 0,
+      "months_since_last_funded": 24
+    },
+    {
+      "company": "Ideogram AI",
+      "stage_family": "Series A",
+      "company_age_years": 4,
+      "valuation_disclosed_flag": 0,
+      "months_since_last_funded": 24
+    },
+    {
+      "company": "Magic",
+      "stage_family": "strategic / alternative",
+      "company_age_years": 4,
+      "valuation_disclosed_flag": 1,
+      "months_since_last_funded": 24
+    },
+    {
+      "company": "Mistral AI",
+      "stage_family": "Series A",
+      "company_age_years": 3,
+      "valuation_disclosed_flag": 1,
+      "months_since_last_funded": 24
+    },
+    {
+      "company": "Myko AI",
+      "stage_family": "seed / pre-seed",
+      "company_age_years": 6,
+      "valuation_disclosed_flag": 0,
+      "months_since_last_funded": 24
+    }
+  ],
+  "notes": []
+}

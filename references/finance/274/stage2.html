@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <title>WMT 斯隆比率（Sloan Ratio）2017–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --bar: #2563eb;
+      --bar-hover: #1d4ed8;
+      --negative-line: #ef4444;
+      --tooltip-bg: rgba(17, 24, 39, 0.9);
+      --tooltip-border: #4b5563;
+      --tooltip-color: #f9fafb;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: #1f2937;
+        --bar: #3b82f6;
+        --bar-hover: #60a5fa;
+        --negative-line: #f97316;
+        --tooltip-bg: rgba(15, 23, 42, 0.97);
+        --tooltip-border: #6b7280;
+        --tooltip-color: #f9fafb;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #000 100%);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 18px;
+      padding: 1.5rem 1.8rem 1.8rem;
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(148, 163, 184, 0.1);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: #e5e7eb;
+    }
+
+    .subtitle {
+      font-size: 0.82rem;
+      color: #9ca3af;
+    }
+
+    .legend-inline {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: var(--bar);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.7);
+    }
+
+    .legend-line {
+      width: 18px;
+      height: 0;
+      border-top: 2px dashed var(--negative-line);
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: min(420px, 70vh);
+    }
+
+    footer {
+      margin-top: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.74rem;
+      color: #9ca3af;
+    }
+
+    .note {
+      max-width: 420px;
+      line-height: 1.4;
+    }
+
+    .stat-chip {
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      background: radial-gradient(circle at top left, rgba(51, 65, 85, 0.9), rgba(15, 23, 42, 0.95));
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div>
+        <h1>WMT 斯隆比率（Sloan Ratio / Accruals Ratio）</h1>
+        <div class="subtitle">年度变化：2017–2024（财年）</div>
+      </div>
+      <div class="legend-inline">
+        <div class="legend-item">
+          <span class="legend-color"></span>
+          <span>斯隆比率</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-line"></span>
+          <span>0 基准线</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="chart-container">
+      <canvas id="sloanChart"></canvas>
+    </div>
+
+    <footer>
+      <div class="note">
+        说明：斯隆比率（应计利润占总资产比例）通常越低越好，负值一般表示利润更具现金支撑。
+        本图展示了 WMT 2017–2024 财年的报告数据。
+      </div>
+      <div class="stat-chip">
+        8 年区间 · 全部为负值（现金质量整体较稳健）
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Data from the user (assumed accurate and already validated)
+    const fiscalYears = [
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+    const sloanValues = [
+      -0.0905106850800439,
+      -0.0916084661594111,
+      -0.0994910539218577,
+      -0.0455209636016586,
+      -0.0922879971206014,
+      -0.0422554468026926,
+      -0.0713511919511301,
+      -0.0815357684489045
+    ];
+
+    // Utility to format percentage with 2 decimals
+    const toPercent = (v) => (v * 100).toFixed(2) + "%";
+
+    const ctx = document.getElementById("sloanChart").getContext("2d");
+
+    // Compute appropriate y-axis bounds with a little padding
+    const minValue = Math.min(...sloanValues);
+    const maxValue = Math.max(...sloanValues);
+    const padding = (maxValue - minValue || 0.02) * 0.2;
+    const suggestedMin = minValue - padding;
+    const suggestedMax = maxValue + padding;
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "斯隆比率",
+            data: sloanValues,
+            backgroundColor: function (ctx) {
+              const base = getComputedStyle(document.documentElement)
+                .getPropertyValue("--bar")
+                .trim() || "#2563eb";
+              const hover = getComputedStyle(document.documentElement)
+                .getPropertyValue("--bar-hover")
+                .trim() || "#1d4ed8";
+              return ctx.active ? hover : base;
+            },
+            borderRadius: 8,
+            borderSkipped: false,
+            maxBarThickness: 46,
+            hoverBackgroundColor: function () {
+              const hover = getComputedStyle(document.documentElement)
+                .getPropertyValue("--bar-hover")
+                .trim() || "#1d4ed8";
+              return hover;
+            }
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 4,
+            right: 10,
+            top: 8,
+            bottom: 8
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-bg")
+              .trim() || "rgba(15,23,42,0.95)",
+            borderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-border")
+              .trim() || "rgba(75,85,99,1)",
+            borderWidth: 1,
+            titleColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-color")
+              .trim() || "#f9fafb",
+            bodyColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-color")
+              .trim() || "#f9fafb",
+            padding: 10,
+            cornerRadius: 8,
+            displayColors: false,
+            callbacks: {
+              title: (items) =>
+                "财年 " + (items[0] ? items[0].label : ""),
+              label: (item) => {
+                const v = item.raw;
+                return "斯隆比率: " + v.toFixed(4) + " (" + toPercent(v) + ")";
+              },
+              footer: () => "数值越低通常表示盈利质量越高"
+            },
+            footerFont: {
+              style: "italic"
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#d1d5db",
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            grid: {
+              color: function (context) {
+                const baseColor = getComputedStyle(document.documentElement)
+                  .getPropertyValue("--grid")
+                  .trim() || "#1f2937";
+                if (context.tick.value === 0) {
+                  return getComputedStyle(document.documentElement)
+                    .getPropertyValue("--negative-line")
+                    .trim() || "#ef4444";
+                }
+                return baseColor;
+              },
+              lineWidth: function (context) {
+                return context.tick.value === 0 ? 1.2 : 0.6;
+              },
+              borderDash: function (context) {
+                return context.tick.value === 0 ? [4, 3] : [3, 3];
+              },
+              drawBorder: false
+            },
+            ticks: {
+              color: "#9ca3af",
+              font: {
+                size: 10
+              },
+              callback: (value) => {
+                // show as percentage
+                return (value * 100).toFixed(1) + "%";
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        animation: {
+          duration: 900,
+          easing: "easeOutQuart"
+        },
+        hover: {
+          mode: "nearest",
+          intersect: true
+        }
+      }
+    });
+  </script>
+</body>
+</html>

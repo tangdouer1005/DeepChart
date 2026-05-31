@@ -1,0 +1,114 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016,
+            "Cash & Equivalents": 6988000000,
+            "SG&A": 4684000000,
+            "R&D": 476000000,
+            "Interest Expense": 201000000,
+            "Monthly Burn": 446750000.0
+        },
+        {
+            "Fiscal Year": 2017,
+            "Cash & Equivalents": 4813000000,
+            "SG&A": 4448000000,
+            "R&D": 433000000,
+            "Interest Expense": 307000000,
+            "Monthly Burn": 432333333.3333333
+        },
+        {
+            "Fiscal Year": 2018,
+            "Cash & Equivalents": 9342000000,
+            "SG&A": 3838000000,
+            "R&D": 453000000,
+            "Interest Expense": 748000000,
+            "Monthly Burn": 419916666.6666667
+        },
+        {
+            "Fiscal Year": 2019,
+            "Cash & Equivalents": 5686000000,
+            "SG&A": 4143000000,
+            "R&D": 500000000,
+            "Interest Expense": 798000000,
+            "Monthly Burn": 453416666.6666667
+        },
+        {
+            "Fiscal Year": 2020,
+            "Cash & Equivalents": 5596000000,
+            "SG&A": 4213000000,
+            "R&D": 435000000,
+            "Interest Expense": 697000000,
+            "Monthly Burn": 445416666.6666667
+        },
+        {
+            "Fiscal Year": 2021,
+            "Cash & Equivalents": 5640000000,
+            "SG&A": 32268000000,
+            "R&D": 268000000,
+            "Interest Expense": 712000000,
+            "Monthly Burn": 2770666666.6666665
+        },
+        {
+            "Fiscal Year": 2022,
+            "Cash & Equivalents": 17678000000,
+            "SG&A": 33353000000,
+            "R&D": 268000000,
+            "Interest Expense": 516000000,
+            "Monthly Burn": 2844750000.0
+        },
+        {
+            "Fiscal Year": 2023,
+            "Cash & Equivalents": 8178000000,
+            "SG&A": 4141000000,
+            "R&D": 320000000,
+            "Interest Expense": 469000000,
+            "Monthly Burn": 410833333.3333333
+        },
+        {
+            "Fiscal Year": 2024,
+            "Cash & Equivalents": 6781000000,
+            "SG&A": 4834000000,
+            "R&D": 353000000,
+            "Interest Expense": 594000000,
+            "Monthly Burn": 481750000.0
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "现金消耗跑道 (Cash Burn Runway) - 零收入情景 (Zero Revenue Scenario)": 15.641857862339116
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "现金消耗跑道 (Cash Burn Runway) - 零收入情景 (Zero Revenue Scenario)": 11.132613723978412
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "现金消耗跑道 (Cash Burn Runway) - 零收入情景 (Zero Revenue Scenario)": 22.247271283984915
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "现金消耗跑道 (Cash Burn Runway) - 零收入情景 (Zero Revenue Scenario)": 12.540341848924829
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "现金消耗跑道 (Cash Burn Runway) - 零收入情景 (Zero Revenue Scenario)": 12.563517305893358
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "现金消耗跑道 (Cash Burn Runway) - 零收入情景 (Zero Revenue Scenario)": 2.0356111645813284
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "现金消耗跑道 (Cash Burn Runway) - 零收入情景 (Zero Revenue Scenario)": 6.2142543281483436
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "现金消耗跑道 (Cash Burn Runway) - 零收入情景 (Zero Revenue Scenario)": 19.905882352941177
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "现金消耗跑道 (Cash Burn Runway) - 零收入情景 (Zero Revenue Scenario)": 14.07576543850545
+        }
+    ]
+}

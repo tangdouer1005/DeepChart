@@ -1,0 +1,62 @@
+[
+    {
+        "fraction": 0.0,
+        "heat_power": 14.00411,
+        "h2_power": 2.52974,
+        "percent": 0.0
+    },
+    {
+        "fraction": 0.11111,
+        "heat_power": 13.97707,
+        "h2_power": 2.57286,
+        "percent": 11.111
+    },
+    {
+        "fraction": 0.22222,
+        "heat_power": 13.94922,
+        "h2_power": 2.61728,
+        "percent": 22.222
+    },
+    {
+        "fraction": 0.33333,
+        "heat_power": 13.91881,
+        "h2_power": 2.66577,
+        "percent": 33.333
+    },
+    {
+        "fraction": 0.44444,
+        "heat_power": 13.88884,
+        "h2_power": 2.71358,
+        "percent": 44.444
+    },
+    {
+        "fraction": 0.55556,
+        "heat_power": 13.85947,
+        "h2_power": 2.76041,
+        "percent": 55.556000000000004
+    },
+    {
+        "fraction": 0.66667,
+        "heat_power": 13.82843,
+        "h2_power": 2.80991,
+        "percent": 66.667
+    },
+    {
+        "fraction": 0.77778,
+        "heat_power": 13.79622,
+        "h2_power": 2.86128,
+        "percent": 77.778
+    },
+    {
+        "fraction": 0.88889,
+        "heat_power": 13.76039,
+        "h2_power": 2.91842,
+        "percent": 88.889
+    },
+    {
+        "fraction": 1.0,
+        "heat_power": 13.73574,
+        "h2_power": 2.95773,
+        "percent": 100.0
+    }
+]

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ma 的资本再投资率（2016–2024）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #f7f7f9;
+      color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .chart-container {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+      padding: 20px 24px 28px;
+      max-width: 900px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 14px;
+    }
+    .note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 10px;
+    }
+    canvas {
+      max-height: 480px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>ma 的资本再投资率变化（2016–2024）</h1>
+    <div class="subtitle">指标：RESULT_Reinvestment_Rate（单位：比例）</div>
+    <canvas id="reinvestmentChart"></canvas>
+    <div class="note">数据来源：用户提供的年度资本再投资率（2016–2024 财年）。</div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById("reinvestmentChart").getContext("2d");
+
+    const dataYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+
+    // 原始数据（RESULT_Reinvestment_Rate）
+    const rawRates = [
+      0.6340429369798425,
+      0.1099363436171776,
+      -0.9447124143547496,
+      0.2123514665309205,
+      -0.1303137043008097,
+      0.020006203534151,
+      -0.0346811240326118,
+      0.01008881800204,
+      -0.1642482641357492,
+    ];
+
+    // 将比例转换为百分比显示（例如 0.63 -> 63.40）
+    const ratePercentages = rawRates.map((v) => v * 100);
+
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: dataYears,
+        datasets: [
+          {
+            label: "资本再投资率（%）",
+            data: ratePercentages,
+            borderColor: "rgba(37, 99, 235, 0.9)",
+            backgroundColor: "rgba(37, 99, 235, 0.15)",
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderColor: "#ffffff",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            borderWidth: 2,
+            tension: 0.22,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 6,
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return (
+                  "资本再投资率: " +
+                  value.toFixed(2) +
+                  " %"
+                );
+              },
+            },
+          },
+          title: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              color: "#4b5563",
+            },
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "资本再投资率（%）",
+              color: "#4b5563",
+            },
+            grid: {
+              color: "rgba(156, 163, 175, 0.25)",
+            },
+            ticks: {
+              // 让 0 清晰可见
+              callback: function (value) {
+                return value + " %";
+              },
+            },
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>

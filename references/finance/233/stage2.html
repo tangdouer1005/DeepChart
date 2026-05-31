@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>T-Mobile US (TMUS) Sloan Ratio 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 6px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px 20px;
+      background: #ffffff;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .meta-row span {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+    }
+
+    /* FIX: put the canvas in a container with a sensible, stable aspect ratio */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      /* 2:1 aspect ratio (width : height) using the padding-top hack */
+      padding-top: 50%;
+      /* minimum height so it's readable even on narrow screens */
+      min-height: 320px;
+    }
+
+    .chart-wrapper canvas {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .card {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>T-Mobile US (TMUS) 斯隆比率 / Sloan Ratio</h1>
+    <div class="subtitle">Fiscal years 2016–2024 — Accruals Ratio trend</div>
+
+    <div class="card">
+      <div class="meta-row">
+        <span>Metric: Sloan Ratio (Accruals Ratio)</span>
+        <span>Frequency: Annual (Fiscal Year)</span>
+        <span>Source: Provided dataset</span>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="sloanChart"></canvas>
+      </div>
+
+      <div class="note">
+        Values near zero indicate lower accruals; more negative values generally
+        suggest more cash-based earnings. Data shown is exactly as provided.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const sloanValues = [
+      -0.072860738581904,
+      0.0103331525642341,
+      -0.0141367955198523,
+      -0.042110810658201,
+      -0.0388459086744948,
+      -0.0535644477226627,
+      -0.0679156068063967,
+      -0.0488854947257887,
+      -0.0526993122725315
+    ];
+
+    const ctx = document.getElementById("sloanChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "斯隆比率 (Sloan Ratio)",
+            data: sloanValues,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            tension: 0.25,
+            fill: true,
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        // FIX: allow Chart.js to respect the parent container's aspect ratio
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: { size: 12 }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: (context) => {
+                const value = context.parsed.y;
+                return ` Sloan Ratio: ${value.toFixed(4)}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              font: { size: 12 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Sloan Ratio (Accruals Ratio)",
+              font: { size: 12 }
+            },
+            ticks: {
+              callback: (value) => Number(value).toFixed(2)
+            },
+            grid: {
+              color: "rgba(156, 163, 175, 0.2)"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

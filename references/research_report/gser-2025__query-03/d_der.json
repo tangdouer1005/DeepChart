@@ -1,0 +1,77 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a dumbbell chart for the 10 ecosystems with the largest `stage-step-up gap`, comparing `Median Seed Round` versus `Median Series A Round`, with both values converted to `$M`, and the ecosystems ranked by the derived `Series A / Seed` multiple descending after excluding rows where either round value is missing.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "$M",
+  "sort_rule": "descending by stage_multiple",
+  "selection_rule": "top 10 ecosystems",
+  "plot_spec": {
+    "title": "2025 Seed vs Series A Step-Up",
+    "left_field": "seed_round_musd",
+    "right_field": "series_a_round_musd",
+    "left_label": "Median Seed Round ($M)",
+    "right_label": "Median Series A Round ($M)"
+  },
+  "records": [
+    {
+      "entity": "Nairobi",
+      "seed_round_musd": 0.175,
+      "series_a_round_musd": 14.5,
+      "stage_multiple": 82.8571
+    },
+    {
+      "entity": "Córdoba",
+      "seed_round_musd": 0.1,
+      "series_a_round_musd": 4.0,
+      "stage_multiple": 40.0
+    },
+    {
+      "entity": "Lagos",
+      "seed_round_musd": 0.475,
+      "series_a_round_musd": 16.3,
+      "stage_multiple": 34.3158
+    },
+    {
+      "entity": "Brisbane",
+      "seed_round_musd": 0.3,
+      "series_a_round_musd": 7.5,
+      "stage_multiple": 25.0
+    },
+    {
+      "entity": "Mid-East Region, Ireland",
+      "seed_round_musd": 0.428,
+      "series_a_round_musd": 10.3,
+      "stage_multiple": 24.0654
+    },
+    {
+      "entity": "Bahrain",
+      "seed_round_musd": 0.75,
+      "series_a_round_musd": 16.0,
+      "stage_multiple": 21.3333
+    },
+    {
+      "entity": "Tamil Nadu",
+      "seed_round_musd": 0.526,
+      "series_a_round_musd": 9.4,
+      "stage_multiple": 17.8707
+    },
+    {
+      "entity": "Telangana",
+      "seed_round_musd": 0.5,
+      "series_a_round_musd": 7.3,
+      "stage_multiple": 14.6
+    },
+    {
+      "entity": "Mexico City",
+      "seed_round_musd": 0.7,
+      "series_a_round_musd": 9.7,
+      "stage_multiple": 13.8571
+    },
+    {
+      "entity": "Manila",
+      "seed_round_musd": 1.1,
+      "series_a_round_musd": 14.5,
+      "stage_multiple": 13.1818
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MRK 可持续增长率 (SGR) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1.5rem 1.5rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      height: 480px; /* ensures canvas has height for Chart.js 4 */
+    }
+
+    canvas {
+      max-width: 100%;
+      height: 100%;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      .chart-container {
+        padding: 1rem 1rem 1.5rem;
+        height: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>MRK 可持续增长率 (Sustainable Growth Rate, SGR)</h1>
+    <h2>2016–2024 年度变化（柱状图）</h2>
+    <canvas id="sgrChart"></canvas>
+    <div class="note">
+      数据来源：用户提供的 MRK 2016–2024 财年可持续增长率（RESULT_SGR）。数值以小数表示（如 0.22 ≈ 22%）。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+
+  <script>
+    // Ensure script runs after DOM is ready
+    window.addEventListener("load", function () {
+      const years = [
+        "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+      ];
+
+      const sgrValues = [
+        -0.0284082865367372,
+        -0.0745189723745028,
+        0.0343398266625161,
+        0.1576946472019464,
+        0.0332656567234108,
+        0.2027999559062061,
+        0.1783664983664983,
+        -0.1694347389077681,
+        0.2211600352826185
+      ];
+
+      const positiveColor = "rgba(54, 162, 235, 0.8)";
+      const positiveBorder = "rgba(54, 162, 235, 1)";
+      const negativeColor = "rgba(255, 99, 132, 0.8)";
+      const negativeBorder = "rgba(255, 99, 132, 1)";
+
+      const bgColors = sgrValues.map(v => v >= 0 ? positiveColor : negativeColor);
+      const borderColors = sgrValues.map(v => v >= 0 ? positiveBorder : negativeBorder);
+
+      const canvas = document.getElementById("sgrChart");
+      if (!canvas) {
+        console.error("Canvas element with id 'sgrChart' not found.");
+        return;
+      }
+
+      const ctx = canvas.getContext("2d");
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: years,
+          datasets: [{
+            label: "可持续增长率 (SGR)",
+            data: sgrValues,
+            backgroundColor: bgColors,
+            borderColor: borderColors,
+            borderWidth: 1.2,
+            borderRadius: 4,
+            hoverBackgroundColor: bgColors,
+            hoverBorderColor: borderColors
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                font: {
+                  size: 12
+                }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const value = context.parsed.y;
+                  const pct = (value * 100).toFixed(2) + "%";
+                  return " " + value.toFixed(4) + "  (" + pct + ")";
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年 (Fiscal Year)",
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "可持续增长率 (SGR)",
+                font: {
+                  size: 12
+                }
+              },
+              ticks: {
+                callback: function(value) {
+                  return (value * 100).toFixed(0) + "%";
+                }
+              },
+              grid: {
+                color: "rgba(0,0,0,0.06)"
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

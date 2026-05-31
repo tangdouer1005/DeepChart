@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "chart_type": "barh",
+  "title": "Top 10 markets by headline-round amplification",
+  "x_label": "Largest top deal / average funding per deal (x)",
+  "y_label": "Market",
+  "value_format": "float2",
+  "data": [
+    {
+      "label": "US",
+      "value": 435.46850185283216
+    },
+    {
+      "label": "Silicon Valley",
+      "value": 237.4309392265193
+    },
+    {
+      "label": "New York",
+      "value": 83.9655172413793
+    },
+    {
+      "label": "Europe",
+      "value": 70.80568720379146
+    },
+    {
+      "label": "Asia",
+      "value": 69.68852459016394
+    },
+    {
+      "label": "United Kingdom",
+      "value": 57.82608695652174
+    },
+    {
+      "label": "China",
+      "value": 41.294117647058826
+    },
+    {
+      "label": "Japan",
+      "value": 30.80454545454546
+    },
+    {
+      "label": "Canada",
+      "value": 29.545454545454547
+    },
+    {
+      "label": "Oceania",
+      "value": 25.344995140913507
+    }
+  ]
+}

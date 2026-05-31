@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = {
+    "data": {
+        "DMSO": [
+            743,
+            799,
+            1143,
+            728
+        ],
+        "40 nM": [
+            370,
+            311,
+            245,
+            298
+        ],
+        "100 nM": [
+            357,
+            342,
+            247,
+            314
+        ],
+        "200 nM": [
+            645,
+            316,
+            291,
+            352
+        ],
+        "1 \u03bcM (LY)": [
+            584,
+            757,
+            600,
+            835
+        ],
+        "5 \u03bcM": [
+            567,
+            566,
+            504,
+            517
+        ],
+        "10 \u03bcM": [
+            513,
+            530,
+            521,
+            451
+        ],
+        "0.2 \u03bcM": [
+            2874,
+            2719,
+            2494,
+            2903
+        ],
+        "1 \u03bcM (MK)": [
+            3053,
+            2862,
+            2556,
+            2965
+        ]
+    },
+    "order": [
+        "DMSO",
+        "40 nM",
+        "100 nM",
+        "200 nM",
+        "1 \u03bcM (LY)",
+        "5 \u03bcM",
+        "10 \u03bcM",
+        "0.2 \u03bcM",
+        "1 \u03bcM (MK)"
+    ],
+    "means": {
+        "DMSO": 853.25,
+        "40 nM": 306.0,
+        "100 nM": 315.0,
+        "200 nM": 401.0,
+        "1 \u03bcM (LY)": 694.0,
+        "5 \u03bcM": 538.5,
+        "10 \u03bcM": 503.75,
+        "0.2 \u03bcM": 2747.5,
+        "1 \u03bcM (MK)": 2859.0
+    },
+    "stds": {
+        "DMSO": 195.56818930149828,
+        "40 nM": 51.33549778986597,
+        "100 nM": 48.71002634639676,
+        "200 nM": 164.5822995748125,
+        "1 \u03bcM (LY)": 122.18292297480309,
+        "5 \u03bcM": 32.76685317003552,
+        "10 \u03bcM": 35.845734288289684,
+        "0.2 \u03bcM": 187.31168320920793,
+        "1 \u03bcM (MK)": 216.5563821887193
+    },
+    "p_values": {
+        "DMSO_vs_40nM": 0.0016434007272829486,
+        "DMSO_vs_100nM": 0.0017591209695759077,
+        "DMSO_vs_200nM": 0.012238814512310856,
+        "DMSO_vs_10uM": 0.012585032841153945,
+        "DMSO_vs_1uM_MK": 9.210350990264461e-06
+    }
+};
+
+        const rawData = jsonData.data;
+        const conditions = jsonData.order;
+
+        const displayLabels = [
+            "DMSO",
+            "40 nM", "100 nM", "200 nM",
+            "1 μM", "5 μM", "10 μM",
+            "0.2 μM", "1 μM"
+        ];
+        
+        const means = jsonData.means;
+        const stds = jsonData.stds;
+
+        // Define Colors (matching the image)
+        const colors = [
+            "#666666", // DMSO
+            "#E6B0AA", "#D98880", "#C0392B", // Rapamycin (Pinks/Reds)
+            "#AED6F1", "#5DADE2", "#2E86C1", // LY (Blues)
+            "#D7BDE2", "#884EA0"             // MK (Purples)
+        ];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [];
+
+        // Bars
+        series.push({
+            type: 'bar',
+            data: conditions.map((cond, i) => ({
+                value: means[cond],
+                itemStyle: { color: colors[i] },
+            })),
+            barWidth: '70%',
+            z: 1
+        });
+
+        // Error bars (SD for seaborn barplot default)
+        series.push({
+            type: 'custom',
+            name: 'Error',
+            renderItem: (params, api) => {
+                const xIndex = api.value(0);
+                const meanVal = api.value(1);
+                const stdVal = api.value(2);
+                
+                const highPoint = api.coord([xIndex, meanVal + stdVal]);
+                const lowPoint = api.coord([xIndex, meanVal - stdVal]);
+                const capHalfWidth = 5; // Fixed pixel width for cap
+
+                const style = api.style({ stroke: 'gray', lineWidth: 1.5 }); // Color matching seaborn barplot default
+                return {
+                    type: 'group',
+                    children: [
+                        { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                    ]
+                };
+            },
+            data: conditions.map((cond, i) => ([i, means[cond], stds[cond]])),
+            z: 2
+        });
+
+        // Scatter points (stripplot effect)
+        const scatterData = [];
+        conditions.forEach((cond, i) => {
+            const yVals = rawData[cond];
+            yVals.forEach(y => {
+                const jitter = (Math.random() - 0.5) * 0.3; // Small jitter for x
+                scatterData.push([i + jitter, y]);
+            });
+        });
+
+        series.push({
+            type: 'scatter',
+            name: 'Data Points',
+            data: scatterData,
+            itemStyle: { color: 'black', opacity: 0.6, borderColor: 'gray', borderWidth: 0.5 },
+            symbolSize: 6,
+            z: 3
+        });
+        
+        // Custom series for Group Labels below X-axis
+        const groupLabels = [
+            { range: [1, 3], text: 'Rapamycin' },
+            { range: [4, 6], text: 'LY294002' },
+            { range: [7, 8], text: 'MK2206' }
+        ];
+        // Y-offsets for group labels (negative values to go below axis)
+        const groupLineYDataPos = -600; // Corresponds to y_line_pos in Python
+        const groupTextYDataPos = -700; // Corresponds to y_text_pos in Python
+
+        series.push({
+            type: 'custom',
+            name: 'Group Labels',
+            renderItem: (params, api) => {
+                const children = [];
+
+                groupLabels.forEach(group => {
+                    // Start and end are category indices for the horizontal line
+                    const x1Coord = api.coord([group.range[0], 0])[0];
+                    const x2Coord = api.coord([group.range[1], 0])[0];
+
+                    // Use data coordinate for y, then convert to pixel
+                    const yLinePixel = api.coord([0, groupLineYDataPos])[1];
+                    const yTextPixel = api.coord([0, groupTextYDataPos])[1];
+
+                    // Group line
+                    children.push({
+                        type: 'line',
+                        shape: { x1: x1Coord, y1: yLinePixel, x2: x2Coord, y2: yLinePixel },
+                        style: { stroke: 'black', lineWidth: 1 },
+                        z: 0
+                    });
+
+                    // Group text
+                    children.push({
+                        type: 'text',
+                        x: (x1Coord + x2Coord) / 2, y: yTextPixel,
+                        style: { text: group.text, fill: 'black', fontSize: 12, align: 'center', verticalAlign: 'top' },
+                        z: 0
+                    });
+                });
+
+                return {
+                    type: 'group',
+                    children: children
+                };
+            },
+            data: [0], // Dummy data
+            z: 0,
+            animation: false
+        });
+
+        // Custom series for Statistical Annotations
+        // Based on Python's add_stat_annotation(x1, x2, y, text):
+        // Note: The Python script hardcoded y-values for annotations which stack.
+        // We will use these y-values for the ECharts rendering.
+        // Statistical Annotation
+        const getPText = (group1, group2) => {
+            // The JSON p_values keys are like "DMSO_vs_40nM".
+            // Need to construct the key dynamically.
+            const key = `${group1}_vs_${group2}`.replace(/ \u03bcM \((LY|MK)\)/g, (match, p1) => {
+                if (p1 === 'LY') return 'uM';
+                if (p1 === 'MK') return 'uM_MK';
+                return match;
+            }).replace(/\s/g, ''); // Remove spaces
+            
+            let pVal = jsonData.p_values[key];
+            if (!pVal) { // Handle cases where a specific p-value might not be provided
+                // Fallback to a generic P-value if not found, or throw error
+                // For this case, the python script had specific p-values, so we assume they are present.
+                // But for the purpose of dynamic data, a fallback is good.
+                pVal = 1; 
+            }
+
+            if (pVal < 0.0001) return "P < 0.0001";
+            return `P = ${pVal.toFixed(4)}`;
+        };
+        const statAnnotations = [
+            { x1: 0, x2: 1, y: 1300, text: getPText('DMSO', '40 nM') },
+            { x1: 0, x2: 2, y: 2100, text: getPText('DMSO', '100 nM') },
+            { x1: 0, x2: 3, y: 2750, text: getPText('DMSO', '200 nM') },
+            { x1: 0, x2: 6, y: 3300, text: getPText('DMSO', '10 μM') },
+            { x1: 0, x2: 8, y: 4100, text: getPText('DMSO', '1 μM (MK)') }
+        ];
+
+        series.push({
+            type: 'custom',
+            name: 'Statistical Annotations',
+            renderItem: (params, api) => {
+                const children = [];
+                const bracketHeight = 50; // height of the bracket ticks in data units (h=50 in Python)
+                const textOffset = 5; // Offset for text from the bracket line in pixels
+
+                statAnnotations.forEach(ann => {
+                    const x1Coord = ann.x1;
+                    const x2Coord = ann.x2;
+                    const yCoord = ann.y;
+
+                    const p1 = api.coord([x1Coord, yCoord]);
+                    const p2 = api.coord([x2Coord, yCoord]);
+                    const pYTop = api.coord([0, yCoord + bracketHeight]); // Y coord for top of bracket
+
+                    // Bracket shape: [x1, y] -> [x1, y+h] -> [x2, y+h] -> [x2, y]
+                    children.push({
+                        type: 'polyline',
+                        shape: {
+                            points: [
+                                [p1[0], p1[1]],
+                                [p1[0], pYTop[1]],
+                                [p2[0], pYTop[1]],
+                                [p2[0], p2[1]]
+                            ]
+                        },
+                        style: { stroke: 'black', lineWidth: 1, fill: null },
+                        z: 10
+                    });
+
+                    // P-value text
+                    children.push({
+                        type: 'text',
+                        x: (p1[0] + p2[0]) / 2,
+                        y: pYTop[1] - textOffset, // Position text above the bracket line
+                        style: {
+                            text: ann.text,
+                            fill: 'black',
+                            fontSize: 10,
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        },
+                        z: 10
+                    });
+                });
+                return {
+                    type: 'group',
+                    children: children
+                };
+            },
+            data: [0], // Dummy data
+            z: 10,
+            animation: false
+        });
+        
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            title: {
+                text: 'CD107a',
+                left: 'center',
+                top: 20,
+                textStyle: { fontSize: 16, color: 'black' }
+            },
+            grid: { top: 60, right: 20, bottom: 200, left: 80 }, // Adjusted bottom for labels
+            xAxis: {
+                type: 'category',
+                data: conditions, // Original keys
+                axisLabel: { show: false }, // Hidden x-axis labels
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                axisTick: { alignWithLabel: true, length: 5, lineStyle: { width: 1.2 } }
+            },
+            yAxis: {
+                name: 'MFI',
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: { color: 'black', fontSize: 14, fontWeight: 'bold' },
+                type: 'value',
+                min: 0,
+                max: 4500, // Extended to fit annotations
+                interval: 500,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                splitLine: { show: false }
+            },
+            series: series,
+            graphic: [] // graphic elements are now handled by custom series
+        };
+        chart.setOption(option);
+
+        // Dynamic positioning of graphic elements (x-axis group labels and stat lines)
+
+    </script>
+</body>
+</html>

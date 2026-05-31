@@ -1,0 +1,251 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a scatter plot showing ecosystems with `Software Engineer Salary <= $80k`, where the x-axis is `Software Engineer Salary` in `$k`, the y-axis is `Total VC Funding / Software Engineer Salary` in `$M per $1k salary`, and only the top 15 ecosystems by the derived y-value should be labeled after excluding rows with missing salary data.",
+  "chart_type": "scatter plot",
+  "value_unit": "$k / $M per $1k salary",
+  "sort_rule": "labels assigned to top 15 by VC per salary",
+  "selection_rule": "all ecosystems with salary <= 80k",
+  "plot_spec": {
+    "title": "2025 Salary vs VC Intensity",
+    "x_field": "x_salary_kusd",
+    "y_field": "y_vc_per_salary_musd_per_k",
+    "xlabel": "Software Engineer Salary ($k)",
+    "ylabel": "Total VC Funding / Salary ($M per $1k salary)"
+  },
+  "records": [
+    {
+      "entity": "Beijing",
+      "x_salary_kusd": 53.5,
+      "y_vc_per_salary_musd_per_k": 1196.2617,
+      "label": true
+    },
+    {
+      "entity": "Mid-East Region, Ireland",
+      "x_salary_kusd": 61.0,
+      "y_vc_per_salary_musd_per_k": 2.459,
+      "label": false
+    },
+    {
+      "entity": "North Rhine-Westphalia",
+      "x_salary_kusd": 65.0,
+      "y_vc_per_salary_musd_per_k": 52.3077,
+      "label": false
+    },
+    {
+      "entity": "Bengaluru-Karnataka",
+      "x_salary_kusd": 17.4,
+      "y_vc_per_salary_musd_per_k": 2183.908,
+      "label": true
+    },
+    {
+      "entity": "Paris",
+      "x_salary_kusd": 61.0,
+      "y_vc_per_salary_musd_per_k": 655.7377,
+      "label": true
+    },
+    {
+      "entity": "Calgary",
+      "x_salary_kusd": 70.0,
+      "y_vc_per_salary_musd_per_k": 37.1429,
+      "label": false
+    },
+    {
+      "entity": "Hong Kong",
+      "x_salary_kusd": 58.5,
+      "y_vc_per_salary_musd_per_k": 307.6923,
+      "label": true
+    },
+    {
+      "entity": "Porto",
+      "x_salary_kusd": 33.0,
+      "y_vc_per_salary_musd_per_k": 42.4242,
+      "label": false
+    },
+    {
+      "entity": "Edmonton",
+      "x_salary_kusd": 65.5,
+      "y_vc_per_salary_musd_per_k": 12.229,
+      "label": false
+    },
+    {
+      "entity": "Kerala",
+      "x_salary_kusd": 6.0,
+      "y_vc_per_salary_musd_per_k": 49.5,
+      "label": false
+    },
+    {
+      "entity": "Tbilisi",
+      "x_salary_kusd": 43.0,
+      "y_vc_per_salary_musd_per_k": 0.6977,
+      "label": false
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "x_salary_kusd": 21.0,
+      "y_vc_per_salary_musd_per_k": 157.1429,
+      "label": false
+    },
+    {
+      "entity": "Turin",
+      "x_salary_kusd": 42.5,
+      "y_vc_per_salary_musd_per_k": 15.5765,
+      "label": false
+    },
+    {
+      "entity": "Manila",
+      "x_salary_kusd": 12.0,
+      "y_vc_per_salary_musd_per_k": 200.0,
+      "label": false
+    },
+    {
+      "entity": "Valencia",
+      "x_salary_kusd": 41.0,
+      "y_vc_per_salary_musd_per_k": 34.1463,
+      "label": false
+    },
+    {
+      "entity": "Seoul",
+      "x_salary_kusd": 47.5,
+      "y_vc_per_salary_musd_per_k": 821.0526,
+      "label": true
+    },
+    {
+      "entity": "Shanghai",
+      "x_salary_kusd": 43.5,
+      "y_vc_per_salary_musd_per_k": 1149.4253,
+      "label": true
+    },
+    {
+      "entity": "Shenzhen",
+      "x_salary_kusd": 49.0,
+      "y_vc_per_salary_musd_per_k": 489.7959,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "x_salary_kusd": 66.0,
+      "y_vc_per_salary_musd_per_k": 484.8485,
+      "label": true
+    },
+    {
+      "entity": "Tamil Nadu",
+      "x_salary_kusd": 11.0,
+      "y_vc_per_salary_musd_per_k": 263.6364,
+      "label": false
+    },
+    {
+      "entity": "Mexico City",
+      "x_salary_kusd": 25.0,
+      "y_vc_per_salary_musd_per_k": 272.0,
+      "label": true
+    },
+    {
+      "entity": "Brisbane",
+      "x_salary_kusd": 78.5,
+      "y_vc_per_salary_musd_per_k": 25.4777,
+      "label": false
+    },
+    {
+      "entity": "Telangana",
+      "x_salary_kusd": 15.0,
+      "y_vc_per_salary_musd_per_k": 386.6667,
+      "label": true
+    },
+    {
+      "entity": "Tokyo",
+      "x_salary_kusd": 48.0,
+      "y_vc_per_salary_musd_per_k": 491.6667,
+      "label": true
+    },
+    {
+      "entity": "Abu Dhabi",
+      "x_salary_kusd": 54.0,
+      "y_vc_per_salary_musd_per_k": 70.3704,
+      "label": false
+    },
+    {
+      "entity": "Baku",
+      "x_salary_kusd": 20.6,
+      "y_vc_per_salary_musd_per_k": 0.8544,
+      "label": false
+    },
+    {
+      "entity": "Bahrain",
+      "x_salary_kusd": 66.5,
+      "y_vc_per_salary_musd_per_k": 6.1504,
+      "label": false
+    },
+    {
+      "entity": "Lagos",
+      "x_salary_kusd": 7.5,
+      "y_vc_per_salary_musd_per_k": 400.0,
+      "label": true
+    },
+    {
+      "entity": "Berlin",
+      "x_salary_kusd": 75.0,
+      "y_vc_per_salary_musd_per_k": 360.0,
+      "label": true
+    },
+    {
+      "entity": "Nairobi",
+      "x_salary_kusd": 14.7,
+      "y_vc_per_salary_musd_per_k": 129.2517,
+      "label": false
+    },
+    {
+      "entity": "Budapest",
+      "x_salary_kusd": 30.0,
+      "y_vc_per_salary_musd_per_k": 29.6333,
+      "label": false
+    },
+    {
+      "entity": "Riyadh",
+      "x_salary_kusd": 40.0,
+      "y_vc_per_salary_musd_per_k": 90.0,
+      "label": false
+    },
+    {
+      "entity": "Sharjah",
+      "x_salary_kusd": 36.0,
+      "y_vc_per_salary_musd_per_k": 8.9722,
+      "label": false
+    },
+    {
+      "entity": "Istanbul",
+      "x_salary_kusd": 25.0,
+      "y_vc_per_salary_musd_per_k": 256.0,
+      "label": false
+    },
+    {
+      "entity": "London",
+      "x_salary_kusd": 75.0,
+      "y_vc_per_salary_musd_per_k": 1360.0,
+      "label": true
+    },
+    {
+      "entity": "Tunisia",
+      "x_salary_kusd": 10.0,
+      "y_vc_per_salary_musd_per_k": 11.3,
+      "label": false
+    },
+    {
+      "entity": "Córdoba",
+      "x_salary_kusd": 16.0,
+      "y_vc_per_salary_musd_per_k": 5.5,
+      "label": false
+    },
+    {
+      "entity": "São Paulo",
+      "x_salary_kusd": 28.0,
+      "y_vc_per_salary_musd_per_k": 535.7143,
+      "label": true
+    },
+    {
+      "entity": "Montréal",
+      "x_salary_kusd": 68.0,
+      "y_vc_per_salary_musd_per_k": 132.3529,
+      "label": false
+    }
+  ]
+}

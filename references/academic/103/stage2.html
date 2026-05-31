@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        
+        const data = {"data": {"B16-F0": {"21": [100.0, 90.12618296529968, 80.85173501577286], "1": [100.00000000000001, 110.53045186640473, 106.56188605108055]}, "LN7-1112AR": {"21": [100.0, 70.70471753057659, 56.08619685497961], "1": [100.0, 95.75384615384615, 92.4923076923077]}, "LN7-1120BL": {"21": [100.00000000000001, 47.22869119701911, 42.80391243595716], "1": [100.0, 91.51491669895391, 87.7566834560248]}, "LN7-1134BL": {"21": [100.0, 65.38703587161739, 53.49276274386407], "1": [100.0, 101.99115044247787, 89.7345132743363]}, "LN8-1194BR": {"21": [103.13499680102366, 54.510556621880994, 46.705054382597574], "1": [100.0, 86.21981681931722, 73.52206494587843]}, "LN8-1198AR": {"21": [100.0, 62.18538980969919, 46.531614487415595], "1": [100.0, 88.74761602034329, 74.44373808010172]}, "LN8-1205BL": {"21": [100.0, 51.329787234042556, 48.47074468085108], "1": [100.0, 79.20792079207921, 70.35891089108911]}, "LN9-1315BL": {"21": [100.0, 58.53658536585366, 48.71080139372822], "1": [100.00000000000004, 91.43413367942895, 81.50551589876706]}, "LN9-1358IR": {"21": [100.0, 54.31093007467754, 41.8194161575017], "1": [100.0, 94.09221902017289, 89.91354466858787]}}, "p_values": {"B16-F0": 4.3779488301e-05, "LN7-1112AR": 4.8904949e-08, "LN7-1120BL": 2.96147e-10, "LN7-1134BL": 5.4145029e-08, "LN8-1194BR": 9.03365e-10, "LN8-1198AR": 1.923302805e-05, "LN8-1205BL": 3.6981560674e-05, "LN9-1315BL": 4.6683616809e-05, "LN9-1358IR": 5.0104e-11}};
+        
+        const processed = {};
+        const pValues = data.p_values;
+        
+        const cellLines = [
+            "B16-F0", "LN7-1112AR", "LN7-1120BL", "LN7-1134BL", 
+            "LN8-1194BR", "LN8-1198AR", "LN8-1205BL", "LN9-1315BL", "LN9-1358IR"
+        ];
+        
+        cellLines.forEach(name => {
+            processed[name] = {
+                norm: data.data[name]["21"],
+                hyp: data.data[name]["1"]
+            };
+        });
+
+
+        
+        // Prepare Heatmap Data
+        // Left: B16-F0. Rows: 0, 1, 2 (conc). Cols: 0 (Norm), 1 (Hyp)
+        // Right: Others. Rows: 0, 1, 2. Cols: 0,1 (LN7-1112AR), 2,3 (LN7-1120BL) ...
+        
+        const leftData = [];
+        const rightData = [];
+        
+        const concentrations = ['0', '2.5', '5'];
+        
+        // B16-F0
+        const b16 = processed['B16-F0'];
+        b16.norm.forEach((v, i) => leftData.push([0, i, v]));
+        b16.hyp.forEach((v, i) => leftData.push([1, i, v]));
+        
+        // Others
+        const otherLines = [
+            "LN7-1112AR", "LN7-1120BL", "LN7-1134BL", 
+            "LN8-1194BR", "LN8-1198AR", "LN8-1205BL", "LN9-1315BL", "LN9-1358IR"
+        ];
+        
+        otherLines.forEach((name, idx) => {
+            const d = processed[name];
+            const colBase = idx * 2;
+            d.norm.forEach((v, i) => rightData.push([colBase, i, v]));
+            d.hyp.forEach((v, i) => rightData.push([colBase + 1, i, v]));
+        });
+
+        // ECharts Option
+        const chart = echarts.init(document.getElementById('chart-container'));
+        
+        // Format P value
+        const superscripts = {
+            '-': '⁻', '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', 
+            '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹'
+        };
+        function toSuper(numStr) {
+            return numStr.split('').map(c => superscripts[c] || c).join('');
+        }
+        
+        function fmtP(p) {
+            if (p === 0) return "P < 10⁻¹⁵";
+            const exp = Math.floor(Math.log10(p));
+            const base = (p / Math.pow(10, exp)).toFixed(1);
+            return `P = ${base} × 10${toSuper(exp.toString())}`;
+        }
+        
+        // We will use 2 grids. 
+        
+        const option = {
+            tooltip: { position: 'top' },
+            animation: false,
+            grid: [
+                { left: 50, width: 60, top: 100, bottom: 50 }, // Left (B16)
+                { left: 130, right: 80, top: 100, bottom: 50 }  // Right (Others)
+            ],
+            xAxis: [
+                {
+                    gridIndex: 0, type: 'category', 
+                    data: ['21', '1'], 
+                    axisLabel: { interval: 0, fontSize: 11 },
+                    axisTick: { alignWithLabel: true },
+                    name: 'B16-F0', nameLocation: 'center', nameGap: 25, nameRotate: 45
+                },
+                {
+                    gridIndex: 1, type: 'category', 
+                    data: Array(16).fill(0).map((_, i) => i % 2 === 0 ? '21' : '1'),
+                    axisLabel: { interval: 0, fontSize: 11 },
+                    axisTick: { alignWithLabel: true },
+                    name: '% O2', nameLocation: 'end', nameGap: 10
+                }
+            ],
+            yAxis: [
+                {
+                    gridIndex: 0, type: 'category', 
+                    data: ['0', '2.5', '5'],
+                    name: 'ML-210 (μM)', nameLocation: 'middle', nameGap: 30,
+                    axisTick: { show: false }
+                },
+                {
+                    gridIndex: 1, type: 'category', 
+                    data: ['0', '2.5', '5'],
+                    axisLabel: { show: false }, axisTick: { show: false }, axisLine: { show: false }
+                }
+            ],
+            visualMap: {
+                min: 40, max: 100,
+                calculable: true,
+                orient: 'vertical',
+                right: 10,
+                top: 'center',
+                inRange: { color: ['#440154', '#21918c', '#fde725'] } // Viridis approximation
+            },
+            series: [
+                {
+                    type: 'heatmap',
+                    xAxisIndex: 0, yAxisIndex: 0,
+                    data: leftData,
+                    label: { show: false },
+                    itemStyle: { borderColor: 'black', borderWidth: 1 }
+                },
+                {
+                    type: 'heatmap',
+                    xAxisIndex: 1, yAxisIndex: 1,
+                    data: rightData,
+                    label: { show: false },
+                    itemStyle: { borderColor: 'black', borderWidth: 1 }
+                }
+            ],
+            graphic: []
+        };
+        
+        // Add Cell line labels for Right Chart
+        otherLines.forEach((name, i) => {
+            // Calculate x percent
+            // Grid 1 width is flexible. 
+            // Better to use secondary x-axis for labels? 
+            // Or graphic text using 'left' pixels? 
+            // This is static chart, we can approximate.
+            // Grid 1 starts at 130px. Width = 1000 - 130 - 80 = 790px.
+            // 8 cell lines. Each takes 2 columns. Total 16 columns.
+            // Each cell line width = 790 / 8 = 98.75px.
+            // Center of i-th cell line = 130 + i * 98.75 + 98.75/2
+            
+            // Actually, let's use a second x-axis for grouping?
+            // ECharts supports multiple x-axes.
+        });
+        
+        // Add top X-axis for labels
+        option.xAxis.push({
+            gridIndex: 1, type: 'category', position: 'top',
+            data: otherLines,
+            axisTick: { length: 0 },
+            axisLine: { show: false },
+            axisLabel: { rotate: 45, interval: 0, fontSize: 11, padding: [0, 0, 0, 20] } // padding to shift?
+            // Default groups every 1 data point. We need to group 2 data points.
+            // We can't easily group ticks in ECharts category axis.
+            // Workaround: blank data with empty strings?
+        });
+        
+        // Actually, graphic elements are safest for annotations.
+        // P-values
+        
+        // Let's rely on ECharts 'markArea' or just static graphic elements.
+        
+        chart.setOption(option);
+
+        // Add P-value annotations
+        const graphics = [];
+        
+        function addAnnotation(gridIndex, col1, col2, pVal) {
+            // Top row index is 2 (for 5 uM)
+            const pt1 = chart.convertToPixel({xAxisIndex: gridIndex, yAxisIndex: gridIndex}, [col1, 2]); 
+            const pt2 = chart.convertToPixel({xAxisIndex: gridIndex, yAxisIndex: gridIndex}, [col2, 2]);
+            
+            if (!pt1 || !pt2) return;
+            
+            const x1 = pt1[0];
+            const x2 = pt2[0];
+            const gridTop = option.grid[gridIndex].top;
+            const yLine = gridTop - 10; 
+            const yText = yLine - 5;
+            
+            graphics.push({
+                type: 'polyline',
+                shape: { points: [[x1, yLine+5], [x1, yLine], [x2, yLine], [x2, yLine+5]] },
+                style: { stroke: 'black', lineWidth: 1 }
+            });
+            
+            graphics.push({
+                type: 'text',
+                style: {
+                    text: fmtP(pVal),
+                    x: (x1 + x2) / 2,
+                    y: yText,
+                    textAlign: 'center',
+                    textVerticalAlign: 'bottom',
+                    font: '10px sans-serif'
+                }
+            });
+        }
+
+        if (pValues['B16-F0']) {
+            addAnnotation(0, 0, 1, pValues['B16-F0']);
+        }
+
+        otherLines.forEach((name, i) => {
+            if (pValues[name]) {
+                addAnnotation(1, i*2, i*2+1, pValues[name]);
+            }
+        });
+
+        chart.setOption({ graphic: graphics });
+    </script>
+</body>
+</html>

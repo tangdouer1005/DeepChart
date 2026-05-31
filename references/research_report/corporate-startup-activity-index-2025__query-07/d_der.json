@@ -1,0 +1,66 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a ranked horizontal bar chart showing the top 12 countries by `leaderboard capture ratio`, where the metric is `the sum of scores from country-list companies that also appear in at least one main-industry top-20 table divided by that country's visible total score`, values are percentages, countries must have at least 5 visible companies in their country table, and bars are sorted descending after the cross-view match is completed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by leaderboard_capture_ratio_percent, ties by overlap_score_total then country",
+  "selection_rule": "top 12 eligible countries with at least 5 visible companies",
+  "plot_spec": {
+    "title": "Country Leaderboard Capture Ratio",
+    "xlabel": "Percent of visible country score matched to main-industry leaders",
+    "ylabel": "Country",
+    "value_field": "leaderboard_capture_ratio_percent",
+    "label_suffix": "%",
+    "label_decimals": 1
+  },
+  "records": [
+    {
+      "entity": "United States",
+      "leaderboard_capture_ratio_percent": 100.0
+    },
+    {
+      "entity": "Spain",
+      "leaderboard_capture_ratio_percent": 98.6755
+    },
+    {
+      "entity": "Australia",
+      "leaderboard_capture_ratio_percent": 91.3114
+    },
+    {
+      "entity": "South Korea",
+      "leaderboard_capture_ratio_percent": 90.1872
+    },
+    {
+      "entity": "France",
+      "leaderboard_capture_ratio_percent": 88.4461
+    },
+    {
+      "entity": "Canada",
+      "leaderboard_capture_ratio_percent": 86.1887
+    },
+    {
+      "entity": "Germany",
+      "leaderboard_capture_ratio_percent": 84.5847
+    },
+    {
+      "entity": "United Kingdom",
+      "leaderboard_capture_ratio_percent": 82.9158
+    },
+    {
+      "entity": "Singapore",
+      "leaderboard_capture_ratio_percent": 71.0624
+    },
+    {
+      "entity": "Sweden",
+      "leaderboard_capture_ratio_percent": 60.1483
+    },
+    {
+      "entity": "Japan",
+      "leaderboard_capture_ratio_percent": 58.8166
+    },
+    {
+      "entity": "China",
+      "leaderboard_capture_ratio_percent": 54.2407
+    }
+  ]
+}

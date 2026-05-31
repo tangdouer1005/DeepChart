@@ -1,0 +1,135 @@
+{
+  "report_id": "010",
+  "query_id": 3,
+  "query_text": "Create a stacked bar chart comparing value-chain segments by the share of companies in each segment that fall into three maturity buckets, `Commercial Maturity 2 or below`, `Commercial Maturity 3 to 4`, and `Commercial Maturity 5`, where segment membership is inferred from the report’s section-2 page blocks and duplicate company cards are counted only once.",
+  "chart_type": "stacked_bar",
+  "value_unit": "percent of companies with numeric Commercial Maturity",
+  "sort_rule": "segment order follows report structure",
+  "selection_rule": "within-segment shares across three maturity buckets",
+  "records": [
+    {
+      "group": "Power generation",
+      "category": "2 or below",
+      "value": 15.384615,
+      "count": 2,
+      "denominator": 13
+    },
+    {
+      "group": "Power generation",
+      "category": "3 to 4",
+      "value": 61.538462,
+      "count": 8,
+      "denominator": 13
+    },
+    {
+      "group": "Power generation",
+      "category": "5",
+      "value": 23.076923,
+      "count": 3,
+      "denominator": 13
+    },
+    {
+      "group": "AI computing hardware",
+      "category": "2 or below",
+      "value": 0.0,
+      "count": 0,
+      "denominator": 15
+    },
+    {
+      "group": "AI computing hardware",
+      "category": "3 to 4",
+      "value": 73.333333,
+      "count": 11,
+      "denominator": 15
+    },
+    {
+      "group": "AI computing hardware",
+      "category": "5",
+      "value": 26.666667,
+      "count": 4,
+      "denominator": 15
+    },
+    {
+      "group": "Supporting hardware infrastructure",
+      "category": "2 or below",
+      "value": 14.285714,
+      "count": 2,
+      "denominator": 14
+    },
+    {
+      "group": "Supporting hardware infrastructure",
+      "category": "3 to 4",
+      "value": 85.714286,
+      "count": 12,
+      "denominator": 14
+    },
+    {
+      "group": "Supporting hardware infrastructure",
+      "category": "5",
+      "value": 0.0,
+      "count": 0,
+      "denominator": 14
+    },
+    {
+      "group": "Networking & connectivity",
+      "category": "2 or below",
+      "value": 0.0,
+      "count": 0,
+      "denominator": 15
+    },
+    {
+      "group": "Networking & connectivity",
+      "category": "3 to 4",
+      "value": 46.666667,
+      "count": 7,
+      "denominator": 15
+    },
+    {
+      "group": "Networking & connectivity",
+      "category": "5",
+      "value": 53.333333,
+      "count": 8,
+      "denominator": 15
+    },
+    {
+      "group": "Data center facilities & operations",
+      "category": "2 or below",
+      "value": 7.692308,
+      "count": 1,
+      "denominator": 13
+    },
+    {
+      "group": "Data center facilities & operations",
+      "category": "3 to 4",
+      "value": 76.923077,
+      "count": 10,
+      "denominator": 13
+    },
+    {
+      "group": "Data center facilities & operations",
+      "category": "5",
+      "value": 15.384615,
+      "count": 2,
+      "denominator": 13
+    }
+  ],
+  "plot_config": {
+    "title": "Maturity mix by value-chain segment",
+    "x_label": "Value-chain segment",
+    "y_label": "Share of companies (%)"
+  },
+  "reasoning_summary": [
+    "Assigned segment membership from the section-2 page-block boundaries.",
+    "Excluded rows with N/A Commercial Maturity because the query defines only three numeric buckets.",
+    "Bucketed maturity into 2 or below, 3 to 4, and 5.",
+    "Computed within-segment shares for each bucket."
+  ],
+  "stats": {
+    "eligible_count": 70,
+    "returned_count": 15,
+    "segment_count": 5
+  },
+  "open_issues": [
+    "Rows with N/A / 5 Commercial Maturity were excluded from the denominator."
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a slope chart comparing each ecosystem’s rank by `Ecosystem Value` and its rank by `Total VC Funding` for the 12 ecosystems with the largest absolute rank difference in 2025, with ranks shown as ordinal positions, sorted by absolute rank gap descending and excluding rows with missing funding values.",
+  "chart_type": "slope chart",
+  "value_unit": "rank position",
+  "sort_rule": "descending by absolute rank gap, ties broken by lower value_rank then entity",
+  "selection_rule": "top 12 after deterministic tie-break",
+  "plot_spec": {
+    "title": "2025 Value Rank vs VC Rank",
+    "left_field": "value_rank",
+    "right_field": "vc_rank",
+    "left_label": "value_rank",
+    "right_label": "vc_rank"
+  },
+  "records": [
+    {
+      "entity": "Palestine",
+      "value_rank": 16,
+      "vc_rank": 48,
+      "abs_rank_gap": 32
+    },
+    {
+      "entity": "Abu Dhabi",
+      "value_rank": 37,
+      "vc_rank": 26,
+      "abs_rank_gap": 11
+    },
+    {
+      "entity": "Telangana",
+      "value_rank": 33,
+      "vc_rank": 23,
+      "abs_rank_gap": 10
+    },
+    {
+      "entity": "Malta",
+      "value_rank": 50,
+      "vc_rank": 42,
+      "abs_rank_gap": 8
+    },
+    {
+      "entity": "Porto",
+      "value_rank": 30,
+      "vc_rank": 36,
+      "abs_rank_gap": 6
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "value_rank": 35,
+      "vc_rank": 29,
+      "abs_rank_gap": 6
+    },
+    {
+      "entity": "Tamil Nadu",
+      "value_rank": 27,
+      "vc_rank": 31,
+      "abs_rank_gap": 4
+    },
+    {
+      "entity": "Edmonton",
+      "value_rank": 43,
+      "vc_rank": 39,
+      "abs_rank_gap": 4
+    },
+    {
+      "entity": "Beijing",
+      "value_rank": 3,
+      "vc_rank": 6,
+      "abs_rank_gap": 3
+    },
+    {
+      "entity": "Hong Kong",
+      "value_rank": 20,
+      "vc_rank": 17,
+      "abs_rank_gap": 3
+    },
+    {
+      "entity": "Istanbul",
+      "value_rank": 25,
+      "vc_rank": 22,
+      "abs_rank_gap": 3
+    },
+    {
+      "entity": "Kerala",
+      "value_rank": 41,
+      "vc_rank": 44,
+      "abs_rank_gap": 3
+    }
+  ]
+}

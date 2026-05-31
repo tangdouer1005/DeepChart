@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "chart_type": "ranked_bar",
+  "title": "Top markets by headline-round amplification",
+  "label_field": "label",
+  "value_field": "value",
+  "x_label": "Multiple of Q3 average deal size",
+  "data": [
+    {
+      "label": "Silicon Valley",
+      "value": 194.465753
+    },
+    {
+      "label": "China",
+      "value": 189.714286
+    },
+    {
+      "label": "United Kingdom",
+      "value": 87.731707
+    },
+    {
+      "label": "France",
+      "value": 75.6
+    },
+    {
+      "label": "Singapore",
+      "value": 53.772727
+    },
+    {
+      "label": "India",
+      "value": 47.901724
+    },
+    {
+      "label": "Japan",
+      "value": 41.16
+    },
+    {
+      "label": "New York",
+      "value": 37.630137
+    },
+    {
+      "label": "Philadelphia",
+      "value": 28.5
+    },
+    {
+      "label": "Germany",
+      "value": 27.127857
+    }
+  ]
+}

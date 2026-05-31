@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart Replication</title>
+    <!-- Include ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #chart-container {
+            width: 350px;  /* Matches figsize=(3.5, 6) */
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. Data Preparation
+        // ---------------------------------------------------------
+        
+        const data = {"parental_values": [6204616.859286747, 6031719.639947483, 6442731.7845764635, 6859345.48128456, 6764765.683211772], "ln_values": [1478381.7987170925, 1081751.8498301418, 3928401.4065465294, 3922032.1950288094, 3110395.9232401457, 3495866.48103521, 2662220.3343282263, 1907977.6288138991, 2795104.0071977014, 3534860.737689079, 3006628.029078749, 3037851.004063388, 4632932.147138998, 3595460.617386489, 3721260.394931968, 3859800.6117266854, 3909206.586895387, 3731577.4010725464, 4910662.424020618, 4314128.730348152, 4225639.093779526, 3720654.2353181, 3489159.2704787264, 3663818.5393517087]};
+        const parental_values = data.parental_values;
+        const ln_values = data.ln_values;
+
+        // Calculation Functions
+        function calculateMean(data) {
+            const sum = data.reduce((a, b) => a + b, 0);
+            return sum / data.length;
+        }
+
+        function calculateSD(data, mean) {
+            const squareDiffs = data.map(value => Math.pow(value - mean, 2));
+            const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / (data.length - 1);
+            return Math.sqrt(avgSquareDiff);
+        }
+
+        const parentalMean = calculateMean(parental_values);
+        const parentalSD = calculateSD(parental_values, parentalMean);
+        
+        const lnMean = calculateMean(ln_values);
+        const lnSD = calculateSD(ln_values, lnMean);
+
+        // ---------------------------------------------------------
+        // 2. Chart Configuration
+        // ---------------------------------------------------------
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom, null, { renderer: 'svg' });
+
+        // Helper: Box-Muller transform for normal distribution
+        function randn_bm() {
+            let u = 0, v = 0;
+            while(u === 0) u = Math.random(); 
+            while(v === 0) v = Math.random();
+            return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+        }
+
+        // Generate points
+        // Parental: Uniform jitter (sns.stripplot default)
+        // Python: sns.stripplot(..., jitter=0.15)
+        const parentalPoints = parental_values.map(val => {
+            const jitter = (Math.random() - 0.5) * 0.3; // 0.15 * 2 = 0.3 width
+            return [0 + jitter, val];
+        });
+
+        // LN: Normal jitter (Python: np.random.normal(1, 0.08))
+        const lnPoints = ln_values.map(val => {
+            const jitter = randn_bm() * 0.08;
+            return [1 + jitter, val];
+        });
+
+        const option = {
+            backgroundColor: '#fff',
+            animation: false,
+            grid: {
+                top: 50,
+                bottom: 50,
+                left: 70,
+                right: 30
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Parental', 'LN'],
+                axisLine: {
+                    lineStyle: { color: 'black', width: 1 } // spine bottom
+                },
+                axisTick: {
+                    show: true,
+                    lineStyle: { color: 'black' }
+                },
+                axisLabel: {
+                    color: 'black',
+                    fontSize: 12,
+                    rotate: 45,
+                    margin: 10
+                },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Glutamate peak intensity',
+                nameLocation: 'middle',
+                nameGap: 55,
+                nameTextStyle: {
+                    color: 'black',
+                    fontSize: 12,
+                    fontFamily: 'sans-serif'
+                },
+                min: 0,
+                max: 1.05 * 1e7,
+                interval: 2e6,
+                axisLine: {
+                    show: true, // Show left spine
+                    lineStyle: { color: 'black', width: 1 }
+                },
+                axisTick: {
+                    show: true,
+                    lineStyle: { color: 'black' }
+                },
+                axisLabel: {
+                    color: 'black',
+                    fontSize: 11,
+                    formatter: function(value) {
+                        if (value === 0) return '0';
+                        return (value / 1e6).toFixed(0) + ' × 10⁶'; 
+                        // Note: Python uses latex $2 \times 10^6$.
+                        // ECharts can't easily render latex. We approximate.
+                        // Or use '2e6' if simple, but user wants to match image.
+                        // "2 x 10^6"
+                    }
+                },
+                splitLine: { show: false }
+            },
+            series: [
+                // 1. Bars
+                {
+                    type: 'bar',
+                    data: [
+                        {
+                            value: parentalMean,
+                            itemStyle: { 
+                                color: '#D9D9D9', 
+                                borderColor: 'black', 
+                                borderWidth: 1.5 
+                            }
+                        },
+                        {
+                            value: lnMean,
+                            itemStyle: { 
+                                color: '#A2CFA5', 
+                                borderColor: '#2E7D32', 
+                                borderWidth: 1.5 
+                            }
+                        }
+                    ],
+                    barWidth: 0.6 * (350/2), // Approximate width conversion? 
+                    // ECharts barWidth is in pixels or percent. Python bar_width=0.6 data units.
+                    // X-axis is category, effectively 0 and 1. Space is split.
+                    // Let's use percent to be safe, e.g. '50%'
+                    barWidth: '50%',
+                    z: 1
+                },
+                // 2. Error Bars
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const mean = api.value(1);
+                        const sd = api.value(2);
+                        
+                        // Parental or LN specific colors
+                        const isParental = (xValue === 0);
+                        const eColor = isParental ? 'gray' : '#2E7D32';
+                        
+                        const high = mean + sd;
+                        const low = mean - sd; // Draw full range if desired, though Python only shows +SD implicitly if bar covers it?
+                        // Python code: yerr=stds. 
+                        // Matplotlib errorbar draws both + and - by default.
+                        // However, since bars are opaque, the lower part might be hidden or visible depending on z-order.
+                        // Python bar zorder is usually below lines.
+                        // But here we draw error bars manually in ECharts on top (z: 3).
+                        // So we should see both up and down lines.
+                        
+                        const start = api.coord([xValue, low]);
+                        const end = api.coord([xValue, high]);
+                        // Cap width
+                        const size = 10; // Cap size in pixels (approx capsize=6 in python points)
+
+                        const style = api.style({
+                            stroke: eColor,
+                            fill: null,
+                            lineWidth: 1.5
+                        });
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1],
+                                        x2: end[0], y2: end[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0] - size/2, y1: start[1],
+                                        x2: start[0] + size/2, y2: start[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: end[0] - size/2, y1: end[1],
+                                        x2: end[0] + size/2, y2: end[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: [
+                        [0, parentalMean, parentalSD],
+                        [1, lnMean, lnSD]
+                    ],
+                    z: 3
+                },
+                // 3. Scatter Points
+                {
+                    type: 'scatter',
+                    data: parentalPoints,
+                    itemStyle: {
+                        color: 'black',
+                        // opacity: 1 // Default
+                    },
+                    symbolSize: 8,
+                    z: 4
+                },
+                {
+                    type: 'scatter',
+                    data: lnPoints,
+                    itemStyle: {
+                        color: '#2E7D32',
+                        opacity: 0.9
+                    },
+                    symbolSize: 8, // s=60 in python is area, sqrt(60/pi)*2 approx 8-9 diam.
+                    z: 4
+                },
+                // 4. Significance Annotation (Line + Text)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        // y = 0.95 * 10^7
+                        const yLineVal = 0.95 * 1e7;
+                        const p1 = api.coord([0, yLineVal]);
+                        const p2 = api.coord([1, yLineVal]);
+                        
+                        const yTextVal = 0.97 * 1e7;
+                        const pText = api.coord([0.5, yTextVal]);
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: p1[0], y1: p1[1],
+                                        x2: p2[0], y2: p2[1]
+                                    },
+                                    style: {
+                                        stroke: 'black',
+                                        lineWidth: 1
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    style: {
+                                        text: 'P = 5 × 10⁻¹⁰',
+                                        x: pText[0],
+                                        y: pText[1],
+                                        textAlign: 'center',
+                                        textVerticalAlign: 'bottom',
+                                        fill: 'black',
+                                        fontSize: 12,
+                                        fontFamily: 'serif' // Match math text style better
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: [[0]] // Dummy
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: '2%',
+                    top: '2%',
+                    style: {
+                        text: 'e',
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        fontFamily: 'sans-serif'
+                    }
+                }
+            ]
+        };
+        
+        // Manual override for Tick Labels to match latex style closer
+        // ECharts formatter returns string.
+        option.yAxis.axisLabel.formatter = function (value) {
+            if (value === 0) return '0';
+            if (value === 10000000) return '1 × 10⁷';
+            return (value / 1000000) + ' × 10⁶';
+        };
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{
+  "report_id": "010",
+  "query_id": 7,
+  "query_text": "Create a ranked bar chart of the top 10 companies by `Mosaic momentum`, defined as the one-year Mosaic change divided by `Founded age in years`, using only companies with numeric Mosaic change and numeric Founded year, with values shown as `Mosaic-change points per company-year`.",
+  "chart_type": "ranked_bar",
+  "value_unit": "Mosaic-change points per company-year",
+  "sort_rule": "descending by Mosaic momentum",
+  "selection_rule": "top 10 companies with numeric Founded year and 1-year Mosaic delta",
+  "records": [
+    {
+      "label": "Positron",
+      "value": 90.333333
+    },
+    {
+      "label": "Corintis",
+      "value": 59.6
+    },
+    {
+      "label": "Starcloud",
+      "value": 34.0
+    },
+    {
+      "label": "MemryX",
+      "value": 30.571429
+    },
+    {
+      "label": "Armada",
+      "value": 28.25
+    },
+    {
+      "label": "Pacific Fusion",
+      "value": 25.666667
+    },
+    {
+      "label": "Proxima Fusion",
+      "value": 25.0
+    },
+    {
+      "label": "Aligned",
+      "value": 24.153846
+    },
+    {
+      "label": "Aalo Atomics",
+      "value": 23.666667
+    },
+    {
+      "label": "Dream",
+      "value": 16.666667
+    }
+  ],
+  "plot_config": {
+    "title": "Top companies by age-normalized Mosaic momentum",
+    "x_label": "Mosaic-change points per company-year",
+    "y_label": "Company"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with numeric founded year and one-year Mosaic change.",
+    "Computed company age as 2026 minus Founded year.",
+    "Divided Mosaic delta by age in years and ranked descending.",
+    "Kept the top 10 companies."
+  ],
+  "stats": {
+    "eligible_count": 72,
+    "returned_count": 10
+  },
+  "open_issues": []
+}

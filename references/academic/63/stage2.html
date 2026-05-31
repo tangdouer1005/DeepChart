@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 500px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // Data parsed from 63.json
+        const chartData = [
+    {
+        "label": "0 \u00b5M",
+        "color": "#00008B",
+        "x_log": [
+            NaN,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y_mean": [
+            NaN,
+            -0.30109098,
+            -0.29673696,
+            -0.30693861666666666,
+            -0.1928858883333333,
+            -0.039108891666666666,
+            0.004845919999999999,
+            0.004125017666666668,
+            -0.008068091666666668
+        ],
+        "y_sem": [
+            NaN,
+            0.006911022967688643,
+            0.008977578864625288,
+            0.008804909777115897,
+            0.032433636077951584,
+            0.030722023424492557,
+            0.005904542786660116,
+            0.005674570092895976,
+            0.004564869948886034
+        ]
+    },
+    {
+        "label": "1 \u00b5M",
+        "color": "#6A5ACD",
+        "x_log": [
+            NaN,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y_mean": [
+            NaN,
+            -0.16974430833333332,
+            -0.188317375,
+            -0.18332165333333336,
+            -0.06009720666666666,
+            -0.005810383333333333,
+            0.0006483483333333326,
+            -0.010343535000000001,
+            -0.01820484
+        ],
+        "y_sem": [
+            NaN,
+            0.026510563087099256,
+            0.026326274835683807,
+            0.02574344656775477,
+            0.01956943178163445,
+            0.0052576484071884385,
+            0.0100555255042192,
+            0.008687549262300137,
+            0.009385327949887173
+        ]
+    },
+    {
+        "label": "3 \u00b5M",
+        "color": "#9370DB",
+        "x_log": [
+            NaN,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y_mean": [
+            NaN,
+            -0.09157349333333333,
+            -0.09572224833333333,
+            -0.09113392666666666,
+            -0.01541896,
+            0.012469936666666667,
+            0.007132499999999999,
+            0.0006742133333333336,
+            0.0014164799999999977
+        ],
+        "y_sem": [
+            NaN,
+            0.023494808932259435,
+            0.02340394243573084,
+            0.025466907261621787,
+            0.016763805660418123,
+            0.011762133007863744,
+            0.012973090101565369,
+            0.013185626485439028,
+            0.012836304967957096
+        ]
+    },
+    {
+        "label": "10 \u00b5M",
+        "color": "#BA55D3",
+        "x_log": [
+            NaN,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y_mean": [
+            NaN,
+            -0.018821303333333334,
+            -0.015687771666666666,
+            -0.015319136666666665,
+            0.006262163333333334,
+            0.005353043333333335,
+            0.012372268333333332,
+            0.012337565,
+            0.003296271333333333
+        ],
+        "y_sem": [
+            NaN,
+            0.013526904494574672,
+            0.01527650231875094,
+            0.019449143591051626,
+            0.014559597751220482,
+            0.007422735467414362,
+            0.01493480947953481,
+            0.01843094763448763,
+            0.009874574946181486
+        ]
+    },
+    {
+        "label": "30 \u00b5M",
+        "color": "#DDA0DD",
+        "x_log": [
+            NaN,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y_mean": [
+            NaN,
+            -0.0036905583333333336,
+            -0.004147411666666667,
+            0.00010943833333333305,
+            0.001966323333333334,
+            0.001225078333333334,
+            -0.0005336100000000012,
+            -2.2390000000000024e-05,
+            -0.005695831666666667
+        ],
+        "y_sem": [
+            NaN,
+            0.009160365385092606,
+            0.01028056260948152,
+            0.00980693737739444,
+            0.0073899559682412495,
+            0.009775910104442252,
+            0.011021653693106433,
+            0.010629347268706893,
+            0.006821607423596688
+        ]
+    }
+];
+
+        const series = [];
+        const markers = ['circle', 'rect', 'rect', 'rect', 'rect'];
+
+        chartData.forEach((dataset, idx) => {
+            const label = dataset.label;
+            const color = dataset.color;
+            // Map JSON data to [x, y, err], filtering out NaNs
+            const data = dataset.x_log
+                .map((x, i) => [x, dataset.y_mean[i], dataset.y_sem[i]])
+                .filter(d => d[0] !== null && !isNaN(d[0]) && d[1] !== null && !isNaN(d[1]))
+                .sort((a,b)=>a[0]-b[0]);
+
+            // Error bars
+            series.push({
+                type: 'custom',
+                name: label,
+                itemStyle: { color: color, borderWidth: 1.5 },
+                renderItem: function (params, api) {
+                    const xValue = api.value(0);
+                    const yValue = api.value(1);
+                    const lowPoint = api.coord([xValue, yValue - api.value(2)]);
+                    const highPoint = api.coord([xValue, yValue + api.value(2)]);
+                    const style = api.style({ stroke: api.visual('color'), fill: null });
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: lowPoint[0], y1: lowPoint[1], x2: highPoint[0], y2: highPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: lowPoint[0]-3, y1: lowPoint[1], x2: lowPoint[0]+3, y2: lowPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: highPoint[0]-3, y1: highPoint[1], x2: highPoint[0]+3, y2: highPoint[1] }, style: style }
+                        ]
+                    };
+                },
+                data: data,
+                z: 10
+            });
+
+            // Scatter
+            series.push({
+                type: 'scatter',
+                name: label,
+                data: data,
+                symbol: markers[idx % markers.length],
+                itemStyle: { color: color },
+                symbolSize: 8,
+                z: 10
+            });
+
+            // Spline
+            series.push({
+                type: 'line',
+                name: label,
+                data: data.map(d => [d[0], d[1]]),
+                smooth: true,
+                showSymbol: false,
+                lineStyle: { color: color, width: 2 },
+                z: 5
+            });
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 50, bottom: 50, left: 60 },
+            xAxis: {
+                type: 'value',
+                min: -15, max: -3,
+                interval: 2,
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisTick: { show: true, inside: true },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                min: -0.05, max: 0.35,
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisTick: { show: true, inside: true },
+                splitLine: { show: false },
+                name: 'G protein activation\n(-Δ Net BRET)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 }
+            },
+            series: [
+                ...series,
+                {
+                    type: 'line',
+                    markLine: {
+                        symbol: 'none',
+                        lineStyle: { type: 'dashed', color: 'black', width: 1 },
+                        data: [{ yAxis: 0 }]
+                    }
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 70,
+                    top: 60,
+                    style: {
+                        text: 'G11',
+                        font: '14px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

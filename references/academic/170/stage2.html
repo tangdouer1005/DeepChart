@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const data = {
+    "df": [
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 302.631
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 266.816
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 263.0
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 245.96
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 240.168
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 229.0
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 208.636
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 178.0
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 175.2
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 169.996
+        },
+        {
+            "Country": "Spain",
+            "Stage": "HIC",
+            "value": 164.0
+        },
+        {
+            "Country": "Spain",
+            "Stage": "HIC",
+            "value": 164.0
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 158.0
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 156.877
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 133.667
+        },
+        {
+            "Country": "Italy",
+            "Stage": "HIC",
+            "value": 131.85
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 121.3
+        },
+        {
+            "Country": "South Africa",
+            "Stage": "UMIC",
+            "value": 118.794
+        },
+        {
+            "Country": "South Africa",
+            "Stage": "UMIC",
+            "value": 118.794
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 118.18
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 117.08
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 112.1
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 111.0
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 109.0
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 109.0
+        },
+        {
+            "Country": "Russia",
+            "Stage": "UMIC",
+            "value": 106.333
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 106.14
+        },
+        {
+            "Country": "Spain",
+            "Stage": "HIC",
+            "value": 106.0
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 99.4224
+        },
+        {
+            "Country": "Italy",
+            "Stage": "HIC",
+            "value": 99.15
+        },
+        {
+            "Country": "South Africa",
+            "Stage": "UMIC",
+            "value": 96.8182
+        },
+        {
+            "Country": "South Africa",
+            "Stage": "UMIC",
+            "value": 96.8182
+        },
+        {
+            "Country": "South Africa",
+            "Stage": "UMIC",
+            "value": 92.4859
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 92.2
+        },
+        {
+            "Country": "Latvia",
+            "Stage": "HIC",
+            "value": 89.3333
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 89.01
+        },
+        {
+            "Country": "South Africa",
+            "Stage": "UMIC",
+            "value": 88.7179
+        },
+        {
+            "Country": "South Africa",
+            "Stage": "UMIC",
+            "value": 88.7179
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 88.23
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 88.23
+        },
+        {
+            "Country": "Denmark",
+            "Stage": "HIC",
+            "value": 88.0
+        },
+        {
+            "Country": "Spain",
+            "Stage": "HIC",
+            "value": 87.0
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 86.366
+        },
+        {
+            "Country": "Thailand",
+            "Stage": "UMIC",
+            "value": 85.6
+        },
+        {
+            "Country": "Turkey",
+            "Stage": "UMIC",
+            "value": 81.71
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 77.3168
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 76.5
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 76.0
+        },
+        {
+            "Country": "France",
+            "Stage": "HIC",
+            "value": 75.68
+        },
+        {
+            "Country": "Latvia",
+            "Stage": "HIC",
+            "value": 75.0
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 73.7
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 71.27
+        },
+        {
+            "Country": "Jordan",
+            "Stage": "UMIC",
+            "value": 70.1833
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 69.069
+        },
+        {
+            "Country": "Brazil",
+            "Stage": "UMIC",
+            "value": 69.02
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 68.78
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 68.56
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 68.0
+        },
+        {
+            "Country": "Brazil",
+            "Stage": "UMIC",
+            "value": 68.0
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 67.58
+        },
+        {
+            "Country": "Italy",
+            "Stage": "HIC",
+            "value": 67.3333
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 66.6667
+        },
+        {
+            "Country": "Latvia",
+            "Stage": "HIC",
+            "value": 64.3333
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 63.2
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 63.0
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 63.0
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 62.76
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 61.03
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 61.03
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 60.615
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 58.92
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 58.4172
+        },
+        {
+            "Country": "Finland",
+            "Stage": "HIC",
+            "value": 58.0
+        },
+        {
+            "Country": "Latvia",
+            "Stage": "HIC",
+            "value": 57.3333
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 56.856
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 56.8
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 56.8
+        },
+        {
+            "Country": "UK",
+            "Stage": "HIC",
+            "value": 56.35
+        },
+        {
+            "Country": "Turkey",
+            "Stage": "UMIC",
+            "value": 56.06
+        },
+        {
+            "Country": "Spain",
+            "Stage": "HIC",
+            "value": 55.85
+        },
+        {
+            "Country": "Spain",
+            "Stage": "HIC",
+            "value": 55.85
+        },
+        {
+            "Country": "Italy",
+            "Stage": "HIC",
+            "value": 54.0
+        },
+        {
+            "Country": "China",
+            "Stage": "UMIC",
+            "value": 53.88
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 53.5768
+        },
+        {
+            "Country": "Italy",
+            "Stage": "HIC",
+            "value": 53.5667
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 53.45
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 53.0
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 52.2
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 50.81
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 50.44
+        },
+        {
+            "Country": "Thailand",
+            "Stage": "UMIC",
+            "value": 50.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 49.46
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 49.46
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 49.46
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 49.02
+        },
+        {
+            "Country": "Latvia",
+            "Stage": "HIC",
+            "value": 48.3333
+        },
+        {
+            "Country": "Latvia",
+            "Stage": "HIC",
+            "value": 48.0
+        },
+        {
+            "Country": "France",
+            "Stage": "HIC",
+            "value": 47.58
+        },
+        {
+            "Country": "Latvia",
+            "Stage": "HIC",
+            "value": 47.3333
+        },
+        {
+            "Country": "Indonesia",
+            "Stage": "LMIC",
+            "value": 47.05
+        },
+        {
+            "Country": "UK",
+            "Stage": "HIC",
+            "value": 46.96
+        },
+        {
+            "Country": "UK",
+            "Stage": "HIC",
+            "value": 46.96
+        },
+        {
+            "Country": "UK",
+            "Stage": "HIC",
+            "value": 46.96
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 46.93
+        },
+        {
+            "Country": "Brazil",
+            "Stage": "UMIC",
+            "value": 46.9
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 46.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 45.8
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 45.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 44.89
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 44.89
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 44.89
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 44.7
+        },
+        {
+            "Country": "Indonesia",
+            "Stage": "LMIC",
+            "value": 44.5
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 43.43
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 43.43
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 43.43
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 43.4
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 43.4
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 43.4
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 42.0
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 40.97
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 40.0
+        },
+        {
+            "Country": "Italy",
+            "Stage": "HIC",
+            "value": 40.0
+        },
+        {
+            "Country": "India",
+            "Stage": "LMIC",
+            "value": 40.0
+        },
+        {
+            "Country": "Russia",
+            "Stage": "UMIC",
+            "value": 39.3333
+        },
+        {
+            "Country": "Italy",
+            "Stage": "HIC",
+            "value": 39.0
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 38.68
+        },
+        {
+            "Country": "Thailand",
+            "Stage": "UMIC",
+            "value": 38.4
+        },
+        {
+            "Country": "Turkey",
+            "Stage": "UMIC",
+            "value": 38.04
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 37.7
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 37.7
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 37.4376
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 37.29
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 37.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 37.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 37.0
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 35.56
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 35.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 35.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 35.0
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 34.8619
+        },
+        {
+            "Country": "Spain",
+            "Stage": "HIC",
+            "value": 34.0
+        },
+        {
+            "Country": "Spain",
+            "Stage": "HIC",
+            "value": 34.0
+        },
+        {
+            "Country": "South Africa",
+            "Stage": "UMIC",
+            "value": 33.6158
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 32.44
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 32.1
+        },
+        {
+            "Country": "Indonesia",
+            "Stage": "LMIC",
+            "value": 31.83
+        },
+        {
+            "Country": "Ethiopia",
+            "Stage": "LIC",
+            "value": 31.33
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 31.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 30.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 30.0
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 29.39
+        },
+        {
+            "Country": "Indonesia",
+            "Stage": "LMIC",
+            "value": 27.83
+        },
+        {
+            "Country": "Finland",
+            "Stage": "HIC",
+            "value": 27.5
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 27.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 27.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 27.0
+        },
+        {
+            "Country": "Philippines",
+            "Stage": "LMIC",
+            "value": 26.7
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 26.2
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 26.07
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 25.0
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 24.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 24.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 24.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 24.0
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 23.4
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 22.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 22.0
+        },
+        {
+            "Country": "Thailand",
+            "Stage": "UMIC",
+            "value": 21.9
+        },
+        {
+            "Country": "Portugal",
+            "Stage": "HIC",
+            "value": 21.6
+        },
+        {
+            "Country": "Switzerland",
+            "Stage": "HIC",
+            "value": 21.09
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 20.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 19.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 19.0
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 19.0
+        },
+        {
+            "Country": "Thailand",
+            "Stage": "UMIC",
+            "value": 18.9
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 18.0
+        },
+        {
+            "Country": "USA",
+            "Stage": "HIC",
+            "value": 17.9
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 16.83
+        },
+        {
+            "Country": "Switzerland",
+            "Stage": "HIC",
+            "value": 16.77
+        },
+        {
+            "Country": "Malaysia",
+            "Stage": "UMIC",
+            "value": 16.2
+        },
+        {
+            "Country": "Sweden",
+            "Stage": "HIC",
+            "value": 16.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 11.0
+        },
+        {
+            "Country": "Malaysia",
+            "Stage": "UMIC",
+            "value": 10.6
+        },
+        {
+            "Country": "Malaysia",
+            "Stage": "UMIC",
+            "value": 10.2
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 9.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 9.0
+        },
+        {
+            "Country": "Switzerland",
+            "Stage": "HIC",
+            "value": 8.26
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 8.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 8.0
+        },
+        {
+            "Country": "Malaysia",
+            "Stage": "UMIC",
+            "value": 7.7
+        },
+        {
+            "Country": "Malaysia",
+            "Stage": "UMIC",
+            "value": 7.7
+        },
+        {
+            "Country": "Malaysia",
+            "Stage": "UMIC",
+            "value": 7.6
+        },
+        {
+            "Country": "Malaysia",
+            "Stage": "UMIC",
+            "value": 6.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 6.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 6.0
+        },
+        {
+            "Country": "Malaysia",
+            "Stage": "UMIC",
+            "value": 5.6
+        },
+        {
+            "Country": "Philippines",
+            "Stage": "LMIC",
+            "value": 5.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 5.0
+        },
+        {
+            "Country": "Malaysia",
+            "Stage": "UMIC",
+            "value": 4.5
+        },
+        {
+            "Country": "Malaysia",
+            "Stage": "UMIC",
+            "value": 3.7
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 2.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 1.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 1.0
+        },
+        {
+            "Country": "Japan",
+            "Stage": "HIC",
+            "value": 1.0
+        }
+    ],
+    "stage_order": [
+        "LIC",
+        "LMIC",
+        "UMIC",
+        "HIC"
+    ],
+    "means": {
+        "LIC": 31.33,
+        "LMIC": 31.844285714285714,
+        "UMIC": 56.07491860465117,
+        "HIC": 62.06268116883116
+    },
+    "sems": {
+        "LIC": 0.0,
+        "LMIC": 5.391992677481452,
+        "UMIC": 5.433588749113046,
+        "HIC": 4.4992024652766265
+    }
+};
+
+        const df = data.df;
+        
+        const stageOrder = data.stage_order;
+
+        // Group data by stage and calculate means and SEMs
+        const groupedData = {};
+        const means = data.means;
+        const sems = data.sems;
+
+        stageOrder.forEach(stage => {
+            const values = df.filter(row => row.Stage === stage).map(row => row.value);
+            const mean = means[stage];
+            const sem = sems[stage];
+            groupedData[stage] = { mean, sem, values };
+        });
+
+        // Colors
+        const customPalette = {
+            'LIC': '#FDBF6F',
+            'LMIC': '#E78AC3',
+            'UMIC': '#B2DF8A',
+            'HIC': '#66C2A5'
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const barData = [];
+        const errorData = [];
+        const scatterData = [];
+
+        stageOrder.forEach((stage, idx) => {
+            const data = groupedData[stage];
+            barData.push({
+                value: data.mean,
+                itemStyle: { color: '#E0E0E0', borderColor: 'black', borderWidth: 1 } // Light grey bars
+            });
+
+            errorData.push([idx, data.mean - data.sem, data.mean + data.sem]);
+
+            data.values.forEach(val => {
+                const jitter = (Math.random() - 0.5) * 0.4; // Adjust jitter strength
+                scatterData.push({
+                    value: [idx + jitter, val],
+                    itemStyle: { color: customPalette[stage], opacity: 0.5, borderColor: '#404040', borderWidth: 1 }, // Custom color for points
+                    symbolSize: 10
+                });
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 60, bottom: 60, left: 80, right: 80 },
+            xAxis: {
+                type: 'category',
+                data: stageOrder,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Plate waste amount (g per capita per meal)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                min: 0,
+                max: 320,
+                interval: 40,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: barData,
+                    barWidth: '50%',
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const xVal = api.value(0);
+                        const low = api.value(1);
+                        const high = api.value(2);
+                        const style = api.style({ stroke: 'black', lineWidth: 1 });
+                        const xCoord = api.coord([xVal, high])[0];
+                        const lowCoord = api.coord([xVal, low]);
+                        const highCoord = api.coord([xVal, high]);
+                        const capSize = 10;
+
+                        return {
+                            type: 'group',
+                            children: [
+                                { type: 'line', shape: { x1: lowCoord[0], y1: lowCoord[1], x2: highCoord[0], y2: highCoord[1] }, style: style },
+                                { type: 'line', shape: { x1: xCoord - capSize/2, y1: lowCoord[1], x2: xCoord + capSize/2, y2: lowCoord[1] }, style: style },
+                                { type: 'line', shape: { x1: xCoord - capSize/2, y1: highCoord[1], x2: xCoord + capSize/2, y2: highCoord[1] }, style: style }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 2
+                },
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    symbolSize: 10,
+                    z: 3
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10, top: 10,
+                    style: { text: 'a', font: 'bold 20px Arial', fill: 'black' }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

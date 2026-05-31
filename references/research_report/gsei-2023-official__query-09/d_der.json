@@ -1,0 +1,91 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a scatter plot for the 12 countries with the highest listed top-10 city-score totals in the 2023 country tables, where `x = score(rank 1) / score(rank 10)`, `y = global_rank(rank 10) - global_rank(rank 1)`, bubble size = `sum(score ranks 1-10)`, values shown as a ratio, rank positions, and score points, and only countries with 10 listed cities are allowed.",
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "2023 Ladder Steepness Among Large Ecosystems",
+  "value_unit": "mixed",
+  "sort_rule": "subset selected by descending listed_top10_score_total, tie-break alphabetically",
+  "selection_rule": "top 12 countries by listed top-10 city-score total among complete 10-city ladders",
+  "records": [
+    {
+      "entity": "United States",
+      "listed_top10_score_total": 1206.71,
+      "score_rank1_over_rank10": 18.674983,
+      "global_rank_spread_1_to_10": 25
+    },
+    {
+      "entity": "China",
+      "listed_top10_score_total": 285.0,
+      "score_rank1_over_rank10": 17.587922,
+      "global_rank_spread_1_to_10": 119
+    },
+    {
+      "entity": "United Kingdom",
+      "listed_top10_score_total": 179.49,
+      "score_rank1_over_rank10": 45.187943,
+      "global_rank_spread_1_to_10": 200
+    },
+    {
+      "entity": "India",
+      "listed_top10_score_total": 171.94,
+      "score_rank1_over_rank10": 69.064516,
+      "global_rank_spread_1_to_10": 363
+    },
+    {
+      "entity": "Canada",
+      "listed_top10_score_total": 105.67,
+      "score_rank1_over_rank10": 14.311404,
+      "global_rank_spread_1_to_10": 201
+    },
+    {
+      "entity": "Germany",
+      "listed_top10_score_total": 101.93,
+      "score_rank1_over_rank10": 18.249057,
+      "global_rank_spread_1_to_10": 194
+    },
+    {
+      "entity": "France",
+      "listed_top10_score_total": 82.3,
+      "score_rank1_over_rank10": 34.836364,
+      "global_rank_spread_1_to_10": 261
+    },
+    {
+      "entity": "Israel",
+      "listed_top10_score_total": 75.75,
+      "score_rank1_over_rank10": 166.970588,
+      "global_rank_spread_1_to_10": 607
+    },
+    {
+      "entity": "Japan",
+      "listed_top10_score_total": 58.61,
+      "score_rank1_over_rank10": 259.235294,
+      "global_rank_spread_1_to_10": 833
+    },
+    {
+      "entity": "Brazil",
+      "listed_top10_score_total": 53.7,
+      "score_rank1_over_rank10": 66.980769,
+      "global_rank_spread_1_to_10": 475
+    },
+    {
+      "entity": "Australia",
+      "listed_top10_score_total": 52.82,
+      "score_rank1_over_rank10": 49.025641,
+      "global_rank_spread_1_to_10": 529
+    },
+    {
+      "entity": "The Netherlands",
+      "listed_top10_score_total": 48.05,
+      "score_rank1_over_rank10": 71.842105,
+      "global_rank_spread_1_to_10": 553
+    }
+  ],
+  "x_field": "score_rank1_over_rank10",
+  "y_field": "global_rank_spread_1_to_10",
+  "size_field": "listed_top10_score_total",
+  "x_label": "score(rank 1) / score(rank 10)",
+  "y_label": "global_rank(rank 10) - global_rank(rank 1)",
+  "size_label": "Sum of listed city scores",
+  "annotate_all": true
+}

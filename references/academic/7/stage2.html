@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 300px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const data = {
+    "raw_data": {
+        "vehicle_K": [
+            20.2038371448114,
+            28.2841222234369,
+            17.6957721587514,
+            24.5982083872017,
+            4.51862967654018,
+            22.5550309385981,
+            9.47358789887242,
+            12.6892037800691
+        ],
+        "dipy_K": [
+            17.2002793898328,
+            14.5098132817267,
+            7.73067754218708,
+            16.8116512414254,
+            2.32638463554246,
+            17.2686735656735,
+            1.96725015719119,
+            6.56186138881869
+        ]
+    },
+    "comparison": {
+        "t_stat": 5.24892700217413,
+        "p_val": 0.0011876113445952509
+    }
+};
+
+        const dataArr = [];
+        if (data.raw_data && data.raw_data.vehicle_K && data.raw_data.dipy_K) {
+            const vArr = data.raw_data.vehicle_K;
+            const dArr = data.raw_data.dipy_K;
+            for(let i=0; i < vArr.length; i++) {
+                dataArr.push({ v: vArr[i], d: dArr[i] });
+            }
+        }
+
+        const pVal = data.comparison.p_val;
+        
+        let sigText = "";
+        if (pVal < 0.001) sigText = "***";
+        else if (pVal < 0.01) sigText = "**";
+        else if (pVal < 0.05) sigText = "*";
+        else sigText = `P = ${pVal.toFixed(2)}`;
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Prepare series for lines connecting points
+        const lineSeries = dataArr.map(item => ({
+            type: 'line',
+            data: [[0, item.v], [1, item.d]],
+            lineStyle: { color: 'black', type: 'dashed', width: 1 },
+            symbol: 'none',
+            z: 1
+        }));
+        
+        // Points series
+        const pointSeries = [
+            {
+                type: 'scatter',
+                data: dataArr.map(item => [0, item.v]),
+                itemStyle: { color: 'black' },
+                symbolSize: 10,
+                z: 2
+            },
+            {
+                type: 'scatter',
+                data: dataArr.map(item => [1, item.d]),
+                itemStyle: { color: '#8B1C1C' },
+                symbolSize: 10,
+                z: 2
+            }
+        ];
+        
+        // Annotation series
+        const annotationSeries = {
+            type: 'custom',
+            renderItem: function(params, api) {
+                const p1 = api.coord([0.2, 29]);
+                const p2 = api.coord([0.8, 29]);
+                return {
+                    type: 'group',
+                    children: [
+                        { type: 'line', shape: { x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1] }, style: { stroke: 'black', lineWidth: 1 } },
+                        { type: 'text', style: { text: sigText, x: (p1[0]+p2[0])/2, y: p1[1]-5, textAlign: 'center', textVerticalAlign: 'bottom', fill: 'black', font: 'bold 14px Arial' } }
+                    ]
+                };
+            },
+            data: [0],
+            z: 3
+        };
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 80, left: 60 },
+            xAxis: {
+                type: 'value',
+                min: -0.5,
+                max: 1.5,
+                interval: 1,
+                axisLabel: { 
+                    formatter: function(value) {
+                        if(value === 0) return 'Vehicle + ketamine';
+                        if(value === 1) return 'Dipyridamole + ketamine';
+                        return '';
+                    },
+                    color: 'black',
+                    rotate: 30,
+                    margin: 20
+                },
+                axisTick: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black', width: 0.8 } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                min: 0,
+                max: 30,
+                interval: 10,
+                axisLabel: { color: 'black', fontSize: 12 },
+                name: 'Ado peak (ΔF/F %)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black', width: 0.8 } }
+            },
+            series: [
+                ...lineSeries,
+                ...pointSeries,
+                annotationSeries
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'c', font: 'bold 20px Arial' } }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

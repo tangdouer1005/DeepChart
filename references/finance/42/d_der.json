@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016,
+            "Cash & Equiv": 3379000000,
+            "Receivables": 1252000000,
+            "Operating Expenses": 12146000000,
+            "Cost of Revenue": 102901000000,
+            "Quick Assets": 4631000000,
+            "Daily Burn": 315197260.27397263
+        },
+        {
+            "Fiscal Year": 2017,
+            "Cash & Equiv": 4546000000,
+            "Receivables": 1432000000,
+            "Operating Expenses": 13032000000,
+            "Cost of Revenue": 111882000000,
+            "Quick Assets": 5978000000,
+            "Daily Burn": 342230136.98630136
+        },
+        {
+            "Fiscal Year": 2018,
+            "Cash & Equiv": 6055000000,
+            "Receivables": 1669000000,
+            "Operating Expenses": 13944000000,
+            "Cost of Revenue": 123152000000,
+            "Quick Assets": 7724000000,
+            "Daily Burn": 375605479.4520548
+        },
+        {
+            "Fiscal Year": 2019,
+            "Cash & Equiv": 8384000000,
+            "Receivables": 1535000000,
+            "Operating Expenses": 15080000000,
+            "Cost of Revenue": 132886000000,
+            "Quick Assets": 9919000000,
+            "Daily Burn": 405386301.36986303
+        },
+        {
+            "Fiscal Year": 2020,
+            "Cash & Equiv": 12277000000,
+            "Receivables": 1550000000,
+            "Operating Expenses": 16387000000,
+            "Cost of Revenue": 144939000000,
+            "Quick Assets": 13827000000,
+            "Daily Burn": 441989041.0958904
+        },
+        {
+            "Fiscal Year": 2021,
+            "Cash & Equiv": 11258000000,
+            "Receivables": 1803000000,
+            "Operating Expenses": 18537000000,
+            "Cost of Revenue": 170684000000,
+            "Quick Assets": 13061000000,
+            "Daily Burn": 518413698.63013697
+        },
+        {
+            "Fiscal Year": 2022,
+            "Cash & Equiv": 10203000000,
+            "Receivables": 2241000000,
+            "Operating Expenses": 19779000000,
+            "Cost of Revenue": 199382000000,
+            "Quick Assets": 12444000000,
+            "Daily Burn": 600441095.8904109
+        },
+        {
+            "Fiscal Year": 2023,
+            "Cash & Equiv": 13700000000,
+            "Receivables": 2285000000,
+            "Operating Expenses": 21590000000,
+            "Cost of Revenue": 212586000000,
+            "Quick Assets": 15985000000,
+            "Daily Burn": 641578082.1917808
+        },
+        {
+            "Fiscal Year": 2024,
+            "Cash & Equiv": 9906000000,
+            "Receivables": 2721000000,
+            "Operating Expenses": 22810000000,
+            "Cost of Revenue": 222358000000,
+            "Quick Assets": 12627000000,
+            "Daily Burn": 671693150.6849315
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 14.692386589828503
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 17.46777783114783
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 20.564130244500205
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 24.4680196801968
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 31.283581071866905
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 25.194164495484117
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 20.724763986293183
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 24.91512793796119
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 18.798762481237354
+        }
+    ]
+}

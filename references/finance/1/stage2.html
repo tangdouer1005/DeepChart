@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AbbVie 内部增长率 (IGR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f7f7f9;
+      color: #222;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem 2rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+      color: #111827;
+    }
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 1.25rem;
+      font-weight: 400;
+      color: #4b5563;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      margin-top: 0.75rem;
+    }
+    .note {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    .legend-custom {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: #374151;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .legend-dot.line {
+      background: linear-gradient(90deg, #0f766e, #22c55e);
+    }
+    .legend-dot.zero {
+      background: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AbbVie 内部增长率 (IGR)</h1>
+    <h2>2016–2024 年度变化（单位：%）</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="igrChart"></canvas>
+    </div>
+
+    <div class="legend-custom">
+      <span class="legend-dot line"></span><span>年度内部增长率</span>
+      <span class="legend-dot zero"></span><span>0% 基准线</span>
+    </div>
+
+    <div class="note">
+      注：内部增长率 (Internal Growth Rate, IGR) 为年化比率值，图中已转换为百分比显示，保留两位小数。
+    </div>
+  </div>
+
+  <script>
+    // Raw data from source (IGR as decimals)
+    const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const igrRaw = [
+      0.0389964857818045,
+      0.01787613120069,
+      0.0016471167759613,
+      0.0208478014233162,
+      -0.0252155523019359,
+      0.0155948750905883,
+      0.0127276857333503,
+      -0.0398500358060575,
+      -0.0476203920018633
+    ];
+
+    // Convert to percentage with 2 decimals
+    const igrPercent = igrRaw.map(v => v * 100);
+
+    const ctx = document.getElementById('igrChart').getContext('2d');
+
+    // Determine y-axis suggested bounds for better readability
+    const minVal = Math.min(...igrPercent);
+    const maxVal = Math.max(...igrPercent);
+    const padding = 2; // percentage points
+    const suggestedMin = Math.floor((minVal - padding));
+    const suggestedMax = Math.ceil((maxVal + padding));
+
+    const igrChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: '内部增长率 (IGR)',
+            data: igrPercent,
+            borderColor: 'rgba(34, 197, 94, 1)',
+            borderWidth: 2.5,
+            tension: 0.25,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: function(context) {
+              const value = context.raw;
+              return value < 0 ? 'rgba(220, 38, 38, 1)' : 'rgba(16, 185, 129, 1)';
+            },
+            pointBorderColor: '#ffffff',
+            pointBorderWidth: 1.5,
+            fill: {
+              target: 'origin',
+              above: 'rgba(34, 197, 94, 0.08)',
+              below: 'rgba(239, 68, 68, 0.08)'
+            }
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(17, 24, 39, 0.92)',
+            titleColor: '#e5e7eb',
+            bodyColor: '#f9fafb',
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function(context) {
+                const v = context.raw;
+                return 'IGR: ' + v.toFixed(2) + '%';
+              },
+              title: function(context) {
+                return '年度：' + context[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#4b5563',
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            grid: {
+              color: '#e5e7eb',
+              borderDash: [4, 4]
+            },
+            ticks: {
+              color: '#4b5563',
+              font: {
+                size: 11
+              },
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      },
+      plugins: [{
+        // Plugin to draw a zero line across the chart with stronger style
+        id: 'zeroLine',
+        afterDraw(chart, args, options) {
+          const yScale = chart.scales.y;
+          if (!yScale) return;
+          const zeroY = yScale.getPixelForValue(0);
+          const ctx = chart.ctx;
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(chart.chartArea.left, zeroY);
+          ctx.lineTo(chart.chartArea.right, zeroY);
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([6, 4]);
+          ctx.strokeStyle = '#9ca3af';
+          ctx.stroke();
+          ctx.restore();
+        }
+      }]
+    });
+  </script>
+</body>
+</html>

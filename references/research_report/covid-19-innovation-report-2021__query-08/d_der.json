@@ -1,0 +1,171 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a heatmap for the 15 countries with the highest sampled-innovation density in the 2021 report, where rows are countries, columns are the six innovation categories, each cell is `category count / total sampled innovations` expressed as a percentage, and rows are ordered from the largest to the smallest `((diagnostics + treatment) - (grants_support_initiatives + life_business_adaptation)) / total sampled innovations` gap.",
+  "chart_type": "heatmap",
+  "value_unit": "percent",
+  "sort_rule": "row order descending by clinical_minus_support_share_pct after selecting top 15 by innovation_density",
+  "selection_rule": "top 15 by innovation_density",
+  "plot_spec": {
+    "title": "2021 Density-Selected Category Share Heatmap",
+    "value_fields": [
+      "grants_support_initiatives_share_pct",
+      "life_business_adaptation_share_pct",
+      "prevention_share_pct",
+      "information_share_pct",
+      "diagnostics_share_pct",
+      "treatment_share_pct"
+    ]
+  },
+  "records": [
+    {
+      "entity": "Taiwan",
+      "clinical_minus_support_share_pct": 60.6061,
+      "grants_support_initiatives_share_pct": 0.0,
+      "life_business_adaptation_share_pct": 12.1212,
+      "prevention_share_pct": 12.1212,
+      "information_share_pct": 3.0303,
+      "diagnostics_share_pct": 66.6667,
+      "treatment_share_pct": 6.0606
+    },
+    {
+      "entity": "Croatia",
+      "clinical_minus_support_share_pct": 50.0,
+      "grants_support_initiatives_share_pct": 0.0,
+      "life_business_adaptation_share_pct": 0.0,
+      "prevention_share_pct": 12.5,
+      "information_share_pct": 37.5,
+      "diagnostics_share_pct": 25.0,
+      "treatment_share_pct": 25.0
+    },
+    {
+      "entity": "Belgium",
+      "clinical_minus_support_share_pct": 37.931,
+      "grants_support_initiatives_share_pct": 20.6897,
+      "life_business_adaptation_share_pct": 0.0,
+      "prevention_share_pct": 17.2414,
+      "information_share_pct": 3.4483,
+      "diagnostics_share_pct": 41.3793,
+      "treatment_share_pct": 17.2414
+    },
+    {
+      "entity": "Switzerland",
+      "clinical_minus_support_share_pct": 31.8182,
+      "grants_support_initiatives_share_pct": 13.6364,
+      "life_business_adaptation_share_pct": 4.5455,
+      "prevention_share_pct": 9.0909,
+      "information_share_pct": 22.7273,
+      "diagnostics_share_pct": 36.3636,
+      "treatment_share_pct": 13.6364
+    },
+    {
+      "entity": "Israel",
+      "clinical_minus_support_share_pct": 31.5789,
+      "grants_support_initiatives_share_pct": 2.6316,
+      "life_business_adaptation_share_pct": 13.1579,
+      "prevention_share_pct": 26.3158,
+      "information_share_pct": 10.5263,
+      "diagnostics_share_pct": 23.6842,
+      "treatment_share_pct": 23.6842
+    },
+    {
+      "entity": "Singapore",
+      "clinical_minus_support_share_pct": 26.6667,
+      "grants_support_initiatives_share_pct": 13.3333,
+      "life_business_adaptation_share_pct": 0.0,
+      "prevention_share_pct": 26.6667,
+      "information_share_pct": 20.0,
+      "diagnostics_share_pct": 33.3333,
+      "treatment_share_pct": 6.6667
+    },
+    {
+      "entity": "United States",
+      "clinical_minus_support_share_pct": 21.7284,
+      "grants_support_initiatives_share_pct": 14.321,
+      "life_business_adaptation_share_pct": 11.358,
+      "prevention_share_pct": 16.0494,
+      "information_share_pct": 10.8642,
+      "diagnostics_share_pct": 25.679,
+      "treatment_share_pct": 21.7284
+    },
+    {
+      "entity": "Luxembourg",
+      "clinical_minus_support_share_pct": 20.0,
+      "grants_support_initiatives_share_pct": 20.0,
+      "life_business_adaptation_share_pct": 0.0,
+      "prevention_share_pct": 20.0,
+      "information_share_pct": 20.0,
+      "diagnostics_share_pct": 40.0,
+      "treatment_share_pct": 0.0
+    },
+    {
+      "entity": "Canada",
+      "clinical_minus_support_share_pct": 16.25,
+      "grants_support_initiatives_share_pct": 7.5,
+      "life_business_adaptation_share_pct": 15.0,
+      "prevention_share_pct": 20.0,
+      "information_share_pct": 18.75,
+      "diagnostics_share_pct": 27.5,
+      "treatment_share_pct": 11.25
+    },
+    {
+      "entity": "Denmark",
+      "clinical_minus_support_share_pct": 11.1111,
+      "grants_support_initiatives_share_pct": 22.2222,
+      "life_business_adaptation_share_pct": 0.0,
+      "prevention_share_pct": 44.4444,
+      "information_share_pct": 0.0,
+      "diagnostics_share_pct": 22.2222,
+      "treatment_share_pct": 11.1111
+    },
+    {
+      "entity": "Ireland",
+      "clinical_minus_support_share_pct": 10.0,
+      "grants_support_initiatives_share_pct": 30.0,
+      "life_business_adaptation_share_pct": 10.0,
+      "prevention_share_pct": 10.0,
+      "information_share_pct": 0.0,
+      "diagnostics_share_pct": 10.0,
+      "treatment_share_pct": 40.0
+    },
+    {
+      "entity": "Norway",
+      "clinical_minus_support_share_pct": 0.0,
+      "grants_support_initiatives_share_pct": 14.2857,
+      "life_business_adaptation_share_pct": 28.5714,
+      "prevention_share_pct": 0.0,
+      "information_share_pct": 14.2857,
+      "diagnostics_share_pct": 0.0,
+      "treatment_share_pct": 42.8571
+    },
+    {
+      "entity": "Estonia",
+      "clinical_minus_support_share_pct": -18.1818,
+      "grants_support_initiatives_share_pct": 0.0,
+      "life_business_adaptation_share_pct": 27.2727,
+      "prevention_share_pct": 18.1818,
+      "information_share_pct": 45.4545,
+      "diagnostics_share_pct": 9.0909,
+      "treatment_share_pct": 0.0
+    },
+    {
+      "entity": "Finland",
+      "clinical_minus_support_share_pct": -20.0,
+      "grants_support_initiatives_share_pct": 10.0,
+      "life_business_adaptation_share_pct": 40.0,
+      "prevention_share_pct": 0.0,
+      "information_share_pct": 20.0,
+      "diagnostics_share_pct": 10.0,
+      "treatment_share_pct": 20.0
+    },
+    {
+      "entity": "Portugal",
+      "clinical_minus_support_share_pct": -44.4444,
+      "grants_support_initiatives_share_pct": 11.1111,
+      "life_business_adaptation_share_pct": 33.3333,
+      "prevention_share_pct": 0.0,
+      "information_share_pct": 55.5556,
+      "diagnostics_share_pct": 0.0,
+      "treatment_share_pct": 0.0
+    }
+  ]
+}

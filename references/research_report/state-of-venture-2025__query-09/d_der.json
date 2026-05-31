@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "chart_type": "lollipop",
+  "title": "Top 10 markets by visible top-deal concentration share",
+  "x_label": "Visible top-deal concentration share (%)",
+  "y_label": "Market",
+  "value_format": "float2",
+  "data": [
+    {
+      "label": "Kenya",
+      "value": 60.526315789473685
+    },
+    {
+      "label": "Mexico",
+      "value": 36.94614860259032
+    },
+    {
+      "label": "Toronto",
+      "value": 32.33333333333333
+    },
+    {
+      "label": "Denver",
+      "value": 31.016129032258068
+    },
+    {
+      "label": "Silicon Valley",
+      "value": 29.60308710033076
+    },
+    {
+      "label": "Austin",
+      "value": 23.28767123287671
+    },
+    {
+      "label": "Chicago",
+      "value": 23.06451612903226
+    },
+    {
+      "label": "Los Angeles",
+      "value": 20.537634408602152
+    },
+    {
+      "label": "Sweden",
+      "value": 19.3
+    },
+    {
+      "label": "Netherlands",
+      "value": 18.11627906976744
+    }
+  ]
+}

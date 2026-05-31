@@ -1,0 +1,75 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a horizontal bar chart showing the top 10 ecosystems with the largest positive divergence computed as `Growth Tier rank - VC leverage rank` among ecosystems where `Early-Stage Funding Growth Tier`, `Total VC Funding`, and `Total Early-Stage Funding` are all exact values; `VC leverage rank` is based on `Total VC Funding / Total Early-Stage Funding`, values are expressed in `rank-gap points`, items are sorted descending by the gap, and ecosystems with missing tiers are excluded.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "rank-gap points",
+  "sort_rule": "descending by rank_gap_points",
+  "selection_rule": "top 10 positive gaps",
+  "plot_spec": {
+    "title": "2022 Growth Tier vs VC Leverage Rank Gap",
+    "xlabel": "Rank-gap points",
+    "value_field": "rank_gap_points"
+  },
+  "records": [
+    {
+      "entity": "Mid-East Region Ireland",
+      "rank_gap_points": 59,
+      "growth_tier_rank": 62,
+      "vc_leverage_rank": 3
+    },
+    {
+      "entity": "Shanghai",
+      "rank_gap_points": 58,
+      "growth_tier_rank": 62,
+      "vc_leverage_rank": 4
+    },
+    {
+      "entity": "Shenzhen",
+      "rank_gap_points": 57,
+      "growth_tier_rank": 62,
+      "vc_leverage_rank": 5
+    },
+    {
+      "entity": "Sharjah",
+      "rank_gap_points": 55,
+      "growth_tier_rank": 62,
+      "vc_leverage_rank": 7
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "rank_gap_points": 55,
+      "growth_tier_rank": 57,
+      "vc_leverage_rank": 2
+    },
+    {
+      "entity": "Beijing",
+      "rank_gap_points": 51,
+      "growth_tier_rank": 62,
+      "vc_leverage_rank": 11
+    },
+    {
+      "entity": "Bahrain",
+      "rank_gap_points": 46,
+      "growth_tier_rank": 62,
+      "vc_leverage_rank": 16
+    },
+    {
+      "entity": "Sri Lanka",
+      "rank_gap_points": 44,
+      "growth_tier_rank": 62,
+      "vc_leverage_rank": 18
+    },
+    {
+      "entity": "Kyoto",
+      "rank_gap_points": 43,
+      "growth_tier_rank": 60,
+      "vc_leverage_rank": 17
+    },
+    {
+      "entity": "Mississippi",
+      "rank_gap_points": 40,
+      "growth_tier_rank": 41,
+      "vc_leverage_rank": 1
+    }
+  ]
+}

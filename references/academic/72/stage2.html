@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart 72 Reproduction</title>
+    <!-- Load Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fff;
+        }
+        #chart {
+            width: 600px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+<script>
+
+        // --- Embedded Data ---
+        const chartData = {
+    "SBI-553 + 100 nM NT": {
+        "x": [
+            -5.522878745280337,
+            -6.0,
+            -6.522878745280337,
+            -7.0,
+            -7.522878745280337,
+            -8.0,
+            -8.522878745280337,
+            -11.0
+        ],
+        "y": [
+            0.025329485830000005,
+            0.029826953318888887,
+            0.02816340073444444,
+            0.028972125151111108,
+            0.027705464353333334,
+            0.026307003489999998,
+            0.022197602613333332,
+            0.014362545006000002
+        ],
+        "yerr": [
+            0.0015721671011366745,
+            0.0020814921185263696,
+            0.001972735726568134,
+            0.001916475323732997,
+            0.002327289907262603,
+            0.001868928398986847,
+            0.002071813002088512,
+            0.001190908124872072
+        ],
+        "color": "#bf2bb9",
+        "marker": "o"
+    },
+    "Vehicle + 100 nM NT": {
+        "x": [
+            -4.0,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0
+        ],
+        "y": [
+            0.013695696458888887,
+            0.01746300132888889,
+            0.014469108170222221,
+            0.01734139166222222,
+            0.019506358863333337,
+            0.017587092712222217,
+            0.016203080492222223,
+            0.015177160944
+        ],
+        "yerr": [
+            0.0008209683876066195,
+            0.001249389724342234,
+            0.001776305341036842,
+            0.0016260690863738525,
+            0.0008804241984290078,
+            0.0010848340175633887,
+            0.0008044337172089153,
+            0.0015070999976605924
+        ],
+        "color": "#0000b3",
+        "marker": "o"
+    },
+    "SR14 + 100 nM NT": {
+        "x": [
+            -4.0,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0
+        ],
+        "y": [
+            0.007165066308777777,
+            0.005211523755355555,
+            0.0063612720915111115,
+            0.008011675164111111,
+            0.010434174311000001,
+            0.012715564877777776,
+            0.012142254274444443,
+            0.014926827746666668
+        ],
+        "yerr": [
+            0.0017469486822761365,
+            0.0016387515295140439,
+            0.0013898560017849223,
+            0.00111301006323846,
+            0.0012006099122619121,
+            0.001359443659280933,
+            0.000600626385608324,
+            0.0016126304796410405
+        ],
+        "color": "#f58025",
+        "marker": "o"
+    },
+    "Vehicle": {
+        "x": [
+            -4.0,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0
+        ],
+        "y": [
+            0.0026598978195444445,
+            0.0031832249383000003,
+            0.0031959299443019996,
+            0.005035161261933333,
+            0.003909876958777778,
+            0.0035134178527444445,
+            0.0027746274265444443,
+            0.0037132041408888886
+        ],
+        "yerr": [
+            0.0006771657178214623,
+            0.001281379333061181,
+            0.001579347526751651,
+            0.0017987436390145886,
+            0.0023502601342372375,
+            0.0014299880691665391,
+            0.0007525674210239233,
+            0.0009856228917732
+        ],
+        "color": "#808080",
+        "marker": "o"
+    }
+};
+
+
+        // 3. Curve Fitting (Nelder-Mead)
+
+        function sigmoid(x, Bottom, Top, LogEC50, HillSlope) {
+             return Bottom + (Top - Bottom) / (1 + Math.pow(10, (LogEC50 - x) * HillSlope));
+        }
+
+        function sumSquaredErrors(params, x, y) {
+            const [Bottom, Top, LogEC50, HillSlope] = params;
+            let sum = 0;
+            for (let i = 0; i < x.length; i++) {
+                const pred = sigmoid(x[i], Bottom, Top, LogEC50, HillSlope);
+                sum += Math.pow(y[i] - pred, 2);
+            }
+            return sum;
+        }
+
+        function nelderMead(f, x0, args) {
+            const dim = x0.length;
+            const res = [[x0, f(x0, ...args)]];
+            
+            for (let i = 0; i < dim; i++) {
+                const x = [...x0];
+                x[i] = x[i] !== 0 ? x[i] * 1.05 : 0.00025;
+                res.push([x, f(x, ...args)]);
+            }
+
+            const maxIter = 2000;
+            const alpha = 1, gamma = 2, rho = 0.5, sigma = 0.5;
+            
+            for (let iter = 0; iter < maxIter; iter++) {
+                res.sort((a, b) => a[1] - b[1]);
+                
+                const best = res[0];
+                const worst = res[dim];
+                const secondWorst = res[dim - 1];
+
+                const x0_center = [];
+                for (let j = 0; j < dim; j++) {
+                    let sum = 0;
+                    for (let i = 0; i < dim; i++) {
+                        sum += res[i][0][j];
+                    }
+                    x0_center.push(sum / dim);
+                }
+
+                const xr = x0_center.map((val, j) => x0_center[j] + alpha * (x0_center[j] - worst[0][j]));
+                const fr = f(xr, ...args);
+
+                if (best[1] <= fr && fr < secondWorst[1]) {
+                    res[dim] = [xr, fr];
+                    continue;
+                }
+
+                if (fr < best[1]) {
+                    const xe = x0_center.map((val, j) => x0_center[j] + gamma * (xr[j] - x0_center[j]));
+                    const fe = f(xe, ...args);
+                    if (fe < fr) res[dim] = [xe, fe];
+                    else res[dim] = [xr, fr];
+                    continue;
+                }
+
+                const xc = x0_center.map((val, j) => x0_center[j] + rho * (worst[0][j] - x0_center[j]));
+                const fc = f(xc, ...args);
+                if (fc < worst[1]) {
+                    res[dim] = [xc, fc];
+                    continue;
+                }
+
+                for (let i = 1; i <= dim; i++) {
+                    res[i][0] = res[i][0].map((val, j) => best[0][j] + sigma * (val - best[0][j]));
+                    res[i][1] = f(res[i][0], ...args);
+                }
+            }
+            res.sort((a, b) => a[1] - b[1]);
+            return res[0][0];
+        }
+
+        function getFittedCurve(xData, yData, initialGuess) {
+            // Check if we should fit
+            // Python script has try-except.
+            try {
+                // If no initial guess, use defaults
+                const guess = initialGuess || [
+                    Math.max(...yData),
+                    Math.min(...yData),
+                    xData.reduce((a,b)=>a+b,0)/xData.length,
+                    1.0
+                ];
+                
+                const popt = nelderMead(sumSquaredErrors, guess, [xData, yData]);
+
+                // Generate smooth line
+                const xSmooth = [];
+                const minX = Math.min(...xData) - 0.5;
+                const maxX = Math.max(...xData) + 0.5;
+                const steps = 100;
+                for(let i=0; i<=steps; i++) {
+                    xSmooth.push(minX + (maxX - minX) * (i/steps));
+                }
+                const ySmooth = xSmooth.map(x => sigmoid(x, ...popt));
+                
+                return { x: xSmooth, y: ySmooth };
+
+            } catch (e) {
+                console.warn("Fit failed", e);
+                // Fallback: horizontal line at mean
+                const mean = yData.reduce((a,b)=>a+b,0)/yData.length;
+                return {
+                    x: [Math.min(...xData)-0.5, Math.max(...xData)+0.5],
+                    y: [mean, mean]
+                };
+            }
+        }
+
+
+
+        function addTrace(data, name, color, initialGuess) {
+            if (!data) return; 
+            
+            // Scatter points
+            plotData.push({
+                x: data.x,
+                y: data.y,
+                error_y: {
+                    type: 'data',
+                    array: data.yerr,
+                    visible: true,
+                    color: color,
+                    thickness: 1.5,
+                    width: 3
+                },
+                mode: 'markers',
+                type: 'scatter',
+                marker: { color: color, size: 8 },
+                name: name,
+                showlegend: true
+            });
+
+            // Fitted line
+            const fit = getFittedCurve(data.x, data.y, initialGuess); // Removed color from getFittedCurve call
+            plotData.push({
+                x: fit.x,
+                y: fit.y,
+                mode: 'lines',
+                line: { color: color, width: 2 },
+                showlegend: false,
+                hoverinfo: 'skip'
+            });
+        }
+
+
+
+        // 4. Plotting
+        const plotData = []; // Traces array for Plotly
+        const plotConfigs = [
+            { name: 'Vehicle', color: '#808080', initialGuess: [0.0009, 0.006, -8, 1] },
+            { name: 'SR14 + 100 nM NT', color: '#f58025', initialGuess: [0.005, 0.024, -8, 1] },
+            { name: 'Vehicle + 100 nM NT', color: '#0000B3', initialGuess: [0.012, 0.019, -7, 1] },
+            { name: 'SBI-553 + 100 nM NT', color: '#BF2BB9', initialGuess: [0.014, 0.029, -8, 1] }
+        ];
+
+        plotConfigs.forEach(cfg => {
+            const data = chartData[cfg.name];
+            if (!data) return; // Skip if data is missing
+
+            // Use addTrace function
+            addTrace(data, cfg.name, cfg.color, cfg.initialGuess);
+        });
+
+        const layout = {
+            title: 'Dose-Response Curve',
+            xaxis: {
+                title: 'Log [Agonist] (M)',
+                zeroline: false
+            },
+            yaxis: {
+                title: 'Response',
+                zeroline: false
+            },
+            showlegend: true
+        };
+
+        Plotly.newPlot('chart', plotData, layout);
+
+
+
+</script>
+</body>
+</html>

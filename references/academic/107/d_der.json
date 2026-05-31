@@ -1,0 +1,26 @@
+{
+    "means": [
+        99.99999986666667,
+        99.6576407,
+        78.64923743333334,
+        84.0024899,
+        103.85932129999999,
+        100.06466226666667,
+        102.39249903333332,
+        65.21176849999999,
+        47.46201096666666,
+        87.03524083333333
+    ],
+    "columns": [
+        "F0Luc - Vehicule",
+        "F0Luc - viFSP1 (30 \u03bcM)",
+        "F0Luc - BSO (1mM)",
+        "F0Luc - viFSP1 (30 \u03bcM) + BSO (1mM)",
+        "F0Luc - viFSP1 (30 \u03bcM) + BSO (1mM) + Liprox (1\u03bcM)",
+        "LN8 - Vehicule",
+        "LN8 - viFSP1 (30 \u03bcM)",
+        "LN8 - BSO (1mM)",
+        "LN8 - viFSP1 (30 \u03bcM) + BSO (1mM)",
+        "LN8 -  viFSP1 (30 \u03bcM) + BSO (1mM) + Liprox (1\u03bcM)"
+    ]
+}

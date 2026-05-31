@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>WMT 净资产收益率-杜邦分析 (ROE) 2017–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Chart.js (latest stable 4.x at time of creation) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+        sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 1.5rem 1.5rem 2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.4rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1rem;
+      margin: 0;
+      text-align: center;
+      color: #555;
+      font-weight: 400;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      margin-top: 1.5rem;
+      height: 420px;
+    }
+
+    .note {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 0.75rem;
+      }
+      .container {
+        padding: 1rem 0.75rem 1.5rem;
+      }
+      .chart-wrapper {
+        height: 340px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>WMT 净资产收益率（ROE）- 杜邦分析</h1>
+    <h2>2017 – 2024 财年变化（柱状图）</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="roeChart"></canvas>
+    </div>
+
+    <div class="note">
+      数据说明：使用提供的 <strong>Original ROE(Avg)</strong>，单位为小数形式，图中已转换为百分比展示。
+    </div>
+  </div>
+
+  <script>
+    // Source data (as provided, unchanged)
+    const fiscalYears = [
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+
+    const originalRoeAvg = [
+      0.1723210225837417,
+      0.1267063667957884,
+      0.0887174541947926,
+      0.2022355859069751,
+      0.1732417755037924,
+      0.1661855594921939,
+      0.1460492916359271,
+      0.1932184810095046,
+    ];
+
+    // Convert to percentage values for display on axis and tooltip
+    const roePercent = originalRoeAvg.map((v) => v * 100);
+
+    const ctx = document.getElementById("roeChart").getContext("2d");
+
+    // Compute min/max for y-axis with a little padding
+    const minVal = Math.min(...roePercent);
+    const maxVal = Math.max(...roePercent);
+    const padding = 2; // percentage points
+    const suggestedMin = Math.max(0, Math.floor(minVal - padding));
+    const suggestedMax = Math.ceil(maxVal + padding);
+
+    // Create gradient fill for bars
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(37, 99, 235, 0.9)"); // deeper blue
+    gradient.addColorStop(1, "rgba(96, 165, 250, 0.8)"); // lighter blue
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "ROE（杜邦分析，%）",
+            data: roePercent,
+            backgroundColor: gradient,
+            borderColor: "rgba(37, 99, 235, 1)",
+            borderWidth: 1.2,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.9)",
+            hoverBorderColor: "rgba(30, 64, 175, 1)",
+            borderRadius: 6,
+            maxBarThickness: 48,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 12,
+              },
+            },
+          },
+          title: {
+            display: false,
+          },
+          tooltip: {
+            enabled: true,
+            mode: "nearest",
+            intersect: true,
+            backgroundColor: "rgba(15, 23, 42, 0.9)",
+            titleFont: {
+              size: 12,
+              weight: "600",
+            },
+            bodyFont: {
+              size: 12,
+            },
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const v = context.raw;
+                const original = originalRoeAvg[context.dataIndex];
+                return [
+                  `ROE: ${v.toFixed(2)}%`,
+                  `原始值: ${original.toFixed(4)}`,
+                ];
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              font: {
+                size: 11,
+              },
+            },
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            grid: {
+              color: "rgba(148, 163, 184, 0.3)",
+            },
+            ticks: {
+              callback: function (value) {
+                return value + "%";
+              },
+              font: {
+                size: 11,
+              },
+            },
+            title: {
+              display: true,
+              text: "ROE（%）",
+              font: {
+                size: 12,
+                weight: "600",
+              },
+            },
+          },
+        },
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutQuart",
+        },
+      },
+    });
+  </script>
+</body>
+</html>

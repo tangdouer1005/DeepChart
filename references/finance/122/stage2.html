@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <title>ko's 防御区间比率 (DIR) 2016–2024 变化趋势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x at time of creation) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2933;
+      --grid: #d0d7de;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.08);
+      --accent-border: rgba(37, 99, 235, 0.2);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1120;
+        --fg: #e5e7eb;
+        --grid: #1f2933;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.08);
+        --accent-border: rgba(96, 165, 250, 0.3);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.08), transparent 55%),
+                  var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(24px);
+      border-radius: 18px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.25),
+        0 0 0 1px rgba(148, 163, 184, 0.18);
+      padding: 20px 22px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .card {
+        background: rgba(15, 23, 42, 0.92);
+      }
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 22px 55px rgba(15, 23, 42, 0.35),
+        0 0 0 1px rgba(148, 163, 184, 0.25);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    h1 {
+      font-size: 1.15rem;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.82rem;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+    }
+
+    .meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-size: 0.78rem;
+      color: #6b7280;
+      gap: 4px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .meta {
+        color: #9ca3af;
+      }
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 3px 10px;
+      border: 1px solid var(--accent-border);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 560;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    canvas {
+      max-height: 430px;
+    }
+
+    .footnote {
+      font-size: 0.74rem;
+      color: #9ca3af;
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footnote span {
+      white-space: nowrap;
+    }
+
+    .legend-hint {
+      font-style: italic;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 16px 14px;
+      }
+      h1 {
+        font-size: 1.0rem;
+      }
+      .subtitle {
+        font-size: 0.78rem;
+      }
+      .meta {
+        align-items: flex-start;
+      }
+      canvas {
+        max-height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="title-group">
+        <h1>ko 的防御区间比率 (DIR) 变化趋势</h1>
+        <div class="subtitle">按年度：2016 – 2024，单位：比率（DIR）</div>
+      </div>
+      <div class="meta">
+        <div class="pill">Line Chart</div>
+        <div>数据来源：用户提供的年度 DIR 结果</div>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="dirChart"></canvas>
+    </div>
+
+    <div class="footnote">
+      <span class="legend-hint">提示：悬停查看具体数值，拖动画布可缩放 / 平移（缩放重置按钮在图表右上角）。</span>
+      <span>最后更新：基于提供数据 (2016–2024)</span>
+    </div>
+  </div>
+
+  <!-- Zoom & pan plugin for Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.umd.min.js"></script>
+
+  <script>
+    // Raw data (from the provided source)
+    const labels = [
+      "2016", "2017", "2018", "2019", "2020",
+      "2021", "2022", "2023", "2024"
+    ];
+
+    const dirValues = [
+      136.42158043727036,
+      124.06947324032753,
+      185.2286464132337,
+      140.34639440765267,
+      151.04863221884497,
+      169.91357110099833,
+      147.9105779716467,
+      135.39006474465057,
+      141.76009603711998
+    ];
+
+    // Utility: format numbers nicely
+    const formatNumber = (value) =>
+      value.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+    const ctx = document.getElementById("dirChart").getContext("2d");
+
+    const dirChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "防御区间比率 (DIR)",
+            data: dirValues,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.11)",
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: "#2563eb",
+            pointHoverBackgroundColor: "#2563eb",
+            pointHoverBorderColor: "#ffffff",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            borderWidth: 2.4,
+            tension: 0.28,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+              padding: 16,
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.94)",
+            titleFont: { size: 12, weight: "600" },
+            bodyFont: { size: 12 },
+            padding: 10,
+            cornerRadius: 8,
+            callbacks: {
+              label: function (context) {
+                const year = context.label;
+                const value = context.parsed.y;
+                return ` ${year} 年 DIR：${formatNumber(value)}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          },
+          zoom: {
+            zoom: {
+              wheel: {
+                enabled: true
+              },
+              pinch: {
+                enabled: true
+              },
+              mode: "x"
+            },
+            pan: {
+              enabled: true,
+              mode: "x"
+            },
+            limits: {
+              x: { min: 0, max: labels.length - 1 }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年 (Fiscal Year)",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              minRotation: 0,
+              font: {
+                size: 11
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "防御区间比率 (DIR)",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              callback: function (value) {
+                return formatNumber(value);
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.28)",
+              drawBorder: false
+            },
+            beginAtZero: false
+          }
+        }
+      }
+    });
+
+    // Add a small UI button for reset zoom in top-right of canvas
+    (function addResetZoomButton() {
+      const container = document.querySelector(".chart-container");
+      const btn = document.createElement("button");
+      btn.textContent = "重置缩放";
+      btn.style.position = "absolute";
+      btn.style.top = "6px";
+      btn.style.right = "8px";
+      btn.style.zIndex = "10";
+      btn.style.borderRadius = "999px";
+      btn.style.border = "1px solid var(--accent-border)";
+      btn.style.background = "rgba(15,23,42,0.03)";
+      btn.style.backdropFilter = "blur(10px)";
+      btn.style.padding = "2px 8px";
+      btn.style.fontSize = "10px";
+      btn.style.cursor = "pointer";
+      btn.style.color = "var(--accent)";
+      btn.style.fontWeight = "600";
+      btn.onclick = () => dirChart.resetZoom();
+      container.appendChild(btn);
+    })();
+  </script>
+</body>
+</html>

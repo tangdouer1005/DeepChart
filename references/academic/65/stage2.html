@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const chartData = [
+    {
+        "label": "0 \u00b5M",
+        "x": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y": [
+            0.128415,
+            0.12225833333333334,
+            0.08690733333333334,
+            0.04809466666666667,
+            0.0082335,
+            -0.0166115,
+            0.0024154999999999997,
+            0.007016166666666666
+        ],
+        "y_err": [
+            0.007616170406882103,
+            0.007882606344209876,
+            0.029898310223898016,
+            0.01959940932216524,
+            0.008520977931943416,
+            0.007653119580711299,
+            0.004123748082751903,
+            0.0024236445066148716
+        ]
+    },
+    {
+        "label": "1 \u00b5M",
+        "x": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y": [
+            0.08654833333333334,
+            0.09311000000000001,
+            0.06071666666666667,
+            0.06256666666666666,
+            0.044158333333333334,
+            0.031221666666666665,
+            0.03596,
+            0.03649333333333334
+        ],
+        "y_err": [
+            0.004608447617630524,
+            0.005503693305408651,
+            0.01847886985481285,
+            0.02039120883561781,
+            0.01466480171855196,
+            0.003713669718456097,
+            0.0031602352233127623,
+            0.0024660057673177582
+        ]
+    },
+    {
+        "label": "3 \u00b5M",
+        "x": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y": [
+            0.08817000000000001,
+            0.09135833333333332,
+            0.07522833333333334,
+            0.08479833333333332,
+            0.06785166666666667,
+            0.05976,
+            0.06471833333333334,
+            0.060286666666666676
+        ],
+        "y_err": [
+            0.006805958663798462,
+            0.006046189663287486,
+            0.012476947387526773,
+            0.015029676957421426,
+            0.00786611950780759,
+            0.007868905048776905,
+            0.004964740622071253,
+            0.0042703275960724344
+        ]
+    },
+    {
+        "label": "10 \u00b5M",
+        "x": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y": [
+            0.07637666666666666,
+            0.07976666666666667,
+            0.07964666666666669,
+            0.09952333333333334,
+            0.09432999999999998,
+            0.092385,
+            0.09626333333333333,
+            0.09649833333333334
+        ],
+        "y_err": [
+            0.004031632148122864,
+            0.003459081445188077,
+            0.0053104410781444926,
+            0.010210117748804098,
+            0.007492632826094355,
+            0.004737171272675991,
+            0.006606774132997469,
+            0.005382892912840743
+        ]
+    },
+    {
+        "label": "30 \u00b5M",
+        "x": [
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0,
+            -12.0
+        ],
+        "y": [
+            0.050771666666666666,
+            0.05341166666666667,
+            0.06805166666666666,
+            0.09595833333333333,
+            0.10614000000000001,
+            0.10486833333333334,
+            0.10731500000000001,
+            0.11042999999999999
+        ],
+        "y_err": [
+            0.004091208799907973,
+            0.0039383291014224685,
+            0.006851377193268843,
+            0.003920045422072443,
+            0.007211555541860116,
+            0.005270329159022655,
+            0.0061946045071497495,
+            0.005764146655548131
+        ]
+    }
+];
+
+        const seriesConfig = {
+            '0 µM':  { color: '#00008B', marker: 'circle' },
+            '1 µM':  { color: '#D8BFD8', marker: 'rect' },
+            '3 µM':  { color: '#DA70D6', marker: 'rect' },
+            '10 µM': { color: '#BA55D3', marker: 'rect' },
+            '30 µM': { color: '#9400D3', marker: 'rect' }
+        };
+
+        const echartsSeries = [];
+
+        chartData.forEach(dataset => {
+            const name = dataset.label;
+            const config = seriesConfig[name];
+            
+            // Map JSON data to [x, y, err]
+            const data = dataset.x.map((x, i) => [x, dataset.y[i], dataset.y_err[i]]).sort((a,b)=>a[0]-b[0]);
+
+            if(data.length === 0) return;
+
+            // A. Scatter Points
+            echartsSeries.push({
+                name: name,
+                type: 'scatter',
+                symbol: config.marker,
+                symbolSize: 8,
+                itemStyle: { color: config.color, borderColor: config.color },
+                data: data.map(p => [p[0], p[1]]),
+                z: 10
+            });
+
+            // B. Error Bars
+            echartsSeries.push({
+                type: 'custom',
+                name: name + '_error',
+                renderItem: function(params, api) {
+                    const xVal = api.value(0);
+                    const yVal = api.value(1);
+                    const sem = api.value(2);
+                    const style = api.style({ stroke: config.color, lineWidth: 1.5 });
+                    
+                    const p1 = api.coord([xVal, yVal - sem]);
+                    const p2 = api.coord([xVal, yVal + sem]);
+                    
+                    const cap = 4;
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1] }, style: style },
+                            { type: 'line', shape: { x1: p1[0]-cap, y1: p1[1], x2: p1[0]+cap, y2: p1[1] }, style: style },
+                            { type: 'line', shape: { x1: p2[0]-cap, y1: p2[1], x2: p2[0]+cap, y2: p2[1] }, style: style }
+                        ]
+                    };
+                },
+                data: data.map(p => [p[0], p[1], p[2]]),
+                z: 9,
+                silent: true
+            });
+
+            // C. Line connecting mean points (smooth)
+            echartsSeries.push({
+                name: name + '_line',
+                type: 'line',
+                showSymbol: false,
+                data: data.map(p => [p[0], p[1]]),
+                smooth: true,
+                lineStyle: { color: config.color, width: 1.5 },
+                z: 5,
+                silent: true
+            });
+        });
+
+        // D. Arrows using markLine
+        const arrowSeries = {
+            type: 'line',
+            markLine: {
+                symbol: ['none', 'arrow'],
+                symbolSize: 12,
+                lineStyle: { color: '#9400D3', width: 3, type: 'solid' },
+                data: [
+                    [
+                        { coord: [-13.5, 0.01] }, // Start
+                        { coord: [-13.5, 0.13] }  // End
+                    ],
+                    [
+                        { coord: [-3.5, 0.14] }, // Start
+                        { coord: [-3.5, 0.04] }  // End
+                    ]
+                ],
+                silent: true,
+                animation: false
+            },
+            data: [[-13.5, 0.01]],
+            opacity: 0
+        };
+        echartsSeries.push(arrowSeries);
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 60, bottom: 60, left: 80, right: 20 },
+            xAxis: {
+                type: 'value',
+                name: 'Log [NT], M',
+                nameLocation: 'middle',
+                nameGap: 30,
+                min: -15, max: -3,
+                interval: 2,
+                axisLabel: { color: 'black', fontSize: 14, formatter: '{value}' },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true, alignWithLabel: true, inside: true },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Relative activity',
+                nameLocation: 'middle',
+                nameGap: 45,
+                min: -0.03, max: 0.16,
+                axisLabel: { color: 'black', fontSize: 14 },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true, inside: true },
+                splitLine: { show: false }
+            },
+            graphic: [
+                {
+                    type: 'text',
+                    left: '15%', 
+                    top: '15%',
+                    style: {
+                        text: 'G₁₅',
+                        font: '16px Arial',
+                        fill: 'black'
+                    }
+                }
+            ],
+            series: echartsSeries
+        };
+        
+        echartsSeries.push({
+            type: 'line',
+            markLine: {
+                symbol: 'none',
+                lineStyle: { color: 'black', type: 'dashed', width: 0.8 },
+                data: [ { yAxis: 0 } ],
+                silent: true
+            },
+            data: [],
+            opacity: 0
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

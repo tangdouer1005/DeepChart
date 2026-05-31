@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart 78 Reproduction (ECharts)</title>
+    <!-- Load ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fff;
+        }
+        #chart {
+            width: 1400px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. Source Data (Injected JSON)
+        // ---------------------------------------------------------
+        const sourceData = {
+    "PM10": [
+        {
+            "Station": "BERN",
+            "PM_size": "PM10",
+            "Site_type": "Traffic",
+            "Site_topography": "Other",
+            "Country": "CH",
+            "Date_start": "2013-01-01 00:00:00 ",
+            "Date_end": "2020-12-31 00:00:00 ",
+            "N_samples": 738,
+            "OP_DTT_v_mean": 2.69,
+            "OP_DTT_v_SD": 1.45,
+            "PM_mass_mean": 19.42,
+            "PM_mass_SD": 10.22,
+            "tag": "***"
+        },
+        {
+            "Station": "BOSSONS",
+            "PM_size": "PM10",
+            "Site_type": "Traffic",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2023-08-12 00:00:00 ",
+            "Date_end": "2024-01-09 00:00:00 ",
+            "N_samples": 96,
+            "OP_DTT_v_mean": 1.51,
+            "OP_DTT_v_SD": 0.66,
+            "PM_mass_mean": 14.67,
+            "PM_mass_SD": 7.19,
+            "tag": "*"
+        },
+        {
+            "Station": "RBX",
+            "PM_size": "PM10",
+            "Site_type": "Traffic",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2013-01-20 00:00:00 ",
+            "Date_end": "2014-05-26 00:00:00 ",
+            "N_samples": 159,
+            "OP_DTT_v_mean": 2.71,
+            "OP_DTT_v_SD": 1.71,
+            "PM_mass_mean": 27.8,
+            "PM_mass_SD": 15.26,
+            "tag": "**"
+        },
+        {
+            "Station": "STG-cle",
+            "PM_size": "PM10",
+            "Site_type": "Traffic",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2013-04-11 00:00:00 ",
+            "Date_end": "2020-01-03 00:00:00 ",
+            "N_samples": 147,
+            "OP_DTT_v_mean": 2.65,
+            "OP_DTT_v_SD": 2.09,
+            "PM_mass_mean": 27.87,
+            "PM_mass_SD": 14.58,
+            "tag": "**"
+        },
+        {
+            "Station": "CHAM",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Valley",
+            "Country": "FR",
+            "Date_start": "2013-11-02 00:00:00 ",
+            "Date_end": "2014-10-31 00:00:00 ",
+            "N_samples": 98,
+            "OP_DTT_v_mean": 2.33,
+            "OP_DTT_v_SD": 1.56,
+            "PM_mass_mean": 23.47,
+            "PM_mass_SD": 12.72,
+            "tag": "*"
+        },
+        {
+            "Station": "GRE-cb",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Valley",
+            "Country": "FR",
+            "Date_start": "2017-02-28 00:00:00 ",
+            "Date_end": "2021-07-10 00:00:00 ",
+            "N_samples": 247,
+            "OP_DTT_v_mean": 1.59,
+            "OP_DTT_v_SD": 1.06,
+            "PM_mass_mean": 18.08,
+            "PM_mass_SD": 9.39,
+            "tag": "*"
+        },
+        {
+            "Station": "GRE-fr",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Valley",
+            "Country": "FR",
+            "Date_start": "2013-01-02 00:00:00 ",
+            "Date_end": "2022-05-12 00:00:00 ",
+            "N_samples": 1351,
+            "OP_DTT_v_mean": 1.62,
+            "OP_DTT_v_SD": 1.33,
+            "PM_mass_mean": 18.9,
+            "PM_mass_SD": 10.23,
+            "tag": "****"
+        },
+        {
+            "Station": "ZURICH",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "CH",
+            "Date_start": "2011-05-24 00:00:00 ",
+            "Date_end": "2019-05-29 00:00:00 ",
+            "N_samples": 204,
+            "OP_DTT_v_mean": 2.4,
+            "OP_DTT_v_SD": 2.1,
+            "PM_mass_mean": 18.38,
+            "PM_mass_SD": 12.57,
+            "tag": "**"
+        },
+        {
+            "Station": "BCN",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Coastal",
+            "Country": "ES",
+            "Date_start": "2018-01-03 00:00:00 ",
+            "Date_end": "2023-12-02 00:00:00 ",
+            "N_samples": 270,
+            "OP_DTT_v_mean": 2.48,
+            "OP_DTT_v_SD": 1.15,
+            "PM_mass_mean": 23.31,
+            "PM_mass_SD": 8.94,
+            "tag": "**"
+        },
+        {
+            "Station": "AIX",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2013-08-02 00:00:00 ",
+            "Date_end": "2014-07-13 00:00:00 ",
+            "N_samples": 59,
+            "OP_DTT_v_mean": 1.96,
+            "OP_DTT_v_SD": 1.29,
+            "PM_mass_mean": 18.39,
+            "PM_mass_SD": 10.21,
+            "tag": "*"
+        },
+        {
+            "Station": "LENS",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2011-03-09 00:00:00 ",
+            "Date_end": "2012-03-06 00:00:00 ",
+            "N_samples": 116,
+            "OP_DTT_v_mean": 1.74,
+            "OP_DTT_v_SD": 1.46,
+            "PM_mass_mean": 25.86,
+            "PM_mass_SD": 14.74,
+            "tag": "**"
+        },
+        {
+            "Station": "LYON",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2019-01-02 00:00:00 ",
+            "Date_end": "2019-12-31 00:00:00 ",
+            "N_samples": 122,
+            "OP_DTT_v_mean": 1.64,
+            "OP_DTT_v_SD": 1.33,
+            "PM_mass_mean": 19.32,
+            "PM_mass_SD": 12.19,
+            "tag": "**"
+        },
+        {
+            "Station": "MRS-lcp",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Coastal",
+            "Country": "FR",
+            "Date_start": "2015-01-11 00:00:00 ",
+            "Date_end": "2024-02-29 00:00:00 ",
+            "N_samples": 271,
+            "OP_DTT_v_mean": 1.78,
+            "OP_DTT_v_SD": 0.97,
+            "PM_mass_mean": 18.62,
+            "PM_mass_SD": 8.09,
+            "tag": "**"
+        },
+        {
+            "Station": "NICE",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Coastal",
+            "Country": "FR",
+            "Date_start": "2014-07-11 00:00:00 ",
+            "Date_end": "2018-07-06 00:00:00 ",
+            "N_samples": 110,
+            "OP_DTT_v_mean": 2.24,
+            "OP_DTT_v_SD": 0.8,
+            "PM_mass_mean": 22.88,
+            "PM_mass_SD": 7.72,
+            "tag": "**"
+        },
+        {
+            "Station": "NOGENT",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2013-01-02 00:00:00 ",
+            "Date_end": "2018-05-22 00:00:00 ",
+            "N_samples": 199,
+            "OP_DTT_v_mean": 2.24,
+            "OP_DTT_v_SD": 1.83,
+            "PM_mass_mean": 24.88,
+            "PM_mass_SD": 13.72,
+            "tag": "**"
+        },
+        {
+            "Station": "PARIS-lcpp",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2020-04-21 00:00:00 ",
+            "Date_end": "2021-09-22 00:00:00 ",
+            "N_samples": 184,
+            "OP_DTT_v_mean": 2.29,
+            "OP_DTT_v_SD": 1.51,
+            "PM_mass_mean": 19.4,
+            "PM_mass_SD": 9.26,
+            "tag": "**"
+        },
+        {
+            "Station": "PARIS-lh",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2022-04-07 00:00:00 ",
+            "Date_end": "2023-09-26 00:00:00 ",
+            "N_samples": 386,
+            "OP_DTT_v_mean": 1.79,
+            "OP_DTT_v_SD": 1.06,
+            "PM_mass_mean": 20.74,
+            "PM_mass_SD": 13.22,
+            "tag": "**"
+        },
+        {
+            "Station": "ROUEN",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2013-01-02 00:00:00 ",
+            "Date_end": "2014-03-30 00:00:00 ",
+            "N_samples": 135,
+            "OP_DTT_v_mean": 2.26,
+            "OP_DTT_v_SD": 1.19,
+            "PM_mass_mean": 25.39,
+            "PM_mass_SD": 13.88,
+            "tag": "**"
+        },
+        {
+            "Station": "TAL",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2012-03-01 00:00:00 ",
+            "Date_end": "2019-11-03 00:00:00 ",
+            "N_samples": 235,
+            "OP_DTT_v_mean": 1.64,
+            "OP_DTT_v_SD": 1.25,
+            "PM_mass_mean": 20.05,
+            "PM_mass_SD": 10.98,
+            "tag": "**"
+        },
+        {
+            "Station": "RDAM",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "NL",
+            "Date_start": "2023-07-26 00:00:00 ",
+            "Date_end": "2024-02-18 00:00:00 ",
+            "N_samples": 56,
+            "OP_DTT_v_mean": 1.89,
+            "OP_DTT_v_SD": 0.71,
+            "PM_mass_mean": 16.21,
+            "PM_mass_SD": 4.17,
+            "tag": "*"
+        },
+        {
+            "Station": "KRAK",
+            "PM_size": "PM10",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "PL",
+            "Date_start": "2018-01-23 00:00:00 ",
+            "Date_end": "2018-09-27 00:00:00 ",
+            "N_samples": 63,
+            "OP_DTT_v_mean": 2.04,
+            "OP_DTT_v_SD": 1.26,
+            "PM_mass_mean": 28.69,
+            "PM_mass_SD": 18.9,
+            "tag": ""
+        },
+        {
+            "Station": "KANAL",
+            "PM_size": "PM10",
+            "Site_type": "Industrial",
+            "Site_topography": "Valley",
+            "Country": "SI",
+            "Date_start": "2020-11-12 00:00:00 ",
+            "Date_end": "2021-11-16 00:00:00 ",
+            "N_samples": 120,
+            "OP_DTT_v_mean": 1.52,
+            "OP_DTT_v_SD": 1.62,
+            "PM_mass_mean": 15.62,
+            "PM_mass_SD": 11.65,
+            "tag": "**"
+        },
+        {
+            "Station": "CALAIS",
+            "PM_size": "PM10",
+            "Site_type": "Industrial",
+            "Site_topography": "Coastal",
+            "Country": "FR",
+            "Date_start": "2021-02-01 00:00:00 ",
+            "Date_end": "2021-06-20 00:00:00 ",
+            "N_samples": 139,
+            "OP_DTT_v_mean": 1.67,
+            "OP_DTT_v_SD": 1.13,
+            "PM_mass_mean": 20.5,
+            "PM_mass_SD": 9.21,
+            "tag": "**"
+        },
+        {
+            "Station": "FSM",
+            "PM_size": "PM10",
+            "Site_type": "Industrial",
+            "Site_topography": "Coastal",
+            "Country": "FR",
+            "Date_start": "2018-02-13 00:00:00 ",
+            "Date_end": "2018-09-23 00:00:00 ",
+            "N_samples": 29,
+            "OP_DTT_v_mean": 1.1,
+            "OP_DTT_v_SD": 0.7,
+            "PM_mass_mean": 21.89,
+            "PM_mass_SD": 7.84,
+            "tag": ""
+        },
+        {
+            "Station": "GSY",
+            "PM_size": "PM10",
+            "Site_type": "Industrial",
+            "Site_topography": "Coastal",
+            "Country": "FR",
+            "Date_start": "2018-01-01 00:00:00 ",
+            "Date_end": "2020-06-29 00:00:00 ",
+            "N_samples": 133,
+            "OP_DTT_v_mean": 1.63,
+            "OP_DTT_v_SD": 1.54,
+            "PM_mass_mean": 27.05,
+            "PM_mass_SD": 14.6,
+            "tag": "**"
+        },
+        {
+            "Station": "LHV",
+            "PM_size": "PM10",
+            "Site_type": "Industrial",
+            "Site_topography": "Coastal",
+            "Country": "FR",
+            "Date_start": "2021-02-01 00:00:00 ",
+            "Date_end": "2021-06-16 00:00:00 ",
+            "N_samples": 136,
+            "OP_DTT_v_mean": 1.06,
+            "OP_DTT_v_SD": 0.57,
+            "PM_mass_mean": 15.33,
+            "PM_mass_SD": 7.37,
+            "tag": "**"
+        },
+        {
+            "Station": "PDB",
+            "PM_size": "PM10",
+            "Site_type": "Industrial",
+            "Site_topography": "Coastal",
+            "Country": "FR",
+            "Date_start": "2014-06-01 00:00:00 ",
+            "Date_end": "2018-11-10 00:00:00 ",
+            "N_samples": 139,
+            "OP_DTT_v_mean": 1.63,
+            "OP_DTT_v_SD": 0.87,
+            "PM_mass_mean": 20.74,
+            "PM_mass_SD": 7.05,
+            "tag": "**"
+        },
+        {
+            "Station": "PASSY",
+            "PM_size": "PM10",
+            "Site_type": "Suburban",
+            "Site_topography": "Valley",
+            "Country": "FR",
+            "Date_start": "2013-11-14 00:00:00 ",
+            "Date_end": "2018-03-02 00:00:00 ",
+            "N_samples": 437,
+            "OP_DTT_v_mean": 3.19,
+            "OP_DTT_v_SD": 2.25,
+            "PM_mass_mean": 29.19,
+            "PM_mass_SD": 18.4,
+            "tag": "***"
+        },
+        {
+            "Station": "BASEL",
+            "PM_size": "PM10",
+            "Site_type": "Suburban",
+            "Site_topography": "Other",
+            "Country": "CH",
+            "Date_start": "2018-06-03 00:00:00 ",
+            "Date_end": "2019-05-29 00:00:00 ",
+            "N_samples": 90,
+            "OP_DTT_v_mean": 0.79,
+            "OP_DTT_v_SD": 0.55,
+            "PM_mass_mean": 13.97,
+            "PM_mass_SD": 9.26,
+            "tag": "*"
+        },
+        {
+            "Station": "VIF",
+            "PM_size": "PM10",
+            "Site_type": "Suburban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2017-02-28 00:00:00 ",
+            "Date_end": "2021-07-10 00:00:00 ",
+            "N_samples": 253,
+            "OP_DTT_v_mean": 1.12,
+            "OP_DTT_v_SD": 0.8,
+            "PM_mass_mean": 14.32,
+            "PM_mass_SD": 9.34,
+            "tag": "**"
+        },
+        {
+            "Station": "MGD",
+            "PM_size": "PM10",
+            "Site_type": "Rural",
+            "Site_topography": "Valley",
+            "Country": "CH",
+            "Date_start": "2013-01-04 00:00:00 ",
+            "Date_end": "2019-05-29 00:00:00 ",
+            "N_samples": 240,
+            "OP_DTT_v_mean": 1.61,
+            "OP_DTT_v_SD": 1.42,
+            "PM_mass_mean": 16.7,
+            "PM_mass_SD": 10.6,
+            "tag": "**"
+        },
+        {
+            "Station": "MARNAZ",
+            "PM_size": "PM10",
+            "Site_type": "Rural",
+            "Site_topography": "Valley",
+            "Country": "FR",
+            "Date_start": "2013-11-02 00:00:00 ",
+            "Date_end": "2014-10-31 00:00:00 ",
+            "N_samples": 93,
+            "OP_DTT_v_mean": 1.77,
+            "OP_DTT_v_SD": 1.18,
+            "PM_mass_mean": 18.49,
+            "PM_mass_SD": 12.28,
+            "tag": "*"
+        },
+        {
+            "Station": "COURMAY",
+            "PM_size": "PM10",
+            "Site_type": "Rural",
+            "Site_topography": "Valley",
+            "Country": "IT",
+            "Date_start": "2023-08-12 00:00:00 ",
+            "Date_end": "2024-01-09 00:00:00 ",
+            "N_samples": 67,
+            "OP_DTT_v_mean": 1.0,
+            "OP_DTT_v_SD": 0.83,
+            "PM_mass_mean": 17.58,
+            "PM_mass_SD": 12.9,
+            "tag": ""
+        },
+        {
+            "Station": "PAYRN",
+            "PM_size": "PM10",
+            "Site_type": "Rural",
+            "Site_topography": "Other",
+            "Country": "CH",
+            "Date_start": "2013-01-01 00:00:00 ",
+            "Date_end": "2019-05-29 00:00:00 ",
+            "N_samples": 103,
+            "OP_DTT_v_mean": 0.92,
+            "OP_DTT_v_SD": 0.73,
+            "PM_mass_mean": 13.49,
+            "PM_mass_SD": 8.31,
+            "tag": "**"
+        },
+        {
+            "Station": "MSY",
+            "PM_size": "PM10",
+            "Site_type": "Rural",
+            "Site_topography": "Other",
+            "Country": "ES",
+            "Date_start": "2018-01-11 00:00:00 ",
+            "Date_end": "2019-03-27 00:00:00 ",
+            "N_samples": 106,
+            "OP_DTT_v_mean": 0.55,
+            "OP_DTT_v_SD": 0.38,
+            "PM_mass_mean": 12.82,
+            "PM_mass_SD": 6.24,
+            "tag": "**"
+        },
+        {
+            "Station": "ARREST",
+            "PM_size": "PM10",
+            "Site_type": "Rural",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2021-02-01 00:00:00 ",
+            "Date_end": "2021-06-20 00:00:00 ",
+            "N_samples": 140,
+            "OP_DTT_v_mean": 0.91,
+            "OP_DTT_v_SD": 0.67,
+            "PM_mass_mean": 18.58,
+            "PM_mass_SD": 8.89,
+            "tag": "**"
+        },
+        {
+            "Station": "DIEPPE",
+            "PM_size": "PM10",
+            "Site_type": "Rural",
+            "Site_topography": "Coastal",
+            "Country": "FR",
+            "Date_start": "2021-02-11 00:00:00 ",
+            "Date_end": "2021-06-29 00:00:00 ",
+            "N_samples": 137,
+            "OP_DTT_v_mean": 0.72,
+            "OP_DTT_v_SD": 0.63,
+            "PM_mass_mean": 16.72,
+            "PM_mass_SD": 8.3,
+            "tag": "**"
+        },
+        {
+            "Station": "OPE",
+            "PM_size": "PM10",
+            "Site_type": "Rural",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2017-06-13 00:00:00 ",
+            "Date_end": "2020-12-29 00:00:00 ",
+            "N_samples": 200,
+            "OP_DTT_v_mean": 0.6,
+            "OP_DTT_v_SD": 0.4,
+            "PM_mass_mean": 9.54,
+            "PM_mass_SD": 6.54,
+            "tag": "**"
+        },
+        {
+            "Station": "PLOURZ",
+            "PM_size": "PM10",
+            "Site_type": "Rural",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2023-03-10 00:00:00 ",
+            "Date_end": "2024-05-20 00:00:00 ",
+            "N_samples": 171,
+            "OP_DTT_v_mean": 0.88,
+            "OP_DTT_v_SD": 0.53,
+            "PM_mass_mean": 15.73,
+            "PM_mass_SD": 8.13,
+            "tag": "**"
+        }
+    ],
+    "PM2.5": [
+        {
+            "Station": "BERN",
+            "PM_size": "PM2.5",
+            "Site_type": "Traffic",
+            "Site_topography": "Other",
+            "Country": "CH",
+            "Date_start": "2013-01-01 00:00:00 ",
+            "Date_end": "2020-12-29 00:00:00 ",
+            "N_samples": 644,
+            "OP_DTT_v_mean": 1.27,
+            "OP_DTT_v_SD": 0.74,
+            "PM_mass_mean": 12.61,
+            "PM_mass_SD": 7.52,
+            "tag": "***"
+        },
+        {
+            "Station": "SRJV",
+            "PM_size": "PM2.5",
+            "Site_type": "Urban",
+            "Site_topography": "Valley",
+            "Country": "BA",
+            "Date_start": "2022-08-20 00:00:00 ",
+            "Date_end": "2023-03-01 00:00:00 ",
+            "N_samples": 103,
+            "OP_DTT_v_mean": 1.75,
+            "OP_DTT_v_SD": 1.5,
+            "PM_mass_mean": 32.69,
+            "PM_mass_SD": 22.95,
+            "tag": "**"
+        },
+        {
+            "Station": "ZURICH",
+            "PM_size": "PM2.5",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "CH",
+            "Date_start": "2018-06-03 00:00:00 ",
+            "Date_end": "2019-05-29 00:00:00 ",
+            "N_samples": 90,
+            "OP_DTT_v_mean": 0.83,
+            "OP_DTT_v_SD": 0.56,
+            "PM_mass_mean": 10.8,
+            "PM_mass_SD": 6.97,
+            "tag": "*"
+        },
+        {
+            "Station": "BCN",
+            "PM_size": "PM2.5",
+            "Site_type": "Urban",
+            "Site_topography": "Coastal",
+            "Country": "ES",
+            "Date_start": "2018-01-03 00:00:00 ",
+            "Date_end": "2023-02-28 00:00:00 ",
+            "N_samples": 197,
+            "OP_DTT_v_mean": 1.2,
+            "OP_DTT_v_SD": 0.59,
+            "PM_mass_mean": 17.48,
+            "PM_mass_SD": 6.32,
+            "tag": "*"
+        },
+        {
+            "Station": "LILLE",
+            "PM_size": "PM2.5",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2023-04-03 00:00:00 ",
+            "Date_end": "2024-04-01 00:00:00 ",
+            "N_samples": 121,
+            "OP_DTT_v_mean": 0.86,
+            "OP_DTT_v_SD": 0.49,
+            "PM_mass_mean": 11.19,
+            "PM_mass_SD": 6.82,
+            "tag": "**"
+        },
+        {
+            "Station": "PARIS-lcpp",
+            "PM_size": "PM2.5",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2020-11-07 00:00:00 ",
+            "Date_end": "2021-09-22 00:00:00 ",
+            "N_samples": 69,
+            "OP_DTT_v_mean": 1.02,
+            "OP_DTT_v_SD": 0.84,
+            "PM_mass_mean": 12.51,
+            "PM_mass_SD": 7.26,
+            "tag": "*"
+        },
+        {
+            "Station": "PARIS-lh",
+            "PM_size": "PM2.5",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2020-06-24 00:00:00 ",
+            "Date_end": "2023-09-26 00:00:00 ",
+            "N_samples": 806,
+            "OP_DTT_v_mean": 0.8,
+            "OP_DTT_v_SD": 0.55,
+            "PM_mass_mean": 10.48,
+            "PM_mass_SD": 6.27,
+            "tag": "****"
+        },
+        {
+            "Station": "ATH",
+            "PM_size": "PM2.5",
+            "Site_type": "Urban",
+            "Site_topography": "Coastal",
+            "Country": "GR",
+            "Date_start": "2022-01-07 00:00:00 ",
+            "Date_end": "2023-12-06 00:00:00 ",
+            "N_samples": 152,
+            "OP_DTT_v_mean": 1.92,
+            "OP_DTT_v_SD": 1.2,
+            "PM_mass_mean": 24.7,
+            "PM_mass_SD": 16.61,
+            "tag": "*"
+        },
+        {
+            "Station": "BDP",
+            "PM_size": "PM2.5",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "HU",
+            "Date_start": "2017-10-18 00:00:00 ",
+            "Date_end": "2018-08-01 00:00:00 ",
+            "N_samples": 61,
+            "OP_DTT_v_mean": 1.8,
+            "OP_DTT_v_SD": 1.23,
+            "PM_mass_mean": 15.03,
+            "PM_mass_SD": 8.69,
+            "tag": "*"
+        },
+        {
+            "Station": "BASEL",
+            "PM_size": "PM2.5",
+            "Site_type": "Suburban",
+            "Site_topography": "Other",
+            "Country": "CH",
+            "Date_start": "2018-06-03 00:00:00 ",
+            "Date_end": "2019-05-29 00:00:00 ",
+            "N_samples": 90,
+            "OP_DTT_v_mean": 0.62,
+            "OP_DTT_v_SD": 0.57,
+            "PM_mass_mean": 10.6,
+            "PM_mass_SD": 7.76,
+            "tag": "*"
+        },
+        {
+            "Station": "MGD",
+            "PM_size": "PM2.5",
+            "Site_type": "Rural",
+            "Site_topography": "Valley",
+            "Country": "CH",
+            "Date_start": "2014-01-03 00:00:00 ",
+            "Date_end": "2019-05-29 00:00:00 ",
+            "N_samples": 153,
+            "OP_DTT_v_mean": 0.88,
+            "OP_DTT_v_SD": 0.86,
+            "PM_mass_mean": 10.61,
+            "PM_mass_SD": 7.2,
+            "tag": "**"
+        },
+        {
+            "Station": "PAYRN",
+            "PM_size": "PM2.5",
+            "Site_type": "Rural",
+            "Site_topography": "Other",
+            "Country": "CH",
+            "Date_start": "2013-01-01 00:00:00 ",
+            "Date_end": "2019-05-29 00:00:00 ",
+            "N_samples": 102,
+            "OP_DTT_v_mean": 0.61,
+            "OP_DTT_v_SD": 0.48,
+            "PM_mass_mean": 9.68,
+            "PM_mass_SD": 6.73,
+            "tag": "**"
+        },
+        {
+            "Station": "MSY",
+            "PM_size": "PM2.5",
+            "Site_type": "Rural",
+            "Site_topography": "Other",
+            "Country": "ES",
+            "Date_start": "2018-01-11 00:00:00 ",
+            "Date_end": "2019-03-31 00:00:00 ",
+            "N_samples": 107,
+            "OP_DTT_v_mean": 0.44,
+            "OP_DTT_v_SD": 0.3,
+            "PM_mass_mean": 9.62,
+            "PM_mass_SD": 4.68,
+            "tag": "**"
+        },
+        {
+            "Station": "OPE",
+            "PM_size": "PM2.5",
+            "Site_type": "Rural",
+            "Site_topography": "Other",
+            "Country": "FR",
+            "Date_start": "2014-01-01 00:00:00 ",
+            "Date_end": "2015-12-28 00:00:00 ",
+            "N_samples": 102,
+            "OP_DTT_v_mean": 0.5,
+            "OP_DTT_v_SD": 0.54,
+            "PM_mass_mean": 8.79,
+            "PM_mass_SD": 7.16,
+            "tag": "**"
+        }
+    ],
+    "PM1": [
+        {
+            "Station": "BCN",
+            "PM_size": "PM1",
+            "Site_type": "Urban",
+            "Site_topography": "Coastal",
+            "Country": "ES",
+            "Date_start": "2018-01-03 00:00:00 ",
+            "Date_end": "2019-03-15 00:00:00 ",
+            "N_samples": 94,
+            "OP_DTT_v_mean": 0.87,
+            "OP_DTT_v_SD": 0.41,
+            "PM_mass_mean": 14.71,
+            "PM_mass_SD": 4.91,
+            "tag": "*"
+        },
+        {
+            "Station": "MRS-lcp",
+            "PM_size": "PM1",
+            "Site_type": "Urban",
+            "Site_topography": "Coastal",
+            "Country": "FR",
+            "Date_start": "2022-12-10 00:00:00 ",
+            "Date_end": "2024-07-26 00:00:00 ",
+            "N_samples": 262,
+            "OP_DTT_v_mean": 0.87,
+            "OP_DTT_v_SD": 0.76,
+            "PM_mass_mean": 13.65,
+            "PM_mass_SD": 13.48,
+            "tag": "**"
+        },
+        {
+            "Station": "KRAK",
+            "PM_size": "PM1",
+            "Site_type": "Urban",
+            "Site_topography": "Other",
+            "Country": "PL",
+            "Date_start": "2018-01-23 00:00:00 ",
+            "Date_end": "2018-09-27 00:00:00 ",
+            "N_samples": 63,
+            "OP_DTT_v_mean": 1.03,
+            "OP_DTT_v_SD": 0.85,
+            "PM_mass_mean": 19.73,
+            "PM_mass_SD": 17.28,
+            "tag": "*"
+        },
+        {
+            "Station": "MSY",
+            "PM_size": "PM1",
+            "Site_type": "Rural",
+            "Site_topography": "Other",
+            "Country": "ES",
+            "Date_start": "2018-01-11 00:00:00 ",
+            "Date_end": "2019-03-31 00:00:00 ",
+            "N_samples": 94,
+            "OP_DTT_v_mean": 0.35,
+            "OP_DTT_v_SD": 0.2,
+            "PM_mass_mean": 9.35,
+            "PM_mass_SD": 4.39,
+            "tag": "*"
+        }
+    ]
+};
+
+        // ---------------------------------------------------------
+        // 2. Data Processing Logic
+        // ---------------------------------------------------------
+        
+        const colors = {
+            'Traffic': '#A89968',
+            'Urban': '#7BAF68',
+            'Industrial': '#E696A2',
+            'Suburban': '#7FB2E5',
+            'Rural': '#D49ED8',
+            'Default': '#808080'
+        };
+
+        // ---------------------------------------------------------
+        // 3. ECharts Logic
+        // ---------------------------------------------------------
+        
+        var chartDom = document.getElementById('chart');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        const pmSizes = ['PM10', 'PM2.5', 'PM1'];
+        
+        // Calculate Grid Layout (Total 100%, match ratios 10 : 3.5 : 1.2)
+        // Approx: 68% : 24% : 8%
+        const gridDefs = [
+            { left: '5%', width: '63%', bottom: '20%', containLabel: true },
+            { left: '72%', width: '20%', bottom: '20%', containLabel: true },
+            { left: '94%', width: '6%', bottom: '20%', containLabel: true }
+        ];
+
+        const xAxisDefs = [];
+        const yAxisDefs = [];
+        const seriesDefs = [];
+
+        // Error bar render item function
+        function renderErrorBar(params, api) {
+            var xValue = api.value(0);
+            var highPoint = api.coord([xValue, api.value(1)]);
+            var lowPoint = api.coord([xValue, api.value(2)]);
+            var halfWidth = api.size([1, 0])[0] * 0.1; // Width of error bar cap
+            var style = api.style({
+                stroke: 'gray',
+                fill: null,
+                lineWidth: 1
+            });
+            return {
+                type: 'group',
+                children: [{
+                    type: 'line',
+                    transition: ['shape'],
+                    shape: {
+                        x1: highPoint[0] - halfWidth, y1: highPoint[1],
+                        x2: highPoint[0] + halfWidth, y2: highPoint[1]
+                    },
+                    style: style
+                }, {
+                    type: 'line',
+                    transition: ['shape'],
+                    shape: {
+                        x1: highPoint[0], y1: highPoint[1],
+                        x2: lowPoint[0], y2: lowPoint[1]
+                    },
+                    style: style
+                }, {
+                    type: 'line',
+                    transition: ['shape'],
+                    shape: {
+                        x1: lowPoint[0] - halfWidth, y1: lowPoint[1],
+                        x2: lowPoint[0] + halfWidth, y2: lowPoint[1]
+                    },
+                    style: style
+                }]
+            };
+        }
+
+        pmSizes.forEach((pmSize, idx) => {
+            // Data is already sorted in JSON
+            const filtered = sourceData[pmSize];
+            const xLabels = filtered.map(d => d.Station);
+            
+            // Series Data Preparation
+            const barData = [];
+            const errorData = [];
+            const scatterData = [];
+            const tagsData = [];
+
+            filtered.forEach((d, i) => {
+                const color = colors[d.Site_type] || colors['Default'];
+                
+                // Bar Data with specific styles
+                let itemStyle = { color: color };
+                
+                // Hatching for Valley
+                if (d.Site_topography === 'Valley') {
+                    itemStyle.decal = {
+                        symbol: 'rect', // Basic shape
+                        symbolSize: 1, // small size to create lines
+                        rotation: Math.PI / 4, // 45 degree
+                        color: 'white',
+                        dashArrayX: [1, 0], // Solid line
+                        dashArrayY: [2, 5], // Gap between lines
+                        opacity: 0.6
+                    };
+                }
+
+                barData.push({
+                    value: d.OP_DTT_v_mean,
+                    itemStyle: itemStyle
+                });
+
+                // Error Bar Data
+                const high = d.OP_DTT_v_mean + d.OP_DTT_v_SD;
+                const low = Math.max(0, d.OP_DTT_v_mean - d.OP_DTT_v_SD);
+                errorData.push([i, high, low]);
+
+                // Scatter Data
+                scatterData.push([i, d.PM_mass_mean]);
+
+                // Tag Data
+                const tag = d.tag;
+                if (tag) {
+                    tagsData.push([i, 0.2, tag]); // y position near bottom
+                }
+            });
+
+            // X Axis
+            xAxisDefs.push({
+                type: 'category',
+                data: xLabels,
+                gridIndex: idx,
+                axisLabel: { rotate: 90, interval: 0, fontSize: 10 },
+                axisTick: { alignWithLabel: true }
+            });
+
+            // Y Axes (Left and Right per grid)
+            // Left (Bar)
+            yAxisDefs.push({
+                type: 'value',
+                gridIndex: idx,
+                min: 0,
+                max: 7,
+                show: idx === 0, // Only show label on first plot
+                name: idx === 0 ? 'OP_v DTT (nmolDTT min⁻¹ m⁻³)' : '',
+                nameLocation: 'middle',
+                nameGap: 40,
+                splitLine: { show: false }
+            });
+            
+            // Right (Scatter)
+            yAxisDefs.push({
+                type: 'value',
+                gridIndex: idx,
+                min: 0,
+                max: 70,
+                show: idx === 2, // Only show label on last plot
+                name: idx === 2 ? 'PM (μg m⁻³)' : '',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameRotate: -90,
+                position: 'right',
+                splitLine: { show: false }
+            });
+
+            // Series
+            // 1. Bar Series
+            seriesDefs.push({
+                name: 'OP_DTT',
+                type: 'bar',
+                xAxisIndex: idx,
+                yAxisIndex: idx * 2,
+                data: barData,
+                z: 2
+            });
+
+            // 2. Error Bar (Custom)
+            seriesDefs.push({
+                type: 'custom',
+                xAxisIndex: idx,
+                yAxisIndex: idx * 2,
+                renderItem: renderErrorBar,
+                data: errorData,
+                z: 3
+            });
+
+            // 3. Scatter Series
+            seriesDefs.push({
+                name: 'PM Mass',
+                type: 'scatter',
+                xAxisIndex: idx,
+                yAxisIndex: idx * 2 + 1, // Use right y-axis
+                data: scatterData,
+                symbolSize: 8,
+                itemStyle: {
+                    color: 'black',
+                    borderColor: 'white',
+                    borderWidth: 1
+                },
+                z: 4
+            });
+
+            // 4. Tags (Asterisks) - Using Scatter with Labels
+            seriesDefs.push({
+                type: 'scatter',
+                xAxisIndex: idx,
+                yAxisIndex: idx * 2,
+                data: tagsData.map(item => ({
+                    value: [item[0], item[1]],
+                    label: {
+                        show: true,
+                        formatter: item[2],
+                        position: 'right',
+                        rotate: 90,
+                        color: 'black',
+                        fontSize: 10,
+                        fontWeight: 'bold',
+                        distance: 5
+                    }
+                })),
+                symbolSize: 0, // Invisible points
+                z: 5
+            });
+        });
+
+        // Add Titles via Graphic elements or just title option (but title is global or array in ECharts 5)
+        // ECharts supports array of titles
+        const titleDefs = [
+            { text: 'PM10', left: '33%', top: '5%', textAlign: 'center' },
+            { text: 'PM2.5', left: '81%', top: '5%', textAlign: 'center' },
+            { text: 'PM1', left: '97%', top: '5%', textAlign: 'center' },
+            { text: 'b', left: '2%', top: '2%', textStyle: { fontSize: 24, fontWeight: 'bold' } }
+        ];
+
+        option = {
+            backgroundColor: '#fff',
+            title: titleDefs,
+            grid: gridDefs,
+            xAxis: xAxisDefs,
+            yAxis: yAxisDefs,
+            series: seriesDefs,
+            animation: false // Static reproduction
+        };
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

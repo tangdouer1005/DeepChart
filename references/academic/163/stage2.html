@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const df = [
+    {
+        "Category": "Vegetables and fruits",
+        "Observed diets": 46.800000000000004,
+        "Red and processed meat (25%)": 63.2,
+        "Red and processed meat (50%)": 64.5,
+        "Dairy (25%)": 60.35,
+        "Dairy (50%)": 62.74999999999999
+    },
+    {
+        "Category": "Whole-grain foods",
+        "Observed diets": 23.599999999999998,
+        "Red and processed meat (25%)": 19.2,
+        "Red and processed meat (50%)": 18.4,
+        "Dairy (25%)": 16.6,
+        "Dairy (50%)": 15.6
+    },
+    {
+        "Category": "Grain foods ratio",
+        "Observed diets": 28.199999999999996,
+        "Red and processed meat (25%)": 28.199999999999996,
+        "Red and processed meat (50%)": 28.199999999999996,
+        "Dairy (25%)": 28.199999999999996,
+        "Dairy (50%)": 28.199999999999996
+    },
+    {
+        "Category": "Protein foods",
+        "Observed diets": 71.39999999999999,
+        "Red and processed meat (25%)": 80.2,
+        "Red and processed meat (50%)": 81.39999999999999,
+        "Dairy (25%)": 84.8,
+        "Dairy (50%)": 86.6
+    },
+    {
+        "Category": "Plant-based protein foods",
+        "Observed diets": 28.199999999999996,
+        "Red and processed meat (25%)": 62.4,
+        "Red and processed meat (50%)": 65.0,
+        "Dairy (25%)": 76.0,
+        "Dairy (50%)": 79.4
+    },
+    {
+        "Category": "Beverages",
+        "Observed diets": 78.8,
+        "Red and processed meat (25%)": 78.8,
+        "Red and processed meat (50%)": 78.8,
+        "Dairy (25%)": 54.6,
+        "Dairy (50%)": 51.6
+    },
+    {
+        "Category": "Fatty acids ratio",
+        "Observed diets": 51.4,
+        "Red and processed meat (25%)": 56.8,
+        "Red and processed meat (50%)": 60.8,
+        "Dairy (25%)": 63.4,
+        "Dairy (50%)": 75.0
+    },
+    {
+        "Category": "Saturated fats",
+        "Observed diets": 71.2,
+        "Red and processed meat (25%)": 72.8,
+        "Red and processed meat (50%)": 74.6,
+        "Dairy (25%)": 78.8,
+        "Dairy (50%)": 86.4
+    },
+    {
+        "Category": "Free sugars",
+        "Observed diets": 74.1,
+        "Red and processed meat (25%)": 73.7,
+        "Red and processed meat (50%)": 73.9,
+        "Dairy (25%)": 73.6,
+        "Dairy (50%)": 73.4
+    },
+    {
+        "Category": "Sodium",
+        "Observed diets": 51.0,
+        "Red and processed meat (25%)": 53.400000000000006,
+        "Red and processed meat (50%)": 55.50000000000001,
+        "Dairy (25%)": 53.400000000000006,
+        "Dairy (50%)": 55.2
+    }
+];
+
+        const categories = df.map(d => d.Category);
+        const indicators = categories.map(c => ({ name: c, max: 100 }));
+
+        const seriesNames = [
+            'Observed diets',
+            'Red and processed meat (50%)',
+            'Red and processed meat (25%)',
+            'Dairy (50%)',
+            'Dairy (25%)'
+        ];
+
+        const colors = {
+            'Observed diets': '#999999',
+            'Red and processed meat (50%)': '#8B4513',
+            'Red and processed meat (25%)': '#D2691E',
+            'Dairy (50%)': '#1F4E79',
+            'Dairy (25%)': '#4682B4'
+        };
+        
+        const lineStyles = {
+            'Observed diets': { type: 'dashed', width: 3 },
+            'Red and processed meat (50%)': { type: 'solid', width: 2.5 },
+            'Red and processed meat (25%)': { type: 'solid', width: 2.5 },
+            'Dairy (50%)': { type: 'solid', width: 2.5 },
+            'Dairy (25%)': { type: 'solid', width: 2.5 }
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const dataEntries = seriesNames.map(name => {
+            return {
+                value: df.map(row => row[name]),
+                name: name,
+                itemStyle: { color: colors[name] },
+                lineStyle: {
+                    color: colors[name],
+                    type: lineStyles[name].type,
+                    width: lineStyles[name].width
+                },
+                symbol: 'none'
+            };
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            radar: {
+                indicator: indicators,
+                shape: 'polygon',
+                splitNumber: 5,
+                center: ['50%', '50%'],
+                radius: '65%',
+                axisName: {
+                    color: 'black',
+                    fontSize: 11
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: 'grey',
+                        type: 'dashed',
+                        opacity: 0.5
+                    }
+                },
+                splitArea: { show: false },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'grey',
+                        type: 'dashed',
+                        opacity: 0.5
+                    }
+                }
+            },
+            series: [{
+                type: 'radar',
+                data: dataEntries,
+                z: 2
+            }],
+            legend: {
+                data: seriesNames,
+                bottom: 10,
+                left: 'center',
+                orient: 'horizontal',
+                itemWidth: 25,
+                itemHeight: 14
+            }
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

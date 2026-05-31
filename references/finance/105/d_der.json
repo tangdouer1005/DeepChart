@@ -1,0 +1,105 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "Net Income": 7009000000.0,
+            "Operating Cashflow": 9373000000.0,
+            "Accruals": -2364000000.0,
+            "Avg Total Assets": 41247500000.0
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "Net Income": 7957000000.0,
+            "Operating Cashflow": 9783000000.0,
+            "Accruals": -1826000000.0,
+            "Avg Total Assets": 42757500000.0
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "Net Income": 8630000000.0,
+            "Operating Cashflow": 12031000000.0,
+            "Accruals": -3401000000.0,
+            "Avg Total Assets": 43747500000.0
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "Net Income": 11121000000.0,
+            "Operating Cashflow": 13165000000.0,
+            "Accruals": -2044000000.0,
+            "Avg Total Assets": 44266000000.0
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "Net Income": 11242000000.0,
+            "Operating Cashflow": 13723000000.0,
+            "Accruals": -2481000000.0,
+            "Avg Total Assets": 47619500000.0
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "Net Income": 12866000000.0,
+            "Operating Cashflow": 18839000000.0,
+            "Accruals": -5973000000.0,
+            "Avg Total Assets": 60908500000.0
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Net Income": 16433000000.0,
+            "Operating Cashflow": 16571000000.0,
+            "Accruals": -138000000.0,
+            "Avg Total Assets": 71228500000.0
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Net Income": 17105000000.0,
+            "Operating Cashflow": 14615000000.0,
+            "Accruals": 2490000000.0,
+            "Avg Total Assets": 74160500000.0
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "Net Income": 15143000000.0,
+            "Operating Cashflow": 21172000000.0,
+            "Accruals": -6029000000.0,
+            "Avg Total Assets": 76487500000.0
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.05731256439784229
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.042705958019060984
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.0777415852334419
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.046175394207744094
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.05210050504520207
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.09806513048260916
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.0019374267322771082
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": 0.03357582540570789
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.07882333714659258
+        }
+    ]
+}

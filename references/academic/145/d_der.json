@@ -1,0 +1,65 @@
+[
+    {
+        "service_type":"Health Care Services",
+        "state":"AZ",
+        "fairnes_index":0.0413625,
+        "number_HighAging_CBG":274,
+        "service_abbr":"HCS"
+    },
+    {
+        "service_type":"Health Care Services",
+        "state":"CA",
+        "fairnes_index":-0.075969,
+        "number_HighAging_CBG":215,
+        "service_abbr":"HCS"
+    },
+    {
+        "service_type":"Health Care Services",
+        "state":"FL",
+        "fairnes_index":0.146886,
+        "number_HighAging_CBG":851,
+        "service_abbr":"HCS"
+    },
+    {
+        "service_type":"Grocery and Food Supply",
+        "state":"AZ",
+        "fairnes_index":-0.0841503,
+        "number_HighAging_CBG":272,
+        "service_abbr":"GFS"
+    },
+    {
+        "service_type":"Grocery and Food Supply",
+        "state":"CA",
+        "fairnes_index":-0.167186,
+        "number_HighAging_CBG":214,
+        "service_abbr":"GFS"
+    },
+    {
+        "service_type":"Grocery and Food Supply",
+        "state":"FL",
+        "fairnes_index":0.12178,
+        "number_HighAging_CBG":854,
+        "service_abbr":"GFS"
+    },
+    {
+        "service_type":"Housing and Real Estate",
+        "state":"AZ",
+        "fairnes_index":0.0178427,
+        "number_HighAging_CBG":274,
+        "service_abbr":"HRE"
+    },
+    {
+        "service_type":"Housing and Real Estate",
+        "state":"CA",
+        "fairnes_index":-0.00253678,
+        "number_HighAging_CBG":219,
+        "service_abbr":"HRE"
+    },
+    {
+        "service_type":"Housing and Real Estate",
+        "state":"FL",
+        "fairnes_index":0.142783,
+        "number_HighAging_CBG":856,
+        "service_abbr":"HRE"
+    }
+]

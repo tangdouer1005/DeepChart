@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: white;
+        }
+        #chart-container {
+            width: 1000px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        // Data from Python script
+        
+        const data = {"data": {"B16-F0": [455236.1786, 374854.507, 500874.4223], "LN1-18IL": [259322.4689, 325788.1275, 369825.6449], "LN7-1112AR": [7253.489863, 17490.64321, 207263.7738], "LN7-1120BL": [100374.4682, 150631.574, 224441.8039], "LN7-1134BL": [129019.3061, 88956.35534, 233707.8501], "LN8-1194BR": [131170.1782, 133441.9365, 123497.4119], "LN8-1198AR": [229925.4942, 187742.7464, 177946.004], "LN8-1205BL": [162259.7645, 155074.2113, 153575.2223], "LN9-1315BL": [284545.951, 240852.6389, 222731.4212], "LN9-1358IR": [215774.5807, 206790.9562, 196147.948]}};
+        const rawData = data.data;
+
+        const pValuesText = {
+            "LN7-1112AR": "P = 1.2 × 10⁻⁷",
+            "LN7-1120BL": "P = 6.9 × 10⁻⁶",
+            "LN7-1134BL": "P = 4.6 × 10⁻⁶",
+            "LN8-1194BR": "P = 1.6 × 10⁻⁶",
+            "LN8-1198AR": "P = 5.8 × 10⁻⁵",
+            "LN8-1205BL": "P = 6.4 × 10⁻⁶",
+            "LN9-1315BL": "P = 0.0009",
+            "LN9-1358IR": "P = 8.8 × 10⁻⁵"
+        };
+        const globalPValue = "P = 7.6 × 10⁻⁸";
+
+        const labels = Object.keys(rawData);
+        const colors = ['#D9D9D9', '#F0A0F0', '#8FBC8F', '#8FBC8F', '#8FBC8F', '#8FBC8F', '#8FBC8F', '#8FBC8F', '#8FBC8F', '#8FBC8F'];
+
+        // Helper functions for stats
+        function getMean(arr) {
+            return arr.reduce((a, b) => a + b, 0) / arr.length;
+        }
+
+        function getStd(arr, mean) {
+            // Sample standard deviation (ddof=1)
+            const variance = arr.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / (arr.length - 1);
+            return Math.sqrt(variance);
+        }
+
+        // Calculate Means and Stds
+        const means = [];
+        const stds = [];
+        const maxVals = [];
+        
+        labels.forEach(label => {
+            const values = rawData[label];
+            const mean = getMean(values);
+            means.push(mean);
+            stds.push(getStd(values, mean));
+            maxVals.push(Math.max(...values));
+        });
+
+        // Prepare Series Data
+        const barData = means.map((val, idx) => ({
+            value: val,
+            itemStyle: {
+                color: colors[idx],
+                borderColor: 'black',
+                borderWidth: 1
+            }
+        }));
+
+        const errorBarData = means.map((mean, idx) => {
+            const std = stds[idx];
+            return {
+                value: [idx, mean - std, mean + std],
+                itemStyle: {
+                    borderWidth: 1.5,
+                    color: 'gray' 
+                }
+            };
+        });
+
+        const scatterData = [];
+        // Seeded random for consistent jitter
+        // Using a simple LCG or just hardcoded logic isn't strictly necessary if visual approx is fine, 
+        // but let's try to simulate the python np.random.uniform(-0.15, 0.15)
+        let seed = 42;
+        function random() {
+            var x = Math.sin(seed++) * 10000;
+            return x - Math.floor(x);
+        }
+        function randomUniform(min, max) {
+            return random() * (max - min) + min;
+        }
+
+        labels.forEach((label, idx) => {
+            rawData[label].forEach(val => {
+                const jitter = randomUniform(-0.15, 0.15);
+                scatterData.push([idx + jitter, val]);
+            });
+        });
+
+        // Annotations
+        const annotationData = [];
+        labels.forEach((label, idx) => {
+            if (pValuesText[label]) {
+                const errorTop = means[idx] + stds[idx];
+                const valMax = maxVals[idx];
+                let yStart = Math.max(valMax, errorTop) + 25000;
+                
+                // Visual adjustment from Python script
+                if (yStart < 280000) {
+                    yStart = 280000;
+                }
+
+                annotationData.push({
+                    value: [idx, yStart],
+                    label: {
+                        show: true,
+                        formatter: pValuesText[label],
+                        rotate: 90,
+                        position: 'top',
+                        verticalAlign: 'bottom',
+                        align: 'center',
+                        color: 'black',
+                        fontSize: 10,
+                        distance: 5
+                    }
+                });
+            }
+        });
+
+        // ECharts Option
+        const option = {
+            animation: false,
+            grid: {
+                top: '10%',
+                bottom: '15%',
+                left: '10%',
+                right: '5%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: labels,
+                axisLabel: {
+                    rotate: 45,
+                    fontSize: 11,
+                    color: 'black',
+                    interval: 0
+                },
+                axisTick: {
+                    alignWithLabel: true,
+                    lineStyle: { color: 'black' }
+                },
+                axisLine: {
+                    lineStyle: { color: 'black' }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'GSH peak intensity',
+                nameLocation: 'middle',
+                nameGap: 60,
+                nameTextStyle: {
+                    fontSize: 12,
+                    color: 'black'
+                },
+                min: 0,
+                max: 700000,
+                interval: 200000,
+                axisLabel: {
+                    fontSize: 11,
+                    color: 'black',
+                    formatter: function(value) {
+                        if (value === 0) return '0';
+                        if (value === 200000) return '2 × 10⁵';
+                        if (value === 400000) return '4 × 10⁵';
+                        if (value === 600000) return '6 × 10⁵';
+                        return value;
+                    }
+                },
+                axisLine: {
+                    show: false // Left spine is typically shown, but Python script said remove Right and Top. Left is implicit.
+                },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: barData,
+                    barWidth: '65%',
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    name: 'error',
+                    itemStyle: {
+                        borderWidth: 1.5,
+                        color: 'gray'
+                    },
+                    renderItem: function (params, api) {
+                        var xValue = api.value(0);
+                        var highPoint = api.coord([xValue, api.value(2)]);
+                        var lowPoint = api.coord([xValue, api.value(1)]);
+                        var halfWidth = 5; // capsize=5 in python -> roughly 5px here
+                        var style = api.style({
+                            stroke: api.visual('color'),
+                            fill: undefined
+                        });
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0] - halfWidth, y1: highPoint[1],
+                                        x2: highPoint[0] + halfWidth, y2: highPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0], y1: highPoint[1],
+                                        x2: lowPoint[0], y2: lowPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0] - halfWidth, y1: lowPoint[1],
+                                        x2: lowPoint[0] + halfWidth, y2: lowPoint[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    encode: {
+                        x: 0,
+                        y: [1, 2]
+                    },
+                    data: errorBarData,
+                    z: 2
+                },
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    symbolSize: 8, // s=35 in matplotlib is area, sqrt(35/pi)*2 approx 6-7, lets use 8 for visibility
+                    itemStyle: {
+                        color: 'black',
+                        opacity: 0.8
+                    },
+                    z: 3
+                },
+                {
+                    type: 'scatter',
+                    data: annotationData,
+                    symbolSize: 0,
+                    z: 4
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 20, // Relative position for 'f'
+                    top: 20,
+                    style: {
+                        text: 'f',
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        fill: 'black'
+                    }
+                },
+                // Global P-value Line
+                {
+                    type: 'line',
+                    shape: {
+                        x1: 0, y1: 0, x2: 0, y2: 0 // Placeholder, updated in 'render' or via coord conversion if possible, but easier to use markLine or series-line
+                    },
+                    // We'll use a series-line for the top bar to make it coordinate-system aware easily
+                }
+            ]
+        };
+
+        // Add the top global p-value line as a series to adhere to grid coordinates
+        option.series.push({
+            type: 'line',
+            markLine: {
+                symbol: ['none', 'none'],
+                label: { show: false },
+                lineStyle: {
+                    color: 'black',
+                    width: 1,
+                    type: 'solid'
+                },
+                data: [
+                    [
+                        { coord: [0, 620000] },
+                        { coord: [labels.length - 1, 620000] }
+                    ]
+                ]
+            },
+            z: 5
+        });
+
+        // Add Global P-value Text
+        option.series.push({
+            type: 'scatter',
+            data: [{
+                value: [(labels.length - 1) / 2, 630000], // Centered x, slightly above line y
+            }],
+            symbolSize: 0,
+            label: {
+                show: true,
+                formatter: globalPValue,
+                color: 'black',
+                fontSize: 12,
+                position: 'top'
+            },
+            z: 6
+        });
+
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+        myChart.setOption(option);
+
+    </script>
+</body>
+</html>

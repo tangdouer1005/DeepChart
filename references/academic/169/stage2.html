@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        let df = [
+    {
+        "Country": "South Africa",
+        "Plate waste rate": 0.463137,
+        "sd": 11.3842,
+        "rate_pct": 46.313700000000004
+    },
+    {
+        "Country": "Canada",
+        "Plate waste rate": 0.361057,
+        "sd": 0.0,
+        "rate_pct": 36.1057
+    },
+    {
+        "Country": "Italy",
+        "Plate waste rate": 0.322202,
+        "sd": 11.8637,
+        "rate_pct": 32.2202
+    },
+    {
+        "Country": "Latvia",
+        "Plate waste rate": 0.319073,
+        "sd": 7.07593,
+        "rate_pct": 31.9073
+    },
+    {
+        "Country": "Portugal",
+        "Plate waste rate": 0.290535,
+        "sd": 19.6385,
+        "rate_pct": 29.0535
+    },
+    {
+        "Country": "USA",
+        "Plate waste rate": 0.287659,
+        "sd": 12.9019,
+        "rate_pct": 28.7659
+    },
+    {
+        "Country": "France",
+        "Plate waste rate": 0.283855,
+        "sd": 0.0,
+        "rate_pct": 28.385500000000004
+    },
+    {
+        "Country": "Hungary",
+        "Plate waste rate": 0.277409,
+        "sd": 0.0,
+        "rate_pct": 27.740900000000003
+    },
+    {
+        "Country": "Denmark",
+        "Plate waste rate": 0.258459,
+        "sd": 8.91632,
+        "rate_pct": 25.8459
+    },
+    {
+        "Country": "Spain",
+        "Plate waste rate": 0.242257,
+        "sd": 9.88582,
+        "rate_pct": 24.2257
+    },
+    {
+        "Country": "China",
+        "Plate waste rate": 0.241117,
+        "sd": 0.0,
+        "rate_pct": 24.1117
+    },
+    {
+        "Country": "Finland",
+        "Plate waste rate": 0.221753,
+        "sd": 0.0,
+        "rate_pct": 22.1753
+    },
+    {
+        "Country": "UK",
+        "Plate waste rate": 0.208682,
+        "sd": 7.1671,
+        "rate_pct": 20.8682
+    },
+    {
+        "Country": "Iran",
+        "Plate waste rate": 0.201225,
+        "sd": 1.66657,
+        "rate_pct": 20.1225
+    },
+    {
+        "Country": "Germany",
+        "Plate waste rate": 0.18335,
+        "sd": 0.0,
+        "rate_pct": 18.335
+    },
+    {
+        "Country": "Jordan",
+        "Plate waste rate": 0.168129,
+        "sd": 0.0,
+        "rate_pct": 16.8129
+    },
+    {
+        "Country": "Croatia",
+        "Plate waste rate": 0.155559,
+        "sd": 0.0,
+        "rate_pct": 15.555900000000001
+    },
+    {
+        "Country": "Brazil",
+        "Plate waste rate": 0.147553,
+        "sd": 7.84035,
+        "rate_pct": 14.755299999999998
+    },
+    {
+        "Country": "Turkey",
+        "Plate waste rate": 0.136616,
+        "sd": 0.0,
+        "rate_pct": 13.661599999999998
+    },
+    {
+        "Country": "Thailand",
+        "Plate waste rate": 0.124509,
+        "sd": 9.46044,
+        "rate_pct": 12.450899999999999
+    },
+    {
+        "Country": "Ethiopia",
+        "Plate waste rate": 0.116182,
+        "sd": 0.0,
+        "rate_pct": 11.6182
+    },
+    {
+        "Country": "Sweden",
+        "Plate waste rate": 0.0834352,
+        "sd": 1.04935,
+        "rate_pct": 8.34352
+    },
+    {
+        "Country": "Japan",
+        "Plate waste rate": 0.0401832,
+        "sd": 5.1598,
+        "rate_pct": 4.01832
+    },
+    {
+        "Country": "Philippines",
+        "Plate waste rate": 0.0366431,
+        "sd": 2.6163,
+        "rate_pct": 3.66431
+    }
+];
+        df.sort((a, b) => b.rate_pct - a.rate_pct);
+
+        const countries = df.map(row => row.Country);
+        const rates = df.map(row => row.rate_pct);
+        const sds = df.map(row => row.sd); // SD is already in percentage
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Color mapping based on copper gradient
+        const vmin = 0;
+        const vmax = 50; 
+        const colorsList = ['#FFF5E1', '#FDD0A2', '#FDAE6B', '#D97C30', '#A65628']; // Light to dark copper
+        const barColors = rates.map(value => {
+            const ratio = (value - vmin) / (vmax - vmin);
+            // Linear interpolate between the 5 colors.
+            const idx = Math.floor(ratio * (colorsList.length - 1));
+            return colorsList[idx];
+        });
+        
+        const series = [];
+
+        // Bar series
+        series.push({
+            type: 'bar',
+            data: rates.map((rate, idx) => ({
+                value: rate,
+                itemStyle: {
+                    color: barColors[idx],
+                    borderColor: 'black',
+                    borderWidth: 0.7
+                }
+            })),
+            barWidth: '75%',
+            z: 1
+        });
+
+        // Error bar series (custom)
+        series.push({
+            type: 'custom',
+            renderItem: function(params, api) {
+                const xVal = api.value(0);
+                const mean = api.value(1);
+                const sd = api.value(2);
+                
+                // Only draw if sd > 0
+                if (sd === 0) return { type: 'group', children: [] };
+
+                const low = mean - sd;
+                const high = mean + sd;
+                
+                const style = api.style({ stroke: '#333333', lineWidth: 1 });
+                const xCoord = api.coord([xVal, high])[0];
+                const lowCoord = api.coord([xVal, low]);
+                const highCoord = api.coord([xVal, high]);
+                const capSize = 5; // Pixels
+                
+                return {
+                    type: 'group',
+                    children: [
+                        { type: 'line', shape: { x1: lowCoord[0], y1: lowCoord[1], x2: highCoord[0], y2: highCoord[1] }, style: style },
+                        { type: 'line', shape: { x1: xCoord - capSize, y1: lowCoord[1], x2: xCoord + capSize, y2: lowCoord[1] }, style: style },
+                        { type: 'line', shape: { x1: xCoord - capSize, y1: highCoord[1], x2: xCoord + capSize, y2: highCoord[1] }, style: style }
+                    ]
+                };
+            },
+            data: rates.map((rate, idx) => [idx, rate, sds[idx]]),
+            z: 2
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 60, bottom: 150, left: 80, right: 80 },
+            xAxis: {
+                type: 'category',
+                data: countries,
+                axisLabel: {
+                    rotate: -90,
+                    align: 'left', // Start text at axis
+                    verticalAlign: 'middle',
+                    color: 'black',
+                    fontSize: 13
+                },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Plate waste rate (%)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                min: 0,
+                max: 70,
+                interval: 10,
+                axisLabel: { color: 'black', fontSize: 11 },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true },
+                splitLine: { show: false }
+            },
+            visualMap: {
+                min: vmin,
+                max: vmax,
+                dimension: 0, // Map to data value (rate)
+                orient: 'horizontal',
+                right: '20%',
+                top: '5%',
+                itemWidth: 200,
+                itemHeight: 15,
+                text: ['40', '10'], // Labels, visualMap.formatter for exact control
+                textStyle: { color: 'black', fontSize: 10 },
+                calculable: true,
+                inRange: {
+                    color: colorsList
+                },
+                formatter: function (value) {
+                    if (value > 35) return '40'; // Custom ticks 10,20,30,40
+                    if (value > 25) return '30';
+                    if (value > 15) return '20';
+                    if (value > 5) return '10';
+                    return ''; // Echarts handles label range
+                }
+            },
+            series: series
+        };
+        
+        // Custom formatter for visualMap ticks (to match 10, 20, 30, 40)
+        option.visualMap.formatter = function(value) {
+            if (value >= 10 && value < 20) return '10';
+            if (value >= 20 && value < 30) return '20';
+            if (value >= 30 && value < 40) return '30';
+            if (value >= 40 && value <= 50) return '40';
+            return '';
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

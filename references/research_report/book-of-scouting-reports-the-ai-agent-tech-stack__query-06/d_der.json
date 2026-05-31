@@ -1,0 +1,120 @@
+{
+  "query_id": 6,
+  "query_text": "Create a ranked bar chart of the top 12 companies by \"headcount-light quality,\" defined as Mosaic divided by Headcount, using only companies with disclosed Headcount and Mosaic, with values expressed as Mosaic points per employee, colored by direction, and excluding companies with Headcount below 10.",
+  "status": "complete",
+  "chart": {
+    "type": "ranked_bar",
+    "title": "Top companies by headcount-light quality",
+    "entity_field": "company",
+    "value_field": "mosaic_per_employee",
+    "hue_field": "direction",
+    "orientation": "h",
+    "x_label": "Mosaic points per employee",
+    "y_label": "Company",
+    "order": [
+      "OpenRouter",
+      "E2B",
+      "Letta",
+      "Traceloop",
+      "/dev/agents",
+      "Linkup",
+      "Exa",
+      "Nevermined",
+      "Reducto",
+      "Hamming",
+      "Fixie",
+      "Skyfire"
+    ],
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "company": "OpenRouter",
+      "direction": "LLM benchmarking & model routing",
+      "headcount": 10.0,
+      "mosaic": 879.0,
+      "mosaic_per_employee": 87.9
+    },
+    {
+      "company": "E2B",
+      "direction": "Browser infrastructure",
+      "headcount": 13.0,
+      "mosaic": 868.0,
+      "mosaic_per_employee": 66.76923076923077
+    },
+    {
+      "company": "Letta",
+      "direction": "Memory management",
+      "headcount": 13.0,
+      "mosaic": 805.0,
+      "mosaic_per_employee": 61.92307692307692
+    },
+    {
+      "company": "Traceloop",
+      "direction": "Observability, evaluation, & governance",
+      "headcount": 12.0,
+      "mosaic": 688.0,
+      "mosaic_per_employee": 57.333333333333336
+    },
+    {
+      "company": "/dev/agents",
+      "direction": "Developer frameworks & platforms",
+      "headcount": 14.0,
+      "mosaic": 762.0,
+      "mosaic_per_employee": 54.42857142857143
+    },
+    {
+      "company": "Linkup",
+      "direction": "AI web search APIs & scrapers",
+      "headcount": 13.0,
+      "mosaic": 701.0,
+      "mosaic_per_employee": 53.92307692307692
+    },
+    {
+      "company": "Exa",
+      "direction": "AI web search APIs & scrapers",
+      "headcount": 15.0,
+      "mosaic": 751.0,
+      "mosaic_per_employee": 50.06666666666667
+    },
+    {
+      "company": "Nevermined",
+      "direction": "Payments infrastructure",
+      "headcount": 12.0,
+      "mosaic": 577.0,
+      "mosaic_per_employee": 48.083333333333336
+    },
+    {
+      "company": "Reducto",
+      "direction": "LLM data preparation platforms",
+      "headcount": 16.0,
+      "mosaic": 754.0,
+      "mosaic_per_employee": 47.125
+    },
+    {
+      "company": "Hamming",
+      "direction": "Voice",
+      "headcount": 14.0,
+      "mosaic": 558.0,
+      "mosaic_per_employee": 39.857142857142854
+    },
+    {
+      "company": "Fixie",
+      "direction": "Voice",
+      "headcount": 19.0,
+      "mosaic": 741.0,
+      "mosaic_per_employee": 39.0
+    },
+    {
+      "company": "Skyfire",
+      "direction": "Payments infrastructure",
+      "headcount": 22.0,
+      "mosaic": 816.0,
+      "mosaic_per_employee": 37.09090909090909
+    }
+  ],
+  "notes": []
+}

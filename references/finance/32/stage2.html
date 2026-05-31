@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AMZN Defensive Interval Ratio (DIR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      background: #f7f7f9;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .chart-container {
+      background: #ffffff;
+      max-width: 900px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+      padding: 20px 24px 24px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 1.25rem;
+      margin: 0 0 4px;
+      text-align: left;
+      color: #111827;
+    }
+    h2 {
+      font-size: 0.9rem;
+      margin: 0 0 12px;
+      font-weight: 500;
+      color: #4b5563;
+    }
+    .meta {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-bottom: 14px;
+    }
+    /* Key fix: give the canvas a stable aspect ratio using a wrapper */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      /* 16:9 aspect ratio; adjust if you prefer squarer */
+      padding-top: 56.25%;
+    }
+    .chart-wrapper canvas {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .legend-note {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 10px;
+    }
+    @media (max-width: 600px) {
+      .chart-container {
+        padding: 16px 14px 20px;
+      }
+      h1 {
+        font-size: 1.05rem;
+      }
+      h2 {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>Amazon (AMZN) Defensive Interval Ratio (DIR)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="meta">
+      Metric: 防御区间比率 (Defensive Interval Ratio, days of cash expenses covered by defensive assets)
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="dirChart" aria-label="Line chart of AMZN Defensive Interval Ratio from 2016 to 2024" role="img"></canvas>
+    </div>
+
+    <div class="legend-note">
+      Hover or tap on the line or points to see exact DIR values by fiscal year.
+    </div>
+  </div>
+
+  <script>
+    // Data from the provided source
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const dirValues = [
+      39.80236040509123,
+      43.03692062136412,
+      49.15120598851016,
+      48.13580924969352,
+      40.79380088252257,
+      35.16795229803412,
+      44.43717539079596,
+      85.37137495671729,
+      86.0500100111352
+    ];
+
+    const ctx = document.getElementById("dirChart").getContext("2d");
+
+    // Helper: nice y-axis min/max with padding
+    const minVal = Math.min(...dirValues);
+    const maxVal = Math.max(...dirValues);
+    const padding = (maxVal - minVal) * 0.15 || 5;
+    const suggestedMin = Math.max(0, Math.floor(minVal - padding));
+    const suggestedMax = Math.ceil(maxVal + padding);
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "Defensive Interval Ratio (DIR)",
+            data: dirValues,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.08)",
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderColor: "#ffffff",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointHitRadius: 10,
+            pointBorderWidth: 1.5,
+            borderWidth: 2.5,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // we control it via CSS wrapper
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              font: {
+                size: 11
+              },
+              color: "#374151"
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return `DIR: ${value.toFixed(2)} days`;
+              }
+            },
+            backgroundColor: "rgba(17, 24, 39, 0.9)",
+            borderColor: "rgba(156, 163, 175, 0.6)",
+            borderWidth: 1,
+            titleFont: { size: 12, weight: "600" },
+            bodyFont: { size: 11 },
+            padding: 10,
+            displayColors: false
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Defensive Interval Ratio (days)",
+              color: "#374151",
+              font: {
+                size: 11,
+                weight: "500"
+              }
+            },
+            grid: {
+              color: "rgba(209, 213, 219, 0.6)"
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 11
+              }
+            },
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

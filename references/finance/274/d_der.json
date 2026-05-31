@@ -1,0 +1,94 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2017,
+            "Net Income": 13643000000,
+            "Operating Cashflow": 31673000000,
+            "Accruals": -18030000000,
+            "Avg Total Assets": 199203000000.0
+        },
+        {
+            "Fiscal Year": 2018,
+            "Net Income": 9862000000,
+            "Operating Cashflow": 28337000000,
+            "Accruals": -18475000000,
+            "Avg Total Assets": 201673500000.0
+        },
+        {
+            "Fiscal Year": 2019,
+            "Net Income": 6670000000,
+            "Operating Cashflow": 27753000000,
+            "Accruals": -21083000000,
+            "Avg Total Assets": 211908500000.0
+        },
+        {
+            "Fiscal Year": 2020,
+            "Net Income": 14881000000,
+            "Operating Cashflow": 25255000000,
+            "Accruals": -10374000000,
+            "Avg Total Assets": 227895000000.0
+        },
+        {
+            "Fiscal Year": 2021,
+            "Net Income": 13510000000,
+            "Operating Cashflow": 36074000000,
+            "Accruals": -22564000000,
+            "Avg Total Assets": 244495500000.0
+        },
+        {
+            "Fiscal Year": 2022,
+            "Net Income": 13673000000,
+            "Operating Cashflow": 24181000000,
+            "Accruals": -10508000000,
+            "Avg Total Assets": 248678000000.0
+        },
+        {
+            "Fiscal Year": 2023,
+            "Net Income": 11680000000,
+            "Operating Cashflow": 29101000000,
+            "Accruals": -17421000000,
+            "Avg Total Assets": 244158500000.0
+        },
+        {
+            "Fiscal Year": 2024,
+            "Net Income": 15511000000,
+            "Operating Cashflow": 35726000000,
+            "Accruals": -20215000000,
+            "Avg Total Assets": 247928000000.0
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2017,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.09051068508004398
+        },
+        {
+            "Fiscal Year": 2018,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.09160846615941112
+        },
+        {
+            "Fiscal Year": 2019,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.09949105392185778
+        },
+        {
+            "Fiscal Year": 2020,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.04552096360165866
+        },
+        {
+            "Fiscal Year": 2021,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.0922879971206014
+        },
+        {
+            "Fiscal Year": 2022,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.04225544680269264
+        },
+        {
+            "Fiscal Year": 2023,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.0713511919511301
+        },
+        {
+            "Fiscal Year": 2024,
+            "斯隆比率 (Sloan Ratio / Accruals Ratio)": -0.08153576844890452
+        }
+    ]
+}

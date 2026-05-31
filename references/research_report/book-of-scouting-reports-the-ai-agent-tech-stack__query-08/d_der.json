@@ -1,0 +1,184 @@
+{
+  "query_id": 8,
+  "query_text": "Create a scatter plot for the top 20 companies after filtering to Commercial Maturity >= 3 / 5 and disclosed funding, where the x-axis is company age in years, the y-axis is Mosaic, bubble size is Total raised in $M, and bubble color encodes whether the company belongs to Foundation models & infrastructure, Agent frameworks & development platforms, Tool integration, Context, Orchestration, or Oversight.",
+  "status": "complete",
+  "chart": {
+    "type": "bubble",
+    "title": "Top filtered companies by Mosaic",
+    "x_field": "company_age_years",
+    "y_field": "mosaic",
+    "size_field": "total_raised_value_m",
+    "hue_field": "super_group",
+    "x_label": "Company age (years)",
+    "y_label": "Mosaic",
+    "label_field": "company",
+    "annotate": false,
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "company": "Anthropic",
+      "super_group": "Foundation models & infrastructure",
+      "company_age_years": 5.0,
+      "mosaic": 965.0,
+      "total_raised_value_m": 31500.0,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "Perplexity",
+      "super_group": "Tool integration",
+      "company_age_years": 4.0,
+      "mosaic": 962.0,
+      "total_raised_value_m": 772.2,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "Z.ai",
+      "super_group": "Foundation models & infrastructure",
+      "company_age_years": 7.0,
+      "mosaic": 960.0,
+      "total_raised_value_m": 1200.0,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "ElevenLabs",
+      "super_group": "Agent frameworks & development platforms",
+      "company_age_years": 4.0,
+      "mosaic": 955.0,
+      "total_raised_value_m": 282.4,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "Databricks",
+      "super_group": "Foundation models & infrastructure",
+      "company_age_years": 13.0,
+      "mosaic": 953.0,
+      "total_raised_value_m": 20300.0,
+      "commercial_maturity_score": 5.0
+    },
+    {
+      "company": "OpenAI",
+      "super_group": "Foundation models & infrastructure",
+      "company_age_years": 11.0,
+      "mosaic": 950.0,
+      "total_raised_value_m": 64099.99999999999,
+      "commercial_maturity_score": 5.0
+    },
+    {
+      "company": "Upstage",
+      "super_group": "Context",
+      "company_age_years": 6.0,
+      "mosaic": 939.0,
+      "total_raised_value_m": 143.8,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "Arize",
+      "super_group": "Oversight",
+      "company_age_years": 6.0,
+      "mosaic": 938.0,
+      "total_raised_value_m": 131.0,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "xAI",
+      "super_group": "Foundation models & infrastructure",
+      "company_age_years": 3.0,
+      "mosaic": 937.0,
+      "total_raised_value_m": 22400.0,
+      "commercial_maturity_score": 3.0
+    },
+    {
+      "company": "Together AI",
+      "super_group": "Foundation models & infrastructure",
+      "company_age_years": 4.0,
+      "mosaic": 922.0,
+      "total_raised_value_m": 533.5,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "Stripe",
+      "super_group": "Agent frameworks & development platforms",
+      "company_age_years": 16.0,
+      "mosaic": 921.0,
+      "total_raised_value_m": 10100.0,
+      "commercial_maturity_score": 5.0
+    },
+    {
+      "company": "Cohere",
+      "super_group": "Foundation models & infrastructure",
+      "company_age_years": 7.0,
+      "mosaic": 912.0,
+      "total_raised_value_m": 1400.0,
+      "commercial_maturity_score": 5.0
+    },
+    {
+      "company": "Supabase",
+      "super_group": "Context",
+      "company_age_years": 6.0,
+      "mosaic": 910.0,
+      "total_raised_value_m": 396.6,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "Mistral AI",
+      "super_group": "Foundation models & infrastructure",
+      "company_age_years": 3.0,
+      "mosaic": 909.0,
+      "total_raised_value_m": 1200.0,
+      "commercial_maturity_score": 3.0
+    },
+    {
+      "company": "n8n",
+      "super_group": "Tool integration",
+      "company_age_years": 7.0,
+      "mosaic": 907.0,
+      "total_raised_value_m": 73.5,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "Dust",
+      "super_group": "Agent frameworks & development platforms",
+      "company_age_years": 4.0,
+      "mosaic": 905.0,
+      "total_raised_value_m": 21.5,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "Hugging Face",
+      "super_group": "Foundation models & infrastructure",
+      "company_age_years": 10.0,
+      "mosaic": 899.0,
+      "total_raised_value_m": 398.9,
+      "commercial_maturity_score": 5.0
+    },
+    {
+      "company": "Baseten",
+      "super_group": "Foundation models & infrastructure",
+      "company_age_years": 7.0,
+      "mosaic": 898.0,
+      "total_raised_value_m": 135.0,
+      "commercial_maturity_score": 4.0
+    },
+    {
+      "company": "CrewAI",
+      "super_group": "Orchestration",
+      "company_age_years": 2.0,
+      "mosaic": 897.0,
+      "total_raised_value_m": 18.0,
+      "commercial_maturity_score": 3.0
+    },
+    {
+      "company": "LlamaIndex",
+      "super_group": "Context",
+      "company_age_years": 3.0,
+      "mosaic": 895.0,
+      "total_raised_value_m": 27.5,
+      "commercial_maturity_score": 3.0
+    }
+  ],
+  "notes": []
+}

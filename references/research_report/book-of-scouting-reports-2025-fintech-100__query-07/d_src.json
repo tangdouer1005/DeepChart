@@ -1,0 +1,713 @@
+{
+  "report_code": "018",
+  "query_id": "07",
+  "source_fields": [
+    "Company",
+    "Stage",
+    "Headcount",
+    "Mosaic",
+    "Total raised"
+  ],
+  "records": [
+    {
+      "company": "Affinity",
+      "stage": "Seed VC",
+      "headcount": 20,
+      "mosaic": 694,
+      "total_raised_m": 11.0
+    },
+    {
+      "company": "interface.ai",
+      "stage": "Debt",
+      "headcount": 232,
+      "mosaic": 799,
+      "total_raised_m": 40.0
+    },
+    {
+      "company": "Uzum",
+      "stage": "Series B",
+      "headcount": 1130,
+      "mosaic": 854,
+      "total_raised_m": 179.5
+    },
+    {
+      "company": "9Fin",
+      "stage": "Series B",
+      "headcount": 388,
+      "mosaic": 736,
+      "total_raised_m": 83.9
+    },
+    {
+      "company": "Claira",
+      "stage": "Seed VC - II",
+      "headcount": 20,
+      "mosaic": 703,
+      "total_raised_m": 7.0
+    },
+    {
+      "company": "Baanx",
+      "stage": "Series A",
+      "headcount": 53,
+      "mosaic": 771,
+      "total_raised_m": 34.3
+    },
+    {
+      "company": "Beam",
+      "stage": "Seed VC - II",
+      "headcount": 6,
+      "mosaic": 640,
+      "total_raised_m": 14.0
+    },
+    {
+      "company": "Breez Development",
+      "stage": "Seed VC - II",
+      "headcount": 17,
+      "mosaic": 781,
+      "total_raised_m": 9.5
+    },
+    {
+      "company": "BVNK",
+      "stage": "Series B - III",
+      "headcount": 396,
+      "mosaic": 872,
+      "total_raised_m": 91.7
+    },
+    {
+      "company": "Conduit",
+      "stage": "Series A",
+      "headcount": 71,
+      "mosaic": 836,
+      "total_raised_m": 59.0
+    },
+    {
+      "company": "Crossmint",
+      "stage": "Series A - II",
+      "headcount": 63,
+      "mosaic": 660,
+      "total_raised_m": 23.6
+    },
+    {
+      "company": "Due",
+      "stage": "Seed VC - III",
+      "headcount": 32,
+      "mosaic": 644,
+      "total_raised_m": 7.3
+    },
+    {
+      "company": "Noah",
+      "stage": "Seed VC - III",
+      "headcount": 55,
+      "mosaic": 868,
+      "total_raised_m": 22.7
+    },
+    {
+      "company": "Rain",
+      "stage": "Series B",
+      "headcount": 41,
+      "mosaic": 897,
+      "total_raised_m": 88.8
+    },
+    {
+      "company": "RD Technologies",
+      "stage": "Series A - II",
+      "headcount": 128,
+      "mosaic": 807,
+      "total_raised_m": 47.8
+    },
+    {
+      "company": "RedotPay",
+      "stage": "Series A - II",
+      "headcount": 67,
+      "mosaic": 957,
+      "total_raised_m": 87.0
+    },
+    {
+      "company": "Relai",
+      "stage": "Series A - IV",
+      "headcount": 69,
+      "mosaic": 796,
+      "total_raised_m": 21.8
+    },
+    {
+      "company": "Transak",
+      "stage": "Series B",
+      "headcount": 88,
+      "mosaic": 852,
+      "total_raised_m": 46.7
+    },
+    {
+      "company": "Banxware",
+      "stage": "Series A - II",
+      "headcount": 61,
+      "mosaic": 738,
+      "total_raised_m": 44.0
+    },
+    {
+      "company": "BKN301",
+      "stage": "Series B",
+      "headcount": 98,
+      "mosaic": 805,
+      "total_raised_m": 40.1
+    },
+    {
+      "company": "CredibleX",
+      "stage": "Line of Credit",
+      "headcount": 32,
+      "mosaic": 550,
+      "total_raised_m": 155.0
+    },
+    {
+      "company": "Fimple",
+      "stage": "Series A",
+      "headcount": 120,
+      "mosaic": 782,
+      "total_raised_m": 20.5
+    },
+    {
+      "company": "FISPAN",
+      "stage": "Series B",
+      "headcount": 171,
+      "mosaic": 789,
+      "total_raised_m": 44.5
+    },
+    {
+      "company": "NymCard",
+      "stage": "Series B - II",
+      "headcount": 255,
+      "mosaic": 827,
+      "total_raised_m": 66.1
+    },
+    {
+      "company": "Abacum",
+      "stage": "Series B",
+      "headcount": 121,
+      "mosaic": 794,
+      "total_raised_m": 92.2
+    },
+    {
+      "company": "Auditoria.AI",
+      "stage": "Series B",
+      "headcount": 89,
+      "mosaic": 852,
+      "total_raised_m": 60.5
+    },
+    {
+      "company": "Campfire",
+      "stage": "Series B",
+      "headcount": 31,
+      "mosaic": 721,
+      "total_raised_m": 104.0
+    },
+    {
+      "company": "Clara",
+      "stage": "Debt",
+      "headcount": 582,
+      "mosaic": 871,
+      "total_raised_m": 550.0
+    },
+    {
+      "company": "Crowded",
+      "stage": "Series A",
+      "headcount": 28,
+      "mosaic": 598,
+      "total_raised_m": 18.3
+    },
+    {
+      "company": "Datricks",
+      "stage": "Series A",
+      "headcount": 36,
+      "mosaic": 730,
+      "total_raised_m": 15.0
+    },
+    {
+      "company": "Finmo",
+      "stage": "Series A",
+      "headcount": 116,
+      "mosaic": 855,
+      "total_raised_m": 18.5
+    },
+    {
+      "company": "Mendel",
+      "stage": "Series B",
+      "headcount": 190,
+      "mosaic": 762,
+      "total_raised_m": 130.6
+    },
+    {
+      "company": "Xelix",
+      "stage": "Series B",
+      "headcount": 128,
+      "mosaic": 724,
+      "total_raised_m": 165.1
+    },
+    {
+      "company": "Amlyze",
+      "stage": "Seed VC - II",
+      "headcount": 32,
+      "mosaic": 674,
+      "total_raised_m": 5.1
+    },
+    {
+      "company": "Casap",
+      "stage": "Series A",
+      "headcount": 19,
+      "mosaic": 816,
+      "total_raised_m": 33.6
+    },
+    {
+      "company": "Greenlite",
+      "stage": "Series A",
+      "headcount": 63,
+      "mosaic": 801,
+      "total_raised_m": 20.3
+    },
+    {
+      "company": "Hawk",
+      "stage": "Series C",
+      "headcount": 201,
+      "mosaic": 850,
+      "total_raised_m": 84.0
+    },
+    {
+      "company": "Bolto",
+      "stage": "Seed VC",
+      "headcount": 10,
+      "mosaic": 604,
+      "total_raised_m": 8.1
+    },
+    {
+      "company": "Borderless",
+      "stage": "Seed VC - III",
+      "headcount": null,
+      "mosaic": 646,
+      "total_raised_m": 32.0
+    },
+    {
+      "company": "Every",
+      "stage": "Series A",
+      "headcount": 313,
+      "mosaic": 645,
+      "total_raised_m": 32.5
+    },
+    {
+      "company": "InstaPay",
+      "stage": "Series A - II",
+      "headcount": 14,
+      "mosaic": 721,
+      "total_raised_m": 7.8
+    },
+    {
+      "company": "Jet HR",
+      "stage": "Series A",
+      "headcount": 219,
+      "mosaic": 783,
+      "total_raised_m": 47.3
+    },
+    {
+      "company": "Khazna",
+      "stage": "Series A - II",
+      "headcount": 419,
+      "mosaic": 791,
+      "total_raised_m": 54.7
+    },
+    {
+      "company": "Niural",
+      "stage": "Series A",
+      "headcount": 89,
+      "mosaic": 753,
+      "total_raised_m": 41.5
+    },
+    {
+      "company": "SeamlessHR",
+      "stage": "Series A - II",
+      "headcount": 233,
+      "mosaic": 671,
+      "total_raised_m": 19.1
+    },
+    {
+      "company": "Agora",
+      "stage": "Series A",
+      "headcount": 40,
+      "mosaic": 812,
+      "total_raised_m": 69.7
+    },
+    {
+      "company": "Cryptio",
+      "stage": "Series A - II",
+      "headcount": 130,
+      "mosaic": 693,
+      "total_raised_m": 26.2
+    },
+    {
+      "company": "DigiFT",
+      "stage": "Seed VC - II",
+      "headcount": 25,
+      "mosaic": 836,
+      "total_raised_m": 21.5
+    },
+    {
+      "company": "Komainu",
+      "stage": "Series B",
+      "headcount": 69,
+      "mosaic": 874,
+      "total_raised_m": 100.0
+    },
+    {
+      "company": "Maple Finance",
+      "stage": "Seed VC - III",
+      "headcount": 70,
+      "mosaic": 772,
+      "total_raised_m": 11.4
+    },
+    {
+      "company": "Securitize",
+      "stage": "Series C - III",
+      "headcount": 206,
+      "mosaic": 895,
+      "total_raised_m": 203.0
+    },
+    {
+      "company": "Utila",
+      "stage": "Series A - II",
+      "headcount": 48,
+      "mosaic": 852,
+      "total_raised_m": 51.5
+    },
+    {
+      "company": "Delos",
+      "stage": "Series A",
+      "headcount": 36,
+      "mosaic": 733,
+      "total_raised_m": 22.3
+    },
+    {
+      "company": "Descartes Underwriting",
+      "stage": "Series B - II",
+      "headcount": 237,
+      "mosaic": 757,
+      "total_raised_m": 141.8
+    },
+    {
+      "company": "Further AI",
+      "stage": "Series A",
+      "headcount": 21,
+      "mosaic": 826,
+      "total_raised_m": 30.5
+    },
+    {
+      "company": "Skarlett",
+      "stage": "Seed VC",
+      "headcount": 32,
+      "mosaic": 693,
+      "total_raised_m": 13.6
+    },
+    {
+      "company": "Sixfold",
+      "stage": "Series A",
+      "headcount": 51,
+      "mosaic": 763,
+      "total_raised_m": 21.5
+    },
+    {
+      "company": "Quandri",
+      "stage": "Series A - II",
+      "headcount": 88,
+      "mosaic": 698,
+      "total_raised_m": 22.0
+    },
+    {
+      "company": "Casca",
+      "stage": "Series A",
+      "headcount": 35,
+      "mosaic": 802,
+      "total_raised_m": 33.4
+    },
+    {
+      "company": "CrediLinq",
+      "stage": "Series A",
+      "headcount": 37,
+      "mosaic": 702,
+      "total_raised_m": 11.9
+    },
+    {
+      "company": "InDebted",
+      "stage": "Series C",
+      "headcount": 241,
+      "mosaic": 754,
+      "total_raised_m": 93.8
+    },
+    {
+      "company": "Murphy",
+      "stage": "Seed VC",
+      "headcount": 21,
+      "mosaic": 717,
+      "total_raised_m": 15.0
+    },
+    {
+      "company": "Nada",
+      "stage": "Series A",
+      "headcount": 987,
+      "mosaic": 695,
+      "total_raised_m": 30.3
+    },
+    {
+      "company": "Peach Finance",
+      "stage": "Series A - II",
+      "headcount": 54,
+      "mosaic": 754,
+      "total_raised_m": 38.0
+    },
+    {
+      "company": "PostEx",
+      "stage": "Seed VC - IV",
+      "headcount": 1211,
+      "mosaic": 742,
+      "total_raised_m": 15.9
+    },
+    {
+      "company": "Scienaptic",
+      "stage": "Unattributed",
+      "headcount": 168,
+      "mosaic": 778,
+      "total_raised_m": 17.1
+    },
+    {
+      "company": "Versana",
+      "stage": "Series B",
+      "headcount": 97,
+      "mosaic": 748,
+      "total_raised_m": 66.0
+    },
+    {
+      "company": "WonderLend Hubs",
+      "stage": "Seed VC - II",
+      "headcount": 92,
+      "mosaic": 646,
+      "total_raised_m": 1.6
+    },
+    {
+      "company": "Aspora",
+      "stage": "Series B",
+      "headcount": 16,
+      "mosaic": 714,
+      "total_raised_m": 94.3
+    },
+    {
+      "company": "Capi",
+      "stage": "Series A",
+      "headcount": 36,
+      "mosaic": 737,
+      "total_raised_m": 19.5
+    },
+    {
+      "company": "Catena Labs",
+      "stage": "Series A",
+      "headcount": 13,
+      "mosaic": 770,
+      "total_raised_m": 18.0
+    },
+    {
+      "company": "Easebuzz",
+      "stage": "Series A",
+      "headcount": 403,
+      "mosaic": 878,
+      "total_raised_m": 34.0
+    },
+    {
+      "company": "Enza",
+      "stage": "Seed VC",
+      "headcount": 76,
+      "mosaic": 781,
+      "total_raised_m": 6.8
+    },
+    {
+      "company": "Finom",
+      "stage": "Series C",
+      "headcount": 497,
+      "mosaic": 874,
+      "total_raised_m": 345.5
+    },
+    {
+      "company": "Haball",
+      "stage": "Seed VC",
+      "headcount": 58,
+      "mosaic": 793,
+      "total_raised_m": 52.0
+    },
+    {
+      "company": "Highnote",
+      "stage": "Series B",
+      "headcount": 112,
+      "mosaic": 834,
+      "total_raised_m": 169.0
+    },
+    {
+      "company": "Payrails",
+      "stage": "Series A",
+      "headcount": 104,
+      "mosaic": 870,
+      "total_raised_m": 52.8
+    },
+    {
+      "company": "PayTic",
+      "stage": "Incubator/Accelerator",
+      "headcount": 35,
+      "mosaic": 736,
+      "total_raised_m": 6.7
+    },
+    {
+      "company": "Toku",
+      "stage": "Series A",
+      "headcount": 11,
+      "mosaic": 750,
+      "total_raised_m": 66.6
+    },
+    {
+      "company": "Yaspa",
+      "stage": "Series A",
+      "headcount": 71,
+      "mosaic": 826,
+      "total_raised_m": 13.3
+    },
+    {
+      "company": "Yuno",
+      "stage": "Series A",
+      "headcount": 955,
+      "mosaic": 790,
+      "total_raised_m": 35.0
+    },
+    {
+      "company": "Ziina",
+      "stage": "Series A",
+      "headcount": 182,
+      "mosaic": 844,
+      "total_raised_m": 30.9
+    },
+    {
+      "company": "Candidly",
+      "stage": "Series B",
+      "headcount": 133,
+      "mosaic": 718,
+      "total_raised_m": 42.1
+    },
+    {
+      "company": "Debbie",
+      "stage": "Seed VC",
+      "headcount": 32,
+      "mosaic": 620,
+      "total_raised_m": 7.9
+    },
+    {
+      "company": "Grifin",
+      "stage": "Series A",
+      "headcount": 31,
+      "mosaic": 705,
+      "total_raised_m": 11.0
+    },
+    {
+      "company": "Alpaca",
+      "stage": "Series C",
+      "headcount": 313,
+      "mosaic": 918,
+      "total_raised_m": 138.9
+    },
+    {
+      "company": "Axyon AI",
+      "stage": "Series B - III",
+      "headcount": 48,
+      "mosaic": 761,
+      "total_raised_m": 12.6
+    },
+    {
+      "company": "BridgeWise",
+      "stage": "Series A - II",
+      "headcount": 96,
+      "mosaic": 781,
+      "total_raised_m": 40.5
+    },
+    {
+      "company": "Conquest Planning",
+      "stage": "Series B",
+      "headcount": 161,
+      "mosaic": 849,
+      "total_raised_m": 106.1
+    },
+    {
+      "company": "Dub",
+      "stage": "Series A",
+      "headcount": 113,
+      "mosaic": 754,
+      "total_raised_m": 54.5
+    },
+    {
+      "company": "Flanks",
+      "stage": "Series B",
+      "headcount": 94,
+      "mosaic": 747,
+      "total_raised_m": 25.7
+    },
+    {
+      "company": "Jump",
+      "stage": "Series A",
+      "headcount": 118,
+      "mosaic": 881,
+      "total_raised_m": 24.6
+    },
+    {
+      "company": "Lightyear",
+      "stage": "Series B",
+      "headcount": 44,
+      "mosaic": 787,
+      "total_raised_m": 58.0
+    },
+    {
+      "company": "ModernFi",
+      "stage": "Series B - II",
+      "headcount": 43,
+      "mosaic": 859,
+      "total_raised_m": 58.3
+    },
+    {
+      "company": "Retirable",
+      "stage": "Series A",
+      "headcount": 27,
+      "mosaic": 737,
+      "total_raised_m": 26.4
+    },
+    {
+      "company": "Thndr",
+      "stage": "Series A - II",
+      "headcount": 266,
+      "mosaic": 832,
+      "total_raised_m": 36.0
+    },
+    {
+      "company": "Wealth.com",
+      "stage": "Series A - II",
+      "headcount": 164,
+      "mosaic": 877,
+      "total_raised_m": 46.0
+    },
+    {
+      "company": "Zocks",
+      "stage": "Corporate Minority",
+      "headcount": 73,
+      "mosaic": 897,
+      "total_raised_m": 19.3
+    },
+    {
+      "company": "Unique",
+      "stage": "Series A",
+      "headcount": 122,
+      "mosaic": 710,
+      "total_raised_m": 52.5
+    },
+    {
+      "company": "Upstage",
+      "stage": "Series B - IV",
+      "headcount": 183,
+      "mosaic": 937,
+      "total_raised_m": 143.8
+    }
+  ]
+}

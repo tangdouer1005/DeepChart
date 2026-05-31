@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart 71 Reproduction</title>
+    <!-- Load Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify_content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fff;
+        }
+        #chart {
+            width: 600px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script>
+
+        // --- Embedded Data ---
+        const chartData = {
+    "Vehicle": {
+        "x": [
+            -4.0,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0
+        ],
+        "y": [
+            0.0048782375581,
+            0.0037758903285083334,
+            0.004940349912441667,
+            0.003350580407941666,
+            0.003108769620133334,
+            0.0036820568067666665,
+            0.004932665180266666,
+            0.0040802845352
+        ],
+        "y_err": [
+            0.0017028061986609747,
+            0.0009566583078201719,
+            0.0015710369522029801,
+            0.0006686873060762901,
+            0.0004122395158161914,
+            0.000883826160145559,
+            0.0015485943483973426,
+            0.0010991878346004477
+        ]
+    },
+    "Vehicle + NT": {
+        "x": [
+            -4.0,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0
+        ],
+        "y": [
+            0.030764303519999998,
+            0.026590228215,
+            0.025865911066666667,
+            0.026008875291666667,
+            0.027123256190000004,
+            0.026558198675833335,
+            0.02518663791091667,
+            0.026702199093333333
+        ],
+        "y_err": [
+            0.0012719238657768158,
+            0.0013776433995469127,
+            0.0018666955825750312,
+            0.0018379109087855396,
+            0.0014978397240653515,
+            0.001322962864449695,
+            0.00238450477794637,
+            0.002093223820047127
+        ]
+    },
+    "SBI-553": {
+        "x": [
+            -5.522878745280337,
+            -6.0,
+            -6.522878745280337,
+            -7.0,
+            -7.522878745280337,
+            -8.0,
+            -8.522878745280337,
+            -11.0
+        ],
+        "y": [
+            0.02231138690833333,
+            0.020856153282499998,
+            0.023478777399166664,
+            0.020736988452750002,
+            0.020668660317583333,
+            0.023351418800000006,
+            0.022428650995000004,
+            0.02433950184833333
+        ],
+        "y_err": [
+            0.0019549723513645023,
+            0.001166559036668172,
+            0.0018360941385716482,
+            0.0021389769700119717,
+            0.0031478012770079964,
+            0.0022924048016956587,
+            0.0018106242352835362,
+            0.0006145365532552447
+        ]
+    },
+    "SR142948A": {
+        "x": [
+            -4.0,
+            -5.0,
+            -6.0,
+            -7.0,
+            -8.0,
+            -9.0,
+            -10.0,
+            -11.0
+        ],
+        "y": [
+            0.010703814000666667,
+            0.005171101717875,
+            0.004229031274691666,
+            0.004378720507024167,
+            0.01577990357641667,
+            0.024194654290000003,
+            0.024162864876666666,
+            0.02497643308
+        ],
+        "y_err": [
+            0.0012622606559687013,
+            0.0012639011557349607,
+            0.002501694760604026,
+            0.0021882844824216274,
+            0.0016233359641570824,
+            0.0014983709066292497,
+            0.0012528143009402405,
+            0.0011549168302206203
+        ]
+    }
+};
+
+
+        // 3. Curve Fitting (Simplified Nelder-Mead)
+function sigmoid(x, Top, Bottom, LogEC50, HillSlope) {
+            return Bottom + (Top - Bottom) / (1 + Math.pow(10, (LogEC50 - x) * HillSlope));
+        }
+
+        function sumSquaredErrors(params, x, y) {
+            const [Top, Bottom, LogEC50, HillSlope] = params;
+            let sum = 0;
+            for (let i = 0; i < x.length; i++) {
+                const pred = sigmoid(x[i], Top, Bottom, LogEC50, HillSlope);
+                sum += Math.pow(y[i] - pred, 2);
+            }
+            return sum;
+        }
+
+        // Simple Nelder-Mead implementation
+        function nelderMead(f, x0, args) {
+            const dim = x0.length;
+            const res = [[x0, f(x0, ...args)]];
+            
+            // Create initial simplex
+            for (let i = 0; i < dim; i++) {
+                const x = [...x0];
+                x[i] = x[i] !== 0 ? x[i] * 1.05 : 0.00025;
+                res.push([x, f(x, ...args)]);
+            }
+
+            // Iterate
+            const maxIter = 1000;
+            const alpha = 1, gamma = 2, rho = 0.5, sigma = 0.5;
+            
+            for (let iter = 0; iter < maxIter; iter++) {
+                res.sort((a, b) => a[1] - b[1]);
+                
+                const best = res[0];
+                const worst = res[dim];
+                const secondWorst = res[dim - 1];
+
+                // Centroid
+                const x0_center = [];
+                for (let j = 0; j < dim; j++) {
+                    let sum = 0;
+                    for (let i = 0; i < dim; i++) {
+                        sum += res[i][0][j];
+                    }
+                    x0_center.push(sum / dim);
+                }
+
+                // Reflection
+                const xr = x0_center.map((val, j) => x0_center[j] + alpha * (x0_center[j] - worst[0][j]));
+                const fr = f(xr, ...args);
+
+                if (best[1] <= fr && fr < secondWorst[1]) {
+                    res[dim] = [xr, fr];
+                    continue;
+                }
+
+                // Expansion
+                if (fr < best[1]) {
+                    const xe = x0_center.map((val, j) => x0_center[j] + gamma * (xr[j] - x0_center[j]));
+                    const fe = f(xe, ...args);
+                    if (fe < fr) res[dim] = [xe, fe];
+                    else res[dim] = [xr, fr];
+                    continue;
+                }
+
+                // Contraction
+                const xc = x0_center.map((val, j) => x0_center[j] + rho * (worst[0][j] - x0_center[j]));
+                const fc = f(xc, ...args);
+                if (fc < worst[1]) {
+                    res[dim] = [xc, fc];
+                    continue;
+                }
+
+                // Shrink
+                for (let i = 1; i <= dim; i++) {
+                    res[i][0] = res[i][0].map((val, j) => best[0][j] + sigma * (val - best[0][j]));
+                    res[i][1] = f(res[i][0], ...args);
+                }
+            }
+            res.sort((a, b) => a[1] - b[1]);
+            return res[0][0];
+        }
+
+        function getFittedCurve(xData, yData, initialGuess, color) {
+            // Check if we should fit
+            // Python script has try-except.
+            try {
+                // If no initial guess, use defaults
+                const guess = initialGuess || [
+                    Math.max(...yData), 
+                    Math.min(...yData), 
+                    xData.reduce((a,b)=>a+b,0)/xData.length, 
+                    1.0
+                ];
+                
+                const popt = nelderMead(sumSquaredErrors, guess, [xData, yData]);
+
+                // Generate smooth line
+                const xSmooth = [];
+                const minX = Math.min(...xData) - 0.5;
+                const maxX = Math.max(...xData) + 0.5;
+                const steps = 100;
+                for(let i=0; i<=steps; i++) {
+                    xSmooth.push(minX + (maxX - minX) * (i/steps));
+                }
+                const ySmooth = xSmooth.map(x => sigmoid(x, ...popt));
+                
+                return { x: xSmooth, y: ySmooth };
+
+            } catch (e) {
+                console.warn("Fit failed", e);
+                // Fallback: horizontal line at mean
+                const mean = yData.reduce((a,b)=>a+b,0)/yData.length;
+                return { 
+                    x: [Math.min(...xData)-0.5, Math.max(...xData)+0.5], 
+                    y: [mean, mean] 
+                };
+            }
+        }
+
+        // 4. Build Plot Traces
+        const traces = [];
+
+        function addTrace(data, name, color, initialGuess) {
+            if (!data) return;
+            
+            // Scatter points
+            traces.push({
+                x: data.x,
+                y: data.y,
+                error_y: {
+                    type: 'data',
+                    array: data.yerr,
+                    visible: true,
+                    color: color,
+                    thickness: 1.5,
+                    width: 3
+                },
+                mode: 'markers',
+                type: 'scatter',
+                marker: { color: color, size: 8 },
+                name: name,
+                showlegend: true
+            });
+
+            // Fitted line
+            const fit = getFittedCurve(data.x, data.y, initialGuess, color);
+            traces.push({
+                x: fit.x,
+                y: fit.y,
+                mode: 'lines',
+                line: { color: color, width: 2 },
+                showlegend: false,
+                hoverinfo: 'skip'
+            });
+        }
+
+        // Add groups
+                addTrace(chartData.Vehicle, 'Vehicle', '#808080', [0.004, 0.004, -8, 1]);
+        addTrace(chartData['Vehicle + NT'], 'Vehicle + NT', '#00008B', [0.026, 0.026, -8, 1]);
+        addTrace(chartData.SBI, 'SBI-553', '#bf40bf', [0.022, 0.020, -7, 1]);
+        addTrace(chartData.SR142948A, 'SR142948A', '#ed7d31', [0.025, 0.005, -7.5, -1]);
+
+        // 5. Layout
+        const layout = {
+            width: 500,
+            height: 400,
+            xaxis: {
+                title: 'log[Compound] (M)',
+                range: [-12, -3.5],
+                tickvals: [-12, -10, -8, -6, -4],
+                titlefont: { family: 'Arial', size: 12 },
+                tickfont: { size: 11 },
+                zeroline: false,
+                showgrid: false,
+                linecolor: 'black',
+                mirror: false
+            },
+            yaxis: {
+                title: 'Mini G<sub>o</sub> recruitment<br>(Δ Net BRET)',
+                range: [-0.005, 0.04],
+                tickvals: [0, 0.01, 0.02, 0.03, 0.04],
+                titlefont: { family: 'Arial', size: 12 },
+                tickfont: { size: 11 },
+                zeroline: true,
+                zerolinecolor: 'black',
+                zerolinewidth: 1.5, // Dotted line effect is hard in plotly zeroline, we use shape or line
+                showgrid: false,
+                linecolor: 'black', // only left axis
+                mirror: false
+            },
+            shapes: [
+                // Dotted line at y=0 (simulating ax.axhline(0, ...))
+                {
+                    type: 'line',
+                    x0: -12,
+                    y0: 0,
+                    x1: -3.5,
+                    y1: 0,
+                    line: {
+                        color: 'black',
+                        width: 1.5,
+                        dash: 'dot'
+                    }
+                }
+            ],
+            showlegend: true,
+            legend: {
+                x: 0.05,
+                y: 1,
+                bgcolor: 'rgba(255,255,255,0)'
+            },
+            plot_bgcolor: 'white',
+            paper_bgcolor: 'white',
+            margin: { l: 60, r: 20, t: 20, b: 50 } // tight_layout approximation
+        };
+
+        // Render
+        Plotly.newPlot('chart', traces, layout);
+    
+</script>
+</body>
+</html>

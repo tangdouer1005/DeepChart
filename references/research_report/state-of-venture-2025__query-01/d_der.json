@@ -1,0 +1,58 @@
+{
+  "status": "complete",
+  "chart_type": "barh",
+  "title": "Top 12 venture markets by 2025 average funding per deal",
+  "x_label": "Average funding per deal ($M)",
+  "y_label": "Market",
+  "value_format": "float2",
+  "data": [
+    {
+      "label": "Silicon Valley",
+      "value": 59.887751733245295
+    },
+    {
+      "label": "Dallas",
+      "value": 33.02325581395349
+    },
+    {
+      "label": "Boston",
+      "value": 25.66510172143975
+    },
+    {
+      "label": "Denver",
+      "value": 24.603174603174605
+    },
+    {
+      "label": "Los Angeles",
+      "value": 21.552723059096177
+    },
+    {
+      "label": "Austin",
+      "value": 17.548076923076923
+    },
+    {
+      "label": "New York",
+      "value": 17.349397590361445
+    },
+    {
+      "label": "Mexico",
+      "value": 17.058139534883722
+    },
+    {
+      "label": "Israel",
+      "value": 16.417910447761194
+    },
+    {
+      "label": "South Africa",
+      "value": 14.594594594594595
+    },
+    {
+      "label": "Raleigh",
+      "value": 13.385826771653543
+    },
+    {
+      "label": "Seattle",
+      "value": 12.990196078431373
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a bar chart of the top 12 countries in the 2025 country tables by tail-momentum premium, defined as `average(numeric growth of cities ranked 6-10) - numeric growth of city rank 1`, expressed in percentage points, sorted descending, and restricted to countries with at least 3 numeric growth values in ranks 6-10 and a numeric growth value for rank 1.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2025 Tail-Momentum Premium",
+  "value_unit": "percentage points",
+  "sort_rule": "descending by tail_momentum_premium_pp, tie-break alphabetically",
+  "selection_rule": "top 12 countries with numeric rank-1 growth and at least 3 numeric tail growth values in ranks 6-10",
+  "records": [
+    {
+      "entity": "Sweden",
+      "tail_momentum_premium_pp": 83.72
+    },
+    {
+      "entity": "Ireland",
+      "tail_momentum_premium_pp": 82.1
+    },
+    {
+      "entity": "Brazil",
+      "tail_momentum_premium_pp": 56.88
+    },
+    {
+      "entity": "China",
+      "tail_momentum_premium_pp": 45.1
+    },
+    {
+      "entity": "Japan",
+      "tail_momentum_premium_pp": 38.433333
+    },
+    {
+      "entity": "Portugal",
+      "tail_momentum_premium_pp": 29.233333
+    },
+    {
+      "entity": "Germany",
+      "tail_momentum_premium_pp": 18.7
+    },
+    {
+      "entity": "Mexico",
+      "tail_momentum_premium_pp": 13.56
+    },
+    {
+      "entity": "Türkiye",
+      "tail_momentum_premium_pp": 13.1
+    },
+    {
+      "entity": "Israel",
+      "tail_momentum_premium_pp": 8.78
+    },
+    {
+      "entity": "Australia",
+      "tail_momentum_premium_pp": 8.42
+    },
+    {
+      "entity": "France",
+      "tail_momentum_premium_pp": 2.78
+    }
+  ],
+  "value_field": "tail_momentum_premium_pp",
+  "x_label": "Country",
+  "y_label": "average(growth ranks 6-10) - growth(rank 1)"
+}

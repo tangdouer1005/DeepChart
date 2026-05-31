@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart Reproduction - Fig 2h</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; font-family: sans-serif; display: flex; justify-content: center; }
+        #chart-container { width: 800px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // 1. Data Preparation
+        
+        const data = {"data": {"B16-F0": [21863.71235, 24875.51896, 22016.88534, 25814.18798, 27246.77866], "LN1-18IL": [18036.00176, 18830.57124, 19307.19433, 16733.69258, 16079.18642, 17297.56782], "LN7-1112AR": [5248.194658, 4320.354879, 15541.98794], "LN7-1120BL": [13139.91358, 14483.39718, 13964.3633], "LN7-1134BL": [10780.69564, 8743.865759, 13898.34151], "LN8-1194BR": [10198.56842, 12314.92301, 11617.38643], "LN8-1198AR": [17421.54825, 15474.15213, 16688.7275], "LN8-1205BL": [14176.33743, 13151.32158, 15637.46513], "LN9-1315BL": [14238.3281, 13632.08987, 13037.7814], "LN9-1358IR": [14076.18123, 13737.78268, 14613.4574]}, "p_values": [null, null, "$P = 6.7 \\times 10^{-9}$", "$P = 1.2 \\times 10^{-5}$", "$P = 2.5 \\times 10^{-7}$", "$P = 3.4 \\times 10^{-7}$", "$P = 0.0007$", "$P = 2.4 \\times 10^{-5}$", "$P = 8.6 \\times 10^{-6}$", "$P = 1.8 \\times 10^{-5}$"]};
+        const rawData = data.data;
+        const pValueTexts = data.p_values;
+
+        const groups = Object.keys(rawData);
+        
+        // Calculate Statistics
+        const means = [];
+        const stds = [];
+        const scatterPoints = []; // [x, y, groupIndex]
+
+        function calculateSD(arr) {
+            const n = arr.length;
+            if (n <= 1) return 0;
+            const mean = arr.reduce((a, b) => a + b, 0) / n;
+            const variance = arr.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / (n - 1);
+            return Math.sqrt(variance);
+        }
+
+        groups.forEach((group, i) => {
+            const vals = rawData[group];
+            const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+            const sd = calculateSD(vals);
+            
+            means.push(mean);
+            stds.push(sd);
+
+            // Jitter for scatter
+            vals.forEach(v => {
+                // Python: np.random.normal(i, 0.04)
+                // Approximate standard normal distribution using Box-Muller
+                let u = 0, v_rand = 0;
+                while(u === 0) u = Math.random(); 
+                while(v_rand === 0) v_rand = Math.random();
+                const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v_rand);
+                const jitter = z * 0.04;
+                
+                scatterPoints.push([i + jitter, v, i]);
+            });
+        });
+
+        // 2. Chart Configuration
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Colors
+        const getBarColor = (i) => {
+            if (i === 0) return '#d9d9d9'; // Grey
+            if (i === 1) return '#f0b0f0'; // Pink
+            return '#90cf90'; // Green
+        };
+
+        const getScatterColor = (i) => {
+            if (i <= 1) return 'black';
+            return '#1e7145'; // Dark Green
+        };
+
+        // Series Data Construction
+        const barSeriesData = means.map((m, i) => ({
+            value: m,
+            itemStyle: {
+                color: getBarColor(i),
+                borderColor: 'black',
+                borderWidth: 1
+            }
+        }));
+
+        const errorBarData = means.map((m, i) => {
+            const sd = stds[i];
+            return [i, m - sd, m + sd];
+        });
+
+        const scatterSeriesData = scatterPoints.map(pt => ({
+            value: [pt[0], pt[1]],
+            itemStyle: {
+                color: getScatterColor(pt[2]),
+                borderColor: 'transparent'
+            }
+        }));
+
+        const pValueSeriesData = pValueTexts.map((text, i) => {
+            if (!text) return null;
+            return {
+                value: [i, 20000], // Start height approx as per python script logic
+                label: {
+                    show: true,
+                    formatter: text,
+                    rotate: 90,
+                    position: 'top', // Will go upwards from the point
+                    distance: 5,
+                    color: 'black',
+                    fontSize: 10,
+                    align: 'left', // Anchored at bottom of text (left after rotation)
+                    verticalAlign: 'middle'
+                }
+            };
+        }).filter(item => item !== null);
+
+
+        const option = {
+            animation: false,
+            grid: {
+                top: 80,
+                right: 20,
+                bottom: 80,
+                left: 80
+            },
+            xAxis: {
+                data: groups,
+                axisLabel: {
+                    rotate: 45,
+                    interval: 0,
+                    fontSize: 11,
+                    color: 'black'
+                },
+                axisTick: { show: false }, // Python default might show ticks, code says "ax.set_xticks(x_pos)". Matplotlib shows ticks by default.
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: "GSSG peak intensity",
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: {
+                    fontSize: 12,
+                    color: 'black'
+                },
+                min: 0,
+                max: 33000,
+                interval: 10000,
+                axisLabel: {
+                    formatter: function (value) {
+                        if (value === 0) return "0";
+                        // Python: '1 x 10^4', etc.
+                        const v = value / 10000;
+                        return `${v} × 10⁴`;
+                    },
+                    color: 'black',
+                    fontSize: 11
+                },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                // 1. Bars
+                {
+                    type: 'bar',
+                    data: barSeriesData,
+                    barWidth: '70%',
+                    z: 1
+                },
+                // 2. Error Bars
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const high = api.value(2);
+                        const low = api.value(1);
+                        
+                        const start = api.coord([xValue, low]);
+                        const end = api.coord([xValue, high]);
+                        const style = api.style({
+                            stroke: 'black',
+                            lineWidth: 1
+                        });
+                        const capWidth = 10;
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: { x1: start[0], y1: start[1], x2: end[0], y2: end[1] },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: { x1: start[0]-capWidth/2, y1: start[1], x2: start[0]+capWidth/2, y2: start[1] },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: { x1: end[0]-capWidth/2, y1: end[1], x2: end[0]+capWidth/2, y2: end[1] },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: errorBarData,
+                    z: 2
+                },
+                // 3. Scatter Points
+                {
+                    type: 'scatter',
+                    symbolSize: 6, // Approx s=30 in matplotlib
+                    data: scatterSeriesData,
+                    z: 3
+                },
+                // 4. Vertical P-value Labels
+                {
+                    type: 'scatter',
+                    symbolSize: 0,
+                    data: pValueSeriesData,
+                    z: 4
+                },
+                // 5. Global P-value Line & Text
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const start = api.coord([0, 31000]);
+                        const end = api.coord([9, 31000]); // group indices 0 to 9
+                        const mid = api.coord([4.5, 31000]);
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1],
+                                        x2: end[0], y2: end[1]
+                                    },
+                                    style: {
+                                        stroke: 'black',
+                                        lineWidth: 1
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    position: [mid[0], mid[1]],
+                                    style: {
+                                        text: "P = 4.5 × 10⁻⁸",
+                                        font: '12px sans-serif',
+                                        fill: 'black',
+                                        textAlign: 'center',
+                                        textVerticalAlign: 'bottom' // Sit on top of the line position
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: [0], // Single item
+                    z: 5
+                }
+            ],
+            graphic: [
+                // Label "h"
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'h',
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

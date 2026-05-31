@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <title>xom 斯隆比率（Sloan Ratio）2016–2024 变化柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.2rem;
+    }
+    h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 0;
+      color: #555;
+    }
+    .chart-container {
+      position: relative;
+      max-width: 900px;
+      margin: 1.5rem auto;
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    }
+    .note {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 0.82rem;
+      color: #666;
+      line-height: 1.4;
+    }
+    canvas {
+      max-height: 480px;
+    }
+  </style>
+</head>
+<body>
+  <h1>xom 斯隆比率（Sloan Ratio / Accruals Ratio）变化</h1>
+  <h2>2016–2024 财年</h2>
+
+  <div class="chart-container">
+    <canvas id="sloanChart"></canvas>
+  </div>
+
+  <div class="note">
+    数据来源：用户提供的 xom 各年度 斯隆比率（RESULT_Sloan）。<br>
+    单位：比率（无量纲，负值通常表示更高的盈余现金成分）。
+  </div>
+
+  <script>
+    const ctx = document.getElementById('sloanChart');
+
+    // Source data (exactly as provided)
+    const years = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const sloanValues = [
+      -0.0427000383766669,
+      -0.030503457264674,
+      -0.0436732878870953,
+      -0.0433864329924251,
+      -0.1067323221355668,
+      -0.0747059953280837,
+      -0.0594838910154098,
+      -0.0519436961351464,
+      -0.0514393968609
+    ];
+
+    // Determine a sensible y-axis range with padding
+    const minVal = Math.min(...sloanValues);
+    const maxVal = Math.max(...sloanValues);
+    const padding = 0.02; // small padding
+    const suggestedMin = minVal - padding;
+    const suggestedMax = maxVal + padding;
+
+    const barColors = sloanValues.map(v =>
+      v < 0 ? 'rgba(25, 118, 210, 0.75)' : 'rgba(220, 0, 78, 0.75)'
+    );
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [{
+          label: '斯隆比率 (Sloan Ratio)',
+          data: sloanValues,
+          backgroundColor: barColors,
+          borderColor: barColors.map(c => c.replace('0.75', '1')),
+          borderWidth: 1.2,
+          borderRadius: 4,
+          hoverBackgroundColor: barColors.map(c => c.replace('0.75', '0.95')),
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: true
+        },
+        plugins: {
+          title: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const val = context.raw;
+                return ' 斯隆比率: ' + val.toFixed(4);
+              }
+            }
+          },
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财年',
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: '斯隆比率 (Sloan Ratio)',
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(2);
+              }
+            },
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            grid: {
+              color: 'rgba(0,0,0,0.06)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

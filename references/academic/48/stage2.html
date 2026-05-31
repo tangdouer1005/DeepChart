@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 800px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const data = [
+    {
+        "GO term": "regulation of synapse structure or activity",
+        "piggybac_abs_log10_q_value": 6.42566939091866,
+        "human_abs_log10_q_value": 5.79263196486851,
+        "sum_abs_log10_q_value": 12.2183013557872,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Reg. of synapse structure or activity"
+    },
+    {
+        "GO term": "glutamate receptor activity",
+        "piggybac_abs_log10_q_value": 3.76126695799075,
+        "human_abs_log10_q_value": 8.72002068201322,
+        "sum_abs_log10_q_value": 12.481287640004,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Glutamatergic synapse"
+    },
+    {
+        "GO term": "somatodendritic compartment",
+        "piggybac_abs_log10_q_value": 8.83646274468904,
+        "human_abs_log10_q_value": 4.32490960269357,
+        "sum_abs_log10_q_value": 13.1613723473826,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Somatodendritic compartment"
+    },
+    {
+        "GO term": "central nervous system development",
+        "piggybac_abs_log10_q_value": 8.83646274468904,
+        "human_abs_log10_q_value": 4.61984120461526,
+        "sum_abs_log10_q_value": 13.4563039493043,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Central nervous system development"
+    },
+    {
+        "GO term": "regulation of nervous system development",
+        "piggybac_abs_log10_q_value": 8.83646274468904,
+        "human_abs_log10_q_value": 5.17551645632876,
+        "sum_abs_log10_q_value": 14.0119792010178,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Reg. of nervous system development"
+    },
+    {
+        "GO term": "cell part morphogenesis",
+        "piggybac_abs_log10_q_value": 10.5347125889337,
+        "human_abs_log10_q_value": 3.60180433795327,
+        "sum_abs_log10_q_value": 14.136516926887,
+        "piggybac_marker_size_binned_q": 40,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Cell part morphogenesis"
+    },
+    {
+        "GO term": "regulation of ion transmembrane transport",
+        "piggybac_abs_log10_q_value": 5.40342991222435,
+        "human_abs_log10_q_value": 8.93170096109507,
+        "sum_abs_log10_q_value": 14.3351308733194,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Reg. of ion transmembrane transport"
+    },
+    {
+        "GO term": "cell morphogenesis",
+        "piggybac_abs_log10_q_value": 11.4391738590977,
+        "human_abs_log10_q_value": 4.6716762136979,
+        "sum_abs_log10_q_value": 16.1108500727957,
+        "piggybac_marker_size_binned_q": 40,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Cell morphogenesis"
+    },
+    {
+        "GO term": "modulation of chemical synaptic transmission",
+        "piggybac_abs_log10_q_value": 6.7627162380012,
+        "human_abs_log10_q_value": 9.66651296264769,
+        "sum_abs_log10_q_value": 16.4292292006489,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Mod. of chemical synaptic transmission"
+    },
+    {
+        "GO term": "trans-synaptic signaling",
+        "piggybac_abs_log10_q_value": 3.53762865997199,
+        "human_abs_log10_q_value": 13.6838452055278,
+        "sum_abs_log10_q_value": 17.2214738654998,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 40,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Transsynaptic signalling"
+    },
+    {
+        "GO term": "synapse organization",
+        "piggybac_abs_log10_q_value": 10.342692521706,
+        "human_abs_log10_q_value": 6.89491987055633,
+        "sum_abs_log10_q_value": 17.2376123922624,
+        "piggybac_marker_size_binned_q": 40,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Synapse organization"
+    },
+    {
+        "GO term": "ion channel complex",
+        "piggybac_abs_log10_q_value": 3.46667759619904,
+        "human_abs_log10_q_value": 14.3980727256377,
+        "sum_abs_log10_q_value": 17.8647503218367,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 40,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Ion channel complex"
+    },
+    {
+        "GO term": "regulation of membrane potential",
+        "piggybac_abs_log10_q_value": 5.61355344651853,
+        "human_abs_log10_q_value": 12.4308863597106,
+        "sum_abs_log10_q_value": 18.0444398062292,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 40,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Reg. of membrane potential"
+    },
+    {
+        "GO term": "gated channel activity",
+        "piggybac_abs_log10_q_value": 1.38980943250208,
+        "human_abs_log10_q_value": 16.9962913940332,
+        "sum_abs_log10_q_value": 18.3861008265352,
+        "piggybac_marker_size_binned_q": 10,
+        "human_marker_size_binned_q": 40,
+        "total_marker_size_binned_q": 40,
+        "display_label": "Gated channel activity"
+    },
+    {
+        "GO term": "glutamatergic synapse",
+        "piggybac_abs_log10_q_value": 10.2438761964056,
+        "human_abs_log10_q_value": 10.0243580040108,
+        "sum_abs_log10_q_value": 20.2682342004164,
+        "piggybac_marker_size_binned_q": 40,
+        "human_marker_size_binned_q": 40,
+        "total_marker_size_binned_q": 80,
+        "display_label": "Glutamatergic synapse"
+    },
+    {
+        "GO term": "neuron to neuron synapse",
+        "piggybac_abs_log10_q_value": 13.985186921544,
+        "human_abs_log10_q_value": 7.62842695455214,
+        "sum_abs_log10_q_value": 21.6136138760962,
+        "piggybac_marker_size_binned_q": 40,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 80,
+        "display_label": "Neuron-to-neuron synapse"
+    },
+    {
+        "GO term": "biological adhesion",
+        "piggybac_abs_log10_q_value": 8.67189690613437,
+        "human_abs_log10_q_value": 14.2766853763774,
+        "sum_abs_log10_q_value": 22.9485822825118,
+        "piggybac_marker_size_binned_q": 20,
+        "human_marker_size_binned_q": 40,
+        "total_marker_size_binned_q": 80,
+        "display_label": "Biological adhesion"
+    },
+    {
+        "GO term": "neuron differentiation",
+        "piggybac_abs_log10_q_value": 15.4613873832848,
+        "human_abs_log10_q_value": 8.00296758756651,
+        "sum_abs_log10_q_value": 23.4643549708513,
+        "piggybac_marker_size_binned_q": 40,
+        "human_marker_size_binned_q": 20,
+        "total_marker_size_binned_q": 80,
+        "display_label": "Neuron differentiation"
+    },
+    {
+        "GO term": "postsynapse",
+        "piggybac_abs_log10_q_value": 13.5690029560099,
+        "human_abs_log10_q_value": 11.9859107281264,
+        "sum_abs_log10_q_value": 25.5549136841363,
+        "piggybac_marker_size_binned_q": 40,
+        "human_marker_size_binned_q": 40,
+        "total_marker_size_binned_q": 80,
+        "display_label": "Postsynapse"
+    },
+    {
+        "GO term": "synaptic membrane",
+        "piggybac_abs_log10_q_value": 10.9683220431953,
+        "human_abs_log10_q_value": 27.1999010137671,
+        "sum_abs_log10_q_value": 38.1682230569625,
+        "piggybac_marker_size_binned_q": 40,
+        "human_marker_size_binned_q": 80,
+        "total_marker_size_binned_q": 80,
+        "display_label": "Synaptic membrane"
+    }
+];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const colorPiggy = '#8c5e4d';
+        const colorSomatic = '#da7cb8';
+        const colorTotal = '#866bb1';
+        const sizeFactor = 6.5;
+
+        function getSymbolSize(val) {
+            // Area = val * sizeFactor
+            // Diameter = 2 * sqrt(Area / PI)
+            const area = val * sizeFactor;
+            return 2 * Math.sqrt(area / Math.PI);
+        }
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: 80,
+                bottom: 50,
+                left: 200, // Space for labels
+                right: 50
+            },
+            xAxis: {
+                name: '-log₁₀[q value]',
+                nameLocation: 'middle',
+                nameGap: 30,
+                nameTextStyle: { fontSize: 12, color: 'black' },
+                type: 'value',
+                min: -2,
+                max: 42,
+                interval: 10,
+                splitLine: { 
+                    show: true,
+                    lineStyle: { color: 'black', width: 0.5 }
+                },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black' },
+                axisTick: { show: true, lineStyle: { color: 'black' } }
+            },
+            yAxis: {
+                type: 'category',
+                data: data.map(d => d.display_label),
+                inverse: true, // Top to bottom
+                axisLine: { show: false },
+                axisTick: { show: false },
+                axisLabel: { 
+                    color: 'black',
+                    fontSize: 11,
+                    margin: 10
+                },
+                splitLine: { show: false }
+            },
+            series: [
+                // Horizontal lines (using custom series or just lines)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const yValue = api.value(1);
+                        const start = api.coord([0, yValue]);
+                        const end = api.coord([api.value(0), yValue]);
+                        return {
+                            type: 'line',
+                            shape: {
+                                x1: start[0], y1: start[1],
+                                x2: end[0], y2: end[1]
+                            },
+                            style: {
+                                stroke: 'black',
+                                lineWidth: 0.8
+                            }
+                        };
+                    },
+                    data: data.map((item, index) => [item.sum_abs_log10_q_value, index]),
+                    z: 1,
+                    silent: true
+                },
+                // Total (Purple)
+                {
+                    name: 'Total',
+                    type: 'scatter',
+                    data: data.map((item, index) => [item.sum_abs_log10_q_value, index, item.total_marker_size_binned_q]),
+                    symbolSize: function (data) {
+                        return getSymbolSize(data[2]);
+                    },
+                    itemStyle: { color: colorTotal, opacity: 1 },
+                    z: 2
+                },
+                // Somatic (Pink)
+                {
+                    name: 'Somatic mutations',
+                    type: 'scatter',
+                    data: data.map((item, index) => [item.human_abs_log10_q_value, index, item.human_marker_size_binned_q]),
+                    symbolSize: function (data) {
+                        return getSymbolSize(data[2]);
+                    },
+                    itemStyle: { color: colorSomatic, borderColor: 'white', borderWidth: 0.5, opacity: 1 },
+                    z: 3
+                },
+                // PiggyBac (Brown)
+                {
+                    name: 'PiggyBac',
+                    type: 'scatter',
+                    data: data.map((item, index) => [item.piggybac_abs_log10_q_value, index, item.piggybac_marker_size_binned_q]),
+                    symbolSize: function (data) {
+                        return getSymbolSize(data[2]);
+                    },
+                    itemStyle: { color: colorPiggy, borderColor: 'white', borderWidth: 0.5, opacity: 1 },
+                    z: 4
+                }
+            ],
+            graphic: [
+                // Title "b"
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'b',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                },
+                // Legend Manual Construction
+                // PiggyBac
+                {
+                    type: 'circle',
+                    left: 100, top: 15,
+                    shape: { r: 5 },
+                    style: { fill: colorPiggy }
+                },
+                {
+                    type: 'text',
+                    left: 110, top: 10,
+                    style: { text: 'PiggyBac', font: 'italic 11px Arial', fill: 'black' }
+                },
+                // Somatic
+                {
+                    type: 'circle',
+                    left: 250, top: 15,
+                    shape: { r: 5 },
+                    style: { fill: colorSomatic }
+                },
+                {
+                    type: 'text',
+                    left: 260, top: 10,
+                    style: { text: 'Somatic mutations', font: '11px Arial', fill: 'black' }
+                },
+                // Total
+                {
+                    type: 'circle',
+                    left: 450, top: 15,
+                    shape: { r: 5 },
+                    style: { fill: colorTotal }
+                },
+                {
+                    type: 'text',
+                    left: 460, top: 10,
+                    style: { text: 'Total', font: '11px Arial', fill: 'black' }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>NVDA 现金消耗跑道（零收入情景）2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 13px;
+      font-weight: normal;
+      margin-top: 0;
+      color: #666;
+    }
+    #chartContainer {
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 16px 18px 24px;
+    }
+    /* Use a fixed aspect ratio via container instead of JS resizing */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+      /* 16:9 aspect ratio */
+      aspect-ratio: 16 / 9;
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .note {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 11px;
+      color: #777;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="chartContainer">
+    <h1>NVDA 现金消耗跑道（月）</h1>
+    <h2>零收入情景（2016–2024 财年）</h2>
+    <div class="chart-wrapper">
+      <canvas id="runwayChart"></canvas>
+    </div>
+  </div>
+  <div class="note">
+    数据来源：用户提供的财年末“RESULT_Runway_Months”指标（单位：月）。<br>
+    说明：数值表示在零收入假设下，按照当期现金消耗速度可支撑的月份数。
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // 数据（用户提供）
+    const labels = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+
+    const runwayMonths = [
+      3.612121212121212,
+      9.703296703296704,
+      17.966329966329965,
+      2.73985401459854,
+      32.90186210367388,
+      1.6805555555555556,
+      3.1134289439374188,
+      4.0501942037645655,
+      7.540134645261522
+    ];
+
+    const ctx = document.getElementById('runwayChart').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: '现金消耗跑道（月）',
+          data: runwayMonths,
+          tension: 0.25,
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37, 99, 235, 0.10)',
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointBackgroundColor: '#2563eb',
+          pointBorderWidth: 1,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        // Keep natural aspect ratio; size is controlled by CSS aspect-ratio
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: { size: 11 }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                const value = ctx.parsed.y;
+                return ' ' + value.toFixed(2) + ' 个月';
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财年',
+              font: { size: 11 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: '现金消耗跑道（月）',
+              font: { size: 11 }
+            },
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return value + ' 月';
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: 'index',
+          intersect: false
+        }
+      }
+    });
+  </script>
+</body>
+</html>

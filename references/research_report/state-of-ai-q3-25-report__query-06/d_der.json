@@ -1,0 +1,72 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a dumbbell chart for US ecosystems (`Silicon Valley`, `New York`, `Los Angeles`, `Boston`, `Seattle`, `Austin`, `Miami`, `Philadelphia`) showing each market’s share of `US 2025 YTD funding` versus its share of `US 2025 YTD deals`, expressed as percentages, and sort by the largest positive funding-share minus deal-share gap.",
+  "status": "completed",
+  "title": "US child-market share of funding vs share of deals",
+  "chart_kind": "dumbbell",
+  "chart_type": "dumbbell chart",
+  "value_unit": "percent of US total",
+  "sort_rule": "descending by funding_share_pct minus deal_share_pct",
+  "selection_rule": "US ecosystems only",
+  "metadata": {
+    "entity_field": "market",
+    "left_field": "funding_share_pct",
+    "right_field": "deal_share_pct",
+    "left_label": "Share of US funding",
+    "right_label": "Share of US deals",
+    "figsize": [
+      12,
+      7
+    ]
+  },
+  "records": [
+    {
+      "market": "Silicon Valley",
+      "funding_share_pct": 78.32840236686391,
+      "deal_share_pct": 43.12158182583088,
+      "share_gap_pct": 35.20682054103303
+    },
+    {
+      "market": "Los Angeles",
+      "funding_share_pct": 3.772189349112426,
+      "deal_share_pct": 4.038704249053429,
+      "share_gap_pct": -0.2665148999410025
+    },
+    {
+      "market": "Austin",
+      "funding_share_pct": 1.452662721893491,
+      "deal_share_pct": 2.0193521245267143,
+      "share_gap_pct": -0.5666894026332232
+    },
+    {
+      "market": "Miami",
+      "funding_share_pct": 0.27884615384615385,
+      "deal_share_pct": 1.851072780816155,
+      "share_gap_pct": -1.572226626970001
+    },
+    {
+      "market": "Seattle",
+      "funding_share_pct": 1.3136094674556213,
+      "deal_share_pct": 3.49179638199411,
+      "share_gap_pct": -2.1781869145384887
+    },
+    {
+      "market": "Boston",
+      "funding_share_pct": 1.7011834319526626,
+      "deal_share_pct": 4.5435422801851075,
+      "share_gap_pct": -2.842358848232445
+    },
+    {
+      "market": "Philadelphia",
+      "funding_share_pct": 1.5983727810650887,
+      "deal_share_pct": 5.006310475389146,
+      "share_gap_pct": -3.4079376943240574
+    },
+    {
+      "market": "New York",
+      "funding_share_pct": 5.325443786982248,
+      "deal_share_pct": 14.009255363904082,
+      "share_gap_pct": -8.683811576921833
+    }
+  ]
+}

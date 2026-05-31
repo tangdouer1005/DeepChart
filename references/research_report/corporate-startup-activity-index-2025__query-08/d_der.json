@@ -1,0 +1,58 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a ranked horizontal bar chart showing the top 10 countries by `visible industry leadership rate`, where the metric is `the number of main industries in which the country supplies the rank-1 company divided by the number of main industries in which that country appears anywhere in the visible top 20`, values are percentages, only the 11 main industries on pages 15-25 are used, and countries are sorted from highest to lowest after the ratio is derived.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by visible_industry_leadership_rate_percent, ties by win count then appearance count then country",
+  "selection_rule": "top 10 countries after ratio derivation",
+  "plot_spec": {
+    "title": "Visible Industry Leadership Rate",
+    "xlabel": "Percent (rank-1 industries / industries represented)",
+    "ylabel": "Country",
+    "value_field": "visible_industry_leadership_rate_percent",
+    "label_suffix": "%",
+    "label_decimals": 1
+  },
+  "records": [
+    {
+      "entity": "United States",
+      "visible_industry_leadership_rate_percent": 72.7273
+    },
+    {
+      "entity": "Norway",
+      "visible_industry_leadership_rate_percent": 50.0
+    },
+    {
+      "entity": "France",
+      "visible_industry_leadership_rate_percent": 16.6667
+    },
+    {
+      "entity": "Japan",
+      "visible_industry_leadership_rate_percent": 16.6667
+    },
+    {
+      "entity": "United Kingdom",
+      "visible_industry_leadership_rate_percent": 0.0
+    },
+    {
+      "entity": "Germany",
+      "visible_industry_leadership_rate_percent": 0.0
+    },
+    {
+      "entity": "Canada",
+      "visible_industry_leadership_rate_percent": 0.0
+    },
+    {
+      "entity": "Spain",
+      "visible_industry_leadership_rate_percent": 0.0
+    },
+    {
+      "entity": "Australia",
+      "visible_industry_leadership_rate_percent": 0.0
+    },
+    {
+      "entity": "China",
+      "visible_industry_leadership_rate_percent": 0.0
+    }
+  ]
+}

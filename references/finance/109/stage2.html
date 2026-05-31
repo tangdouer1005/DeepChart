@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HD 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #0f172a;
+      --axis-color: #64748b;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #e5f0ff 0, #f8fafc 40%, #f1f5f9 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: var(--text-color);
+    }
+
+    .container {
+      background: var(--card-bg);
+      max-width: 960px;
+      width: 100%;
+      padding: 24px 24px 32px;
+      border-radius: 16px;
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.15),
+        0 0 0 1px rgba(148, 163, 184, 0.08);
+    }
+
+    header {
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .subtitle span {
+      font-weight: 500;
+      color: #111827;
+    }
+
+    .chart-wrapper {
+      margin-top: 16px;
+    }
+
+    canvas {
+      max-height: 460px;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 16px 14px 22px;
+      }
+      h1 {
+        font-size: 1.1rem;
+      }
+      .subtitle {
+        font-size: 0.8rem;
+      }
+      canvas {
+        max-height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>HD 自由现金流收益质量（Quality of Income Ratio）</h1>
+      <div class="subtitle">
+        财报年度：<span>2016 – 2024</span> · 单位：倍（Free Cash Flow / Net Income）
+      </div>
+    </header>
+
+    <div class="chart-wrapper">
+      <canvas id="qoiChart" aria-label="Quality of Income Ratio from 2016 to 2024" role="img"></canvas>
+      <div class="note">
+        说明：自由现金流收益质量 = 自由现金流 / 净利润。数值越接近或高于 1，通常代表收益质量越高、现金含金量越好。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data provided by user
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const qoiData = [
+      0.6873212583412774,
+      0.6352597402597403,
+      0.7185689541898107,
+      0.7445424725709762,
+      0.756546667401731,
+      0.9058518055488772,
+      0.6397575476797158,
+      0.5410157696009477,
+      0.8490535771575233
+    ];
+
+    const ctx = document.getElementById("qoiChart").getContext("2d");
+
+    // Determine dynamic y-axis range with padding for cleaner look
+    const minVal = Math.min(...qoiData);
+    const maxVal = Math.max(...qoiData);
+    const padding = 0.08;
+    let suggestedMin = Math.max(0, minVal - padding);
+    let suggestedMax = Math.min(1.4, maxVal + padding); // cap at 1.4 for better readability
+
+    const qoiChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "自由现金流收益质量",
+            data: qoiData,
+            backgroundColor: "rgba(37, 99, 235, 0.7)",
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.95)",
+            borderRadius: 6,
+            borderSkipped: false
+          },
+          {
+            // Optional helper line at 1.0 to indicate "high-quality" threshold
+            type: "line",
+            label: "质量基准线 (1.0)",
+            data: labels.map(() => 1.0),
+            borderColor: "#ef4444",
+            borderWidth: 1.3,
+            borderDash: [5, 5],
+            pointRadius: 0,
+            pointHitRadius: 0,
+            tension: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            labels: {
+              usePointStyle: true,
+              padding: 16,
+              color: "#111827",
+              font: {
+                size: 11.5,
+                weight: "500"
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "#0f172a",
+            titleColor: "#e5e7eb",
+            bodyColor: "#f9fafb",
+            borderColor: "rgba(148, 163, 184, 0.5)",
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8,
+            displayColors: true,
+            callbacks: {
+              label: function (context) {
+                const v = context.parsed.y;
+                if (context.dataset.type === "line") {
+                  return ` 基准线：${v.toFixed(2)}x`;
+                }
+                return ` 收益质量：${v.toFixed(3)}x`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#374151",
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin,
+            suggestedMax,
+            grid: {
+              color: "rgba(148, 163, 184, 0.3)",
+              drawBorder: false
+            },
+            ticks: {
+              color: "#374151",
+              font: {
+                size: 11
+              },
+              callback: function (value) {
+                return value.toFixed(1) + "x";
+              }
+            },
+            title: {
+              display: true,
+              text: "自由现金流收益质量（倍）",
+              color: "#111827",
+              font: {
+                size: 11.5,
+                weight: "500"
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

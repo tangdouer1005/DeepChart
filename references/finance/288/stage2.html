@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XOM 奥特曼破产预测模型 (Altman Z-Score) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --safe: #16a34a;
+      --grey: #6b7280;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: #1f2937;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.18);
+        --safe: #22c55e;
+        --grey: #9ca3af;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #eff6ff 0, #ffffff 40%, #f9fafb 100%);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .container {
+      max-width: 960px;
+      width: 100%;
+      padding: 24px 16px 32px;
+      margin: auto;
+    }
+    .card {
+      background-color: color-mix(in srgb, var(--bg) 85%, #ffffff 15%);
+      border-radius: 18px;
+      padding: 20px 20px 24px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.10),
+        0 1px 0 rgba(148, 163, 184, 0.25);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+    h1 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 0;
+      letter-spacing: 0.01em;
+    }
+    .sub {
+      font-size: 0.8rem;
+      color: var(--grey);
+      margin-bottom: 10px;
+    }
+    .legend-inline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+      color: var(--grey);
+      flex-wrap: wrap;
+    }
+    .legend-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--bg) 80%, #e5e7eb 20%);
+    }
+    .legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+    .legend-color.safe {
+      background: var(--safe);
+    }
+    canvas {
+      max-height: 420px;
+    }
+    .footnote {
+      font-size: 0.75rem;
+      color: var(--grey);
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footnote span {
+      white-space: nowrap;
+    }
+    .footnote strong {
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header-row">
+        <h1>XOM 奥特曼破产预测模型 (Altman Z‑Score) 趋势</h1>
+        <span style="font-size:0.78rem;color:var(--grey);">2016 – 2024</span>
+      </div>
+      <div class="sub">
+        展示 2016–2024 年 XOM 的 Altman Z‑Score 变化，用于评估财务破产风险（Z &gt; 2.99 通常被视为“安全区间”）。
+      </div>
+
+      <div class="legend-inline">
+        <span class="legend-pill">
+          <span class="legend-color"></span> Z‑Score
+        </span>
+        <span class="legend-pill">
+          <span class="legend-color safe"></span> 安全阈值 2.99
+        </span>
+      </div>
+
+      <canvas id="zScoreChart"></canvas>
+
+      <div class="footnote">
+        <span>数据来源：用户提供的计算结果 (RESULT_Z_Score)。</span>
+        <span><strong>提示：</strong> 鼠标悬停查看每年的精确 Z‑Score。</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data from the user (kept exactly as provided)
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const zScores = [
+      2.982579982864815,
+      3.1690563338886526,
+      3.4704183750198645,
+      3.104359694968416,
+      2.3778243526693594,
+      3.298250010483537,
+      4.090145627118131,
+      3.8180930640549167,
+      3.4130673733630705
+    ];
+
+    // Constant "safe zone" threshold line (Z = 2.99)
+    const safeThreshold = 2.99;
+    const safeLine = years.map(() => safeThreshold);
+
+    const ctx = document.getElementById("zScoreChart").getContext("2d");
+
+    // Determine sensible y-axis bounds with a little padding
+    const minZ = Math.min(...zScores, safeThreshold);
+    const maxZ = Math.max(...zScores, safeThreshold);
+    const padding = 0.25;
+    const suggestedMin = Math.max(0, minZ - padding);
+    const suggestedMax = maxZ + padding;
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "Z‑Score",
+            data: zScores,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            tension: 0.25,
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointHoverRadius: 5,
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderWidth: 1.5,
+            fill: {
+              target: "origin",
+              above: "rgba(37, 99, 235, 0.12)"
+            }
+          },
+          {
+            label: "安全阈值 (Z = 2.99)",
+            data: safeLine,
+            borderColor: "rgba(22, 163, 74, 0.8)",
+            borderWidth: 1.5,
+            borderDash: [6, 6],
+            pointRadius: 0,
+            hitRadius: 0,
+            hoverRadius: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.96)",
+            titleFont: { size: 12, weight: "600" },
+            bodyFont: { size: 11 },
+            padding: 10,
+            displayColors: true,
+            callbacks: {
+              label: function (context) {
+                if (context.datasetIndex === 0) {
+                  return "Z‑Score: " + context.parsed.y.toFixed(3);
+                }
+                return "安全阈值: " + safeThreshold.toFixed(2);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+              drawBorder: false
+            },
+            ticks: {
+              maxRotation: 0,
+              autoSkip: true
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Altman Z‑Score",
+              font: { size: 11 }
+            },
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            grid: {
+              color: "rgba(148, 163, 184, 0.20)",
+              drawBorder: false
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(1);
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

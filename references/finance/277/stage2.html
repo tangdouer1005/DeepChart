@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>wmt 盈余-现金质量剪刀差 (Earnings Quality Spread) 2017–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #f7f7f9;
+      --card-bg: #ffffff;
+      --text-color: #222222;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --grid-color: rgba(0, 0, 0, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --card-bg: #020617;
+        --text-color: #e5e7eb;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.16);
+        --grid-color: rgba(148, 163, 184, 0.2);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: radial-gradient(circle at top, rgba(37, 99, 235, 0.08), transparent 55%), var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem 1.75rem;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.20),
+        0 0 0 1px rgba(148, 163, 184, 0.18);
+    }
+
+    h1 {
+      margin: 0 0 0.25rem;
+      font-size: 1.25rem;
+      font-weight: 620;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      margin: 0 0 0.75rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b7280;
+    }
+
+    .description {
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      color: #4b5563;
+      max-width: 680px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+      .description {
+        color: #9ca3af;
+      }
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      background: radial-gradient(circle at top left, var(--accent-soft), transparent 55%);
+      border-radius: 12px;
+      padding: 0.5rem 0.75rem 0.75rem;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .legend-inline {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      margin-top: 0.75rem;
+      color: #6b7280;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 80%);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.18);
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 0.75rem;
+      }
+
+      .card {
+        padding: 1rem 0.85rem 1.25rem;
+      }
+
+      .chart-wrapper {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="subtitle">wmt · 2017–2024</div>
+      <h1>盈余-现金质量剪刀差 (Earnings Quality Spread)</h1>
+      <p class="description">
+        Line chart showing wmt's 盈余-现金质量剪刀差 (Earnings Quality Spread) by fiscal year from 2017 to 2024.
+        Values are based on the provided dataset and plotted as decimal ratios.
+      </p>
+
+      <div class="chart-wrapper">
+        <canvas id="spreadChart"></canvas>
+      </div>
+
+      <div class="legend-inline">
+        <span class="legend-color"></span>
+        <span>RESULT_Spread (盈余-现金质量剪刀差)</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data from the source provided by the user
+    const fiscalYears = ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"];
+    const resultSpread = [
+      0.0905106850800439,
+      0.0916084661594111,
+      0.0994910539218577,
+      0.0455209636016586,
+      0.0922879971206014,
+      0.0422554468026926,
+      0.0713511919511301,
+      0.0815357684489045
+    ];
+
+    const ctx = document.getElementById("spreadChart").getContext("2d");
+
+    // Determine min/max for y-axis with a small padding
+    const minVal = Math.min(...resultSpread);
+    const maxVal = Math.max(...resultSpread);
+    const padding = 0.01; // small padding around min and max
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [{
+          label: "RESULT_Spread",
+          data: resultSpread,
+          borderColor: "#2563eb",
+          pointBackgroundColor: "#1d4ed8",
+          pointBorderColor: "#ffffff",
+          pointHoverRadius: 5,
+          pointRadius: 3.5,
+          pointHitRadius: 10,
+          borderWidth: 2.4,
+          tension: 0.28,
+          fill: true,
+          backgroundColor: function(context) {
+            const chart = context.chart;
+            const {ctx, chartArea} = chart;
+            if (!chartArea) {
+              // This case happens on first chart render
+              return null;
+            }
+            const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+            gradient.addColorStop(0, "rgba(37, 99, 235, 0)");
+            gradient.addColorStop(0.6, "rgba(37, 99, 235, 0.18)");
+            gradient.addColorStop(1, "rgba(59, 130, 246, 0.32)");
+            return gradient;
+          }
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.92)",
+            borderColor: "rgba(148, 163, 184, 0.5)",
+            borderWidth: 1,
+            padding: 10,
+            titleFont: {
+              size: 12,
+              weight: "600"
+            },
+            bodyFont: {
+              size: 12
+            },
+            displayColors: false,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                // Show as 4 decimal places
+                return "Spread: " + value.toFixed(4);
+              },
+              title: function(context) {
+                const year = context[0].label;
+                return "Fiscal Year " + year;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            grid: {
+              color: function(context) {
+                return context.index === 0 ? "transparent" : "var(--grid-color)";
+              },
+              drawBorder: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              callback: function(value) {
+                // Show 3 decimal places for readability
+                return value.toFixed(3);
+              }
+            },
+            suggestedMin: minVal - padding,
+            suggestedMax: maxVal + padding
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

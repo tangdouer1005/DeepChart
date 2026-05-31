@@ -1,0 +1,191 @@
+[
+    {
+        "year": 2027.0,
+        "central": 823.0,
+        "low": 458.6,
+        "high": 2499.9,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2028.0,
+        "central": 535.3,
+        "low": 153.5,
+        "high": 2296.2,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2029.0,
+        "central": 277.0,
+        "low": -153.8,
+        "high": 2115.3,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2030.0,
+        "central": 60.5,
+        "low": -449.5,
+        "high": 1986.5,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2031.0,
+        "central": -114.2,
+        "low": -733.8,
+        "high": 1910.0,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2032.0,
+        "central": -334.8,
+        "low": -1006.6,
+        "high": 1804.0,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2033.0,
+        "central": -535.3,
+        "low": -1237.2,
+        "high": 1693.9,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2034.0,
+        "central": -735.8,
+        "low": -1481.9,
+        "high": 1626.2,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2035.0,
+        "central": -936.3,
+        "low": -1715.2,
+        "high": 1571.3,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2027.0,
+        "central": 1299.5,
+        "low": 935.1,
+        "high": 2976.5,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2028.0,
+        "central": 1118.4,
+        "low": 736.7,
+        "high": 2879.4,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2029.0,
+        "central": 977.7,
+        "low": 546.9,
+        "high": 2816.0,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2030.0,
+        "central": 889.7,
+        "low": 379.6,
+        "high": 2815.7,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2031.0,
+        "central": 854.5,
+        "low": 235.0,
+        "high": 2878.7,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2032.0,
+        "central": 784.7,
+        "low": 112.9,
+        "high": 2923.5,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2033.0,
+        "central": 715.2,
+        "low": 13.3,
+        "high": 2944.4,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2034.0,
+        "central": 682.4,
+        "low": -63.7,
+        "high": 3044.4,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2035.0,
+        "central": 660.8,
+        "low": -118.1,
+        "high": 3168.4,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2027.0,
+        "central": 279.2,
+        "low": -85.2,
+        "high": 1956.2,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2028.0,
+        "central": -131.6,
+        "low": -513.4,
+        "high": 1629.3,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2029.0,
+        "central": -525.6,
+        "low": -956.5,
+        "high": 1312.6,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2030.0,
+        "central": -890.6,
+        "low": -1400.7,
+        "high": 1035.3,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2031.0,
+        "central": -1226.8,
+        "low": -1846.4,
+        "high": 797.4,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2032.0,
+        "central": -1621.8,
+        "low": -2293.7,
+        "high": 516.9,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2033.0,
+        "central": -1974.2,
+        "low": -2676.1,
+        "high": 255.0,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2034.0,
+        "central": -2369.0,
+        "low": -3115.1,
+        "high": -7.0,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2035.0,
+        "central": -2776.6,
+        "low": -3555.5,
+        "high": -269.0,
+        "label": "high estimate of CORSIA offset cost"
+    }
+]

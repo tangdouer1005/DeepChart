@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>WMT 投入资本回报率 (ROIC) 2017–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #222222;
+      --grid: rgba(0, 0, 0, 0.08);
+      --accent: #2563eb;
+      --accent-light: rgba(37, 99, 235, 0.1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1120;
+        --fg: #e5e7eb;
+        --grid: rgba(148, 163, 184, 0.24);
+        --accent: #60a5fa;
+        --accent-light: rgba(96, 165, 250, 0.18);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #eff6ff 0, var(--bg) 48%);
+      color: var(--fg);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      padding: 20px 20px 28px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.22),
+        0 0 0 1px rgba(148, 163, 184, 0.18);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .container {
+        background: rgba(15, 23, 42, 0.96);
+      }
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.88rem;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      margin-top: 4px;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 10px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .note {
+        color: #9ca3af;
+      }
+    }
+
+    .legend-inline {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+    }
+
+    .legend-swatch {
+      width: 14px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Walmart (WMT) 投入资本回报率（ROIC）趋势</h1>
+    <div class="subtitle">财年 2017 – 2024 · 单位：百分比 (%)</div>
+
+    <div class="legend-inline">
+      <span class="legend-swatch"></span>
+      <span>ROIC（Return on Invested Capital）</span>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="roicChart"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：用户提供财报数据（RESULT_ROIC）。鼠标悬停查看精确数值；可在图表上拖动缩放（按住 Alt/Option 键进行横向缩放）。
+    </div>
+  </div>
+
+  <script>
+    // Source data (as provided)
+    const fiscalYears = ["2017","2018","2019","2020","2021","2022","2023","2024"];
+    const roicRaw = [
+      0.1399037388989805,
+      0.128295224661178,
+      0.1212170269465189,
+      0.1332507001628949,
+      0.1322882764456283,
+      0.1769601648429915,
+      0.1245840511554795,
+      0.178928436961647
+    ];
+
+    // Convert to percentage values
+    const roicPercent = roicRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("roicChart").getContext("2d");
+
+    // Lightweight zoom/pan using Chart.js built-in events (no extra plugin)
+    // We'll implement a simple horizontal zoom with mouse wheel + Alt key.
+    let currentMinIdx = 0;
+    let currentMaxIdx = fiscalYears.length - 1;
+
+    function makeChart() {
+      return new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: fiscalYears,
+          datasets: [
+            {
+              label: "ROIC",
+              data: roicPercent,
+              borderColor: getComputedStyle(document.documentElement)
+                .getPropertyValue("--accent")
+                .trim() || "#2563eb",
+              backgroundColor: getComputedStyle(document.documentElement)
+                .getPropertyValue("--accent-light")
+                .trim() || "rgba(37,99,235,0.12)",
+              tension: 0.2,
+              borderWidth: 2.4,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointBorderWidth: 1.4,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "nearest",
+            axis: "x",
+            intersect: false
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const v = ctx.parsed.y;
+                  return `ROIC: ${v.toFixed(2)}%`;
+                }
+              }
+            },
+            legend: {
+              display: false
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                color: getComputedStyle(document.documentElement)
+                  .getPropertyValue("--grid")
+                  .trim() || "rgba(0,0,0,0.08)"
+              }
+            },
+            y: {
+              ticks: {
+                callback: (value) => value.toFixed(1) + "%"
+              },
+              grid: {
+                color: getComputedStyle(document.documentElement)
+                  .getPropertyValue("--grid")
+                  .trim() || "rgba(0,0,0,0.08)"
+              },
+              title: {
+                display: true,
+                text: "ROIC (%)"
+              },
+              suggestedMin: Math.min(...roicPercent) - 2,
+              suggestedMax: Math.max(...roicPercent) + 2
+            }
+          }
+        }
+      });
+    }
+
+    const chart = makeChart();
+
+    // Basic horizontal zoom with mouse wheel + Alt key
+    const canvas = document.getElementById("roicChart");
+    canvas.addEventListener("wheel", function (event) {
+      if (!event.altKey) return; // Only zoom when Alt/Option is pressed
+      event.preventDefault();
+
+      const direction = Math.sign(event.deltaY);
+      const minSpan = 3; // minimum number of points visible
+
+      if (direction < 0 && currentMaxIdx - currentMinIdx > minSpan) {
+        // Zoom in: shrink the visible window around the center
+        currentMinIdx++;
+        currentMaxIdx--;
+      } else if (direction > 0) {
+        // Zoom out: expand until full range
+        if (currentMinIdx > 0) currentMinIdx--;
+        if (currentMaxIdx < fiscalYears.length - 1) currentMaxIdx++;
+      }
+
+      chart.options.scales.x.min = currentMinIdx;
+      chart.options.scales.x.max = currentMaxIdx;
+      chart.update();
+    });
+  </script>
+</body>
+</html>

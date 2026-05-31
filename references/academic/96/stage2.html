@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; font-family: sans-serif; }
+        #chart-container { width: 800px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // 1. Data Embedding (Extracted from Python script)
+        
+        const data = {"group_order": ["B16-F0", "LN1-18IL", "LN7-1112AR", "LN7-1120BL", "LN7-1134BL", "LN8-1194BR", "LN8-1198AR", "LN8-1205BL", "LN9-1315BL", "LN9-1358IR"], "group_map": {"B16-F0": [6204616.859286747, 6031719.639947483, 6442731.7845764635, 6859345.48128456, 6764765.683211772], "LN1-18IL": [5488684.552477316, 5918369.731594182, 6200610.378068406, 4942033.196682305, 4714026.530272788, 5095178.247521065], "LN7-1112AR": [1478381.7987170925, 1081751.8498301418, 3928401.4065465294], "LN7-1120BL": [3922032.1950288094, 3110395.9232401457, 3495866.48103521], "LN7-1134BL": [2662220.3343282263, 1907977.6288138991, 2795104.0071977014], "LN8-1194BR": [3534860.737689079, 3006628.029078749, 3037851.004063388], "LN8-1198AR": [4632932.147138998, 3595460.617386489, 3721260.394931968], "LN8-1205BL": [3859800.6117266854, 3909206.586895387, 3731577.4010725464], "LN9-1315BL": [4910662.424020618, 4314128.730348152, 4225639.093779526], "LN9-1358IR": [3720654.2353181, 3489159.2704787264, 3663818.5393517087]}, "p_values": {}, "global_p": 3.640803e-09};
+        
+        const groupOrder = data.group_order;
+        const groupMap = data.group_map;
+        
+        const pValues = {
+            "LN1-18IL": 0.047510547790651,
+            "LN7-1112AR": 3.623749e-09,
+            "LN7-1120BL": 3.594651952e-06,
+            "LN7-1134BL": 1.4586543e-08,
+            "LN8-1194BR": 6.3676645e-07,
+            "LN8-1198AR": 5.3467408461e-05,
+            "LN8-1205BL": 2.2519176402e-05,
+            "LN9-1315BL": 0.001000242673301,
+            "LN9-1358IR": 6.852518877e-06
+        };
+        
+        const globalP = data.global_p;
+
+        // Calculate Means and SDs
+        const means = [];
+        const stds = [];
+        const scatterData = []; // [groupIndex, value]
+
+        // Helper for SD
+        function calculateSD(arr) {
+            const n = arr.length;
+            if (n <= 1) return 0;
+            const mean = arr.reduce((a, b) => a + b) / n;
+            const variance = arr.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / (n - 1);
+            return Math.sqrt(variance);
+        }
+
+        groupOrder.forEach((g, i) => {
+            const vals = groupMap[g];
+            const mean = vals.reduce((a, b) => a + b) / vals.length;
+            const sd = calculateSD(vals);
+            
+            means.push(mean);
+            stds.push(sd);
+
+            // Scatter points
+            vals.forEach(val => {
+                // Add jitter like in Python: x_pos[i] + uniform(-0.1, 0.1)
+                const jitter = (Math.random() * 0.2) - 0.1; 
+                // Note: In ECharts, categorical axis indices are 0, 1, 2...
+                // So x coordinate is i + jitter
+                scatterData.push([i + jitter, val, g]); // store group name for color logic if needed
+            });
+        });
+
+        // 3. Formatting Helpers
+        function formatPValue(p) {
+            const s = p.toExponential(1);
+            const [base, exponent] = s.split('e');
+            return `P = ${base} × 10^{${parseInt(exponent)}}`;
+        }
+        
+        function formatPValueShort(p) {
+            if (p >= 0.001) {
+                return `P = ${p.toFixed(3).replace(/0+$/, '')}`;
+            }
+            const s = p.toExponential(1);
+            const [base, exponent] = s.split('e');
+            return `P = ${base} × 10^{${parseInt(exponent)}}`;
+        }
+
+        // 4. ECharts Option
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Prepare Series Data
+        // Bars
+        const barData = means.map((m, i) => ({
+            value: m,
+            itemStyle: {
+                color: groupOrder[i] === "B16-F0" ? "#D3D3D3" : 
+                       groupOrder[i] === "LN1-18IL" ? "#EEAEEE" : "#8FBC8F",
+                borderColor: 'black',
+                borderWidth: 0.8
+            }
+        }));
+
+        // Error Bars (using custom series)
+        const errorBarData = means.map((m, i) => {
+            const sd = stds[i];
+            return [i, m - sd, m + sd];
+        });
+        
+        // Scatter Points Color Logic
+        const getPointColor = (groupName) => {
+             if (groupName === "B16-F0" || groupName === "LN1-18IL") return "#222222";
+             return "#1E601E";
+        };
+        
+        // Map scatterData to objects with specific colors
+        const formattedScatterData = scatterData.map(item => ({
+            value: [item[0], item[1]],
+            itemStyle: {
+                color: getPointColor(item[2]),
+                borderColor: 'none',
+                opacity: 0.9
+            }
+        }));
+
+        // P-Value Labels (Vertical)
+        // Python: x_pos[i], y=8.5e6, rotation=90
+        const pValueLabels = [];
+        groupOrder.forEach((g, i) => {
+            if (pValues[g]) {
+                pValueLabels.push({
+                    type: 'text',
+                    rotation: -Math.PI / 2, // 90 degrees counter-clockwise
+                    position: [0, 0], // Position handled by layout logic? No, graphic elements need absolute pixels or relative.
+                    // Easier to use a scatter series with labels for positioning relative to axes
+                });
+            }
+        });
+
+        // For annotations relative to coordinates, it's easiest to use a scatter series with transparent points and labels, or 'graphic' with 'position' conversion (but conversion is async/tricky). 
+        // Best approach for Vertical Labels: Add another series (scatter) at fixed Y (8.5e6) with labels.
+        const pValueSeriesData = groupOrder.map((g, i) => {
+            if (pValues[g]) {
+                return {
+                    value: [i, 8.5e6],
+                    label: {
+                        show: true,
+                        formatter: () => formatPValueShort(pValues[g]),
+                        rotate: 90,
+                        position: 'inside', // or center
+                        color: 'black',
+                        fontSize: 10,
+                        distance: 0
+                    }
+                };
+            }
+            return null;
+        }).filter(x => x);
+
+
+        const option = {
+            animation: false,
+            grid: {
+                top: 80,
+                right: 20,
+                bottom: 80,
+                left: 80
+            },
+            xAxis: {
+                data: groupOrder,
+                axisLabel: {
+                    rotate: 45,
+                    interval: 0,
+                    fontSize: 11,
+                    color: 'black'
+                },
+                axisTick: { show: true },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: "Glutamate peak intensity",
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: {
+                    fontSize: 12,
+                    color: 'black'
+                },
+                min: 0,
+                max: 1e7,
+                interval: 5e6, // 0, 5e6, 1e7
+                axisLabel: {
+                    formatter: function (value) {
+                        if (value === 0) return "0";
+                        if (value === 5000000) return "5 × 10⁶";
+                        if (value === 10000000) return "1 × 10⁷";
+                        return "";
+                    },
+                    rich: {
+                        sup: {
+                            fontSize: 10,
+                            verticalAlign: 'top'
+                        }
+                    },
+                    color: 'black'
+                },
+                axisLine: { show: true, lineStyle: { color: 'black' } }, // Show Y axis line
+                splitLine: { show: false }
+            },
+            series: [
+                // 1. Bars
+                {
+                    type: 'bar',
+                    data: barData,
+                    barWidth: '60%',
+                    z: 1
+                },
+                // 2. Error Bars (Custom)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const high = api.value(2); // Mean + SD
+                        const low = api.value(1);  // Mean - SD 
+                        
+                        const start = api.coord([xValue, low]);
+                        const end = api.coord([xValue, high]);
+                        const style = api.style({
+                            stroke: 'black',
+                            lineWidth: 1
+                        });
+                        
+                        // Cap width
+                        const capWidth = 10; 
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1],
+                                        x2: end[0], y2: end[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0] - capWidth/2, y1: start[1],
+                                        x2: start[0] + capWidth/2, y2: start[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: end[0] - capWidth/2, y1: end[1],
+                                        x2: end[0] + capWidth/2, y2: end[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: errorBarData,
+                    z: 2
+                },
+                // 3. Scatter Points
+                {
+                    type: 'scatter',
+                    symbolSize: 6, 
+                    data: formattedScatterData,
+                    z: 3
+                },
+                // 4. Vertical P-value Labels (Ghost Series)
+                {
+                    type: 'scatter',
+                    symbolSize: 0,
+                    data: pValueSeriesData,
+                    label: {
+                        show: true,
+                        color: 'black',
+                        rotate: 90,
+                        formatter: function(params) {
+                             return params.data.label.formatter();
+                        }
+                    },
+                    z: 4
+                },
+                // 5. Global P-value Line & Label (Custom series to draw outside grid)
+                {
+                    type: 'custom',
+                    clip: false, // Critical: allow drawing outside the coordinate system
+                    data: [0], // Dummy data to trigger render
+                    renderItem: function(params, api) {
+                        // Coordinates: Line from first to last group at y=1.02e7
+                        const start = api.coord([0, 1.02e7]);
+                        const end = api.coord([groupOrder.length - 1, 1.02e7]);
+                        
+                        // Text position: center of line, slightly above at y=1.04e7
+                        // We calculate the midpoint in data space for X
+                        const midXData = (groupOrder.length - 1) / 2;
+                        const textPos = api.coord([midXData, 1.04e7]);
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1],
+                                        x2: end[0], y2: end[1]
+                                    },
+                                    style: {
+                                        stroke: 'black',
+                                        lineWidth: 1
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    style: {
+                                        text: formatPValue(globalP),
+                                        font: '12px sans-serif',
+                                        fill: 'black',
+                                        textAlign: 'center',
+                                        textVerticalAlign: 'bottom'
+                                    },
+                                    position: [textPos[0], textPos[1]] 
+                                }
+                            ]
+                        };
+                    },
+                    z: 5
+                }
+            ],
+            graphic: [
+                // Label "d"
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'd',
+                        fontSize: 20,
+                        fontWeight: 'bold'
+                    }
+                }
+            ]
+        };
+        
+        chart.setOption(option);
+        
+        // Fix for richtext in formatting if needed
+        // ECharts supports rich text in axis labels.
+        // My formatter returns plain strings like "5 × 10⁶" which works fine without rich text if standard unicode is used.
+        // "⁶" and "⁷" are unicode superscripts.
+    </script>
+</body>
+</html>

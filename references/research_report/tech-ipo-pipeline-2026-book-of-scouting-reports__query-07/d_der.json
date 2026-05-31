@@ -1,0 +1,132 @@
+{
+  "report_id": "014",
+  "query_id": 7,
+  "query_text": "Create a bubble chart comparing the top 15 companies founded in 2015 or later, where the x-axis is `Headcount per $100M raised`, the y-axis is `IPO probability`, bubble size is `Mosaic`, and points are colored by whether `Commercial Maturity` is below 5 or equal to 5.",
+  "chart_type": "bubble",
+  "value_unit": "Headcount per $100M raised vs IPO probability",
+  "sort_rule": "descending by IPO probability within the founded-2015-or-later subset",
+  "selection_rule": "top 15 companies founded in 2015 or later with numeric funding, headcount, Mosaic, and Commercial Maturity",
+  "records": [
+    {
+      "label": "Anthropic",
+      "x": 7.330159,
+      "y": 58.3,
+      "size": 960,
+      "color": "Below 5"
+    },
+    {
+      "label": "Brex",
+      "x": 93.823529,
+      "y": 58.3,
+      "size": 886,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Commure",
+      "x": 145.3,
+      "y": 58.3,
+      "size": 898,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Octopus Energy",
+      "x": 154.357143,
+      "y": 58.3,
+      "size": 882,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Sword",
+      "x": 259.306476,
+      "y": 58.3,
+      "size": 875,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Lyra Health",
+      "x": 283.191701,
+      "y": 39.2,
+      "size": 806,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Alan",
+      "x": 163.352462,
+      "y": 34.4,
+      "size": 795,
+      "color": "5 / 5"
+    },
+    {
+      "label": "ManyPets",
+      "x": 78.985963,
+      "y": 31.3,
+      "size": 637,
+      "color": "Below 5"
+    },
+    {
+      "label": "Discord",
+      "x": 383.729156,
+      "y": 28.4,
+      "size": 866,
+      "color": "5 / 5"
+    },
+    {
+      "label": "MasterClass",
+      "x": 166.666667,
+      "y": 25.4,
+      "size": 723,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Snyk",
+      "x": 105.916667,
+      "y": 24.0,
+      "size": 818,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Shield AI",
+      "x": 79.384615,
+      "y": 23.5,
+      "size": 902,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Gong",
+      "x": 350.25729,
+      "y": 23.4,
+      "size": 798,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Rippling",
+      "x": 333.166667,
+      "y": 23.4,
+      "size": 961,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Lattice",
+      "x": 184.983348,
+      "y": 19.4,
+      "size": 755,
+      "color": "5 / 5"
+    }
+  ],
+  "plot_config": {
+    "title": "IPO probability vs headcount intensity for recent companies",
+    "x_label": "Headcount per $100M raised",
+    "y_label": "IPO probability (%)"
+  },
+  "reasoning_summary": [
+    "Filtered to companies founded in 2015 or later with numeric funding, headcount, Mosaic, and Commercial Maturity.",
+    "Converted funding to units of $100M and computed headcount intensity.",
+    "Bucketed Commercial Maturity into below 5 versus exactly 5.",
+    "Ranked by IPO probability and kept the top 15 companies."
+  ],
+  "stats": {
+    "eligible_count": 21,
+    "returned_count": 15
+  },
+  "open_issues": []
+}

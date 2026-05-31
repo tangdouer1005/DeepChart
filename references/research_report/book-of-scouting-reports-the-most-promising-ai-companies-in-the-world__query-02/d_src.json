@@ -1,0 +1,908 @@
+{
+  "query_id": 2,
+  "query_text": "Create a ranked bar chart for the top 12 companies by valuation-per-year-since-founding, computed as Valuation in $M divided by company age in years, using only companies with disclosed Valuation and Founded year, sorted descending, with bars colored by whether Last Funded occurred in 2024 or earlier.",
+  "source_file": "/Users/tangjiahui/Desktop/chartbench/data/aim/066_Book of Scouting Reports_ The most promising AI companies in the world_400eeabb.md",
+  "query_file": "/Users/tangjiahui/Desktop/chartbench/data/aim/066_Book of Scouting Reports_ The most promising AI companies in the world_400eeabb_query_recommendations.md",
+  "rows": [
+    {
+      "company": "01.AI",
+      "founded_year": 2023,
+      "stage": "Corporate Minority",
+      "valuation_display": "$1B",
+      "valuation_value_m": 1000.0,
+      "last_funded_display": "11/5/2023",
+      "last_funded_iso": "2023-11-05"
+    },
+    {
+      "company": "1X",
+      "founded_year": 2014,
+      "stage": "Series B",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "1/11/2024",
+      "last_funded_iso": "2024-01-11"
+    },
+    {
+      "company": "Adaptive ML",
+      "founded_year": 2023,
+      "stage": "Seed VC",
+      "valuation_display": "$100M",
+      "valuation_value_m": 100.0,
+      "last_funded_display": "3/11/2024",
+      "last_funded_iso": "2024-03-11"
+    },
+    {
+      "company": "Adept",
+      "founded_year": 2022,
+      "stage": "Series B",
+      "valuation_display": "$1B",
+      "valuation_value_m": 1000.0,
+      "last_funded_display": "3/14/2023",
+      "last_funded_iso": "2023-03-14"
+    },
+    {
+      "company": "Aionics",
+      "founded_year": 2020,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "10/1/2023",
+      "last_funded_iso": "2023-10-01"
+    },
+    {
+      "company": "Anthropic",
+      "founded_year": 2021,
+      "stage": "Series D - III",
+      "valuation_display": "$18.4B",
+      "valuation_value_m": 18400.0,
+      "last_funded_display": "3/27/2024",
+      "last_funded_iso": "2024-03-27"
+    },
+    {
+      "company": "Argilla",
+      "founded_year": 2017,
+      "stage": "Series A",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "11/7/2023",
+      "last_funded_iso": "2023-11-07"
+    },
+    {
+      "company": "Atomic Industries",
+      "founded_year": 2019,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "12/4/2023",
+      "last_funded_iso": "2023-12-04"
+    },
+    {
+      "company": "Atypical AI",
+      "founded_year": 2023,
+      "stage": "Pre-Seed",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "8/22/2023",
+      "last_funded_iso": "2023-08-22"
+    },
+    {
+      "company": "Binarly",
+      "founded_year": 2021,
+      "stage": "Seed VC",
+      "valuation_display": "$11.6M",
+      "valuation_value_m": 11.6,
+      "last_funded_display": "3/26/2024",
+      "last_funded_iso": "2024-03-26"
+    },
+    {
+      "company": "Bioptimus",
+      "founded_year": 2024,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/19/2024",
+      "last_funded_iso": "2024-02-19"
+    },
+    {
+      "company": "Canvas",
+      "founded_year": 2017,
+      "stage": "Series B",
+      "valuation_display": "$76.1M",
+      "valuation_value_m": 76.1,
+      "last_funded_display": "2/3/2021",
+      "last_funded_iso": "2021-02-03"
+    },
+    {
+      "company": "Chalk",
+      "founded_year": 2022,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "12/12/2023",
+      "last_funded_iso": "2023-12-12"
+    },
+    {
+      "company": "Charm Therapeutics",
+      "founded_year": 2021,
+      "stage": "Series A - II",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "5/15/2023",
+      "last_funded_iso": "2023-05-15"
+    },
+    {
+      "company": "Cleanlab",
+      "founded_year": 2021,
+      "stage": "Incubator/Accelerator",
+      "valuation_display": "$24.6M",
+      "valuation_value_m": 24.6,
+      "last_funded_display": "10/16/2023",
+      "last_funded_iso": "2023-10-16"
+    },
+    {
+      "company": "Cognition AI",
+      "founded_year": 2023,
+      "stage": "Series A",
+      "valuation_display": "$2B",
+      "valuation_value_m": 2000.0,
+      "last_funded_display": "4/24/2024",
+      "last_funded_iso": "2024-04-24"
+    },
+    {
+      "company": "Common Sense Machines",
+      "founded_year": 2020,
+      "stage": "Convertible Note",
+      "valuation_display": "$15.2M",
+      "valuation_value_m": 15.2,
+      "last_funded_display": "9/6/2023",
+      "last_funded_iso": "2023-09-06"
+    },
+    {
+      "company": "Cradle",
+      "founded_year": 2021,
+      "stage": "Series A",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "11/27/2023",
+      "last_funded_iso": "2023-11-27"
+    },
+    {
+      "company": "Daedalus",
+      "founded_year": 2020,
+      "stage": "Series A",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/8/2024",
+      "last_funded_iso": "2024-02-08"
+    },
+    {
+      "company": "Databricks",
+      "founded_year": 2013,
+      "stage": "Series I - II",
+      "valuation_display": "$43B",
+      "valuation_value_m": 43000.0,
+      "last_funded_display": "11/10/2023",
+      "last_funded_iso": "2023-11-10"
+    },
+    {
+      "company": "DatologyAI",
+      "founded_year": 2023,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/22/2024",
+      "last_funded_iso": "2024-02-22"
+    },
+    {
+      "company": "Deepdub",
+      "founded_year": 2019,
+      "stage": "Series A",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/10/2022",
+      "last_funded_iso": "2022-02-10"
+    },
+    {
+      "company": "DP Technology",
+      "founded_year": 2018,
+      "stage": "Series C",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "8/21/2023",
+      "last_funded_iso": "2023-08-21"
+    },
+    {
+      "company": "ElevenLabs",
+      "founded_year": 2022,
+      "stage": "Incubator/Accelerator",
+      "valuation_display": "$1.1B",
+      "valuation_value_m": 1100.0,
+      "last_funded_display": "2/23/2024",
+      "last_funded_iso": "2024-02-23"
+    },
+    {
+      "company": "Elicit",
+      "founded_year": 2023,
+      "stage": "Seed VC",
+      "valuation_display": "$36.32M",
+      "valuation_value_m": 36.32,
+      "last_funded_display": "9/25/2023",
+      "last_funded_iso": "2023-09-25"
+    },
+    {
+      "company": "Ema Unlimited",
+      "founded_year": 2023,
+      "stage": "Series A",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "3/5/2024",
+      "last_funded_iso": "2024-03-05"
+    },
+    {
+      "company": "EvolutionIQ",
+      "founded_year": 2019,
+      "stage": "Corporate Minority",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "10/26/2023",
+      "last_funded_iso": "2023-10-26"
+    },
+    {
+      "company": "Extropic",
+      "founded_year": 2022,
+      "stage": "Seed VC",
+      "valuation_display": "$42.92M",
+      "valuation_value_m": 42.92,
+      "last_funded_display": "12/5/2023",
+      "last_funded_iso": "2023-12-05"
+    },
+    {
+      "company": "Figure",
+      "founded_year": 2022,
+      "stage": "Series B",
+      "valuation_display": "$2.68B",
+      "valuation_value_m": 2680.0,
+      "last_funded_display": "2/23/2024",
+      "last_funded_iso": "2024-02-23"
+    },
+    {
+      "company": "Flawless AI",
+      "founded_year": 2018,
+      "stage": "Incubator/Accelerator",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "5/24/2023",
+      "last_funded_iso": "2023-05-24"
+    },
+    {
+      "company": "Flip AI",
+      "founded_year": 2021,
+      "stage": "Seed VC",
+      "valuation_display": "$19.54M",
+      "valuation_value_m": 19.54,
+      "last_funded_display": "11/9/2023",
+      "last_funded_iso": "2023-11-09"
+    },
+    {
+      "company": "Gather AI",
+      "founded_year": 2017,
+      "stage": "Series A - II",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "3/27/2024",
+      "last_funded_iso": "2024-03-27"
+    },
+    {
+      "company": "Genesis Therapeutics",
+      "founded_year": 2019,
+      "stage": "Series B",
+      "valuation_display": "$426.926M",
+      "valuation_value_m": 426.926,
+      "last_funded_display": "8/21/2023",
+      "last_funded_iso": "2023-08-21"
+    },
+    {
+      "company": "Gesund.ai",
+      "founded_year": 2021,
+      "stage": "Incubator/Accelerator",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/26/2024",
+      "last_funded_iso": "2024-02-26"
+    },
+    {
+      "company": "Glaive",
+      "founded_year": 2023,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "8/8/2023",
+      "last_funded_iso": "2023-08-08"
+    },
+    {
+      "company": "Glyphic",
+      "founded_year": 2022,
+      "stage": "Pre-Seed",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "6/14/2023",
+      "last_funded_iso": "2023-06-14"
+    },
+    {
+      "company": "Greyparrot",
+      "founded_year": 2019,
+      "stage": "Corporate Minority",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/6/2024",
+      "last_funded_iso": "2024-02-06"
+    },
+    {
+      "company": "Groq",
+      "founded_year": 2016,
+      "stage": "Series C - II",
+      "valuation_display": "$1B",
+      "valuation_value_m": 1000.0,
+      "last_funded_display": "4/14/2021",
+      "last_funded_iso": "2021-04-14"
+    },
+    {
+      "company": "Groundlight AI",
+      "founded_year": 2019,
+      "stage": "Seed VC",
+      "valuation_display": "$57.1M",
+      "valuation_value_m": 57.1,
+      "last_funded_display": "4/19/2023",
+      "last_funded_iso": "2023-04-19"
+    },
+    {
+      "company": "Helsing",
+      "founded_year": 2021,
+      "stage": "Series B",
+      "valuation_display": "$1.82B",
+      "valuation_value_m": 1820.0,
+      "last_funded_display": "9/14/2023",
+      "last_funded_iso": "2023-09-14"
+    },
+    {
+      "company": "Hugging Face",
+      "founded_year": 2016,
+      "stage": "Series D",
+      "valuation_display": "$4.5B",
+      "valuation_value_m": 4500.0,
+      "last_funded_display": "8/23/2023",
+      "last_funded_iso": "2023-08-23"
+    },
+    {
+      "company": "Iambic Therapeutics",
+      "founded_year": 2019,
+      "stage": "Series B",
+      "valuation_display": "$266.5M",
+      "valuation_value_m": 266.5,
+      "last_funded_display": "4/24/2024",
+      "last_funded_iso": "2024-04-24"
+    },
+    {
+      "company": "Ideogram AI",
+      "founded_year": 2022,
+      "stage": "Series A",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/28/2024",
+      "last_funded_iso": "2024-02-28"
+    },
+    {
+      "company": "Inworld AI",
+      "founded_year": 2021,
+      "stage": "Series A - III",
+      "valuation_display": "$500M",
+      "valuation_value_m": 500.0,
+      "last_funded_display": "10/13/2023",
+      "last_funded_iso": "2023-10-13"
+    },
+    {
+      "company": "Isomorphic Labs",
+      "founded_year": 2021,
+      "stage": "Spinoff / Spinout",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "11/7/2021",
+      "last_funded_iso": "2021-11-07"
+    },
+    {
+      "company": "Jua",
+      "founded_year": 2022,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/5/2024",
+      "last_funded_iso": "2024-02-05"
+    },
+    {
+      "company": "KoBold Metals",
+      "founded_year": 2018,
+      "stage": "Series C",
+      "valuation_display": "$1B",
+      "valuation_value_m": 1000.0,
+      "last_funded_display": "6/20/2023",
+      "last_funded_iso": "2023-06-20"
+    },
+    {
+      "company": "Lelapa AI",
+      "founded_year": 2022,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/17/2023",
+      "last_funded_iso": "2023-02-17"
+    },
+    {
+      "company": "Lightmatter",
+      "founded_year": 2017,
+      "stage": "Series C - II",
+      "valuation_display": "$1.2B",
+      "valuation_value_m": 1200.0,
+      "last_funded_display": "12/19/2023",
+      "last_funded_iso": "2023-12-19"
+    },
+    {
+      "company": "Lightup",
+      "founded_year": 2019,
+      "stage": "Series A",
+      "valuation_display": "$42.9M",
+      "valuation_value_m": 42.9,
+      "last_funded_display": "3/31/2023",
+      "last_funded_iso": "2023-03-31"
+    },
+    {
+      "company": "Luma AI",
+      "founded_year": 2021,
+      "stage": "Series B",
+      "valuation_display": "$300M",
+      "valuation_value_m": 300.0,
+      "last_funded_display": "1/9/2024",
+      "last_funded_iso": "2024-01-09"
+    },
+    {
+      "company": "Magic",
+      "founded_year": 2022,
+      "stage": "Option/Warrant",
+      "valuation_display": "$158.6M",
+      "valuation_value_m": 158.6,
+      "last_funded_display": "3/13/2024",
+      "last_funded_iso": "2024-03-13"
+    },
+    {
+      "company": "Martian",
+      "founded_year": 2022,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "11/16/2023",
+      "last_funded_iso": "2023-11-16"
+    },
+    {
+      "company": "Mechanical Orchard",
+      "founded_year": 2022,
+      "stage": "Series A",
+      "valuation_display": "$95M",
+      "valuation_value_m": 95.0,
+      "last_funded_display": "2/7/2024",
+      "last_funded_iso": "2024-02-07"
+    },
+    {
+      "company": "Midjourney",
+      "founded_year": 2021,
+      "stage": null,
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": null,
+      "last_funded_iso": null
+    },
+    {
+      "company": "MindsDB",
+      "founded_year": 2017,
+      "stage": "Series A - III",
+      "valuation_display": "$154.5M",
+      "valuation_value_m": 154.5,
+      "last_funded_display": "8/8/2023",
+      "last_funded_iso": "2023-08-08"
+    },
+    {
+      "company": "Mistral AI",
+      "founded_year": 2023,
+      "stage": "Series A - III",
+      "valuation_display": "$2B",
+      "valuation_value_m": 2000.0,
+      "last_funded_display": "3/11/2024",
+      "last_funded_iso": "2024-03-11"
+    },
+    {
+      "company": "Modular",
+      "founded_year": 2022,
+      "stage": "Series B",
+      "valuation_display": "$836.7M",
+      "valuation_value_m": 836.7,
+      "last_funded_display": "8/24/2023",
+      "last_funded_iso": "2023-08-24"
+    },
+    {
+      "company": "Modyfi",
+      "founded_year": 2021,
+      "stage": "Seed VC",
+      "valuation_display": "$26M",
+      "valuation_value_m": 26.0,
+      "last_funded_display": "8/23/2023",
+      "last_funded_iso": "2023-08-23"
+    },
+    {
+      "company": "Monumental",
+      "founded_year": 2021,
+      "stage": "Series A",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/15/2024",
+      "last_funded_iso": "2024-02-15"
+    },
+    {
+      "company": "Myko AI",
+      "founded_year": 2020,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/26/2024",
+      "last_funded_iso": "2024-02-26"
+    },
+    {
+      "company": "Nomic AI",
+      "founded_year": 2022,
+      "stage": "Series A",
+      "valuation_display": "$100M",
+      "valuation_value_m": 100.0,
+      "last_funded_display": "7/13/2023",
+      "last_funded_iso": "2023-07-13"
+    },
+    {
+      "company": "Nous Research",
+      "founded_year": 2023,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "1/10/2024",
+      "last_funded_iso": "2024-01-10"
+    },
+    {
+      "company": "Numbers Station",
+      "founded_year": 2021,
+      "stage": "Series A",
+      "valuation_display": "$51.5M",
+      "valuation_value_m": 51.5,
+      "last_funded_display": "3/20/2023",
+      "last_funded_iso": "2023-03-20"
+    },
+    {
+      "company": "Objective",
+      "founded_year": 2021,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "10/18/2023",
+      "last_funded_iso": "2023-10-18"
+    },
+    {
+      "company": "OpenAI",
+      "founded_year": 2015,
+      "stage": "Secondary Market - III",
+      "valuation_display": "$80B",
+      "valuation_value_m": 80000.0,
+      "last_funded_display": "4/10/2024",
+      "last_funded_iso": "2024-04-10"
+    },
+    {
+      "company": "OpenEvidence",
+      "founded_year": 2021,
+      "stage": "Incubator/Accelerator",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "7/31/2023",
+      "last_funded_iso": "2023-07-31"
+    },
+    {
+      "company": "Orbital Materials",
+      "founded_year": 2022,
+      "stage": "Series A",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "2/21/2024",
+      "last_funded_iso": "2024-02-21"
+    },
+    {
+      "company": "Perplexity AI",
+      "founded_year": 2022,
+      "stage": "Series B",
+      "valuation_display": "$1B",
+      "valuation_value_m": 1000.0,
+      "last_funded_display": "4/23/2024",
+      "last_funded_iso": "2024-04-23"
+    },
+    {
+      "company": "Phind",
+      "founded_year": 2022,
+      "stage": "Convertible Note",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "9/8/2022",
+      "last_funded_iso": "2022-09-08"
+    },
+    {
+      "company": "PhysicsX",
+      "founded_year": 2019,
+      "stage": "Series A",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "11/27/2023",
+      "last_funded_iso": "2023-11-27"
+    },
+    {
+      "company": "Predibase",
+      "founded_year": 2021,
+      "stage": "Series A - II",
+      "valuation_display": "$63.3M",
+      "valuation_value_m": 63.3,
+      "last_funded_display": "5/31/2023",
+      "last_funded_iso": "2023-05-31"
+    },
+    {
+      "company": "Protect AI",
+      "founded_year": 2022,
+      "stage": "Series A",
+      "valuation_display": "$98.3M",
+      "valuation_value_m": 98.3,
+      "last_funded_display": "7/26/2023",
+      "last_funded_iso": "2023-07-26"
+    },
+    {
+      "company": "Pryon",
+      "founded_year": 2017,
+      "stage": "Series B",
+      "valuation_display": "$750M",
+      "valuation_value_m": 750.0,
+      "last_funded_display": "9/19/2023",
+      "last_funded_iso": "2023-09-19"
+    },
+    {
+      "company": "Quantum Systems",
+      "founded_year": 2015,
+      "stage": "Series B",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "10/24/2023",
+      "last_funded_iso": "2023-10-24"
+    },
+    {
+      "company": "Rebellions",
+      "founded_year": 2020,
+      "stage": "Series B",
+      "valuation_display": "$598.8M",
+      "valuation_value_m": 598.8,
+      "last_funded_display": "12/8/2023",
+      "last_funded_iso": "2023-12-08"
+    },
+    {
+      "company": "Reka AI",
+      "founded_year": 2022,
+      "stage": "Series A - II",
+      "valuation_display": "$300M",
+      "valuation_value_m": 300.0,
+      "last_funded_display": "6/1/2023",
+      "last_funded_iso": "2023-06-01"
+    },
+    {
+      "company": "Resistant AI",
+      "founded_year": 2019,
+      "stage": "Series A - II",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "6/27/2023",
+      "last_funded_iso": "2023-06-27"
+    },
+    {
+      "company": "Retrocausal",
+      "founded_year": 2019,
+      "stage": "Seed VC - II",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "11/30/2023",
+      "last_funded_iso": "2023-11-30"
+    },
+    {
+      "company": "Rosebud AI",
+      "founded_year": 2019,
+      "stage": "Seed VC - II",
+      "valuation_display": "$50M",
+      "valuation_value_m": 50.0,
+      "last_funded_display": "12/21/2021",
+      "last_funded_iso": "2021-12-21"
+    },
+    {
+      "company": "Runway",
+      "founded_year": 2018,
+      "stage": "Series C - II",
+      "valuation_display": "$1.5B",
+      "valuation_value_m": 1500.0,
+      "last_funded_display": "5/4/2023",
+      "last_funded_iso": "2023-05-04"
+    },
+    {
+      "company": "Sakana AI",
+      "founded_year": 2023,
+      "stage": "Grant",
+      "valuation_display": "$200M",
+      "valuation_value_m": 200.0,
+      "last_funded_display": "2/2/2024",
+      "last_funded_iso": "2024-02-02"
+    },
+    {
+      "company": "Sarvam AI",
+      "founded_year": 2023,
+      "stage": "Series A",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "12/7/2023",
+      "last_funded_iso": "2023-12-07"
+    },
+    {
+      "company": "Shield AI",
+      "founded_year": 2015,
+      "stage": "Debt - III",
+      "valuation_display": "$2.8B",
+      "valuation_value_m": 2800.0,
+      "last_funded_display": "12/29/2023",
+      "last_funded_iso": "2023-12-29"
+    },
+    {
+      "company": "Sierra",
+      "founded_year": 2023,
+      "stage": "Series B",
+      "valuation_display": "$806.3M",
+      "valuation_value_m": 806.3,
+      "last_funded_display": "2/13/2024",
+      "last_funded_iso": "2024-02-13"
+    },
+    {
+      "company": "Suno",
+      "founded_year": 2022,
+      "stage": "Series A",
+      "valuation_display": "$120.2M",
+      "valuation_value_m": 120.2,
+      "last_funded_display": "11/9/2023",
+      "last_funded_iso": "2023-11-09"
+    },
+    {
+      "company": "SuperAGI",
+      "founded_year": 2023,
+      "stage": "Series A",
+      "valuation_display": "$100M",
+      "valuation_value_m": 100.0,
+      "last_funded_display": "3/11/2024",
+      "last_funded_iso": "2024-03-11"
+    },
+    {
+      "company": "Tenstorrent",
+      "founded_year": 2016,
+      "stage": "Convertible Note",
+      "valuation_display": "$1B",
+      "valuation_value_m": 1000.0,
+      "last_funded_display": "8/2/2023",
+      "last_funded_iso": "2023-08-02"
+    },
+    {
+      "company": "Together AI",
+      "founded_year": 2022,
+      "stage": "Series A - II",
+      "valuation_display": "$1.25B",
+      "valuation_value_m": 1250.0,
+      "last_funded_display": "3/13/2024",
+      "last_funded_iso": "2024-03-13"
+    },
+    {
+      "company": "TrojAI",
+      "founded_year": 2019,
+      "stage": "Seed VC - III",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "4/3/2024",
+      "last_funded_iso": "2024-04-03"
+    },
+    {
+      "company": "Twelve Labs",
+      "founded_year": 2021,
+      "stage": "Seed VC - III",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "10/24/2023",
+      "last_funded_iso": "2023-10-24"
+    },
+    {
+      "company": "Unstructured",
+      "founded_year": 2022,
+      "stage": "Series B",
+      "valuation_display": "$230M",
+      "valuation_value_m": 230.0,
+      "last_funded_display": "3/14/2024",
+      "last_funded_iso": "2024-03-14"
+    },
+    {
+      "company": "Vayu Robotics",
+      "founded_year": 2022,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "10/3/2023",
+      "last_funded_iso": "2023-10-03"
+    },
+    {
+      "company": "Voltron Data",
+      "founded_year": 2021,
+      "stage": "Series A",
+      "valuation_display": "$339.1M",
+      "valuation_value_m": 339.1,
+      "last_funded_display": "2/17/2022",
+      "last_funded_iso": "2022-02-17"
+    },
+    {
+      "company": "Waabi",
+      "founded_year": 2021,
+      "stage": "Series A - II",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "1/18/2023",
+      "last_funded_iso": "2023-01-18"
+    },
+    {
+      "company": "Weights & Biases",
+      "founded_year": 2017,
+      "stage": "Series C - II",
+      "valuation_display": "$1.25B",
+      "valuation_value_m": 1250.0,
+      "last_funded_display": "8/9/2023",
+      "last_funded_iso": "2023-08-09"
+    },
+    {
+      "company": "Wraithwatch",
+      "founded_year": 2023,
+      "stage": "Seed VC",
+      "valuation_display": "$36M",
+      "valuation_value_m": 36.0,
+      "last_funded_display": "11/2/2023",
+      "last_funded_iso": "2023-11-02"
+    },
+    {
+      "company": "Writer",
+      "founded_year": 2015,
+      "stage": "Series B",
+      "valuation_display": "$750M",
+      "valuation_value_m": 750.0,
+      "last_funded_display": "9/18/2023",
+      "last_funded_iso": "2023-09-18"
+    },
+    {
+      "company": "Xanadu",
+      "founded_year": 2016,
+      "stage": "Grant - IV",
+      "valuation_display": "$1B",
+      "valuation_value_m": 1000.0,
+      "last_funded_display": "3/11/2024",
+      "last_funded_iso": "2024-03-11"
+    },
+    {
+      "company": "XetHub",
+      "founded_year": 2021,
+      "stage": "Seed VC",
+      "valuation_display": null,
+      "valuation_value_m": null,
+      "last_funded_display": "1/9/2023",
+      "last_funded_iso": "2023-01-09"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+    "plot_data": [
+        {
+            "flow_rate": 4.0,
+            "heat_power": 12.54969,
+            "h2_power": 2.56383
+        },
+        {
+            "flow_rate": 4.22222,
+            "heat_power": 12.94205,
+            "h2_power": 2.55607
+        },
+        {
+            "flow_rate": 4.44444,
+            "heat_power": 13.30578,
+            "h2_power": 2.54881
+        },
+        {
+            "flow_rate": 4.66667,
+            "heat_power": 13.64379,
+            "h2_power": 2.54199
+        },
+        {
+            "flow_rate": 4.88889,
+            "heat_power": 13.95868,
+            "h2_power": 2.53551
+        },
+        {
+            "flow_rate": 5.11111,
+            "heat_power": 14.25273,
+            "h2_power": 2.52925
+        },
+        {
+            "flow_rate": 5.33333,
+            "heat_power": 14.52797,
+            "h2_power": 2.52308
+        },
+        {
+            "flow_rate": 5.55556,
+            "heat_power": 14.78616,
+            "h2_power": 2.51698
+        },
+        {
+            "flow_rate": 5.77778,
+            "heat_power": 15.02868,
+            "h2_power": 2.51115
+        },
+        {
+            "flow_rate": 6.0,
+            "heat_power": 15.25653,
+            "h2_power": 2.5061
+        }
+    ]
+}

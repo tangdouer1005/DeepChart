@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016,
+            "CFO": -123829000,
+            "Net Income": -674914000,
+            "Total Assets": 22664076000.0,
+            "Avg Total Assets": 15366007500.0,
+            "CFO per Asset": -0.0080586320161564,
+            "NI per Asset": -0.0439225348549387
+        },
+        {
+            "Fiscal Year": 2017,
+            "CFO": -61000000,
+            "Net Income": -1962000000,
+            "Total Assets": 28655372000.0,
+            "Avg Total Assets": 25659724000.0,
+            "CFO per Asset": -0.0023772664117509,
+            "NI per Asset": -0.0764622409812358
+        },
+        {
+            "Fiscal Year": 2018,
+            "CFO": 2098000000,
+            "Net Income": -976000000,
+            "Total Assets": 29740000000.0,
+            "Avg Total Assets": 29197686000.0,
+            "CFO per Asset": 0.0718550093319039,
+            "NI per Asset": -0.0334273065338123
+        },
+        {
+            "Fiscal Year": 2019,
+            "CFO": 2405000000,
+            "Net Income": -862000000,
+            "Total Assets": 34309000000.0,
+            "Avg Total Assets": 32024500000.0,
+            "CFO per Asset": 0.0750987525176037,
+            "NI per Asset": -0.0269168917547502
+        },
+        {
+            "Fiscal Year": 2020,
+            "CFO": 5943000000,
+            "Net Income": 721000000,
+            "Total Assets": 52148000000.0,
+            "Avg Total Assets": 43228500000.0,
+            "CFO per Asset": 0.1374787466601894,
+            "NI per Asset": 0.0166788114322726
+        },
+        {
+            "Fiscal Year": 2021,
+            "CFO": 11497000000,
+            "Net Income": 5644000000,
+            "Total Assets": 62131000000.0,
+            "Avg Total Assets": 57139500000.0,
+            "CFO per Asset": 0.2012093210476115,
+            "NI per Asset": 0.0987758030784308
+        },
+        {
+            "Fiscal Year": 2022,
+            "CFO": 14724000000,
+            "Net Income": 12587000000,
+            "Total Assets": 82338000000.0,
+            "Avg Total Assets": 72234500000.0,
+            "CFO per Asset": 0.2038361170908637,
+            "NI per Asset": 0.1742519156358803
+        },
+        {
+            "Fiscal Year": 2023,
+            "CFO": 13256000000,
+            "Net Income": 14974000000,
+            "Total Assets": 106618000000.0,
+            "Avg Total Assets": 94478000000.0,
+            "CFO per Asset": 0.1403077965240585,
+            "NI per Asset": 0.1584919240458096
+        },
+        {
+            "Fiscal Year": 2024,
+            "CFO": 14923000000,
+            "Net Income": 7130000000,
+            "Total Assets": 122070000000.0,
+            "Avg Total Assets": 114344000000.0,
+            "CFO per Asset": 0.1305096900580704,
+            "NI per Asset": 0.0623556985937172
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.024315352631186025
+        },
+        {
+            "Fiscal Year": 2017,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.06634009148441695
+        },
+        {
+            "Fiscal Year": 2018,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.10336247478143915
+        },
+        {
+            "Fiscal Year": 2019,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.09522282782943252
+        },
+        {
+            "Fiscal Year": 2020,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.10013806857405845
+        },
+        {
+            "Fiscal Year": 2021,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.0942041814875022
+        },
+        {
+            "Fiscal Year": 2022,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.025953994510432593
+        },
+        {
+            "Fiscal Year": 2023,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": -0.016113601830835322
+        },
+        {
+            "Fiscal Year": 2024,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.06384041943147375
+        }
+    ]
+}

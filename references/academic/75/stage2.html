@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart 75 Reproduction</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fff;
+        }
+        #chart {
+            width: 1000px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script>
+        // 1. Source Data (Injected JSON)
+        const sourceData = [
+    {
+        "protein": "G15",
+        "ntsr1": [
+            0.09861,
+            0.1157,
+            0.13439,
+            0.1263,
+            0.119,
+            0.12425,
+            0.12537
+        ],
+        "no_ntsr1": [
+            -0.03635143578,
+            -0.02834705032,
+            -0.0239758348,
+            -0.02936297897,
+            -0.03280815393,
+            -0.02272429095
+        ],
+        "p_value": 7.559192427608294e-12
+    },
+    {
+        "protein": "Gi1",
+        "ntsr1": [
+            0.06814,
+            0.06494,
+            0.05948,
+            0.12041,
+            0.09415,
+            0.08036,
+            0.10172,
+            0.10296,
+            0.09427
+        ],
+        "no_ntsr1": [
+            0.05627221819,
+            0.003265948046,
+            -0.012646862,
+            -0.02237109425,
+            -0.03457729744,
+            -0.003834766583,
+            0.01269434146
+        ],
+        "p_value": 5.930971281792287e-06
+    },
+    {
+        "protein": "Gi2",
+        "ntsr1": [
+            0.06814,
+            0.06494,
+            0.05948,
+            0.12041,
+            0.09415,
+            0.08036,
+            0.10172,
+            0.10296,
+            0.09427
+        ],
+        "no_ntsr1": [
+            -0.026585829,
+            0.00090738,
+            -0.007091,
+            0.00817,
+            0.03506,
+            0.04762,
+            -0.0306,
+            -0.023158,
+            0.00673827
+        ],
+        "p_value": 1.0057808693587946e-06
+    },
+    {
+        "protein": "GoA",
+        "ntsr1": [
+            0.10739,
+            0.13261,
+            0.10043,
+            0.12215,
+            0.13214,
+            0.14922,
+            0.08009,
+            0.10627,
+            0.10338
+        ],
+        "no_ntsr1": [
+            -0.046413,
+            -0.040247,
+            -0.050125,
+            0.01948815829,
+            0.009848719921,
+            0.0003642223716
+        ],
+        "p_value": 1.979673889263181e-07
+    },
+    {
+        "protein": "GoB",
+        "ntsr1": [
+            0.10066,
+            0.12493,
+            0.10246,
+            0.11339,
+            0.15058,
+            0.13409,
+            0.17886,
+            0.19844,
+            0.17703,
+            0.14779,
+            0.18754,
+            0.17204
+        ],
+        "no_ntsr1": [
+            0.0059671,
+            0.0809716,
+            0.05614,
+            0.05503,
+            0.05067,
+            0.04166,
+            0.07838,
+            0.06805,
+            0.02149
+        ],
+        "p_value": 6.484691315536226e-07
+    },
+    {
+        "protein": "Gg",
+        "ntsr1": [
+            0.05587,
+            0.03747,
+            0.02696,
+            0.06502,
+            0.06803,
+            0.05858,
+            0.04931,
+            0.03871,
+            0.04315,
+            0.04863,
+            0.07383,
+            0.04347
+        ],
+        "no_ntsr1": [
+            -0.028911,
+            -0.011637,
+            -0.021725,
+            -0.033632,
+            -0.02368,
+            -0.011402,
+            -0.0698347,
+            -0.0629408,
+            -0.02384818
+        ],
+        "p_value": 1.2570324243305585e-09
+    },
+    {
+        "protein": "G12",
+        "ntsr1": [
+            0.10272,
+            0.14475,
+            0.10265,
+            0.12409,
+            0.14208,
+            0.15277,
+            0.20006,
+            0.23637,
+            0.2368
+        ],
+        "no_ntsr1": [
+            0.05611,
+            0.00916,
+            0.01579454,
+            0.01273,
+            0.01917,
+            0.04146,
+            0.01826,
+            0.00963,
+            0.0203,
+            -0.02153082363,
+            -0.02811099579,
+            -0.04487437074
+        ],
+        "p_value": 6.289587418422725e-08
+    },
+    {
+        "protein": "G13",
+        "ntsr1": [
+            0.18362,
+            0.18632,
+            0.15875,
+            0.27634,
+            0.24043,
+            0.24637,
+            0.28347,
+            0.29985,
+            0.26862
+        ],
+        "no_ntsr1": [
+            0.04172175,
+            0.02928817,
+            0.05098181,
+            0.01676,
+            0.0028,
+            0.04314,
+            0.07779,
+            0.05963,
+            0.05236
+        ],
+        "p_value": 1.0928664649660616e-08
+    }
+];
+
+        // 2. Statistics Functions
+        function getMean(data) {
+            if (!data || !data.length) return 0;
+            return data.reduce((a, b) => a + b, 0) / data.length;
+        }
+
+        function getVariance(data, mean) {
+            if (!data || data.length <= 1) return 0;
+            return data.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / (data.length - 1);
+        }
+
+        function getSEM(data) {
+            if (!data || data.length <= 1) return 0;
+            const mean = getMean(data);
+            const variance = getVariance(data, mean);
+            return Math.sqrt(variance) / Math.sqrt(data.length);
+        }
+
+        function getStarFromPValue(p) {
+            if (p < 0.001) return '***';
+            if (p < 0.01) return '**';
+            if (p < 0.05) return '*';
+            return "";
+        }
+
+
+        // 3. Data Processing
+        
+        const proteins = ['G15', 'Gi1', 'Gi2', 'GoA', 'GoB', 'Gg', 'G12', 'G13'];
+        const plotData = [];
+
+        // Map from protein name to data object for easy lookup
+        const dataMap = {};
+        sourceData.forEach(item => {
+            dataMap[item.protein] = item;
+        });
+
+        proteins.forEach(proteinName => {
+            if (!dataMap[proteinName]) return;
+            const item = dataMap[proteinName];
+
+            plotData.push({
+                protein: proteinName,
+                ntsr1: item.ntsr1,
+                noNtsr1: item.no_ntsr1,
+                pValue: item.p_value
+            });
+        });
+
+        // 4. Prepare Plotly Traces
+        const xProts = plotData.map(d => d.protein);
+        const yMeanNtsr1 = plotData.map(d => getMean(d.ntsr1));
+        const ySemNtsr1 = plotData.map(d => getSEM(d.ntsr1));
+        const yMeanNoNtsr1 = plotData.map(d => getMean(d.noNtsr1));
+        const ySemNoNtsr1 = plotData.map(d => getSEM(d.noNtsr1));
+
+        const xIndices = xProts.map((_, i) => i);
+        const barOffset = 0.35 / 2; // 0.175
+        const trace1X = xIndices.map(i => i - barOffset);
+        const trace2X = xIndices.map(i => i + barOffset);
+        
+        // Trace 1: NTSR1 Bars
+        const trace1 = {
+            x: trace1X,
+            y: yMeanNtsr1,
+            type: 'bar',
+            name: 'Cells with NTSR1',
+            width: 0.35,
+            marker: { color: '#9932CC' },
+            error_y: {
+                type: 'data',
+                array: ySemNtsr1,
+                visible: true,
+                color: 'black',
+                thickness: 1,
+                width: 3
+            }
+        };
+
+        // Trace 2: No NTSR1 Bars
+        const trace2 = {
+            x: trace2X,
+            y: yMeanNoNtsr1,
+            type: 'bar',
+            name: 'Cell without NTSR1',
+            width: 0.35,
+            marker: { 
+                color: 'white',
+                line: { color: '#9932CC', width: 1.5 }
+            },
+            error_y: {
+                type: 'data',
+                array: ySemNoNtsr1,
+                visible: true,
+                color: '#9932CC',
+                thickness: 1,
+                width: 3
+            }
+        };
+        
+        const xScatter1 = [];
+        const yScatter1 = [];
+        const xScatter2 = [];
+        const yScatter2 = [];
+
+        // Now Scatters
+        plotData.forEach((d, i) => {
+            // NTSR1 Scatter
+            if (d.ntsr1) {
+                d.ntsr1.forEach(y => {
+                    const jitter = (Math.random() - 0.5) * 0.1; // -0.05 to 0.05
+                    xScatter1.push(i - barOffset + jitter);
+                    yScatter1.push(y);
+                });
+            }
+            // No NTSR1 Scatter
+            if (d.noNtsr1) {
+                d.noNtsr1.forEach(y => {
+                    const jitter = (Math.random() - 0.5) * 0.1;
+                    xScatter2.push(i + barOffset + jitter);
+                    yScatter2.push(y);
+                });
+            }
+        });
+
+        const traceScatter1 = {
+            x: xScatter1,
+            y: yScatter1,
+            mode: 'markers',
+            type: 'scatter',
+            marker: { color: 'white', line: { color: 'gray', width: 0.8 }, size: 6 },
+            showlegend: false,
+            hoverinfo: 'y'
+        };
+
+        const traceScatter2 = {
+            x: xScatter2,
+            y: yScatter2,
+            mode: 'markers',
+            type: 'scatter',
+            marker: { color: 'white', line: { color: '#9932CC', width: 0.8 }, size: 6 },
+            showlegend: false,
+            hoverinfo: 'y'
+        };
+
+        const data = [trace1, trace2, traceScatter1, traceScatter2];
+
+        // 5. Annotations (Stars and Family Groups)
+        const annotations = [];
+        const shapes = [];
+
+        // Stars
+        plotData.forEach((d, i) => {
+            const star = getStarFromPValue(d.pValue);
+            if (star) {
+                const maxVal = Math.max(
+                    (d.ntsr1 && d.ntsr1.length ? Math.max(...d.ntsr1) : 0),
+                    (d.noNtsr1 && d.noNtsr1.length ? Math.max(...d.noNtsr1) : 0)
+                );
+                let bracketY = maxVal + 0.03;
+                if (bracketY < 0.05) bracketY = 0.05;
+                if (['G12', 'G13'].includes(d.protein)) bracketY += 0.02;
+
+                const x1 = i - barOffset;
+                const x2 = i + barOffset;
+
+                // Bracket line
+                shapes.push({
+                    type: 'path',
+                    path: `M ${x1} ${bracketY - 0.01} L ${x1} ${bracketY} L ${x2} ${bracketY} L ${x2} ${bracketY - 0.01}`,
+                    line: { color: 'black', width: 1 }
+                });
+
+                // Star Text
+                annotations.push({
+                    x: i,
+                    y: bracketY,
+                    text: star,
+                    showarrow: false,
+                    yshift: 5,
+                    font: { size: 14, color: 'black', family: 'Arial', weight: 'bold' }
+                });
+            }
+        });
+
+        // Family Groups
+        const families = [
+            {name: 'Gq', start: 0, end: 0},
+            {name: 'Gi/o', start: 1, end: 5},
+            {name: 'G12/13', start: 6, end: 7}
+        ];
+
+        families.forEach(f => {
+            const xStart = f.start - 0.3;
+            const xEnd = f.end + 0.3;
+            const lineY = -0.12; 
+
+            shapes.push({
+                type: 'line',
+                x0: xStart, x1: xEnd,
+                y0: lineY, y1: lineY,
+                line: { color: 'black', width: 2 },
+                xref: 'x', yref: 'y'
+            });
+
+            annotations.push({
+                x: (xStart + xEnd) / 2,
+                y: lineY - 0.05,
+                text: f.name,
+                showarrow: false,
+                yshift: 0, 
+                font: { size: 12, color: 'black', weight: 'bold' },
+                xref: 'x', yref: 'y',
+                valign: 'top'
+            });
+        });
+        
+        // "Family" label
+        annotations.push({
+            x: -0.8,
+            y: -0.15,
+            text: 'Family',
+            showarrow: false,
+            font: { size: 12, color: 'black', weight: 'bold' },
+            xref: 'x', yref: 'y',
+            xanchor: 'right'
+        });
+
+        // "e" label (Top Left)
+        annotations.push({
+            x: 0, 
+            y: 1.1,
+            xref: 'paper', yref: 'paper',
+            text: 'e',
+            showarrow: false,
+            font: { size: 24, weight: 'bold', color: 'black' },
+            xanchor: 'left'
+        });
+
+        const layout = {
+            width: 1000,
+            height: 600,
+            margin: { t: 80, b: 150, l: 100, r: 50 },
+            barmode: 'group',
+            xaxis: {
+                tickvals: xIndices,
+                ticktext: xProts,
+                tickfont: { size: 12, weight: 'bold', color: 'black' },
+                range: [-0.6, 7.6],
+                zeroline: false,
+                showgrid: false,
+                showline: true,
+                linecolor: 'black',
+                ticks: 'outside',
+                ticklen: 4
+            },
+            yaxis: {
+                title: {
+                    text: 'Max SBI-553-induced<br>G protein Activation<br>(-Δ Net BRET)',
+                    font: { size: 12, weight: 'bold', color: 'black' }
+                },
+                range: [-0.08, 0.32],
+                zeroline: true,
+                zerolinecolor: 'black',
+                zerolinewidth: 1,
+                showgrid: false,
+                showline: false,
+                ticks: 'inside',
+                ticklen: 4,
+                tickfont: { color: 'black' }
+            },
+            legend: {
+                x: 1,
+                y: 1,
+                xanchor: 'right',
+                yanchor: 'top',
+                orientation: 'h', 
+                traceorder: 'normal',
+                font: { size: 11 }
+            },
+            shapes: shapes,
+            annotations: annotations,
+            plot_bgcolor: 'white',
+            paper_bgcolor: 'white',
+            showlegend: true
+        };
+
+        Plotly.newPlot('chart', data, layout, {staticPlot: false});
+
+    </script>
+</body>
+</html>

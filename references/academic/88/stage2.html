@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = {
+    "raw_data": {
+        "B16-F0": [
+            0.94,
+            1.0,
+            1.06,
+            0.98,
+            1.05,
+            1.11,
+            1.01,
+            0.96,
+            1.04,
+            0.99,
+            0.97,
+            1.04,
+            0.93,
+            0.96,
+            1.12,
+            0.94,
+            0.99,
+            1.07,
+            1.01,
+            0.93,
+            1.06,
+            1.1,
+            0.89,
+            1.0,
+            1.04,
+            0.93,
+            1.03,
+            1.0,
+            1.0,
+            1.0
+        ],
+        "LN1-18IL": [
+            0.9,
+            1.07,
+            0.97,
+            0.94,
+            1.12,
+            1.01,
+            0.82,
+            0.9,
+            0.89,
+            1.08,
+            1.12,
+            1.05,
+            1.07,
+            1.24,
+            1.01,
+            1.07,
+            1.11,
+            1.24,
+            0.6,
+            0.66,
+            0.6,
+            0.53,
+            0.66,
+            0.62,
+            0.56,
+            0.67,
+            0.59,
+            0.66,
+            1.2,
+            1.02
+        ],
+        "LN7-1112AR": [
+            0.32,
+            0.31,
+            0.39,
+            0.31,
+            0.34,
+            0.41,
+            0.33,
+            0.55,
+            0.32
+        ],
+        "LN7-1120BL": [
+            0.43,
+            0.42,
+            0.45,
+            0.29,
+            0.42,
+            0.43,
+            0.35,
+            0.68,
+            0.45
+        ],
+        "LN7-1134BL": [
+            0.34,
+            0.32,
+            0.41,
+            0.45,
+            0.49,
+            0.45,
+            0.33,
+            0.76,
+            0.44
+        ],
+        "LN8-1194BR": [
+            0.4,
+            0.35,
+            0.43,
+            0.35,
+            0.34,
+            0.35,
+            0.44,
+            0.45,
+            0.36,
+            0.31,
+            0.46,
+            0.27
+        ],
+        "LN8-1198AR": [
+            0.54,
+            0.51,
+            0.5,
+            0.43,
+            0.46,
+            0.44,
+            0.48,
+            0.48,
+            0.45,
+            0.38,
+            0.57,
+            0.37
+        ],
+        "LN8-1205BL": [
+            0.45,
+            0.44,
+            0.47,
+            0.33,
+            0.35,
+            0.3,
+            0.39,
+            0.35,
+            0.35,
+            0.25,
+            0.49,
+            0.28
+        ],
+        "LN9-1315BL": [
+            0.4,
+            0.48,
+            0.46,
+            0.3,
+            0.43,
+            0.34
+        ],
+        "LN9-1358IR": [
+            0.7,
+            0.42,
+            0.54,
+            0.4,
+            0.69,
+            0.39
+        ]
+    },
+    "p_values": {
+        "LN7-1112AR": "P = 4 × 10⁻¹⁵",
+        "LN7-1120BL": "P = 4 × 10⁻¹⁵",
+        "LN7-1134BL": "P = 4 × 10⁻¹⁵",
+        "LN8-1194BR": "P = 4 × 10⁻¹⁵",
+        "LN8-1198AR": "P = 4 × 10⁻¹⁵",
+        "LN8-1205BL": "P = 4 × 10⁻¹⁵",
+        "LN9-1315BL": "P = 4 × 10⁻¹⁵",
+        "LN9-1358IR": "P = 1.8 × 10⁻¹²"
+    }
+};
+
+        const rawData = jsonData.raw_data;
+        const pValues = jsonData.p_values;
+
+        const groups = Object.keys(rawData);
+        const barData = [];
+        const errorData = [];
+        const scatterData = [];
+
+        // Colors
+        const barColors = ['#d9d9d9', '#eeb7e6', '#8cc685', '#8cc685', '#8cc685', '#8cc685', '#8cc685', '#8cc685', '#8cc685', '#8cc685'];
+        const edgeColors = ['#4d4d4d', '#4d4d4d', '#2e6b2e', '#2e6b2e', '#2e6b2e', '#2e6b2e', '#2e6b2e', '#2e6b2e', '#2e6b2e', '#2e6b2e'];
+        const pointColors = ['black', 'black', '#2e6b2e', '#2e6b2e', '#2e6b2e', '#2e6b2e', '#2e6b2e', '#2e6b2e', '#2e6b2e', '#2e6b2e'];
+
+        groups.forEach((group, i) => {
+            const vals = rawData[group];
+            const mean = jStat.mean(vals);
+            const std = jStat.stdev(vals, true); // Sample SD
+
+            barData.push({
+                value: mean,
+                itemStyle: {
+                    color: barColors[i],
+                    borderColor: edgeColors[i],
+                    borderWidth: 1.5
+                }
+            });
+
+            errorData.push([
+                i,
+                mean - std,
+                mean + std
+            ]);
+
+            vals.forEach(v => {
+                // Jitter
+                const jitter = (Math.random() - 0.5) * 0.3;
+                scatterData.push({
+                    value: [i + jitter, v],
+                    itemStyle: {
+                        color: pointColors[i],
+                        opacity: 0.9
+                    }
+                });
+            });
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 80, right: 20, bottom: 80, left: 60 },
+            xAxis: {
+                type: 'category',
+                data: groups,
+                axisLabel: {
+                    rotate: 45,
+                    color: 'black',
+                    fontSize: 12
+                },
+                axisTick: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Relative GCLC levels',
+                nameLocation: 'middle',
+                nameGap: 40,
+                min: 0,
+                max: 2.2, // increased for annotations
+                interval: 0.5,
+                axisLabel: { color: 'black' },
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: barData,
+                    barWidth: '60%',
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const xValue = api.value(0);
+                        const low = api.value(1);
+                        const high = api.value(2);
+                        const style = api.style({ stroke: '#333333', lineWidth: 1.5 });
+                        const xCoord = api.coord([xValue, high])[0];
+                        const lowCoord = api.coord([xValue, low]);
+                        const highCoord = api.coord([xValue, high]);
+                        const capWidth = 10;
+
+                        return {
+                            type: 'group',
+                            children: [
+                                { type: 'line', shape: { x1: lowCoord[0], y1: lowCoord[1], x2: highCoord[0], y2: highCoord[1] }, style: style },
+                                { type: 'line', shape: { x1: xCoord - capWidth/2, y1: lowCoord[1], x2: xCoord + capWidth/2, y2: lowCoord[1] }, style: style },
+                                { type: 'line', shape: { x1: xCoord - capWidth/2, y1: highCoord[1], x2: xCoord + capWidth/2, y2: highCoord[1] }, style: style }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 2
+                },
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    symbolSize: 6,
+                    z: 3
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 10, top: 10, style: { text: 'e', font: 'bold 20px Arial' } },
+                // Top bracket
+                {
+                    type: 'line',
+                    shape: { x1: 170, y1: 50, x2: 570, y2: 50 }, // Approx pixels or convert data to pixel
+                    // Better to use relative coords or data coords via custom series if dynamic.
+                    // But for static reproduction, we can approximate or use markLine.
+                    // Let's use graphic relative to grid.
+                    // Grid width ~520. Columns 10. Width per col ~52.
+                    // Start index 2 (~160px from left of grid). End index 9 (~520px).
+                    // Left margin 60.
+                    // Start x = 60 + 2.5 * 52 = 190.
+                    // End x = 60 + 9.5 * 52 = 554.
+                    // Y = 50 (top margin).
+                    // Actually let's use data conversion logic if possible? No simple API in graphic.
+                    // We can use a custom series for annotations.
+                }
+            ]
+        };
+        
+        // Add Annotations via Custom Series
+        const annotationData = [];
+        groups.forEach((g, i) => {
+            if (pValues[g]) {
+                annotationData.push({
+                    type: 'text',
+                    x: i,
+                    y: 1.95,
+                    text: pValues[g]
+                });
+            }
+        });
+        
+        option.series.push({
+            type: 'custom',
+            renderItem: function(params, api) {
+                const children = [];
+                
+                // Vertical P-values
+                annotationData.forEach(ann => {
+                    const coord = api.coord([ann.x, ann.y]);
+                    children.push({
+                        type: 'text',
+                        style: {
+                            text: ann.text,
+                            x: coord[0],
+                            y: coord[1],
+                            textAlign: 'right',
+                            textVerticalAlign: 'middle',
+                            font: '9px Arial',
+                            fill: 'black'
+                        },
+                        rotation: -Math.PI / 2,
+                        origin: [coord[0], coord[1]]
+                    });
+                });
+                
+                // Top Bracket
+                const start = api.coord([2, 2.05]);
+                const end = api.coord([9, 2.05]);
+                children.push({
+                    type: 'line',
+                    shape: { x1: start[0], y1: start[1], x2: end[0], y2: end[1] },
+                    style: { stroke: 'black', lineWidth: 1 }
+                });
+                children.push({
+                    type: 'text',
+                    style: {
+                        text: 'P < 1 × 10⁻¹⁵',
+                        x: (start[0] + end[0]) / 2,
+                        y: start[1] - 5,
+                        textAlign: 'center',
+                        textVerticalAlign: 'bottom',
+                        font: '12px Arial',
+                        fill: 'black'
+                    }
+                });
+                
+                return { type: 'group', children: children };
+            },
+            data: [0] // Dummy
+        });
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

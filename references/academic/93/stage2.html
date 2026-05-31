@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart Replication</title>
+    <!-- Include ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', sans-serif;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #chart-container {
+            width: 300px;  /* Approx 2.5 inches * 100 px/inch + padding */
+            height: 600px; /* Approx 5 inches * 100 px/inch + padding */
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. Data Preparation
+        // ---------------------------------------------------------
+        
+        const data = {"parental_data": [1, 1.000328, 1.000005, 0.861667, 1.003191, 1.136075, 1], "ln_data": [0.587407, 0.932256, 0.847907, 0.563434468, 1.054753, 1.447167, 1.117306, 0.270697051, 0.731263444, 0.744321601, 0.463934401, 0.179749188, 0.782426964, 0.479145444, 0.70873371, 1.548417104, 1.414139626, 0.485153079, 1.03000271, 0.782000195, 0.492599693, 0.953486003, 0.618357257, 0.371824586, 0.625783402, 0.705343274, 0.451463534, 0.33207914, 0.455197984, 0.453811153, 0.537530998, 0.160409973, 0.327652464, 0.318659655]};
+        const parental_data = data.parental_data;
+        const ln_data = data.ln_data;
+
+        // Calculation Functions
+        function calculateMean(data) {
+            const sum = data.reduce((a, b) => a + b, 0);
+            return sum / data.length;
+        }
+
+        function calculateSD(data, mean) {
+            const squareDiffs = data.map(value => Math.pow(value - mean, 2));
+            const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / (data.length - 1);
+            return Math.sqrt(avgSquareDiff);
+        }
+
+        const parentalMean = calculateMean(parental_data);
+        const parentalSD = calculateSD(parental_data, parentalMean);
+        
+        const lnMean = calculateMean(ln_data);
+        const lnSD = calculateSD(ln_data, lnMean);
+
+        // ---------------------------------------------------------
+        // 2. Chart Configuration
+        // ---------------------------------------------------------
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        // Jitter function for strip plot
+        function getJitteredPoints(data, categoryIndex, width) {
+            return data.map(value => {
+                // Jitter x around the category center (categoryIndex)
+                const jitter = (Math.random() - 0.5) * width; 
+                return [categoryIndex + jitter, value];
+            });
+        }
+
+        const jitterWidth = 0.3; // Spread for scatter points
+        const parentalPoints = getJitteredPoints(parental_data, 0, jitterWidth);
+        const lnPoints = getJitteredPoints(ln_data, 1, jitterWidth);
+
+        const option = {
+            backgroundColor: '#fff',
+            animation: false, // Static for replication
+            grid: {
+                top: 80,    // Space for title/p-value
+                bottom: 50,
+                left: 70,
+                right: 30,
+                show: false
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Parental', 'LN'],
+                axisLine: {
+                    lineStyle: { color: 'black' }
+                },
+                axisTick: {
+                    alignWithLabel: true,
+                    lineStyle: { color: 'black' }
+                },
+                axisLabel: {
+                    color: 'black',
+                    fontSize: 14,
+                    rotate: 45,
+                    margin: 14
+                },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Relative GPX4 levels',
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: {
+                    color: 'black',
+                    fontSize: 14
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: { color: 'black' }
+                },
+                axisTick: {
+                    show: true,
+                    lineStyle: { color: 'black' }
+                },
+                axisLabel: {
+                    color: 'black',
+                    fontSize: 12,
+                    formatter: function(value) {
+                         // Only show specific ticks to match python script roughly [0, 0.5, 1.0, 1.5]
+                         // But echarts auto-ticks are usually fine. Let's force them if needed.
+                         return value.toFixed(1);
+                    }
+                },
+                splitLine: { show: false },
+                min: 0,
+                max: 1.9 // Give space for annotations
+            },
+            series: [
+                // 1. Bars (Mean)
+                {
+                    type: 'bar',
+                    data: [
+                        {
+                            value: parentalMean,
+                            itemStyle: { color: '#D9D9D9', borderColor: 'black', borderWidth: 1 }
+                        },
+                        {
+                            value: lnMean,
+                            itemStyle: { color: '#8FBC8F', borderColor: 'black', borderWidth: 1 }
+                        }
+                    ],
+                    barWidth: '60%',
+                    z: 1
+                },
+                // 2. Error Bars (Custom Render or using custom series)
+                // ECharts Custom Series for Error Bars
+                {
+                    type: 'custom',
+                    name: 'error',
+                    itemStyle: {
+                        borderWidth: 1.5,
+                        color: 'black' 
+                    },
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const mean = api.value(1);
+                        const sd = api.value(2);
+                        const high = mean + sd;
+                        // const low = mean - sd; // Original plot only shows upper SD cap often in bar plots? 
+                        // Actually sns.barplot shows both up and down, but since bars start at 0, 
+                        // sometimes only up is visible or meaningful if bar covers down. 
+                        // However, standard scientific bar plots with SD usually show +/- SD centered on mean.
+                        // Let's look at the Python code: sns.barplot with errorbar='sd'.
+                        // This usually draws a line from mean-sd to mean+sd.
+                        
+                        const low = mean - sd;
+                        
+                        const start = api.coord([xValue, low]);
+                        const end = api.coord([xValue, high]);
+                        const size = api.size([1, 0])[0] * 0.1; // Cap width
+
+                        const style = api.style({
+                            stroke: 'black',
+                            fill: null,
+                            lineWidth: 1
+                        });
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1],
+                                        x2: end[0], y2: end[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0] - size, y1: start[1],
+                                        x2: start[0] + size, y2: start[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: end[0] - size, y1: end[1],
+                                        x2: end[0] + size, y2: end[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: [
+                        [0, parentalMean, parentalSD],
+                        [1, lnMean, lnSD]
+                    ],
+                    z: 3
+                },
+                // 3. Scatter Points (Strip Plot)
+                {
+                    type: 'scatter',
+                    data: parentalPoints,
+                    itemStyle: {
+                        color: 'black',
+                        opacity: 0.8
+                    },
+                    symbolSize: 6,
+                    z: 4,
+                    xAxisIndex: 0,
+                    yAxisIndex: 0
+                },
+                {
+                    type: 'scatter',
+                    data: lnPoints,
+                    itemStyle: {
+                        color: '#2E7D32',
+                        opacity: 0.8
+                    },
+                    symbolSize: 6,
+                    z: 4,
+                    xAxisIndex: 0,
+                    yAxisIndex: 0
+                }
+            ],
+            // ---------------------------------------------------------
+            // 3. Graphic Elements (Annotations)
+            // ---------------------------------------------------------
+            graphic: [
+                // "j" Tag
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 10,
+                    style: {
+                        text: 'j',
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        fontFamily: 'sans-serif'
+                    }
+                },
+                // Significance Line
+                {
+                    type: 'line',
+                    shape: {
+                        x1: 0, y1: 0, x2: 0, y2: 0 // Will update in update hook or relative coordinates
+                    },
+                    // Using direct relative coordinates might be tricky without pixel conversion.
+                    // ECharts allows graphic elements to be positioned relative to axes?
+                    // No, 'graphic' is usually absolute or relative to container.
+                    // Instead, use 'markLine' or 'markPoint' or custom series for lines attached to data.
+                }
+            ]
+        };
+
+        // Adding annotations via `markArea` or `markLine` is one way, but for specific drawing lines:
+        // Let's use a secondary custom series for the Significance Line and Text, 
+        // because it's tied to data coordinates.
+
+        option.series.push({
+            type: 'custom',
+            renderItem: function (params, api) {
+                // Coordinates for [0, 1.65] and [1, 1.65]
+                const p1 = api.coord([0, 1.65]);
+                const p2 = api.coord([1, 1.65]);
+                
+                return {
+                    type: 'group',
+                    children: [
+                        // The line
+                        {
+                            type: 'line',
+                            shape: {
+                                x1: p1[0], y1: p1[1],
+                                x2: p2[0], y2: p2[1]
+                            },
+                            style: {
+                                stroke: 'black',
+                                lineWidth: 1.2
+                            }
+                        },
+                        // The text "P = 2.2 x 10^-5"
+                        {
+                            type: 'text',
+                            style: {
+                                text: 'P = 2.2 × 10⁻⁵',
+                                x: (p1[0] + p2[0]) / 2,
+                                y: p1[1] - 10, // Slightly above line
+                                textAlign: 'center',
+                                fill: 'black',
+                                fontSize: 13
+                            }
+                        }
+                    ]
+                };
+            },
+            data: [[0]] // Dummy data to trigger render
+        });
+
+        myChart.setOption(option);
+
+    </script>
+</body>
+</html>

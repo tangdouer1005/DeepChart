@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ko's Piotroski F-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2933;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.1);
+      --grid: rgba(148, 163, 184, 0.3);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1120;
+        --fg: #e5e7eb;
+        --muted: #9ca3af;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.08);
+        --grid: rgba(75, 85, 99, 0.7);
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #eff6ff 0, var(--bg) 50%);
+      min-height: 100vh;
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.16),
+        0 0 0 1px rgba(148, 163, 184, 0.2);
+      padding: 20px 24px 24px;
+      box-sizing: border-box;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .container {
+        background: rgba(15, 23, 42, 0.94);
+        box-shadow:
+          0 18px 45px rgba(0, 0, 0, 0.6),
+          0 0 0 1px rgba(31, 41, 55, 0.9);
+      }
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      margin: 0;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 2px 10px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: radial-gradient(circle at top left, var(--accent-soft), transparent 60%);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    .note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 6px;
+      background: var(--accent);
+    }
+
+    @media (max-width: 640px) {
+      .chart-wrapper {
+        height: 320px;
+      }
+      .container {
+        padding: 16px 14px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>ko's Piotroski F-Score (2016–2024)</h1>
+      <p class="subtitle">Line chart of 年度 皮奥特罗斯基 F-Score 变化</p>
+    </header>
+
+    <div class="meta">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Piotroski F-Score (0–9)
+      </div>
+      <div>Years: 2016–2024</div>
+      <div>Interaction: hover tooltips</div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="fScoreChart"></canvas>
+    </div>
+
+    <div class="note">
+      <span><span class="legend-swatch"></span>Line represents ko's 皮奥特罗斯基 F-Score by fiscal year.</span>
+      <span>Data source: provided table. Values are shown as-is without modification.</span>
+    </div>
+  </div>
+
+  <script>
+    // Ensure script runs after DOM is loaded
+    window.addEventListener('DOMContentLoaded', function () {
+      // Data from source:
+      // Fiscal Year, RESULT_F_Score
+      // 2016,6
+      // 2017,6
+      // 2018,6
+      // 2019,5
+      // 2020,4
+      // 2021,7
+      // 2022,6
+      // 2023,8
+      // 2024,4
+
+      const labels = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+      const dataValues = [6, 6, 6, 5, 4, 7, 6, 8, 4];
+
+      const canvas = document.getElementById('fScoreChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      function getCSSVar(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      }
+
+      const accent = getCSSVar('--accent') || '#2563eb';
+      const accentSoft = getCSSVar('--accent-soft') || 'rgba(37, 99, 235, 0.12)';
+      const gridColor = getCSSVar('--grid') || 'rgba(148, 163, 184, 0.4)';
+      const muted = getCSSVar('--muted') || '#6b7280';
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Piotroski F-Score",
+              data: dataValues,
+              tension: 0.25,
+              borderColor: accent,
+              backgroundColor: accentSoft,
+              pointBackgroundColor: '#ffffff',
+              pointBorderColor: accent,
+              pointHoverBackgroundColor: accent,
+              pointHoverBorderColor: '#ffffff',
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointBorderWidth: 2,
+              borderWidth: 2,
+              fill: true,
+              spanGaps: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          layout: {
+            padding: {
+              top: 16,
+              right: 12,
+              bottom: 8,
+              left: 4
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: false
+            },
+            tooltip: {
+              usePointStyle: true,
+              backgroundColor: 'rgba(15,23,42,0.96)',
+              titleColor: '#e5e7eb',
+              bodyColor: '#e5e7eb',
+              borderColor: 'rgba(148,163,184,0.7)',
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                title: items => {
+                  const year = items[0].label;
+                  return `Year: ${year}`;
+                },
+                label: context => {
+                  const v = context.raw;
+                  return `Piotroski F-Score: ${v}`;
+                },
+                footer: items => {
+                  const year = items[0].label;
+                  const idx = labels.indexOf(Number(year));
+                  if (idx <= 0) return '';
+                  const prev = dataValues[idx - 1];
+                  const curr = dataValues[idx];
+                  const delta = curr - prev;
+                  if (delta === 0) return 'Change vs prior year: 0 (no change)';
+                  const direction = delta > 0 ? '↑ increase' : '↓ decrease';
+                  return `Change vs prior year: ${delta > 0 ? '+' : ''}${delta} (${direction})`;
+                }
+              },
+              footerFont: {
+                size: 10
+              },
+              footerSpacing: 6
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                color: gridColor,
+                drawBorder: false
+              },
+              ticks: {
+                color: muted,
+                maxRotation: 0
+              }
+            },
+            y: {
+              suggestedMin: 0,
+              suggestedMax: 9,
+              ticks: {
+                stepSize: 1,
+                color: muted
+              },
+              title: {
+                display: true,
+                text: 'Piotroski F-Score',
+                color: muted,
+                font: {
+                  size: 11,
+                  weight: '500'
+                }
+              },
+              grid: {
+                color: gridColor,
+                drawBorder: false
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

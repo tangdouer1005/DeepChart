@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = [
+    {
+        "Stage": "Preschool",
+        "value": 302.631
+    },
+    {
+        "Stage": "Preschool",
+        "value": 266.816
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 263.0
+    },
+    {
+        "Stage": "Preschool",
+        "value": 245.96
+    },
+    {
+        "Stage": "Preschool",
+        "value": 240.168
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 229.0
+    },
+    {
+        "Stage": "Preschool",
+        "value": 208.636
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 178.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 175.2
+    },
+    {
+        "Stage": "Preschool",
+        "value": 169.996
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 164.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 164.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 158.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 156.877
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 133.667
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 131.85
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 121.3
+    },
+    {
+        "Stage": "University",
+        "value": 118.794
+    },
+    {
+        "Stage": "University",
+        "value": 118.794
+    },
+    {
+        "Stage": "University",
+        "value": 118.18
+    },
+    {
+        "Stage": "University",
+        "value": 117.08
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 112.1
+    },
+    {
+        "Stage": "University",
+        "value": 111.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 109.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 109.0
+    },
+    {
+        "Stage": "Preschool",
+        "value": 106.333
+    },
+    {
+        "Stage": "University",
+        "value": 106.14
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 106.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 99.4224
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 99.15
+    },
+    {
+        "Stage": "University",
+        "value": 96.8182
+    },
+    {
+        "Stage": "University",
+        "value": 96.8182
+    },
+    {
+        "Stage": "University",
+        "value": 92.4859
+    },
+    {
+        "Stage": "University",
+        "value": 92.2
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 89.3333
+    },
+    {
+        "Stage": "University",
+        "value": 89.01
+    },
+    {
+        "Stage": "University",
+        "value": 88.7179
+    },
+    {
+        "Stage": "University",
+        "value": 88.7179
+    },
+    {
+        "Stage": "University",
+        "value": 88.23
+    },
+    {
+        "Stage": "University",
+        "value": 88.23
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 88.0
+    },
+    {
+        "Stage": "Preschool",
+        "value": 87.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 86.366
+    },
+    {
+        "Stage": "Preschool",
+        "value": 85.6
+    },
+    {
+        "Stage": "University",
+        "value": 81.71
+    },
+    {
+        "Stage": "University",
+        "value": 77.3168
+    },
+    {
+        "Stage": "University",
+        "value": 76.5
+    },
+    {
+        "Stage": "University",
+        "value": 76.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 75.68
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 75.0
+    },
+    {
+        "Stage": "University",
+        "value": 73.7
+    },
+    {
+        "Stage": "University",
+        "value": 71.27
+    },
+    {
+        "Stage": "University",
+        "value": 70.1833
+    },
+    {
+        "Stage": "University",
+        "value": 69.069
+    },
+    {
+        "Stage": "Preschool",
+        "value": 69.02
+    },
+    {
+        "Stage": "University",
+        "value": 68.78
+    },
+    {
+        "Stage": "University",
+        "value": 68.56
+    },
+    {
+        "Stage": "University",
+        "value": 68.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 68.0
+    },
+    {
+        "Stage": "University",
+        "value": 67.58
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 67.3333
+    },
+    {
+        "Stage": "University",
+        "value": 66.6667
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 64.3333
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 63.2
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 63.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 63.0
+    },
+    {
+        "Stage": "University",
+        "value": 62.76
+    },
+    {
+        "Stage": "University",
+        "value": 61.03
+    },
+    {
+        "Stage": "University",
+        "value": 61.03
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 60.615
+    },
+    {
+        "Stage": "University",
+        "value": 58.92
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 58.4172
+    },
+    {
+        "Stage": "University",
+        "value": 58.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 57.3333
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 56.856
+    },
+    {
+        "Stage": "University",
+        "value": 56.8
+    },
+    {
+        "Stage": "University",
+        "value": 56.8
+    },
+    {
+        "Stage": "University",
+        "value": 56.35
+    },
+    {
+        "Stage": "University",
+        "value": 56.06
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 55.85
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 55.85
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 54.0
+    },
+    {
+        "Stage": "University",
+        "value": 53.88
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 53.5768
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 53.5667
+    },
+    {
+        "Stage": "Preschool",
+        "value": 53.45
+    },
+    {
+        "Stage": "Preschool",
+        "value": 53.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 52.2
+    },
+    {
+        "Stage": "University",
+        "value": 50.81
+    },
+    {
+        "Stage": "University",
+        "value": 50.44
+    },
+    {
+        "Stage": "Preschool",
+        "value": 50.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 49.46
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 49.46
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 49.46
+    },
+    {
+        "Stage": "University",
+        "value": 49.02
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 48.3333
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 48.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 47.58
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 47.3333
+    },
+    {
+        "Stage": "University",
+        "value": 47.05
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 46.96
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 46.96
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 46.96
+    },
+    {
+        "Stage": "University",
+        "value": 46.93
+    },
+    {
+        "Stage": "University",
+        "value": 46.9
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 46.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 45.8
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 45.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 44.89
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 44.89
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 44.89
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 44.7
+    },
+    {
+        "Stage": "University",
+        "value": 44.5
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 43.43
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 43.43
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 43.43
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 43.4
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 43.4
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 43.4
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 42.0
+    },
+    {
+        "Stage": "University",
+        "value": 40.97
+    },
+    {
+        "Stage": "University",
+        "value": 40.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 40.0
+    },
+    {
+        "Stage": "Preschool",
+        "value": 40.0
+    },
+    {
+        "Stage": "Preschool",
+        "value": 39.3333
+    },
+    {
+        "Stage": "Preschool",
+        "value": 39.0
+    },
+    {
+        "Stage": "University",
+        "value": 38.68
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 38.4
+    },
+    {
+        "Stage": "University",
+        "value": 38.04
+    },
+    {
+        "Stage": "University",
+        "value": 37.7
+    },
+    {
+        "Stage": "University",
+        "value": 37.7
+    },
+    {
+        "Stage": "University",
+        "value": 37.4376
+    },
+    {
+        "Stage": "University",
+        "value": 37.29
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 37.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 37.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 37.0
+    },
+    {
+        "Stage": "University",
+        "value": 35.56
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 35.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 35.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 35.0
+    },
+    {
+        "Stage": "University",
+        "value": 34.8619
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 34.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 34.0
+    },
+    {
+        "Stage": "University",
+        "value": 33.6158
+    },
+    {
+        "Stage": "University",
+        "value": 32.44
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 32.1
+    },
+    {
+        "Stage": "University",
+        "value": 31.83
+    },
+    {
+        "Stage": "University",
+        "value": 31.33
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 31.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 30.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 30.0
+    },
+    {
+        "Stage": "University",
+        "value": 29.39
+    },
+    {
+        "Stage": "University",
+        "value": 27.83
+    },
+    {
+        "Stage": "University",
+        "value": 27.5
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 27.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 27.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 27.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 26.7
+    },
+    {
+        "Stage": "University",
+        "value": 26.2
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 26.07
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 25.0
+    },
+    {
+        "Stage": "University",
+        "value": 24.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 24.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 24.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 24.0
+    },
+    {
+        "Stage": "University",
+        "value": 23.4
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 22.0
+    },
+    {
+        "Stage": "Preschool",
+        "value": 22.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 21.9
+    },
+    {
+        "Stage": "University",
+        "value": 21.6
+    },
+    {
+        "Stage": "University",
+        "value": 21.09
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 20.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 19.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 19.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 19.0
+    },
+    {
+        "Stage": "University",
+        "value": 18.9
+    },
+    {
+        "Stage": "University",
+        "value": 18.0
+    },
+    {
+        "Stage": "University",
+        "value": 17.9
+    },
+    {
+        "Stage": "Preschool",
+        "value": 16.83
+    },
+    {
+        "Stage": "University",
+        "value": 16.77
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 16.2
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 16.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 11.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 10.6
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 10.2
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 9.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 9.0
+    },
+    {
+        "Stage": "University",
+        "value": 8.26
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 8.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 8.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 7.7
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 7.7
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 7.6
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 6.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 6.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 6.0
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 5.6
+    },
+    {
+        "Stage": "Secondary\nschool",
+        "value": 5.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 5.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 4.5
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 3.7
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 2.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 1.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 1.0
+    },
+    {
+        "Stage": "Primary\nschool",
+        "value": 1.0
+    }
+];
+
+        /* const labelMap = {
+            'preschool': 'Preschool',
+            'primary school': 'Primary\nschool',
+            'secondary school': 'Secondary\nschool',
+            'university': 'University'
+        };
+
+        rawData.forEach(d => d.Stage = labelMap[d.Stage]); */
+
+        const categories = ['Preschool', 'Primary\nschool', 'Secondary\nschool', 'University'];
+        const colors = {
+            'Preschool': '#8da0cb',       
+            'Primary\nschool': '#bebada', 
+            'Secondary\nschool': '#ffffb3', 
+            'University': '#bf812d'       
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Prepare data for boxplot (used for bar chart approximation)
+        const boxplotData = [];
+        const scatterData = [];
+        const errorData = [];
+
+        categories.forEach((cat, idx) => {
+            const values = rawData.filter(d => d.Stage === cat).map(d => d.value);
+            
+            const n = values.length;
+            const mean = values.reduce((a, b) => a + b, 0) / n;
+            
+            // Standard Error
+            const std = Math.sqrt(values.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / (n - 1));
+            const se = std / Math.sqrt(n);
+            const ci = se; // Python code uses 'se' for error bars directly
+
+            boxplotData.push({
+                value: mean,
+                itemStyle: {
+                    color: '#d9d9d9',
+                    borderColor: 'black',
+                    borderWidth: 1
+                }
+            });
+
+            // Error bar data
+            errorData.push({
+                x: idx,
+                low: mean - ci,
+                high: mean + ci
+            });
+
+            // Scatter data
+            values.forEach(v => {
+                const jitter = (Math.random() - 0.5) * 0.5;
+                scatterData.push({
+                    value: [idx + jitter, v],
+                    itemStyle: {
+                        color: colors[cat],
+                        borderColor: '#555555',
+                        borderWidth: 1,
+                        opacity: 0.6
+                    }
+                });
+            });
+        });
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: {
+                top: 50,
+                bottom: 50,
+                left: 60,
+                right: 20
+            },
+            xAxis: {
+                type: 'category',
+                data: categories,
+                axisLabel: { color: 'black', fontSize: 11, interval: 0 },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Plate waste amount (g per capita per meal)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                min: 0,
+                max: 320,
+                interval: 40,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: boxplotData,
+                    barWidth: '60%',
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const idx = params.dataIndex;
+                        const err = errorData[idx];
+                        const x = api.coord([err.x, 0])[0];
+                        const yHigh = api.coord([err.x, err.high])[1];
+                        const yLow = api.coord([err.x, err.low])[1];
+                        
+                        const capWidth = 10;
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: { x1: x, y1: yHigh, x2: x, y2: yLow },
+                                    style: { stroke: 'black', lineWidth: 1.2 }
+                                },
+                                {
+                                    type: 'line',
+                                    shape: { x1: x - capWidth/2, y1: yHigh, x2: x + capWidth/2, y2: yHigh },
+                                    style: { stroke: 'black', lineWidth: 1.2 }
+                                },
+                                {
+                                    type: 'line',
+                                    shape: { x1: x - capWidth/2, y1: yLow, x2: x + capWidth/2, y2: yLow },
+                                    style: { stroke: 'black', lineWidth: 1.2 }
+                                }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 3
+                },
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    symbolSize: 9,
+                    z: 2
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'c',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

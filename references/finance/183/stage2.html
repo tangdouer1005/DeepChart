@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <title>NFLX 斯隆比率（Accruals Ratio）2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --bar-positive: #2563eb;
+      --bar-negative: #dc2626;
+      --bar-hover: #1d4ed8;
+      --tooltip-bg: rgba(17, 24, 39, 0.95);
+      --tooltip-fg: #f9fafb;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: #1f2933;
+        --tooltip-bg: rgba(15, 23, 42, 0.98);
+        --tooltip-fg: #f9fafb;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: min(65vh, 480px);
+      margin-top: 1rem;
+      background: radial-gradient(circle at top left, rgba(59,130,246,0.08), transparent 55%);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .footer-note {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .legend-inline {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .legend-swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 0.3rem;
+    }
+
+    .legend-pos {
+      background: var(--bar-positive);
+    }
+
+    .legend-neg {
+      background: var(--bar-negative);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>NFLX 斯隆比率（Accruals Ratio）变化趋势：2016–2024</h1>
+    <div class="subtitle">
+      单位：比率（Sloan Ratio），数值约在 -0.05 至 0.18 之间，柱状图按正负颜色区分。
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="sloanChart"></canvas>
+    </div>
+
+    <div class="legend-inline">
+      <span><span class="legend-swatch legend-pos"></span>正斯隆比率（较高应计成分）</span>
+      <span><span class="legend-swatch legend-neg"></span>负斯隆比率（较高现金成分）</span>
+    </div>
+
+    <div class="footer-note">
+      数据来源：用户提供的 NFLX 2016–2024 财报指标（RESULT_Sloan）。图表仅用于可视化展示。
+    </div>
+  </div>
+
+  <script>
+    // Wrap everything in DOMContentLoaded to ensure styles are available
+    document.addEventListener("DOMContentLoaded", function () {
+      // Data from the prompt
+      const years = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ];
+
+      const sloanValues = [
+        0.1396131340570229,
+        0.143860344217885,
+        0.1730148138772629,
+        0.1586064759979097,
+        0.0091273800365296,
+        0.1126481073360953,
+        0.0529229889802611,
+        -0.0383514462004077,
+        0.0263820982801433
+      ];
+
+      const rootStyle = getComputedStyle(document.documentElement);
+
+      // Colors (positive vs negative)
+      const barColors = sloanValues.map(function (v) {
+        return v >= 0
+          ? rootStyle.getPropertyValue("--bar-positive").trim()
+          : rootStyle.getPropertyValue("--bar-negative").trim();
+      });
+
+      const barBorderColors = sloanValues.map(function (v) {
+        return v >= 0 ? "rgba(37, 99, 235, 0.9)" : "rgba(220, 38, 38, 0.9)";
+      });
+
+      const ctx = document.getElementById("sloanChart").getContext("2d");
+
+      // Determine y-axis limits with a small padding
+      const minVal = Math.min.apply(null, sloanValues);
+      const maxVal = Math.max.apply(null, sloanValues);
+      const padding = 0.03;
+      const yMin = Math.floor((minVal - padding) * 1000) / 1000;
+      const yMax = Math.ceil((maxVal + padding) * 1000) / 1000;
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "斯隆比率（Accruals Ratio）",
+              data: sloanValues,
+              backgroundColor: barColors,
+              borderColor: barBorderColors,
+              borderWidth: 1.2,
+              hoverBackgroundColor: rootStyle.getPropertyValue("--bar-hover").trim(),
+              hoverBorderColor: "rgba(37, 99, 235, 1)",
+              borderRadius: 6,
+              barPercentage: 0.7,
+              categoryPercentage: 0.7
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 900,
+            easing: "easeOutQuart"
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: false
+            },
+            tooltip: {
+              enabled: true,
+              backgroundColor: rootStyle.getPropertyValue("--tooltip-bg").trim(),
+              titleColor: rootStyle.getPropertyValue("--tooltip-fg").trim(),
+              bodyColor: rootStyle.getPropertyValue("--tooltip-fg").trim(),
+              padding: 10,
+              cornerRadius: 6,
+              displayColors: false,
+              callbacks: {
+                label: function (context) {
+                  var val = context.parsed.y;
+                  return "斯隆比率: " + val.toFixed(4);
+                },
+                title: function (context) {
+                  return "财年 " + context[0].label;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                maxRotation: 0,
+                font: {
+                  size: 11
+                }
+              }
+            },
+            y: {
+              beginAtZero: false,
+              min: yMin,
+              max: yMax,
+              grid: {
+                color: rootStyle.getPropertyValue("--grid").trim()
+              },
+              ticks: {
+                callback: function (value) {
+                  return Number(value).toFixed(2);
+                },
+                font: {
+                  size: 11
+                }
+              },
+              title: {
+                display: true,
+                text: "斯隆比率（Sloan Ratio）",
+                font: {
+                  size: 12,
+                  weight: "500"
+                }
+              }
+            }
+          },
+          interaction: {
+            mode: "index",
+            intersect: false
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

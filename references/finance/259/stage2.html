@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UNH 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #1f2933;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #6b7280;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px 24px 28px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      /* Important: give a height so Chart.js can render */
+      height: 420px;
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .footer-note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 11px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>UNH 自由现金流收益质量 (Quality of Income Ratio)</h1>
+    <h2>Fiscal Years 2016 – 2024</h2>
+    <canvas id="qoiChart"></canvas>
+  </div>
+  <div class="footer-note">
+    数据来源：用户提供的 UNH 2016–2024 年 Quality of Income Ratio（自由现金流收益质量）结果。
+  </div>
+
+  <script>
+    // Ensure Chart.js is loaded
+    if (typeof Chart === 'undefined') {
+      console.error('Chart.js failed to load. Check network or script URL.');
+    } else {
+      const ctx = document.getElementById('qoiChart');
+
+      const labels = [
+        '2016',
+        '2017',
+        '2018',
+        '2019',
+        '2020',
+        '2021',
+        '2022',
+        '2023',
+        '2024'
+      ];
+
+      const qoiData = [
+        0.6536536536536537,
+        0.7789618425575799,
+        0.7947096904713736,
+        0.8240571301048873,
+        0.8765812776723593,
+        0.8252871864957707,
+        0.823182032354327,
+        0.800110101844206,
+        0.665200901445611
+      ];
+
+      const minVal = Math.min(...qoiData);
+      const maxVal = Math.max(...qoiData);
+      const padding = 0.05;
+      const suggestedMin = Math.max(0, minVal - padding);
+      const suggestedMax = Math.min(1.2, maxVal + padding);
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Quality of Income Ratio',
+              data: qoiData,
+              backgroundColor: '#4f46e5',
+              hoverBackgroundColor: '#4338ca',
+              borderRadius: 6,
+              borderSkipped: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: false
+            },
+            legend: {
+              display: true,
+              labels: {
+                boxWidth: 14,
+                boxHeight: 14,
+                usePointStyle: true
+              }
+            },
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                label: function(context) {
+                  const val = context.raw;
+                  return ' QoI: ' + Number(val).toFixed(3);
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Fiscal Year',
+                font: {
+                  size: 12
+                }
+              }
+            },
+            y: {
+              beginAtZero: false,
+              suggestedMin: suggestedMin,
+              suggestedMax: suggestedMax,
+              ticks: {
+                callback: function(value) {
+                  return Number(value).toFixed(2);
+                }
+              },
+              title: {
+                display: true,
+                text: 'Quality of Income Ratio (自由现金流收益质量)',
+                font: {
+                  size: 12
+                }
+              },
+              grid: {
+                color: 'rgba(148, 163, 184, 0.25)'
+              }
+            }
+          },
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          animation: {
+            duration: 900,
+            easing: 'easeOutCubic'
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a bar chart of the top 12 countries in the 2024 country tables by bench quality, where the metric is the average score of listed cities ranked 3-10, expressed in score points, sorted descending, and limited to countries with 10 listed cities.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2024 Bench Quality by Country",
+  "value_unit": "score points",
+  "sort_rule": "descending by bench_quality_score, tie-break alphabetically",
+  "selection_rule": "top 12 countries with 10 listed cities",
+  "records": [
+    {
+      "entity": "United States",
+      "bench_quality_score": 59.12875
+    },
+    {
+      "entity": "China",
+      "bench_quality_score": 15.76625
+    },
+    {
+      "entity": "India",
+      "bench_quality_score": 10.11625
+    },
+    {
+      "entity": "Canada",
+      "bench_quality_score": 7.2575
+    },
+    {
+      "entity": "United Kingdom",
+      "bench_quality_score": 5.255
+    },
+    {
+      "entity": "Germany",
+      "bench_quality_score": 4.15625
+    },
+    {
+      "entity": "Switzerland",
+      "bench_quality_score": 2.88625
+    },
+    {
+      "entity": "France",
+      "bench_quality_score": 2.51125
+    },
+    {
+      "entity": "Australia",
+      "bench_quality_score": 2.09625
+    },
+    {
+      "entity": "The Netherlands",
+      "bench_quality_score": 2.06625
+    },
+    {
+      "entity": "Brazil",
+      "bench_quality_score": 1.75125
+    },
+    {
+      "entity": "Spain",
+      "bench_quality_score": 1.21
+    }
+  ],
+  "value_field": "bench_quality_score",
+  "x_label": "Country",
+  "y_label": "Average score of cities ranked 3-10"
+}

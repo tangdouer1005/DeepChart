@@ -1,0 +1,55 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a ranked horizontal bar chart showing the top 10 countries by sampled-innovation density in the 2020 COVID-19 Innovation Report, where sampled-innovation density is defined as the sum of all six `Number Of Sampled Innovations Per Category` values divided by `population` in millions, values are expressed as sampled innovations per 1 million people, bars are sorted from highest to lowest, and all 32 countries are eligible.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "sampled innovations per 1 million people",
+  "sort_rule": "descending by innovation_density",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "2020 Sampled-Innovation Density",
+    "xlabel": "Sampled innovations per 1M people",
+    "value_field": "innovation_density"
+  },
+  "records": [
+    {
+      "entity": "Estonia",
+      "innovation_density": 8.4615
+    },
+    {
+      "entity": "Israel",
+      "innovation_density": 3.7079
+    },
+    {
+      "entity": "Belgium",
+      "innovation_density": 2.9825
+    },
+    {
+      "entity": "Switzerland",
+      "innovation_density": 2.7059
+    },
+    {
+      "entity": "Croatia",
+      "innovation_density": 1.9512
+    },
+    {
+      "entity": "Canada",
+      "innovation_density": 1.8598
+    },
+    {
+      "entity": "Ireland",
+      "innovation_density": 1.8367
+    },
+    {
+      "entity": "Finland",
+      "innovation_density": 1.8182
+    },
+    {
+      "entity": "Singapore",
+      "innovation_density": 1.7857
+    },
+    {
+      "entity": "United States",
+      "innovation_density": 1.2366
+    }
+  ]
+}

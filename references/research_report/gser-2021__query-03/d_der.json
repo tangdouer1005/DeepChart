@@ -1,0 +1,55 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a horizontal bar chart showing the top 10 stage-escalation multiples computed as `Median Series A Round / Median Seed Round` among ecosystems where both `Median Seed Round` and `Median Series A Round` are exact values, with values expressed in `x multiple`, sorted descending, and excluding `N/A`, `<` range values, and items missing either round.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by stage_escalation_multiple",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "2021 Stage Escalation",
+    "xlabel": "x multiple",
+    "value_field": "stage_escalation_multiple"
+  },
+  "records": [
+    {
+      "entity": "Pittsburgh",
+      "stage_escalation_multiple": 45.3333
+    },
+    {
+      "entity": "Abu Dhabi",
+      "stage_escalation_multiple": 32.96
+    },
+    {
+      "entity": "Manila",
+      "stage_escalation_multiple": 23.0415
+    },
+    {
+      "entity": "Cape Town",
+      "stage_escalation_multiple": 21.4286
+    },
+    {
+      "entity": "Sri Lanka",
+      "stage_escalation_multiple": 21.2
+    },
+    {
+      "entity": "Telangana",
+      "stage_escalation_multiple": 20.0
+    },
+    {
+      "entity": "Bahrain",
+      "stage_escalation_multiple": 15.1261
+    },
+    {
+      "entity": "Cairo",
+      "stage_escalation_multiple": 13.3333
+    },
+    {
+      "entity": "Edmonton",
+      "stage_escalation_multiple": 10.5
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "stage_escalation_multiple": 8.8
+    }
+  ]
+}

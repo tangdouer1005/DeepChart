@@ -1,0 +1,76 @@
+{
+  "query_id": 3,
+  "query_text": "Create a dumbbell chart comparing, for each super-group in the AI agent stack, its share of total companies versus its share of total disclosed funding, using the section-3 direction tables rolled up into the report's visible super-groups, with values expressed as percentages, sorted by the absolute gap between the two shares.",
+  "status": "complete",
+  "chart": {
+    "type": "dumbbell",
+    "title": "Super-group share of companies vs disclosed funding",
+    "entity_field": "super_group",
+    "left_field": "company_share_pct",
+    "right_field": "funding_share_pct",
+    "x_label": "Share of total (%)",
+    "order": [
+      "Foundation models & infrastructure",
+      "Agent frameworks & development platforms",
+      "Oversight",
+      "Context",
+      "Tool integration",
+      "Orchestration"
+    ],
+    "figsize": [
+      12,
+      6
+    ]
+  },
+  "data": [
+    {
+      "super_group": "Foundation models & infrastructure",
+      "company_share_pct": 13.970588235294118,
+      "funding_share_pct": 90.00818812702957,
+      "abs_gap_pct": 76.03759989173545,
+      "company_count": 19,
+      "funding_total_m": 144991.4
+    },
+    {
+      "super_group": "Agent frameworks & development platforms",
+      "company_share_pct": 31.61764705882353,
+      "funding_share_pct": 7.719249672071411,
+      "abs_gap_pct": 23.898397386752116,
+      "company_count": 43,
+      "funding_total_m": 12434.7
+    },
+    {
+      "super_group": "Oversight",
+      "company_share_pct": 24.264705882352942,
+      "funding_share_pct": 0.6634928104023355,
+      "abs_gap_pct": 23.601213071950607,
+      "company_count": 33,
+      "funding_total_m": 1068.8
+    },
+    {
+      "super_group": "Context",
+      "company_share_pct": 11.76470588235294,
+      "funding_share_pct": 0.626804538419946,
+      "abs_gap_pct": 11.137901343932993,
+      "company_count": 16,
+      "funding_total_m": 1009.7
+    },
+    {
+      "super_group": "Tool integration",
+      "company_share_pct": 11.76470588235294,
+      "funding_share_pct": 0.8518383555708131,
+      "abs_gap_pct": 10.912867526782128,
+      "company_count": 16,
+      "funding_total_m": 1372.2
+    },
+    {
+      "super_group": "Orchestration",
+      "company_share_pct": 6.61764705882353,
+      "funding_share_pct": 0.1304264965059232,
+      "abs_gap_pct": 6.4872205623176065,
+      "company_count": 9,
+      "funding_total_m": 210.1
+    }
+  ],
+  "notes": []
+}

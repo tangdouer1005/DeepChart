@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMO 可持续增长率 (SGR) 2016–2024 折线图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 16px;
+    }
+
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      /* Use fixed-height box instead of aspectRatio to avoid extreme tall/narrow stretching */
+      height: 420px;
+      background: #fff;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      box-sizing: border-box;
+    }
+
+    .footer-note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 11px;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .chart-container {
+        padding: 14px;
+        height: 320px; /* Slightly smaller height on small screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>TMO 可持续增长率 (Sustainable Growth Rate, SGR)</h1>
+    <div class="subtitle">2016–2024 年度变化趋势</div>
+
+    <div class="chart-container">
+      <canvas id="sgrChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      说明：可持续增长率 (SGR) 数据来源于提供的年度结果，单位为小数形式（图中工具提示和坐标轴中已转换为百分比）。鼠标悬停可查看具体数值。
+    </div>
+  </div>
+
+  <script>
+    // 年度标签
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    // SGR 数据（小数形式）
+    const sgrValues = [
+      0.0831625456113967,
+      0.0846816875850597,
+      0.1008320911715315,
+      0.118719547335883,
+      0.1881524414945,
+      0.1946879150066401,
+      0.1532363662101426,
+      0.1206442296032542,
+      0.1194364559432718
+    ];
+
+    const ctx = document.getElementById("sgrChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "可持续增长率 (SGR)",
+            data: sgrValues,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderColor: "#ffffff",
+            pointHoverBackgroundColor: "#ffffff",
+            pointHoverBorderColor: "rgba(37, 99, 235, 1)",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            borderWidth: 2,
+            fill: true,
+            tension: 0.22
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        // Let the CSS height control vertical size to avoid extreme aspect ratio issues
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 16,
+              usePointStyle: true,
+              padding: 16
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                if (value == null) return "";
+                const percent = (value * 100).toFixed(2) + "%";
+                return " 可持续增长率: " + percent;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财政年度",
+              color: "#444",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "SGR（百分比）",
+              color: "#444",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.35)",
+              drawBorder: false
+            },
+            ticks: {
+              callback: function (value) {
+                return (value * 100).toFixed(0) + "%";
+              }
+            },
+            // Make the range slightly larger than data to avoid clipping / exaggeration
+            suggestedMin: 0,
+            suggestedMax: 0.22
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a ranked horizontal bar chart for the top 10 countries by second-tier depth, where the plotted value is `(sum of scores of cities ranked 2 through 5 in each 3.2 national block) / (score of the rank-1 city)`, values are expressed as multiples, only countries with at least 5 listed cities are eligible, and bars are sorted from highest to lowest after the ratio is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by second_tier_depth_multiple",
+  "selection_rule": "top 10 among countries with at least 5 listed cities",
+  "plot_spec": {
+    "title": "Second-Tier Depth",
+    "xlabel": "x multiple",
+    "value_field": "second_tier_depth_multiple"
+  },
+  "records": [
+    {
+      "entity": "Switzerland",
+      "second_tier_depth_multiple": 2.5324,
+      "rank_2_to_5_score_sum": 19.056,
+      "leader_city_score": 7.525
+    },
+    {
+      "entity": "India",
+      "second_tier_depth_multiple": 2.0584,
+      "rank_2_to_5_score_sum": 52.215,
+      "leader_city_score": 25.367
+    },
+    {
+      "entity": "Canada",
+      "second_tier_depth_multiple": 1.9652,
+      "rank_2_to_5_score_sum": 30.81,
+      "leader_city_score": 15.678
+    },
+    {
+      "entity": "Australia",
+      "second_tier_depth_multiple": 1.7179,
+      "rank_2_to_5_score_sum": 20.611,
+      "leader_city_score": 11.998
+    },
+    {
+      "entity": "Poland",
+      "second_tier_depth_multiple": 1.5846,
+      "rank_2_to_5_score_sum": 10.054,
+      "leader_city_score": 6.345
+    },
+    {
+      "entity": "Spain",
+      "second_tier_depth_multiple": 1.431,
+      "rank_2_to_5_score_sum": 17.055,
+      "leader_city_score": 11.918
+    },
+    {
+      "entity": "Pakistan",
+      "second_tier_depth_multiple": 1.4013,
+      "rank_2_to_5_score_sum": 1.753,
+      "leader_city_score": 1.251
+    },
+    {
+      "entity": "China",
+      "second_tier_depth_multiple": 1.301,
+      "rank_2_to_5_score_sum": 85.932,
+      "leader_city_score": 66.049
+    },
+    {
+      "entity": "Germany",
+      "second_tier_depth_multiple": 1.224,
+      "rank_2_to_5_score_sum": 29.22,
+      "leader_city_score": 23.872
+    },
+    {
+      "entity": "The Netherlands",
+      "second_tier_depth_multiple": 1.1578,
+      "rank_2_to_5_score_sum": 15.72,
+      "leader_city_score": 13.578
+    }
+  ]
+}

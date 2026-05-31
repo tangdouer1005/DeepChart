@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NVDA ROE (DuPont) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px 24px 24px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Fix the chart height explicitly to avoid extreme stretching */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px; /* fixed, reasonable height */
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .note span {
+      font-weight: 600;
+      color: #444;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      #chart-container {
+        padding: 16px;
+      }
+      .chart-wrapper {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>NVDA 净资产收益率-杜邦分析 (ROE, DuPont)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="chart-wrapper">
+      <canvas id="roeChart"></canvas>
+    </div>
+  </div>
+
+  <div class="note">
+    <span>Note:</span> Values are Original ROE(Avg) by fiscal year, displayed as percentages. Hover over bars for exact figures.
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // Data from source
+    const fiscalYears = [
+      "2016", "2017", "2018", "2019",
+      "2020", "2021", "2022", "2023", "2024"
+    ];
+
+    // Original ROE(Avg)
+    const roeRaw = [
+      0.138179642987912,
+      0.3256768644316293,
+      0.4605153782211139,
+      0.492595015761613,
+      0.2595377332219437,
+      0.2977626559439117,
+      0.4483162854844271,
+      0.1793361115102744,
+      0.9145807403309824
+    ];
+
+    // Convert to percentage for display
+    const roePercent = roeRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("roeChart").getContext("2d");
+
+    // Determine sensible max for y-axis
+    const maxVal = Math.max(...roePercent);
+    const yMax = Math.ceil(maxVal / 10) * 10; // round up to nearest 10
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "ROE (DuPont, %)",
+            data: roePercent,
+            backgroundColor: function(chartCtx) {
+              const index = chartCtx.dataIndex;
+              // Highlight the latest year (2024)
+              if (index === fiscalYears.length - 1) {
+                return "rgba(37, 99, 235, 0.85)";
+              }
+              return "rgba(59, 130, 246, 0.65)";
+            },
+            borderColor: "rgba(37, 99, 235, 1)",
+            borderWidth: 1.2,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.95)",
+            hoverBorderColor: "rgba(30, 64, 175, 1)"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // we control height via CSS wrapper
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 16,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            mode: "index",
+            intersect: false,
+            backgroundColor: "rgba(15, 23, 42, 0.95)",
+            titleFont: { size: 12, weight: "600" },
+            bodyFont: { size: 12 },
+            padding: 10,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return " ROE: " + value.toFixed(2) + "%";
+              }
+            }
+          }
+        },
+        layout: {
+          padding: {
+            top: 10,
+            right: 10,
+            bottom: 10,
+            left: 6
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: { size: 11 }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: yMax,
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+              drawBorder: false
+            },
+            ticks: {
+              callback: function(value) {
+                return value + "%";
+              },
+              font: { size: 11 }
+            },
+            title: {
+              display: true,
+              text: "ROE (%, Original ROE Avg)",
+              font: { size: 12, weight: "600" }
+            }
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutQuart"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

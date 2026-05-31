@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawJson = [
+    {
+        "service_type":"Health Care Services",
+        "state":"AZ",
+        "fairnes_index":0.0413625,
+        "number_HighAging_CBG":274,
+        "service_abbr":"HCS"
+    },
+    {
+        "service_type":"Health Care Services",
+        "state":"CA",
+        "fairnes_index":-0.075969,
+        "number_HighAging_CBG":215,
+        "service_abbr":"HCS"
+    },
+    {
+        "service_type":"Health Care Services",
+        "state":"FL",
+        "fairnes_index":0.146886,
+        "number_HighAging_CBG":851,
+        "service_abbr":"HCS"
+    },
+    {
+        "service_type":"Grocery and Food Supply",
+        "state":"AZ",
+        "fairnes_index":-0.0841503,
+        "number_HighAging_CBG":272,
+        "service_abbr":"GFS"
+    },
+    {
+        "service_type":"Grocery and Food Supply",
+        "state":"CA",
+        "fairnes_index":-0.167186,
+        "number_HighAging_CBG":214,
+        "service_abbr":"GFS"
+    },
+    {
+        "service_type":"Grocery and Food Supply",
+        "state":"FL",
+        "fairnes_index":0.12178,
+        "number_HighAging_CBG":854,
+        "service_abbr":"GFS"
+    },
+    {
+        "service_type":"Housing and Real Estate",
+        "state":"AZ",
+        "fairnes_index":0.0178427,
+        "number_HighAging_CBG":274,
+        "service_abbr":"HRE"
+    },
+    {
+        "service_type":"Housing and Real Estate",
+        "state":"CA",
+        "fairnes_index":-0.00253678,
+        "number_HighAging_CBG":219,
+        "service_abbr":"HRE"
+    },
+    {
+        "service_type":"Housing and Real Estate",
+        "state":"FL",
+        "fairnes_index":0.142783,
+        "number_HighAging_CBG":856,
+        "service_abbr":"HRE"
+    }
+];
+
+        const data = rawJson.map(d => ({
+            service: d.service_type,
+            state: d.state,
+            value: d.fairnes_index
+        }));
+
+        const targetStates = ['FL', 'AZ', 'CA'];
+        const filteredData = data.filter(d => targetStates.includes(d.state));
+        
+        const serviceMap = {
+            'Health Care Services': 'HCS',
+            'Grocery and Food Supply': 'GFS',
+            'Housing and Real Estate': 'HRE'
+        };
+        
+        // Prepare Series Data
+        const services = ['HCS', 'GFS', 'HRE'];
+        const states = ['FL', 'AZ', 'CA'];
+        const colors = ["#dbe5eb", "#dcc0b3", "#eaddb3"];
+        
+        const series = states.map((state, i) => {
+            const seriesData = services.map(srv => {
+                // Find matching row
+                const row = filteredData.find(d => serviceMap[d.service] === srv && d.state === state);
+                return row ? row.value : 0;
+            });
+            
+            return {
+                name: state,
+                type: 'bar',
+                data: seriesData,
+                itemStyle: { color: colors[i] },
+                barGap: 0,
+                barCategoryGap: '20%' // spacing
+            };
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 50, left: 60 },
+            legend: {
+                data: states,
+                right: 10,
+                bottom: 10,
+                orient: 'horizontal',
+                icon: 'rect',
+                itemWidth: 15,
+                itemHeight: 15
+            },
+            xAxis: {
+                type: 'category',
+                data: services,
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true, alignWithLabel: true },
+                axisLabel: { color: 'black', fontSize: 12 }
+            },
+            yAxis: {
+                name: 'ΔF̄',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: -0.2,
+                max: 0.2,
+                interval: 0.1,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true },
+                axisLabel: { color: 'black' },
+                nameTextStyle: { fontSize: 14 }
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'b',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 500px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // Data parsed from 62.json
+        const chartData = [
+    {
+        "LogConc": [
+            -11.0,
+            -10.0,
+            -9.0,
+            -8.0,
+            -7.0,
+            -6.0,
+            -5.0
+        ],
+        "Mean": [
+            -0.007839227384,
+            -0.0024026607063900004,
+            -0.013454630166999998,
+            -0.0057359557233000015,
+            -0.0252488347994,
+            -0.003947249835092999,
+            -0.012547079384399995
+        ],
+        "SEM": [
+            0.01300176856522546,
+            0.012325554304643582,
+            0.0257244371001326,
+            0.02056291859997351,
+            0.02020832852479565,
+            0.016124274366464984,
+            0.021018533530380974
+        ]
+    },
+    {
+        "LogConc": [
+            -10.0,
+            -9.0,
+            -8.0,
+            -7.0,
+            -6.0,
+            -5.0,
+            -4.0
+        ],
+        "Mean": [
+            -0.0390528775349,
+            -0.027398907374000005,
+            -0.026566947245699996,
+            -0.017872331502,
+            -0.025273554992500002,
+            -0.009383598488999997,
+            -0.0211623172729
+        ],
+        "SEM": [
+            0.012387116206316483,
+            0.008023035014041918,
+            0.013861779384327534,
+            0.012851992774390473,
+            0.012940841395333694,
+            0.023717298126883918,
+            0.02090272311661118
+        ]
+    },
+    {
+        "LogConc": [
+            -7.0,
+            -6.522878745280337,
+            -6.0,
+            -5.522878745280337,
+            -5.0,
+            -4.522878745280337
+        ],
+        "Mean": [
+            -0.014051393996,
+            -0.0209506045739,
+            0.002251499622399998,
+            -0.000634932389899999,
+            0.01873279872,
+            -0.0029063533926999992
+        ],
+        "SEM": [
+            0.008072591444834003,
+            0.00769176044105665,
+            0.009322664929773784,
+            0.010621738487626846,
+            0.010342889590110921,
+            0.015539332737536965
+        ]
+    },
+    {
+        "LogConc": [
+            -7.0,
+            -6.522878745280337,
+            -6.0,
+            -5.522878745280337,
+            -5.0,
+            -4.522878745280337
+        ],
+        "Mean": [
+            -0.022158373703444444,
+            0.000961483800777778,
+            -0.01022159518,
+            -0.014865049081111113,
+            0.02363582441888889,
+            0.049903631702222215
+        ],
+        "SEM": [
+            0.008356306934849992,
+            0.012870791602354765,
+            0.015474566161686057,
+            0.015308300486812717,
+            0.011195441156080725,
+            0.011827525483735385
+        ]
+    }
+];
+
+        // Colors from 62_gen.py
+        const colors = ['#000099', '#45a070', '#b030b0', '#f59e30'];
+        const series = [];
+        
+        chartData.forEach((dataset, idx) => {
+            const color = colors[idx % colors.length];
+            // Map JSON data to [x, y, err]
+            const data = dataset.LogConc.map((x, i) => [x, dataset.Mean[i], dataset.SEM[i]]).sort((a,b)=>a[0]-b[0]);
+            
+            // Error bars
+            series.push({
+                type: 'custom',
+                name: 'Series ' + idx,
+                itemStyle: { color: color, borderWidth: 1.5 },
+                renderItem: function (params, api) {
+                    const xValue = api.value(0);
+                    const yValue = api.value(1);
+                    const lowPoint = api.coord([xValue, yValue - api.value(2)]);
+                    const highPoint = api.coord([xValue, yValue + api.value(2)]);
+                    const style = api.style({ stroke: api.visual('color'), fill: null });
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: lowPoint[0], y1: lowPoint[1], x2: highPoint[0], y2: highPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: lowPoint[0]-3, y1: lowPoint[1], x2: lowPoint[0]+3, y2: lowPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: highPoint[0]-3, y1: highPoint[1], x2: highPoint[0]+3, y2: highPoint[1] }, style: style }
+                        ]
+                    };
+                },
+                data: data,
+                z: 10
+            });
+
+            // Scatter
+            series.push({
+                type: 'scatter',
+                name: 'Series ' + idx,
+                data: data,
+                symbol: 'circle',
+                itemStyle: { color: color },
+                symbolSize: 8,
+                z: 10
+            });
+
+            // Spline
+            series.push({
+                type: 'line',
+                name: 'Series ' + idx,
+                data: data.map(d => [d[0], d[1]]),
+                smooth: true,
+                showSymbol: false,
+                lineStyle: { color: color, width: 2 },
+                z: 5
+            });
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 50, bottom: 50, left: 60 },
+            xAxis: {
+                type: 'value',
+                min: -12.5, max: -3.5,
+                interval: 2,
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisTick: { show: true, inside: true },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                min: -0.05, max: 0.4,
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisTick: { show: true, inside: true },
+                splitLine: { show: false },
+                name: 'G protein activation\n(-Δ Net BRET)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 }
+            },
+            series: [
+                ...series,
+                {
+                    type: 'line',
+                    markLine: {
+                        symbol: 'none',
+                        lineStyle: { type: 'dashed', color: 'black', width: 1 },
+                        data: [{ yAxis: 0 }]
+                    }
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 70,
+                    top: 60,
+                    style: {
+                        text: 'Gq',
+                        font: '14px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

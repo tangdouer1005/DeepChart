@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>2016–2024 奥特曼破产预测模型 (Altman Z-Score) 变化柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+                   Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 0 0 18px;
+      text-align: center;
+      font-weight: normal;
+      color: #555;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 16px 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+    .info {
+      max-width: 900px;
+      margin: 12px auto 0;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+    .legend-note {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>2016–2024 年奥特曼破产预测模型 (Altman Z-Score)</h1>
+    <h2>Bar Chart｜成本相关主体的 Z-Score 年度变化</h2>
+    <div class="chart-wrapper">
+      <canvas id="zScoreChart"></canvas>
+    </div>
+    <div class="legend-note">
+      注：一般情况下 Z-Score &gt; 2.99 视为财务状况相对安全，1.81–2.99 为灰色地带，&lt; 1.81 破产风险较高。阈值线仅为常用参考。
+    </div>
+  </div>
+
+  <div class="info">
+    数据来源：用户提供年度财报指标计算结果（RESULT_Z_Score）。<br/>
+    图表交互：将鼠标悬停在柱子上查看精确数值，可在图例中点击系列名称切换显示。
+  </div>
+
+  <script>
+    // ----- Source Data (as provided) -----
+    const fiscalYears = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+
+    const zScores = [
+      4.604724467022887,
+      4.403750825785922,
+      4.38760392731197,
+      4.33744399009963,
+      4.01751576909205,
+      4.212023846056632,
+      4.575455698629092,
+      4.678093617174053,
+      4.721642641890359
+    ];
+
+    // ----- Create Chart -----
+    const ctx = document.getElementById("zScoreChart").getContext("2d");
+
+    // Compute a reasonable y-axis range
+    const minScore = Math.min(...zScores);
+    const maxScore = Math.max(...zScores);
+    const padding = 0.3;
+    const suggestedMin = Math.max(0, Math.floor((minScore - padding) * 10) / 10);
+    const suggestedMax = Math.ceil((maxScore + padding) * 10) / 10;
+
+    const zScoreChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "Altman Z-Score",
+            data: zScores,
+            backgroundColor: "rgba(54, 162, 235, 0.8)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+            borderRadius: 4,
+            hoverBackgroundColor: "rgba(54, 162, 235, 1)",
+            hoverBorderColor: "rgba(23, 117, 204, 1)"
+          },
+          // Reference line: 2.99 (commonly used "safe" threshold)
+          {
+            type: "line",
+            label: "安全阈值 2.99",
+            data: fiscalYears.map(() => 2.99),
+            borderColor: "rgba(255, 99, 132, 0.9)",
+            borderWidth: 1.5,
+            borderDash: [6, 4],
+            pointRadius: 0,
+            fill: false,
+            yAxisID: "y"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+            labels: {
+              usePointStyle: true,
+              padding: 16,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            usePointStyle: true,
+            callbacks: {
+              label: function (ctx) {
+                const value = ctx.parsed.y;
+                if (ctx.dataset.type === "line") {
+                  return ctx.dataset.label + ": " + value.toFixed(2);
+                }
+                return ctx.dataset.label + ": " + value.toFixed(3);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year (财年)",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            title: {
+              display: true,
+              text: "Altman Z-Score",
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              precision: 2
+            },
+            grid: {
+              color: "rgba(0,0,0,0.06)"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

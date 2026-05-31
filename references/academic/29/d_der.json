@@ -1,0 +1,160 @@
+{
+    "plot_data": [
+        {
+            "Date": "2020-08-19 00:00:00",
+            "E_solar [kWh]": 154.791,
+            "E_fuel [kWh]": 10.4153,
+            "E_heat [kWh]": 60.6679,
+            "Fuel system efficiency (Gibbs) [%]": 5.47092,
+            "Heat system efficiency [%]": 38.3446,
+            "IPEC device efficiency (Gibbs) [%]": 20.3615,
+            "Fuel system efficiency (HHV) [%]": 6.5829,
+            "IPEC device efficiency (HHV) [%]": 24.5,
+            "DateLabel": "19 Aug. 2020"
+        },
+        {
+            "Date": "2020-08-20 00:00:00",
+            "E_solar [kWh]": 275.969,
+            "E_fuel [kWh]": 20.0619,
+            "E_heat [kWh]": 107.334,
+            "Fuel system efficiency (Gibbs) [%]": 5.94472,
+            "Heat system efficiency [%]": 38.2694,
+            "IPEC device efficiency (Gibbs) [%]": 21.9405,
+            "Fuel system efficiency (HHV) [%]": 7.153,
+            "IPEC device efficiency (HHV) [%]": 26.4,
+            "DateLabel": "20 Aug. 2020"
+        },
+        {
+            "Date": "2020-08-21 00:00:00",
+            "E_solar [kWh]": 224.841,
+            "E_fuel [kWh]": 15.9314,
+            "E_heat [kWh]": 87.3055,
+            "Fuel system efficiency (Gibbs) [%]": 5.79087,
+            "Heat system efficiency [%]": 38.1847,
+            "IPEC device efficiency (Gibbs) [%]": 21.4419,
+            "Fuel system efficiency (HHV) [%]": 6.96788,
+            "IPEC device efficiency (HHV) [%]": 25.8,
+            "DateLabel": "21 Aug. 2020"
+        },
+        {
+            "Date": "2020-08-24 00:00:00",
+            "E_solar [kWh]": 264.534,
+            "E_fuel [kWh]": 19.2475,
+            "E_heat [kWh]": 101.679,
+            "Fuel system efficiency (Gibbs) [%]": 5.94933,
+            "Heat system efficiency [%]": 37.8166,
+            "IPEC device efficiency (Gibbs) [%]": 22.0236,
+            "Fuel system efficiency (HHV) [%]": 7.15854,
+            "IPEC device efficiency (HHV) [%]": 26.5,
+            "DateLabel": "24 Aug. 2020"
+        },
+        {
+            "Date": "2021-02-17 00:00:00",
+            "E_solar [kWh]": 77.6414,
+            "E_fuel [kWh]": 5.58401,
+            "E_heat [kWh]": 27.7777,
+            "Fuel system efficiency (Gibbs) [%]": 5.87082,
+            "Heat system efficiency [%]": 35.1403,
+            "IPEC device efficiency (Gibbs) [%]": 21.7743,
+            "Fuel system efficiency (HHV) [%]": 7.06408,
+            "IPEC device efficiency (HHV) [%]": 26.2,
+            "DateLabel": "17 Feb. 2021"
+        },
+        {
+            "Date": "2021-02-23 00:00:00",
+            "E_solar [kWh]": 128.928,
+            "E_fuel [kWh]": 7.61501,
+            "E_heat [kWh]": 43.6776,
+            "Fuel system efficiency (Gibbs) [%]": 4.78073,
+            "Heat system efficiency [%]": 32.9943,
+            "IPEC device efficiency (Gibbs) [%]": 17.8682,
+            "Fuel system efficiency (HHV) [%]": 5.75242,
+            "IPEC device efficiency (HHV) [%]": 21.5,
+            "DateLabel": "23 Feb. 2021"
+        },
+        {
+            "Date": "2021-02-24 00:00:00",
+            "E_solar [kWh]": 156.83,
+            "E_fuel [kWh]": 9.67157,
+            "E_heat [kWh]": 52.5228,
+            "Fuel system efficiency (Gibbs) [%]": 5.00715,
+            "Heat system efficiency [%]": 32.7189,
+            "IPEC device efficiency (Gibbs) [%]": 18.6162,
+            "Fuel system efficiency (HHV) [%]": 6.02487,
+            "IPEC device efficiency (HHV) [%]": 22.4,
+            "DateLabel": "24 Feb. 2021"
+        },
+        {
+            "Date": "2021-02-25 00:00:00",
+            "E_solar [kWh]": 191.114,
+            "E_fuel [kWh]": 12.7748,
+            "E_heat [kWh]": 65.2465,
+            "Fuel system efficiency (Gibbs) [%]": 5.45997,
+            "Heat system efficiency [%]": 33.5545,
+            "IPEC device efficiency (Gibbs) [%]": 20.1953,
+            "Fuel system efficiency (HHV) [%]": 6.56972,
+            "IPEC device efficiency (HHV) [%]": 24.3,
+            "DateLabel": "25 Feb. 2021"
+        },
+        {
+            "Date": "2021-02-26 00:00:00",
+            "E_solar [kWh]": 54.2302,
+            "E_fuel [kWh]": 3.29407,
+            "E_heat [kWh]": 17.5064,
+            "Fuel system efficiency (Gibbs) [%]": 4.93685,
+            "Heat system efficiency [%]": 31.5697,
+            "IPEC device efficiency (Gibbs) [%]": 18.3669,
+            "Fuel system efficiency (HHV) [%]": 5.94028,
+            "IPEC device efficiency (HHV) [%]": 22.1,
+            "DateLabel": "26 Feb. 2021"
+        },
+        {
+            "Date": "2021-03-01 00:00:00",
+            "E_solar [kWh]": 210.299,
+            "E_fuel [kWh]": 12.8753,
+            "E_heat [kWh]": 70.6659,
+            "Fuel system efficiency (Gibbs) [%]": 4.99228,
+            "Heat system efficiency [%]": 32.9691,
+            "IPEC device efficiency (Gibbs) [%]": 18.5331,
+            "Fuel system efficiency (HHV) [%]": 6.00697,
+            "IPEC device efficiency (HHV) [%]": 22.3,
+            "DateLabel": "01 Mar. 2021"
+        },
+        {
+            "Date": "2021-03-02 00:00:00",
+            "E_solar [kWh]": 118.593,
+            "E_fuel [kWh]": 7.28012,
+            "E_heat [kWh]": 37.5582,
+            "Fuel system efficiency (Gibbs) [%]": 5.00232,
+            "Heat system efficiency [%]": 31.0524,
+            "IPEC device efficiency (Gibbs) [%]": 18.5331,
+            "Fuel system efficiency (HHV) [%]": 6.01905,
+            "IPEC device efficiency (HHV) [%]": 22.3,
+            "DateLabel": "02 Mar. 2021"
+        },
+        {
+            "Date": "2021-03-05 00:00:00",
+            "E_solar [kWh]": 4.20444,
+            "E_fuel [kWh]": 0.2585,
+            "E_heat [kWh]": 1.33517,
+            "Fuel system efficiency (Gibbs) [%]": 4.9503,
+            "Heat system efficiency [%]": 30.766,
+            "IPEC device efficiency (Gibbs) [%]": 18.6162,
+            "Fuel system efficiency (HHV) [%]": 5.95645,
+            "IPEC device efficiency (HHV) [%]": 22.4,
+            "DateLabel": "05 Mar. 2021"
+        },
+        {
+            "Date": "2021-03-12 00:00:00",
+            "E_solar [kWh]": 22.4122,
+            "E_fuel [kWh]": 1.67846,
+            "E_heat [kWh]": 5.83005,
+            "Fuel system efficiency (Gibbs) [%]": 6.12886,
+            "Heat system efficiency [%]": 25.6151,
+            "IPEC device efficiency (Gibbs) [%]": 22.6054,
+            "Fuel system efficiency (HHV) [%]": 7.37457,
+            "IPEC device efficiency (HHV) [%]": 27.2,
+            "DateLabel": "12 Mar. 2021"
+        }
+    ]
+}

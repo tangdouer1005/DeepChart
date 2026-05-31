@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>PG 资本再投资率 (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js latest stable -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f7f7f7;
+      color: #222;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px 24px 28px;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px 0;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: normal;
+      margin: 0 0 16px 0;
+      text-align: center;
+      color: #666;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #777;
+      margin-top: 10px;
+      text-align: right;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .chart-container {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>PG 资本再投资率变化</h1>
+    <h2>Fiscal Year 2016–2024</h2>
+    <canvas id="reinvestmentChart"></canvas>
+    <div class="note">数据来源：用户提供；单位：比率（可为负值）</div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('reinvestmentChart').getContext('2d');
+
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const dataValues = [
+      0.5788115485258473,
+      0.0082188700620144,
+      0.2421023627054082,
+      -0.4693681144843251,
+      -0.3542334928465324,
+      0.0896666610262087,
+      0.3131106688040007,
+      0.1339775927829559,
+      0.2201788897466312
+    ];
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '资本再投资率',
+            data: dataValues,
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37, 99, 235, 0.12)',
+            tension: 0.25,
+            borderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: '#2563eb',
+            pointBorderColor: '#ffffff',
+            pointBorderWidth: 1.5,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: { size: 12 },
+              color: '#333'
+            }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            titleFont: { size: 12, weight: '600' },
+            bodyFont: { size: 12 },
+            padding: 10,
+            callbacks: {
+              label: function(context) {
+                const v = context.parsed.y;
+                // format as percentage with 2 decimals
+                const pct = (v * 100).toFixed(2) + '%';
+                return ' 资本再投资率: ' + pct;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Fiscal Year',
+              font: { size: 12 },
+              color: '#444'
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#444'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: '资本再投资率（%）',
+              font: { size: 12 },
+              color: '#444'
+            },
+            ticks: {
+              callback: function(value) {
+                return (value * 100).toFixed(0) + '%';
+              },
+              color: '#444'
+            },
+            grid: {
+              color: 'rgba(148, 163, 184, 0.25)'
+            }
+          }
+        }
+      }
+    });
+
+    // Make the canvas container height responsive but stable
+    const canvasParent = document.getElementById('reinvestmentChart').parentElement;
+    function resizeChartHeight() {
+      const width = canvasParent.clientWidth;
+      // 16:9 ratio for larger screens, taller for phones
+      const height = width < 500 ? width * 0.9 : width * 0.5;
+      canvasParent.style.height = height + 'px';
+      chart.resize();
+    }
+
+    window.addEventListener('load', resizeChartHeight);
+    window.addEventListener('resize', resizeChartHeight);
+  </script>
+</body>
+</html>

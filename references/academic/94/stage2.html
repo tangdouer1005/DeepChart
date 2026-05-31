@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: white;
+        }
+        #chart-container {
+            width: 700px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        
+        const data = {"means": [1.0000199921533155, 1.3842577080992438, 0.7960945141818532, 1.6946583422257693, 0.4935876291388364, 0.6212140830409298, 0.70791087916729, 0.33591996432487464, 0.6495233177565551, 0.655141029183349], "stds": [0.12941491558211352, 0.33164112831594617, 0.15319424606044418, 0.5593440694583889, 0.26425531678268765, 0.1853073686314629, 0.28897115996251577, 0.29268622965594776, 0.3786721262864257, 0.21077924944803733], "columns": ["B16-F0", "LN1 18IL", "LN7 1112AR", "LN7 1120BL", "LN7 1134BL", "LN8 1194BR", "LN8 1198AR", "LN8 1205BL", "LN9 1315BL", "LN9 1358IR"], "new_labels": ["B16-F0", "LN1-18IL", "LN7-1112AR", "LN7-1120BL", "LN7-1134BL", "LN8-1194BR", "LN8-1198AR", "LN8-1205BL", "LN9-1315BL", "LN9-1358IR"], "raw_data": {"B16-F0": [0.8299296674003414, 1.0355057637490246, 1.134564568850634, 1.067366156351031, 1.0214732863448737, 0.9111623735995767, 0.7882105310868032, 0.9514894525471388, 1.2603002786479676, 1.151744305174724, 0.8150691363293474, 1.033186952433866, 1.0000178133667066, 1.0001977922468783, 1.000081804170821], "LN1 18IL": [1.928546998833788, 2.146987063268871, 1.1800532877406624, 1.139263648683155, 1.296021888185411, 0.935489563538324, 1.446763836975741, 1.7365729543386703, 1.3206856278467825, 1.5762741597162917, 1.255709001728316, 1.2621057179113198, 1.112049159854708, 1.3090844939710062, 1.1182582188956112], "LN7 1112AR": [0.8025826043362723, 0.5586761586545418, 0.981485217508094, 0.6828174503771713, 0.8991676521394686, 0.8518380020755709], "LN7 1120BL": [2.222764945615544, 1.625153697906596, 2.496864417961382, 1.1651481165731932, 1.54030017361637, 1.1177187016815318], "LN7 1134BL": [0.3727814164837758, 0.211252515486752, 0.2840339839626573, 0.4938553059954519, 0.9079694495974822, 0.6916331033068995], "LN8 1194BR": [0.6090772699389065, 0.5130045874571015, 0.618016249272412, 0.555341273528883, 0.9781711654635804, 0.4536739525846956], "LN8 1198AR": [0.5369301638703191, 0.589444402175406, 0.4357346534565269, 0.5996181837280969, 0.8639109240152595, 1.2218269477581314], "LN8 1205BL": [0.1399408368610549, 0.1059778739660381, 0.1881532296192536, 0.2869213153964222, 0.8911277607591113, 0.4033987693473678], "LN9 1315BL": [0.5357799907267852, 0.7520433000113403, 0.8726564170965828, 0.2089727516886209, 1.2240086468234774, 0.3036788001925242], "LN9 1358IR": [0.5369725529955741, 0.735953968614233, 0.5482852964188359, 0.5125056222512814, 1.052278207408882, 0.5448505274112878]}};
+        
+        const means = data.means;
+        const stds = data.stds;
+        const headers = data.new_labels;
+        
+        // Reconstruct dataMap for compatibility with existing scatter generation code
+        const dataMap = {};
+        data.columns.forEach((col, idx) => {
+             dataMap[headers[idx]] = data.raw_data[col];
+        });
+
+        const barColors = ['#D9D9D9', '#EAB8F5'];
+        const pointColors = ['black', 'black'];
+        
+        // Fill colors for the rest
+        for (let i = 0; i < 8; i++) {
+            barColors.push('#96D691');
+            pointColors.push('#4A8A45');
+        }
+
+        // P-values Configuration
+        const pValues = {
+            2: "P = 0.6982",
+            3: "P = 4.8 × 10⁻⁵", // Using unicode for superscript and times
+            4: "P = 0.0051",
+            5: "P = 0.0688",
+            6: "P = 0.2721",
+            7: "P = 0.0001",
+            8: "P = 0.1122",
+            9: "P = 0.1231"
+        };
+        const globalPValue = "P = 2.2 × 10⁻¹³";
+
+        // Chart Initialization
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        // Helper for Jitter
+        function randn_bm() {
+            let u = 0, v = 0;
+            while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+            while(v === 0) v = Math.random();
+            return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+        }
+
+        // Prepare Series Data
+        const barData = means.map((mean, idx) => ({
+            value: mean,
+            itemStyle: {
+                color: barColors[idx],
+                borderColor: 'black',
+                borderWidth: 1
+            }
+        }));
+
+        const errorBarData = means.map((mean, idx) => {
+            const std = stds[idx];
+            return {
+                value: [idx, mean - std, mean + std],
+                itemStyle: {
+                    borderWidth: 1,
+                    color: 'black'
+                }
+            };
+        });
+
+        const scatterData = [];
+        headers.forEach((h, colIdx) => {
+            dataMap[h].forEach(val => {
+                // Jitter logic: np.random.normal(i, 0.06) clipped to +/- 0.2
+                let jitter = randn_bm() * 0.06;
+                if (jitter > 0.2) jitter = 0.2;
+                if (jitter < -0.2) jitter = -0.2;
+                
+                scatterData.push({
+                    value: [colIdx + jitter, val],
+                    itemStyle: {
+                        color: pointColors[colIdx],
+                        borderColor: 'transparent'
+                    }
+                });
+            });
+        });
+
+        // Annotation Series (Vertical P-values)
+        const pValueAnnotations = [];
+        Object.keys(pValues).forEach(idxStr => {
+            const idx = parseInt(idxStr);
+            const yPos = means[idx] + stds[idx] + 0.2;
+            pValueAnnotations.push({
+                value: [idx, yPos],
+                name: pValues[idx], // Store text in name
+                label: {
+                    show: true,
+                    formatter: '{b}',
+                    rotate: 90,
+                    position: 'insideLeft', // Anchor at the point
+                    offset: [0, -5], // Slight shift upwards
+                    color: 'black',
+                    fontSize: 10,
+                    align: 'left', // Text extends from anchor
+                    verticalAlign: 'middle'
+                },
+                itemStyle: { color: 'transparent' } // Invisible point
+            });
+        });
+
+        const option = {
+            animation: false,
+            grid: {
+                top: '15%',
+                bottom: '25%',
+                left: '15%',
+                right: '5%'
+            },
+            xAxis: {
+                type: 'category',
+                data: headers,
+                axisLabel: {
+                    interval: 0,
+                    rotate: 45,
+                    fontSize: 12,
+                    color: 'black',
+                    margin: 14
+                },
+                axisTick: {
+                    alignWithLabel: true,
+                    show: true,
+                    lineStyle: { color: 'black' }
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: { color: 'black' }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Relative ACSL4 levels',
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: {
+                    fontSize: 12,
+                    color: 'black'
+                },
+                min: 0,
+                max: 4.5,
+                interval: 0.5,
+                axisLabel: {
+                    fontSize: 12,
+                    color: 'black',
+                    formatter: (value) => value.toFixed(1)
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: { color: 'black' }
+                },
+                splitLine: { show: false }
+            },
+            series: [
+                // Bars
+                {
+                    type: 'bar',
+                    data: barData,
+                    barWidth: '80%',
+                    z: 1
+                },
+                // Error Bars (Custom Series)
+                {
+                    type: 'custom',
+                    name: 'error',
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1.0,
+                            color: 'black'
+                        }
+                    },
+                    renderItem: function (params, api) {
+                        var xValue = api.value(0);
+                        var highPoint = api.coord([xValue, api.value(2)]);
+                        var lowPoint = api.coord([xValue, api.value(1)]);
+                        var halfWidth = 4;
+                        var style = api.style({
+                            stroke: api.visual('color'),
+                            fill: undefined
+                        });
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0] - halfWidth, y1: highPoint[1],
+                                        x2: highPoint[0] + halfWidth, y2: highPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0], y1: highPoint[1],
+                                        x2: lowPoint[0], y2: lowPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0] - halfWidth, y1: lowPoint[1],
+                                        x2: lowPoint[0] + halfWidth, y2: lowPoint[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    encode: {
+                        x: 0,
+                        y: [1, 2]
+                    },
+                    data: errorBarData,
+                    z: 3
+                },
+                // Scatter Points
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    symbolSize: 6,
+                    z: 4
+                },
+                // P-value Annotations
+                {
+                    type: 'scatter',
+                    data: pValueAnnotations,
+                    symbolSize: 0, // Hidden point
+                    z: 5
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: '2%',
+                    top: '2%',
+                    style: {
+                        text: 'k',
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        // Adding the global p-value line
+        option.series.push({
+            type: 'line',
+            data: [
+                [0, 4.15],
+                [9, 4.15]
+            ],
+            symbol: 'none',
+            lineStyle: {
+                color: 'black',
+                width: 1
+            },
+            z: 10
+        });
+
+        // Add Global P-value Text using a scatter point
+        option.series.push({
+            type: 'scatter',
+            data: [{
+                value: [4.5, 4.2],
+                name: globalPValue
+            }],
+            symbolSize: 0,
+            label: {
+                show: true,
+                formatter: '{b}',
+                color: 'black',
+                fontSize: 12,
+                position: 'top',
+                color: 'black'
+            },
+            z: 10
+        });
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

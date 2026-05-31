@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GOOG 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --text-color: #111827;
+      --grid-color: rgba(148, 163, 184, 0.3);
+      --line-color: #2563eb;
+      --line-fill: rgba(37, 99, 235, 0.08);
+      --point-hover: #1d4ed8;
+      --border-subtle: #e5e7eb;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --text-color: #e5e7eb;
+        --grid-color: rgba(148, 163, 184, 0.35);
+        --line-color: #60a5fa;
+        --line-fill: rgba(37, 99, 235, 0.18);
+        --point-hover: #93c5fd;
+        --border-subtle: #1f2937;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #eef2ff 0, #f9fafb 42%, var(--bg-color) 100%);
+      color: var(--text-color);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 960px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 18px;
+      padding: 20px 22px 24px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.14),
+        0 0 0 1px rgba(148, 163, 184, 0.22);
+      box-sizing: border-box;
+      backdrop-filter: blur(12px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .card {
+        background: rgba(15, 23, 42, 0.9);
+        box-shadow:
+          0 18px 50px rgba(0, 0, 0, 0.7),
+          0 0 0 1px rgba(31, 41, 55, 0.9);
+      }
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: flex-end;
+    }
+
+    .title-block {
+      min-width: 0;
+    }
+
+    h1 {
+      font-size: 1.15rem;
+      margin: 0 0 4px 0;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+    }
+
+    .meta {
+      text-align: right;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .meta {
+        color: #9ca3af;
+      }
+    }
+
+    .meta span {
+      display: block;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #6b7280;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 4px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 8px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .footer-note {
+        color: #9ca3af;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="header">
+        <div class="title-block">
+          <h1>GOOG 自由现金流收益质量（Quality of Income Ratio）</h1>
+          <div class="subtitle">年度变化趋势：2016 – 2024 财年</div>
+        </div>
+        <div class="meta">
+          <span>单位：倍</span>
+          <span>数据区间：2016–2024 财年</span>
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="qoiChart" aria-label="GOOG Quality of Income Ratio from 2016 to 2024" role="img"></canvas>
+      </div>
+
+      <div class="footer-note">
+        <span>指标说明：自由现金流收益质量 = 自由现金流 / 净利润，衡量盈利的现金含量和可持续性。</span>
+        <span>交互提示：将鼠标悬停或在移动端点按折线节点查看各年度的精确数值。</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data from source
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const qoiData = [
+      1.2068318821165438,
+      1.1208110476535824,
+      1.3121529582318991,
+      1.1849082847952708,
+      1.1857759327033377,
+      1.0054522516592617,
+      1.0359840121380934,
+      1.0572221240869086,
+      0.981190437036515
+    ];
+
+    const ctx = document.getElementById("qoiChart").getContext("2d");
+
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "自由现金流收益质量（QoI Ratio）",
+            data: qoiData,
+            borderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--line-color")
+              .trim() || "#2563eb",
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--line-fill")
+              .trim() || "rgba(37, 99, 235, 0.1)",
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--line-color")
+              .trim() || "#2563eb",
+            pointHoverBackgroundColor: getComputedStyle(
+              document.documentElement
+            )
+              .getPropertyValue("--point-hover")
+              .trim() || "#1d4ed8",
+            pointRadius: 3.5,
+            pointHoverRadius: 5,
+            pointHitRadius: 8,
+            borderWidth: 2.3,
+            fill: true,
+            tension: 0.32
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 12,
+              usePointStyle: true,
+              padding: 14,
+              font: {
+                size: 11
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.92)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.4)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              title: (items) => {
+                const year = items[0].label;
+                return `财年 ${year}`;
+              },
+              label: (ctx) => {
+                const value = ctx.raw;
+                return `QoI Ratio: ${value.toFixed(3)} 倍`;
+              },
+              footer: (items) => {
+                const v = items[0].raw;
+                if (v > 1) {
+                  return "提示：> 1 通常表示自由现金流高于净利润，盈利现金含量较高。";
+                } else if (v < 1) {
+                  return "提示：< 1 通常表示自由现金流低于净利润，需要关注盈利的现金兑现能力。";
+                }
+                return "";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              minRotation: 0,
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            ticks: {
+              font: {
+                size: 11
+              },
+              callback: (value) => value.toFixed(1)
+            },
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--grid-color")
+                .trim() || "rgba(148, 163, 184, 0.3)",
+              drawBorder: false
+            },
+            title: {
+              display: true,
+              text: "自由现金流收益质量（倍）",
+              font: {
+                size: 11.5,
+                weight: "500"
+              }
+            },
+            suggestedMin: 0.9,
+            suggestedMax: 1.35
+          }
+        }
+      }
+    });
+
+    // Optional: update colors if system theme changes while page is open
+    if (window.matchMedia) {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      mediaQuery.addEventListener("change", () => {
+        const rootStyle = getComputedStyle(document.documentElement);
+        const lineColor =
+          rootStyle.getPropertyValue("--line-color").trim() || "#2563eb";
+        const lineFill =
+          rootStyle.getPropertyValue("--line-fill").trim() ||
+          "rgba(37, 99, 235, 0.1)";
+        const pointHover =
+          rootStyle.getPropertyValue("--point-hover").trim() || "#1d4ed8";
+        const gridColor =
+          rootStyle.getPropertyValue("--grid-color").trim() ||
+          "rgba(148, 163, 184, 0.3)";
+
+        chart.data.datasets[0].borderColor = lineColor;
+        chart.data.datasets[0].backgroundColor = lineFill;
+        chart.data.datasets[0].pointBorderColor = lineColor;
+        chart.data.datasets[0].pointHoverBackgroundColor = pointHover;
+        chart.options.scales.y.grid.color = gridColor;
+        chart.update();
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>hd 息税折旧摊销前利润（EBITDA）2016–2024 走势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --card-bg: #f7f7f9;
+      --text: #222222;
+      --muted: #666666;
+      --accent: #1565c0;
+      --accent-soft: rgba(21, 101, 192, 0.15);
+      --grid: rgba(0, 0, 0, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0c0f;
+        --card-bg: #14151b;
+        --text: #f5f5f5;
+        --muted: #a0a4af;
+        --accent: #64b5f6;
+        --accent-soft: rgba(100, 181, 246, 0.18);
+        --grid: rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      background: radial-gradient(circle at top, #e3f2fd 0, transparent 55%),
+                  radial-gradient(circle at bottom, #ede7f6 0, transparent 60%),
+                  var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 22px 20px 26px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(15, 23, 42, 0.06);
+    }
+
+    header {
+      margin-bottom: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .meta span {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .meta span {
+        background: rgba(255, 255, 255, 0.04);
+      }
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    footer {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .legend-inline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #42a5f5, #1565c0);
+    }
+
+    .toggle-group {
+      display: inline-flex;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .toggle-group {
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+    }
+
+    .toggle-btn {
+      font-size: 11px;
+      padding: 4px 9px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .toggle-btn.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>hd 息税折旧摊销前利润（EBITDA）趋势</h1>
+        <p class="subtitle">2016–2024 财年（单位：人民币元）</p>
+      </div>
+      <div class="toggle-group" aria-label="Scale toggle">
+        <button class="toggle-btn active" data-scale="linear">线性刻度</button>
+        <button class="toggle-btn" data-scale="logarithmic">对数刻度</button>
+      </div>
+    </header>
+
+    <div class="meta">
+      <span>指标：EBITDA（息税折旧摊销前利润）</span>
+      <span>范围：2016 财年至 2024 财年</span>
+      <span>交互：悬停查看精确数值，可切换纵轴刻度</span>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <footer>
+      <div class="legend-inline">
+        <span class="legend-color"></span>
+        <span>hd EBITDA（财报口径，单位：元）</span>
+      </div>
+      <span>数据来源：用户提供的财务数据</span>
+    </footer>
+  </div>
+
+  <script>
+    // Data from source
+    const years = [
+      "2016", "2017", "2018", "2019", "2020",
+      "2021", "2022", "2023", "2024"
+    ];
+
+    const ebitdaValues = [
+      13803000000,
+      15436000000,
+      16817000000,
+      17759000000,
+      18212000000,
+      20844000000,
+      25946000000,
+      27069000000,
+      25114000000
+    ];
+
+    const ctx = document.getElementById("ebitdaChart").getContext("2d");
+
+    function formatCurrency(value) {
+      // Format large RMB values with units 亿 / 万
+      const absVal = Math.abs(value);
+      if (absVal >= 1e8) {
+        return (value / 1e8).toFixed(2).replace(/\.0+$/, "") + " 亿元";
+      } else if (absVal >= 1e4) {
+        return (value / 1e4).toFixed(0) + " 万元";
+      }
+      return value.toLocaleString("zh-CN") + " 元";
+    }
+
+    function formatCurrencyShort(value) {
+      const absVal = Math.abs(value);
+      if (absVal >= 1e8) {
+        return (value / 1e8).toFixed(1).replace(/\.0$/, "") + "亿";
+      } else if (absVal >= 1e4) {
+        return (value / 1e4).toFixed(0) + "万";
+      }
+      return value.toLocaleString("zh-CN");
+    }
+
+    const chartConfig = {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "EBITDA",
+            data: ebitdaValues,
+            borderColor: "rgba(21, 101, 192, 0.9)",
+            backgroundColor: "rgba(66, 165, 245, 0.15)",
+            pointBackgroundColor: "rgba(21, 101, 192, 1)",
+            pointBorderColor: "#ffffff",
+            pointHoverRadius: 6,
+            pointRadius: 4,
+            pointBorderWidth: 1.5,
+            tension: 0.28,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.94)",
+            borderColor: "rgba(148, 163, 184, 0.65)",
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8,
+            titleFont: { weight: "600", size: 13 },
+            bodyFont: { size: 12 },
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return " EBITDA: " + formatCurrency(value);
+              },
+              footer: function () {
+                return " 单位：人民币";
+              }
+            },
+            footerFont: { style: "italic", size: 11 },
+            footerMarginTop: 6
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              autoSkipPadding: 12
+            }
+          },
+          y: {
+            type: "linear",
+            beginAtZero: false,
+            grace: "5%",
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            ticks: {
+              callback: function (value) {
+                return formatCurrencyShort(value);
+              }
+            }
+          }
+        }
+      }
+    };
+
+    const ebitdaChart = new Chart(ctx, chartConfig);
+
+    // Toggle between linear and logarithmic y-axis
+    const toggleButtons = document.querySelectorAll(".toggle-btn");
+    toggleButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const scale = btn.dataset.scale;
+
+        toggleButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        ebitdaChart.options.scales.y.type = scale;
+        // For log scale, ensure a sensible minimum
+        if (scale === "logarithmic") {
+          ebitdaChart.options.scales.y.min = 1e9; // 10亿
+        } else {
+          ebitdaChart.options.scales.y.min = undefined;
+        }
+        ebitdaChart.update();
+      });
+    });
+  </script>
+</body>
+</html>

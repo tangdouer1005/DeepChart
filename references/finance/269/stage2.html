@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>v 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f7;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #555;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 16px 20px 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #777;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .chart-container {
+        padding: 12px 12px 18px;
+      }
+      .chart-wrapper {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>v 自由现金流收益质量 (Quality of Income Ratio)</h1>
+    <h2>2016–2024 年度变化</h2>
+    <div class="chart-wrapper">
+      <canvas id="qoiChart"></canvas>
+    </div>
+    <div class="note">
+      说明：自由现金流收益质量（Quality of Income Ratio）通常衡量经营现金流相对于净利润的质量。
+      数值越接近或高于 1，一般表示收益的现金保障程度越高。鼠标悬停查看具体年度数值。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Data from source
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const qoiData = [
+      0.6647584973166368,
+      0.7250393700787402,
+      0.937053143657404,
+      0.8165038002171553,
+      0.703125,
+      0.9168473025048168,
+      0.95806648368405,
+      0.9458597274757324,
+      0.8100207072962767
+    ];
+
+    const ctx = document.getElementById("qoiChart").getContext("2d");
+
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "自由现金流收益质量 (QoI Ratio)",
+            data: qoiData,
+            tension: 0.25,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            pointBackgroundColor: "#2563eb",
+            pointBorderColor: "#ffffff",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              padding: 16,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.95)",
+            titleColor: "#f9fafb",
+            bodyColor: "#e5e7eb",
+            borderColor: "#1f2937",
+            borderWidth: 1,
+            padding: 10,
+            callbacks: {
+              label: function (ctx) {
+                const value = ctx.raw;
+                return " " + value.toFixed(3);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(1);
+              }
+            },
+            title: {
+              display: true,
+              text: "QoI Ratio",
+              font: {
+                size: 12
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

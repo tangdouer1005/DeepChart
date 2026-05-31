@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JNJ 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #222222;
+      --grid-color: rgba(0, 0, 0, 0.08);
+      --bar-color: #1f78b4;
+      --bar-hover-color: #145072;
+      --accent-color: #444444;
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px 16px 40px;
+      font-family: var(--font-family);
+      background: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+      font-weight: 600;
+      color: var(--accent-color);
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #666666;
+      margin-bottom: 18px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      background: #fafafa;
+      border-radius: 12px;
+      padding: 16px 14px 10px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+    }
+
+    canvas {
+      max-height: 460px;
+    }
+
+    .footer-note {
+      font-size: 0.78rem;
+      color: #777777;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .legend-inline {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: var(--bar-color);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px 10px 28px;
+      }
+
+      h1 {
+        font-size: 1.15rem;
+      }
+
+      .subtitle {
+        font-size: 0.8rem;
+      }
+
+      canvas {
+        max-height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JNJ 自由现金流收益质量（Quality of Income Ratio）</h1>
+    <div class="subtitle">2016–2024 年度变化 — 单位：比率（倍）</div>
+
+    <div class="chart-wrapper">
+      <div class="legend-inline">
+        <span class="legend-swatch"></span>
+        <span>自由现金流收益质量（QoI Ratio）</span>
+      </div>
+      <canvas id="qoiChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      说明：自由现金流收益质量（Quality of Income Ratio）通常定义为
+      “经营活动产生的现金流量 / 净利润”。数值越接近或高于 1，盈利的现金实现质量通常被认为越好。
+      本图展示的是 JNJ 在 2016–2024 财年的该比率变化。
+    </div>
+  </div>
+
+  <script>
+    // Data from source
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const qoiValues = [
+      0.7614932034895516,
+      0.8580626757406578,
+      0.7899587247366923,
+      0.8369133993352157,
+      0.8728675270731345,
+      0.8262450146472311,
+      0.7573884143944538,
+      0.776815842394083,
+      0.8229110146500271
+    ];
+
+    const ctx = document.getElementById("qoiChart").getContext("2d");
+
+    const qoiChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "QoI Ratio",
+            data: qoiValues,
+            backgroundColor: "rgba(31, 120, 180, 0.75)",
+            borderColor: "rgba(31, 120, 180, 1)",
+            borderWidth: 1.2,
+            hoverBackgroundColor: "rgba(20, 80, 114, 0.9)",
+            hoverBorderColor: "rgba(20, 80, 114, 1)",
+            borderRadius: 5,
+            maxBarThickness: 48
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          title: {
+            display: false
+          },
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.92)",
+            borderColor: "rgba(148, 163, 184, 0.6)",
+            borderWidth: 1,
+            cornerRadius: 6,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              title: (items) => {
+                if (!items.length) return "";
+                return "Fiscal Year " + items[0].label;
+              },
+              label: (context) => {
+                const v = context.parsed.y;
+                return "QoI Ratio: " + v.toFixed(3);
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: 0.7,
+            suggestedMax: 0.9,
+            grid: {
+              color: "rgba(0, 0, 0, 0.08)",
+              drawBorder: false
+            },
+            ticks: {
+              callback: (value) => value.toFixed(2),
+              font: {
+                size: 11
+              }
+            },
+            title: {
+              display: true,
+              text: "QoI Ratio（倍）",
+              font: {
+                size: 12,
+                weight: "500"
+              },
+              color: "#444"
+            }
+          }
+        }
+      }
+    });
+
+    // Simple click handler to highlight a bar and log value
+    document.getElementById("qoiChart").onclick = (evt) => {
+      const points = qoiChart.getElementsAtEventForMode(
+        evt,
+        "nearest",
+        { intersect: true },
+        true
+      );
+      if (points.length) {
+        const index = points[0].index;
+        const year = years[index];
+        const value = qoiValues[index];
+        console.log(`Year: ${year}, QoI Ratio: ${value}`);
+      }
+    };
+  </script>
+</body>
+</html>

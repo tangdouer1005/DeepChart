@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>crm 盈余-现金质量剪刀差（2016-2024）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --text-color: #1f2933;
+      --grid-color: rgba(148, 163, 184, 0.35);
+      --line-color: #2563eb;
+      --point-color: #1d4ed8;
+      --accent-color: #0f766e;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --text-color: #e5e7eb;
+        --grid-color: rgba(148, 163, 184, 0.3);
+        --line-color: #38bdf8;
+        --point-color: #0ea5e9;
+        --accent-color: #22c55e;
+      }
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #e0f2fe 0, #ffffff 40%, #f9fafb 100%);
+      background-attachment: fixed;
+      color: var(--text-color);
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      padding: 1.5rem 1.75rem 2rem;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(148, 163, 184, 0.15);
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #000 100%);
+      }
+      .container {
+        background-color: rgba(15, 23, 42, 0.9);
+      }
+    }
+    h1 {
+      font-size: 1.3rem;
+      margin: 0 0 0.25rem;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+    h1 span.tag {
+      font-size: 0.75rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 1rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #94a3b8;
+      }
+    }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+    }
+    .toolbar-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .pill {
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--line-color);
+    }
+    .pill-label {
+      font-weight: 500;
+    }
+    .pill-small {
+      font-size: 0.78rem;
+      opacity: 0.82;
+    }
+    .toolbar-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      white-space: nowrap;
+    }
+    select {
+      font-size: 0.8rem;
+      padding: 0.2rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(248, 250, 252, 0.9);
+      color: inherit;
+      outline: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      select {
+        background: rgba(15, 23, 42, 0.92);
+      }
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: min(460px, 70vh);
+    }
+    canvas {
+      max-height: 100%;
+    }
+    .footer-note {
+      margin-top: 0.85rem;
+      font-size: 0.78rem;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .badge-positive {
+      color: var(--accent-color);
+      font-weight: 500;
+    }
+    .badge-latest {
+      padding: 0.05rem 0.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+    }
+    @media (max-width: 640px) {
+      body {
+        padding: 0.75rem;
+      }
+      .container {
+        padding: 1.1rem 1.1rem 1.4rem;
+      }
+      h1 {
+        font-size: 1.05rem;
+      }
+      .subtitle {
+        font-size: 0.8rem;
+      }
+      .toolbar {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>
+      crm 盈余-现金质量剪刀差走势
+      <span class="tag">Line Chart</span>
+    </h1>
+    <div class="subtitle">2016–2024 年度 Earnings Quality Spread（盈余-现金质量剪刀差），单位为比例（无量纲）。</div>
+
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span class="pill-label">RESULT_Spread</span>
+          <span class="pill-small">盈余-现金质量剪刀差</span>
+        </div>
+        <div class="pill pill-small">
+          <span>数据频率：年度</span>
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <label for="scaleSelect">Y 轴刻度：</label>
+        <select id="scaleSelect">
+          <option value="absolute" selected>绝对值</option>
+          <option value="percent">百分比</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="spreadChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      <span>来源：用户提供的 crm 2016–2024 年 RESULT_Spread 数据。</span>
+      <span class="badge-latest">
+        最新年度 2024：<span class="badge-positive">0.0614</span>
+      </span>
+    </div>
+  </div>
+
+  <script>
+    // Source data
+    const rawData = [
+      { year: 2016, spread: 0.1466161480381355 },
+      { year: 2017, spread: 0.1212078235675596 },
+      { year: 2018, spread: 0.135276880454518 },
+      { year: 2019, spread: 0.0884305855268118 },
+      { year: 2020, spread: 0.0979467290916925 },
+      { year: 2021, spread: 0.0120072142110074 },
+      { year: 2022, spread: 0.0564175592842548 },
+      { year: 2023, spread: 0.0711436786939987 },
+      { year: 2024, spread: 0.0613876137553354 }
+    ];
+
+    const ctx = document.getElementById('spreadChart').getContext('2d');
+
+    // Helper formatters
+    function formatValue(val, mode) {
+      if (mode === 'percent') {
+        return (val * 100).toFixed(2) + '%';
+      }
+      return val.toFixed(4);
+    }
+
+    const years = rawData.map(d => d.year);
+    const absoluteValues = rawData.map(d => d.spread);
+
+    // Initial mode
+    let currentMode = 'absolute';
+
+    const chartConfig = {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: 'RESULT_Spread（盈余-现金质量剪刀差）',
+            data: absoluteValues,
+            borderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--line-color').trim() || '#2563eb',
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--line-color').trim() || '#2563eb',
+            fill: {
+              target: 'origin',
+              above: 'rgba(37, 99, 235, 0.12)'
+            },
+            tension: 0.25,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--point-color').trim() || '#1d4ed8',
+            pointBorderWidth: 1.5,
+            borderWidth: 2,
+            hitRadius: 10
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              title: items => {
+                const item = items[0];
+                return 'Fiscal Year: ' + item.label;
+              },
+              label: item => {
+                const value = item.raw;
+                return '剪刀差: ' + formatValue(value, currentMode);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--grid-color').trim() || 'rgba(148, 163, 184, 0.35)'
+            },
+            ticks: {
+              callback: function (val) {
+                const numeric = typeof val === 'string' ? parseFloat(val) : val;
+                return currentMode === 'percent'
+                  ? (numeric * 100).toFixed(0) + '%'
+                  : numeric.toFixed(2);
+              }
+            }
+          }
+        }
+      }
+    };
+
+    const spreadChart = new Chart(ctx, chartConfig);
+
+    // Y-axis scale mode toggle
+    const scaleSelect = document.getElementById('scaleSelect');
+    scaleSelect.addEventListener('change', (e) => {
+      currentMode = e.target.value;
+
+      if (currentMode === 'percent') {
+        spreadChart.options.scales.y.ticks.callback = function (val) {
+          const numeric = typeof val === 'string' ? parseFloat(val) : val;
+          return (numeric * 100).toFixed(0) + '%';
+        };
+      } else {
+        spreadChart.options.scales.y.ticks.callback = function (val) {
+          const numeric = typeof val === 'string' ? parseFloat(val) : val;
+          return numeric.toFixed(2);
+        };
+      }
+
+      // Only tooltip / tick formatting changes; the underlying data remains absolute.
+      spreadChart.update();
+    });
+
+    // Update chart colors on theme change (for systems that switch light/dark dynamically)
+    if (window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      mediaQuery.addEventListener('change', () => {
+        const rootStyles = getComputedStyle(document.documentElement);
+        const lineColor = rootStyles.getPropertyValue('--line-color').trim();
+        const pointColor = rootStyles.getPropertyValue('--point-color').trim();
+        const gridColor = rootStyles.getPropertyValue('--grid-color').trim();
+
+        spreadChart.data.datasets[0].borderColor = lineColor;
+        spreadChart.data.datasets[0].backgroundColor = lineColor;
+        spreadChart.data.datasets[0].pointBackgroundColor = pointColor;
+        spreadChart.options.scales.y.grid.color = gridColor;
+        spreadChart.update();
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+{
+  "status": "complete",
+  "chart_type": "bubble",
+  "title": "Top-12 markets by 2025 funding: concentration vs late-stage share",
+  "x_label": "Top-5 deal concentration share of 2025 funding (%)",
+  "y_label": "Late-stage deal share in 2025 (%)",
+  "size_label": "Annual funding ($B)",
+  "data": [
+    {
+      "label": "Silicon Valley",
+      "x": 33.70165745856354,
+      "y": 7,
+      "size": 144.8,
+      "annual_funding_b": 144.8
+    },
+    {
+      "label": "China",
+      "x": 28.88235294117647,
+      "y": 12,
+      "size": 6.8,
+      "annual_funding_b": 6.8
+    },
+    {
+      "label": "United Kingdom",
+      "x": 26.36231884057971,
+      "y": 6,
+      "size": 6.9,
+      "annual_funding_b": 6.9
+    },
+    {
+      "label": "US",
+      "x": 26.09846479618846,
+      "y": 7,
+      "size": 188.9,
+      "annual_funding_b": 188.9
+    },
+    {
+      "label": "New York",
+      "x": 24.75,
+      "y": 7,
+      "size": 11.6,
+      "annual_funding_b": 11.6
+    },
+    {
+      "label": "Philadelphia",
+      "x": 24.397413286302175,
+      "y": 5,
+      "size": 3.402,
+      "annual_funding_b": 3.402
+    },
+    {
+      "label": "Israel",
+      "x": 19.82142857142857,
+      "y": 9,
+      "size": 2.8,
+      "annual_funding_b": 2.8
+    },
+    {
+      "label": "Boston",
+      "x": 18.5,
+      "y": 5,
+      "size": 3.6,
+      "annual_funding_b": 3.6
+    },
+    {
+      "label": "Asia",
+      "x": 16.098360655737707,
+      "y": 9,
+      "size": 12.2,
+      "annual_funding_b": 12.2
+    },
+    {
+      "label": "Europe",
+      "x": 10.009478672985782,
+      "y": 6,
+      "size": 21.1,
+      "annual_funding_b": 21.1
+    },
+    {
+      "label": "France",
+      "x": 6.612903225806452,
+      "y": 6,
+      "size": 3.1,
+      "annual_funding_b": 3.1
+    },
+    {
+      "label": "Los Angeles",
+      "x": 3.5925925925925926,
+      "y": 12,
+      "size": 5.4,
+      "annual_funding_b": 5.4
+    }
+  ]
+}

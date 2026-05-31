@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "CFO": 15435000000.0,
+            "Net Income": 10508000000.0,
+            "Total Assets": 127136000000.0,
+            "Avg Total Assets": 128315500000.0,
+            "CFO per Asset": 0.1202894428186774,
+            "NI per Asset": 0.0818918992639236
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "CFO": 12753000000.0,
+            "Net Income": 15326000000.0,
+            "Total Assets": 120406000000.0,
+            "Avg Total Assets": 123771000000.0,
+            "CFO per Asset": 0.1030370603776328,
+            "NI per Asset": 0.1238254518425156
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "CFO": 14867000000.0,
+            "Net Income": 9750000000.0,
+            "Total Assets": 118310000000.0,
+            "Avg Total Assets": 119358000000.0,
+            "CFO per Asset": 0.1245580522461837,
+            "NI per Asset": 0.0816870255868898
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "CFO": 15242000000.0,
+            "Net Income": 3897000000.0,
+            "Total Assets": 115095000000.0,
+            "Avg Total Assets": 116702500000.0,
+            "CFO per Asset": 0.1306055997086609,
+            "NI per Asset": 0.0333926008440264
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "CFO": 17403000000.0,
+            "Net Income": 13027000000.0,
+            "Total Assets": 120700000000.0,
+            "Avg Total Assets": 117897500000.0,
+            "CFO per Asset": 0.1476112725036578,
+            "NI per Asset": 0.1104942852901885
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "CFO": 18371000000.0,
+            "Net Income": 14306000000.0,
+            "Total Assets": 119307000000.0,
+            "Avg Total Assets": 120003500000.0,
+            "CFO per Asset": 0.1530872016232859,
+            "NI per Asset": 0.1192131896153028
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "CFO": 16723000000.0,
+            "Net Income": 14742000000.0,
+            "Total Assets": 117208000000.0,
+            "Avg Total Assets": 118257500000.0,
+            "CFO per Asset": 0.1414117497833118,
+            "NI per Asset": 0.1246601695452719
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "CFO": 16848000000.0,
+            "Net Income": 14653000000.0,
+            "Total Assets": 120829000000.0,
+            "Avg Total Assets": 119018500000.0,
+            "CFO per Asset": 0.1415578250440057,
+            "NI per Asset": 0.1231153140058058
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "CFO": 19846000000.0,
+            "Net Income": 14879000000.0,
+            "Total Assets": 122370000000.0,
+            "Avg Total Assets": 121599500000.0,
+            "CFO per Asset": 0.1632079079272529,
+            "NI per Asset": 0.1223607004963013
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.03875377548452051
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": -0.02136936697506768
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.04325078184430732
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.09857074590555628
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.03625517812758905
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.03407176443963891
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.016901576684185404
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.01816616871777471
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.04059001389229387
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+  "status": "complete",
+  "chart_type": "bubble",
+  "title": "Sector Spotlights: average vs median deal size with concentration",
+  "x_label": "Average deal size in 2025 ($M)",
+  "y_label": "Median deal size in 2025 ($M)",
+  "size_label": "Visible top-deal concentration share (%)",
+  "data": [
+    {
+      "label": "AI",
+      "x": 44.8,
+      "y": 4.1,
+      "size": 24.402125775022142
+    },
+    {
+      "label": "Fintech",
+      "x": 20.0,
+      "y": 5.0,
+      "size": 13.922053231939163
+    },
+    {
+      "label": "Retail Tech",
+      "x": 20.0,
+      "y": 3.6,
+      "size": 15.079999999999998
+    },
+    {
+      "label": "Digital Health",
+      "x": 20.3,
+      "y": 5.1,
+      "size": 10.315315315315315
+    }
+  ]
+}

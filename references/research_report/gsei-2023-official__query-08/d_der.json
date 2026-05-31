@@ -1,0 +1,91 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a slope chart for the 12 countries with the smallest frontier gap in the 2023 country tables, comparing each country's top-city global rank with the median global rank of its cities ranked 2-5, where the countries are sorted by the derived rank gap `(median rank of positions 2-5) - rank of position 1` in ascending order and only countries with at least 5 listed cities are included.",
+  "status": "complete",
+  "chart_type": "slope",
+  "title": "2023 Smallest Frontier Gaps",
+  "value_unit": "global rank position",
+  "sort_rule": "ascending by frontier_gap, tie-break alphabetically",
+  "selection_rule": "12 countries with at least 5 listed cities and smallest frontier gap",
+  "records": [
+    {
+      "entity": "United States",
+      "top_city_global_rank": 1,
+      "support_median_global_rank": 4.5,
+      "frontier_gap": 3.5
+    },
+    {
+      "entity": "China",
+      "top_city_global_rank": 6,
+      "support_median_global_rank": 25.5,
+      "frontier_gap": 19.5
+    },
+    {
+      "entity": "Canada",
+      "top_city_global_rank": 23,
+      "support_median_global_rank": 56.0,
+      "frontier_gap": 33.0
+    },
+    {
+      "entity": "India",
+      "top_city_global_rank": 8,
+      "support_median_global_rank": 51.5,
+      "frontier_gap": 43.5
+    },
+    {
+      "entity": "Switzerland",
+      "top_city_global_rank": 61,
+      "support_median_global_rank": 118.0,
+      "frontier_gap": 57.0
+    },
+    {
+      "entity": "United Kingdom",
+      "top_city_global_rank": 3,
+      "support_median_global_rank": 90.5,
+      "frontier_gap": 87.5
+    },
+    {
+      "entity": "Australia",
+      "top_city_global_rank": 38,
+      "support_median_global_rank": 144.5,
+      "frontier_gap": 106.5
+    },
+    {
+      "entity": "Germany",
+      "top_city_global_rank": 11,
+      "support_median_global_rank": 119.0,
+      "frontier_gap": 108.0
+    },
+    {
+      "entity": "Poland",
+      "top_city_global_rank": 99,
+      "support_median_global_rank": 228.5,
+      "frontier_gap": 129.5
+    },
+    {
+      "entity": "The Netherlands",
+      "top_city_global_rank": 27,
+      "support_median_global_rank": 171.0,
+      "frontier_gap": 144.0
+    },
+    {
+      "entity": "Brazil",
+      "top_city_global_rank": 17,
+      "support_median_global_rank": 166.0,
+      "frontier_gap": 149.0
+    },
+    {
+      "entity": "France",
+      "top_city_global_rank": 9,
+      "support_median_global_rank": 163.0,
+      "frontier_gap": 154.0
+    }
+  ],
+  "left_field": "top_city_global_rank",
+  "right_field": "support_median_global_rank",
+  "left_label": "Top city",
+  "right_label": "Median of positions 2-5",
+  "x_label": "Country support ladder",
+  "y_label": "Global rank position",
+  "reverse_y_axis": true
+}

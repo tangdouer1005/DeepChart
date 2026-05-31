@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>KO 投入资本回报率 (ROIC) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #fafafa;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 0;
+      color: #555;
+    }
+    .chart-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 24px 24px 16px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+    }
+    /* Fixed-height container to prevent vertical stretching */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      height: 420px;          /* Adjust height as needed */
+      margin: 0 auto;
+    }
+    canvas {
+      width: 100% !important; /* Let Chart.js expand to container width */
+      height: 100% !important;/* and fixed container height */
+      display: block;
+    }
+    .note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-card">
+    <h1>KO 投入资本回报率 (ROIC)</h1>
+    <h2>2016–2024 年度表现（单位：%）</h2>
+    <div class="chart-container">
+      <canvas id="roicChart" aria-label="KO ROIC 2016-2024 Bar Chart" role="img"></canvas>
+    </div>
+    <div class="note">
+      数据来源：用户提供的年度 ROIC 数据。<br />
+      提示：将鼠标悬停在柱状图上可查看精确数值。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // Raw data from source
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const roicRaw = [
+      0.1136262796037985,
+      0.0242768716472618,
+      0.130003133092434,
+      0.1560948434566685,
+      0.1289771265308116,
+      0.1452358732547959,
+      0.1617683178412558,
+      0.1653214670664524,
+      0.1380039757875183
+    ];
+
+    // Convert to percentage values (e.g., 0.1136 -> 11.36%)
+    const roicPercent = roicRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("roicChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "ROIC",
+            data: roicPercent,
+            backgroundColor: "rgba(37, 99, 235, 0.7)",
+            borderColor: "rgba(37, 99, 235, 1)",
+            borderWidth: 1.5,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.9)",
+            hoverBorderColor: "rgba(30, 64, 175, 1)",
+            borderRadius: 6,
+            maxBarThickness: 50
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // use the container's fixed height
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.95)",
+            titleColor: "#fff",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.6)",
+            borderWidth: 1,
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const value = context.raw;
+                return "ROIC: " + value.toFixed(2) + "%";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 12
+              }
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "ROIC（%）",
+              font: {
+                size: 13
+              }
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(0) + "%";
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            beginAtZero: true
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          intersect: true
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutQuart"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

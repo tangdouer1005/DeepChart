@@ -1,0 +1,70 @@
+{
+  "status": "complete",
+  "chart_type": "ranked_bar",
+  "title": "Top fintech capital intensity",
+  "label_field": "label",
+  "value_field": "value",
+  "x_label": "$M per employee",
+  "data": [
+    {
+      "label": "Highnote",
+      "value": 1.508929
+    },
+    {
+      "label": "Komainu",
+      "value": 1.449275
+    },
+    {
+      "label": "RedotPay",
+      "value": 1.298507
+    },
+    {
+      "label": "Xelix",
+      "value": 1.289844
+    },
+    {
+      "label": "Securitize",
+      "value": 0.985437
+    },
+    {
+      "label": "Clara",
+      "value": 0.945017
+    },
+    {
+      "label": "Haball",
+      "value": 0.896552
+    },
+    {
+      "label": "Conduit",
+      "value": 0.830986
+    },
+    {
+      "label": "Upstage",
+      "value": 0.785792
+    },
+    {
+      "label": "Abacum",
+      "value": 0.761983
+    },
+    {
+      "label": "Banxware",
+      "value": 0.721311
+    },
+    {
+      "label": "Peach Finance",
+      "value": 0.703704
+    },
+    {
+      "label": "Finom",
+      "value": 0.695171
+    },
+    {
+      "label": "Mendel",
+      "value": 0.687368
+    },
+    {
+      "label": "Versana",
+      "value": 0.680412
+    }
+  ]
+}

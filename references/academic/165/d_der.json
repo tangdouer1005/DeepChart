@@ -1,0 +1,86 @@
+[
+    {
+        "Scenario": "Red and processed meat (25%)",
+        "Nutrient": "Free sugars",
+        "Mean difference from observed (%)": -0.588834,
+        "95% CI": "(-0.56, -0.62)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Red and processed meat (50%)",
+        "Nutrient": "Free sugars",
+        "Mean difference from observed (%)": -0.867064,
+        "95% CI": "(-0.83, -0.91)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Dairy (25%)",
+        "Nutrient": "Free sugars",
+        "Mean difference from observed (%)": 0.211354,
+        "95% CI": "(0.2, 0.22)",
+        "P-value": "P = 0.08"
+    },
+    {
+        "Scenario": "Dairy (50%)",
+        "Nutrient": "Free sugars",
+        "Mean difference from observed (%)": 0.640388,
+        "95% CI": "(0.61, 0.67)",
+        "P-value": "P = 0.008"
+    },
+    {
+        "Scenario": "Red and processed meat (25%)",
+        "Nutrient": "Saturated fat",
+        "Mean difference from observed (%)": -0.838248,
+        "95% CI": "(-0.8, -0.88)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Red and processed meat (50%)",
+        "Nutrient": "Saturated fat",
+        "Mean difference from observed (%)": -4.70775,
+        "95% CI": "(-4.5, -4.92)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Dairy (25%)",
+        "Nutrient": "Saturated fat",
+        "Mean difference from observed (%)": -13.4857,
+        "95% CI": "(-12.88, -14.09)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Dairy (50%)",
+        "Nutrient": "Saturated fat",
+        "Mean difference from observed (%)": -33.3778,
+        "95% CI": "(-31.89, -34.87)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Red and processed meat (25%)",
+        "Nutrient": "Sodium",
+        "Mean difference from observed (%)": -1.51633,
+        "95% CI": "(-1.45, -1.58)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Red and processed meat (50%)",
+        "Nutrient": "Sodium",
+        "Mean difference from observed (%)": -3.18769,
+        "95% CI": "(-3.05, -3.33)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Dairy (25%)",
+        "Nutrient": "Sodium",
+        "Mean difference from observed (%)": -1.4256,
+        "95% CI": "(-1.36, -1.49)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Dairy (50%)",
+        "Nutrient": "Sodium",
+        "Mean difference from observed (%)": -2.9479,
+        "95% CI": "(-2.82, -3.08)",
+        "P-value": "P < 0.0001"
+    }
+]

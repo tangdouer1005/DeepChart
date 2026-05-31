@@ -1,0 +1,138 @@
+{
+    "data": [
+        {
+            "Generation": 0,
+            "TPM": 5.86566848
+        },
+        {
+            "Generation": 0,
+            "TPM": 8.15498
+        },
+        {
+            "Generation": 0,
+            "TPM": 8.072314491
+        },
+        {
+            "Generation": 1,
+            "TPM": 10.08575711
+        },
+        {
+            "Generation": 1,
+            "TPM": 10.8043
+        },
+        {
+            "Generation": 1,
+            "TPM": 8.624570815
+        },
+        {
+            "Generation": 1,
+            "TPM": 7.92934
+        },
+        {
+            "Generation": 2,
+            "TPM": 8.299775685
+        },
+        {
+            "Generation": 2,
+            "TPM": 10.4507
+        },
+        {
+            "Generation": 2,
+            "TPM": 9.935653318
+        },
+        {
+            "Generation": 3,
+            "TPM": 10.21662252
+        },
+        {
+            "Generation": 3,
+            "TPM": 8.68885
+        },
+        {
+            "Generation": 3,
+            "TPM": 12.23267
+        },
+        {
+            "Generation": 4,
+            "TPM": 13.14692214
+        },
+        {
+            "Generation": 4,
+            "TPM": 11.2483
+        },
+        {
+            "Generation": 4,
+            "TPM": 17.66730274
+        },
+        {
+            "Generation": 5,
+            "TPM": 11.23320993
+        },
+        {
+            "Generation": 5,
+            "TPM": 11.317
+        },
+        {
+            "Generation": 5,
+            "TPM": 14.40373849
+        },
+        {
+            "Generation": 6,
+            "TPM": 16.84068224
+        },
+        {
+            "Generation": 6,
+            "TPM": 20.4273
+        },
+        {
+            "Generation": 6,
+            "TPM": 9.949043375
+        },
+        {
+            "Generation": 6,
+            "TPM": 10.8217
+        },
+        {
+            "Generation": 6,
+            "TPM": 10.8965
+        },
+        {
+            "Generation": 7,
+            "TPM": 16.60248485
+        },
+        {
+            "Generation": 7,
+            "TPM": 12.4377
+        },
+        {
+            "Generation": 7,
+            "TPM": 13.09089132
+        },
+        {
+            "Generation": 8,
+            "TPM": 8.269548139
+        },
+        {
+            "Generation": 8,
+            "TPM": 12.3538
+        },
+        {
+            "Generation": 8,
+            "TPM": 17.2109045
+        },
+        {
+            "Generation": 9,
+            "TPM": 9.73430569
+        },
+        {
+            "Generation": 9,
+            "TPM": 16.1348
+        }
+    ],
+    "stats": {
+        "slope": 0.676,
+        "intercept": 8.724,
+        "r_squared": 0.3089,
+        "syx": 2.879
+    }
+}

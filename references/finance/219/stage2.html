@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>PG 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 16px;
+      background: #f4f5f7;
+      color: #111827;
+    }
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;         /* required for fixed height */
+      width: 100%;
+      height: 480px;              /* fixed, reasonable height to avoid stretching */
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px 20px 24px;
+      box-sizing: border-box;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    .subtitle {
+      margin: 0 0 12px;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+    canvas {
+      width: 100% !important;  /* let Chart.js adapt to container */
+      height: 100% !important;
+      display: block;
+    }
+    .note {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    /* Improve x-axis label readability on very narrow screens */
+    @media (max-width: 480px) {
+      .chart-container {
+        height: 420px;
+        padding: 12px 14px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>PG 自由现金流收益质量 (Quality of Income Ratio)</h1>
+    <p class="subtitle">2016–2024 财年，单位：倍</p>
+    <div class="chart-container">
+      <canvas id="qoiChart"></canvas>
+    </div>
+    <p class="note">
+      数据来源：用户提供。数值表示自由现金流与净利润的比率，约大于 1 通常表示较高的收益质量。
+    </p>
+  </div>
+
+  <script>
+    const labels = [
+      "2016", "2017", "2018", "2019", "2020",
+      "2021", "2022", "2023", "2024"
+    ];
+
+    const qoiData = [
+      0.9343785943459048,
+      0.7689014831785843,
+      0.9178860282768414,
+      1.833954999398388,
+      0.9296970992040172,
+      0.8865884851117224,
+      0.8110087293889428,
+      0.8081350729086723,
+      0.9256098129751412
+    ];
+
+    const ctx = document.getElementById("qoiChart").getContext("2d");
+
+    const minVal = Math.min(...qoiData);
+    const maxVal = Math.max(...qoiData);
+    const padding = (maxVal - minVal) * 0.15 || 0.1;
+    const suggestedMin = Math.max(0, minVal - padding);
+    const suggestedMax = maxVal + padding;
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "自由现金流收益质量",
+            data: qoiData,
+            borderColor: "#2563EB",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: "#2563EB",
+            pointHoverBackgroundColor: "#2563EB",
+            pointHoverBorderColor: "#1D4ED8",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            borderWidth: 2,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,   // use the fixed-height container
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        layout: {
+          padding: {
+            top: 8,
+            right: 8,
+            bottom: 8,
+            left: 4
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+            labels: {
+              usePointStyle: true,
+              padding: 12,
+              boxWidth: 8
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const v = context.parsed.y;
+                return ` ${context.dataset.label}: ${v.toFixed(3)} 倍`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+              autoSkip: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "自由现金流收益质量 (倍)",
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(1);
+              }
+            },
+            suggestedMin,
+            suggestedMax,
+            grid: {
+              color: "rgba(148, 163, 184, 0.3)"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

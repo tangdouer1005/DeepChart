@@ -1,0 +1,63 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a horizontal bar chart showing the top 12 ecosystems by `venture amplification`, defined as `Total VC Funding / Total Early-Stage Funding`, using 2025 card values with both inputs normalized to `$B`, the plotted value expressed as `x multiple`, sorted descending after the ratio is computed, and excluding rows with missing funding fields.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "x multiple",
+  "sort_rule": "descending by venture_amplification_multiple",
+  "selection_rule": "top 12",
+  "plot_spec": {
+    "title": "2025 Venture Amplification",
+    "xlabel": "x multiple",
+    "value_field": "venture_amplification_multiple"
+  },
+  "records": [
+    {
+      "entity": "São Paulo",
+      "venture_amplification_multiple": 17.8359
+    },
+    {
+      "entity": "Bengaluru-Karnataka",
+      "venture_amplification_multiple": 17.2727
+    },
+    {
+      "entity": "Malta",
+      "venture_amplification_multiple": 16.6522
+    },
+    {
+      "entity": "Shanghai",
+      "venture_amplification_multiple": 14.7059
+    },
+    {
+      "entity": "Beijing",
+      "venture_amplification_multiple": 13.3333
+    },
+    {
+      "entity": "Los Angeles",
+      "venture_amplification_multiple": 12.7586
+    },
+    {
+      "entity": "Tel Aviv",
+      "venture_amplification_multiple": 12.381
+    },
+    {
+      "entity": "Hong Kong",
+      "venture_amplification_multiple": 12.0
+    },
+    {
+      "entity": "Istanbul",
+      "venture_amplification_multiple": 11.6152
+    },
+    {
+      "entity": "Silicon Valley",
+      "venture_amplification_multiple": 11.5806
+    },
+    {
+      "entity": "Valencia",
+      "venture_amplification_multiple": 11.2903
+    },
+    {
+      "entity": "Telangana",
+      "venture_amplification_multiple": 11.2621
+    }
+  ]
+}

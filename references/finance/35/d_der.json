@@ -1,0 +1,105 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016,
+            "Current Assets": 45781000000,
+            "Total Liabilities": 64117000000,
+            "Shares": 9680000000,
+            "Net-Net Value": -18336000000
+        },
+        {
+            "Fiscal Year": 2017,
+            "Current Assets": 60197000000,
+            "Total Liabilities": 103601000000,
+            "Shares": 9860000000,
+            "Net-Net Value": -43404000000
+        },
+        {
+            "Fiscal Year": 2018,
+            "Current Assets": 75101000000,
+            "Total Liabilities": 119099000000,
+            "Shares": 10000000000,
+            "Net-Net Value": -43998000000
+        },
+        {
+            "Fiscal Year": 2019,
+            "Current Assets": 96334000000,
+            "Total Liabilities": 163188000000,
+            "Shares": 10080000000,
+            "Net-Net Value": -66854000000
+        },
+        {
+            "Fiscal Year": 2020,
+            "Current Assets": 132733000000,
+            "Total Liabilities": 227791000000,
+            "Shares": 10200000000,
+            "Net-Net Value": -95058000000
+        },
+        {
+            "Fiscal Year": 2021,
+            "Current Assets": 161580000000,
+            "Total Liabilities": 282304000000,
+            "Shares": 10300000000,
+            "Net-Net Value": -120724000000
+        },
+        {
+            "Fiscal Year": 2022,
+            "Current Assets": 146791000000,
+            "Total Liabilities": 316632000000,
+            "Shares": 10189000000,
+            "Net-Net Value": -169841000000
+        },
+        {
+            "Fiscal Year": 2023,
+            "Current Assets": 172351000000,
+            "Total Liabilities": 325979000000,
+            "Shares": 10492000000,
+            "Net-Net Value": -153628000000
+        },
+        {
+            "Fiscal Year": 2024,
+            "Current Assets": 190867000000,
+            "Total Liabilities": 338924000000,
+            "Shares": 10721000000,
+            "Net-Net Value": -148057000000
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016,
+            "格雷厄姆“烟蒂股”净值 (Graham's Net-Net Working Capital, NNWC)": -1.894214876033058
+        },
+        {
+            "Fiscal Year": 2017,
+            "格雷厄姆“烟蒂股”净值 (Graham's Net-Net Working Capital, NNWC)": -4.402028397565923
+        },
+        {
+            "Fiscal Year": 2018,
+            "格雷厄姆“烟蒂股”净值 (Graham's Net-Net Working Capital, NNWC)": -4.3998
+        },
+        {
+            "Fiscal Year": 2019,
+            "格雷厄姆“烟蒂股”净值 (Graham's Net-Net Working Capital, NNWC)": -6.63234126984127
+        },
+        {
+            "Fiscal Year": 2020,
+            "格雷厄姆“烟蒂股”净值 (Graham's Net-Net Working Capital, NNWC)": -9.319411764705883
+        },
+        {
+            "Fiscal Year": 2021,
+            "格雷厄姆“烟蒂股”净值 (Graham's Net-Net Working Capital, NNWC)": -11.720776699029127
+        },
+        {
+            "Fiscal Year": 2022,
+            "格雷厄姆“烟蒂股”净值 (Graham's Net-Net Working Capital, NNWC)": -16.669054863087645
+        },
+        {
+            "Fiscal Year": 2023,
+            "格雷厄姆“烟蒂股”净值 (Graham's Net-Net Working Capital, NNWC)": -14.642394205108655
+        },
+        {
+            "Fiscal Year": 2024,
+            "格雷厄姆“烟蒂股”净值 (Graham's Net-Net Working Capital, NNWC)": -13.809999067251189
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a horizontal bar chart showing the top 8 Fintech ecosystems by `exit premium gap = Exit Growth Index - Funding Growth Index`, expressed in `index-point gap`, sorted descending by the gap, and excluding ecosystems where `Total Early-Stage Funding` is `<$50 m`.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "index-point gap",
+  "sort_rule": "descending by exit_premium_gap",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "Fintech 2020 Exit Premium Gap",
+    "xlabel": "index-point gap",
+    "value_field": "exit_premium_gap"
+  },
+  "records": [
+    {
+      "entity": "Stockholm",
+      "exit_premium_gap": 6.0
+    },
+    {
+      "entity": "Sydney",
+      "exit_premium_gap": 5.0
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "exit_premium_gap": 5.0
+    },
+    {
+      "entity": "Melbourne",
+      "exit_premium_gap": 4.0
+    },
+    {
+      "entity": "Chicago",
+      "exit_premium_gap": 4.0
+    },
+    {
+      "entity": "Manila",
+      "exit_premium_gap": 3.0
+    },
+    {
+      "entity": "Boston",
+      "exit_premium_gap": 3.0
+    },
+    {
+      "entity": "Tel Aviv",
+      "exit_premium_gap": 3.0
+    }
+  ]
+}

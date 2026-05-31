@@ -1,0 +1,70 @@
+{
+  "status": "complete",
+  "chart_type": "slope",
+  "title": "Top 10 markets by increase in Q4 concentration share",
+  "y_label": "Q4 share of annual funding (%)",
+  "start_label": "2024 Q4 share",
+  "end_label": "2025 Q4 share",
+  "data": [
+    {
+      "label": "Japan",
+      "start": 16.666666666666664,
+      "end": 45.45454545454545,
+      "delta": 28.78787878787879
+    },
+    {
+      "label": "Oceania",
+      "start": 21.596858638743456,
+      "end": 41.39941690962099,
+      "delta": 19.802558270877533
+    },
+    {
+      "label": "New York",
+      "start": 13.88888888888889,
+      "end": 33.62068965517241,
+      "delta": 19.731800766283524
+    },
+    {
+      "label": "China",
+      "start": 27.941176470588236,
+      "end": 42.64705882352941,
+      "delta": 14.705882352941178
+    },
+    {
+      "label": "Singapore",
+      "start": 10.391822827938672,
+      "end": 24.617346938775512,
+      "delta": 14.22552411083684
+    },
+    {
+      "label": "DC",
+      "start": 25.402726146220573,
+      "end": 39.405204460966544,
+      "delta": 14.002478314745971
+    },
+    {
+      "label": "Asia",
+      "start": 24.193548387096776,
+      "end": 37.704918032786885,
+      "delta": 13.51136964569011
+    },
+    {
+      "label": "Philadelphia",
+      "start": 20.62937062937063,
+      "end": 31.363903586125808,
+      "delta": 10.734532956755178
+    },
+    {
+      "label": "Germany",
+      "start": 13.751438434982738,
+      "end": 24.382384532760472,
+      "delta": 10.630946097777734
+    },
+    {
+      "label": "United Kingdom",
+      "start": 24.324324324324326,
+      "end": 34.78260869565217,
+      "delta": 10.458284371327846
+    }
+  ]
+}

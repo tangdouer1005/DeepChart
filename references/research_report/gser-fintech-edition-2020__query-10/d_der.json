@@ -1,0 +1,47 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a horizontal bar chart showing the top 8 Fintech ecosystems by the absolute value of `rank mismatch = rank by Ecosystem Value - rank by seed purchasing power`, where `seed purchasing power = Median Seed Round / Software Engineer Salary`, expressed in `absolute rank positions`, sorted descending by the absolute rank gap, and excluding ecosystems where `Total Early-Stage Funding` is `<$50 m`.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "absolute rank positions",
+  "sort_rule": "descending by absolute_rank_positions",
+  "selection_rule": "top 8 ecosystems",
+  "plot_spec": {
+    "title": "Fintech 2020 Value Rank vs Seed Purchasing Power Rank Gap",
+    "xlabel": "absolute rank positions",
+    "value_field": "absolute_rank_positions"
+  },
+  "records": [
+    {
+      "entity": "Manila",
+      "absolute_rank_positions": 18
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "absolute_rank_positions": 17
+    },
+    {
+      "entity": "Los Angeles",
+      "absolute_rank_positions": 17
+    },
+    {
+      "entity": "Frankfurt",
+      "absolute_rank_positions": 13
+    },
+    {
+      "entity": "Curitiba",
+      "absolute_rank_positions": 13
+    },
+    {
+      "entity": "New York City",
+      "absolute_rank_positions": 12
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "absolute_rank_positions": 10
+    },
+    {
+      "entity": "Melbourne",
+      "absolute_rank_positions": 6
+    }
+  ]
+}

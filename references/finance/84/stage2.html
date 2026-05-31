@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>GE 可持续增长率 (SGR) 2016–2024 柱状图</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9fafb;
+      color: #111827;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      padding: 20px 22px 16px 22px;
+      box-sizing: border-box;
+    }
+
+    /* Fix height explicitly to avoid extreme stretching */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;        /* controlled, readable height */
+    }
+
+    .chart-footer {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chart-footer span.label {
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      #chart-container {
+        padding: 14px;
+      }
+      .chart-wrapper {
+        height: 360px;      /* slightly smaller on narrow screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>GE 可持续增长率 (SGR) 变化趋势</h1>
+    <h2>2016–2024 财年（柱状图）</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="sgrChart"></canvas>
+    </div>
+
+    <div class="chart-footer">
+      <div><span class="label">数据来源：</span>用户提供财报数据 (RESULT_SGR)</div>
+      <div><span class="label">说明：</span>数值为可持续增长率，单位为小数（例如 0.15 ≈ 15%）。</div>
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // Source data
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const sgrValues = [
+      -0.0150028719126938,
+      -0.2599408328908442,
+      -0.6165460186142708,
+      -0.1898145025295109,
+      0.1583662218881162,
+      -0.1822256202051093,
+      -0.0093776180309704,
+      0.2911013273539665,
+      0.2373729810674938
+    ];
+
+    // Colors: green for positive, red for negative
+    const barBackgroundColors = sgrValues.map(v =>
+      v >= 0 ? "rgba(34, 197, 94, 0.75)" : "rgba(239, 68, 68, 0.75)"
+    );
+    const barBorderColors = sgrValues.map(v =>
+      v >= 0 ? "rgba(22, 163, 74, 1)" : "rgba(220, 38, 38, 1)"
+    );
+
+    const ctx = document.getElementById("sgrChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "可持续增长率 (SGR)",
+            data: sgrValues,
+            backgroundColor: barBackgroundColors,
+            borderColor: barBorderColors,
+            borderWidth: 1.2,
+            borderRadius: 4,
+            hoverBackgroundColor: barBackgroundColors.map(c =>
+              c.replace("0.75", "0.95")
+            ),
+            hoverBorderWidth: 1.5
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        // Prevent Chart.js from changing height based on width; we control height with CSS
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 10,
+            right: 14,
+            bottom: 10,
+            left: 6
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "rectRounded",
+              padding: 14,
+              font: {
+                size: 13
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function (context) {
+                const value = context.raw;
+                const pct = (value * 100).toFixed(2) + "%";
+                return " SGR: " + value.toFixed(4) + " (" + pct + ")";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 12
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            grid: {
+              color: "rgba(229, 231, 235, 0.8)"
+            },
+            ticks: {
+              font: {
+                size: 12
+              },
+              callback: function (value) {
+                const pct = (value * 100).toFixed(0);
+                return value.toFixed(2) + " (" + pct + "%)";
+              }
+            },
+            title: {
+              display: true,
+              text: "可持续增长率 (SGR)",
+              font: {
+                size: 13,
+                weight: "600"
+              },
+              color: "#4b5563"
+            }
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          intersect: true
+        },
+        animation: {
+          duration: 700,
+          easing: "easeOutQuart"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

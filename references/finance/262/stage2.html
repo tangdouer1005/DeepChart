@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>V 公司 现金循环周期（CCC）变化趋势 2016–2023</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --text-color: #222222;
+      --grid-color: rgba(0, 0, 0, 0.08);
+      --line-color: #1f78b4;
+      --point-border: #0b3c68;
+      --tooltip-bg: rgba(0, 0, 0, 0.8);
+      --tooltip-color: #ffffff;
+      --accent-color: #1f78b4;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #111827;
+        --text-color: #e5e7eb;
+        --grid-color: rgba(255, 255, 255, 0.08);
+        --line-color: #60a5fa;
+        --point-border: #1d4ed8;
+        --tooltip-bg: rgba(15, 23, 42, 0.95);
+        --tooltip-color: #e5e7eb;
+        --accent-color: #60a5fa;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+        sans-serif;
+      background: radial-gradient(circle at top, #f9fafb 0, var(--bg-color) 45%);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 960px;
+      width: 100%;
+      padding: 24px 16px 32px;
+      box-sizing: border-box;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px 20px 24px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+      box-sizing: border-box;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .card {
+        background: rgba(15, 23, 42, 0.95);
+      }
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text-color);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .meta-row {
+        color: #9ca3af;
+      }
+    }
+
+    .meta-label {
+      font-weight: 500;
+      color: var(--accent-color);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: min(480px, 70vh);
+    }
+
+    canvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .legend-inline {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .legend-inline {
+        color: #9ca3af;
+      }
+    }
+
+    .highlight-max {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .highlight-min {
+      color: #15803d;
+      font-weight: 600;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .footer-note strong {
+      color: var(--accent-color);
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 16px 14px 18px;
+        border-radius: 12px;
+      }
+      h1 {
+        font-size: 17px;
+      }
+      .subtitle {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>V 公司 现金循环周期（CCC）变化趋势</h1>
+      <div class="subtitle">按财年统计，单位：天（2016 – 2023）</div>
+      <div class="meta-row">
+        <div><span class="meta-label">指标说明：</span>现金循环周期（Cash Conversion Cycle）</div>
+        <div><span class="meta-label">公司：</span>V（示例）</div>
+        <div><span class="meta-label">交互：</span>悬停查看精确数值，缩放/拖动查看局部趋势</div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="cccChart"></canvas>
+      </div>
+
+      <div class="legend-inline">
+        <span class="highlight-max">● 高点：</span>2016 年约 396.78 天
+        &nbsp;|&nbsp;
+        <span class="highlight-min">● 低点：</span>2021 年约 309.94 天
+      </div>
+
+      <div class="footer-note">
+        说明：数据来自用户提供的年度 CCC 结果并原样绘制；为便于阅读，图表采用平滑折线并支持缩放与悬浮提示。
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js zoom plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.umd.min.js"></script>
+
+  <script>
+    (function () {
+      const ctx = document.getElementById("cccChart").getContext("2d");
+
+      const labels = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ];
+
+      const cccValues = [
+        396.7760193863512,
+        314.24185480135907,
+        317.19204948679914,
+        347.94444381748,
+        335.1593880507362,
+        309.93589310181767,
+        361.7787100878196,
+        339.25471363680265
+      ];
+
+      const maxVal = Math.max(...cccValues);
+      const minVal = Math.min(...cccValues);
+      const maxIndex = cccValues.indexOf(maxVal);
+      const minIndex = cccValues.indexOf(minVal);
+
+      // Base style
+      const baseColor = getComputedStyle(document.documentElement)
+        .getPropertyValue("--line-color")
+        .trim() || "#1f78b4";
+
+      const pointBorder = getComputedStyle(document.documentElement)
+        .getPropertyValue("--point-border")
+        .trim() || "#0b3c68";
+
+      const tooltipBg = getComputedStyle(document.documentElement)
+        .getPropertyValue("--tooltip-bg")
+        .trim() || "rgba(0,0,0,0.8)";
+
+      const tooltipColor = getComputedStyle(document.documentElement)
+        .getPropertyValue("--tooltip-color")
+        .trim() || "#ffffff";
+
+      const gridColor = getComputedStyle(document.documentElement)
+        .getPropertyValue("--grid-color")
+        .trim() || "rgba(0,0,0,0.08)";
+
+      const cccData = {
+        labels,
+        datasets: [
+          {
+            label: "现金循环周期（天）",
+            data: cccValues,
+            borderColor: baseColor,
+            backgroundColor: baseColor,
+            tension: 0.25,
+            borderWidth: 2.4,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBorderColor: pointBorder,
+            pointBackgroundColor: baseColor,
+            pointBorderWidth: 1.4,
+            fill: false
+          },
+          // Highlight max point
+          {
+            label: "最高值",
+            data: cccValues.map((v, i) => (i === maxIndex ? v : null)),
+            borderColor: "rgba(0,0,0,0)",
+            backgroundColor: "#b91c1c",
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            pointStyle: "circle",
+            pointBorderWidth: 0,
+            showLine: false
+          },
+          // Highlight min point
+          {
+            label: "最低值",
+            data: cccValues.map((v, i) => (i === minIndex ? v : null)),
+            borderColor: "rgba(0,0,0,0)",
+            backgroundColor: "#15803d",
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            pointStyle: "circle",
+            pointBorderWidth: 0,
+            showLine: false
+          }
+        ]
+      };
+
+      const cccChart = new Chart(ctx, {
+        type: "line",
+        data: cccData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "nearest",
+            axis: "x",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                boxWidth: 8,
+                boxHeight: 8,
+                padding: 16,
+                font: {
+                  size: 12
+                }
+              }
+            },
+            tooltip: {
+              enabled: true,
+              backgroundColor: tooltipBg,
+              titleColor: tooltipColor,
+              bodyColor: tooltipColor,
+              borderWidth: 0,
+              padding: 10,
+              cornerRadius: 8,
+              displayColors: false,
+              callbacks: {
+                title: function (items) {
+                  const item = items[0];
+                  return "财年 " + item.label;
+                },
+                label: function (context) {
+                  const value = context.parsed.y;
+                  if (value == null || isNaN(value)) return "";
+                  const rounded = value.toFixed(2);
+                  let tag = "";
+                  if (context.dataset.label === "最高值") tag = "（最高）";
+                  if (context.dataset.label === "最低值") tag = "（最低）";
+                  return "CCC： " + rounded + " 天 " + tag;
+                }
+              }
+            },
+            title: {
+              display: false
+            },
+            zoom: {
+              limits: {
+                x: { minRange: 1 },
+                y: { minRange: 10 }
+              },
+              pan: {
+                enabled: true,
+                mode: "x"
+              },
+              zoom: {
+                wheel: {
+                  enabled: true
+                },
+                pinch: {
+                  enabled: true
+                },
+                mode: "x"
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年",
+                font: {
+                  size: 12,
+                  weight: "500"
+                }
+              },
+              grid: {
+                display: false
+              },
+              ticks: {
+                autoSkip: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "现金循环周期（天）",
+                font: {
+                  size: 12,
+                  weight: "500"
+                }
+              },
+              grid: {
+                color: gridColor
+              },
+              ticks: {
+                callback: function (value) {
+                  return value + " 天";
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Optional: double-click to reset zoom
+      document
+        .getElementById("cccChart")
+        .addEventListener("dblclick", function () {
+          if (cccChart.resetZoom) {
+            cccChart.resetZoom();
+          }
+        });
+    })();
+  </script>
+</body>
+</html>

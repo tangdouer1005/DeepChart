@@ -1,0 +1,184 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a bubble chart comparing markets by `2025 YTD top-5 deal concentration share` on the x-axis and `Early-stage minus Late-stage deal share` on the y-axis, with bubble size equal to `2025 YTD deal count`, expressed in percentage points for the y-axis, and label only markets whose concentration share is above `40%`.",
+  "status": "completed",
+  "title": "Top-5 deal concentration vs early-minus-late stage spread",
+  "chart_kind": "bubble",
+  "chart_type": "bubble chart",
+  "value_unit": "x: concentration share %; y: percentage points; bubble size: deal count",
+  "sort_rule": "descending by concentration_share_pct",
+  "selection_rule": "all markets; labels only where concentration_share_pct > 40",
+  "metadata": {
+    "x_field": "concentration_share_pct",
+    "y_field": "early_minus_late_pp",
+    "size_field": "deals",
+    "label_field": "label",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "market": "France",
+      "concentration_share_pct": 69.0,
+      "early_minus_late_pp": 76.0,
+      "deals": 80,
+      "label": "France"
+    },
+    {
+      "market": "Brazil",
+      "concentration_share_pct": 49.528301886792455,
+      "early_minus_late_pp": 80.0,
+      "deals": 39,
+      "label": "Brazil"
+    },
+    {
+      "market": "Singapore",
+      "concentration_share_pct": 45.96912521440823,
+      "early_minus_late_pp": 75.0,
+      "deals": 73,
+      "label": "Singapore"
+    },
+    {
+      "market": "LatAm",
+      "concentration_share_pct": 44.11764705882353,
+      "early_minus_late_pp": 85.0,
+      "deals": 59,
+      "label": "LatAm"
+    },
+    {
+      "market": "Japan",
+      "concentration_share_pct": 36.34453781512605,
+      "early_minus_late_pp": 48.0,
+      "deals": 173,
+      "label": ""
+    },
+    {
+      "market": "United Kingdom",
+      "concentration_share_pct": 33.22222222222222,
+      "early_minus_late_pp": 70.0,
+      "deals": 250,
+      "label": ""
+    },
+    {
+      "market": "Philadelphia",
+      "concentration_share_pct": 30.07866728366497,
+      "early_minus_late_pp": 76.0,
+      "deals": 119,
+      "label": ""
+    },
+    {
+      "market": "China",
+      "concentration_share_pct": 24.7027027027027,
+      "early_minus_late_pp": 51.0,
+      "deals": 345,
+      "label": ""
+    },
+    {
+      "market": "Boston",
+      "concentration_share_pct": 24.08695652173913,
+      "early_minus_late_pp": 47.0,
+      "deals": 108,
+      "label": ""
+    },
+    {
+      "market": "Silicon Valley",
+      "concentration_share_pct": 22.71010387157696,
+      "early_minus_late_pp": 71.0,
+      "deals": 1025,
+      "label": ""
+    },
+    {
+      "market": "Canada",
+      "concentration_share_pct": 22.59093809827696,
+      "early_minus_late_pp": 63.0,
+      "deals": 75,
+      "label": ""
+    },
+    {
+      "market": "New York",
+      "concentration_share_pct": 21.666666666666668,
+      "early_minus_late_pp": 63.0,
+      "deals": 333,
+      "label": ""
+    },
+    {
+      "market": "Europe",
+      "concentration_share_pct": 21.294964028776977,
+      "early_minus_late_pp": 72.0,
+      "deals": 938,
+      "label": ""
+    },
+    {
+      "market": "Austin",
+      "concentration_share_pct": 19.45010183299389,
+      "early_minus_late_pp": 43.0,
+      "deals": 48,
+      "label": ""
+    },
+    {
+      "market": "Israel",
+      "concentration_share_pct": 18.85,
+      "early_minus_late_pp": 56.0,
+      "deals": 80,
+      "label": ""
+    },
+    {
+      "market": "Los Angeles",
+      "concentration_share_pct": 18.666666666666668,
+      "early_minus_late_pp": 48.0,
+      "deals": 96,
+      "label": ""
+    },
+    {
+      "market": "US",
+      "concentration_share_pct": 17.78846153846154,
+      "early_minus_late_pp": 66.0,
+      "deals": 2377,
+      "label": ""
+    },
+    {
+      "market": "India",
+      "concentration_share_pct": 16.51186790505676,
+      "early_minus_late_pp": 74.0,
+      "deals": 120,
+      "label": ""
+    },
+    {
+      "market": "Miami",
+      "concentration_share_pct": 15.384615384615385,
+      "early_minus_late_pp": 59.0,
+      "deals": 44,
+      "label": ""
+    },
+    {
+      "market": "Asia",
+      "concentration_share_pct": 15.11111111111111,
+      "early_minus_late_pp": 61.0,
+      "deals": 951,
+      "label": ""
+    },
+    {
+      "market": "Oceania",
+      "concentration_share_pct": 12.962962962962964,
+      "early_minus_late_pp": 79.0,
+      "deals": 54,
+      "label": ""
+    },
+    {
+      "market": "Germany",
+      "concentration_share_pct": 7.135728542914172,
+      "early_minus_late_pp": 78.0,
+      "deals": 111,
+      "label": ""
+    },
+    {
+      "market": "Seattle",
+      "concentration_share_pct": 6.86936936936937,
+      "early_minus_late_pp": 67.0,
+      "deals": 83,
+      "label": ""
+    }
+  ]
+}

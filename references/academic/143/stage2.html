@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 500px; height: 800px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const data = [
+    {
+        "state":"AZ",
+        "number_of_HighAging_CBG":256,
+        "mean_coeff":0.047617,
+        "lower_diff":0.0252163,
+        "upper_diff":0.0252163
+    },
+    {
+        "state":"CA",
+        "number_of_HighAging_CBG":208,
+        "mean_coeff":0.0498035,
+        "lower_diff":0.0255024,
+        "upper_diff":0.0255024
+    },
+    {
+        "state":"FL",
+        "number_of_HighAging_CBG":818,
+        "mean_coeff":0.0912992,
+        "lower_diff":0.0141943,
+        "upper_diff":0.0141938
+    },
+    {
+        "state":"IL",
+        "number_of_HighAging_CBG":35,
+        "mean_coeff":0.0252548,
+        "lower_diff":0.0639286,
+        "upper_diff":0.0639286
+    },
+    {
+        "state":"MA",
+        "number_of_HighAging_CBG":33,
+        "mean_coeff":0.013831,
+        "lower_diff":0.0641358,
+        "upper_diff":0.0641358
+    },
+    {
+        "state":"MD",
+        "number_of_HighAging_CBG":37,
+        "mean_coeff":0.0555133,
+        "lower_diff":0.05745299,
+        "upper_diff":0.0574527
+    },
+    {
+        "state":"NJ",
+        "number_of_HighAging_CBG":106,
+        "mean_coeff":-0.0347223,
+        "lower_diff":0.0364099,
+        "upper_diff":0.03640998
+    },
+    {
+        "state":"NV",
+        "number_of_HighAging_CBG":39,
+        "mean_coeff":0.133239,
+        "lower_diff":0.0625953,
+        "upper_diff":0.062596
+    },
+    {
+        "state":"NY",
+        "number_of_HighAging_CBG":72,
+        "mean_coeff":0.0330087,
+        "lower_diff":0.0470229,
+        "upper_diff":0.0470229
+    },
+    {
+        "state":"OH",
+        "number_of_HighAging_CBG":36,
+        "mean_coeff":-0.00445404,
+        "lower_diff":0.06711946,
+        "upper_diff":0.06711944
+    },
+    {
+        "state":"PA",
+        "number_of_HighAging_CBG":48,
+        "mean_coeff":0.0072914,
+        "lower_diff":0.0568121,
+        "upper_diff":0.0568121
+    },
+    {
+        "state":"SC",
+        "number_of_HighAging_CBG":36,
+        "mean_coeff":-0.0359281,
+        "lower_diff":0.0645749,
+        "upper_diff":0.0645749
+    },
+    {
+        "state":"TX",
+        "number_of_HighAging_CBG":54,
+        "mean_coeff":-0.0102545,
+        "lower_diff":0.0573807,
+        "upper_diff":0.0573807
+    },
+    {
+        "state":"VA",
+        "number_of_HighAging_CBG":32,
+        "mean_coeff":0.0888894,
+        "lower_diff":0.0605533,
+        "upper_diff":0.0605536
+    },
+    {
+        "state":"WA",
+        "number_of_HighAging_CBG":31,
+        "mean_coeff":0.121289,
+        "lower_diff":0.0768692,
+        "upper_diff":0.076869
+    }
+];
+
+        // Sort by state ascending (A-Z)
+        data.sort((a, b) => a.state.localeCompare(b.state));
+
+        const states = data.map(d => d.state);
+        const scatterData = data.map(d => [d.mean_coeff, d.state, d.number_of_HighAging_CBG]);
+        
+        // Custom error bar data: [x, y, low, high]
+        // JSON has diffs
+        const errorData = data.map((d, i) => [
+            d.mean_coeff, 
+            i, 
+            d.mean_coeff - d.lower_diff, 
+            d.mean_coeff + d.upper_diff
+        ]);
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            title: {
+                text: 'HRE',
+                left: 'center',
+                top: 10,
+                textStyle: { fontSize: 16 }
+            },
+            grid: {
+                top: 50,
+                bottom: 60,
+                left: 60,
+                right: 40
+            },
+            xAxis: {
+                name: 'Coefficient of high-ageing CBGs',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: -0.35,
+                max: 0.3,
+                interval: 0.1,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black' },
+                nameTextStyle: { fontSize: 14 }
+            },
+            yAxis: {
+                name: 'State',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'category',
+                data: states,
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true, alignWithLabel: true },
+                axisLabel: { color: 'black', fontSize: 12 },
+                nameTextStyle: { fontSize: 14 }
+            },
+            series: [
+                {
+                    type: 'line',
+                    markLine: {
+                        symbol: 'none',
+                        data: [{ xAxis: 0 }],
+                        lineStyle: {
+                            color: '#d62728',
+                            type: 'dashed',
+                            width: 1.5
+                        },
+                        label: { show: false },
+                        animation: false
+                    }
+                },
+                {
+                    type: 'custom',
+                    name: 'error_bar',
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1.5,
+                            stroke: 'black'
+                        }
+                    },
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const yValue = api.value(1);
+                        const low = api.value(2);
+                        const high = api.value(3);
+                        
+                        const start = api.coord([low, yValue]);
+                        const end = api.coord([high, yValue]);
+                        const halfHeight = 4;
+
+                        const style = api.style({
+                            stroke: 'black',
+                            lineWidth: 1
+                        });
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1],
+                                        x2: end[0], y2: end[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1] - halfHeight,
+                                        x2: start[0], y2: start[1] + halfHeight
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: end[0], y1: end[1] - halfHeight,
+                                        x2: end[0], y2: end[1] + halfHeight
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 2
+                },
+                {
+                    type: 'scatter',
+                    name: 'scatter',
+                    data: scatterData,
+                    symbolSize: function (val) {
+                        // Python code: sizes = number * 0.35 (Area in points^2)
+                        // ECharts symbolSize is diameter in pixels.
+                        // D = 2 * sqrt(Area / pi) = 2 * sqrt( (N * 0.35) / pi ) approx 0.67 * sqrt(N)
+                        // Using 0.7 multiplier.
+                        return Math.sqrt(val[2]) * 0.7;
+                    },
+                    itemStyle: {
+                        color: 'black'
+                    },
+                    z: 3
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'c',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

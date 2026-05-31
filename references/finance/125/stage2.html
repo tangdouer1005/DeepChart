@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>KO 息税折旧摊销前利润 (EBITDA) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x at time of writing) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+        "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f7;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 960px;
+      width: 100%;
+      margin: 24px;
+      padding: 24px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+    }
+    h2 {
+      font-size: 0.9rem;
+      margin: 0 0 16px;
+      font-weight: normal;
+      color: #6b7280;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+    .footer-note {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .controls input[type="checkbox"] {
+      cursor: pointer;
+    }
+    @media (max-width: 640px) {
+      .container {
+        margin: 12px;
+        padding: 16px;
+      }
+      .chart-wrapper {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>KO 息税折旧摊销前利润 (EBITDA)</h1>
+    <h2>2016–2024 财年（单位：十亿美元，约值）</h2>
+
+    <div class="controls">
+      <label>
+        <input type="checkbox" id="toggleLogScale" />
+        使用对数刻度（Y 轴）
+      </label>
+      <label>
+        <input type="checkbox" id="toggleValues" checked />
+        显示数据标签
+      </label>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      数据来源：用户提供的 KO EBITDA 财报数据（RESULT_EBITDA，单位：美元）。
+      为便于阅读，图中值以十亿美元显示，保留两位小数。<br />
+      交互说明：悬停查看精确数值；点击图例可高亮/淡出系列；上方可切换对数轴及数据标签。
+    </div>
+  </div>
+
+  <script>
+    // 原始数据（美元）
+    const rawData = [
+      { year: 2016, value: 10633000000 },
+      { year: 2017, value: 8968000000 },
+      { year: 2018, value: 10219000000 },
+      { year: 2019, value: 13032000000 },
+      { year: 2020, value: 12701000000 },
+      { year: 2021, value: 15441000000 },
+      { year: 2022, value: 13799000000 },
+      { year: 2023, value: 15618000000 },
+      { year: 2024, value: 15799000000 }
+    ];
+
+    // 转换为十亿美元单位并四舍五入到两位小数
+    const labels = rawData.map(d => d.year.toString());
+    const ebitdaBillion = rawData.map(d =>
+      +(d.value / 1_000_000_000).toFixed(2)
+    );
+
+    const ctx = document.getElementById("ebitdaChart").getContext("2d");
+
+    const gradientStroke = ctx.createLinearGradient(0, 0, 0, 400);
+    gradientStroke.addColorStop(0, "rgba(59,130,246,1)");
+    gradientStroke.addColorStop(1, "rgba(37,99,235,0.4)");
+
+    const gradientFill = ctx.createLinearGradient(0, 0, 0, 400);
+    gradientFill.addColorStop(0, "rgba(59,130,246,0.20)");
+    gradientFill.addColorStop(1, "rgba(59,130,246,0)");
+
+    let showLabels = true;
+
+    const data = {
+      labels,
+      datasets: [
+        {
+          label: "EBITDA（十亿美元）",
+          data: ebitdaBillion,
+          borderColor: gradientStroke,
+          backgroundColor: gradientFill,
+          pointBackgroundColor: "#1d4ed8",
+          pointBorderColor: "#ffffff",
+          pointHoverBackgroundColor: "#ffffff",
+          pointHoverBorderColor: "#1d4ed8",
+          tension: 0.28,
+          fill: true,
+          borderWidth: 3,
+          pointRadius: 4,
+          pointHoverRadius: 6
+        }
+      ]
+    };
+
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            usePointStyle: true,
+            padding: 16
+          }
+        },
+        tooltip: {
+          backgroundColor: "rgba(15,23,42,0.95)",
+          borderColor: "rgba(148,163,184,0.6)",
+          borderWidth: 1,
+          padding: 10,
+          displayColors: false,
+          callbacks: {
+            label: context => {
+              const val = context.parsed.y;
+              return ` EBITDA: ${val.toFixed(2)} 十亿美元`;
+            },
+            title: items => {
+              const year = items[0].label;
+              return `财年 ${year}`;
+            }
+          }
+        },
+        datalabels: {
+          display: ctx => showLabels,
+          align: "top",
+          anchor: "end",
+          color: "#374151",
+          font: {
+            size: 10,
+            weight: "500"
+          },
+          formatter: value => value.toFixed(2)
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            maxRotation: 0,
+            autoSkip: false
+          }
+        },
+        y: {
+          beginAtZero: false,
+          grace: "10%",
+          ticks: {
+            callback: (value) => value.toFixed ? value.toFixed(1) : value
+          },
+          grid: {
+            color: "rgba(148,163,184,0.35)"
+          },
+          title: {
+            display: true,
+            text: "EBITDA（十亿美元）",
+            color: "#4b5563",
+            font: {
+              size: 12
+            }
+          }
+        }
+      }
+    };
+
+    // 注册 datalabels 插件
+    // 使用官方插件 CDN
+    const loadDataLabels = () =>
+      new Promise(resolve => {
+        const script = document.createElement("script");
+        script.src =
+          "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0";
+        script.onload = resolve;
+        document.head.appendChild(script);
+      });
+
+    let chartInstance;
+
+    (async () => {
+      await loadDataLabels();
+      Chart.register(ChartDataLabels);
+      chartInstance = new Chart(ctx, {
+        type: "line",
+        data,
+        options
+      });
+    })();
+
+    // 交互：切换对数刻度
+    document
+      .getElementById("toggleLogScale")
+      .addEventListener("change", function () {
+        const isLog = this.checked;
+        const yScale = chartInstance.options.scales.y;
+        if (isLog) {
+          yScale.type = "logarithmic";
+          yScale.ticks = {
+            callback: (value) => {
+              if (value === 0) return "0";
+              // 只显示少量重要刻度
+              const log10 = Math.log10(value);
+              if (Number.isInteger(log10)) {
+                return value.toLocaleString();
+              }
+              return "";
+            }
+          };
+          yScale.min = Math.min(...ebitdaBillion) * 0.8;
+          yScale.max = Math.max(...ebitdaBillion) * 1.1;
+        } else {
+          yScale.type = "linear";
+          yScale.min = undefined;
+          yScale.max = undefined;
+          yScale.ticks = {
+            callback: (value) => value.toFixed ? value.toFixed(1) : value
+          };
+        }
+        chartInstance.update();
+      });
+
+    // 交互：切换数据标签显示
+    document
+      .getElementById("toggleValues")
+      .addEventListener("change", function () {
+        showLabels = this.checked;
+        chartInstance.update();
+      });
+  </script>
+</body>
+</html>

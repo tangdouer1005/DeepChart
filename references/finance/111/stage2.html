@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JNJ 内部增长率 (IGR) 2016–2024 - Bar Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 0 16px 40px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 24px;
+      text-align: center;
+      color: #555;
+    }
+
+    .chart-wrapper {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+      padding: 16px 16px 8px;
+    }
+
+    canvas {
+      max-height: 520px;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 8px;
+      text-align: right;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin-top: 16px;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      h2 {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>强生 (JNJ) 内部增长率 (IGR)</h1>
+    <h2>2016–2024 财年 | 单位：%</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="igrChart"></canvas>
+      <div class="note">
+        数据来源：用户提供的结果（RESULT_IGR）
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Source data: Fiscal Year & RESULT_IGR
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+
+    // IGR values (as decimals); will be shown as percentages
+    const igrRaw = [
+      0.0612023293827599,
+      -0.0487130214756674,
+      0.0388614134893236,
+      0.0346478929525306,
+      0.0261170547514159,
+      0.0583951129826226,
+      0.0350764126676343,
+      0.1517539020670409,
+      0.0130720096976478,
+    ];
+
+    // Split data into positive and negative for clearer coloring
+    const igrPositive = igrRaw.map(v => (v >= 0 ? v * 100 : null)); // to %
+    const igrNegative = igrRaw.map(v => (v < 0 ? v * 100 : null));  // to %
+
+    // Define colors
+    const positiveColor = "rgba(40, 167, 69, 0.85)";   // green
+    const negativeColor = "rgba(220, 53, 69, 0.85)";   // red
+    const positiveBorder = "rgba(33, 136, 56, 1)";
+    const negativeBorder = "rgba(200, 35, 51, 1)";
+
+    const ctx = document.getElementById("igrChart").getContext("2d");
+
+    const igrChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "IGR (正增长)",
+            data: igrPositive,
+            backgroundColor: positiveColor,
+            borderColor: positiveBorder,
+            borderWidth: 1,
+            borderRadius: 4,
+          },
+          {
+            label: "IGR (负增长)",
+            data: igrNegative,
+            backgroundColor: negativeColor,
+            borderColor: negativeBorder,
+            borderWidth: 1,
+            borderRadius: 4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+            labels: {
+              usePointStyle: true,
+            },
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function (context) {
+                const value = context.raw;
+                if (value === null || value === undefined) return "";
+                const yr = context.label;
+                const formatted = value.toFixed(2) + "%";
+                return ` ${yr} IGR: ${formatted}`;
+              },
+              title: function () {
+                // Use only the custom label, no default title
+                return "";
+              },
+            },
+          },
+          title: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            stacked: true,
+            grid: {
+              display: false,
+            },
+            title: {
+              display: true,
+              text: "财年 (Fiscal Year)",
+            },
+          },
+          y: {
+            stacked: true,
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "内部增长率 (IGR, %)",
+            },
+            ticks: {
+              callback: function (value) {
+                return value + "%";
+              },
+            },
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>

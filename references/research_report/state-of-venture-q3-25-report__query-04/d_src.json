@@ -1,0 +1,248 @@
+{
+  "report_code": "021",
+  "query_id": "04",
+  "source_fields": [
+    "2024 Q3 funding/deals",
+    "2025 Q3 funding/deals",
+    "market hierarchy from section 2"
+  ],
+  "records": [
+    {
+      "market": "Silicon Valley",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 11900.0,
+      "q3_2024_deals": 674,
+      "q3_2025_funding_m": 36500.0,
+      "q3_2025_deals": 546
+    },
+    {
+      "market": "New York",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 4000.0,
+      "q3_2024_deals": 459,
+      "q3_2025_funding_m": 7300.0,
+      "q3_2025_deals": 335
+    },
+    {
+      "market": "Los Angeles",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 2800.0,
+      "q3_2024_deals": 197,
+      "q3_2025_funding_m": 3100.0,
+      "q3_2025_deals": 117
+    },
+    {
+      "market": "Boston",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 3300.0,
+      "q3_2024_deals": 181,
+      "q3_2025_funding_m": 2900.0,
+      "q3_2025_deals": 120
+    },
+    {
+      "market": "Seattle",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 1300.0,
+      "q3_2024_deals": 81,
+      "q3_2025_funding_m": 400.0,
+      "q3_2025_deals": 53
+    },
+    {
+      "market": "Denver",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 700.0,
+      "q3_2024_deals": 58,
+      "q3_2025_funding_m": 900.0,
+      "q3_2025_deals": 54
+    },
+    {
+      "market": "Chicago",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 300.0,
+      "q3_2024_deals": 64,
+      "q3_2025_funding_m": 300.0,
+      "q3_2025_deals": 46
+    },
+    {
+      "market": "Dallas",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 200.0,
+      "q3_2024_deals": 50,
+      "q3_2025_funding_m": 300.0,
+      "q3_2025_deals": 42
+    },
+    {
+      "market": "Austin",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 700.0,
+      "q3_2024_deals": 80,
+      "q3_2025_funding_m": 1400.0,
+      "q3_2025_deals": 66
+    },
+    {
+      "market": "Miami",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 400.0,
+      "q3_2024_deals": 85,
+      "q3_2025_funding_m": 800.0,
+      "q3_2025_deals": 69
+    },
+    {
+      "market": "Atlanta",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 200.0,
+      "q3_2024_deals": 44,
+      "q3_2025_funding_m": 200.0,
+      "q3_2025_deals": 40
+    },
+    {
+      "market": "Philadelphia",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 700.0,
+      "q3_2024_deals": 139,
+      "q3_2025_funding_m": 1200.0,
+      "q3_2025_deals": 114
+    },
+    {
+      "market": "Raleigh",
+      "parent_geography": "US",
+      "market_level": "child market",
+      "q3_2024_funding_m": 300.0,
+      "q3_2024_deals": 36,
+      "q3_2025_funding_m": 300.0,
+      "q3_2025_deals": 18
+    },
+    {
+      "market": "Toronto",
+      "parent_geography": "Canada",
+      "market_level": "child market",
+      "q3_2024_funding_m": 300.0,
+      "q3_2024_deals": 58,
+      "q3_2025_funding_m": 300.0,
+      "q3_2025_deals": 27
+    },
+    {
+      "market": "China",
+      "parent_geography": "Asia",
+      "market_level": "child market",
+      "q3_2024_funding_m": 3500.0,
+      "q3_2024_deals": 642,
+      "q3_2025_funding_m": 4900.0,
+      "q3_2025_deals": 581
+    },
+    {
+      "market": "India",
+      "parent_geography": "Asia",
+      "market_level": "child market",
+      "q3_2024_funding_m": 4200.0,
+      "q3_2024_deals": 371,
+      "q3_2025_funding_m": 2900.0,
+      "q3_2025_deals": 343
+    },
+    {
+      "market": "Singapore",
+      "parent_geography": "Asia",
+      "market_level": "child market",
+      "q3_2024_funding_m": 700.0,
+      "q3_2024_deals": 130,
+      "q3_2025_funding_m": 2200.0,
+      "q3_2025_deals": 91
+    },
+    {
+      "market": "Japan",
+      "parent_geography": "Asia",
+      "market_level": "child market",
+      "q3_2024_funding_m": 1100.0,
+      "q3_2024_deals": 390,
+      "q3_2025_funding_m": 900.0,
+      "q3_2025_deals": 343
+    },
+    {
+      "market": "United Kingdom",
+      "parent_geography": "Europe",
+      "market_level": "child market",
+      "q3_2024_funding_m": 3300.0,
+      "q3_2024_deals": 508,
+      "q3_2025_funding_m": 4100.0,
+      "q3_2025_deals": 327
+    },
+    {
+      "market": "Germany",
+      "parent_geography": "Europe",
+      "market_level": "child market",
+      "q3_2024_funding_m": 2100.0,
+      "q3_2024_deals": 255,
+      "q3_2025_funding_m": 1400.0,
+      "q3_2025_deals": 163
+    },
+    {
+      "market": "France",
+      "parent_geography": "Europe",
+      "market_level": "child market",
+      "q3_2024_funding_m": 1100.0,
+      "q3_2024_deals": 222,
+      "q3_2025_funding_m": 2500.0,
+      "q3_2025_deals": 126
+    },
+    {
+      "market": "Israel",
+      "parent_geography": "Europe",
+      "market_level": "child market",
+      "q3_2024_funding_m": 1000.0,
+      "q3_2024_deals": 93,
+      "q3_2025_funding_m": 1300.0,
+      "q3_2025_deals": 66
+    },
+    {
+      "market": "Netherlands",
+      "parent_geography": "Europe",
+      "market_level": "child market",
+      "q3_2024_funding_m": 300.0,
+      "q3_2024_deals": 105,
+      "q3_2025_funding_m": 700.0,
+      "q3_2025_deals": 76
+    },
+    {
+      "market": "Sweden",
+      "parent_geography": "Europe",
+      "market_level": "child market",
+      "q3_2024_funding_m": 500.0,
+      "q3_2024_deals": 91,
+      "q3_2025_funding_m": 200.0,
+      "q3_2025_deals": 57
+    },
+    {
+      "market": "Brazil",
+      "parent_geography": "LatAm",
+      "market_level": "child market",
+      "q3_2024_funding_m": 500.0,
+      "q3_2024_deals": 131,
+      "q3_2025_funding_m": 900.0,
+      "q3_2025_deals": 90
+    },
+    {
+      "market": "South Africa",
+      "parent_geography": "Africa",
+      "market_level": "child market",
+      "q3_2024_funding_m": 23.0,
+      "q3_2024_deals": 12,
+      "q3_2025_funding_m": 820.0,
+      "q3_2025_deals": 16
+    }
+  ],
+  "notes": [
+    "No parent-geography metric rows are explicit in section 3.2; all plotted rows are child markets."
+  ]
+}

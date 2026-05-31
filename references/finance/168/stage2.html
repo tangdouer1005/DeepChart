@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MRK Piotroski F-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f6f7fb;
+      color: #222;
+    }
+
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      /* Fixed but responsive height using aspect ratio */
+      aspect-ratio: 16 / 9;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+      padding: 1.25rem 1.5rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.15rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 0.4rem;
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-bottom: 0.7rem;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 0.75rem;
+      }
+      .chart-container {
+        padding: 0.9rem 0.9rem 1.1rem;
+      }
+      h1 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>MRK 皮奥特罗斯基 F-Score 趋势</h1>
+    <div class="subtitle">Fiscal Years 2016–2024</div>
+    <div class="meta">
+      Data source: Provided RESULT_F_Score for MRK, 2016–2024.
+      Hover to see exact values.
+    </div>
+
+    <div class="chart-container">
+      <canvas id="fScoreChart" aria-label="MRK Piotroski F-Score from 2016 to 2024" role="img"></canvas>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('fScoreChart').getContext('2d');
+
+    const data = {
+      labels: ['2016','2017','2018','2019','2020','2021','2022','2023','2024'],
+      datasets: [{
+        label: 'Piotroski F-Score',
+        data: [7, 7, 8, 7, 5, 8, 7, 5, 9],
+        borderColor: 'rgba(37, 99, 235, 1)',
+        backgroundColor: 'rgba(37, 99, 235, 0.18)',
+        borderWidth: 2.5,
+        tension: 0.25,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointBackgroundColor: 'rgba(37, 99, 235, 1)',
+        pointBorderColor: '#ffffff',
+        pointBorderWidth: 1.5,
+        fill: true
+      }]
+    };
+
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            usePointStyle: true,
+            padding: 16,
+            font: { size: 12 }
+          }
+        },
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+          backgroundColor: 'rgba(15, 23, 42, 0.92)',
+          titleFont: { size: 13, weight: '600' },
+          bodyFont: { size: 12 },
+          padding: 10,
+          callbacks: {
+            label: (context) => ' F-Score: ' + context.parsed.y
+          }
+        },
+        title: { display: false }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Fiscal Year',
+            font: { size: 12, weight: '600' }
+          },
+          grid: { display: false },
+          ticks: {
+            maxRotation: 0,
+            autoSkip: false,
+            font: { size: 11 }
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Piotroski F-Score (0–9)',
+            font: { size: 12, weight: '600' }
+          },
+          min: 0,
+          max: 9,
+          ticks: {
+            stepSize: 1,
+            font: { size: 11 }
+          },
+          grid: {
+            color: 'rgba(148, 163, 184, 0.25)'
+          }
+        }
+      },
+      interaction: {
+        mode: 'nearest',
+        intersect: false
+      }
+    };
+
+    new Chart(ctx, {
+      type: 'line',
+      data,
+      options
+    });
+  </script>
+</body>
+</html>

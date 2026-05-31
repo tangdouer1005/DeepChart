@@ -1,0 +1,85 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a ranked horizontal bar chart showing the top 10 countries by tail catch-up, where the metric is `average numeric global_rank_change of cities ranked 6 through 10 minus average numeric global_rank_change of cities ranked 1 through 3` within each 3.2 national block, values are expressed in rank positions, only countries with at least 8 listed cities and numeric values in both groups are eligible, and bars are sorted from highest to lowest after the difference is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by tail_catch_up",
+  "selection_rule": "top 10 among countries with at least 8 listed cities and numeric values in both comparison groups",
+  "plot_spec": {
+    "title": "Tail Catch-Up",
+    "xlabel": "tail average minus core average",
+    "value_field": "tail_catch_up"
+  },
+  "records": [
+    {
+      "entity": "Japan",
+      "tail_catch_up": 230.5,
+      "core_avg_global_rank_change": -24.5,
+      "tail_avg_global_rank_change": 206.0,
+      "listed_cities": 8
+    },
+    {
+      "entity": "The Netherlands",
+      "tail_catch_up": 132.6667,
+      "core_avg_global_rank_change": -16.0,
+      "tail_avg_global_rank_change": 116.6667,
+      "listed_cities": 8
+    },
+    {
+      "entity": "Belgium",
+      "tail_catch_up": 119.1667,
+      "core_avg_global_rank_change": 1.3333,
+      "tail_avg_global_rank_change": 120.5,
+      "listed_cities": 8
+    },
+    {
+      "entity": "Israel",
+      "tail_catch_up": 76.0833,
+      "core_avg_global_rank_change": -19.3333,
+      "tail_avg_global_rank_change": 56.75,
+      "listed_cities": 10
+    },
+    {
+      "entity": "Mexico",
+      "tail_catch_up": 50.3333,
+      "core_avg_global_rank_change": -10.0,
+      "tail_avg_global_rank_change": 40.3333,
+      "listed_cities": 8
+    },
+    {
+      "entity": "China",
+      "tail_catch_up": 43.8,
+      "core_avg_global_rank_change": 0.0,
+      "tail_avg_global_rank_change": 43.8,
+      "listed_cities": 10
+    },
+    {
+      "entity": "United Kingdom",
+      "tail_catch_up": 31.9333,
+      "core_avg_global_rank_change": 7.6667,
+      "tail_avg_global_rank_change": 39.6,
+      "listed_cities": 10
+    },
+    {
+      "entity": "Germany",
+      "tail_catch_up": 16.0667,
+      "core_avg_global_rank_change": -3.6667,
+      "tail_avg_global_rank_change": 12.4,
+      "listed_cities": 10
+    },
+    {
+      "entity": "Switzerland",
+      "tail_catch_up": 12.0,
+      "core_avg_global_rank_change": -12.6667,
+      "tail_avg_global_rank_change": -0.6667,
+      "listed_cities": 8
+    },
+    {
+      "entity": "France",
+      "tail_catch_up": 7.0,
+      "core_avg_global_rank_change": -4.6667,
+      "tail_avg_global_rank_change": 2.3333,
+      "listed_cities": 8
+    }
+  ]
+}

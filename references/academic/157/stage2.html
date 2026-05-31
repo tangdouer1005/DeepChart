@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2027.0,
+        "central estimate of SAF cost": 641.1,
+        "low SAF cost": 357.2,
+        "high SAF cost": 1947.5
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2028.0,
+        "central estimate of SAF cost": 453.3,
+        "low SAF cost": 164.1,
+        "high SAF cost": 1905.5
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2029.0,
+        "central estimate of SAF cost": 257.2,
+        "low SAF cost": -51.4,
+        "high SAF cost": 1859.0
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2030.0,
+        "central estimate of SAF cost": 61.3,
+        "low SAF cost": -285.3,
+        "high SAF cost": 1815.9
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2031.0,
+        "central estimate of SAF cost": -125.5,
+        "low SAF cost": -533.5,
+        "high SAF cost": 1784.8
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2032.0,
+        "central estimate of SAF cost": -397.3,
+        "low SAF cost": -791.8,
+        "high SAF cost": 1677.8
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2033.0,
+        "central estimate of SAF cost": -695.4,
+        "low SAF cost": -1073.1,
+        "high SAF cost": 1585.9
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2034.0,
+        "central estimate of SAF cost": -1026.5,
+        "low SAF cost": -1342.4,
+        "high SAF cost": 1433.8
+    },
+    {
+        "Group": "central estimate of CORSIA offset cost",
+        "Year": 2035.0,
+        "central estimate of SAF cost": -1398.6,
+        "low SAF cost": -1607.1,
+        "high SAF cost": 1246.9
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2027.0,
+        "central estimate of SAF cost": 1012.4,
+        "low SAF cost": 728.5,
+        "high SAF cost": 2318.8
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2028.0,
+        "central estimate of SAF cost": 913.1,
+        "low SAF cost": 623.8,
+        "high SAF cost": 2365.3
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2029.0,
+        "central estimate of SAF cost": 816.2,
+        "low SAF cost": 507.7,
+        "high SAF cost": 2418.0
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2030.0,
+        "central estimate of SAF cost": 730.8,
+        "low SAF cost": 384.2,
+        "high SAF cost": 2485.4
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2031.0,
+        "central estimate of SAF cost": 666.1,
+        "low SAF cost": 258.0,
+        "high SAF cost": 2576.4
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2032.0,
+        "central estimate of SAF cost": 528.4,
+        "low SAF cost": 133.9,
+        "high SAF cost": 2603.5
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2033.0,
+        "central estimate of SAF cost": 395.0,
+        "low SAF cost": 17.3,
+        "high SAF cost": 2676.3
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2034.0,
+        "central estimate of SAF cost": 227.1,
+        "low SAF cost": -88.8,
+        "high SAF cost": 2687.4
+    },
+    {
+        "Group": "low estimate of CORSIA offset cost",
+        "Year": 2035.0,
+        "central estimate of SAF cost": 32.2,
+        "low SAF cost": -176.3,
+        "high SAF cost": 2677.6
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2027.0,
+        "central estimate of SAF cost": 217.5,
+        "low SAF cost": -66.4,
+        "high SAF cost": 1523.9
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2028.0,
+        "central estimate of SAF cost": -72.5,
+        "low SAF cost": -361.7,
+        "high SAF cost": 1379.8
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2029.0,
+        "central estimate of SAF cost": -383.2,
+        "low SAF cost": -691.8,
+        "high SAF cost": 1218.6
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2030.0,
+        "central estimate of SAF cost": -706.7,
+        "low SAF cost": -1053.3,
+        "high SAF cost": 1047.9
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2031.0,
+        "central estimate of SAF cost": -1034.6,
+        "low SAF cost": -1442.6,
+        "high SAF cost": 875.7
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2032.0,
+        "central estimate of SAF cost": -1461.6,
+        "low SAF cost": -1856.1,
+        "high SAF cost": 613.5
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2033.0,
+        "central estimate of SAF cost": -1950.0,
+        "low SAF cost": -2327.7,
+        "high SAF cost": 331.2
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2034.0,
+        "central estimate of SAF cost": -2470.1,
+        "low SAF cost": -2786.0,
+        "high SAF cost": -9.8
+    },
+    {
+        "Group": "high estimate of CORSIA offset cost",
+        "Year": 2035.0,
+        "central estimate of SAF cost": -3047.2,
+        "low SAF cost": -3255.7,
+        "high SAF cost": -401.7
+    }
+];
+
+        function getSeriesData(groupName) {
+            return jsonData.filter(d => d.Group === groupName)
+                           .sort((a, b) => a.Year - b.Year);
+        }
+
+        const dataHigh = getSeriesData('high estimate of CORSIA offset cost');
+        const dataMed = getSeriesData('central estimate of CORSIA offset cost');
+        const dataLow = getSeriesData('low estimate of CORSIA offset cost');
+
+        const years = [2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035];
+
+        const central_high = dataHigh.map(d => d['central estimate of SAF cost']);
+        const low_high = dataHigh.map(d => d['low SAF cost']);
+        const high_high = dataHigh.map(d => d['high SAF cost']);
+
+        const central_med = dataMed.map(d => d['central estimate of SAF cost']);
+        const low_med = dataMed.map(d => d['low SAF cost']);
+        const high_med = dataMed.map(d => d['high SAF cost']);
+
+        const central_low = dataLow.map(d => d['central estimate of SAF cost']);
+        const low_low = dataLow.map(d => d['low SAF cost']);
+        const high_low = dataLow.map(d => d['high SAF cost']);
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 100, bottom: 50, left: 80 },
+            legend: {
+                data: ['High offset price', 'Low offset price', 'Medium offset price'],
+                bottom: 10,
+                left: 10,
+                orient: 'vertical',
+                title: { text: 'China-S2', left: '0' } // ECharts doesn't support legend title natively like this, handle via graphic
+            },
+            xAxis: {
+                type: 'category',
+                data: years,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true, alignWithLabel: true }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Net costs of max usage of SAF (million US$)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                min: -4000,
+                max: 6000,
+                axisLabel: { 
+                    color: 'black',
+                    formatter: function(value) {
+                        return value.toLocaleString();
+                    }
+                },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                // High offset price (Yellow)
+                {
+                    name: 'High offset price',
+                    type: 'line',
+                    data: central_high,
+                    lineStyle: { color: '#EDD968', width: 3 },
+                    symbol: 'none',
+                    z: 1
+                },
+                {
+                    name: 'High offset price CI',
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const points = [];
+                        for (let i = 0; i < years.length; i++) {
+                            points.push(api.coord([i, high_high[i]]));
+                        }
+                        for (let i = years.length - 1; i >= 0; i--) {
+                            points.push(api.coord([i, low_high[i]]));
+                        }
+                        return {
+                            type: 'polygon',
+                            shape: { points: points },
+                            style: api.style({ fill: '#F9F0C2', stroke: 'none', opacity: 0.5 })
+                        };
+                    },
+                    data: [0],
+                    z: 0
+                },
+                // Medium offset price (Pink)
+                {
+                    name: 'Medium offset price',
+                    type: 'line',
+                    data: central_med,
+                    lineStyle: { color: '#E67E83', width: 3 },
+                    symbol: 'none',
+                    z: 2
+                },
+                {
+                    name: 'Medium offset price CI',
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const points = [];
+                        for (let i = 0; i < years.length; i++) {
+                            points.push(api.coord([i, high_med[i]]));
+                        }
+                        for (let i = years.length - 1; i >= 0; i--) {
+                            points.push(api.coord([i, low_med[i]]));
+                        }
+                        return {
+                            type: 'polygon',
+                            shape: { points: points },
+                            style: api.style({ fill: '#F2D4D7', stroke: 'none', opacity: 0.5 })
+                        };
+                    },
+                    data: [0],
+                    z: 0
+                },
+                // Low offset price (Blue)
+                {
+                    name: 'Low offset price',
+                    type: 'line',
+                    data: central_low,
+                    lineStyle: { color: '#2B5576', width: 3 },
+                    symbol: 'none',
+                    z: 3
+                },
+                {
+                    name: 'Low offset price CI',
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const points = [];
+                        for (let i = 0; i < years.length; i++) {
+                            points.push(api.coord([i, high_low[i]]));
+                        }
+                        for (let i = years.length - 1; i >= 0; i--) {
+                            points.push(api.coord([i, low_low[i]]));
+                        }
+                        return {
+                            type: 'polygon',
+                            shape: { points: points },
+                            style: api.style({ fill: '#DCE6F1', stroke: 'none', opacity: 0.5 })
+                        };
+                    },
+                    data: [0],
+                    z: 0
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 10, top: 10, style: { text: 'a', font: 'bold 24px Arial' } },
+                { type: 'text', left: 80, bottom: 100, style: { text: 'China-S2', font: 'bold 14px Arial' } },
+                // Annotations
+                { type: 'text', right: 30, top: '65%', style: { text: '-10.9 B', fill: '#EDD968', font: '14px Arial' } },
+                { type: 'text', right: 30, top: '55%', style: { text: '-2.2 B', fill: '#E67E83', font: '14px Arial' } },
+                { type: 'text', right: 30, top: '45%', style: { text: '5.3 B', fill: '#2B5576', font: '14px Arial' } },
+                // Zero line
+                {
+                    type: 'line',
+                    shape: { x1: 80, y1: 370, x2: 700, y2: 370 }, // Approx y for 0
+                    style: { stroke: 'grey', lineWidth: 1, lineDash: [4, 4] },
+                    // Better to find y pixel for 0 value
+                    // Hardcoded here for simplicity in this prompt context, but convertToPixel is better in full app
+                }
+            ]
+        };
+        
+        // Correct Zero Line placement
+        // In a real browser environment, we'd use convertToPixel after setOption.
+        // For static gen, we rely on ECharts rendering logic. 
+        // We can add a markLine to a series instead of graphic line for accuracy.
+        option.series[0].markLine = {
+            symbol: 'none',
+            label: { show: false },
+            lineStyle: { type: 'dotted', color: 'grey', width: 1.5 },
+            data: [{ yAxis: 0 }]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

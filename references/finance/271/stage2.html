@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WMT 内部增长率 (IGR) 2017–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f7f7f9;
+      --card-bg: #ffffff;
+      --primary: #2563eb;
+      --primary-light: #93c5fd;
+      --axis: #6b7280;
+      --grid: #e5e7eb;
+      --text: #111827;
+      --muted: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #eff6ff, #f9fafb 40%, #f3f4f6);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem 1.75rem;
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.12),
+        0 2px 6px rgba(15, 23, 42, 0.1);
+      border: 1px solid #e5e7eb;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.35rem;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .meta-label {
+      font-weight: 500;
+      color: #4b5563;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    .note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .legend-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .legend-swatch {
+      width: 18px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 0.75rem;
+      }
+      .card {
+        padding: 1.1rem 1.1rem 1.25rem;
+      }
+      .chart-wrapper {
+        height: 340px;
+      }
+      h1 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>WMT 内部增长率 (Internal Growth Rate, IGR)</h1>
+      <div class="subtitle">Fiscal Years 2017–2024</div>
+
+      <div class="meta-row">
+        <div><span class="meta-label">Metric:</span> RESULT_IGR</div>
+        <div><span class="meta-label">Unit:</span> Ratio (displayed as %)</div>
+        <div><span class="meta-label">Source:</span> Provided dataset</div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="igrChart"></canvas>
+      </div>
+
+      <div class="legend-line">
+        <span class="legend-swatch"></span>
+        WMT 内部增长率 (IGR)
+      </div>
+
+      <div class="note">
+        Values range from 0.27% to 4.03% over the 2017–2024 period. Hover over points for exact annual IGR values.
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+
+  <script>
+    // Source data (as provided)
+    const igrData = [
+      { year: 2017, value: 0.0387274737193392 },
+      { year: 2018, value: 0.0188849397909925 },
+      { year: 2019, value: 0.0026876060196696 },
+      { year: 2020, value: 0.0403219179958185 },
+      { year: 2021, value: 0.031184956653585 },
+      { year: 2022, value: 0.0311871519383638 },
+      { year: 2023, value: 0.0233284784727097 },
+      { year: 2024, value: 0.0392820164572827 }
+    ];
+
+    const ctx = document.getElementById("igrChart");
+
+    const labels = igrData.map(d => d.year);
+    const values = igrData.map(d => d.value * 100); // convert to percentage
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "内部增长率 (IGR)",
+            data: values,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.15)",
+            borderWidth: 2.5,
+            fill: true,
+            tension: 0.25,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: "#2563eb",
+            pointBorderWidth: 2,
+            pointHitRadius: 10
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(17, 24, 39, 0.9)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#f9fafb",
+            borderColor: "rgba(55, 65, 81, 0.7)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function (ctx) {
+                const val = ctx.parsed.y;
+                return `IGR: ${val.toFixed(2)}%`;
+              },
+              title: function (items) {
+                const item = items[0];
+                return `Fiscal Year ${item.label}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 11
+              }
+            },
+            border: {
+              color: "#d1d5db"
+            }
+          },
+          y: {
+            ticks: {
+              color: "#4b5563",
+              font: { size: 11 },
+              callback: function (value) {
+                return value.toFixed(1) + "%";
+              }
+            },
+            grid: {
+              color: "rgba(209, 213, 219, 0.6)",
+              drawBorder: false
+            },
+            border: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: "内部增长率 (IGR, %)",
+              color: "#4b5563",
+              font: { size: 11 }
+            },
+            suggestedMin: 0,
+            suggestedMax: 5
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a slope chart for the 10 countries with the largest absolute gap between diagnostics share and support-adaptation share in the 2021 report, where each slope connects `diagnostics / total sampled innovations` and `(grants_support_initiatives + life_business_adaptation) / total sampled innovations`, values are percentages, only countries with at least 10 total sampled innovations are eligible, and countries are sorted by the absolute percentage-point gap after both shares are derived.",
+  "chart_type": "slope chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by absolute_gap_pp",
+  "selection_rule": "top 10 after total_innovations >= 10",
+  "plot_spec": {
+    "title": "2021 Diagnostics vs Support-Adaptation Gap",
+    "left_field": "diagnostics_share_pct",
+    "right_field": "support_adaptation_share_pct",
+    "left_label": "Diagnostics share",
+    "right_label": "Support + adaptation share",
+    "ylabel": "Share (%)"
+  },
+  "records": [
+    {
+      "entity": "South Korea",
+      "diagnostics_share_pct": 85.2941,
+      "support_adaptation_share_pct": 2.9412,
+      "absolute_gap_pp": 82.3529
+    },
+    {
+      "entity": "Poland",
+      "diagnostics_share_pct": 63.6364,
+      "support_adaptation_share_pct": 9.0909,
+      "absolute_gap_pp": 54.5455
+    },
+    {
+      "entity": "Taiwan",
+      "diagnostics_share_pct": 66.6667,
+      "support_adaptation_share_pct": 12.1212,
+      "absolute_gap_pp": 54.5455
+    },
+    {
+      "entity": "Finland",
+      "diagnostics_share_pct": 10.0,
+      "support_adaptation_share_pct": 50.0,
+      "absolute_gap_pp": 40.0
+    },
+    {
+      "entity": "The Netherlands",
+      "diagnostics_share_pct": 41.6667,
+      "support_adaptation_share_pct": 8.3333,
+      "absolute_gap_pp": 33.3333
+    },
+    {
+      "entity": "Philippines",
+      "diagnostics_share_pct": 38.4615,
+      "support_adaptation_share_pct": 7.6923,
+      "absolute_gap_pp": 30.7692
+    },
+    {
+      "entity": "Ireland",
+      "diagnostics_share_pct": 10.0,
+      "support_adaptation_share_pct": 40.0,
+      "absolute_gap_pp": 30.0
+    },
+    {
+      "entity": "South Africa",
+      "diagnostics_share_pct": 16.6667,
+      "support_adaptation_share_pct": 44.4444,
+      "absolute_gap_pp": 27.7778
+    },
+    {
+      "entity": "United Kingdom",
+      "diagnostics_share_pct": 18.0,
+      "support_adaptation_share_pct": 44.0,
+      "absolute_gap_pp": 26.0
+    },
+    {
+      "entity": "Belgium",
+      "diagnostics_share_pct": 41.3793,
+      "support_adaptation_share_pct": 20.6897,
+      "absolute_gap_pp": 20.6897
+    }
+  ]
+}

@@ -1,0 +1,416 @@
+{
+  "query_id": 5,
+  "query_text": "Create a scatter plot for companies with disclosed Valuation and Last Funded, where the x-axis is months since Last Funded, the y-axis is Valuation in $M, point size is company age in years, and points are colored by whether the company was founded before or after 2021, with all values shown as absolute values.",
+  "status": "complete",
+  "chart": {
+    "type": "scatter",
+    "title": "Valuation vs funding recency",
+    "x_field": "months_since_last_funded",
+    "y_field": "valuation_value_m",
+    "size_field": "company_age_years",
+    "hue_field": "founded_cohort",
+    "x_label": "Months since last funded",
+    "y_label": "Valuation ($M)",
+    "label_field": "company",
+    "annotate": false,
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "company": "01.AI",
+      "months_since_last_funded": 28,
+      "valuation_value_m": 1000.0,
+      "company_age_years": 3,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Adaptive ML",
+      "months_since_last_funded": 24,
+      "valuation_value_m": 100.0,
+      "company_age_years": 3,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Adept",
+      "months_since_last_funded": 36,
+      "valuation_value_m": 1000.0,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Anthropic",
+      "months_since_last_funded": 23,
+      "valuation_value_m": 18400.0,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Binarly",
+      "months_since_last_funded": 23,
+      "valuation_value_m": 11.6,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Canvas",
+      "months_since_last_funded": 61,
+      "valuation_value_m": 76.1,
+      "company_age_years": 9,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Cleanlab",
+      "months_since_last_funded": 29,
+      "valuation_value_m": 24.6,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Cognition AI",
+      "months_since_last_funded": 23,
+      "valuation_value_m": 2000.0,
+      "company_age_years": 3,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Common Sense Machines",
+      "months_since_last_funded": 30,
+      "valuation_value_m": 15.2,
+      "company_age_years": 6,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Databricks",
+      "months_since_last_funded": 28,
+      "valuation_value_m": 43000.0,
+      "company_age_years": 13,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "ElevenLabs",
+      "months_since_last_funded": 25,
+      "valuation_value_m": 1100.0,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Elicit",
+      "months_since_last_funded": 30,
+      "valuation_value_m": 36.32,
+      "company_age_years": 3,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Extropic",
+      "months_since_last_funded": 27,
+      "valuation_value_m": 42.92,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Figure",
+      "months_since_last_funded": 25,
+      "valuation_value_m": 2680.0,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Flip AI",
+      "months_since_last_funded": 28,
+      "valuation_value_m": 19.54,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Genesis Therapeutics",
+      "months_since_last_funded": 31,
+      "valuation_value_m": 426.926,
+      "company_age_years": 7,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Groq",
+      "months_since_last_funded": 59,
+      "valuation_value_m": 1000.0,
+      "company_age_years": 10,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Groundlight AI",
+      "months_since_last_funded": 35,
+      "valuation_value_m": 57.1,
+      "company_age_years": 7,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Helsing",
+      "months_since_last_funded": 30,
+      "valuation_value_m": 1820.0,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Hugging Face",
+      "months_since_last_funded": 31,
+      "valuation_value_m": 4500.0,
+      "company_age_years": 10,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Iambic Therapeutics",
+      "months_since_last_funded": 23,
+      "valuation_value_m": 266.5,
+      "company_age_years": 7,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Inworld AI",
+      "months_since_last_funded": 29,
+      "valuation_value_m": 500.0,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "KoBold Metals",
+      "months_since_last_funded": 33,
+      "valuation_value_m": 1000.0,
+      "company_age_years": 8,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Lightmatter",
+      "months_since_last_funded": 27,
+      "valuation_value_m": 1200.0,
+      "company_age_years": 9,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Lightup",
+      "months_since_last_funded": 35,
+      "valuation_value_m": 42.9,
+      "company_age_years": 7,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Luma AI",
+      "months_since_last_funded": 26,
+      "valuation_value_m": 300.0,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Magic",
+      "months_since_last_funded": 24,
+      "valuation_value_m": 158.6,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Mechanical Orchard",
+      "months_since_last_funded": 25,
+      "valuation_value_m": 95.0,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "MindsDB",
+      "months_since_last_funded": 31,
+      "valuation_value_m": 154.5,
+      "company_age_years": 9,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Mistral AI",
+      "months_since_last_funded": 24,
+      "valuation_value_m": 2000.0,
+      "company_age_years": 3,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Modular",
+      "months_since_last_funded": 31,
+      "valuation_value_m": 836.7,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Modyfi",
+      "months_since_last_funded": 31,
+      "valuation_value_m": 26.0,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Nomic AI",
+      "months_since_last_funded": 32,
+      "valuation_value_m": 100.0,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Numbers Station",
+      "months_since_last_funded": 36,
+      "valuation_value_m": 51.5,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "OpenAI",
+      "months_since_last_funded": 23,
+      "valuation_value_m": 80000.0,
+      "company_age_years": 11,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Perplexity AI",
+      "months_since_last_funded": 23,
+      "valuation_value_m": 1000.0,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Predibase",
+      "months_since_last_funded": 33,
+      "valuation_value_m": 63.3,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Protect AI",
+      "months_since_last_funded": 31,
+      "valuation_value_m": 98.3,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Pryon",
+      "months_since_last_funded": 30,
+      "valuation_value_m": 750.0,
+      "company_age_years": 9,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Rebellions",
+      "months_since_last_funded": 27,
+      "valuation_value_m": 598.8,
+      "company_age_years": 6,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Reka AI",
+      "months_since_last_funded": 33,
+      "valuation_value_m": 300.0,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Rosebud AI",
+      "months_since_last_funded": 51,
+      "valuation_value_m": 50.0,
+      "company_age_years": 7,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Runway",
+      "months_since_last_funded": 34,
+      "valuation_value_m": 1500.0,
+      "company_age_years": 8,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Sakana AI",
+      "months_since_last_funded": 25,
+      "valuation_value_m": 200.0,
+      "company_age_years": 3,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Shield AI",
+      "months_since_last_funded": 26,
+      "valuation_value_m": 2800.0,
+      "company_age_years": 11,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Sierra",
+      "months_since_last_funded": 25,
+      "valuation_value_m": 806.3,
+      "company_age_years": 3,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Suno",
+      "months_since_last_funded": 28,
+      "valuation_value_m": 120.2,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "SuperAGI",
+      "months_since_last_funded": 24,
+      "valuation_value_m": 100.0,
+      "company_age_years": 3,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Tenstorrent",
+      "months_since_last_funded": 31,
+      "valuation_value_m": 1000.0,
+      "company_age_years": 10,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Together AI",
+      "months_since_last_funded": 24,
+      "valuation_value_m": 1250.0,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Unstructured",
+      "months_since_last_funded": 24,
+      "valuation_value_m": 230.0,
+      "company_age_years": 4,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Voltron Data",
+      "months_since_last_funded": 49,
+      "valuation_value_m": 339.1,
+      "company_age_years": 5,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Weights & Biases",
+      "months_since_last_funded": 31,
+      "valuation_value_m": 1250.0,
+      "company_age_years": 9,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Wraithwatch",
+      "months_since_last_funded": 28,
+      "valuation_value_m": 36.0,
+      "company_age_years": 3,
+      "founded_cohort": "2021 or later"
+    },
+    {
+      "company": "Writer",
+      "months_since_last_funded": 30,
+      "valuation_value_m": 750.0,
+      "company_age_years": 11,
+      "founded_cohort": "before 2021"
+    },
+    {
+      "company": "Xanadu",
+      "months_since_last_funded": 24,
+      "valuation_value_m": 1000.0,
+      "company_age_years": 10,
+      "founded_cohort": "before 2021"
+    }
+  ],
+  "notes": []
+}

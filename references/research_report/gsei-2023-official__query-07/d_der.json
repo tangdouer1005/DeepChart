@@ -1,0 +1,55 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a bar chart of the top 10 countries by lower-tier resilience in the 2023 country tables, defined as `average(score ranks 6-10) / average(score ranks 1-5)`, expressed as a ratio, sorted descending, and limited to countries with 10 listed cities.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2023 Lower-Tier Resilience by Country",
+  "value_unit": "ratio",
+  "sort_rule": "descending by lower_tier_resilience_ratio, tie-break alphabetically",
+  "selection_rule": "top 10 countries with 10 listed cities",
+  "records": [
+    {
+      "entity": "Canada",
+      "lower_tier_resilience_ratio": 0.265357
+    },
+    {
+      "entity": "Germany",
+      "lower_tier_resilience_ratio": 0.184269
+    },
+    {
+      "entity": "China",
+      "lower_tier_resilience_ratio": 0.172261
+    },
+    {
+      "entity": "United States",
+      "lower_tier_resilience_ratio": 0.162187
+    },
+    {
+      "entity": "Poland",
+      "lower_tier_resilience_ratio": 0.156359
+    },
+    {
+      "entity": "France",
+      "lower_tier_resilience_ratio": 0.142579
+    },
+    {
+      "entity": "Switzerland",
+      "lower_tier_resilience_ratio": 0.130769
+    },
+    {
+      "entity": "Italy",
+      "lower_tier_resilience_ratio": 0.126682
+    },
+    {
+      "entity": "The Netherlands",
+      "lower_tier_resilience_ratio": 0.122926
+    },
+    {
+      "entity": "United Kingdom",
+      "lower_tier_resilience_ratio": 0.121252
+    }
+  ],
+  "value_field": "lower_tier_resilience_ratio",
+  "x_label": "Country",
+  "y_label": "average(score ranks 6-10) / average(score ranks 1-5)"
+}

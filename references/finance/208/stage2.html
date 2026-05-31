@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ORCL 皮奥特罗斯基 F-Score (Piotroski F-Score) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f7f7fa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .chart-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 1rem 1.5rem 1.5rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Fix layout: give the canvas a clear, controlled height */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px; /* Adjust this if you want taller/shorter chart */
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .footer-note {
+      max-width: 900px;
+      margin: 0.8rem auto 0;
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    .footer-note strong {
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .chart-wrapper {
+        height: 340px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-card">
+    <h1>ORCL 皮奥特罗斯基 F-Score (Piotroski F-Score)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="chart-wrapper">
+      <canvas id="piotroskiChart" aria-label="ORCL Piotroski F-Score 2016–2024" role="img"></canvas>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <strong>Note:</strong> Values shown are the Piotroski F-Score for ORCL by fiscal year, on a 0–9 scale.
+  </div>
+
+  <script>
+    // Source data (fiscal year and Piotroski F-Score)
+    const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const fScores = [5, 5, 4, 6, 7, 7, 6, 6, 5];
+
+    const ctx = document.getElementById("piotroskiChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "Piotroski F-Score",
+            data: fScores,
+            backgroundColor: "rgba(54, 162, 235, 0.8)",
+            borderColor: "rgba(37, 99, 235, 1)",
+            borderWidth: 1.5,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.95)",
+            hoverBorderColor: "rgba(30, 64, 175, 1)",
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        // Use the explicit height from CSS; avoid Chart.js aspectRatio conflicts
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function (context) {
+                return "Fiscal " + context.label + ": " + context.raw;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        layout: {
+          padding: {
+            top: 10,
+            right: 10,
+            bottom: 10,
+            left: 10
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              font: {
+                size: 12,
+                weight: "600"
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+              autoSkip: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Piotroski F-Score (0–9)",
+              font: {
+                size: 12,
+                weight: "600"
+              }
+            },
+            beginAtZero: true,
+            suggestedMax: 9,
+            ticks: {
+              stepSize: 1
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            }
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          intersect: true
+        },
+        animation: {
+          duration: 600,
+          easing: "easeOutQuad"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

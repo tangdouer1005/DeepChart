@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature 137 Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 1000px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = [
+    {
+        "UF":"AC",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"AMAZÔNIA"
+    },
+    {
+        "UF":"AM",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"AMAZÔNIA"
+    },
+    {
+        "UF":"AP",
+        "Total":0.067138,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0379322,
+        "Other countries":0.0,
+        "Biome":"AMAZÔNIA"
+    },
+    {
+        "UF":"MA",
+        "Total":0.266676,
+        "Domestic":0.12271,
+        "China":0.0477404,
+        "EU":0.00390637,
+        "Other countries":0.0190575,
+        "Biome":"AMAZÔNIA"
+    },
+    {
+        "UF":"MT",
+        "Total":14.2444,
+        "Domestic":0.858222,
+        "China":3.70748,
+        "EU":2.21389,
+        "Other countries":2.14395,
+        "Biome":"AMAZÔNIA"
+    },
+    {
+        "UF":"PA",
+        "Total":1.58271,
+        "Domestic":0.0950292,
+        "China":0.551001,
+        "EU":0.671685,
+        "Other countries":0.14383,
+        "Biome":"AMAZÔNIA"
+    },
+    {
+        "UF":"RO",
+        "Total":0.889164,
+        "Domestic":0.42801,
+        "China":0.152716,
+        "EU":0.215917,
+        "Other countries":0.091916,
+        "Biome":"AMAZÔNIA"
+    },
+    {
+        "UF":"RR",
+        "Total":0.105008,
+        "Domestic":0.104795,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.000212607,
+        "Biome":"AMAZÔNIA"
+    },
+    {
+        "UF":"TO",
+        "Total":0.0931787,
+        "Domestic":0.027217,
+        "China":0.0393144,
+        "EU":0.0264442,
+        "Other countries":0.0,
+        "Biome":"AMAZÔNIA"
+    },
+    {
+        "UF":"MS",
+        "Total":0.000380705,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"PANTANAL"
+    },
+    {
+        "UF":"MT",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"PANTANAL"
+    },
+    {
+        "UF":"BA",
+        "Total":6.57289,
+        "Domestic":2.51835,
+        "China":1.64725,
+        "EU":1.44533,
+        "Other countries":0.808875,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"DF",
+        "Total":0.351429,
+        "Domestic":0.130677,
+        "China":0.167283,
+        "EU":0.0163992,
+        "Other countries":0.0368531,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"GO",
+        "Total":13.709,
+        "Domestic":7.50225,
+        "China":3.57765,
+        "EU":1.0861,
+        "Other countries":1.25681,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"MA",
+        "Total":3.73388,
+        "Domestic":0.600306,
+        "China":1.73935,
+        "EU":0.897921,
+        "Other countries":0.467115,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"MG",
+        "Total":6.37774,
+        "Domestic":1.47775,
+        "China":2.59487,
+        "EU":0.972055,
+        "Other countries":1.09499,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"MS",
+        "Total":7.97434,
+        "Domestic":2.35714,
+        "China":1.62995,
+        "EU":1.69072,
+        "Other countries":1.5285,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"MT",
+        "Total":22.1982,
+        "Domestic":6.47418,
+        "China":6.80724,
+        "EU":3.41044,
+        "Other countries":3.90981,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"PA",
+        "Total":0.0550185,
+        "Domestic":0.0,
+        "China":0.00530147,
+        "EU":0.00568574,
+        "Other countries":0.00133762,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"PI",
+        "Total":2.81416,
+        "Domestic":1.38696,
+        "China":0.750725,
+        "EU":0.283503,
+        "Other countries":0.16784,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"PR",
+        "Total":0.379938,
+        "Domestic":0.0,
+        "China":0.304605,
+        "EU":0.000296198,
+        "Other countries":0.0714852,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"RO",
+        "Total":0.244054,
+        "Domestic":0.0,
+        "China":0.0721874,
+        "EU":0.135157,
+        "Other countries":0.0366261,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"SP",
+        "Total":1.91952,
+        "Domestic":0.185938,
+        "China":1.38244,
+        "EU":0.0428669,
+        "Other countries":0.256277,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"TO",
+        "Total":4.86451,
+        "Domestic":1.20177,
+        "China":1.74741,
+        "EU":1.52155,
+        "Other countries":0.214859,
+        "Biome":"CERRADO"
+    },
+    {
+        "UF":"AL",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"CAATINGA"
+    },
+    {
+        "UF":"BA",
+        "Total":0.0179572,
+        "Domestic":0.0170261,
+        "China":0.000910982,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"CAATINGA"
+    },
+    {
+        "UF":"CE",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"CAATINGA"
+    },
+    {
+        "UF":"MG",
+        "Total":0.00514199,
+        "Domestic":0.0,
+        "China":0.00316291,
+        "EU":0.0,
+        "Other countries":0.00111873,
+        "Biome":"CAATINGA"
+    },
+    {
+        "UF":"PB",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"CAATINGA"
+    },
+    {
+        "UF":"PE",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"CAATINGA"
+    },
+    {
+        "UF":"PI",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"CAATINGA"
+    },
+    {
+        "UF":"RN",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"CAATINGA"
+    },
+    {
+        "UF":"SE",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"CAATINGA"
+    },
+    {
+        "UF":"RS",
+        "Total":18.3157,
+        "Domestic":4.14094,
+        "China":8.8696,
+        "EU":2.14767,
+        "Other countries":2.72434,
+        "Biome":"PAMPA"
+    },
+    {
+        "UF":"AL",
+        "Total":0.000953549,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.000953517,
+        "Other countries":0.0,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"BA",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"ES",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"GO",
+        "Total":0.00526863,
+        "Domestic":0.000424816,
+        "China":0.000489741,
+        "EU":0.00367306,
+        "Other countries":0.000655903,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"MG",
+        "Total":1.14379,
+        "Domestic":0.249163,
+        "China":0.554815,
+        "EU":0.0754145,
+        "Other countries":0.231935,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"MS",
+        "Total":2.93363,
+        "Domestic":0.920377,
+        "China":0.998459,
+        "EU":0.337178,
+        "Other countries":0.455984,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"PB",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"PE",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"PR",
+        "Total":32.9761,
+        "Domestic":11.1358,
+        "China":14.3749,
+        "EU":2.768,
+        "Other countries":3.9394,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"RJ",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"RN",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"RS",
+        "Total":9.01536,
+        "Domestic":3.7042,
+        "China":3.15373,
+        "EU":0.685776,
+        "Other countries":1.05507,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"SC",
+        "Total":3.86536,
+        "Domestic":0.787649,
+        "China":1.53009,
+        "EU":0.467788,
+        "Other countries":0.558936,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"SE",
+        "Total":0.0,
+        "Domestic":0.0,
+        "China":0.0,
+        "EU":0.0,
+        "Other countries":0.0,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"SP",
+        "Total":3.4042,
+        "Domestic":0.820036,
+        "China":2.14107,
+        "EU":0.0351306,
+        "Other countries":0.276878,
+        "Biome":"MATA ATLÂNTICA"
+    },
+    {
+        "UF":"NA",
+        "Total":0.0,
+        "Domestic":0.000405953,
+        "China":7.38215,
+        "EU":1.13064,
+        "Other countries":3.28723,
+        "Biome":"NA"
+    }
+];
+
+        // 1. Parsing (Adapted from JSON)
+        const data = rawData.map(item => ({
+            UF: item.UF,
+            Biome: item.Biome,
+            Domestic: item.Domestic,
+            China: item.China,
+            EU: item.EU,
+            Other: item["Other countries"]
+        }));
+
+        // 2. Sorting
+        const biomeOrder = ["AMAZÔNIA", "PANTANAL", "CERRADO", "CAATINGA", "PAMPA", "MATA ATLÂNTICA", "NA"];
+        
+        data.sort((a, b) => {
+            const idxA = biomeOrder.indexOf(a.Biome);
+            const idxB = biomeOrder.indexOf(b.Biome);
+            if (idxA !== idxB) return idxA - idxB;
+            return a.UF.localeCompare(b.UF);
+        });
+
+        // 3. Prepare Data with Groups and Gaps
+        const categoryData = [];
+        const seriesDomestic = [];
+        const seriesChina = [];
+        const seriesEU = [];
+        const seriesOther = [];
+        
+        const biomeGroups = [];
+        let lastBiome = null;
+        let currentIndex = 0;
+        
+        data.forEach(item => {
+            if (item.Biome !== lastBiome) {
+                if (lastBiome !== null) {
+                    // Close previous group
+                    if(biomeGroups.length > 0) {
+                        biomeGroups[biomeGroups.length - 1].end = currentIndex - 1;
+                    }
+                    
+                    // Insert gap (4 empty bars)
+                    for(let k=0; k<4; k++) {
+                        categoryData.push('');
+                        seriesDomestic.push(null);
+                        seriesChina.push(null);
+                        seriesEU.push(null);
+                        seriesOther.push(null);
+                        currentIndex++;
+                    }
+                }
+                // Start new group
+                biomeGroups.push({ name: item.Biome, start: currentIndex });
+                lastBiome = item.Biome;
+            }
+            
+            categoryData.push(item.UF);
+            seriesDomestic.push(item.Domestic);
+            seriesChina.push(item.China);
+            seriesEU.push(item.EU);
+            seriesOther.push(item.Other);
+            currentIndex++;
+        });
+        
+        // Close last group
+        if (biomeGroups.length > 0) {
+            biomeGroups[biomeGroups.length - 1].end = currentIndex - 1;
+        }
+
+        // 4. Calculate Graphic Labels for Biomes
+        const totalSectors = categoryData.length;
+        const graphics = biomeGroups.map(g => {
+            const mid = (g.start + g.end) / 2;
+            
+            const angleDeg = 90 - (mid * 360 / totalSectors);
+            const rad = angleDeg * Math.PI / 180;
+            
+            const r = 440; 
+            const cx = 500;
+            const cy = 500;
+            
+            const x = cx + r * Math.cos(rad);
+            const y = cy - r * Math.sin(rad); 
+            
+            // Format Label: Title Case
+            let labelText = g.name.toLowerCase().replace(/(?:^|\s)\w/g, function(a) { return a.toUpperCase(); });
+            if (g.name === 'NA') labelText = 'NA';
+            if (g.name === 'MATA ATLÂNTICA') labelText = 'Mata Atlântica'; // Special handling
+            
+            return {
+                type: 'text',
+                left: x,
+                top: y,
+                style: {
+                    text: labelText,
+                    textAlign: 'center',
+                    textVerticalAlign: 'middle',
+                    fontSize: 14,
+                    fontWeight: 'bold',
+                    fill: '#333'
+                }
+            };
+        });
+
+        const option = {
+            graphic: graphics,
+            title: {
+                text: '2016',
+                top: 20,
+                left: 20,
+                textStyle: { fontSize: 24 }
+            },
+            legend: {
+                bottom: 20,
+                data: ['Domestic', 'China', 'EU', 'Other countries']
+            },
+            polar: {
+                radius: ['30%', '80%']
+            },
+            angleAxis: {
+                type: 'category',
+                data: categoryData,
+                startAngle: 90, 
+                clockwise: true,
+                axisLabel: {
+                    interval: 0,
+                    fontSize: 10,
+                    color: '#555',
+                    margin: 2
+                },
+                axisTick: { show: false },
+                axisLine: { show: false },
+                splitLine: { show: false }
+            },
+            radiusAxis: {
+                max: 35, 
+                axisLabel: { show: true },
+                axisLine: { show: false },
+                splitLine: {
+                    show: true,
+                    lineStyle: { type: 'solid', color: '#ccc' }
+                }
+            },
+            series: [
+                {
+                    name: 'Domestic',
+                    type: 'bar',
+                    stack: 'total',
+                    coordinateSystem: 'polar',
+                    data: seriesDomestic,
+                    itemStyle: { color: '#d0e1f2' }
+                },
+                {
+                    name: 'China',
+                    type: 'bar',
+                    stack: 'total',
+                    coordinateSystem: 'polar',
+                    data: seriesChina,
+                    itemStyle: { color: '#94c4df' }
+                },
+                {
+                    name: 'EU',
+                    type: 'bar',
+                    stack: 'total',
+                    coordinateSystem: 'polar',
+                    data: seriesEU,
+                    itemStyle: { color: '#4a7bb7' }
+                },
+                {
+                    name: 'Other countries',
+                    type: 'bar',
+                    stack: 'total',
+                    coordinateSystem: 'polar',
+                    data: seriesOther,
+                    itemStyle: { color: '#08306b' }
+                }
+            ]
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

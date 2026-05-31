@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AMZN 盈余-现金质量剪刀差 (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js latest stable -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #0f172a;
+      --card-bg: #111827;
+      --axis: #9ca3af;
+      --grid: #1f2937;
+      --primary: #3b82f6;
+      --primary-soft: rgba(59, 130, 246, 0.15);
+      --text-main: #e5e7eb;
+      --accent: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #111827 0, #020617 60%);
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(148, 163, 184, 0.12);
+      padding: 18px 20px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.08), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(96, 165, 250, 0.08), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .title-block {
+      max-width: 70%;
+    }
+
+    h1 {
+      font-size: 1.15rem;
+      margin: 0 0 2px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: #9ca3af;
+      backdrop-filter: blur(4px);
+      background-color: rgba(15, 23, 42, 0.6);
+    }
+
+    .stat-block {
+      text-align: right;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .stat-label {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.68rem;
+      color: #6b7280;
+    }
+
+    .stat-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .stat-delta {
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    #chart-wrapper {
+      position: relative;
+      height: 380px;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 0.73rem;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .legend-hint {
+      color: #9ca3af;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 14px;
+      }
+      .title-block {
+        max-width: 100%;
+      }
+      #chart-wrapper {
+        height: 310px;
+      }
+      h1 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-inner">
+        <div class="header">
+          <div class="title-block">
+            <h1>AMZN 盈余-现金质量剪刀差</h1>
+            <div class="subtitle">Earnings–Cash Quality Spread | Fiscal Years 2016–2024</div>
+            <div class="tag-row">
+              <span class="tag">Ticker: AMZN</span>
+              <span class="tag">Metric: RESULT_Spread</span>
+              <span class="tag">Unit: 比例 (Spread)</span>
+            </div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Latest (2024)</div>
+            <div class="stat-value">0.0983</div>
+            <div class="stat-delta">vs. 2016: −0.1020</div>
+          </div>
+        </div>
+
+        <div id="chart-wrapper">
+          <canvas id="spreadChart"></canvas>
+        </div>
+
+        <div class="footer-note">
+          <span>Source: Provided dataset; values are as given by user (no further transformation).</span>
+          <span class="legend-hint">Hint: Hover to inspect values; double‑click chart to reset zoom.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Wrap all JS so it runs after DOM is ready
+    document.addEventListener("DOMContentLoaded", function () {
+      // Data from the provided source
+      const fiscalYears = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ];
+
+      const resultSpread = [
+        0.2002308486726201,
+        0.1428145609001825,
+        0.140496261370672,
+        0.1388310268731825,
+        0.1637243042732727,
+        0.0349527599818805,
+        0.1120304701864985,
+        0.110084611354135,
+        0.0982504415535746
+      ];
+
+      const ctx = document.getElementById("spreadChart").getContext("2d");
+
+      function createGradient(ctx, area) {
+        const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+        gradient.addColorStop(0, "rgba(37, 99, 235, 0)");
+        gradient.addColorStop(0.6, "rgba(59, 130, 246, 0.25)");
+        gradient.addColorStop(1, "rgba(96, 165, 250, 0.4)");
+        return gradient;
+      }
+
+      const spreadChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: fiscalYears,
+          datasets: [
+            {
+              label: "盈余-现金质量剪刀差 (RESULT_Spread)",
+              data: resultSpread,
+              tension: 0.25,
+              borderColor: "rgba(59, 130, 246, 1)",
+              borderWidth: 2.4,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointBackgroundColor: "#1d4ed8",
+              pointBorderWidth: 1.2,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: "#d1d5db",
+                font: {
+                  size: 11
+                },
+                usePointStyle: true,
+                pointStyle: "line"
+              }
+            },
+            tooltip: {
+              backgroundColor: "rgba(15, 23, 42, 0.95)",
+              borderColor: "rgba(55, 65, 81, 0.8)",
+              borderWidth: 1,
+              padding: 10,
+              titleFont: { size: 12, weight: "600" },
+              bodyFont: { size: 11 },
+              callbacks: {
+                label: function (ctx) {
+                  const v = ctx.parsed.y;
+                  return " Spread: " + (v != null ? v.toFixed(6) : "N/A");
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                color: "rgba(31, 41, 55, 0.8)"
+              },
+              ticks: {
+                color: "#9ca3af",
+                maxRotation: 0,
+                autoSkipPadding: 16
+              },
+              border: {
+                color: "rgba(55, 65, 81, 0.9)"
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: "rgba(31, 41, 55, 0.7)"
+              },
+              ticks: {
+                color: "#9ca3af",
+                callback: function (value) {
+                  return Number(value).toFixed(2);
+                }
+              },
+              border: {
+                color: "rgba(55, 65, 81, 0.9)"
+              },
+              title: {
+                display: true,
+                text: "Spread (RESULT_Spread)",
+                color: "#9ca3af",
+                font: {
+                  size: 11
+                }
+              }
+            }
+          },
+          elements: {
+            line: {
+              capBezierPoints: true
+            }
+          }
+        },
+        plugins: [
+          {
+            id: "gradientFill",
+            beforeDatasetsDraw(chart) {
+              const { ctx, chartArea, data } = chart;
+              if (!chartArea) return;
+              const gradient = createGradient(ctx, chartArea);
+              if (data.datasets[0]) {
+                data.datasets[0].backgroundColor = gradient;
+              }
+            }
+          }
+        ]
+      });
+
+      // Simple zoom: scroll wheel to zoom on Y axis, double-click to reset
+      const canvas = spreadChart.canvas;
+
+      canvas.addEventListener("wheel", function (event) {
+        event.preventDefault();
+        const deltaY = event.deltaY;
+
+        const yScale = spreadChart.scales.y;
+        const range = yScale.max - yScale.min;
+        const zoomFactor = 0.1 * (deltaY > 0 ? 1 : -1); // zoom in/out
+
+        const newMin = yScale.min + range * zoomFactor;
+        const newMax = yScale.max - range * zoomFactor;
+
+        if (newMax > newMin) {
+          yScale.options.min = newMin;
+          yScale.options.max = newMax;
+          spreadChart.update("none");
+        }
+      });
+
+      canvas.addEventListener("dblclick", function () {
+        // reset y-axis auto range
+        const yScale = spreadChart.scales.y;
+        delete yScale.options.min;
+        delete yScale.options.max;
+        spreadChart.update("none");
+      });
+    });
+  </script>
+</body>
+</html>

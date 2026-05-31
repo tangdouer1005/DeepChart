@@ -1,0 +1,65 @@
+[
+    {
+        "Current_Density": 50,
+        "AEM_mean": -2.1933333333333334,
+        "AEM_std": 0.012472191289246403,
+        "Separator_mean": -2.1133333333333333,
+        "Separator_std": 0.012472191289246403
+    },
+    {
+        "Current_Density": 100,
+        "AEM_mean": -2.3033333333333332,
+        "AEM_std": 0.012472191289246403,
+        "Separator_mean": -2.2,
+        "Separator_std": 0.008164965809277268
+    },
+    {
+        "Current_Density": 200,
+        "AEM_mean": -2.4333333333333336,
+        "AEM_std": 0.012472191289246561,
+        "Separator_mean": -2.2866666666666666,
+        "Separator_std": 0.012472191289246403
+    },
+    {
+        "Current_Density": 300,
+        "AEM_mean": -2.53,
+        "AEM_std": 0.016329931618554536,
+        "Separator_mean": -2.3633333333333333,
+        "Separator_std": 0.016996731711975993
+    },
+    {
+        "Current_Density": 400,
+        "AEM_mean": -2.62,
+        "AEM_std": 0.016329931618554536,
+        "Separator_mean": -2.44,
+        "Separator_std": 0.016329931618554536
+    },
+    {
+        "Current_Density": 500,
+        "AEM_mean": -2.706666666666667,
+        "AEM_std": 0.016996731711975934,
+        "Separator_mean": -2.5033333333333334,
+        "Separator_std": 0.020548046676563177
+    },
+    {
+        "Current_Density": 600,
+        "AEM_mean": -2.776666666666667,
+        "AEM_std": 0.016996731711975934,
+        "Separator_mean": -2.5666666666666664,
+        "Separator_std": 0.024944382578492966
+    },
+    {
+        "Current_Density": 700,
+        "AEM_mean": -2.84,
+        "AEM_std": 0.014142135623730857,
+        "Separator_mean": -2.603333333333333,
+        "Separator_std": 0.024944382578492966
+    },
+    {
+        "Current_Density": 800,
+        "AEM_mean": -2.9000000000000004,
+        "AEM_std": 0.014142135623730857,
+        "Separator_mean": -2.6366666666666667,
+        "Separator_std": 0.02624669291337269
+    }
+]

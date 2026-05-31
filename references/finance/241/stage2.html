@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TSLA Defensive Interval Ratio (DIR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      padding: 24px 24px 32px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #666;
+      margin: 6px 0 18px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 480px;
+    }
+
+    .note {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .legend-inline {
+      font-size: 0.9rem;
+      margin-top: 8px;
+      color: #444;
+    }
+
+    .legend-color-box {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 6px;
+      border-radius: 2px;
+      vertical-align: middle;
+      background: linear-gradient(135deg, #1d9bf0, #005bb5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TSLA 防御区间比率 (DIR)</h1>
+    <h2>Defensive Interval Ratio from 2016 to 2024</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="dirChart"></canvas>
+    </div>
+
+    <div class="legend-inline">
+      <span class="legend-color-box"></span>
+      Defensive Interval Ratio (DIR)
+    </div>
+
+    <p class="note">
+      Notes: Values shown are TSLA's Defensive Interval Ratio (DIR) by fiscal year (2016–2024),
+      based on the provided source data. Hover over bars to see exact values.
+    </p>
+  </div>
+
+  <script>
+    // Source data (fiscal years and DIR values)
+    const fiscalYears = [
+      "2016", "2017", "2018", "2019", "2020",
+      "2021", "2022", "2023", "2024"
+    ];
+
+    const dirValues = [
+      185.2906238196892,
+      105.8474105742663,
+      77.42944184758403,
+      113.06377249173772,
+      262.7970347302146,
+      150.30500559934077,
+      103.6496377347331,
+      82.67551944653057,
+      82.8051404860176
+    ];
+
+    // Find min and max for a nicer y-axis range
+    const minVal = Math.min(...dirValues);
+    const maxVal = Math.max(...dirValues);
+    const padding = (maxVal - minVal) * 0.1 || 10;
+
+    const ctx = document.getElementById("dirChart").getContext("2d");
+
+    const dirChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "Defensive Interval Ratio (DIR)",
+            data: dirValues,
+            backgroundColor: fiscalYears.map((_, i) =>
+              i === fiscalYears.length - 1
+                ? "rgba(29, 155, 240, 0.85)"   // highlight 2024
+                : "rgba(29, 155, 240, 0.55)"
+            ),
+            borderColor: fiscalYears.map((_, i) =>
+              i === fiscalYears.length - 1
+                ? "rgba(0, 91, 181, 1)"
+                : "rgba(0, 91, 181, 0.9)"
+            ),
+            borderWidth: 1.2,
+            borderRadius: 6,
+            hoverBackgroundColor: "rgba(29, 155, 240, 1)",
+            hoverBorderColor: "rgba(0, 70, 140, 1)"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 10,
+            right: 18,
+            bottom: 10,
+            left: 6
+          }
+        },
+        plugins: {
+          title: {
+            display: false
+          },
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return "DIR: " + value.toFixed(2);
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              font: {
+                size: 12,
+                weight: "600"
+              }
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              minRotation: 0
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Defensive Interval Ratio (DIR)",
+              font: {
+                size: 12,
+                weight: "600"
+              }
+            },
+            beginAtZero: false,
+            suggestedMin: Math.max(0, minVal - padding),
+            suggestedMax: maxVal + padding,
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(0);
+              }
+            },
+            grid: {
+              color: "rgba(0,0,0,0.06)"
+            }
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          intersect: true
+        },
+        animation: {
+          duration: 900,
+          easing: "easeOutCubic"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

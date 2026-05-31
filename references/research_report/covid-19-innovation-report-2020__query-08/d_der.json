@@ -1,0 +1,141 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a heatmap for the top 12 countries in the 2020 report after filtering to countries with at least 10 total sampled innovations and then sorting by dominant-category concentration, where rows are countries, columns are the six innovation categories, each cell shows `category count / total sampled innovations` as a percentage, and row order is descending by `max(category count) / total sampled innovations`.",
+  "chart_type": "heatmap",
+  "value_unit": "percent",
+  "sort_rule": "descending by dominant_category_share_pct",
+  "selection_rule": "top 12 after total_innovations >= 10",
+  "plot_spec": {
+    "title": "2020 Innovation Category Share Heatmap",
+    "value_fields": [
+      "grants_support_initiatives_share_pct",
+      "life_business_adaptation_share_pct",
+      "prevention_share_pct",
+      "information_share_pct",
+      "diagnostics_share_pct",
+      "treatment_share_pct"
+    ]
+  },
+  "records": [
+    {
+      "entity": "South Korea",
+      "dominant_category_share_pct": 69.2308,
+      "grants_support_initiatives_share_pct": 0.0,
+      "life_business_adaptation_share_pct": 7.6923,
+      "prevention_share_pct": 15.3846,
+      "information_share_pct": 7.6923,
+      "diagnostics_share_pct": 69.2308,
+      "treatment_share_pct": 0.0
+    },
+    {
+      "entity": "Taiwan",
+      "dominant_category_share_pct": 69.2308,
+      "grants_support_initiatives_share_pct": 0.0,
+      "life_business_adaptation_share_pct": 7.6923,
+      "prevention_share_pct": 15.3846,
+      "information_share_pct": 0.0,
+      "diagnostics_share_pct": 69.2308,
+      "treatment_share_pct": 7.6923
+    },
+    {
+      "entity": "China",
+      "dominant_category_share_pct": 54.5455,
+      "grants_support_initiatives_share_pct": 4.5455,
+      "life_business_adaptation_share_pct": 0.0,
+      "prevention_share_pct": 54.5455,
+      "information_share_pct": 4.5455,
+      "diagnostics_share_pct": 18.1818,
+      "treatment_share_pct": 18.1818
+    },
+    {
+      "entity": "Finland",
+      "dominant_category_share_pct": 50.0,
+      "grants_support_initiatives_share_pct": 10.0,
+      "life_business_adaptation_share_pct": 50.0,
+      "prevention_share_pct": 0.0,
+      "information_share_pct": 20.0,
+      "diagnostics_share_pct": 10.0,
+      "treatment_share_pct": 10.0
+    },
+    {
+      "entity": "Belgium",
+      "dominant_category_share_pct": 38.2353,
+      "grants_support_initiatives_share_pct": 20.5882,
+      "life_business_adaptation_share_pct": 0.0,
+      "prevention_share_pct": 23.5294,
+      "information_share_pct": 2.9412,
+      "diagnostics_share_pct": 38.2353,
+      "treatment_share_pct": 14.7059
+    },
+    {
+      "entity": "Estonia",
+      "dominant_category_share_pct": 36.3636,
+      "grants_support_initiatives_share_pct": 0.0,
+      "life_business_adaptation_share_pct": 36.3636,
+      "prevention_share_pct": 18.1818,
+      "information_share_pct": 36.3636,
+      "diagnostics_share_pct": 9.0909,
+      "treatment_share_pct": 0.0
+    },
+    {
+      "entity": "Australia",
+      "dominant_category_share_pct": 33.3333,
+      "grants_support_initiatives_share_pct": 25.0,
+      "life_business_adaptation_share_pct": 0.0,
+      "prevention_share_pct": 16.6667,
+      "information_share_pct": 25.0,
+      "diagnostics_share_pct": 33.3333,
+      "treatment_share_pct": 0.0
+    },
+    {
+      "entity": "Spain",
+      "dominant_category_share_pct": 31.4286,
+      "grants_support_initiatives_share_pct": 0.0,
+      "life_business_adaptation_share_pct": 28.5714,
+      "prevention_share_pct": 14.2857,
+      "information_share_pct": 8.5714,
+      "diagnostics_share_pct": 31.4286,
+      "treatment_share_pct": 17.1429
+    },
+    {
+      "entity": "Russia",
+      "dominant_category_share_pct": 31.0345,
+      "grants_support_initiatives_share_pct": 3.4483,
+      "life_business_adaptation_share_pct": 24.1379,
+      "prevention_share_pct": 6.8966,
+      "information_share_pct": 31.0345,
+      "diagnostics_share_pct": 24.1379,
+      "treatment_share_pct": 10.3448
+    },
+    {
+      "entity": "Switzerland",
+      "dominant_category_share_pct": 30.4348,
+      "grants_support_initiatives_share_pct": 17.3913,
+      "life_business_adaptation_share_pct": 8.6957,
+      "prevention_share_pct": 8.6957,
+      "information_share_pct": 21.7391,
+      "diagnostics_share_pct": 30.4348,
+      "treatment_share_pct": 13.0435
+    },
+    {
+      "entity": "Brazil",
+      "dominant_category_share_pct": 30.0,
+      "grants_support_initiatives_share_pct": 20.0,
+      "life_business_adaptation_share_pct": 0.0,
+      "prevention_share_pct": 10.0,
+      "information_share_pct": 30.0,
+      "diagnostics_share_pct": 10.0,
+      "treatment_share_pct": 30.0
+    },
+    {
+      "entity": "Singapore",
+      "dominant_category_share_pct": 30.0,
+      "grants_support_initiatives_share_pct": 30.0,
+      "life_business_adaptation_share_pct": 0.0,
+      "prevention_share_pct": 10.0,
+      "information_share_pct": 20.0,
+      "diagnostics_share_pct": 30.0,
+      "treatment_share_pct": 10.0
+    }
+  ]
+}

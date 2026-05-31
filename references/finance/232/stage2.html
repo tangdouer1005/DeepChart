@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMUS 投入资本回报率（ROIC） 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f8fa;
+      color: #111827;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      padding: 18px 18px 10px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    .note strong {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .chart-container {
+        padding: 14px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>TMUS 投入资本回报率（ROIC）</h1>
+    <h2>2016 – 2024 财年（单位：%）</h2>
+    <div class="chart-wrapper">
+      <canvas id="roicChart"></canvas>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>说明：</strong> 投入资本回报率（ROIC）= 税后经营利润 ÷ 投入资本。<br />
+    本图按财年展示 TMUS 2016–2024 年 ROIC 的变化，数据为小数形式转换为百分比后绘制。
+  </div>
+
+  <!-- Chart.js (latest stable 4.x at time of generation) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // Source data (as provided)
+    const rawData = [
+      { year: 2016, roic: 0.0724108049019996 },
+      { year: 2017, roic: 0.0760651680652543 },
+      { year: 2018, roic: 0.1081393525144778 },
+      { year: 2019, roic: 0.109405749638036 },
+      { year: 2020, roic: 0.0614875892072187 },
+      { year: 2021, roic: 0.0464992393938931 },
+      { year: 2022, roic: 0.0380693391521554 },
+      { year: 2023, roic: 0.0765238340710895 },
+      { year: 2024, roic: 0.0992674982101212 }
+    ];
+
+    const labels = rawData.map(d => d.year.toString());
+    const dataValues = rawData.map(d => d.roic * 100); // convert to %
+
+    const ctx = document.getElementById('roicChart').getContext('2d');
+
+    const roicChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'ROIC (%)',
+            data: dataValues,
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37, 99, 235, 0.12)',
+            pointBackgroundColor: '#2563eb',
+            pointBorderColor: '#ffffff',
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointHitRadius: 8,
+            borderWidth: 2.5,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            titleFont: { size: 13, weight: '600' },
+            bodyFont: { size: 12 },
+            padding: 10,
+            cornerRadius: 6,
+            displayColors: false,
+            callbacks: {
+              label: context => {
+                const value = context.parsed.y;
+                return 'ROIC：' + value.toFixed(2) + '%';
+              },
+              title: items => {
+                if (!items.length) return '';
+                return '财年：' + items[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: { size: 12 }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(148, 163, 184, 0.25)'
+            },
+            ticks: {
+              font: { size: 12 },
+              callback: value => value + '%'
+            },
+            title: {
+              display: true,
+              text: 'ROIC（%）',
+              font: { size: 12, weight: '500' },
+              color: '#4b5563'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

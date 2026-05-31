@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const df = [
+    {
+        "Scenario": "central estimate of CORSIA offset cost",
+        "Year": 2027,
+        "Central": -555.1,
+        "Low": -555.1,
+        "High": 351.8
+    },
+    {
+        "Scenario": "central estimate of CORSIA offset cost",
+        "Year": 2028,
+        "Central": -628.1,
+        "Low": -668.4,
+        "High": 134.2
+    },
+    {
+        "Scenario": "central estimate of CORSIA offset cost",
+        "Year": 2029,
+        "Central": -692.9,
+        "Low": -791.4,
+        "High": -28.8
+    },
+    {
+        "Scenario": "central estimate of CORSIA offset cost",
+        "Year": 2030,
+        "Central": -757.6,
+        "Low": -925.3,
+        "High": -139.5
+    },
+    {
+        "Scenario": "central estimate of CORSIA offset cost",
+        "Year": 2031,
+        "Central": -822.3,
+        "Low": -1070.3,
+        "High": -216.0
+    },
+    {
+        "Scenario": "central estimate of CORSIA offset cost",
+        "Year": 2032,
+        "Central": -887.1,
+        "Low": -1226.5,
+        "High": -322.0
+    },
+    {
+        "Scenario": "central estimate of CORSIA offset cost",
+        "Year": 2033,
+        "Central": -951.8,
+        "Low": -1363.0,
+        "High": -432.1
+    },
+    {
+        "Scenario": "central estimate of CORSIA offset cost",
+        "Year": 2034,
+        "Central": -1016.6,
+        "Low": -1536.2,
+        "High": -418.2
+    },
+    {
+        "Scenario": "central estimate of CORSIA offset cost",
+        "Year": 2035,
+        "Central": -1081.3,
+        "Low": -1720.5,
+        "High": -344.7
+    },
+    {
+        "Scenario": "low estimate of CORSIA offset cost",
+        "Year": 2027,
+        "Central": -78.6,
+        "Low": -78.6,
+        "High": 828.4
+    },
+    {
+        "Scenario": "low estimate of CORSIA offset cost",
+        "Year": 2028,
+        "Central": -44.9,
+        "Low": -85.2,
+        "High": 717.4
+    },
+    {
+        "Scenario": "low estimate of CORSIA offset cost",
+        "Year": 2029,
+        "Central": 7.8,
+        "Low": -90.7,
+        "High": 671.9
+    },
+    {
+        "Scenario": "low estimate of CORSIA offset cost",
+        "Year": 2030,
+        "Central": 71.6,
+        "Low": -96.1,
+        "High": 689.7
+    },
+    {
+        "Scenario": "low estimate of CORSIA offset cost",
+        "Year": 2031,
+        "Central": 146.4,
+        "Low": -101.6,
+        "High": 752.7
+    },
+    {
+        "Scenario": "low estimate of CORSIA offset cost",
+        "Year": 2032,
+        "Central": 232.4,
+        "Low": -107.0,
+        "High": 797.5
+    },
+    {
+        "Scenario": "low estimate of CORSIA offset cost",
+        "Year": 2033,
+        "Central": 298.7,
+        "Low": -112.5,
+        "High": 818.4
+    },
+    {
+        "Scenario": "low estimate of CORSIA offset cost",
+        "Year": 2034,
+        "Central": 401.7,
+        "Low": -118.0,
+        "High": 1000.1
+    },
+    {
+        "Scenario": "low estimate of CORSIA offset cost",
+        "Year": 2035,
+        "Central": 515.8,
+        "Low": -123.4,
+        "High": 1252.4
+    },
+    {
+        "Scenario": "high estimate of CORSIA offset cost",
+        "Year": 2027,
+        "Central": -1098.9,
+        "Low": -1098.9,
+        "High": -192.0
+    },
+    {
+        "Scenario": "high estimate of CORSIA offset cost",
+        "Year": 2028,
+        "Central": -1295.0,
+        "Low": -1335.3,
+        "High": -532.7
+    },
+    {
+        "Scenario": "high estimate of CORSIA offset cost",
+        "Year": 2029,
+        "Central": -1495.5,
+        "Low": -1594.0,
+        "High": -831.4
+    },
+    {
+        "Scenario": "high estimate of CORSIA offset cost",
+        "Year": 2030,
+        "Central": -1708.8,
+        "Low": -1876.5,
+        "High": -1090.7
+    },
+    {
+        "Scenario": "high estimate of CORSIA offset cost",
+        "Year": 2031,
+        "Central": -1934.9,
+        "Low": -2182.9,
+        "High": -1328.6
+    },
+    {
+        "Scenario": "high estimate of CORSIA offset cost",
+        "Year": 2032,
+        "Central": -2174.1,
+        "Low": -2513.6,
+        "High": -1609.1
+    },
+    {
+        "Scenario": "high estimate of CORSIA offset cost",
+        "Year": 2033,
+        "Central": -2390.7,
+        "Low": -2801.9,
+        "High": -1871.0
+    },
+    {
+        "Scenario": "high estimate of CORSIA offset cost",
+        "Year": 2034,
+        "Central": -2649.7,
+        "Low": -3169.4,
+        "High": -2051.3
+    },
+    {
+        "Scenario": "high estimate of CORSIA offset cost",
+        "Year": 2035,
+        "Central": -2921.6,
+        "Low": -3560.8,
+        "High": -2185.0
+    }
+];
+
+        const colors = {
+            'high estimate of CORSIA offset cost': '#EBD66E', // Yellow
+            'low estimate of CORSIA offset cost': '#365C80',  // Dark Blue
+            'central estimate of CORSIA offset cost': '#E68387' // Red/Pink
+        };
+
+        const scenarioConfig = {
+            'high estimate of CORSIA offset cost': {
+                label: 'High offset price',
+                color: colors['high estimate of CORSIA offset cost']
+            },
+            'central estimate of CORSIA offset cost': {
+                label: 'Medium offset price',
+                color: colors['central estimate of CORSIA offset cost']
+            },
+            'low estimate of CORSIA offset cost': {
+                label: 'Low offset price',
+                color: colors['low estimate of CORSIA offset cost']
+            }
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [];
+        const uniqueScenarios = [...new Set(df.map(d => d.Scenario))];
+
+        uniqueScenarios.forEach(sc => {
+            const config = scenarioConfig[sc];
+            if (!config) return;
+
+            const subset = df.filter(d => d.Scenario === sc);
+            if (subset.length === 0) return;
+
+            const centralData = subset.map(d => [d.Year, d.Central]);
+            
+            // Cumulative sum for annotation
+            let cumSum = 0;
+            subset.forEach(d => cumSum += d.Central);
+            const cumSumBillions = cumSum / 1000.0;
+            const sign = cumSumBillions > 0 ? '+' : '';
+            const labelText = `${sign}${cumSumBillions.toFixed(1)} B`;
+            
+            let annotationY = 0;
+            if (config.label === 'High offset price') annotationY = -2500;
+            else if (config.label === 'Medium offset price') annotationY = -600;
+            else if (config.label === 'Low offset price') annotationY = 1000;
+
+            // 1. Central line
+            series.push({
+                name: config.label,
+                type: 'line',
+                data: centralData,
+                lineStyle: {
+                    width: 3,
+                    color: config.color
+                },
+                showSymbol: false,
+                z: config.label === 'Low offset price' ? 30 : (config.label === 'Medium offset price' ? 20 : 10),
+                markPoint: {
+                    data: [
+                        {
+                            xAxis: 2035,
+                            yAxis: annotationY,
+                            name: labelText,
+                            value: labelText,
+                            symbolSize: 0,
+                            label: {
+                                show: true,
+                                position: 'right',
+                                formatter: '{b}',
+                                color: config.color,
+                                fontSize: 12,
+                                offset: [10, 0]
+                            }
+                        }
+                    ],
+                    silent: true,
+                    animation: false
+                }
+            });
+
+            // 2. Confidence Interval (Custom Series)
+            series.push({
+                name: config.label + ' CI',
+                type: 'custom',
+                renderItem: function (params, api) {
+                    const points = [];
+                    // Forward pass (High values)
+                    for (let i = 0; i < subset.length; i++) {
+                        points.push(api.coord([subset[i].Year, subset[i].High]));
+                    }
+                    // Backward pass (Low values)
+                    for (let i = subset.length - 1; i >= 0; i--) {
+                        points.push(api.coord([subset[i].Year, subset[i].Low]));
+                    }
+                    return {
+                        type: 'polygon',
+                        shape: { points: points },
+                        style: api.style({ 
+                            fill: config.color, 
+                            stroke: 'none', 
+                            opacity: 0.3 
+                        })
+                    };
+                },
+                data: [0], // Trigger once
+                z: -1, // Behind lines
+                silent: true
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 80, bottom: 80, left: 80, right: 80 },
+            xAxis: {
+                type: 'value',
+                min: 2027,
+                max: 2035,
+                interval: 1,
+                axisLabel: { color: 'black' },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Net costs of max usage of SAF (million US$)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                min: -4000,
+                max: 6000,
+                interval: 1000,
+                axisLabel: {
+                    color: 'black',
+                    formatter: function (value) {
+                        return value.toLocaleString();
+                    }
+                },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { show: true },
+                splitLine: { show: false }
+            },
+            legend: {
+                data: uniqueScenarios.map(sc => scenarioConfig[sc] ? scenarioConfig[sc].label : null).filter(Boolean),
+                top: 80, left: 80,
+                orient: 'vertical',
+                itemGap: 10,
+                textStyle: { fontSize: 12 },
+                inactiveColor: '#ccc'
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'line',
+                    shape: { x1: 80, y1: 300, x2: 720, y2: 300 }, // Horizontal line at y=0. Approx for pixels.
+                    style: { stroke: 'gray', lineDash: [5, 5] },
+                    z: 0
+                },
+                {
+                    type: 'text',
+                    left: 10, top: 10,
+                    style: { text: 'e', font: 'bold 20px Arial', fill: 'black' }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta 皮奥特罗斯基 F-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x, no integrity check) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --panel: #020617;
+      --panel-alt: #0f172a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --grid: rgba(148, 163, 184, 0.25);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+    body {
+      background: radial-gradient(circle at top, #1e293b 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .container {
+      width: min(960px, 100%);
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 45%, #020617 100%);
+      border-radius: 18px;
+      box-shadow:
+        0 30px 80px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(148, 163, 184, 0.15);
+      padding: 20px 22px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .container::before {
+      content: "";
+      position: absolute;
+      inset: -80px;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(56, 189, 248, 0.18) 0, transparent 55%),
+        radial-gradient(circle at 85% 0%, rgba(59, 130, 246, 0.16) 0, transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    h1 {
+      font-size: 18px;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pill {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.9);
+    }
+    .subtitle {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .controls span.label {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 10px;
+      opacity: 0.8;
+    }
+    .chip {
+      padding: 4px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .chip strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .chart-wrapper {
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+      border-radius: 14px;
+      padding: 14px 12px 10px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow:
+        inset 0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 16px 40px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+      height: 360px; /* ensures canvas has height */
+    }
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 4px 6px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .chart-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .metric-label {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 9px;
+      color: rgba(148, 163, 184, 0.95);
+    }
+    .metric-value {
+      font-size: 13px;
+      color: var(--text);
+    }
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .legend-swatch {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+    }
+    .legend-label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    canvas {
+      width: 100% !important;
+      height: calc(100% - 30px) !important; /* fill remaining area */
+    }
+    .footnote {
+      margin-top: 10px;
+      font-size: 10px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .footnote span {
+      opacity: 0.9;
+    }
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+      }
+      .container {
+        padding: 16px 14px 16px;
+      }
+      .chart-wrapper {
+        padding: 10px 8px 8px;
+        height: 280px;
+      }
+      h1 {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <header>
+        <div class="title-group">
+          <h1>
+            Meta 皮奥特罗斯基 F-Score
+            <span class="pill">Quality Factor</span>
+          </h1>
+          <div class="subtitle">
+            Fiscal years 2016–2024 (Piotroski F-Score: 0–9 scale, higher is better)
+          </div>
+        </div>
+        <div class="controls">
+          <span class="label">Scale</span>
+          <div class="chip"><strong>0–9</strong> F-Score range</div>
+        </div>
+      </header>
+
+      <section class="chart-wrapper">
+        <div class="chart-header">
+          <div class="chart-header-left">
+            <span class="metric-label">Current F-Score (2024)</span>
+            <span class="metric-value">8 / 9</span>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <span class="legend-swatch"></span>
+              <span class="legend-label">Piotroski F-Score (Meta)</span>
+            </div>
+          </div>
+        </div>
+        <canvas id="fScoreChart"></canvas>
+      </section>
+
+      <div class="footnote">
+        <span>
+          Data: Input for Meta Platforms, Inc. — Fiscal years 2016, 2017, 2022, 2023, 2024.
+        </span>
+        <span>
+          Note: Years without data (2018–2021) are omitted (no interpolation).
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Ensure Chart.js is loaded
+    window.addEventListener('load', function () {
+      if (typeof Chart === 'undefined') {
+        console.error('Chart.js failed to load. Check the CDN URL or network connection.');
+        return;
+      }
+
+      const labels = ['2016', '2017', '2022', '2023', '2024'];
+      const fScores = [8, 8, 4, 7, 8];
+
+      const canvas = document.getElementById('fScoreChart');
+      const ctx = canvas.getContext('2d');
+
+      // Create gradients after canvas context exists
+      const gradientStroke = ctx.createLinearGradient(0, 0, 0, canvas.height || 260);
+      gradientStroke.addColorStop(0, 'rgba(56, 189, 248, 0.95)');
+      gradientStroke.addColorStop(1, 'rgba(56, 189, 248, 0.2)');
+
+      const gradientFill = ctx.createLinearGradient(0, 0, 0, canvas.height || 260);
+      gradientFill.addColorStop(0, 'rgba(56, 189, 248, 0.24)');
+      gradientFill.addColorStop(0.5, 'rgba(56, 189, 248, 0.14)');
+      gradientFill.addColorStop(1, 'rgba(15, 23, 42, 0.0)');
+
+      const data = {
+        labels,
+        datasets: [
+          {
+            label: 'Piotroski F-Score',
+            data: fScores,
+            tension: 0.3,
+            borderColor: gradientStroke,
+            pointBackgroundColor: 'rgba(15, 23, 42, 1)',
+            pointBorderColor: '#38bdf8',
+            pointHoverBackgroundColor: '#0f172a',
+            pointHoverBorderColor: '#e5e7eb',
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBorderWidth: 2,
+            pointHitRadius: 12,
+            borderWidth: 2.4,
+            fill: true,
+            backgroundColor: gradientFill
+          }
+        ]
+      };
+
+      const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          intersect: false,
+          mode: 'nearest',
+          axis: 'x'
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: 'rgba(15, 23, 42, 0.96)',
+            borderColor: 'rgba(148, 163, 184, 0.6)',
+            borderWidth: 1,
+            padding: 9,
+            titleColor: '#e5e7eb',
+            titleFont: { size: 11, weight: '600' },
+            bodyColor: '#e5e7eb',
+            bodyFont: { size: 11 },
+            displayColors: false,
+            callbacks: {
+              title: (items) => 'Fiscal Year ' + items[0].label,
+              label: (item) => 'F-Score: ' + item.formattedValue + ' / 9'
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: 'rgba(148, 163, 184, 0.95)',
+              font: { size: 11 }
+            },
+            grid: {
+              display: false
+            },
+            border: {
+              color: 'rgba(51, 65, 85, 0.9)'
+            }
+          },
+          y: {
+            min: 0,
+            max: 9,
+            ticks: {
+              color: 'rgba(148, 163, 184, 0.95)',
+              font: { size: 11 },
+              stepSize: 1,
+              callback: (value) => value
+            },
+            grid: {
+              color: 'rgba(51, 65, 85, 0.7)',
+              drawBorder: false,
+              borderDash: [4, 4]
+            }
+          }
+        },
+        animation: {
+          duration: 900,
+          easing: 'easeOutQuart'
+        }
+      };
+
+      new Chart(ctx, {
+        type: 'line',
+        data,
+        options
+      });
+    });
+  </script>
+</body>
+</html>

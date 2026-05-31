@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>CSCO 现金消耗跑道（零收入情景）2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #fafafa;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 0 0 20px;
+      font-weight: normal;
+      color: #666;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 18px 18px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .chart-wrapper {
+      position: relative;
+      /* Fixed but reasonable height to avoid extreme vertical stretch */
+      height: 420px;
+      width: 100%;
+    }
+    .meta {
+      font-size: 11px;
+      color: #777;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+    .meta strong {
+      color: #555;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #555;
+    }
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .controls input[type="checkbox"] {
+      cursor: pointer;
+    }
+    .range-label {
+      margin-left: auto;
+      font-size: 11px;
+      color: #777;
+    }
+    @media (max-width: 600px) {
+      .chart-wrapper {
+        height: 320px;
+      }
+      .range-label {
+        flex-basis: 100%;
+        margin-left: 0;
+        margin-top: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>CSCO 现金消耗跑道（月）</h1>
+    <h2>零收入情景 · 财年 2016–2024</h2>
+
+    <div class="controls">
+      <label>
+        <input type="checkbox" id="toggleSmoothing" checked>
+        使用平滑曲线显示
+      </label>
+      <label>
+        <input type="checkbox" id="togglePoints" checked>
+        显示数据点
+      </label>
+      <span class="range-label">单位：月（月度现金消耗跑道）</span>
+    </div>
+
+    <div class="chart-wrapper">
+      <!-- Remove the height attribute to let CSS control the size -->
+      <canvas id="runwayChart"></canvas>
+    </div>
+
+    <div class="meta">
+      <div><strong>说明：</strong>展示 CSCO 在零收入情景下的现金消耗跑道（可维持运营的月份数），按财年统计。</div>
+      <div><strong>数据来源：</strong>用户提供的 Fiscal Year 与 RESULT_Runway_Months 数据。</div>
+    </div>
+  </div>
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // 数据
+    const fiscalYears = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const runwayMonths = [
+      10.42249032551787,
+      15.763042746549983,
+      11.382100010616838,
+      15.22185037244953,
+      15.999548379812577,
+      12.052545155993432,
+      9.198484028153764,
+      11.617827084927312,
+      9.174377224199288
+    ];
+
+    const ctx = document.getElementById('runwayChart').getContext('2d');
+
+    // 自动计算合理 Y 轴范围，避免图形贴边或过度留白
+    const minVal = Math.min(...runwayMonths);
+    const maxVal = Math.max(...runwayMonths);
+    const padding = 1.5; // 月数缓冲
+    const suggestedMin = Math.max(0, Math.floor(minVal - padding));
+    const suggestedMax = Math.ceil(maxVal + padding);
+
+    const config = {
+      type: 'line',
+      data: {
+        labels: fiscalYears,
+        datasets: [{
+          label: '现金消耗跑道（月）',
+          data: runwayMonths,
+          borderColor: 'rgba(26, 115, 232, 0.9)',
+          backgroundColor: 'rgba(26, 115, 232, 0.15)',
+          pointBackgroundColor: 'rgba(26, 115, 232, 1)',
+          pointBorderColor: '#ffffff',
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointBorderWidth: 1.5,
+          tension: 0.35,
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // use parent (.chart-wrapper) aspect
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        },
+        layout: {
+          padding: {
+            top: 10,
+            bottom: 10,
+            left: 8,
+            right: 12
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              font: { size: 11 }
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            boxWidth: 6,
+            callbacks: {
+              title: (items) => `财年 ${items[0].label}`,
+              label: (ctx) => {
+                const v = ctx.parsed.y;
+                return `  跑道：${v.toFixed(2)} 个月`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财年',
+              font: { size: 12 }
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              font: { size: 11 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: '现金消耗跑道（月）',
+              font: { size: 12 }
+            },
+            ticks: {
+              callback: (val) => val + ' 月',
+              font: { size: 11 }
+            },
+            beginAtZero: false,
+            suggestedMin,
+            suggestedMax,
+            grid: {
+              color: 'rgba(0,0,0,0.06)'
+            }
+          }
+        }
+      }
+    };
+
+    const runwayChart = new Chart(ctx, config);
+
+    // 交互控制：平滑曲线 / 折线
+    const toggleSmoothing = document.getElementById('toggleSmoothing');
+    const togglePoints = document.getElementById('togglePoints');
+
+    toggleSmoothing.addEventListener('change', () => {
+      runwayChart.data.datasets[0].tension = toggleSmoothing.checked ? 0.35 : 0.0;
+      runwayChart.update();
+    });
+
+    togglePoints.addEventListener('change', () => {
+      const ds = runwayChart.data.datasets[0];
+      if (togglePoints.checked) {
+        ds.pointRadius = 4;
+        ds.pointHoverRadius = 6;
+      } else {
+        ds.pointRadius = 0;
+        ds.pointHoverRadius = 0;
+      }
+      runwayChart.update();
+    });
+  </script>
+</body>
+</html>

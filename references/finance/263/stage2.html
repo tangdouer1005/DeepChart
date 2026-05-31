@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>2016–2024年 v 的防御区间比率（DIR）变化折线图</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 20px 24px 28px;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 0 0 16px;
+      font-weight: 400;
+      color: #666;
+      text-align: center;
+    }
+    .meta {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    #chartWrapper {
+      position: relative;
+      height: 420px;
+      width: 100%;
+    }
+    .note {
+      font-size: 11px;
+      color: #777;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>v 的防御区间比率（DIR）变化趋势</h1>
+    <h2>Fiscal Year 2016–2024</h2>
+    <div class="meta">
+      数据来源：用户提供结果值 RESULT_DIR（单位：同原始数据）
+    </div>
+
+    <div id="chartWrapper">
+      <canvas id="dirChart"></canvas>
+    </div>
+
+    <div class="note">
+      说明：本图展示 2016–2024 年 v 的防御区间比率（DIR）年度变化情况。鼠标悬停可查看精确数值，拖动缩放工具可放大或缩小时间区间。
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Zoom plugin for interactivity (pan/zoom) -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.umd.min.js"></script>
+
+  <script>
+    // Raw data from the user (Fiscal Year, RESULT_DIR)
+    const labels = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const dataValues = [
+      423.8137241283512,
+      730.0,
+      522.2050947093403,
+      568.7337011033098,
+      901.1481004507406,
+      888.7778580893868,
+      682.953701057445,
+      650.2531536943276,
+      562.1076960506041
+    ];
+
+    const ctx = document.getElementById('dirChart').getContext('2d');
+
+    // Create gradient for line fill to keep the design clean but modern
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(52, 152, 219, 0.28)');
+    gradient.addColorStop(1, 'rgba(52, 152, 219, 0.02)');
+
+    const dirChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "防御区间比率（DIR）",
+          data: dataValues,
+          borderColor: '#3498db',
+          backgroundColor: gradient,
+          borderWidth: 2,
+          tension: 0.25,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointBackgroundColor: '#ffffff',
+          pointBorderColor: '#3498db',
+          pointBorderWidth: 2,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              padding: 16
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return ' DIR: ' + value.toFixed(3);
+              }
+            }
+          },
+          title: {
+            display: false
+          },
+          zoom: {
+            zoom: {
+              wheel: { enabled: true },
+              pinch: { enabled: true },
+              mode: 'x'
+            },
+            pan: {
+              enabled: true,
+              mode: 'x'
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Fiscal Year',
+              color: '#555',
+              font: { size: 12 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: '防御区间比率（DIR）',
+              color: '#555',
+              font: { size: 12 }
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(0);
+              }
+            },
+            grid: {
+              color: 'rgba(0,0,0,0.05)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

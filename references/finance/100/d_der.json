@@ -1,0 +1,150 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "Current Assets": 105408000000.0,
+            "Cash & Equiv": 12918000000.0,
+            "Current Liabilities": 16756000000.0,
+            "Short Term Debt": 554000000.0,
+            "CapEx": 10212000000.0,
+            "NOPAT": 19127960579.710144,
+            "NCWC": 76288000000.0,
+            "Change in NCWC": 18808000000.0,
+            "Reinvestment": 29020000000.0
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "Current Assets": 124308000000.0,
+            "Cash & Equiv": 10715000000.0,
+            "Current Liabilities": 24183000000.0,
+            "Short Term Debt": 16740000000.0,
+            "CapEx": 13184000000.0,
+            "NOPAT": 12189380943.625198,
+            "NCWC": 106150000000.0,
+            "Change in NCWC": 29862000000.0,
+            "Reinvestment": 43046000000.0
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "Current Assets": 135676000000.0,
+            "Cash & Equiv": 16701000000.0,
+            "Current Liabilities": 34620000000.0,
+            "Short Term Debt": 69000000.0,
+            "CapEx": 25139000000.0,
+            "NOPAT": 24231021797.03836,
+            "NCWC": 84424000000.0,
+            "Change in NCWC": -21726000000.0,
+            "Reinvestment": 3413000000.0
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "Current Assets": 152578000000.0,
+            "Cash & Equiv": 18498000000.0,
+            "Current Liabilities": 45221000000.0,
+            "Short Term Debt": 1199000000.0,
+            "CapEx": 23548000000.0,
+            "NOPAT": 29668018498.42271,
+            "NCWC": 90058000000.0,
+            "Change in NCWC": 5634000000.0,
+            "Reinvestment": 29182000000.0
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "Current Assets": 174296000000.0,
+            "Cash & Equiv": 26465000000.0,
+            "Current Liabilities": 56834000000.0,
+            "Short Term Debt": 1694000000.0,
+            "CapEx": 22281000000.0,
+            "NOPAT": 34525378644.8151,
+            "NCWC": 92691000000.0,
+            "Change in NCWC": 2633000000.0,
+            "Reinvestment": 24914000000.0
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "Current Assets": 188143000000.0,
+            "Cash & Equiv": 20945000000.0,
+            "Current Liabilities": 64254000000.0,
+            "Short Term Debt": 2189000000.0,
+            "CapEx": 24640000000.0,
+            "NOPAT": 65960517138.007805,
+            "NCWC": 105133000000.0,
+            "Change in NCWC": 12442000000.0,
+            "Reinvestment": 37082000000.0
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Current Assets": 164795000000.0,
+            "Cash & Equiv": 21879000000.0,
+            "Current Liabilities": 69300000000.0,
+            "Short Term Debt": 2477000000.0,
+            "CapEx": 31485000000.0,
+            "NOPAT": 62926542507.85105,
+            "NCWC": 76093000000.0,
+            "Change in NCWC": -29040000000.0,
+            "Reinvestment": 2445000000.0
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Current Assets": 171530000000.0,
+            "Cash & Equiv": 24048000000.0,
+            "Current Liabilities": 81814000000.0,
+            "Short Term Debt": 2791000000.0,
+            "CapEx": 32251000000.0,
+            "NOPAT": 72569057888.16687,
+            "NCWC": 68459000000.0,
+            "Change in NCWC": -7634000000.0,
+            "Reinvestment": 24617000000.0
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "Current Assets": 163711000000.0,
+            "Cash & Equiv": 23466000000.0,
+            "Current Liabilities": 89122000000.0,
+            "Short Term Debt": 2887000000.0,
+            "CapEx": 52535000000.0,
+            "NOPAT": 93913633685.2648,
+            "NCWC": 54010000000.0,
+            "Change in NCWC": -14449000000.0,
+            "Reinvestment": 38086000000.0
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "资本再投资率 (Reinvestment Rate)": 1.5171507636199737
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "资本再投资率 (Reinvestment Rate)": 3.531434467351863
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "资本再投资率 (Reinvestment Rate)": 0.14085250009626726
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "资本再投资率 (Reinvestment Rate)": 0.9836181004657069
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "资本再投资率 (Reinvestment Rate)": 0.7216140989011716
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "资本再投资率 (Reinvestment Rate)": 0.5621847979513882
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "资本再投资率 (Reinvestment Rate)": 0.03885482822602161
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "资本再投资率 (Reinvestment Rate)": 0.3392217112413975
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "资本再投资率 (Reinvestment Rate)": 0.4055428216912424
+        }
+    ]
+}

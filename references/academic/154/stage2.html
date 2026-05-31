@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "Region": "China",
+        "Scenario": "S1",
+        "Central": 5.8,
+        "Low": 4.3,
+        "High": 9.5,
+        "Label": "China-S1"
+    },
+    {
+        "Region": "China",
+        "Scenario": "S2",
+        "Central": 11.0,
+        "Low": 7.5,
+        "High": 14.8,
+        "Label": "China-S2"
+    },
+    {
+        "Region": "China",
+        "Scenario": "S3",
+        "Central": 16.5,
+        "Low": 11.2,
+        "High": 22.1,
+        "Label": "China-S3"
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S1",
+        "Central": 2.8,
+        "Low": 2.1,
+        "High": 4.7,
+        "Label": "EU27-S1"
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S2",
+        "Central": 5.4,
+        "Low": 3.6,
+        "High": 7.3,
+        "Label": "EU27-S2"
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S3",
+        "Central": 8.1,
+        "Low": 5.4,
+        "High": 10.9,
+        "Label": "EU27-S3"
+    },
+    {
+        "Region": "US",
+        "Scenario": "S1",
+        "Central": 2.6,
+        "Low": 1.9,
+        "High": 4.4,
+        "Label": "US-S1"
+    },
+    {
+        "Region": "US",
+        "Scenario": "S2",
+        "Central": 5.1,
+        "Low": 3.3,
+        "High": 7.0,
+        "Label": "US-S2"
+    },
+    {
+        "Region": "US",
+        "Scenario": "S3",
+        "Central": 7.6,
+        "Low": 5.0,
+        "High": 10.4,
+        "Label": "US-S3"
+    },
+    {
+        "Region": "India",
+        "Scenario": "S1",
+        "Central": 2.5,
+        "Low": 1.9,
+        "High": 4.2,
+        "Label": "India-S1"
+    },
+    {
+        "Region": "India",
+        "Scenario": "S2",
+        "Central": 4.8,
+        "Low": 3.2,
+        "High": 6.5,
+        "Label": "India-S2"
+    },
+    {
+        "Region": "India",
+        "Scenario": "S3",
+        "Central": 7.2,
+        "Low": 4.8,
+        "High": 9.7,
+        "Label": "India-S3"
+    }
+];
+
+        const data = jsonData.map(d => ({
+            region: d.Region,
+            scenario: d.Scenario,
+            central: d.Central,
+            low: d.Low,
+            high: d.High
+        }));
+        
+        const colors = {
+            'China': '#Eeb456',
+            'EU27': '#D46a4e',
+            'US': '#265b96',
+            'India': '#366e78'
+        };
+
+        const xLabels = data.map(d => `${d.region}-${d.scenario}`);
+        const barData = data.map(d => ({
+            value: d.central,
+            itemStyle: { 
+                color: colors[d.region],
+                borderColor: 'gray',
+                borderWidth: 0.5
+            }
+        }));
+        
+        // Error Bar Data: [index, low, high]
+        // ECharts custom renderItem for error bars
+        const errorData = data.map((d, i) => [i, d.low, d.high]);
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 40, right: 20, bottom: 60, left: 60 },
+            xAxis: {
+                type: 'category',
+                data: xLabels,
+                axisLabel: { 
+                    color: 'black', 
+                    fontSize: 11,
+                    rotate: 0,
+                    interval: 0
+                },
+                axisTick: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: 'MSW-SAF potential (Mt yr⁻¹)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: 0,
+                max: 25,
+                interval: 5,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true, inside: true },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: barData,
+                    barWidth: '70%',
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    name: 'error',
+                    itemStyle: {
+                        borderWidth: 1,
+                        stroke: '#555555'
+                    },
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const low = api.value(1);
+                        const high = api.value(2);
+                        const start = api.coord([xValue, low]);
+                        const end = api.coord([xValue, high]);
+                        const halfWidth = 8; // wide caps
+                        
+                        const style = api.style({
+                            stroke: '#555555',
+                            lineWidth: 1
+                        });
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1],
+                                        x2: end[0], y2: end[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0] - halfWidth, y1: start[1],
+                                        x2: start[0] + halfWidth, y2: start[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: end[0] - halfWidth, y1: end[1],
+                                        x2: end[0] + halfWidth, y2: end[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 2
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'b',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

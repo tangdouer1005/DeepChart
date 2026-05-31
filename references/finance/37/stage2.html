@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AMZN 皮奥特罗斯基 F-Score (Piotroski F-Score) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #0b1120;
+      --bg-card: #020617;
+      --axis: #9ca3af;
+      --grid: rgba(148, 163, 184, 0.25);
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.25);
+      --accent-border: rgba(34, 197, 94, 0.9);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: min(960px, 100vw - 2rem);
+      margin: 1.5rem auto;
+      padding: 1.5rem 1.75rem 1.75rem;
+      background: radial-gradient(circle at top left, #111827 0, #020617 45%);
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow:
+        0 26px 70px rgba(15, 23, 42, 0.85),
+        inset 0 0 0 1px rgba(15, 23, 42, 0.8);
+    }
+
+    header {
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: baseline;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      letter-spacing: 0.02em;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      align-items: baseline;
+    }
+
+    h1 span.en {
+      font-weight: 600;
+      color: #f3f4f6;
+    }
+
+    h1 span.cn {
+      font-weight: 500;
+      color: #9ca3af;
+      font-size: 0.95rem;
+    }
+
+    header .meta {
+      text-align: right;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .meta strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    footer {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    footer span.label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>
+        <span class="en">AMZN Piotroski F-Score</span>
+        <span class="cn">（皮奥特罗斯基 F-Score，2016–2024 财报年度）</span>
+      </h1>
+      <div class="meta">
+        <div><strong>Ticker:</strong> AMZN</div>
+        <div><strong>Metric:</strong> Piotroski F-Score (0–9)</div>
+        <div><strong>Period:</strong> Fiscal Years 2016–2024</div>
+      </div>
+    </header>
+
+    <div class="chart-wrapper">
+      <canvas id="fscoreChart"></canvas>
+    </div>
+
+    <footer>
+      <div>
+        <span class="label">Interpretation</span>
+        &nbsp;Higher F-Score (closer to 9) typically indicates stronger fundamental quality.
+      </div>
+      <div>
+        <span class="label">Note</span>
+        &nbsp;Values shown: 2016–2024 fiscal-year Piotroski F-Score for AMZN.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Data from source (Fiscal Year, RESULT_F_Score)
+    const labels = ["2016","2017","2018","2019","2020","2021","2022","2023","2024"];
+    const scores = [7,4,7,5,5,6,4,7,7];
+
+    const ctx = document.getElementById("fscoreChart").getContext("2d");
+
+    const chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "Piotroski F-Score",
+            data: scores,
+            backgroundColor: scores.map(v =>
+              v >= 7 ? "rgba(34, 197, 94, 0.65)"   // strong
+                    : v >= 5 ? "rgba(59, 130, 246, 0.55)" // neutral
+                             : "rgba(239, 68, 68, 0.55)"  // weaker
+            ),
+            borderColor: scores.map(v =>
+              v >= 7 ? "rgba(34, 197, 94, 0.95)"
+                    : v >= 5 ? "rgba(59, 130, 246, 0.95)"
+                             : "rgba(239, 68, 68, 0.95)"
+            ),
+            borderWidth: 1.6,
+            borderRadius: 6,
+            maxBarThickness: 44,
+            hoverBackgroundColor: scores.map(v =>
+              v >= 7 ? "rgba(34, 197, 94, 0.9)"
+                    : v >= 5 ? "rgba(59, 130, 246, 0.9)"
+                             : "rgba(239, 68, 68, 0.9)"
+            ),
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 850,
+          easing: "easeOutCubic"
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.96)",
+            borderColor: "rgba(148, 163, 184, 0.6)",
+            borderWidth: 1,
+            padding: 10,
+            titleColor: "#e5e7eb",
+            titleFont: { weight: "600", size: 12 },
+            bodyColor: "#e5e7eb",
+            bodyFont: { size: 12 },
+            displayColors: true,
+            callbacks: {
+              title: context => "Fiscal Year " + context[0].label,
+              label: context => "Piotroski F-Score: " + context.formattedValue
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#9ca3af",
+              font: { size: 11 }
+            },
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              color: "#9ca3af",
+              font: { size: 11, weight: "500" }
+            }
+          },
+          y: {
+            min: 0,
+            max: 9,
+            ticks: {
+              stepSize: 1,
+              color: "#9ca3af",
+              font: { size: 11 }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.2)"
+            },
+            title: {
+              display: true,
+              text: "Piotroski F-Score (0–9)",
+              color: "#9ca3af",
+              font: { size: 11, weight: "500" }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

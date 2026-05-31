@@ -1,0 +1,184 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a scatter plot for all markets with complete `2024 Q1-Q3` and `2025 Q1-Q3` data, where the x-axis is `funding growth rate` from `2024 Q1-Q3` to `2025 Q1-Q3`, the y-axis is `deal growth rate` over the same period, bubble size is `2025 YTD funding` in `$B`, and color encodes whether the market’s `Early-stage` share is above or below `75%`.",
+  "status": "completed",
+  "title": "Funding growth vs deal growth with early-stage classification",
+  "chart_kind": "bubble",
+  "chart_type": "scatter plot",
+  "value_unit": "growth rates in %",
+  "sort_rule": "market alphabetical order",
+  "selection_rule": "complete 2024 Q1-Q3 and 2025 Q1-Q3 data",
+  "metadata": {
+    "x_field": "funding_growth_pct",
+    "y_field": "deal_growth_pct",
+    "size_field": "funding_b",
+    "hue_field": "early_stage_bucket",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "market": "Asia",
+      "funding_growth_pct": -16.27906976744186,
+      "deal_growth_pct": 0.10526315789473684,
+      "funding_b": 7.2,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "Austin",
+      "funding_growth_pct": 324.1900647948164,
+      "deal_growth_pct": -2.0408163265306123,
+      "funding_b": 1.964,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "Boston",
+      "funding_growth_pct": 91.66666666666667,
+      "deal_growth_pct": -3.5714285714285716,
+      "funding_b": 2.3,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "Brazil",
+      "funding_growth_pct": 20.454545454545453,
+      "deal_growth_pct": -20.408163265306122,
+      "funding_b": 0.212,
+      "early_stage_bucket": "Above 75%"
+    },
+    {
+      "market": "Canada",
+      "funding_growth_pct": 39.04170363797693,
+      "deal_growth_pct": -23.46938775510204,
+      "funding_b": 1.567,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "China",
+      "funding_growth_pct": -15.909090909090908,
+      "deal_growth_pct": 14.23841059602649,
+      "funding_b": 3.7,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "Europe",
+      "funding_growth_pct": 51.08695652173913,
+      "deal_growth_pct": -1.263157894736842,
+      "funding_b": 13.9,
+      "early_stage_bucket": "Above 75%"
+    },
+    {
+      "market": "France",
+      "funding_growth_pct": 35.294117647058826,
+      "deal_growth_pct": -11.11111111111111,
+      "funding_b": 2.3,
+      "early_stage_bucket": "Above 75%"
+    },
+    {
+      "market": "Germany",
+      "funding_growth_pct": 34.316353887399465,
+      "deal_growth_pct": 13.26530612244898,
+      "funding_b": 2.004,
+      "early_stage_bucket": "Above 75%"
+    },
+    {
+      "market": "India",
+      "funding_growth_pct": 32.196452933151434,
+      "deal_growth_pct": -9.090909090909092,
+      "funding_b": 0.969,
+      "early_stage_bucket": "Above 75%"
+    },
+    {
+      "market": "Israel",
+      "funding_growth_pct": 53.84615384615385,
+      "deal_growth_pct": 14.285714285714286,
+      "funding_b": 2.0,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "Japan",
+      "funding_growth_pct": -17.647058823529413,
+      "deal_growth_pct": -4.945054945054945,
+      "funding_b": 0.476,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "LatAm",
+      "funding_growth_pct": 11.737089201877934,
+      "deal_growth_pct": -9.23076923076923,
+      "funding_b": 0.238,
+      "early_stage_bucket": "Above 75%"
+    },
+    {
+      "market": "Los Angeles",
+      "funding_growth_pct": 112.5,
+      "deal_growth_pct": -9.433962264150944,
+      "funding_b": 5.1,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "Miami",
+      "funding_growth_pct": 146.40522875816993,
+      "deal_growth_pct": 7.317073170731708,
+      "funding_b": 0.377,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "New York",
+      "funding_growth_pct": 22.033898305084747,
+      "deal_growth_pct": -3.4782608695652173,
+      "funding_b": 7.2,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "Oceania",
+      "funding_growth_pct": -0.33557046979865773,
+      "deal_growth_pct": 20.0,
+      "funding_b": 0.594,
+      "early_stage_bucket": "Above 75%"
+    },
+    {
+      "market": "Philadelphia",
+      "funding_growth_pct": 230.42813455657492,
+      "deal_growth_pct": 22.68041237113402,
+      "funding_b": 2.161,
+      "early_stage_bucket": "Above 75%"
+    },
+    {
+      "market": "Seattle",
+      "funding_growth_pct": 165.07462686567163,
+      "deal_growth_pct": 5.063291139240507,
+      "funding_b": 1.776,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "Silicon Valley",
+      "funding_growth_pct": 304.19847328244276,
+      "deal_growth_pct": 23.64294330518697,
+      "funding_b": 105.9,
+      "early_stage_bucket": "Above 75%"
+    },
+    {
+      "market": "Singapore",
+      "funding_growth_pct": 19.222903885480573,
+      "deal_growth_pct": -8.75,
+      "funding_b": 0.583,
+      "early_stage_bucket": "Above 75%"
+    },
+    {
+      "market": "US",
+      "funding_growth_pct": 222.67303102625297,
+      "deal_growth_pct": 10.199350950394066,
+      "funding_b": 135.2,
+      "early_stage_bucket": "75% or below"
+    },
+    {
+      "market": "United Kingdom",
+      "funding_growth_pct": 73.07692307692308,
+      "deal_growth_pct": -6.367041198501872,
+      "funding_b": 4.5,
+      "early_stage_bucket": "Above 75%"
+    }
+  ]
+}

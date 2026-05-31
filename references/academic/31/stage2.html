@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const data = [
+    {
+        "N_EC": 30,
+        "Heat_Power": 14.06738,
+        "H2_Power": 2.42885
+    },
+    {
+        "N_EC": 31,
+        "Heat_Power": 14.0313,
+        "H2_Power": 2.48638
+    },
+    {
+        "N_EC": 32,
+        "Heat_Power": 14.00105,
+        "H2_Power": 2.53463
+    },
+    {
+        "N_EC": 33,
+        "Heat_Power": 13.97772,
+        "H2_Power": 2.57183
+    },
+    {
+        "N_EC": 34,
+        "Heat_Power": 13.95487,
+        "H2_Power": 2.60828
+    },
+    {
+        "N_EC": 35,
+        "Heat_Power": 13.94783,
+        "H2_Power": 2.6195
+    },
+    {
+        "N_EC": 36,
+        "Heat_Power": 13.93679,
+        "H2_Power": 2.63711
+    },
+    {
+        "N_EC": 37,
+        "Heat_Power": 13.92168,
+        "H2_Power": 2.66119
+    },
+    {
+        "N_EC": 38,
+        "Heat_Power": 13.95207,
+        "H2_Power": 2.61274
+    },
+    {
+        "N_EC": 39,
+        "Heat_Power": 13.94198,
+        "H2_Power": 2.62883
+    },
+    {
+        "N_EC": 40,
+        "Heat_Power": 13.93424,
+        "H2_Power": 2.64117
+    },
+    {
+        "N_EC": 41,
+        "Heat_Power": 13.92495,
+        "H2_Power": 2.65599
+    },
+    {
+        "N_EC": 42,
+        "Heat_Power": 13.9187,
+        "H2_Power": 2.66595
+    },
+    {
+        "N_EC": 43,
+        "Heat_Power": 13.9798,
+        "H2_Power": 2.56851
+    },
+    {
+        "N_EC": 44,
+        "Heat_Power": 14.13696,
+        "H2_Power": 2.31789
+    },
+    {
+        "N_EC": 45,
+        "Heat_Power": 14.32758,
+        "H2_Power": 2.0139
+    }
+];
+        
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const color_fuel = '#757575'; // Grey
+        const color_heat = '#d65f5f'; // Muted Red
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 60, bottom: 60, left: 60 },
+            xAxis: {
+                type: 'value',
+                name: 'N_EC (–)',
+                nameLocation: 'middle',
+                nameGap: 35,
+                min: 28,
+                max: 47,
+                interval: 5,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    name: 'Power fuel (kW)',
+                    nameLocation: 'middle',
+                    nameGap: 40,
+                    min: 1.9,
+                    max: 2.8,
+                    interval: 0.2,
+                    axisLabel: { color: 'black' },
+                    axisLine: { show: true, lineStyle: { color: 'black' } },
+                    splitLine: { show: false }
+                },
+                {
+                    type: 'value',
+                    name: 'Power heat (kW)',
+                    nameLocation: 'middle',
+                    nameGap: 40,
+                    min: 13.8,
+                    max: 14.4,
+                    interval: 0.2,
+                    position: 'right',
+                    axisLabel: { color: 'black' },
+                    axisLine: { show: true, lineStyle: { color: 'black' } },
+                    nameTextStyle: { color: color_heat },
+                    splitLine: { show: false }
+                }
+            ],
+            series: [
+                {
+                    name: 'Power fuel',
+                    type: 'line',
+                    data: data.map(d => [d.N_EC, d.H2_Power]),
+                    symbol: 'rect', // Square marker
+                    symbolSize: 11,
+                    itemStyle: { color: color_fuel, borderColor: color_fuel },
+                    lineStyle: { width: 0.8, color: color_fuel }
+                },
+                {
+                    name: 'Power heat',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    data: data.map(d => [d.N_EC, d.Heat_Power]),
+                    symbol: 'triangle', // Triangle marker
+                    symbolSize: 12,
+                    itemStyle: { color: color_heat, borderColor: color_heat },
+                    lineStyle: { width: 0.8, color: color_heat }
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 10, top: 10, style: { text: 'b', font: 'bold 24px Arial' } }
+            ]
+        };
+        
+        // Initial set of options
+        chart.setOption(option);
+
+        // Update graphic with dynamic line coordinates
+        const updateGraphic = () => {
+            const chartHeight = chart.getHeight(); // Should be 500
+            const gridBottom = 60; 
+            const gridTop = 50;
+            const gridHeight = chartHeight - gridTop - gridBottom;
+            
+            const vLineX = chart.convertToPixel('xAxis', 32);
+            
+            // Calculate y coordinates for the vertical line
+            // y1 is the bottom of the grid
+            const y1 = chartHeight - gridBottom;
+            // y2 is 95% up the grid height
+            const y2 = y1 - (gridHeight * 0.95);
+
+            chart.setOption({
+                graphic: [
+                    { type: 'text', left: 10, top: 10, style: { text: 'b', font: 'bold 24px Arial' } },
+                    {
+                        type: 'line',
+                        shape: {
+                            x1: vLineX,
+                            y1: y1,
+                            x2: vLineX,
+                            y2: y2
+                        },
+                        style: { stroke: 'gray', lineWidth: 0.8, lineDash: [5, 5] },
+                        z: 10
+                    }
+                ]
+            });
+        };
+
+        // Call update immediately (synchronous layout usually ready after setOption)
+        updateGraphic();
+
+        // Optional: Update on resize
+        window.addEventListener('resize', () => {
+            chart.resize();
+            updateGraphic();
+        });
+    </script>
+</body>
+</html>

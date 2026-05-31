@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart 76 Reproduction</title>
+    <!-- Load Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fff;
+        }
+        #chart {
+            width: 1000px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. Source Data (Injected JSON)
+        // ---------------------------------------------------------
+        const sourceData = {
+    "control_mean": 0.677859485,
+    "data": {
+        "Gq": {
+            "nt_values": [
+                18.561974,
+                20.5304,
+                21.8859,
+                25.4265,
+                24.8291,
+                20.4485649,
+                20.2525,
+                18.8986,
+                18.5964,
+                19.2369,
+                22.3496,
+                26.1478,
+                21.3146,
+                18.8325
+            ],
+            "sbi_values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                5.85292,
+                4.06629
+            ],
+            "p_nt_vs_ctrl": 0.0,
+            "p_sbi_vs_ctrl": 1.0,
+            "p_nt_vs_sbi": 0.0
+        },
+        "G14": {
+            "nt_values": [
+                22.4859068,
+                13.1417,
+                20.7836,
+                21.5074,
+                12.7223,
+                14.8950184,
+                21.2973,
+                11.0167,
+                20.0157,
+                20.1997,
+                14.0096,
+                12.3474
+            ],
+            "sbi_values": [
+                8.36146599,
+                5.24927,
+                10.5955,
+                2.92653,
+                0.0,
+                0.982024,
+                6.3174,
+                5.42314,
+                9.3953,
+                2.71189338,
+                0.0,
+                0.0
+            ],
+            "p_nt_vs_ctrl": 0.0,
+            "p_sbi_vs_ctrl": 0.0006,
+            "p_nt_vs_sbi": 0.0
+        },
+        "G15": {
+            "nt_values": [
+                2.83892413,
+                18.5284,
+                17.208,
+                17.5503,
+                15.649259,
+                14.2055,
+                15.8142,
+                15.7078,
+                5.02659,
+                20.2398,
+                18.5566,
+                16.3465,
+                16.4657,
+                14.7335
+            ],
+            "sbi_values": [
+                12.430777,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                22.1019669,
+                0.0,
+                2.83248
+            ],
+            "p_nt_vs_ctrl": 0.0,
+            "p_sbi_vs_ctrl": 0.2335,
+            "p_nt_vs_sbi": 0.0007
+        },
+        "Gi1/2": {
+            "nt_values": [
+                17.3927901,
+                18.0613,
+                23.4823,
+                22.5571,
+                21.3372179,
+                20.5129,
+                18.8441,
+                18.3129,
+                16.9856,
+                25.0649,
+                25.0652,
+                24.0523,
+                21.7356,
+                17.7672
+            ],
+            "sbi_values": [
+                4.22817524,
+                1.54981,
+                0.0,
+                2.8971,
+                1.80358,
+                4.40053,
+                5.93329,
+                0.747585,
+                3.7713,
+                6.75973
+            ],
+            "p_nt_vs_ctrl": 0.0,
+            "p_sbi_vs_ctrl": 0.0002,
+            "p_nt_vs_sbi": 0.0
+        },
+        "Gi3": {
+            "nt_values": [
+                19.0917432,
+                10.0348,
+                16.7753,
+                14.4272,
+                15.9897,
+                12.8235221,
+                19.7727,
+                11.6037,
+                17.7305,
+                15.6435,
+                14.911,
+                12.4173
+            ],
+            "sbi_values": [
+                16.4750053,
+                9.89639,
+                10.8542,
+                5.87834,
+                3.54193606,
+                5.2972,
+                13.3745,
+                10.7178,
+                9.5537,
+                4.91039296,
+                2.51106,
+                5.376
+            ],
+            "p_nt_vs_ctrl": 0.0,
+            "p_sbi_vs_ctrl": 0.0,
+            "p_nt_vs_sbi": 0.0004
+        },
+        "Go": {
+            "nt_values": [
+                18.9911805,
+                11.7554,
+                15.4463,
+                14.0694,
+                11.8039,
+                8.39655288,
+                18.9416,
+                12.5947,
+                14.3461,
+                14.1207,
+                12.0699,
+                9.89944
+            ],
+            "sbi_values": [
+                11.3366068,
+                9.02009,
+                12.4783,
+                4.81096,
+                2.83418012,
+                4.8773,
+                13.6896,
+                9.43665,
+                13.0261,
+                3.40032889,
+                2.04381,
+                3.77529
+            ],
+            "p_nt_vs_ctrl": 0.0,
+            "p_sbi_vs_ctrl": 0.0,
+            "p_nt_vs_sbi": 0.0028
+        },
+        "Gz": {
+            "nt_values": [
+                4.98714811,
+                1.37944,
+                19.0384,
+                4.16548,
+                3.21537,
+                0.0,
+                3.11607,
+                1.51332,
+                16.5858,
+                3.97033,
+                3.90115,
+                0.0470616
+            ],
+            "sbi_values": [
+                6.15869732,
+                3.51337,
+                15.6124,
+                0.0,
+                0.0,
+                1.36561,
+                3.53711,
+                1.42626,
+                13.8869,
+                0.0,
+                0.445876,
+                0.134207
+            ],
+            "p_nt_vs_ctrl": 0.0083,
+            "p_sbi_vs_ctrl": 0.0444,
+            "p_nt_vs_sbi": 1.0
+        },
+        "Gs": {
+            "nt_values": [
+                17.8064697,
+                19.0933,
+                19.1808,
+                20.7042,
+                19.4019457,
+                19.1168,
+                17.8993,
+                16.2448,
+                18.6427,
+                19.9202,
+                20.6831,
+                21.3034,
+                19.017,
+                16.5337
+            ],
+            "sbi_values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.42575,
+                0.0,
+                0.0,
+                1.64149
+            ],
+            "p_nt_vs_ctrl": 0.0,
+            "p_sbi_vs_ctrl": 0.7313,
+            "p_nt_vs_sbi": 0.0
+        },
+        "Golf": {
+            "nt_values": [
+                17.5269014,
+                9.27352,
+                10.5943,
+                8.13406,
+                7.30447,
+                5.58784443,
+                17.8185,
+                12.4501,
+                10.9083,
+                8.35866,
+                6.68454,
+                6.75767
+            ],
+            "sbi_values": [
+                1.58662873,
+                4.2992,
+                0.0,
+                0.0,
+                0.0,
+                1.34441,
+                3.09422,
+                4.98111,
+                0.0,
+                0.0,
+                0.0,
+                0.0509099
+            ],
+            "p_nt_vs_ctrl": 0.0,
+            "p_sbi_vs_ctrl": 0.5974,
+            "p_nt_vs_sbi": 0.0
+        },
+        "G12": {
+            "nt_values": [
+                17.1057999,
+                14.0341,
+                20.8579,
+                14.1236,
+                6.59239,
+                9.23437164,
+                18.0802,
+                12.203,
+                20.0663,
+                14.0206,
+                7.11188,
+                9.81983
+            ],
+            "sbi_values": [
+                13.857742,
+                12.189,
+                16.4884,
+                3.8255,
+                0.0,
+                5.71622,
+                20.258,
+                12.5584,
+                19.2429,
+                6.01763134,
+                0.0,
+                5.65288
+            ],
+            "p_nt_vs_ctrl": 0.0,
+            "p_sbi_vs_ctrl": 0.0,
+            "p_nt_vs_sbi": 0.3694
+        },
+        "G13": {
+            "nt_values": [
+                19.6846994,
+                11.214,
+                20.2793,
+                12.9065,
+                10.8931,
+                10.5753117,
+                19.9887,
+                11.964,
+                19.9644,
+                12.8544,
+                11.4575,
+                9.35151
+            ],
+            "sbi_values": [
+                10.8094523,
+                11.4574,
+                15.8762,
+                0.881903,
+                0.48739349,
+                4.30331,
+                14.9154,
+                11.382,
+                13.9409,
+                2.20009171,
+                4.73532,
+                5.22393
+            ],
+            "p_nt_vs_ctrl": 0.0,
+            "p_sbi_vs_ctrl": 0.0,
+            "p_nt_vs_sbi": 0.0179
+        },
+        "G\u0394C": {
+            "nt_values": [
+                1.24566758,
+                0.711698,
+                0.904109,
+                0.748529,
+                0.42162346,
+                0.0,
+                0.482407,
+                2.32307,
+                0.693716,
+                0.770289
+            ],
+            "sbi_values": [
+                1.43637466,
+                1.17791,
+                0.0,
+                0.0,
+                0.0,
+                0.410506,
+                2.23129,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "p_nt_vs_ctrl": 1.0,
+            "p_sbi_vs_ctrl": 1.0,
+            "p_nt_vs_sbi": 1.0
+        }
+    },
+    "proteins": [
+        "Gq",
+        "G14",
+        "G15",
+        "Gi1/2",
+        "Gi3",
+        "Go",
+        "Gz",
+        "Gs",
+        "Golf",
+        "G12",
+        "G13",
+        "G\u0394C"
+    ]
+};
+
+        // ---------------------------------------------------------
+        // 2. Data Processing Logic
+        // ---------------------------------------------------------
+        
+        function getValid(arr) {
+            if (!arr) return [];
+            return arr.filter(v => typeof v === 'number' && !isNaN(v));
+        }
+
+        function mean(arr) {
+            const valid = getValid(arr);
+            if (valid.length === 0) return 0;
+            return valid.reduce((a, b) => a + b, 0) / valid.length;
+        }
+
+        function stdDev(arr) {
+            const valid = getValid(arr);
+            const n = valid.length;
+            if (n < 2) return 0;
+            const m = mean(valid);
+            const sumSq = valid.reduce((a, b) => a + Math.pow(b - m, 2), 0);
+            return Math.sqrt(sumSq / (n - 1));
+        }
+
+        function sem(arr) {
+            const valid = getValid(arr);
+            const n = valid.length;
+            if (n < 2) return 0;
+            return stdDev(valid) / Math.sqrt(n);
+        }
+
+        // ---------------------------------------------------------
+        // 3. Prepare Plotly Data
+        // ---------------------------------------------------------
+        
+        const gProteins = sourceData.proteins;
+        const controlMean = sourceData.control_mean;
+
+        const xVals = gProteins.map((_, i) => i);
+        
+        const annotations = [];
+        const shapes = [];
+
+        // Colors
+        const colorNT = '#0014a8';
+        const colorSBI = '#9b30d9';
+        const width = 0.35; // Bar width
+
+        // Trace Data
+        const traceNT = {
+            x: xVals.map(x => x - width/2), // Shift left
+            y: [],
+            error_y: { type: 'data', array: [], visible: true, color: 'black', thickness: 1, width: 3 },
+            type: 'bar',
+            name: 'NT',
+            marker: { color: colorNT },
+            width: width
+        };
+
+        const traceSBI = {
+            x: xVals.map(x => x + width/2), // Shift right
+            y: [],
+            error_y: { type: 'data', array: [], visible: true, color: 'black', thickness: 1, width: 3 },
+            type: 'bar',
+            name: 'SBI-553',
+            marker: { color: colorSBI },
+            width: width
+        };
+
+        const traceJitterNT = {
+            x: [],
+            y: [],
+            mode: 'markers',
+            type: 'scatter',
+            marker: { size: 6, color: 'rgba(0,0,0,0)', line: { color: colorNT, width: 1.5 } },
+            showlegend: false,
+            hoverinfo: 'none'
+        };
+
+        const traceJitterSBI = {
+            x: [],
+            y: [],
+            mode: 'markers',
+            type: 'scatter',
+            marker: { size: 6, color: 'rgba(0,0,0,0)', line: { color: colorSBI, width: 1.5 } },
+            showlegend: false,
+            hoverinfo: 'none'
+        };
+
+        // Process each protein
+        for (let i = 0; i < gProteins.length; i++) {
+            const protein = gProteins[i];
+            const d = sourceData.data[protein];
+
+            const ntVals = getValid(d.nt_values);
+            const sbiVals = getValid(d.sbi_values);
+            
+            const mNT = mean(ntVals);
+            const mSBI = mean(sbiVals);
+            const sNT = sem(ntVals);
+            const sSBI = sem(sbiVals);
+            
+            traceNT.y.push(mNT);
+            traceNT.error_y.array.push(sNT);
+            
+            traceSBI.y.push(mSBI);
+            traceSBI.error_y.array.push(sSBI);
+
+            // Jitter points
+            const jitterRange = 0.2; // roughly width/2
+            ntVals.forEach(v => {
+                const jit = (Math.random() - 0.5) * 0.2;
+                traceJitterNT.x.push((i - width/2) + jit);
+                traceJitterNT.y.push(v);
+            });
+            sbiVals.forEach(v => {
+                const jit = (Math.random() - 0.5) * 0.2;
+                traceJitterSBI.x.push((i + width/2) + jit);
+                traceJitterSBI.y.push(v);
+            });
+
+            // Statistical Annotations using provided p-values
+            
+            const pNT = d.p_nt_vs_ctrl;
+            const pSBI = d.p_sbi_vs_ctrl;
+            const pComp = d.p_nt_vs_sbi;
+
+            // Stars on Bars (if significantly > control mean)
+            const ntHeight = mNT + sNT;
+            const sbiHeight = mSBI + sSBI;
+            const xNT = i - width/2;
+            const xSBI = i + width/2;
+            
+            // Note: JSON p-values are already adjusted/final?
+            // The Python script logic was:
+            // if sig_nt and nt_means[i] > control_mean: add_star
+            // sig_nt = '*' if p_nt < 0.05 else ''
+            
+            if (pNT < 0.05 && mNT > controlMean) {
+                annotations.push({
+                    x: xNT,
+                    y: ntHeight + 1,
+                    text: '<b>*</b>', // Bold star
+                    showarrow: false,
+                    font: { size: 16, color: 'black' },
+                    yanchor: 'bottom'
+                });
+            }
+            if (pSBI < 0.05 && mSBI > controlMean) {
+                annotations.push({
+                    x: xSBI,
+                    y: sbiHeight + 1,
+                    text: '<b>*</b>', // Bold star
+                    showarrow: false,
+                    font: { size: 16, color: 'black' },
+                    yanchor: 'bottom'
+                });
+            }
+
+            // Brackets (Only for specific proteins: Gi3, Go, G12, G13)
+            const bracketProteins = ['Gi3', 'Go', 'G12', 'G13'];
+            if (bracketProteins.includes(protein)) {
+                const bY = Math.max(ntHeight, sbiHeight) + 4;
+                const label = pComp < 0.05 ? '*' : 'n.s.';
+                
+                // Draw bracket shape
+                shapes.push({
+                    type: 'path',
+                    path: `M ${xNT} ${bY} V ${bY+0.5} H ${xSBI} V ${bY}`,
+                    line: { color: 'black', width: 1 }
+                });
+                
+                // Label
+                annotations.push({
+                    x: (xNT + xSBI) / 2,
+                    y: bY + 1.5,
+                    text: label,
+                    showarrow: false,
+                    font: { size: 10, color: 'black' },
+                    yanchor: 'bottom'
+                });
+            }
+        }
+
+        // ---------------------------------------------------------
+        // 4. Family Grouping (Lines and Text below X-axis)
+        // ---------------------------------------------------------
+        const families = [
+            { start: 0, end: 2, label: "Gq" },
+            { start: 3, end: 6, label: "Gi/o" },
+            { start: 7, end: 8, label: "Gs" },
+            { start: 9, end: 10, label: "G12/13" }
+        ];
+        
+        families.forEach(fam => {
+            // Line
+            shapes.push({
+                type: 'line',
+                xref: 'x', yref: 'paper',
+                x0: fam.start - 0.4, x1: fam.end + 0.4,
+                y0: -0.12, y1: -0.12,
+                line: { color: 'black', width: 1.5 },
+                layer: 'below'
+            });
+            // Text
+            annotations.push({
+                xref: 'x', yref: 'paper',
+                x: (fam.start + fam.end) / 2,
+                y: -0.14,
+                text: '<b>' + fam.label + '</b>',
+                showarrow: false,
+                font: { size: 14, color: 'black' },
+                yanchor: 'top'
+            });
+        });
+        
+        // "Family" Label
+        annotations.push({
+            xref: 'x', yref: 'paper',
+            x: -0.8,
+            y: -0.14,
+            text: "<b>Family</b>",
+            showarrow: false,
+            font: { size: 14, color: 'black' },
+            xanchor: 'right',
+            yanchor: 'top'
+        });
+
+        // ---------------------------------------------------------
+        // 5. Layout and Render
+        // ---------------------------------------------------------
+
+        const layout = {
+            title: '',
+            xaxis: {
+                tickvals: xVals,
+                ticktext: gProteins.map(p => `<b>${p}</b>`), // Bold tick labels
+                tickfont: { size: 12, family: 'Arial' },
+                showline: false,
+                zeroline: false,
+                linecolor: 'black',
+                mirror: false
+            },
+            yaxis: {
+                title: '<b>G Protein Activation<br>(Standardized TGFα Shedding)</b>',
+                titlefont: { size: 14 },
+                range: [0, 32],
+                showline: false,
+                zeroline: false,
+                showgrid: false,
+                linecolor: 'black'
+            },
+            barmode: 'overlay', // Using overlay because we manually offset x coordinates
+            
+            showlegend: true,
+            legend: {
+                x: 0, y: 1,
+                bgcolor: 'rgba(255,255,255,0)',
+                bordercolor: 'rgba(0,0,0,0)',
+                itemsizing: 'constant'
+            },
+            shapes: shapes,
+            annotations: annotations,
+            margin: { b: 100 }, // Extra bottom margin for Family labels
+            plot_bgcolor: 'white',
+            paper_bgcolor: 'white'
+        };
+
+        // Fix Legend Icons to be circles using HTML
+        
+        traceNT.showlegend = false;
+        traceSBI.showlegend = false;
+        
+        const legendNT = {
+            x: [null], y: [null], 
+            mode: 'markers', 
+            name: 'NT', 
+            marker: { size: 10, color: 'white', line: { color: colorNT, width: 2 } },
+            showlegend: true
+        };
+        
+        const legendSBI = {
+            x: [null], y: [null], 
+            mode: 'markers', 
+            name: 'SBI-553', 
+            marker: { size: 10, color: 'white', line: { color: colorSBI, width: 2 } },
+            showlegend: true
+        };
+        
+        Plotly.newPlot('chart', [traceNT, traceSBI, traceJitterNT, traceJitterSBI, legendNT, legendSBI], layout);
+
+    </script>
+</body>
+</html>

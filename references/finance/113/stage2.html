@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JNJ 防御区间比率 (DIR) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 0 0 4px;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 14px;
+      margin: 0 0 18px;
+      font-weight: 400;
+      color: #555;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px 22px 26px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      box-sizing: border-box;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #777;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .legend-note {
+      display: flex;
+      align-items: center;
+      font-size: 11px;
+      color: #555;
+      margin-top: 10px;
+      gap: 6px;
+    }
+
+    .swatch {
+      width: 14px;
+      height: 10px;
+      border-radius: 3px;
+      background: #2563eb;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .chart-container {
+        padding: 14px 12px 20px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>JNJ 防御区间比率 (DIR) 变化</h1>
+    <h2>2016–2024 财年</h2>
+    <div class="chart-wrapper">
+      <canvas id="dirChart"></canvas>
+    </div>
+    <div class="legend-note">
+      <span class="swatch"></span>
+      <span>柱表示各年度防御区间比率 (Defensive Interval Ratio, DIR)。</span>
+    </div>
+    <div class="note">
+      数据来源：用户提供的财务数据（单位为天，已按原始数值呈现）。<br>
+      悬停查看精确数值，滚轮缩放，拖拽平移，双击图表区域重置缩放。
+    </div>
+  </div>
+
+  <!-- Chart.js (core) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <!-- Zoom plugin (loaded after Chart.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.umd.min.js"></script>
+
+  <script>
+    // Ensure code runs after DOM is ready
+    document.addEventListener('DOMContentLoaded', function () {
+      const canvas = document.getElementById('dirChart');
+      const ctx = canvas.getContext('2d');
+
+      // Explicitly register the zoom plugin so Chart.js 4 can use it
+      if (window['chartjs-plugin-zoom']) {
+        Chart.register(window['chartjs-plugin-zoom']);
+      }
+
+      const labels = [
+        '2016',
+        '2017',
+        '2018',
+        '2019',
+        '2020',
+        '2021',
+        '2022',
+        '2023',
+        '2024'
+      ];
+
+      const values = [
+        219.51244142042,
+        198.59277535489028,
+        194.596977121478,
+        189.91782481297776,
+        160.05735787815627,
+        211.37628250601244,
+        184.45258321040407,
+        211.80713755351587,
+        166.8385328702081
+      ];
+
+      const data = {
+        labels: labels,
+        datasets: [{
+          label: '防御区间比率 (DIR)',
+          data: values,
+          backgroundColor: 'rgba(37, 99, 235, 0.8)',
+          hoverBackgroundColor: 'rgba(37, 99, 235, 1)',
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      };
+
+      const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15,23,42,0.9)',
+            padding: 10,
+            cornerRadius: 6,
+            displayColors: false,
+            titleFont: { size: 13, weight: '600' },
+            bodyFont: { size: 12 },
+            callbacks: {
+              label: function(ctx) {
+                const val = ctx.raw;
+                return 'DIR: ' + Number(val).toFixed(2) + ' 天';
+              },
+              title: function(ctx) {
+                return '财年 ' + ctx[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          },
+          zoom: {
+            zoom: {
+              wheel: { enabled: true },
+              pinch: { enabled: true },
+              drag: { enabled: true },
+              mode: 'x'
+            },
+            pan: {
+              enabled: true,
+              mode: 'x'
+            },
+            limits: {
+              x: { minRange: 1 }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: { size: 12 },
+              color: '#4b5563'
+            }
+          },
+          y: {
+            beginAtZero: false,
+            grace: '5%',
+            grid: {
+              color: 'rgba(148, 163, 184, 0.25)'
+            },
+            ticks: {
+              font: { size: 12 },
+              color: '#4b5563',
+              callback: function(value) {
+                return value + ' 天';
+              }
+            },
+            title: {
+              display: true,
+              text: '防御区间比率 (天)',
+              font: { size: 12, weight: '500' },
+              color: '#374151'
+            }
+          }
+        },
+        animation: {
+          duration: 800,
+          easing: 'easeOutCubic'
+        }
+      };
+
+      const dirChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+      });
+
+      // Double-click to reset zoom
+      canvas.addEventListener('dblclick', function () {
+        if (typeof dirChart.resetZoom === 'function') {
+          dirChart.resetZoom();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

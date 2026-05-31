@@ -1,0 +1,86 @@
+[
+    {
+        "Type": "Individual\nbehaviour",
+        "Driver": "Satisfaction with sensory characteristics",
+        "Frequency in literatures": 10,
+        "Percentage": 0.178571
+    },
+    {
+        "Type": "Individual\nbehaviour",
+        "Driver": "Social norms",
+        "Frequency in literatures": 6,
+        "Percentage": 0.107143
+    },
+    {
+        "Type": "Individual\nbehaviour",
+        "Driver": "Attitude towards food waste",
+        "Frequency in literatures": 4,
+        "Percentage": 0.0714286
+    },
+    {
+        "Type": "Individual\nbehaviour",
+        "Driver": "Economic level",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0535714
+    },
+    {
+        "Type": "Individual\nbehaviour",
+        "Driver": "Eating habits",
+        "Frequency in literatures": 2,
+        "Percentage": 0.0357143
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Duration of eating time",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0892857
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Menu planning",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0892857
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Portion size",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0892857
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Use of trays",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0535714
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Staff training",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0535714
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Food quality and palatability",
+        "Frequency in literatures": 2,
+        "Percentage": 0.0357143
+    },
+    {
+        "Type": "Canteen",
+        "Driver": "Canteen atmosphere",
+        "Frequency in literatures": 1,
+        "Percentage": 0.0178571
+    },
+    {
+        "Type": "Demographic",
+        "Driver": "Gender",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0892857
+    },
+    {
+        "Type": "Demographic",
+        "Driver": "Age",
+        "Frequency in literatures": 2,
+        "Percentage": 0.0357143
+    }
+]

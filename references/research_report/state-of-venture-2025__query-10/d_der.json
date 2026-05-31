@@ -1,0 +1,248 @@
+{
+  "status": "complete",
+  "chart_type": "bubble",
+  "title": "Sectors and markets with complete stage-mix and top-deal coverage",
+  "x_label": "Average funding per deal in 2025 ($M)",
+  "y_label": "Visible top-deal concentration share (%)",
+  "size_label": "Annual funding ($B)",
+  "label_entities": [
+    "AI",
+    "Silicon Valley",
+    "Fintech",
+    "New York",
+    "Retail Tech",
+    "Digital Health",
+    "United Kingdom",
+    "Los Angeles",
+    "China",
+    "Boston",
+    "India",
+    "France"
+  ],
+  "data": [
+    {
+      "label": "Silicon Valley",
+      "x": 59.887751733245295,
+      "y": 29.60308710033076,
+      "size": 181.4,
+      "hue": "Market"
+    },
+    {
+      "label": "New York",
+      "x": 17.349397590361445,
+      "y": 15.711805555555555,
+      "size": 28.8,
+      "hue": "Market"
+    },
+    {
+      "label": "Los Angeles",
+      "x": 21.552723059096177,
+      "y": 20.537634408602152,
+      "size": 18.6,
+      "hue": "Market"
+    },
+    {
+      "label": "Boston",
+      "x": 25.66510172143975,
+      "y": 10.548780487804878,
+      "size": 16.4,
+      "hue": "Market"
+    },
+    {
+      "label": "Seattle",
+      "x": 12.990196078431373,
+      "y": 13.622641509433961,
+      "size": 5.3,
+      "hue": "Market"
+    },
+    {
+      "label": "Denver",
+      "x": 24.603174603174605,
+      "y": 31.016129032258068,
+      "size": 6.2,
+      "hue": "Market"
+    },
+    {
+      "label": "DC",
+      "x": 10.194174757281553,
+      "y": 16.857142857142858,
+      "size": 4.2,
+      "hue": "Market"
+    },
+    {
+      "label": "Chicago",
+      "x": 8.179419525065963,
+      "y": 23.06451612903226,
+      "size": 3.1,
+      "hue": "Market"
+    },
+    {
+      "label": "Dallas",
+      "x": 33.02325581395349,
+      "y": 2.23943661971831,
+      "size": 7.1,
+      "hue": "Market"
+    },
+    {
+      "label": "Austin",
+      "x": 17.548076923076923,
+      "y": 23.28767123287671,
+      "size": 7.3,
+      "hue": "Market"
+    },
+    {
+      "label": "Miami",
+      "x": 8.293838862559241,
+      "y": 17.942857142857143,
+      "size": 3.5,
+      "hue": "Market"
+    },
+    {
+      "label": "Atlanta",
+      "x": 5.6521739130434785,
+      "y": 6.615384615384616,
+      "size": 1.3,
+      "hue": "Market"
+    },
+    {
+      "label": "Philadelphia",
+      "x": 7.701863354037267,
+      "y": 17.741935483870968,
+      "size": 6.2,
+      "hue": "Market"
+    },
+    {
+      "label": "Raleigh",
+      "x": 13.385826771653543,
+      "y": 1.9411764705882355,
+      "size": 1.7,
+      "hue": "Market"
+    },
+    {
+      "label": "Toronto",
+      "x": 8.480565371024735,
+      "y": 32.33333333333333,
+      "size": 2.4,
+      "hue": "Market"
+    },
+    {
+      "label": "China",
+      "x": 7.4959481361426255,
+      "y": 10.01081081081081,
+      "size": 18.5,
+      "hue": "Market"
+    },
+    {
+      "label": "India",
+      "x": 8.461025982678214,
+      "y": 7.818897637795276,
+      "size": 12.7,
+      "hue": "Market"
+    },
+    {
+      "label": "Singapore",
+      "x": 12.100456621004566,
+      "y": 11.69811320754717,
+      "size": 5.3,
+      "hue": "Market"
+    },
+    {
+      "label": "Japan",
+      "x": 2.339572192513369,
+      "y": 11.771428571428572,
+      "size": 3.5,
+      "hue": "Market"
+    },
+    {
+      "label": "United Kingdom",
+      "x": 11.409764125068568,
+      "y": 13.798076923076923,
+      "size": 20.8,
+      "hue": "Market"
+    },
+    {
+      "label": "Germany",
+      "x": 9.973753280839896,
+      "y": 8.789473684210526,
+      "size": 7.6,
+      "hue": "Market"
+    },
+    {
+      "label": "France",
+      "x": 11.842105263157896,
+      "y": 3.988888888888889,
+      "size": 9.0,
+      "hue": "Market"
+    },
+    {
+      "label": "Israel",
+      "x": 16.417910447761194,
+      "y": 11.893939393939394,
+      "size": 6.6,
+      "hue": "Market"
+    },
+    {
+      "label": "Netherlands",
+      "x": 10.411622276029055,
+      "y": 18.11627906976744,
+      "size": 4.3,
+      "hue": "Market"
+    },
+    {
+      "label": "Sweden",
+      "x": 5.602240896358543,
+      "y": 19.3,
+      "size": 2.0,
+      "hue": "Market"
+    },
+    {
+      "label": "Mexico",
+      "x": 17.058139534883722,
+      "y": 36.94614860259032,
+      "size": 1.467,
+      "hue": "Market"
+    },
+    {
+      "label": "Brazil",
+      "x": 6.25,
+      "y": 10.0,
+      "size": 2.6,
+      "hue": "Market"
+    },
+    {
+      "label": "South Africa",
+      "x": 14.594594594594595,
+      "y": 7.962962962962964,
+      "size": 1.08,
+      "hue": "Market"
+    },
+    {
+      "label": "AI",
+      "x": 32.66309851005352,
+      "y": 24.402125775022142,
+      "size": 225.8,
+      "hue": "Sector"
+    },
+    {
+      "label": "Fintech",
+      "x": 14.486367391903057,
+      "y": 13.922053231939163,
+      "size": 52.6,
+      "hue": "Sector"
+    },
+    {
+      "label": "Retail Tech",
+      "x": 13.170498084291188,
+      "y": 15.079999999999998,
+      "size": 27.5,
+      "hue": "Sector"
+    },
+    {
+      "label": "Digital Health",
+      "x": 15.061058344640434,
+      "y": 10.315315315315315,
+      "size": 22.2,
+      "hue": "Sector"
+    }
+  ]
+}

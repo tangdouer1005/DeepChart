@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1200px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const chartData = [
+    {
+        "country": "Ireland",
+        "budget_shares": {
+            "Bread and cereals": 1.47,
+            "Meat": 1.52,
+            "Fish and seafood": 0.21,
+            "Milk, cheese and eggs": 1.08,
+            "Oils and fats": 0.23,
+            "Fruit": 0.49,
+            "Vegetables": 0.82,
+            "Sugar and confectionery": 0.62,
+            "Coffee, tea and cocoa": 0.2,
+            "Mineral waters and soft drinks": 0.63,
+            "Alcoholic drinks": 1.96,
+            "Tobacco": 2.57,
+            "Ultra‑processed foods": 4.69,
+            "Ultra‑processed beverages": 0.9
+        }
+    },
+    {
+        "country": "Italy",
+        "budget_shares": {
+            "Bread and cereals": 2.31,
+            "Meat": 2.97,
+            "Fish and seafood": 1.04,
+            "Milk, cheese and eggs": 1.74,
+            "Oils and fats": 0.48,
+            "Fruit": 1.19,
+            "Vegetables": 1.79,
+            "Sugar and confectionery": 0.61,
+            "Coffee, tea and cocoa": 0.41,
+            "Mineral waters and soft drinks": 0.67,
+            "Alcoholic drinks": 0.88,
+            "Tobacco": 3.1,
+            "Ultra‑processed foods": 4.72,
+            "Ultra‑processed beverages": 0.29
+        }
+    },
+    {
+        "country": "Netherlands",
+        "budget_shares": {
+            "Bread and cereals": 0.96,
+            "Meat": 1.7,
+            "Fish and seafood": 0.42,
+            "Milk, cheese and eggs": 1.36,
+            "Oils and fats": 0.34,
+            "Fruit": 0.68,
+            "Vegetables": 0.92,
+            "Sugar and confectionery": 1.15,
+            "Coffee, tea and cocoa": 0.31,
+            "Mineral waters and soft drinks": 0.46,
+            "Alcoholic drinks": 0.97,
+            "Tobacco": 1.69,
+            "Ultra‑processed foods": 3.29,
+            "Ultra‑processed beverages": 0.61
+        }
+    },
+    {
+        "country": "Norway",
+        "budget_shares": {
+            "Bread and cereals": 1.37,
+            "Meat": 1.96,
+            "Fish and seafood": 0.68,
+            "Milk, cheese and eggs": 1.73,
+            "Oils and fats": 0.21,
+            "Fruit": 0.73,
+            "Vegetables": 1.04,
+            "Sugar and confectionery": 0.99,
+            "Coffee, tea and cocoa": 0.35,
+            "Mineral waters and soft drinks": 0.96,
+            "Alcoholic drinks": 1.99,
+            "Tobacco": 1.59,
+            "Ultra‑processed foods": 5.28,
+            "Ultra‑processed beverages": 1.19
+        }
+    }
+];
+
+        // Define categories for plotting
+        const categories = [
+            "Bread and cereals", "Meat", "Fish and seafood", "Milk, cheese and eggs",
+            "Oils and fats", "Fruit", "Vegetables", "Sugar and confectionery",
+            "Coffee, tea and cocoa", "Mineral waters and soft drinks", "Alcoholic drinks",
+            "Tobacco", "Ultra‑processed foods", "Ultra‑processed beverages"
+        ];
+
+        // Panel countries and their colors
+        const panelCountries = ["Ireland", "Italy", "Netherlands", "Norway"];
+        const panelColors = ["#d0d3dc", "#e7c395", "#c5d6d5", "#d58a52"];
+        
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const grids = [];
+        const xAxes = [];
+        const yAxes = [];
+        const series = [];
+
+        panelCountries.forEach((country, idx) => {
+            const countryData = chartData.find(row => row.country === country);
+            if (!countryData) return;
+
+            grids.push({
+                left: `${idx * 25 + 2}%`, // Adjust for fit, original logic: idx*25
+                top: '15%',
+                width: '20%',
+                bottom: '15%',
+                containLabel: true // Ensure labels fit
+            });
+
+            xAxes.push({
+                gridIndex: idx,
+                type: 'value',
+                min: 0, max: 20,
+                interval: 2.5, // 0, 2.5, 5 ...
+                axisLabel: { color: 'black', fontSize: 9 },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true },
+                splitLine: { show: false }, // Remove split lines to match clean look
+                name: (idx === 1 || idx === 2) ? 'Budget share (%)' : '', // Approximate placement
+                nameLocation: 'middle',
+                nameGap: 30,
+                nameTextStyle: { fontSize: 11, color: 'black' }
+            });
+
+            yAxes.push({
+                gridIndex: idx,
+                type: 'category',
+                data: categories.slice().reverse(), // Reverse for top-to-bottom
+                axisLabel: {
+                    show: (idx === 0), // Only show labels for the first panel
+                    color: 'black',
+                    fontSize: 9,
+                    interval: 0
+                },
+                axisLine: { show: false }, // Hide y axis line
+                axisTick: { show: false },
+                splitLine: { show: false }
+            });
+
+            const barData = [];
+            categories.forEach(cat => {
+                const value = countryData.budget_shares[cat] || 0;
+                barData.push({
+                    name: cat,
+                    value: value
+                });
+            });
+
+            series.push({
+                type: 'bar',
+                xAxisIndex: idx,
+                yAxisIndex: idx,
+                data: barData.reverse(), // Reverse to match y-axis order
+                itemStyle: { color: panelColors[idx], borderColor: 'none' },
+                barWidth: '70%'
+            });
+        });
+
+        // Center the x-axis label manually using graphic text if standard axis name is tricky for shared axis
+        // The original code tried to put it on the first axis.
+        // Let's remove per-axis name and add a global graphic.
+
+        xAxes.forEach(ax => ax.name = '');
+
+        const option = {
+            backgroundColor: 'white',
+            grid: grids,
+            xAxis: xAxes,
+            yAxis: yAxes,
+            title: panelCountries.map((country, idx) => ({
+                text: country,
+                left: `${idx * 25 + 12.5}%`,
+                top: '8%',
+                textAlign: 'center',
+                textStyle: { fontSize: 12, color: 'black', fontWeight: 'normal' }
+            })),
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10, top: 10,
+                    style: { text: 'b', font: 'bold 16px Arial', fill: 'black' }
+                },
+                {
+                    type: 'text',
+                    left: '50%', bottom: 10,
+                    style: { text: 'Budget share (%)', font: '12px Arial', fill: 'black', textAlign: 'center' }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

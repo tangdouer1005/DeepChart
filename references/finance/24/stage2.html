@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ACN 可持续增长率 (SGR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 使用一个非常稳定的 Chart.js 版本（3.9.1）以避免兼容性问题 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 14px;
+      margin-top: 0;
+      margin-bottom: 16px;
+      text-align: center;
+      font-weight: 400;
+      color: #666;
+    }
+
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 420px; /* 固定高度，避免 0 高度导致看不见 */
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 16px 24px 16px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+      box-sizing: border-box;
+    }
+
+    .chart-footer {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #666;
+      text-align: right;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .chart-container {
+        height: 360px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>ACN 可持续增长率 (SGR)</h1>
+    <h2>2016–2024 财年变化（柱状图）</h2>
+    <div class="chart-container">
+      <canvas id="sgrChart"></canvas>
+    </div>
+    <div class="chart-footer">
+      数据来源：用户提供的 ACN 2016–2024 财年 SGR 计算结果
+    </div>
+  </div>
+
+  <script>
+    // 为了避免任何 ES 版本或打包器问题，使用最基础的 JS 语法（不使用箭头函数等）。
+    window.onload = function () {
+      if (typeof Chart === "undefined") {
+        console.error("Chart.js 未成功加载，请检查网络或 Script URL。");
+        return;
+      }
+
+      var fiscalYears = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ];
+
+      // 原始 SGR（小数形式）
+      var sgrRaw = [
+        0.3906430768032726,
+        0.2275190174167552,
+        0.2434663975731882,
+        0.2355223334882419,
+        0.1954887342522387,
+        0.2009699427785225,
+        0.2123119734863122,
+        0.1692156076444881,
+        0.1490625165276575
+      ];
+
+      // 转换为百分比（保留两位小数）
+      var sgrPercent = [];
+      for (var i = 0; i < sgrRaw.length; i++) {
+        sgrPercent.push(parseFloat((sgrRaw[i] * 100).toFixed(2)));
+      }
+
+      var canvas = document.getElementById("sgrChart");
+      if (!canvas) {
+        console.error("找不到 ID 为 'sgrChart' 的 canvas 元素。");
+        return;
+      }
+
+      var ctx = canvas.getContext("2d");
+
+      // 使用统一颜色，避免与渐变相关的 chartArea 未定义问题
+      var barColor = "rgba(79, 70, 229, 0.85)";
+      var barHoverColor = "rgba(22, 163, 74, 0.9)";
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: fiscalYears,
+          datasets: [
+            {
+              label: "可持续增长率 (SGR)",
+              data: sgrPercent,
+              backgroundColor: barColor,
+              hoverBackgroundColor: barHoverColor,
+              borderRadius: 6,
+              borderSkipped: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                font: {
+                  size: 12
+                }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  var value = context.parsed.y;
+                  return "SGR: " + value.toFixed(2) + "%";
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          layout: {
+            padding: {
+              top: 10,
+              right: 10,
+              bottom: 0,
+              left: 10
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年",
+                font: {
+                  size: 12
+                }
+              },
+              ticks: {
+                font: {
+                  size: 11
+                }
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "可持续增长率 (SGR, %)",
+                font: {
+                  size: 12
+                }
+              },
+              ticks: {
+                callback: function (value) {
+                  return value + "%";
+                },
+                font: {
+                  size: 11
+                }
+              },
+              suggestedMin: 0,
+              suggestedMax: 45,
+              grid: {
+                color: "rgba(148, 163, 184, 0.25)"
+              }
+            }
+          },
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          animation: {
+            duration: 800,
+            easing: "easeOutQuart"
+          }
+        }
+      });
+    };
+  </script>
+</body>
+</html>

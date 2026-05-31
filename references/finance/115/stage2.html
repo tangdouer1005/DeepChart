@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>JNJ 2016–2024 EBITDA 柱状图</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 22px;
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #555;
+    }
+    #chartContainer {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 20px 24px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+    /* 关键：给图表容器一个高度，避免某些环境中高度为 0 不显示 */
+    #chartWrapper {
+      position: relative;
+      height: 480px;
+      width: 100%;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #666;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="chartContainer">
+    <h1>强生 (JNJ) 息税折旧摊销前利润（EBITDA）</h1>
+    <h2>2016–2024 财年，单位：十亿美元（USD）</h2>
+    <div id="chartWrapper">
+      <canvas id="ebitdaChart" aria-label="JNJ 2016 至 2024 EBITDA 柱状图" role="img"></canvas>
+    </div>
+    <div class="note">
+      数据来源：用户提供的财务数据。<br />
+      提示：将鼠标悬停在柱状条上查看具体 EBITDA 数值。
+    </div>
+  </div>
+
+  <!-- Chart.js 最新稳定 4.x 版本，无完整性校验 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // 确保 DOM 和 Chart.js 均已加载
+    window.addEventListener("load", function () {
+      const canvas = document.getElementById("ebitdaChart");
+      if (!canvas || typeof Chart === "undefined") {
+        console.error("Canvas 或 Chart.js 未正确加载");
+        return;
+      }
+
+      // 原始数据（单位：美元）
+      const years = [
+        "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+      ];
+      const ebitdaRaw = [
+        24283000000,
+        24249000000,
+        25933000000,
+        24655000000,
+        23929000000,
+        29828000000,
+        28176000000,
+        45622000000,
+        24781000000
+      ];
+
+      // 转换为十亿美元（保留两位小数）
+      const ebitdaInBillions = ebitdaRaw.map(v => v / 1e9);
+
+      const ctx = canvas.getContext("2d");
+
+      // 创建渐变（兼容部分不支持高度推断的情况）
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height || 400);
+      gradient.addColorStop(0, "#2563eb");
+      gradient.addColorStop(1, "#93c5fd");
+
+      const chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: years,
+          datasets: [{
+            label: "EBITDA（十亿美元）",
+            data: ebitdaInBillions,
+            backgroundColor: gradient,
+            borderColor: "#1d4ed8",
+            borderWidth: 1.2,
+            borderRadius: 4,
+            hoverBackgroundColor: "#1d4ed8"
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                pointStyle: "rectRounded",
+                boxWidth: 8,
+                font: {
+                  size: 11
+                }
+              }
+            },
+            tooltip: {
+              enabled: true,
+              backgroundColor: "rgba(15,23,42,0.92)",
+              titleColor: "#fff",
+              bodyColor: "#e5e7eb",
+              borderColor: "rgba(148,163,184,0.6)",
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                label: function(context) {
+                  const value = context.raw;
+                  return " EBITDA: " + value.toFixed(2) + " 十亿美元";
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                font: {
+                  size: 11
+                }
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: "rgba(148,163,184,0.25)"
+              },
+              ticks: {
+                font: {
+                  size: 11
+                },
+                callback: function(value) {
+                  return value + "B";
+                }
+              },
+              title: {
+                display: true,
+                text: "十亿美元（USD）",
+                font: {
+                  size: 11
+                }
+              }
+            }
+          },
+          interaction: {
+            mode: "nearest",
+            intersect: true
+          },
+          animation: {
+            duration: 900,
+            easing: "easeOutCubic"
+          }
+        }
+      });
+
+      // 可选：通过 Enter 键在柱状条间循环高亮（简单可访问性增强）
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter") return;
+        const meta = chart.getDatasetMeta(0);
+        const visibleElements = meta.data;
+        if (!visibleElements.length) return;
+
+        const current = chart._active && chart._active[0] ? chart._active[0].index : -1;
+        const nextIndex = (current + 1) % visibleElements.length;
+
+        chart.setActiveElements([{ datasetIndex: 0, index: nextIndex }]);
+        chart.tooltip.setActiveElements([{ datasetIndex: 0, index: nextIndex }], {
+          x: visibleElements[nextIndex].x,
+          y: visibleElements[nextIndex].y
+        });
+        chart.update();
+      });
+    });
+  </script>
+</body>
+</html>

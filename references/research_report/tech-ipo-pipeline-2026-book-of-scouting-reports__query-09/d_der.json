@@ -1,0 +1,170 @@
+{
+  "report_id": "014",
+  "query_id": 9,
+  "query_text": "Create a scatter plot for the top 20 companies after filtering to `Commercial Maturity = 5 / 5`, where the x-axis is `Total raised ($B)`, the y-axis is `IPO probability (%)`, point size is `Headcount`, and point color shows whether `Mosaic` is above or below the median Mosaic of the filtered set.",
+  "chart_type": "bubble",
+  "value_unit": "IPO probability (%)",
+  "sort_rule": "descending by IPO probability inside the Commercial Maturity = 5 subset",
+  "selection_rule": "top 20 companies with Commercial Maturity = 5 and numeric funding, headcount, and Mosaic",
+  "records": [
+    {
+      "label": "Arctic Wolf",
+      "x": 0.8997,
+      "y": 58.3,
+      "size": 3200,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Brex",
+      "x": 1.7,
+      "y": 58.3,
+      "size": 1595,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Canva",
+      "x": 0.9793,
+      "y": 58.3,
+      "size": 13231,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Clio",
+      "x": 1.3,
+      "y": 58.3,
+      "size": 1639,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Commure",
+      "x": 1.0,
+      "y": 58.3,
+      "size": 1453,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Games24x7",
+      "x": 0.075,
+      "y": 58.3,
+      "size": 1201,
+      "color": "Below median Mosaic"
+    },
+    {
+      "label": "Grammarly",
+      "x": 1.4,
+      "y": 58.3,
+      "size": 1604,
+      "color": "Below median Mosaic"
+    },
+    {
+      "label": "Innovaccer",
+      "x": 0.6507,
+      "y": 58.3,
+      "size": 1616,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Kaseya",
+      "x": 0.6817,
+      "y": 58.3,
+      "size": 5385,
+      "color": "Below median Mosaic"
+    },
+    {
+      "label": "Octopus Energy",
+      "x": 2.8,
+      "y": 58.3,
+      "size": 4322,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "RELEX",
+      "x": 0.8029,
+      "y": 58.3,
+      "size": 2309,
+      "color": "Below median Mosaic"
+    },
+    {
+      "label": "Socure",
+      "x": 0.7433,
+      "y": 58.3,
+      "size": 482,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Stripe",
+      "x": 9.4,
+      "y": 58.3,
+      "size": 12516,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Sword",
+      "x": 0.3922,
+      "y": 58.3,
+      "size": 1017,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Skydio",
+      "x": 0.744,
+      "y": 55.1,
+      "size": 824,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Noom",
+      "x": 0.6328,
+      "y": 55.0,
+      "size": 1203,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Motive",
+      "x": 0.7173,
+      "y": 52.7,
+      "size": 5012,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Locus Robotics",
+      "x": 0.4328,
+      "y": 50.5,
+      "size": 480,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Fivetran",
+      "x": 0.853,
+      "y": 43.1,
+      "size": 1607,
+      "color": "At or above median Mosaic"
+    },
+    {
+      "label": "Indigo",
+      "x": 1.4,
+      "y": 42.5,
+      "size": 1412,
+      "color": "At or above median Mosaic"
+    }
+  ],
+  "plot_config": {
+    "title": "Maturity-5 companies: funding vs IPO probability",
+    "x_label": "Total raised ($B)",
+    "y_label": "IPO probability (%)"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with Commercial Maturity = 5 plus numeric funding, headcount, and Mosaic.",
+    "Computed the median Mosaic within the filtered set.",
+    "Flagged companies as at/above versus below the filtered-set median.",
+    "Ranked by IPO probability and kept the top 20 companies."
+  ],
+  "stats": {
+    "eligible_count": 92,
+    "returned_count": 20,
+    "median_mosaic": 805.0
+  },
+  "open_issues": [
+    "Rows with N/A Mosaic were excluded because the color split depends on the filtered-set median Mosaic."
+  ]
+}

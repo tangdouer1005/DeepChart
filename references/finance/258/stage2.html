@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UNH Piotroski F-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --fg-color: #111827;
+      --grid-color: rgba(148, 163, 184, 0.35);
+      --bar-color: #2563eb;
+      --bar-hover: #1d4ed8;
+      --accent-color: #0f766e;
+      --border-color: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #e0f2fe 0, #ffffff 40%, #f9fafb 100%);
+      min-height: 100vh;
+      color: var(--fg-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      width: min(960px, 100%);
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 18px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.16),
+        0 0 0 1px rgba(148, 163, 184, 0.25);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem 1.75rem 1.75rem;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+      color: #0f172a;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.72rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #4b5563;
+      background: rgba(248, 250, 252, 0.9);
+      white-space: nowrap;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-color);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.7rem;
+      margin-top: 0.9rem;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .meta-row span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--bar-color);
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 1.25rem;
+      }
+      h1 {
+        font-size: 1.05rem;
+      }
+      .chart-container {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="title-block">
+        <h1>UNH Piotroski F-Score (2016–2024)</h1>
+        <div class="subtitle">
+          皮奥特罗斯基 F-Score 趋势：2016 年至 2024 年（0–9，分数越高财务质量越好）
+        </div>
+      </div>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Interactive bar chart
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="fScoreChart"></canvas>
+    </div>
+
+    <div class="meta-row">
+      <span>
+        <span class="legend-dot"></span>
+        Piotroski F-Score (annual, FY-end)
+      </span>
+      <span>Source: Provided dataset | Range: 2016–2024</span>
+    </div>
+  </div>
+
+  <script>
+    // Source data (as provided)
+    const fiscalYears = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const fScores =     [   5,    5,    7,    6,    7,    8,    7,    7,    5];
+
+    const ctx = document.getElementById('fScoreChart').getContext('2d');
+
+    // Compute some basic stats for tooltip/annotation use
+    const minScore = Math.min(...fScores);
+    const maxScore = Math.max(...fScores);
+    const latestScore = fScores[fScores.length - 1];
+    const latestYear = fiscalYears[fiscalYears.length - 1];
+
+    // Plugin to draw a subtle horizontal band for "strong" scores (7+)
+    const highlightBandPlugin = {
+      id: 'highlightBand',
+      beforeDatasetsDraw(chart, args, opts) {
+        const {
+          ctx,
+          chartArea: { top, bottom, left, right },
+          scales: { y }
+        } = chart;
+
+        const bandTop = y.getPixelForValue(9);
+        const bandBottom = y.getPixelForValue(7);
+
+        ctx.save();
+        ctx.fillStyle = 'rgba(34, 197, 94, 0.06)';
+        ctx.fillRect(left, bandTop, right - left, bandBottom - bandTop);
+        ctx.restore();
+      }
+    };
+
+    // Plugin to annotate latest point
+    const latestLabelPlugin = {
+      id: 'latestLabel',
+      afterDatasetsDraw(chart, args, opts) {
+        const { ctx, data, scales: { x, y } } = chart;
+        const lastIndex = data.datasets[0].data.length - 1;
+        const xPos = x.getPixelForValue(lastIndex);
+        const yPos = y.getPixelForValue(data.datasets[0].data[lastIndex]);
+
+        ctx.save();
+        ctx.font = '11px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillStyle = '#0f172a';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+
+        const label = `FY ${latestYear}: ${latestScore}`;
+        ctx.fillText(label, xPos, yPos - 10);
+        ctx.restore();
+      }
+    };
+
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: fiscalYears,
+        datasets: [{
+          label: 'Piotroski F-Score',
+          data: fScores,
+          backgroundColor: function(context) {
+            const index = context.dataIndex;
+            const value = context.dataset.data[index];
+            // Highlight high-quality years (score >= 7)
+            if (value >= 7) {
+              return 'rgba(37, 99, 235, 0.95)'; // stronger blue
+            }
+            return 'rgba(59, 130, 246, 0.85)';
+          },
+          borderRadius: 6,
+          borderSkipped: false,
+          hoverBackgroundColor: 'rgba(37, 99, 235, 1)',
+          maxBarThickness: 40
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 10,
+            right: 18,
+            bottom: 6,
+            left: 2
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15, 23, 42, 0.96)',
+            titleColor: '#e5e7eb',
+            bodyColor: '#e5e7eb',
+            borderColor: 'rgba(148, 163, 184, 0.6)',
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8,
+            displayColors: false,
+            callbacks: {
+              title: (items) => {
+                const year = items[0].label;
+                return `Fiscal Year ${year}`;
+              },
+              label: (item) => {
+                return `Piotroski F-Score: ${item.formattedValue} / 9`;
+              },
+              afterLabel: (item) => {
+                const val = item.raw;
+                if (val >= 7) return 'Quality band: Strong (7–9)';
+                if (val >= 4) return 'Quality band: Neutral (4–6)';
+                return 'Quality band: Weak (0–3)';
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#6b7280',
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 9,
+            ticks: {
+              stepSize: 1,
+              color: '#6b7280',
+              font: {
+                size: 11
+              }
+            },
+            grid: {
+              color: 'rgba(148, 163, 184, 0.35)',
+              borderDash: [4, 4]
+            },
+            title: {
+              display: true,
+              text: 'Piotroski F-Score (0–9)',
+              color: '#4b5563',
+              font: {
+                size: 11,
+                weight: '500'
+              }
+            }
+          }
+        },
+        animation: {
+          duration: 800,
+          easing: 'easeOutQuart'
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        }
+      },
+      plugins: [highlightBandPlugin, latestLabelPlugin]
+    });
+
+    // Expose chart for debugging in console if needed
+    window.fScoreChart = chart;
+  </script>
+</body>
+</html>

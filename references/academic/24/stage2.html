@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const chartData = {
+    "plot_data": [
+        {
+            "Cancer Type": "LUNG",
+            "Model": "ctranspath",
+            "Percentage": 8.4,
+            "Performance": 0.7101566922966756
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "ctranspath",
+            "Percentage": 7.5,
+            "Performance": 0.6901946923437127
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "ctranspath",
+            "Percentage": 3.4,
+            "Performance": 0.6727500426566878
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "ctranspath",
+            "Percentage": 11.7,
+            "Performance": 0.6402351975254987
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "phikon",
+            "Percentage": 9.7,
+            "Performance": 0.7086469364758765
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "phikon",
+            "Percentage": 8.8,
+            "Performance": 0.6333019990370683
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "phikon",
+            "Percentage": 4.0,
+            "Performance": 0.6650650873334706
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "phikon",
+            "Percentage": 5.7,
+            "Performance": 0.6335703165007269
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "uni",
+            "Percentage": 9.8,
+            "Performance": 0.7582049929810751
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "uni",
+            "Percentage": 3.3,
+            "Performance": 0.6884572772690907
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "uni",
+            "Percentage": 6.7,
+            "Performance": 0.6769115022211536
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "uni",
+            "Percentage": 8.3,
+            "Performance": 0.6585192894528652
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "kaiko",
+            "Percentage": 9.7,
+            "Performance": 0.7311053739265448
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "kaiko",
+            "Percentage": 8.8,
+            "Performance": 0.685518762408426
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "kaiko",
+            "Percentage": 4.0,
+            "Performance": 0.6679383667204072
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "kaiko",
+            "Percentage": 5.7,
+            "Performance": 0.609584221956904
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "prov-gigapath",
+            "Percentage": 45.0,
+            "Performance": 0.7578128341867243
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "prov-gigapath",
+            "Percentage": 2.7,
+            "Performance": 0.66703719221213
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "prov-gigapath",
+            "Percentage": 0.7,
+            "Performance": 0.6867942247149665
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "prov-gigapath",
+            "Percentage": 30.0,
+            "Performance": 0.6796362735454282
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "virchow-class",
+            "Percentage": 6.1,
+            "Performance": 0.7174955993098335
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "virchow-class",
+            "Percentage": 25.0,
+            "Performance": 0.6589119444462541
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "virchow-class",
+            "Percentage": 3.5,
+            "Performance": 0.6845577051089727
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "virchow-class",
+            "Percentage": 3.2,
+            "Performance": 0.6476261453717196
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "virchow2-class",
+            "Percentage": 4.0,
+            "Performance": 0.7453463548176368
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "virchow2-class",
+            "Percentage": 19.0,
+            "Performance": 0.7043400914608242
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "virchow2-class",
+            "Percentage": 3.0,
+            "Performance": 0.7171710064688561
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "virchow2-class",
+            "Percentage": 6.0,
+            "Performance": 0.6911429496854462
+        },
+        {
+            "Cancer Type": "LUNG",
+            "Model": "panakeia",
+            "Percentage": 0.0,
+            "Performance": 0.7136461434822977
+        },
+        {
+            "Cancer Type": "BRCA",
+            "Model": "panakeia",
+            "Percentage": 82.0,
+            "Performance": 0.7080816433172487
+        },
+        {
+            "Cancer Type": "STAD",
+            "Model": "panakeia",
+            "Percentage": 0.0,
+            "Performance": 0.6830453013043695
+        },
+        {
+            "Cancer Type": "CRC",
+            "Model": "panakeia",
+            "Percentage": 18.0,
+            "Performance": 0.6616418630330357
+        }
+    ],
+    "stats_data": [
+        {
+            "cancer_type": "LUNG",
+            "r": 0.548585053629297,
+            "p": 0.15913917874978992
+        },
+        {
+            "cancer_type": "STAD",
+            "r": -0.2788407405224243,
+            "p": 0.5036420596256193
+        },
+        {
+            "cancer_type": "BRCA",
+            "r": 0.43959345798517785,
+            "p": 0.27579154872184664
+        },
+        {
+            "cancer_type": "CRC",
+            "r": 0.4472210806869125,
+            "p": 0.2665607212308931
+        }
+    ]
+};
+
+        const rawData = chartData.plot_data.map(d => ({
+            cancer: d["Cancer Type"],
+            model: d["Model"],
+            percent: d["Percentage"],
+            auroc: d["Performance"]
+        }));
+
+        const colors = {
+            'LUNG': '#6baed6',
+            'STAD': '#d6616b',
+            'BRCA': '#8c1b2f',
+            'CRC': '#316ca0'
+        };
+
+        const advancedSymbolMap = {
+            'ctranspath': 'circle',
+            'phikon': 'rect',
+            'uni': 'diamond',
+            'kaiko': 'triangle',
+            'prov-gigapath': 'path://M5 5 L15 15 M15 5 L5 15',
+            'virchow-class': 'path://M10 0 L20 10 L10 20 L0 10 Z',
+            'virchow2-class': 'path://M10 0 L0 20 L20 20 Z',
+            'panakeia': 'path://M 10 0 L 17 6 L 17 14 L 10 20 L 3 14 L 3 6 Z'
+        };
+
+        const cancerTypes = ['LUNG', 'STAD', 'BRCA', 'CRC'];
+        const series = [];
+        const datasets = [];
+
+        echarts.registerTransform(ecStat.transform.regression);
+
+        cancerTypes.forEach(cat => {
+            const catDataPoints = rawData.filter(d => d.cancer === cat);
+            const regressionSourceData = catDataPoints.map(d => [d.percent, d.auroc]);
+            
+            const stat = chartData.stats_data.find(s => s.cancer_type === cat);
+            const r = stat ? stat.r : 0;
+            const p = stat ? stat.p : 0;
+            
+            let pStr = p.toFixed(2);
+            if (cat === 'STAD') pStr = p.toFixed(1);
+            const dispName = cat === 'LUNG' ? 'NSCLC' : cat;
+            const label = `${dispName} (r = ${r.toFixed(2)}, P = ${pStr})`;
+
+            const scatterPlotData = catDataPoints.map(d => ({
+                value: [d.percent, d.auroc],
+                symbol: advancedSymbolMap[d.model] || 'circle',
+                symbolKeepAspect: true,
+                symbolOffset: [0,0],
+                symbolSize: 10
+            }));
+            
+            const sourceIdx = datasets.length;
+            datasets.push({ source: regressionSourceData });
+            
+            const transformIdx = datasets.length;
+            datasets.push({
+                fromDatasetIndex: sourceIdx,
+                transform: {
+                    type: 'ecStat:regression',
+                    config: { method: 'linear' }
+                }
+            });
+
+            series.push({
+                name: label,
+                type: 'scatter',
+                datasetIndex: sourceIdx,
+                data: scatterPlotData,
+                itemStyle: { color: colors[cat], opacity: 1 },
+                symbolSize: 10
+            });
+
+            series.push({
+                name: label,
+                type: 'line',
+                datasetIndex: transformIdx,
+                symbol: 'none',
+                lineStyle: { color: colors[cat], width: 3 },
+                silent: true,
+                tooltip: { show: false }
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 80, left: 80 },
+            xAxis: {
+                name: 'Percentage of slides in pretraining dataset (%)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: -5,
+                max: 87,
+                interval: 10,
+                splitLine: { show: true, lineStyle: { color: '#E0E0E0' } },
+                axisLine: { show: true, lineStyle: { color: '#ccc' } },
+                axisLabel: { color: 'black' },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                name: 'Average downstream performance\nby cancer type (AUROC)',
+                nameLocation: 'middle',
+                nameGap: 60,
+                type: 'value',
+                min: 0.60,
+                max: 0.77,
+                interval: 0.02,
+                splitLine: { show: true, lineStyle: { color: '#E0E0E0' } },
+                axisLine: { show: true, lineStyle: { color: '#ccc' } },
+                axisLabel: { color: 'black' },
+                axisTick: { show: true }
+            },
+            legend: {
+                top: 20,
+                right: 20,
+                orient: 'vertical',
+                itemGap: 5,
+                textStyle: { fontSize: 10 },
+                backgroundColor: 'rgba(255,255,255,0)'
+            },
+            dataset: datasets,
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'c',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

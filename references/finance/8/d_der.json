@@ -1,0 +1,177 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "Working Capital": 6406000000.0,
+            "Total Assets": 66099000000.0,
+            "Retained Earnings": 4378000000.0,
+            "Operating Income": 9340000000.0,
+            "Market Value of Equity": 4636000000.0,
+            "Total Liabilities": 61463000000.0,
+            "Revenue": 25638000000.0,
+            "X1 (WC/TA)": 0.0969152332107898,
+            "X2 (RE/TA)": 0.0662339823597936,
+            "X3 (EBIT/TA)": 0.1413031967200714,
+            "X4 (MVE/TL)": 0.0754274929632461,
+            "X5 (S/TA)": 0.3878727363500204
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "Working Capital": 4582000000.0,
+            "Total Assets": 70786000000.0,
+            "Retained Earnings": 5459000000.0,
+            "Operating Income": 9545000000.0,
+            "Market Value of Equity": 5097000000.0,
+            "Total Liabilities": 65689000000.0,
+            "Revenue": 28216000000.0,
+            "X1 (WC/TA)": 0.0647303139038793,
+            "X2 (RE/TA)": 0.0771197694459356,
+            "X3 (EBIT/TA)": 0.1348430480603509,
+            "X4 (MVE/TL)": 0.0775928998766916,
+            "X5 (S/TA)": 0.3986098946119289
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "Working Capital": -294000000.0,
+            "Total Assets": 59352000000.0,
+            "Retained Earnings": 3368000000.0,
+            "Operating Income": 6383000000.0,
+            "Market Value of Equity": -8446000000.0,
+            "Total Liabilities": 67798000000.0,
+            "Revenue": 32753000000.0,
+            "X1 (WC/TA)": -0.0049534977759805,
+            "X2 (RE/TA)": 0.0567461922091926,
+            "X3 (EBIT/TA)": 0.1075448173608303,
+            "X4 (MVE/TL)": -0.124575946193103,
+            "X5 (S/TA)": 0.5518432403288853
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "Working Capital": 33934000000.0,
+            "Total Assets": 89115000000.0,
+            "Retained Earnings": 4717000000.0,
+            "Operating Income": 12983000000.0,
+            "Market Value of Equity": -8172000000.0,
+            "Total Liabilities": 97287000000.0,
+            "Revenue": 33266000000.0,
+            "X1 (WC/TA)": 0.3807888683162206,
+            "X2 (RE/TA)": 0.0529316052291982,
+            "X3 (EBIT/TA)": 0.1456881557538012,
+            "X4 (MVE/TL)": -0.0839988898825125,
+            "X5 (S/TA)": 0.3732929360938113
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "Working Capital": -4488000000.0,
+            "Total Assets": 150565000000.0,
+            "Retained Earnings": 1055000000.0,
+            "Operating Income": 11363000000.0,
+            "Market Value of Equity": 13076000000.0,
+            "Total Liabilities": 137468000000.0,
+            "Revenue": 45804000000.0,
+            "X1 (WC/TA)": -0.0298077242387008,
+            "X2 (RE/TA)": 0.0070069405240261,
+            "X3 (EBIT/TA)": 0.0754690665161226,
+            "X4 (MVE/TL)": 0.0951203189105828,
+            "X5 (S/TA)": 0.3042141267890944
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "Working Capital": -7266000000.0,
+            "Total Assets": 146529000000.0,
+            "Retained Earnings": 3127000000.0,
+            "Operating Income": 17924000000.0,
+            "Market Value of Equity": 15408000000.0,
+            "Total Liabilities": 131093000000.0,
+            "Revenue": 56197000000.0,
+            "X1 (WC/TA)": -0.0495874536781115,
+            "X2 (RE/TA)": 0.0213404855011635,
+            "X3 (EBIT/TA)": 0.1223239085778241,
+            "X4 (MVE/TL)": 0.1175348798181443,
+            "X5 (S/TA)": 0.3835213507223826
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Working Capital": -1075000000.0,
+            "Total Assets": 138805000000.0,
+            "Retained Earnings": 4784000000.0,
+            "Operating Income": 18117000000.0,
+            "Market Value of Equity": 17254000000.0,
+            "Total Liabilities": 121518000000.0,
+            "Revenue": 58054000000.0,
+            "X1 (WC/TA)": -0.0077446777853823,
+            "X2 (RE/TA)": 0.0344656172328086,
+            "X3 (EBIT/TA)": 0.1305212348258348,
+            "X4 (MVE/TL)": 0.1419871953126285,
+            "X5 (S/TA)": 0.4182414178163611
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Working Capital": -4839000000.0,
+            "Total Assets": 134711000000.0,
+            "Retained Earnings": -1000000000.0,
+            "Operating Income": 12757000000.0,
+            "Market Value of Equity": 10360000000.0,
+            "Total Liabilities": 124314000000.0,
+            "Revenue": 54318000000.0,
+            "X1 (WC/TA)": -0.0359213427262807,
+            "X2 (RE/TA)": -0.0074232987655054,
+            "X3 (EBIT/TA)": 0.0946990223515525,
+            "X4 (MVE/TL)": 0.0833373554064707,
+            "X5 (S/TA)": 0.4032187423447231
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "Working Capital": -13167000000.0,
+            "Total Assets": 135161000000.0,
+            "Retained Earnings": -7900000000.0,
+            "Operating Income": 9137000000.0,
+            "Market Value of Equity": 3325000000.0,
+            "Total Liabilities": 131797000000.0,
+            "Revenue": 56334000000.0,
+            "X1 (WC/TA)": -0.0974171543566561,
+            "X2 (RE/TA)": -0.0584488128972114,
+            "X3 (EBIT/TA)": 0.0676008611951672,
+            "X4 (MVE/TL)": 0.0252281918404819,
+            "X5 (S/TA)": 0.4167918260444951
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "奥特曼破产预测模型 (Altman Z-Score)": 1.1084556364608626
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "奥特曼破产预测模型 (Altman Z-Score)": 1.075791747046067
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "奥特曼破产预测模型 (Altman Z-Score)": 0.9054960416654564
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "奥特曼破产预测模型 (Altman Z-Score)": 1.3347154054521901
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "奥特曼破产预测模型 (Altman Z-Score)": 0.5843746852858442
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "奥特曼破产预测模型 (Altman Z-Score)": 0.8280829122079842
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "奥特曼破产预测模型 (Altman Z-Score)": 0.9731120607126662
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "奥特曼破产预测模型 (Altman Z-Score)": 0.7122296998054847
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "奥特曼破产预测模型 (Altman Z-Score)": 0.45628265980875277
+        }
+    ]
+}

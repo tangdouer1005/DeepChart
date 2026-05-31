@@ -1,0 +1,63 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a bar chart of the top 12 countries in the 2025 country tables by emerging-bench momentum, defined as `sum(score * numeric growth rate)` for cities ranked 6-10, expressed in score-growth points, sorted descending, and limited to countries with at least 3 numeric growth entries in ranks 6-10.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2025 Emerging-Bench Momentum",
+  "value_unit": "score-growth points",
+  "sort_rule": "descending by emerging_bench_momentum, tie-break alphabetically",
+  "selection_rule": "top 12 countries with at least 3 numeric growth entries in ranks 6-10",
+  "records": [
+    {
+      "entity": "China",
+      "emerging_bench_momentum": 39.353849
+    },
+    {
+      "entity": "United States",
+      "emerging_bench_momentum": 36.473527
+    },
+    {
+      "entity": "Germany",
+      "emerging_bench_momentum": 5.9422
+    },
+    {
+      "entity": "France",
+      "emerging_bench_momentum": 4.873383
+    },
+    {
+      "entity": "United Kingdom",
+      "emerging_bench_momentum": 4.576406
+    },
+    {
+      "entity": "Brazil",
+      "emerging_bench_momentum": 3.726887
+    },
+    {
+      "entity": "India",
+      "emerging_bench_momentum": 3.60564
+    },
+    {
+      "entity": "Canada",
+      "emerging_bench_momentum": 2.9975
+    },
+    {
+      "entity": "Sweden",
+      "emerging_bench_momentum": 2.43306
+    },
+    {
+      "entity": "Australia",
+      "emerging_bench_momentum": 2.102237
+    },
+    {
+      "entity": "Spain",
+      "emerging_bench_momentum": 1.62937
+    },
+    {
+      "entity": "Ireland",
+      "emerging_bench_momentum": 1.514949
+    }
+  ],
+  "value_field": "emerging_bench_momentum",
+  "x_label": "Country",
+  "y_label": "sum(score * numeric growth rate as decimal) for ranks 6-10"
+}

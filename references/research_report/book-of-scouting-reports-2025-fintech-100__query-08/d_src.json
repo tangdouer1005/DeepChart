@@ -1,0 +1,611 @@
+{
+  "report_code": "018",
+  "query_id": "08",
+  "source_fields": [
+    "Company",
+    "Total raised",
+    "Commercial Maturity"
+  ],
+  "records": [
+    {
+      "company": "Affinity",
+      "total_raised_m": 11.0,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "interface.ai",
+      "total_raised_m": 40.0,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Uzum",
+      "total_raised_m": 179.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "9Fin",
+      "total_raised_m": 83.9,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Claira",
+      "total_raised_m": 7.0,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Baanx",
+      "total_raised_m": 34.3,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Beam",
+      "total_raised_m": 14.0,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Breez Development",
+      "total_raised_m": 9.5,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "BVNK",
+      "total_raised_m": 91.7,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Conduit",
+      "total_raised_m": 59.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Crossmint",
+      "total_raised_m": 23.6,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Due",
+      "total_raised_m": 7.3,
+      "commercial_maturity": null,
+      "commercial_maturity_raw": "N/A / 5"
+    },
+    {
+      "company": "Noah",
+      "total_raised_m": 22.7,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Rain",
+      "total_raised_m": 88.8,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "RD Technologies",
+      "total_raised_m": 47.8,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "RedotPay",
+      "total_raised_m": 87.0,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Relai",
+      "total_raised_m": 21.8,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Transak",
+      "total_raised_m": 46.7,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Banxware",
+      "total_raised_m": 44.0,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "BKN301",
+      "total_raised_m": 40.1,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "CredibleX",
+      "total_raised_m": 155.0,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Fimple",
+      "total_raised_m": 20.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "FISPAN",
+      "total_raised_m": 44.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "NymCard",
+      "total_raised_m": 66.1,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Abacum",
+      "total_raised_m": 92.2,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Auditoria.AI",
+      "total_raised_m": 60.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Campfire",
+      "total_raised_m": 104.0,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "Clara",
+      "total_raised_m": 550.0,
+      "commercial_maturity": 5,
+      "commercial_maturity_raw": "5 / 5"
+    },
+    {
+      "company": "Crowded",
+      "total_raised_m": 18.3,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Datricks",
+      "total_raised_m": 15.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Finmo",
+      "total_raised_m": 18.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Mendel",
+      "total_raised_m": 130.6,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Xelix",
+      "total_raised_m": 165.1,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Amlyze",
+      "total_raised_m": 5.1,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Casap",
+      "total_raised_m": 33.6,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "Greenlite",
+      "total_raised_m": 20.3,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Hawk",
+      "total_raised_m": 84.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Bolto",
+      "total_raised_m": 8.1,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Borderless",
+      "total_raised_m": 32.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Every",
+      "total_raised_m": 32.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "InstaPay",
+      "total_raised_m": 7.8,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Jet HR",
+      "total_raised_m": 47.3,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Khazna",
+      "total_raised_m": 54.7,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Niural",
+      "total_raised_m": 41.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "SeamlessHR",
+      "total_raised_m": 19.1,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Agora",
+      "total_raised_m": 69.7,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Cryptio",
+      "total_raised_m": 26.2,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "DigiFT",
+      "total_raised_m": 21.5,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Komainu",
+      "total_raised_m": 100.0,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Maple Finance",
+      "total_raised_m": 11.4,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Securitize",
+      "total_raised_m": 203.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Utila",
+      "total_raised_m": 51.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Delos",
+      "total_raised_m": 22.3,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Descartes Underwriting",
+      "total_raised_m": 141.8,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Further AI",
+      "total_raised_m": 30.5,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "Skarlett",
+      "total_raised_m": 13.6,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "Sixfold",
+      "total_raised_m": 21.5,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Quandri",
+      "total_raised_m": 22.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Casca",
+      "total_raised_m": 33.4,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "CrediLinq",
+      "total_raised_m": 11.9,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "InDebted",
+      "total_raised_m": 93.8,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Murphy",
+      "total_raised_m": 15.0,
+      "commercial_maturity": 1,
+      "commercial_maturity_raw": "1 / 5"
+    },
+    {
+      "company": "Nada",
+      "total_raised_m": 30.3,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Peach Finance",
+      "total_raised_m": 38.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "PostEx",
+      "total_raised_m": 15.9,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Scienaptic",
+      "total_raised_m": 17.1,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Versana",
+      "total_raised_m": 66.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "WonderLend Hubs",
+      "total_raised_m": 1.6,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Aspora",
+      "total_raised_m": 94.3,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Capi",
+      "total_raised_m": 19.5,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Catena Labs",
+      "total_raised_m": 18.0,
+      "commercial_maturity": 2,
+      "commercial_maturity_raw": "2 / 5"
+    },
+    {
+      "company": "Easebuzz",
+      "total_raised_m": 34.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Enza",
+      "total_raised_m": 6.8,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Finom",
+      "total_raised_m": 345.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Haball",
+      "total_raised_m": 52.0,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Highnote",
+      "total_raised_m": 169.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Payrails",
+      "total_raised_m": 52.8,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "PayTic",
+      "total_raised_m": 6.7,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Toku",
+      "total_raised_m": 66.6,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Yaspa",
+      "total_raised_m": 13.3,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Yuno",
+      "total_raised_m": 35.0,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Ziina",
+      "total_raised_m": 30.9,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Candidly",
+      "total_raised_m": 42.1,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Debbie",
+      "total_raised_m": 7.9,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Grifin",
+      "total_raised_m": 11.0,
+      "commercial_maturity": null,
+      "commercial_maturity_raw": "N/A / 5"
+    },
+    {
+      "company": "Alpaca",
+      "total_raised_m": 138.9,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Axyon AI",
+      "total_raised_m": 12.6,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "BridgeWise",
+      "total_raised_m": 40.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Conquest Planning",
+      "total_raised_m": 106.1,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Dub",
+      "total_raised_m": 54.5,
+      "commercial_maturity": null,
+      "commercial_maturity_raw": "N/A / 5"
+    },
+    {
+      "company": "Flanks",
+      "total_raised_m": 25.7,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Jump",
+      "total_raised_m": 24.6,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Lightyear",
+      "total_raised_m": 58.0,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "ModernFi",
+      "total_raised_m": 58.3,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Retirable",
+      "total_raised_m": 26.4,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Thndr",
+      "total_raised_m": 36.0,
+      "commercial_maturity": 3,
+      "commercial_maturity_raw": "3 / 5"
+    },
+    {
+      "company": "Wealth.com",
+      "total_raised_m": 46.0,
+      "commercial_maturity": null,
+      "commercial_maturity_raw": "N/A / 5"
+    },
+    {
+      "company": "Zocks",
+      "total_raised_m": 19.3,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Unique",
+      "total_raised_m": 52.5,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    },
+    {
+      "company": "Upstage",
+      "total_raised_m": 143.8,
+      "commercial_maturity": 4,
+      "commercial_maturity_raw": "4 / 5"
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>CSCO 防御区间比率 (DIR) 2016–2024 变化趋势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+
+    body {
+      background-color: #f7f7f9;
+      color: #222;
+      padding: 24px;
+    }
+
+    .chart-container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px 24px 30px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .chart-container {
+        padding: 14px 12px 20px;
+      }
+      .chart-wrapper {
+        height: 320px;
+      }
+      h1 {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <div class="meta">Ticker: CSCO</div>
+    <h1>防御区间比率 (Defensive Interval Ratio, DIR) 变化趋势</h1>
+    <div class="subtitle">财年 2016–2024：公司以流动资产覆盖日常现金支出的能力</div>
+
+    <div class="chart-wrapper">
+      <canvas id="dirChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Source data (fiscal year vs. DIR)
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const dirValues = [
+      177.0779238527346,
+      219.91979351687388,
+      191.6346127873369,
+      216.3364733979037,
+      228.4459516269163,
+      190.6763552791672,
+      170.96387144833457,
+      168.11030095074702,
+      167.02200759213878
+    ];
+
+    const ctx = document.getElementById("dirChart").getContext("2d");
+
+    // Determine a clean y-axis range
+    const minVal = Math.min(...dirValues);
+    const maxVal = Math.max(...dirValues);
+    const padding = 10;
+    const suggestedMin = Math.floor((minVal - padding) / 10) * 10;
+    const suggestedMax = Math.ceil((maxVal + padding) / 10) * 10;
+
+    const dirChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "防御区间比率 (DIR)",
+            data: dirValues,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderColor: "#ffffff",
+            pointHoverBackgroundColor: "#ffffff",
+            pointHoverBorderColor: "rgba(37, 99, 235, 1)",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointHitRadius: 8,
+            borderWidth: 2.2,
+            tension: 0.28,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+              font: {
+                size: 11
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.9)",
+            titleColor: "#f9fafb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148,163,184,0.6)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function (context) {
+                const v = context.parsed.y;
+                return "DIR: " + v.toFixed(2);
+              },
+              title: function (items) {
+                if (!items.length) return "";
+                return "财年 " + items[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              color: "#6b7280",
+              font: {
+                size: 11,
+                weight: "500"
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "DIR（天）",
+              color: "#6b7280",
+              font: {
+                size: 11,
+                weight: "500"
+              }
+            },
+            grid: {
+              color: "rgba(209,213,219,0.5)"
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 11
+              },
+              callback: function (value) {
+                return value;
+              }
+            },
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

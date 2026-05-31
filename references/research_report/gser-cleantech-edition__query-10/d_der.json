@@ -1,0 +1,47 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a horizontal bar chart showing the bottom 8 Cleantech ecosystems by `Median Seed Round / (Median Seed Round + Median Series A Round)`, expressed in `%`, sorted ascending by the share, and excluding ecosystems with either round missing.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "ascending by seed_share_percent",
+  "selection_rule": "lowest 8 ecosystems",
+  "plot_spec": {
+    "title": "Cleantech Seed Share of Seed+Series A",
+    "xlabel": "percent",
+    "value_field": "seed_share_percent"
+  },
+  "records": [
+    {
+      "entity": "Pittsburgh",
+      "seed_share_percent": 2.1583
+    },
+    {
+      "entity": "Sri Lanka",
+      "seed_share_percent": 4.5045
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "seed_share_percent": 10.2041
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "seed_share_percent": 10.2041
+    },
+    {
+      "entity": "Los Angeles",
+      "seed_share_percent": 10.7603
+    },
+    {
+      "entity": "Washington, D.C.",
+      "seed_share_percent": 11.1111
+    },
+    {
+      "entity": "Singapore",
+      "seed_share_percent": 11.1111
+    },
+    {
+      "entity": "Sydney",
+      "seed_share_percent": 11.6022
+    }
+  ]
+}

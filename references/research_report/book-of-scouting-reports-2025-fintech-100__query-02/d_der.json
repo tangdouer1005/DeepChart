@@ -1,0 +1,436 @@
+{
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "Recent fintech annualized funding",
+  "x_field": "x",
+  "y_field": "y",
+  "size_field": "size",
+  "hue_field": "hue",
+  "label_field": "label",
+  "x_label": "Years since founding (as of 2025)",
+  "y_label": "$M raised per year",
+  "size_label": "Headcount",
+  "annotate": false,
+  "data": [
+    {
+      "label": "Affinity",
+      "x": 3,
+      "y": 3.6666666666666665,
+      "size": 20.0,
+      "hue": "2 / 5"
+    },
+    {
+      "label": "Uzum",
+      "x": 3,
+      "y": 59.833333333333336,
+      "size": 1130.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Beam",
+      "x": 3,
+      "y": 4.666666666666667,
+      "size": 6.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "BVNK",
+      "x": 4,
+      "y": 22.925,
+      "size": 396.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Conduit",
+      "x": 4,
+      "y": 14.75,
+      "size": 71.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Crossmint",
+      "x": 3,
+      "y": 7.866666666666667,
+      "size": 63.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Due",
+      "x": 3,
+      "y": 2.433333333333333,
+      "size": 32.0,
+      "hue": "N/A"
+    },
+    {
+      "label": "Noah",
+      "x": 5,
+      "y": 4.54,
+      "size": 55.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Rain",
+      "x": 4,
+      "y": 22.2,
+      "size": 41.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "RD Technologies",
+      "x": 5,
+      "y": 9.559999999999999,
+      "size": 128.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "RedotPay",
+      "x": 2,
+      "y": 43.5,
+      "size": 67.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Relai",
+      "x": 5,
+      "y": 4.36,
+      "size": 69.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Banxware",
+      "x": 5,
+      "y": 8.8,
+      "size": 61.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "BKN301",
+      "x": 4,
+      "y": 10.025,
+      "size": 98.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "CredibleX",
+      "x": 2,
+      "y": 77.5,
+      "size": 32.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Fimple",
+      "x": 3,
+      "y": 6.833333333333333,
+      "size": 120.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Abacum",
+      "x": 5,
+      "y": 18.44,
+      "size": 121.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Campfire",
+      "x": 2,
+      "y": 52.0,
+      "size": 31.0,
+      "hue": "2 / 5"
+    },
+    {
+      "label": "Clara",
+      "x": 5,
+      "y": 110.0,
+      "size": 582.0,
+      "hue": "5 / 5"
+    },
+    {
+      "label": "Crowded",
+      "x": 4,
+      "y": 4.575,
+      "size": 28.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Finmo",
+      "x": 4,
+      "y": 4.625,
+      "size": 116.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Mendel",
+      "x": 4,
+      "y": 32.65,
+      "size": 190.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Casap",
+      "x": 2,
+      "y": 16.8,
+      "size": 19.0,
+      "hue": "2 / 5"
+    },
+    {
+      "label": "Greenlite",
+      "x": 2,
+      "y": 10.15,
+      "size": 63.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Bolto",
+      "x": 2,
+      "y": 4.05,
+      "size": 10.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Every",
+      "x": 4,
+      "y": 8.125,
+      "size": 313.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Niural",
+      "x": 3,
+      "y": 13.833333333333334,
+      "size": 89.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Agora",
+      "x": 2,
+      "y": 34.85,
+      "size": 40.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "DigiFT",
+      "x": 4,
+      "y": 5.375,
+      "size": 25.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Maple Finance",
+      "x": 5,
+      "y": 2.2800000000000002,
+      "size": 70.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Utila",
+      "x": 3,
+      "y": 17.166666666666668,
+      "size": 48.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Further AI",
+      "x": 2,
+      "y": 15.25,
+      "size": 21.0,
+      "hue": "2 / 5"
+    },
+    {
+      "label": "Skarlett",
+      "x": 2,
+      "y": 6.8,
+      "size": 32.0,
+      "hue": "2 / 5"
+    },
+    {
+      "label": "Sixfold",
+      "x": 2,
+      "y": 10.75,
+      "size": 51.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Quandri",
+      "x": 5,
+      "y": 4.4,
+      "size": 88.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Casca",
+      "x": 2,
+      "y": 16.7,
+      "size": 35.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "CrediLinq",
+      "x": 4,
+      "y": 2.975,
+      "size": 37.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Murphy",
+      "x": 1,
+      "y": 15.0,
+      "size": 21.0,
+      "hue": "1 / 5"
+    },
+    {
+      "label": "PostEx",
+      "x": 5,
+      "y": 3.18,
+      "size": 1211.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Versana",
+      "x": 4,
+      "y": 16.5,
+      "size": 97.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Aspora",
+      "x": 3,
+      "y": 31.433333333333334,
+      "size": 16.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Capi",
+      "x": 2,
+      "y": 9.75,
+      "size": 36.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Catena Labs",
+      "x": 3,
+      "y": 6.0,
+      "size": 13.0,
+      "hue": "2 / 5"
+    },
+    {
+      "label": "Enza",
+      "x": 2,
+      "y": 3.4,
+      "size": 76.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Highnote",
+      "x": 5,
+      "y": 33.8,
+      "size": 112.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Payrails",
+      "x": 4,
+      "y": 13.2,
+      "size": 104.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "PayTic",
+      "x": 5,
+      "y": 1.34,
+      "size": 35.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Toku",
+      "x": 5,
+      "y": 13.319999999999999,
+      "size": 11.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Yuno",
+      "x": 3,
+      "y": 11.666666666666666,
+      "size": 955.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Ziina",
+      "x": 5,
+      "y": 6.18,
+      "size": 182.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Debbie",
+      "x": 4,
+      "y": 1.975,
+      "size": 32.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Dub",
+      "x": 4,
+      "y": 13.625,
+      "size": 113.0,
+      "hue": "N/A"
+    },
+    {
+      "label": "Jump",
+      "x": 2,
+      "y": 12.3,
+      "size": 118.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Lightyear",
+      "x": 5,
+      "y": 11.6,
+      "size": 44.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "ModernFi",
+      "x": 3,
+      "y": 19.433333333333334,
+      "size": 43.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Thndr",
+      "x": 5,
+      "y": 7.2,
+      "size": 266.0,
+      "hue": "3 / 5"
+    },
+    {
+      "label": "Wealth.com",
+      "x": 4,
+      "y": 11.5,
+      "size": 164.0,
+      "hue": "N/A"
+    },
+    {
+      "label": "Zocks",
+      "x": 3,
+      "y": 6.433333333333334,
+      "size": 73.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Unique",
+      "x": 4,
+      "y": 13.125,
+      "size": 122.0,
+      "hue": "4 / 5"
+    },
+    {
+      "label": "Upstage",
+      "x": 5,
+      "y": 28.76,
+      "size": 183.0,
+      "hue": "4 / 5"
+    }
+  ]
+}

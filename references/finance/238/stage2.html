@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMUS Piotroski F-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #020617;
+      --accent: #38bdf8;
+      --accent-alt: #22c55e;
+      --axis: #e5e7eb;
+      --grid: #1f2937;
+      --text-main: #f9fafb;
+      --text-subtle: #9ca3af;
+      --tooltip-bg: rgba(15, 23, 42, 0.96);
+      --tooltip-border: #38bdf8;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%);
+      color: var(--text-main);
+      font-family: var(--font-main);
+    }
+
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .chart-card {
+      width: 100%;
+      max-width: 960px;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow:
+        0 24px 80px rgba(15, 23, 42, 0.85),
+        0 0 0 1px rgba(15, 23, 42, 0.8);
+      padding: 20px 24px 24px;
+      backdrop-filter: blur(16px);
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 1px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-subtle);
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: var(--text-subtle);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 12px;
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+    }
+
+    .meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+    }
+
+    .meta span::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: min(460px, 70vh);
+      margin-top: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .chart-card {
+        padding: 16px 14px 18px;
+        border-radius: 14px;
+      }
+      .title {
+        font-size: 1.05rem;
+      }
+      .subtitle {
+        font-size: 0.8rem;
+      }
+      .chart-container {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="chart-card">
+      <div class="header">
+        <div class="title-block">
+          <div class="title">
+            TMUS 皮奥特罗斯基 F-Score (Piotroski F-Score)
+            <span class="tag">2016–2024 · 年度</span>
+          </div>
+          <div class="subtitle">
+            Annual Piotroski F-Score for T‑Mobile US (TMUS), showing changes in fundamental strength from fiscal year 2016 to 2024.
+          </div>
+        </div>
+        <div class="meta">
+          <span>Score range: 0–9 (higher = stronger fundamentals)</span>
+          <span>Data: user‑provided annual F‑Score values</span>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="fscoreChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data from user (fiscal year, RESULT_F_Score)
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const scores = [7, 6, 8, 6, 4, 4, 5, 7, 8];
+
+    const ctx = document.getElementById("fscoreChart").getContext("2d");
+
+    // Create a vertical gradient for the bars
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(56, 189, 248, 0.95)");   // sky-400
+    gradient.addColorStop(0.5, "rgba(45, 212, 191, 0.92)"); // teal-400
+    gradient.addColorStop(1, "rgba(37, 99, 235, 0.9)");     // blue-600
+
+    const borderGradient = ctx.createLinearGradient(0, 0, 0, 400);
+    borderGradient.addColorStop(0, "#38bdf8");
+    borderGradient.addColorStop(1, "#22c55e");
+
+    const chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "Piotroski F-Score",
+            data: scores,
+            backgroundColor: gradient,
+            borderColor: borderGradient,
+            borderWidth: 1.6,
+            borderRadius: 9,
+            hoverBackgroundColor: "rgba(248, 250, 252, 0.92)",
+            hoverBorderColor: "#38bdf8",
+            hoverBorderWidth: 2,
+            barThickness: 34,
+            maxBarThickness: 40
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 12,
+            right: 12,
+            bottom: 6,
+            left: 4
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: "var(--tooltip-bg)",
+            borderColor: "var(--tooltip-border)",
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8,
+            titleColor: "#e5e7eb",
+            titleFont: { weight: "600", size: 12 },
+            bodyColor: "#f9fafb",
+            bodyFont: { size: 12 },
+            displayColors: false,
+            callbacks: {
+              title: (items) => `Fiscal Year: ${items[0].label}`,
+              label: (item) => `F-Score: ${item.formattedValue} / 9`
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "var(--text-subtle)",
+              font: { size: 11 },
+              padding: 8
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 9,
+            min: 0,
+            max: 9,
+            ticks: {
+              stepSize: 1,
+              color: "var(--text-subtle)",
+              font: { size: 11 },
+              callback: (value) => value.toString()
+            },
+            grid: {
+              color: "rgba(31, 41, 55, 0.9)",
+              borderDash: [4, 4],
+              drawBorder: false
+            }
+          }
+        },
+        animation: {
+          duration: 900,
+          easing: "easeOutCubic"
+        },
+        hover: {
+          mode: "nearest",
+          intersect: true
+        }
+      }
+    });
+
+    // Simple click interaction: log the clicked year & score
+    document
+      .getElementById("fscoreChart")
+      .addEventListener("click", (event) => {
+        const points = chart.getElementsAtEventForMode(
+          event,
+          "nearest",
+          { intersect: true },
+          true
+        );
+        if (points.length) {
+          const idx = points[0].index;
+          const year = labels[idx];
+          const score = scores[idx];
+          console.log(`Clicked: Year ${year}, F-Score ${score}`);
+        }
+      });
+  </script>
+</body>
+</html>

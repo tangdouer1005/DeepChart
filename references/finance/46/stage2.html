@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Earnings Quality Spread (盈余-现金质量剪刀差) 2016–2024</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #333;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 16px 20px 24px 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+    canvas {
+      max-height: 480px;
+    }
+    .note {
+      font-size: 11px;
+      color: #777;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>盈余-现金质量剪刀差 (Earnings Quality Spread)</h1>
+    <h2>Cost: Fiscal Years 2016–2024</h2>
+    <canvas id="eqsBarChart"></canvas>
+    <div class="note">
+      Data source: Provided dataset. Values are decimal spreads (RESULT_Spread).
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('eqsBarChart');
+
+    const labels = [
+      '2016',
+      '2017',
+      '2018',
+      '2019',
+      '2020',
+      '2021',
+      '2022',
+      '2023',
+      '2024'
+    ];
+
+    const dataValues = [
+      0.028467815049864,
+      0.1164436771687527,
+      0.068414164841857,
+      0.0625536356256523,
+      0.0962597567257022,
+      0.068818365498502,
+      0.0250822301796911,
+      0.0717332532291979,
+      0.0572231226364127
+    ];
+
+    // Determine a nice max for y-axis with some headroom
+    const maxVal = Math.max(...dataValues);
+    const suggestedMax = Math.ceil((maxVal + 0.01) * 100) / 100; // round to 2 decimals
+
+    const eqsChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '盈余-现金质量剪刀差 (RESULT_Spread)',
+            data: dataValues,
+            backgroundColor: '#4e79a7',
+            borderColor: '#3b5a7d',
+            borderWidth: 1,
+            hoverBackgroundColor: '#355c8a',
+            hoverBorderColor: '#27405f'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          intersect: true
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 16,
+              font: {
+                size: 11
+              }
+            }
+          },
+          title: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                // Show both decimal and percentage for clarity
+                return [
+                  'Spread: ' + value.toFixed(6),
+                  '≈ ' + (value * 100).toFixed(2) + '%'
+                ];
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Fiscal Year',
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: suggestedMax,
+            title: {
+              display: true,
+              text: 'Earnings Quality Spread (Decimal)',
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(2);
+              }
+            },
+            grid: {
+              color: 'rgba(0,0,0,0.06)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

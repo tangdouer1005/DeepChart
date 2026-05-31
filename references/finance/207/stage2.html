@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ORCL Altman Z-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: #f5f5f7;
+      color: #111827;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #ffffff;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
+    h1 {
+      margin: 0 0 0.25rem;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #111827;
+    }
+    h2 {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #6b7280;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+    .legend-note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.75rem;
+      line-height: 1.4;
+    }
+    @media (max-width: 640px) {
+      .container {
+        margin: 0.75rem;
+        padding: 1rem;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ORCL Altman Z-Score (奥特曼破产预测模型)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="chart-wrapper">
+      <canvas id="zscoreChart"></canvas>
+    </div>
+    <div class="legend-note">
+      <strong>Interpretation bands (approximate, non-manufacturing):</strong><br />
+      • Z-Score &lt; 1.8: High bankruptcy risk (distress zone)<br />
+      • 1.8 ≤ Z-Score ≤ 3.0: Grey zone (moderate risk)<br />
+      • Z-Score &gt; 3.0: Safe zone (low risk)<br />
+      Values shown are the Altman Z-Score estimates for ORCL from 2016 to 2024.
+    </div>
+  </div>
+
+  <script>
+    // Data from the user-provided table
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const zScores = [
+      1.943674663866236,
+      1.72907077313593,
+      1.5994861461274528,
+      1.1870277166848076,
+      1.0154339698158927,
+      0.7893534459001637,
+      0.4174577380821586,
+      0.3917210510860927,
+      0.4734661089691617
+    ];
+
+    // Helper to create a gradient for the bars
+    function createBarGradient(ctx, area) {
+      const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+      gradient.addColorStop(0, "rgba(37, 99, 235, 0.15)");
+      gradient.addColorStop(1, "rgba(37, 99, 235, 0.8)");
+      return gradient;
+    }
+
+    // Plugin to draw Altman Z-Score risk bands (distress / grey / safe)
+    const bandPlugin = {
+      id: "zScoreBands",
+      beforeDraw(chart, args, options) {
+        const {
+          ctx,
+          chartArea: { top, bottom, left, right },
+          scales: { y }
+        } = chart;
+        if (!y) return;
+
+        ctx.save();
+
+        const distressMax = options.distressMax; // 1.8
+        const greyMax = options.greyMax;         // 3.0
+
+        // compute Y positions
+        const distressTop = y.getPixelForValue(distressMax);
+        const greyTop = y.getPixelForValue(greyMax);
+        const maxTop = top;
+        const minBottom = bottom;
+
+        // Distress band (Z < distressMax)
+        ctx.fillStyle = "rgba(239, 68, 68, 0.06)"; // soft red
+        ctx.fillRect(left, distressTop, right - left, minBottom - distressTop);
+
+        // Grey band (distressMax <= Z <= greyMax)
+        ctx.fillStyle = "rgba(234, 179, 8, 0.06)"; // soft amber
+        ctx.fillRect(left, greyTop, right - left, distressTop - greyTop);
+
+        // Safe band (Z > greyMax)
+        ctx.fillStyle = "rgba(34, 197, 94, 0.04)"; // soft green
+        ctx.fillRect(left, maxTop, right - left, greyTop - maxTop);
+
+        ctx.restore();
+      }
+    };
+
+    Chart.register(bandPlugin);
+
+    const ctx = document.getElementById("zscoreChart").getContext("2d");
+
+    const zscoreChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "Altman Z-Score",
+            data: zScores,
+            backgroundColor: (context) => {
+              const { chart, chartArea } = context;
+              if (!chartArea) return "rgba(37, 99, 235, 0.7)";
+              return createBarGradient(chart.ctx, chartArea);
+            },
+            borderColor: "rgba(30, 64, 175, 0.9)",
+            borderWidth: 1.2,
+            borderRadius: 6,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.9)",
+            hoverBorderColor: "rgba(30, 64, 175, 1)",
+            maxBarThickness: 52
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "rectRounded",
+              padding: 16,
+              font: {
+                size: 11.5
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            usePointStyle: true,
+            callbacks: {
+              label: (context) => {
+                const value = context.raw;
+                return ` Z-Score: ${value.toFixed(3)}`;
+              },
+              footer: (items) => {
+                const v = items[0].raw;
+                if (v < 1.8) return "Risk band: Distress (high bankruptcy risk)";
+                if (v <= 3.0) return "Risk band: Grey zone (moderate risk)";
+                return "Risk band: Safe (low risk)";
+              }
+            },
+            footerFont: {
+              style: "italic"
+            },
+            padding: 10,
+            backgroundColor: "rgba(15, 23, 42, 0.95)",
+            borderColor: "rgba(148, 163, 184, 0.6)",
+            borderWidth: 1,
+            bodySpacing: 4
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 3.5,
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              callback: (value) => value.toFixed(1)
+            },
+            title: {
+              display: true,
+              text: "Altman Z-Score",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        layout: {
+          padding: {
+            top: 10,
+            right: 16,
+            bottom: 4,
+            left: 8
+          }
+        }
+      },
+      plugins: [
+        {
+          id: "zScoreBands",
+          distressMax: 1.8,
+          greyMax: 3.0
+        }
+      ]
+    });
+  </script>
+</body>
+</html>

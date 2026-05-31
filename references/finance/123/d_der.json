@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "Operating Income": 8657000000.0,
+            "Income Tax": 1586000000.0,
+            "Pretax Income": 8136000000.0,
+            "Effective Tax Rate": 0.1949360865290068,
+            "NOPAT": 6969438298.918387,
+            "Avg Invested Capital": 61336500000.0
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "Operating Income": 7755000000.0,
+            "Income Tax": 5607000000.0,
+            "Pretax Income": 6890000000.0,
+            "Effective Tax Rate": 0.8137880986937591,
+            "NOPAT": 1444073294.629898,
+            "Avg Invested Capital": 59483500000.0
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "Operating Income": 9152000000.0,
+            "Income Tax": 1749000000.0,
+            "Pretax Income": 8225000000.0,
+            "Effective Tax Rate": 0.212644376899696,
+            "NOPAT": 7205878662.613981,
+            "Avg Invested Capital": 55428500000.0
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "Operating Income": 10086000000.0,
+            "Income Tax": 1801000000.0,
+            "Pretax Income": 10786000000.0,
+            "Effective Tax Rate": 0.166975709252735,
+            "NOPAT": 8401882996.476914,
+            "Avg Invested Capital": 53825500000.0
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "Operating Income": 8997000000.0,
+            "Income Tax": 1981000000.0,
+            "Pretax Income": 9749000000.0,
+            "Effective Tax Rate": 0.2032003282387937,
+            "NOPAT": 7168806646.835572,
+            "Avg Invested Capital": 55582000000.0
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "Operating Income": 10308000000.0,
+            "Income Tax": 2621000000.0,
+            "Pretax Income": 12425000000.0,
+            "Effective Tax Rate": 0.2109456740442656,
+            "NOPAT": 8133571991.951711,
+            "Avg Invested Capital": 56002500000.0
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Operating Income": 10909000000.0,
+            "Income Tax": 2115000000.0,
+            "Pretax Income": 11686000000.0,
+            "Effective Tax Rate": 0.1809857949683382,
+            "NOPAT": 8934625962.6904,
+            "Avg Invested Capital": 55231000000.0
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Operating Income": 11311000000.0,
+            "Income Tax": 2249000000.0,
+            "Pretax Income": 12952000000.0,
+            "Effective Tax Rate": 0.1736411365040148,
+            "NOPAT": 9346945105.003088,
+            "Avg Invested Capital": 56538000000.0
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "Operating Income": 9992000000.0,
+            "Income Tax": 2437000000.0,
+            "Pretax Income": 13086000000.0,
+            "Effective Tax Rate": 0.1862295583065872,
+            "NOPAT": 8131194253.400581,
+            "Avg Invested Capital": 58920000000.0
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "投入资本回报率 (Return on Invested Capital, ROIC)": 0.11362627960379851
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "投入资本回报率 (Return on Invested Capital, ROIC)": 0.024276871647261812
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "投入资本回报率 (Return on Invested Capital, ROIC)": 0.13000313309243408
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "投入资本回报率 (Return on Invested Capital, ROIC)": 0.1560948434566686
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "投入资本回报率 (Return on Invested Capital, ROIC)": 0.12897712653081164
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "投入资本回报率 (Return on Invested Capital, ROIC)": 0.14523587325479595
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "投入资本回报率 (Return on Invested Capital, ROIC)": 0.1617683178412558
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "投入资本回报率 (Return on Invested Capital, ROIC)": 0.16532146706645243
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "投入资本回报率 (Return on Invested Capital, ROIC)": 0.13800397578751836
+        }
+    ]
+}

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 1000px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const pValueData = {
+    "columns": [
+        "SSL ratio",
+        "Li+ binding energy",
+        "Ionic conductivity",
+        "Initial R_interface",
+        "SEI thickness",
+        "F%",
+        "C%",
+        "O%",
+        "R_interface",
+        "eta_15th",
+        "J_crit",
+        "Crystallite size",
+        "Thickness",
+        "Cycle performance"
+    ],
+    "p_values": [
+        [
+            NaN,
+            0.008512891628214076,
+            0.004303878623383886,
+            0.04521449477597076,
+            0.19506402396262018,
+            0.3299836595285547,
+            0.5538852547554471,
+            0.6756866871686789,
+            0.2446153330177452,
+            0.8385532447082006,
+            0.0031729474478672686,
+            0.0028521733944342105,
+            0.006445095072471673,
+            0.0014816136908661864
+        ],
+        [
+            0.008512891628214076,
+            NaN,
+            0.01819400341047459,
+            0.32774079577819115,
+            0.021623646440604233,
+            0.5891688144425602,
+            0.7303906447913543,
+            0.8737287096310956,
+            0.24904995927056975,
+            0.5500870963046207,
+            0.005301614672987469,
+            0.0029121125431973796,
+            0.026845434245135236,
+            0.06924263035016462
+        ],
+        [
+            0.004303878623383886,
+            0.01819400341047459,
+            NaN,
+            0.12227323727647856,
+            0.2039315568912461,
+            0.5226820031913997,
+            0.18439330697472814,
+            0.7032460819724641,
+            0.5460397681552627,
+            0.4799623478812823,
+            0.034629274285583246,
+            0.0005892010435760441,
+            0.026141064885068732,
+            0.07949992190878298
+        ],
+        [
+            0.04521449477597076,
+            0.32774079577819115,
+            0.12227323727647856,
+            NaN,
+            0.9543332609387035,
+            0.2901613059058069,
+            0.1989510347927575,
+            0.6248754942341368,
+            0.9266205702627426,
+            0.7111208325675227,
+            0.05336679618542837,
+            0.13680068950509564,
+            0.01655457150546613,
+            0.0104843177295514
+        ],
+        [
+            0.19506402396262018,
+            0.021623646440604233,
+            0.2039315568912461,
+            0.9543332609387035,
+            NaN,
+            0.7149728768708965,
+            0.6777958756360358,
+            0.7937393529911551,
+            0.5082048409446627,
+            0.6439496255125572,
+            0.16015021059087917,
+            0.044999509000002845,
+            0.2395909379568746,
+            0.48360533992910465
+        ],
+        [
+            0.3299836595285547,
+            0.5891688144425602,
+            0.5226820031913997,
+            0.2901613059058069,
+            0.7149728768708965,
+            NaN,
+            0.2800292629202876,
+            0.12105485236570242,
+            0.9057798436224372,
+            0.7668002851341517,
+            0.13953269954317474,
+            0.5844162321181363,
+            0.16096705380996112,
+            0.1411264482368765
+        ],
+        [
+            0.5538852547554471,
+            0.7303906447913543,
+            0.18439330697472814,
+            0.1989510347927575,
+            0.6777958756360358,
+            0.2800292629202876,
+            NaN,
+            0.4796987049416958,
+            0.47318988586983135,
+            0.05221920725103525,
+            0.4858839481220786,
+            0.42549114175304376,
+            0.1884561505507492,
+            0.6645871636329859
+        ],
+        [
+            0.6756866871686789,
+            0.8737287096310956,
+            0.7032460819724641,
+            0.6248754942341368,
+            0.7937393529911551,
+            0.12105485236570242,
+            0.4796987049416958,
+            NaN,
+            0.8295464544244747,
+            0.1661846522113359,
+            0.3126429233478509,
+            0.8885503918838106,
+            0.5362153788994656,
+            0.26041756439997676
+        ],
+        [
+            0.2446153330177452,
+            0.24904995927056975,
+            0.5460397681552627,
+            0.9266205702627426,
+            0.5082048409446627,
+            0.9057798436224372,
+            0.47318988586983135,
+            0.8295464544244747,
+            NaN,
+            0.305240746168682,
+            0.5703753834402745,
+            0.6361082112582264,
+            0.6348419458643658,
+            0.383040239840902
+        ],
+        [
+            0.8385532447082006,
+            0.5500870963046207,
+            0.4799623478812823,
+            0.7111208325675227,
+            0.6439496255125572,
+            0.7668002851341517,
+            0.05221920725103525,
+            0.1661846522113359,
+            0.305240746168682,
+            NaN,
+            0.551443066790608,
+            0.8344792243268676,
+            0.911112152771469,
+            0.5432322044244023
+        ],
+        [
+            0.0031729474478672686,
+            0.005301614672987469,
+            0.034629274285583246,
+            0.05336679618542837,
+            0.16015021059087917,
+            0.13953269954317474,
+            0.4858839481220786,
+            0.3126429233478509,
+            0.5703753834402745,
+            0.551443066790608,
+            NaN,
+            0.007441850029633259,
+            0.0013262942673747033,
+            0.0030648836386209938
+        ],
+        [
+            0.0028521733944342105,
+            0.0029121125431973796,
+            0.0005892010435760441,
+            0.13680068950509564,
+            0.044999509000002845,
+            0.5844162321181363,
+            0.42549114175304376,
+            0.8885503918838106,
+            0.6361082112582264,
+            0.8344792243268676,
+            0.007441850029633259,
+            NaN,
+            0.014408916342682281,
+            0.05145690597896651
+        ],
+        [
+            0.006445095072471673,
+            0.026845434245135236,
+            0.026141064885068732,
+            0.01655457150546613,
+            0.2395909379568746,
+            0.16096705380996112,
+            0.1884561505507492,
+            0.5362153788994656,
+            0.6348419458643658,
+            0.911112152771469,
+            0.0013262942673747033,
+            0.014408916342682281,
+            NaN,
+            0.008297068588868481
+        ],
+        [
+            0.0014816136908661864,
+            0.06924263035016462,
+            0.07949992190878298,
+            0.0104843177295514,
+            0.48360533992910465,
+            0.1411264482368765,
+            0.6645871636329859,
+            0.26041756439997676,
+            0.383040239840902,
+            0.5432322044244023,
+            0.0030648836386209938,
+            0.05145690597896651,
+            0.008297068588868481,
+            NaN
+        ]
+    ]
+};
+        const pValues = pValueData.p_values;
+        const columns = pValueData.columns;
+        
+        // Prepare Heatmap Data (Upper Triangle + Diagonal)
+        const heatmapData = [];
+        for (let i = 0; i < columns.length; i++) {
+            for (let j = i; j < columns.length; j++) {
+                let val = pValues[i][j];
+                // Diagonal should be handled as special or just data.
+                // In Python script: if i==j: facecolor grey, text "--".
+                // In ECharts, we can map diagonal to a specific value or handle in formatter/visualMap.
+                // We'll pass the raw value.
+                heatmapData.push([j, i, val]);
+            }
+        }
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Reuse rich labels from previous if possible, but keys might differ slightly.
+        const richLabels = {
+            'Li+ binding energy': 'Eb Li+ binding energy', // Updated key
+            'Ionic conductivity': 'σ_ion ionic conductivity', // Updated key
+            'Initial R_interface': 'Initial R_interface\ninitial interfacial resistance',
+            'eta_15th': 'η_15th Li||Li overpotential at 15th cycle',
+            'J_crit': 'J_crit. critical current density',
+            'F%': 'F% F1s atomic percentage',
+            'C%': 'C% C1s atomic percentage',
+            'O%': 'O% O1s atomic percentage',
+            'R_interface': 'R_interface interfacial resistance at 15th cycle'
+        };
+
+        const xLabels = columns;
+        const yLabels = xLabels.map(label => richLabels[label] || label);
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { 
+                top: 200, 
+                bottom: 20, 
+                left: 320, 
+                right: 50 
+            },
+            xAxis: {
+                type: 'category',
+                data: xLabels,
+                position: 'top',
+                axisLabel: { 
+                    rotate: 90, 
+                    align: 'right', 
+                    verticalAlign: 'bottom',
+                    color: 'black', 
+                    fontSize: 12,
+                    formatter: function(value) {
+                        if(value === 'Ionic conductivity') return 'σ_ion'; // Updated
+                        if(value === 'eta_15th') return 'η_15th';
+                        if(value === 'Li+ binding energy') return 'Eb'; // Updated
+                        if(value === 'J_crit') return 'J_crit.';
+                        return value;
+                    }
+                },
+                axisTick: { show: false },
+                axisLine: { show: false },
+                splitArea: { show: false }
+            },
+            yAxis: {
+                type: 'category',
+                data: yLabels,
+                inverse: true,
+                axisLabel: { 
+                    rotate: 0, 
+                    align: 'right',
+                    color: 'black', 
+                    fontSize: 12
+                },
+                axisTick: { show: false },
+                axisLine: { show: false },
+                splitArea: { show: false }
+            },
+            visualMap: {
+                type: 'piecewise',
+                orient: 'vertical',
+                left: 20,
+                bottom: 0,
+                top: 'center',
+                itemWidth: 20,
+                itemHeight: 20,
+                pieces: [
+                    {gt: 0.1, label: '> 0.1', color: '#FFFFFF'},
+                    {gt: 0.01, lte: 0.1, label: '0.01 - 0.1', color: '#DEEBF7'},
+                    {gt: 0.001, lte: 0.01, label: '0.001 - 0.01', color: '#C6DBEF'},
+                    {gt: 0.0001, lte: 0.001, label: '1e-4 - 1e-3', color: '#9ECAE1'},
+                    {gt: 0.00001, lte: 0.0001, label: '1e-5 - 1e-4', color: '#6BAED6'},
+                    {gt: 0.000001, lte: 0.00001, label: '1e-6 - 1e-5', color: '#4292C6'},
+                    {gt: 0.0000001, lte: 0.000001, label: '1e-7 - 1e-6', color: '#2171B5'},
+                    {lte: 0.0000001, label: '< 1e-7', color: '#084594'}
+                ],
+                textStyle: { color: 'black' },
+                showLabel: true // Show labels defined in pieces
+            },
+            series: [{
+                type: 'heatmap',
+                data: heatmapData,
+                label: {
+                    show: true,
+                    formatter: function(params) {
+                        const val = params.value[2];
+                        const xIndex = params.value[0];
+                        const yIndex = params.value[1];
+                        
+                        // Diagonal handling
+                        if (xIndex === yIndex) {
+                            return '--';
+                        }
+                        
+                        if (isNaN(val)) return '';
+                        
+                        if (val < 0.01) return '<0.01';
+                        return val.toFixed(2);
+                    },
+                    color: 'inherit', // Should contrast automatically? No, ECharts doesn't always do this well.
+                    // We need to set color dynamically or based on value.
+                    // Since we can't easily set color callback here for text color in ECharts < 5.0 (check version), 
+                    // we might need to rely on visualMap text color or fixed color.
+                    // Python script sets text color based on background.
+                    // Dark background -> White text. Light background -> Black text.
+                    // 0.0001 and below are darkish.
+                },
+                itemStyle: {
+                    borderColor: 'white',
+                    borderWidth: 1
+                }
+            }],
+            graphic: [
+                { 
+                    type: 'text', 
+                    left: 10, 
+                    top: 10, 
+                    style: { text: 'b', font: 'bold 30px Arial', fill: 'black' } 
+                },
+                {
+                    type: 'text',
+                    left: 20, 
+                    top: '85%', // Above visualMap roughly
+                    style: { 
+                        text: 'P value', 
+                        fill: 'black', 
+                        fontSize: 14 
+                    }
+                }
+            ]
+        };
+        
+        // Manual color correction for labels if possible
+        // ECharts label color callback available?
+        // In recent versions yes.
+        option.series[0].label.color = function(params) {
+             const val = params.value[2];
+             const xIndex = params.value[0];
+             const yIndex = params.value[1];
+             if (xIndex === yIndex) return 'black';
+             if (val <= 0.0001) return 'white';
+             return 'black';
+        };
+        
+        // Handle Diagonal Color Manually
+        // We can't easily override itemStyle color per data point in heatmap without using data object.
+        // Let's map data to objects.
+        option.series[0].data = heatmapData.map(item => {
+            const x = item[0];
+            const y = item[1];
+            const val = item[2];
+            if (x === y) {
+                return {
+                    value: [x, y, val],
+                    itemStyle: { color: '#808080' },
+                    label: { color: 'black' }
+                };
+            }
+            return [x, y, val];
+        });
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

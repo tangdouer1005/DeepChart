@@ -1,0 +1,89 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a slope chart comparing each ecosystem’s rank by `Ecosystem Value` versus its rank by `Number of Unicorns` for the 12 ecosystems with the largest absolute rank gap in 2024, with ranks shown as ordinal positions, sorted by absolute gap descending and excluding ecosystems with zero unicorns.",
+  "chart_type": "slope chart",
+  "value_unit": "rank position",
+  "sort_rule": "descending by absolute rank gap, ties broken by lower value_rank then entity",
+  "selection_rule": "top 12 after deterministic tie-break",
+  "plot_spec": {
+    "title": "2024 Value Rank vs Unicorn Rank",
+    "left_field": "value_rank",
+    "right_field": "unicorn_rank",
+    "left_label": "value_rank",
+    "right_label": "unicorn_rank"
+  },
+  "records": [
+    {
+      "entity": "Kuala Lumpur",
+      "value_rank": 26,
+      "unicorn_rank": 36,
+      "abs_rank_gap": 10
+    },
+    {
+      "entity": "Washington, D.C.",
+      "value_rank": 22,
+      "unicorn_rank": 14,
+      "abs_rank_gap": 8
+    },
+    {
+      "entity": "Mexico City",
+      "value_rank": 28,
+      "unicorn_rank": 21,
+      "abs_rank_gap": 7
+    },
+    {
+      "entity": "The Netherlands",
+      "value_rank": 18,
+      "unicorn_rank": 24,
+      "abs_rank_gap": 6
+    },
+    {
+      "entity": "Buenos Aires",
+      "value_rank": 34,
+      "unicorn_rank": 28,
+      "abs_rank_gap": 6
+    },
+    {
+      "entity": "Telangana",
+      "value_rank": 37,
+      "unicorn_rank": 31,
+      "abs_rank_gap": 6
+    },
+    {
+      "entity": "Kerala",
+      "value_rank": 42,
+      "unicorn_rank": 36,
+      "abs_rank_gap": 6
+    },
+    {
+      "entity": "Beijing",
+      "value_rank": 3,
+      "unicorn_rank": 8,
+      "abs_rank_gap": 5
+    },
+    {
+      "entity": "Tel Aviv",
+      "value_rank": 8,
+      "unicorn_rank": 3,
+      "abs_rank_gap": 5
+    },
+    {
+      "entity": "Berlin",
+      "value_rank": 17,
+      "unicorn_rank": 12,
+      "abs_rank_gap": 5
+    },
+    {
+      "entity": "Austin",
+      "value_rank": 21,
+      "unicorn_rank": 16,
+      "abs_rank_gap": 5
+    },
+    {
+      "entity": "Accra",
+      "value_rank": 41,
+      "unicorn_rank": 36,
+      "abs_rank_gap": 5
+    }
+  ]
+}

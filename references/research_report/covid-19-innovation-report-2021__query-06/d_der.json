@@ -1,0 +1,54 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a dumbbell chart for the 10 countries with the largest positive best-city advantage in the 2021 report, where each country has one point for `covid_rank` and one point for the best visible city rank from `city_rankings`, the selection metric is `covid_rank - best visible city rank`, values are rank positions, Canada and Sweden are excluded because of documented city-rank conflicts, and countries are sorted by the largest positive advantage after the gap is derived.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "rank position",
+  "sort_rule": "descending by best_city_advantage",
+  "selection_rule": "positive advantages only, capped at top 10 after excluding Canada/Sweden",
+  "plot_spec": {
+    "title": "2021 Best-City vs Country Rank Advantage",
+    "left_field": "covid_rank",
+    "right_field": "best_city_rank",
+    "left_label": "Country rank",
+    "right_label": "Best visible city rank",
+    "invert_rank_axis": true
+  },
+  "records": [
+    {
+      "entity": "Russia",
+      "covid_rank": 17,
+      "best_city_rank": 3,
+      "best_city_advantage": 14
+    },
+    {
+      "entity": "Taiwan",
+      "covid_rank": 14,
+      "best_city_rank": 9,
+      "best_city_advantage": 5
+    },
+    {
+      "entity": "Kenya",
+      "covid_rank": 28,
+      "best_city_rank": 24,
+      "best_city_advantage": 4
+    },
+    {
+      "entity": "France",
+      "covid_rank": 18,
+      "best_city_rank": 15,
+      "best_city_advantage": 3
+    },
+    {
+      "entity": "Nigeria",
+      "covid_rank": 37,
+      "best_city_rank": 34,
+      "best_city_advantage": 3
+    },
+    {
+      "entity": "South Korea",
+      "covid_rank": 9,
+      "best_city_rank": 8,
+      "best_city_advantage": 1
+    }
+  ]
+}

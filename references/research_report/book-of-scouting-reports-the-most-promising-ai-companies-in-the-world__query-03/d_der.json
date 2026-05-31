@@ -1,0 +1,70 @@
+{
+  "query_id": 3,
+  "query_text": "Create a dumbbell chart comparing, for each Stage family, the share of companies with disclosed Valuation versus the share with disclosed Last Funded, with values expressed as percentages and sorted by the absolute disclosure-gap between the two shares.",
+  "status": "complete",
+  "chart": {
+    "type": "dumbbell",
+    "title": "Disclosure gap by stage family",
+    "entity_field": "stage_family",
+    "left_field": "valuation_disclosure_pct",
+    "right_field": "last_funded_disclosure_pct",
+    "x_label": "Share of companies (%)",
+    "order": [
+      "seed / pre-seed",
+      "Series A",
+      "strategic / alternative",
+      "Series B",
+      "Series C+",
+      "other / undisclosed"
+    ],
+    "figsize": [
+      12,
+      7
+    ]
+  },
+  "data": [
+    {
+      "stage_family": "seed / pre-seed",
+      "company_count": 28,
+      "valuation_disclosure_pct": 32.142857142857146,
+      "last_funded_disclosure_pct": 100.0,
+      "abs_gap_pct": 67.85714285714286
+    },
+    {
+      "stage_family": "Series A",
+      "company_count": 29,
+      "valuation_disclosure_pct": 51.724137931034484,
+      "last_funded_disclosure_pct": 100.0,
+      "abs_gap_pct": 48.275862068965516
+    },
+    {
+      "stage_family": "strategic / alternative",
+      "company_count": 17,
+      "valuation_disclosure_pct": 58.82352941176471,
+      "last_funded_disclosure_pct": 100.0,
+      "abs_gap_pct": 41.17647058823529
+    },
+    {
+      "stage_family": "Series B",
+      "company_count": 16,
+      "valuation_disclosure_pct": 87.5,
+      "last_funded_disclosure_pct": 100.0,
+      "abs_gap_pct": 12.5
+    },
+    {
+      "stage_family": "Series C+",
+      "company_count": 9,
+      "valuation_disclosure_pct": 88.88888888888889,
+      "last_funded_disclosure_pct": 100.0,
+      "abs_gap_pct": 11.111111111111114
+    },
+    {
+      "stage_family": "other / undisclosed",
+      "company_count": 1,
+      "valuation_disclosure_pct": 0.0,
+      "last_funded_disclosure_pct": 0.0,
+      "abs_gap_pct": 0.0
+    }
+  ],
+  "notes": []
+}

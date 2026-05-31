@@ -1,0 +1,351 @@
+{
+    "models": [
+        "CONCH",
+        "Virchow2",
+        "ProvGigaPath",
+        "DinoSSLPath"
+    ],
+    "data": [
+        {
+            "Task": "KIEL_STAD_M_STATUS",
+            "CONCH": 0.544224,
+            "Virchow2": 0.526274,
+            "ProvGigaPath": 0.534376,
+            "DinoSSLPath": 0.506792,
+            "data_max": 0.544224,
+            "axis_top": 0.544224,
+            "axis_bottom": 0.30422400000000005,
+            "category": "Prognosis"
+        },
+        {
+            "Task": "DACHS_CRC_KRAS",
+            "CONCH": 0.534721,
+            "Virchow2": 0.547883,
+            "ProvGigaPath": 0.5362,
+            "DinoSSLPath": 0.533338,
+            "data_max": 0.547883,
+            "axis_top": 0.547883,
+            "axis_bottom": 0.307883,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "IEO_BRCA_N_STATUS",
+            "CONCH": 0.575481,
+            "Virchow2": 0.55847,
+            "ProvGigaPath": 0.549081,
+            "DinoSSLPath": 0.573873,
+            "data_max": 0.575481,
+            "axis_top": 0.575481,
+            "axis_bottom": 0.33548100000000003,
+            "category": "Prognosis"
+        },
+        {
+            "Task": "CPTAC_LUAD_KRAS",
+            "CONCH": 0.581757,
+            "Virchow2": 0.522889,
+            "ProvGigaPath": 0.552111,
+            "DinoSSLPath": 0.540034,
+            "data_max": 0.581757,
+            "axis_top": 0.581757,
+            "axis_bottom": 0.341757,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "CPTAC_CRC_Sidedness",
+            "CONCH": 0.613278,
+            "Virchow2": 0.583832,
+            "ProvGigaPath": 0.571655,
+            "DinoSSLPath": 0.60289,
+            "data_max": 0.613278,
+            "axis_top": 0.613278,
+            "axis_bottom": 0.373278,
+            "category": "Morphology"
+        },
+        {
+            "Task": "CPTAC_CRC_N_STATUS",
+            "CONCH": 0.630026,
+            "Virchow2": 0.615013,
+            "ProvGigaPath": 0.616402,
+            "DinoSSLPath": 0.594841,
+            "data_max": 0.630026,
+            "axis_top": 0.630026,
+            "axis_bottom": 0.390026,
+            "category": "Prognosis"
+        },
+        {
+            "Task": "CPTAC_CRC_PIK3CA",
+            "CONCH": 0.617665,
+            "Virchow2": 0.636782,
+            "ProvGigaPath": 0.619964,
+            "DinoSSLPath": 0.602783,
+            "data_max": 0.636782,
+            "axis_top": 0.636782,
+            "axis_bottom": 0.39678199999999997,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "DACHS_CRC_N_STATUS",
+            "CONCH": 0.648021,
+            "Virchow2": 0.632989,
+            "ProvGigaPath": 0.622209,
+            "DinoSSLPath": 0.62096,
+            "data_max": 0.648021,
+            "axis_top": 0.648021,
+            "axis_bottom": 0.40802099999999997,
+            "category": "Prognosis"
+        },
+        {
+            "Task": "KIEL_STAD_N_STATUS",
+            "CONCH": 0.631522,
+            "Virchow2": 0.616924,
+            "ProvGigaPath": 0.657943,
+            "DinoSSLPath": 0.632616,
+            "data_max": 0.657943,
+            "axis_top": 0.657943,
+            "axis_bottom": 0.41794299999999995,
+            "category": "Prognosis"
+        },
+        {
+            "Task": "CPTAC_CRC_KRAS",
+            "CONCH": 0.674286,
+            "Virchow2": 0.613441,
+            "ProvGigaPath": 0.628008,
+            "DinoSSLPath": 0.637022,
+            "data_max": 0.674286,
+            "axis_top": 0.674286,
+            "axis_bottom": 0.43428600000000006,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "CPTAC_BRCA_PIK3CA",
+            "CONCH": 0.675417,
+            "Virchow2": 0.610655,
+            "ProvGigaPath": 0.626444,
+            "DinoSSLPath": 0.633569,
+            "data_max": 0.675417,
+            "axis_top": 0.675417,
+            "axis_bottom": 0.43541700000000005,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "CPTAC_BRCA_ERBB2",
+            "CONCH": 0.688275,
+            "Virchow2": 0.66186,
+            "ProvGigaPath": 0.562938,
+            "DinoSSLPath": 0.620216,
+            "data_max": 0.688275,
+            "axis_top": 0.688275,
+            "axis_bottom": 0.448275,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "DACHS_CRC_M_STATUS",
+            "CONCH": 0.675269,
+            "Virchow2": 0.697332,
+            "ProvGigaPath": 0.63174,
+            "DinoSSLPath": 0.662344,
+            "data_max": 0.697332,
+            "axis_top": 0.697332,
+            "axis_bottom": 0.45733199999999996,
+            "category": "Prognosis"
+        },
+        {
+            "Task": "DACHS_CRC_CIMP",
+            "CONCH": 0.671484,
+            "Virchow2": 0.698943,
+            "ProvGigaPath": 0.692594,
+            "DinoSSLPath": 0.65021,
+            "data_max": 0.698943,
+            "axis_top": 0.698943,
+            "axis_bottom": 0.458943,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "BERN_STAD_N_STATUS",
+            "CONCH": 0.71867,
+            "Virchow2": 0.598758,
+            "ProvGigaPath": 0.498635,
+            "DinoSSLPath": 0.627987,
+            "data_max": 0.71867,
+            "axis_top": 0.71867,
+            "axis_bottom": 0.47867000000000004,
+            "category": "Prognosis"
+        },
+        {
+            "Task": "BERN_STAD_LAUREN",
+            "CONCH": 0.720555,
+            "Virchow2": 0.729027,
+            "ProvGigaPath": 0.644662,
+            "DinoSSLPath": 0.705261,
+            "data_max": 0.729027,
+            "axis_top": 0.729027,
+            "axis_bottom": 0.489027,
+            "category": "Morphology"
+        },
+        {
+            "Task": "DACHS_CRC_Sidedness",
+            "CONCH": 0.707539,
+            "Virchow2": 0.723064,
+            "ProvGigaPath": 0.706909,
+            "DinoSSLPath": 0.736509,
+            "data_max": 0.736509,
+            "axis_top": 0.736509,
+            "axis_bottom": 0.496509,
+            "category": "Morphology"
+        },
+        {
+            "Task": "DACHS_CRC_BRAF",
+            "CONCH": 0.708614,
+            "Virchow2": 0.725489,
+            "ProvGigaPath": 0.741302,
+            "DinoSSLPath": 0.649243,
+            "data_max": 0.741302,
+            "axis_top": 0.741302,
+            "axis_bottom": 0.501302,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "CPTAC_CRC_BRAF",
+            "CONCH": 0.708571,
+            "Virchow2": 0.724835,
+            "ProvGigaPath": 0.763956,
+            "DinoSSLPath": 0.753407,
+            "data_max": 0.763956,
+            "axis_top": 0.763956,
+            "axis_bottom": 0.523956,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "CPTAC_LUAD_STK11",
+            "CONCH": 0.727652,
+            "Virchow2": 0.766667,
+            "ProvGigaPath": 0.748611,
+            "DinoSSLPath": 0.737374,
+            "data_max": 0.766667,
+            "axis_top": 0.766667,
+            "axis_bottom": 0.526667,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "CPTAC_LUAD_EGFR",
+            "CONCH": 0.711846,
+            "Virchow2": 0.701634,
+            "ProvGigaPath": 0.769281,
+            "DinoSSLPath": 0.718056,
+            "data_max": 0.769281,
+            "axis_top": 0.769281,
+            "axis_bottom": 0.529281,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "CPTAC_LUAD_TP53",
+            "CONCH": 0.781961,
+            "Virchow2": 0.752157,
+            "ProvGigaPath": 0.732478,
+            "DinoSSLPath": 0.719857,
+            "data_max": 0.781961,
+            "axis_top": 0.781961,
+            "axis_bottom": 0.541961,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "BERN_STAD_MSI",
+            "CONCH": 0.738697,
+            "Virchow2": 0.795687,
+            "ProvGigaPath": 0.790903,
+            "DinoSSLPath": 0.685307,
+            "data_max": 0.795687,
+            "axis_top": 0.795687,
+            "axis_bottom": 0.555687,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "KIEL_STAD_LAUREN",
+            "CONCH": 0.795917,
+            "Virchow2": 0.794557,
+            "ProvGigaPath": 0.711356,
+            "DinoSSLPath": 0.806003,
+            "data_max": 0.806003,
+            "axis_top": 0.806003,
+            "axis_bottom": 0.566003,
+            "category": "Morphology"
+        },
+        {
+            "Task": "CPTAC_BRCA_PGR",
+            "CONCH": 0.800114,
+            "Virchow2": 0.796057,
+            "ProvGigaPath": 0.779371,
+            "DinoSSLPath": 0.806571,
+            "data_max": 0.806571,
+            "axis_top": 0.806571,
+            "axis_bottom": 0.566571,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "KIEL_STAD_MSI",
+            "CONCH": 0.731109,
+            "Virchow2": 0.813374,
+            "ProvGigaPath": 0.778738,
+            "DinoSSLPath": 0.677917,
+            "data_max": 0.813374,
+            "axis_top": 0.813374,
+            "axis_bottom": 0.573374,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "DACHS_CRC_MSI",
+            "CONCH": 0.828881,
+            "Virchow2": 0.862416,
+            "ProvGigaPath": 0.816061,
+            "DinoSSLPath": 0.833579,
+            "data_max": 0.862416,
+            "axis_top": 0.862416,
+            "axis_bottom": 0.622416,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "KIEL_STAD_EBV",
+            "CONCH": 0.87855,
+            "Virchow2": 0.862767,
+            "ProvGigaPath": 0.877741,
+            "DinoSSLPath": 0.837932,
+            "data_max": 0.87855,
+            "axis_top": 0.87855,
+            "axis_bottom": 0.6385500000000001,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "CPTAC_BRCA_ESR1",
+            "CONCH": 0.820932,
+            "Virchow2": 0.894659,
+            "ProvGigaPath": 0.817351,
+            "DinoSSLPath": 0.852485,
+            "data_max": 0.894659,
+            "axis_top": 0.894659,
+            "axis_bottom": 0.654659,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "CPTAC_CRC_MSI",
+            "CONCH": 0.916667,
+            "Virchow2": 0.92284,
+            "ProvGigaPath": 0.888272,
+            "DinoSSLPath": 0.850309,
+            "data_max": 0.92284,
+            "axis_top": 0.92284,
+            "axis_bottom": 0.68284,
+            "category": "Biomarkers"
+        },
+        {
+            "Task": "NSCLC_Subtyping",
+            "CONCH": 0.99268,
+            "Virchow2": 0.983386,
+            "ProvGigaPath": 0.986583,
+            "DinoSSLPath": 0.97072,
+            "data_max": 0.99268,
+            "axis_top": 0.99268,
+            "axis_bottom": 0.75268,
+            "category": "Morphology"
+        }
+    ]
+}

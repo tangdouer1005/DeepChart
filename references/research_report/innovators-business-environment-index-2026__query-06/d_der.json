@@ -1,0 +1,314 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a bubble chart for the 42 countries visible on the regional ranking pages, where the x-axis is `the average of ease_of_operating_business and business_incentives`, the y-axis is `market_perception`, bubble size represents `total_score`, point color represents region, all axis values are index points, and every plotted country must be matched from the regional pages to its country profile card before charting.",
+  "chart_type": "bubble chart",
+  "value_unit": "mixed",
+  "sort_rule": "deterministic region ordering, then descending total_score",
+  "selection_rule": "all 42 countries visible on pages 24-28",
+  "records": [
+    {
+      "entity": "Singapore",
+      "region": "Asia Pacific",
+      "institutional_base_average": 92.4375,
+      "market_perception": 100.0,
+      "total_score": 99.145
+    },
+    {
+      "entity": "Japan",
+      "region": "Asia Pacific",
+      "institutional_base_average": 74.8505,
+      "market_perception": 73.515,
+      "total_score": 83.644
+    },
+    {
+      "entity": "New Zealand",
+      "region": "Asia Pacific",
+      "institutional_base_average": 72.4205,
+      "market_perception": 94.45,
+      "total_score": 77.74
+    },
+    {
+      "entity": "Australia",
+      "region": "Asia Pacific",
+      "institutional_base_average": 67.0785,
+      "market_perception": 93.838,
+      "total_score": 73.812
+    },
+    {
+      "entity": "Taiwan",
+      "region": "Asia Pacific",
+      "institutional_base_average": 77.7805,
+      "market_perception": 78.79,
+      "total_score": 69.007
+    },
+    {
+      "entity": "South Korea",
+      "region": "Asia Pacific",
+      "institutional_base_average": 56.3005,
+      "market_perception": 73.589,
+      "total_score": 67.895
+    },
+    {
+      "entity": "Malaysia",
+      "region": "Asia Pacific",
+      "institutional_base_average": 73.545,
+      "market_perception": 68.648,
+      "total_score": 58.756
+    },
+    {
+      "entity": "Vietnam",
+      "region": "Asia Pacific",
+      "institutional_base_average": 63.326,
+      "market_perception": 37.035,
+      "total_score": 57.133
+    },
+    {
+      "entity": "Indonesia",
+      "region": "Asia Pacific",
+      "institutional_base_average": 68.2035,
+      "market_perception": 42.873,
+      "total_score": 56.234
+    },
+    {
+      "entity": "India",
+      "region": "Asia Pacific",
+      "institutional_base_average": 59.782,
+      "market_perception": 37.811,
+      "total_score": 55.035
+    },
+    {
+      "entity": "United Kingdom",
+      "region": "Europe",
+      "institutional_base_average": 81.5135,
+      "market_perception": 87.143,
+      "total_score": 93.9
+    },
+    {
+      "entity": "Switzerland",
+      "region": "Europe",
+      "institutional_base_average": 72.733,
+      "market_perception": 91.696,
+      "total_score": 86.9
+    },
+    {
+      "entity": "The Netherlands",
+      "region": "Europe",
+      "institutional_base_average": 67.907,
+      "market_perception": 94.121,
+      "total_score": 85.71
+    },
+    {
+      "entity": "Estonia",
+      "region": "Europe",
+      "institutional_base_average": 79.6045,
+      "market_perception": 81.515,
+      "total_score": 78.997
+    },
+    {
+      "entity": "Sweden",
+      "region": "Europe",
+      "institutional_base_average": 69.5895,
+      "market_perception": 94.946,
+      "total_score": 77.012
+    },
+    {
+      "entity": "Luxembourg",
+      "region": "Europe",
+      "institutional_base_average": 70.9255,
+      "market_perception": 90.076,
+      "total_score": 76.136
+    },
+    {
+      "entity": "Ireland",
+      "region": "Europe",
+      "institutional_base_average": 70.8065,
+      "market_perception": 90.749,
+      "total_score": 75.448
+    },
+    {
+      "entity": "Cyprus",
+      "region": "Europe",
+      "institutional_base_average": 77.6085,
+      "market_perception": 64.354,
+      "total_score": 74.63
+    },
+    {
+      "entity": "Belgium",
+      "region": "Europe",
+      "institutional_base_average": 72.365,
+      "market_perception": 79.441,
+      "total_score": 74.409
+    },
+    {
+      "entity": "Bulgaria",
+      "region": "Europe",
+      "institutional_base_average": 79.257,
+      "market_perception": 60.329,
+      "total_score": 73.63
+    },
+    {
+      "entity": "Brazil",
+      "region": "Latin America and the Caribbean",
+      "institutional_base_average": 67.956,
+      "market_perception": 40.222,
+      "total_score": 61.776
+    },
+    {
+      "entity": "Uruguay",
+      "region": "Latin America and the Caribbean",
+      "institutional_base_average": 60.273,
+      "market_perception": 67.832,
+      "total_score": 61.232
+    },
+    {
+      "entity": "Puerto Rico",
+      "region": "Latin America and the Caribbean",
+      "institutional_base_average": 61.639,
+      "market_perception": 59.877,
+      "total_score": 60.606
+    },
+    {
+      "entity": "Colombia",
+      "region": "Latin America and the Caribbean",
+      "institutional_base_average": 58.8125,
+      "market_perception": 39.455,
+      "total_score": 59.337
+    },
+    {
+      "entity": "Peru",
+      "region": "Latin America and the Caribbean",
+      "institutional_base_average": 59.5265,
+      "market_perception": 47.187,
+      "total_score": 54.91
+    },
+    {
+      "entity": "Chile",
+      "region": "Latin America and the Caribbean",
+      "institutional_base_average": 59.3765,
+      "market_perception": 64.439,
+      "total_score": 52.536
+    },
+    {
+      "entity": "Mexico",
+      "region": "Latin America and the Caribbean",
+      "institutional_base_average": 59.406,
+      "market_perception": 37.997,
+      "total_score": 52.519
+    },
+    {
+      "entity": "Panama",
+      "region": "Latin America and the Caribbean",
+      "institutional_base_average": 56.6845,
+      "market_perception": 38.835,
+      "total_score": 50.565
+    },
+    {
+      "entity": "Costa Rica",
+      "region": "Latin America and the Caribbean",
+      "institutional_base_average": 53.3755,
+      "market_perception": 54.664,
+      "total_score": 46.496
+    },
+    {
+      "entity": "Argentina",
+      "region": "Latin America and the Caribbean",
+      "institutional_base_average": 48.8975,
+      "market_perception": 41.125,
+      "total_score": 45.625
+    },
+    {
+      "entity": "United Arab Emirates",
+      "region": "Middle East and Africa",
+      "institutional_base_average": 85.6615,
+      "market_perception": 71.24,
+      "total_score": 86.222
+    },
+    {
+      "entity": "Saudi Arabia",
+      "region": "Middle East and Africa",
+      "institutional_base_average": 72.3415,
+      "market_perception": 51.573,
+      "total_score": 82.88
+    },
+    {
+      "entity": "Israel",
+      "region": "Middle East and Africa",
+      "institutional_base_average": 70.9265,
+      "market_perception": 75.782,
+      "total_score": 70.523
+    },
+    {
+      "entity": "Bahrain",
+      "region": "Middle East and Africa",
+      "institutional_base_average": 78.1115,
+      "market_perception": 50.948,
+      "total_score": 61.246
+    },
+    {
+      "entity": "Qatar",
+      "region": "Middle East and Africa",
+      "institutional_base_average": 69.928,
+      "market_perception": 61.192,
+      "total_score": 52.287
+    },
+    {
+      "entity": "South Africa",
+      "region": "Middle East and Africa",
+      "institutional_base_average": 54.691,
+      "market_perception": 49.396,
+      "total_score": 52.168
+    },
+    {
+      "entity": "Kenya",
+      "region": "Middle East and Africa",
+      "institutional_base_average": 54.283,
+      "market_perception": 39.742,
+      "total_score": 47.709
+    },
+    {
+      "entity": "Cape Verde",
+      "region": "Middle East and Africa",
+      "institutional_base_average": 46.0485,
+      "market_perception": 48.122,
+      "total_score": 46.992
+    },
+    {
+      "entity": "Kuwait",
+      "region": "Middle East and Africa",
+      "institutional_base_average": 68.49,
+      "market_perception": 51.577,
+      "total_score": 46.548
+    },
+    {
+      "entity": "Jordan",
+      "region": "Middle East and Africa",
+      "institutional_base_average": 58.249,
+      "market_perception": 31.272,
+      "total_score": 44.828
+    },
+    {
+      "entity": "United States",
+      "region": "North America",
+      "institutional_base_average": 88.2595,
+      "market_perception": 88.54,
+      "total_score": 100.0
+    },
+    {
+      "entity": "Canada",
+      "region": "North America",
+      "institutional_base_average": 70.849,
+      "market_perception": 91.542,
+      "total_score": 86.14
+    }
+  ],
+  "chart_title": "IBEI 2026 Visible Regional Countries: Institutional Base vs Market Perception",
+  "x_field": "institutional_base_average",
+  "x_label": "average(ease of operating a business, business incentives)",
+  "x_unit": "index points",
+  "y_field": "market_perception",
+  "y_label": "market perception",
+  "y_unit": "index points",
+  "size_field": "total_score",
+  "size_unit": "index points",
+  "color_field": "region"
+}

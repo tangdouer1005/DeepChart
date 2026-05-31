@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cvx 格雷厄姆“烟蒂股”净值 (NNWC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f8;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0 0 16px;
+      color: #555;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 20px 24px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .meta {
+      font-size: 12px;
+      color: #777;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .meta span.label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    canvas {
+      max-height: 480px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>cvx 格雷厄姆“烟蒂股”净值 (NNWC) 走势</h1>
+    <h2>按年度 NNWC 每股变动（2016–2024）</h2>
+    <canvas id="nnwcChart"></canvas>
+    <div class="meta">
+      <div><span class="label">指标说明：</span>RESULT_NNWC_Per_Share（Graham's Net-Net Working Capital per Share）</div>
+      <div><span class="label">单位：</span>与原始数据一致（每股数值，负值表示净流动资产为负）</div>
+      <div><span class="label">数据来源：</span>用户提供的年度 NNWC 数据（2016–2024）</div>
+    </div>
+  </div>
+
+  <script>
+    // Source Data (as provided)
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const dataValues = [
+      -44.71245826411838,
+      -40.01142475916049,
+      -33.540444708681385,
+      -33.71332565750246,
+      -43.30739609642,
+      -34.295608701878635,
+      -24.287253830252077,
+      -31.15182786640692,
+      -34.60099064391855
+    ];
+
+    const ctx = document.getElementById("nnwcChart").getContext("2d");
+
+    // Create gradient fill for bars (for a clean, modern look)
+    function createGradient(ctx, chartArea) {
+      const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+      gradient.addColorStop(0, "rgba(227, 73, 53, 0.9)");
+      gradient.addColorStop(1, "rgba(244, 143, 177, 0.95)");
+      return gradient;
+    }
+
+    let gradientFill;
+
+    const nnwcChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "NNWC 每股",
+            data: dataValues,
+            backgroundColor: function (context) {
+              const chart = context.chart;
+              const { ctx, chartArea } = chart;
+              if (!chartArea) {
+                return "rgba(227, 73, 53, 0.9)";
+              }
+              if (!gradientFill) {
+                gradientFill = createGradient(ctx, chartArea);
+              }
+              return gradientFill;
+            },
+            borderColor: "rgba(183, 28, 28, 0.9)",
+            borderWidth: 1,
+            borderRadius: 4,
+            hoverBackgroundColor: "rgba(229, 57, 53, 1)",
+            hoverBorderColor: "rgba(183, 28, 28, 1)",
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        plugins: {
+          title: {
+            display: false,
+          },
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 14,
+              usePointStyle: true,
+              pointStyle: "rectRounded",
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return `NNWC 每股: ${value.toFixed(3)}`;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年 (Fiscal Year)",
+              color: "#444",
+              font: {
+                size: 12,
+              },
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+            },
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "NNWC 每股 (RESULT_NNWC_Per_Share)",
+              color: "#444",
+              font: {
+                size: 12,
+              },
+            },
+            ticks: {
+              callback: function (value) {
+                return value; // keep raw numeric values; customize if needed
+              },
+            },
+            grid: {
+              color: "rgba(0, 0, 0, 0.05)",
+            },
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>

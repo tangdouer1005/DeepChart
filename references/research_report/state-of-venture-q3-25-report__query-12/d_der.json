@@ -1,0 +1,51 @@
+{
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "Sector median size vs Q3 funding growth",
+  "x_field": "x",
+  "y_field": "y",
+  "size_field": "size",
+  "hue_field": "hue",
+  "label_field": "label",
+  "x_label": "2025 YTD median deal size ($M)",
+  "y_label": "Q3 funding growth vs Q3 2024 (%)",
+  "size_label": "Top-5 concentration share (%)",
+  "annotate": true,
+  "data": [
+    {
+      "label": "AI",
+      "x": 4.7,
+      "y": 165.555556,
+      "size": 52.09205,
+      "hue": "Above cross-sector median"
+    },
+    {
+      "label": "Fintech",
+      "x": 4.8,
+      "y": 28.235294,
+      "size": 21.743119,
+      "hue": "Above cross-sector median"
+    },
+    {
+      "label": "Retail Tech",
+      "x": 3.8,
+      "y": 3.846154,
+      "size": 38.074074,
+      "hue": "At or below cross-sector median"
+    },
+    {
+      "label": "Digital Health",
+      "x": 6.0,
+      "y": 12.5,
+      "size": 24.244444,
+      "hue": "At or below cross-sector median"
+    },
+    {
+      "label": "CVC",
+      "x": 10.9,
+      "y": 20.0,
+      "size": 26.22549,
+      "hue": "At or below cross-sector median"
+    }
+  ]
+}

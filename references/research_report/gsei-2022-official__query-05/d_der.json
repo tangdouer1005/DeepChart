@@ -1,0 +1,76 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a ranked dot plot showing the top 10 countries by global recovery breadth, where the plotted value is `count of cities with positive numeric global_rank_change / count of cities with numeric global_rank_change` within each 3.2 national block, values are percentages, only countries with at least 4 numeric `global_rank_change` values are eligible, and countries are sorted from highest to lowest after the share is computed.",
+  "chart_type": "dot plot",
+  "value_unit": "percent",
+  "sort_rule": "descending by global_recovery_breadth_pct",
+  "selection_rule": "top 10 among countries with at least 4 numeric change values",
+  "plot_spec": {
+    "title": "Global Recovery Breadth",
+    "xlabel": "percent",
+    "value_field": "global_recovery_breadth_pct",
+    "value_as_percent": true
+  },
+  "records": [
+    {
+      "entity": "Ireland",
+      "global_recovery_breadth_pct": 83.3333,
+      "positive_numeric_count": 5,
+      "numeric_count": 6
+    },
+    {
+      "entity": "Taiwan",
+      "global_recovery_breadth_pct": 83.3333,
+      "positive_numeric_count": 5,
+      "numeric_count": 6
+    },
+    {
+      "entity": "United States",
+      "global_recovery_breadth_pct": 83.3333,
+      "positive_numeric_count": 5,
+      "numeric_count": 6
+    },
+    {
+      "entity": "China",
+      "global_recovery_breadth_pct": 77.7778,
+      "positive_numeric_count": 7,
+      "numeric_count": 9
+    },
+    {
+      "entity": "Argentina",
+      "global_recovery_breadth_pct": 75.0,
+      "positive_numeric_count": 3,
+      "numeric_count": 4
+    },
+    {
+      "entity": "Colombia",
+      "global_recovery_breadth_pct": 75.0,
+      "positive_numeric_count": 3,
+      "numeric_count": 4
+    },
+    {
+      "entity": "Norway",
+      "global_recovery_breadth_pct": 75.0,
+      "positive_numeric_count": 3,
+      "numeric_count": 4
+    },
+    {
+      "entity": "Sweden",
+      "global_recovery_breadth_pct": 71.4286,
+      "positive_numeric_count": 5,
+      "numeric_count": 7
+    },
+    {
+      "entity": "United Kingdom",
+      "global_recovery_breadth_pct": 70.0,
+      "positive_numeric_count": 7,
+      "numeric_count": 10
+    },
+    {
+      "entity": "Canada",
+      "global_recovery_breadth_pct": 66.6667,
+      "positive_numeric_count": 6,
+      "numeric_count": 9
+    }
+  ]
+}

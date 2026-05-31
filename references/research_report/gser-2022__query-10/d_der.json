@@ -1,0 +1,123 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a bubble chart for ecosystems where `Total Early-Stage Funding`, `Total VC Funding`, `Time to Exit`, and `Ecosystem Value` are all exact values, with the x-axis showing `Total Early-Stage Funding / Total VC Funding` in `%`, the y-axis showing `Time to Exit` in `years`, bubble size representing `Ecosystem Value` in `$B`, keeping only the top 15 ecosystems by `Ecosystem Value`, and labeling the top 8 items by highest x-axis value.",
+  "chart_type": "bubble chart",
+  "value_unit": "% / years / $B",
+  "sort_rule": "labels assigned to top 8 by early_to_vc_percent",
+  "selection_rule": "top 15 ecosystems by Ecosystem Value",
+  "plot_spec": {
+    "title": "2022 Early-to-VC Share vs Exit Time",
+    "x_field": "x_early_to_vc_percent",
+    "y_field": "y_time_to_exit_years",
+    "size_field": "size_ecosystem_value_busd",
+    "xlabel": "Early-Stage Funding / Total VC Funding (%)",
+    "ylabel": "Time to Exit (years)"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley",
+      "x_early_to_vc_percent": 10.1215,
+      "y_time_to_exit_years": 7.6,
+      "size_ecosystem_value_busd": 2000.0,
+      "label": false
+    },
+    {
+      "entity": "Beijing",
+      "x_early_to_vc_percent": 11.0465,
+      "y_time_to_exit_years": 8.0,
+      "size_ecosystem_value_busd": 795.0,
+      "label": false
+    },
+    {
+      "entity": "New York City",
+      "x_early_to_vc_percent": 15.9091,
+      "y_time_to_exit_years": 8.6,
+      "size_ecosystem_value_busd": 371.0,
+      "label": true
+    },
+    {
+      "entity": "London",
+      "x_early_to_vc_percent": 20.5882,
+      "y_time_to_exit_years": 9.5,
+      "size_ecosystem_value_busd": 314.0,
+      "label": true
+    },
+    {
+      "entity": "Los Angeles",
+      "x_early_to_vc_percent": 15.1282,
+      "y_time_to_exit_years": 9.4,
+      "size_ecosystem_value_busd": 297.0,
+      "label": false
+    },
+    {
+      "entity": "Boston",
+      "x_early_to_vc_percent": 17.0588,
+      "y_time_to_exit_years": 8.9,
+      "size_ecosystem_value_busd": 266.0,
+      "label": true
+    },
+    {
+      "entity": "Shanghai",
+      "x_early_to_vc_percent": 8.6538,
+      "y_time_to_exit_years": 10.0,
+      "size_ecosystem_value_busd": 250.0,
+      "label": false
+    },
+    {
+      "entity": "Seoul",
+      "x_early_to_vc_percent": 12.1053,
+      "y_time_to_exit_years": 8.0,
+      "size_ecosystem_value_busd": 177.0,
+      "label": false
+    },
+    {
+      "entity": "Tel Aviv",
+      "x_early_to_vc_percent": 18.3333,
+      "y_time_to_exit_years": 7.0,
+      "size_ecosystem_value_busd": 120.0,
+      "label": true
+    },
+    {
+      "entity": "Seattle",
+      "x_early_to_vc_percent": 23.75,
+      "y_time_to_exit_years": 9.0,
+      "size_ecosystem_value_busd": 109.0,
+      "label": true
+    },
+    {
+      "entity": "Bangalore - Karnataka",
+      "x_early_to_vc_percent": 10.0,
+      "y_time_to_exit_years": 6.2,
+      "size_ecosystem_value_busd": 105.0,
+      "label": false
+    },
+    {
+      "entity": "Shenzhen",
+      "x_early_to_vc_percent": 8.75,
+      "y_time_to_exit_years": 10.5,
+      "size_ecosystem_value_busd": 97.0,
+      "label": false
+    },
+    {
+      "entity": "San Diego",
+      "x_early_to_vc_percent": 17.5,
+      "y_time_to_exit_years": 10.1,
+      "size_ecosystem_value_busd": 94.0,
+      "label": true
+    },
+    {
+      "entity": "Berlin",
+      "x_early_to_vc_percent": 15.2174,
+      "y_time_to_exit_years": 6.8,
+      "size_ecosystem_value_busd": 94.0,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "x_early_to_vc_percent": 18.8235,
+      "y_time_to_exit_years": 6.8,
+      "size_ecosystem_value_busd": 89.0,
+      "label": true
+    }
+  ]
+}

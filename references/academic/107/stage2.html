@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const data = {
+    "headers": [
+        "F0Luc - Vehicule",
+        "F0Luc - viFSP1 (30 \u03bcM)",
+        "F0Luc - BSO (1mM)",
+        "F0Luc - viFSP1 (30 \u03bcM) + BSO (1mM)",
+        "F0Luc - viFSP1 (30 \u03bcM) + BSO (1mM) + Liprox (1\u03bcM)",
+        "LN8 - Vehicule",
+        "LN8 - viFSP1 (30 \u03bcM)",
+        "LN8 - BSO (1mM)",
+        "LN8 - viFSP1 (30 \u03bcM) + BSO (1mM)",
+        "LN8 -  viFSP1 (30 \u03bcM) + BSO (1mM) + Liprox (1\u03bcM)"
+    ],
+    "means": [
+        99.99999986666667,
+        99.6576407,
+        78.64923743333334,
+        84.0024899,
+        103.85932129999999,
+        100.06466226666667,
+        102.39249903333332,
+        65.21176849999999,
+        47.46201096666666,
+        87.03524083333333
+    ]
+};
+        
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Config Data
+        const rowLabels = ["Vehicle", "viFSP1 (30 μM)", "L-BSO (1 mM)", "Liproxstatin-1 (1 μM)"];
+        const matrix = [
+            [1, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+            [0, 1, 0, 1, 1, 0, 1, 0, 1, 1],
+            [0, 0, 1, 1, 1, 0, 0, 1, 1, 1],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+        ];
+
+        // P-values
+        // y coordinates are relative to the grid logic:
+        // 0 is heatmap center. Heatmap height is 1. Top is -0.5.
+        // We use negative Y for above the heatmap.
+        const pAnnotations = [
+            { idx1: 0, idx2: 3, text: 'P = 0.0057', y: -0.8 },
+            { idx1: 3, idx2: 4, text: 'P = 0.0005', y: -1.5 },
+            { idx1: 3, idx2: 8, text: 'P = 6.1 × 10⁻⁸', y: -2.5 }, 
+            { idx1: 5, idx2: 8, text: 'P = 9.8 × 10⁻¹¹', y: -1.5 },
+            { idx1: 8, idx2: 9, text: 'P = 1.6 × 10⁻⁸', y: -0.8 }
+        ];
+
+        // Viridis colormap approximation
+        function getColor(value) {
+            // value 40-100
+            const min = 40;
+            const max = 100;
+            const t = Math.max(0, Math.min(1, (value - min) / (max - min)));
+            // Simple interpolation between Purple -> Teal -> Yellow
+            // 0.0: #440154 (68, 1, 84)
+            // 0.5: #21918c (33, 145, 140)
+            // 1.0: #fde725 (253, 231, 37)
+            let r, g, b;
+            if (t < 0.5) {
+                const localT = t * 2;
+                r = 68 + localT * (33 - 68);
+                g = 1 + localT * (145 - 1);
+                b = 84 + localT * (140 - 84);
+            } else {
+                const localT = (t - 0.5) * 2;
+                r = 33 + localT * (253 - 33);
+                g = 145 + localT * (231 - 145);
+                b = 140 + localT * (37 - 140);
+            }
+            return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+        }
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 150, bottom: 50, left: 50, right: 150 },
+            xAxis: {
+                type: 'value',
+                min: -0.5,
+                max: 9.5,
+                interval: 1,
+                show: false,
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                inverse: true, // Positive down
+                min: -3,
+                max: 7,
+                show: false,
+                splitLine: { show: false }
+            },
+            series: [
+                // 1. Heatmap (Custom Rects)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const idx = params.dataIndex;
+                        const val = data.means[idx];
+                        const x = api.coord([idx, 0]); // Center of cell
+                        // Width/Height in pixels
+                        // We want 1 unit width/height.
+                        // Calculate size of 1 unit.
+                        const p0 = api.coord([0, 0]);
+                        const p1 = api.coord([1, 1]);
+                        const width = Math.abs(p1[0] - p0[0]);
+                        const height = Math.abs(p1[1] - p0[1]);
+                        
+                        return {
+                            type: 'rect',
+                            shape: {
+                                x: x[0] - width / 2,
+                                y: x[1] - height / 2,
+                                width: width,
+                                height: height
+                            },
+                            style: {
+                                fill: getColor(val),
+                                stroke: 'black',
+                                lineWidth: 1
+                            }
+                        };
+                    },
+                    data: data.means
+                },
+                // 2. Matrix Text and Ticks
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const rowIdx = params.dataIndex; // 0 to 3
+                        const rowData = matrix[rowIdx];
+                        const yBase = 1.5 + rowIdx * 0.8; // Matrix rows below heatmap
+                        
+                        const children = [];
+                        
+                        // Row Label
+                        const labelPos = api.coord([9.8, yBase]); // Slightly right of last col
+                        children.push({
+                            type: 'text',
+                            style: {
+                                text: rowLabels[rowIdx],
+                                x: labelPos[0],
+                                y: labelPos[1],
+                                textAlign: 'left',
+                                textVerticalAlign: 'middle',
+                                font: '14px Arial'
+                            }
+                        });
+
+                        // Ticks for first row
+                        if (rowIdx === 0) {
+                            for (let c = 0; c < 10; c++) {
+                                const top = api.coord([c, 0.5]); // Bottom of heatmap
+                                const bot = api.coord([c, yBase - 0.3]);
+                                children.push({
+                                    type: 'line',
+                                    shape: { x1: top[0], y1: top[1], x2: bot[0], y2: bot[1] },
+                                    style: { stroke: 'black', lineWidth: 1 }
+                                });
+                            }
+                        }
+
+                        // +/- Signs
+                        for (let c = 0; c < 10; c++) {
+                            const val = rowData[c];
+                            const txt = val === 1 ? '+' : '−';
+                            const weight = val === 1 ? 'bold' : 'normal';
+                            const pos = api.coord([c, yBase]);
+                            children.push({
+                                type: 'text',
+                                style: {
+                                    text: txt,
+                                    x: pos[0],
+                                    y: pos[1],
+                                    textAlign: 'center',
+                                    textVerticalAlign: 'middle',
+                                    font: weight + ' 16px Arial'
+                                }
+                            });
+                        }
+                        return { type: 'group', children: children };
+                    },
+                    data: rowLabels // Dummy data to loop 4 times
+                },
+                // 3. Brackets
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const ann = pAnnotations[params.dataIndex];
+                        const p1 = api.coord([ann.idx1, ann.y]);
+                        const p2 = api.coord([ann.idx2, ann.y]);
+                        const legH = 5; // Pixels
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'polyline',
+                                    shape: {
+                                        points: [
+                                            [p1[0], p1[1] + legH],
+                                            [p1[0], p1[1]],
+                                            [p2[0], p2[1]],
+                                            [p2[0], p2[1] + legH]
+                                        ]
+                                    },
+                                    style: { stroke: 'black', lineWidth: 1, fill: null }
+                                },
+                                {
+                                    type: 'text',
+                                    style: {
+                                        text: ann.text,
+                                        x: (p1[0] + p2[0]) / 2,
+                                        y: p1[1] - 5,
+                                        textAlign: 'center',
+                                        textVerticalAlign: 'bottom',
+                                        font: '12px Arial'
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: pAnnotations
+                },
+                // 4. Structural Lines and Group Labels
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const children = [];
+                        
+                        // Vertical separator (between index 4 and 5)
+                        const sepTop = api.coord([4.5, -0.5]);
+                        const sepBot = api.coord([4.5, 4.5]); // Extend down past matrix
+                        children.push({
+                            type: 'line',
+                            shape: { x1: sepTop[0], y1: sepTop[1], x2: sepBot[0], y2: sepBot[1] },
+                            style: { stroke: 'black', lineWidth: 1 }
+                        });
+
+                        // Group Lines
+                        const groupYVal = 5.0;
+                        const groupY = api.coord([0, groupYVal])[1];
+                        
+                        // B16-F0 (0-4)
+                        const g1Left = api.coord([0, groupYVal]);
+                        const g1Right = api.coord([4, groupYVal]);
+                        children.push({
+                            type: 'line',
+                            shape: { x1: g1Left[0], y1: g1Left[1], x2: g1Right[0], y2: g1Right[1] },
+                            style: { stroke: 'black', lineWidth: 1 }
+                        });
+                        children.push({
+                            type: 'text',
+                            style: { text: 'B16-F0', x: (g1Left[0] + g1Right[0]) / 2, y: groupY + 5, textAlign: 'center', textVerticalAlign: 'top', font: '14px Arial' }
+                        });
+
+                        // LN8-1194BR (5-9)
+                        const g2Left = api.coord([5, groupYVal]);
+                        const g2Right = api.coord([9, groupYVal]);
+                        children.push({
+                            type: 'line',
+                            shape: { x1: g2Left[0], y1: g2Left[1], x2: g2Right[0], y2: g2Right[1] },
+                            style: { stroke: 'black', lineWidth: 1 }
+                        });
+                        children.push({
+                            type: 'text',
+                            style: { text: 'LN8-1194BR', x: (g2Left[0] + g2Right[0]) / 2, y: groupY + 5, textAlign: 'center', textVerticalAlign: 'top', font: '14px Arial' }
+                        });
+
+                        // 1% O2 (0-9)
+                        const o2YVal = 5.8;
+                        const o2Y = api.coord([0, o2YVal])[1];
+                        const o2Left = api.coord([0, o2YVal]);
+                        const o2Right = api.coord([9, o2YVal]);
+                        children.push({
+                            type: 'line',
+                            shape: { x1: o2Left[0], y1: o2Left[1], x2: o2Right[0], y2: o2Right[1] },
+                            style: { stroke: 'black', lineWidth: 1 }
+                        });
+                        children.push({
+                            type: 'text',
+                            style: { text: '1% O₂', x: (o2Left[0] + o2Right[0]) / 2, y: o2Y + 5, textAlign: 'center', textVerticalAlign: 'top', font: '14px Arial' }
+                        });
+
+                        return { type: 'group', children: children };
+                    },
+                    data: [0] // Single item
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 20,
+                    style: { text: 'd', font: 'bold 24px Arial' }
+                },
+                // Colorbar (Simulated with gradient rect and text)
+                {
+                    type: 'rect',
+                    right: 20, top: 180, width: 20, height: 150,
+                    style: {
+                        fill: {
+                            type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+                            colorStops: [
+                                { offset: 0, color: '#fde725' }, // 100
+                                { offset: 0.5, color: '#21918c' },
+                                { offset: 1, color: '#440154' } // 40
+                            ]
+                        }
+                    }
+                },
+                { type: 'text', right: 45, top: 180, style: { text: '100', fontSize: 12 } },
+                { type: 'text', right: 45, top: 255, style: { text: '70', fontSize: 12 } }, // Approx
+                { type: 'text', right: 45, top: 330, style: { text: '40', fontSize: 12 } },
+                {
+                    type: 'text',
+                    right: 5, top: 200,
+                    style: { text: 'Relative\nviability\n(%)', textAlign: 'center', fontSize: 12 },
+                    rotation: Math.PI / 2
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a scatter plot covering all Blue Economy ecosystems with non-missing `Median Series A Round`, with the x-axis showing `Early-Stage Funding Growth Tier` (raw tier score) and the y-axis showing `salary-adjusted Series A = Median Series A Round / Software Engineer Salary`, expressed in `engineer-years`, and labels added to the top 10 ecosystems by highest y value.",
+  "chart_type": "scatter plot",
+  "value_unit": "tier / engineer-years",
+  "sort_rule": "labels assigned to top 10 by salary-adjusted Series A",
+  "selection_rule": "all ecosystems with visible Series A",
+  "plot_spec": {
+    "title": "Blue Economy Growth Tier vs Salary-Adjusted Series A",
+    "x_field": "x_growth_tier",
+    "y_field": "y_salary_adjusted_series_a",
+    "xlabel": "Early-Stage Funding Growth Tier",
+    "ylabel": "Median Series A / Salary (engineer-years)"
+  },
+  "records": [
+    {
+      "entity": "Singapore",
+      "x_growth_tier": 8,
+      "y_salary_adjusted_series_a": 133.3333,
+      "label": true
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "x_growth_tier": 5,
+      "y_salary_adjusted_series_a": 92.437,
+      "label": true
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "x_growth_tier": 6,
+      "y_salary_adjusted_series_a": 53.7313,
+      "label": false
+    },
+    {
+      "entity": "London",
+      "x_growth_tier": 7,
+      "y_salary_adjusted_series_a": 89.8551,
+      "label": true
+    },
+    {
+      "entity": "New York City",
+      "x_growth_tier": 6,
+      "y_salary_adjusted_series_a": 79.4118,
+      "label": true
+    },
+    {
+      "entity": "Denmark",
+      "x_growth_tier": 5,
+      "y_salary_adjusted_series_a": 63.5135,
+      "label": false
+    },
+    {
+      "entity": "Los Angeles",
+      "x_growth_tier": 6,
+      "y_salary_adjusted_series_a": 74.4681,
+      "label": true
+    },
+    {
+      "entity": "Atlantic Canada",
+      "x_growth_tier": 6,
+      "y_salary_adjusted_series_a": 63.8298,
+      "label": false
+    },
+    {
+      "entity": "Seoul",
+      "x_growth_tier": 8,
+      "y_salary_adjusted_series_a": 57.7778,
+      "label": false
+    },
+    {
+      "entity": "Tokyo",
+      "x_growth_tier": 3,
+      "y_salary_adjusted_series_a": 40.2985,
+      "label": false
+    },
+    {
+      "entity": "Boston",
+      "x_growth_tier": 5,
+      "y_salary_adjusted_series_a": 92.2222,
+      "label": true
+    },
+    {
+      "entity": "Stockholm",
+      "x_growth_tier": 6,
+      "y_salary_adjusted_series_a": 46.5517,
+      "label": false
+    },
+    {
+      "entity": "San Diego",
+      "x_growth_tier": 5,
+      "y_salary_adjusted_series_a": 108.6957,
+      "label": true
+    },
+    {
+      "entity": "Miami",
+      "x_growth_tier": 7,
+      "y_salary_adjusted_series_a": 58.6667,
+      "label": false
+    },
+    {
+      "entity": "Beijing",
+      "x_growth_tier": 1,
+      "y_salary_adjusted_series_a": 222.2222,
+      "label": true
+    },
+    {
+      "entity": "Tel Aviv",
+      "x_growth_tier": 4,
+      "y_salary_adjusted_series_a": 88.2353,
+      "label": true
+    },
+    {
+      "entity": "Paris",
+      "x_growth_tier": 5,
+      "y_salary_adjusted_series_a": 96.1538,
+      "label": true
+    },
+    {
+      "entity": "Sydney",
+      "x_growth_tier": 9,
+      "y_salary_adjusted_series_a": 71.0526,
+      "label": false
+    },
+    {
+      "entity": "Philadelphia",
+      "x_growth_tier": 6,
+      "y_salary_adjusted_series_a": 62.5,
+      "label": false
+    },
+    {
+      "entity": "New Zealand",
+      "x_growth_tier": 7,
+      "y_salary_adjusted_series_a": 63.7931,
+      "label": false
+    },
+    {
+      "entity": "Tunisia",
+      "x_growth_tier": 10,
+      "y_salary_adjusted_series_a": 7.1429,
+      "label": false
+    }
+  ]
+}

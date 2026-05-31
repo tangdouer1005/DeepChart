@@ -1,0 +1,100 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a ranked horizontal bar chart showing the top 12 countries by national startup-score concentration, where concentration is defined as `top-1 city score / sum of all listed city scores in that country's 3.2 national block`, values are percentages, only countries with at least 5 listed cities are eligible, and bars are sorted from highest to lowest after the ratio is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by national_startup_score_concentration_pct",
+  "selection_rule": "top 12 among countries with at least 5 listed cities",
+  "plot_spec": {
+    "title": "National Startup-Score Concentration",
+    "xlabel": "percent",
+    "value_field": "national_startup_score_concentration_pct",
+    "value_as_percent": true
+  },
+  "records": [
+    {
+      "entity": "Indonesia",
+      "national_startup_score_concentration_pct": 92.7084,
+      "leader_city_score": 24.437,
+      "listed_city_score_sum": 26.359,
+      "listed_cities": 5
+    },
+    {
+      "entity": "South Korea",
+      "national_startup_score_concentration_pct": 84.4415,
+      "leader_city_score": 30.111,
+      "listed_city_score_sum": 35.659,
+      "listed_cities": 5
+    },
+    {
+      "entity": "Russia",
+      "national_startup_score_concentration_pct": 82.3576,
+      "leader_city_score": 25.082,
+      "listed_city_score_sum": 30.455,
+      "listed_cities": 8
+    },
+    {
+      "entity": "The Philippines",
+      "national_startup_score_concentration_pct": 81.7928,
+      "leader_city_score": 7.327,
+      "listed_city_score_sum": 8.958,
+      "listed_cities": 5
+    },
+    {
+      "entity": "Hungary",
+      "national_startup_score_concentration_pct": 80.8099,
+      "leader_city_score": 4.809,
+      "listed_city_score_sum": 5.951,
+      "listed_cities": 5
+    },
+    {
+      "entity": "Israel",
+      "national_startup_score_concentration_pct": 71.9209,
+      "leader_city_score": 54.89,
+      "listed_city_score_sum": 76.32,
+      "listed_cities": 10
+    },
+    {
+      "entity": "Ireland",
+      "national_startup_score_concentration_pct": 70.2633,
+      "leader_city_score": 15.049,
+      "listed_city_score_sum": 21.418,
+      "listed_cities": 8
+    },
+    {
+      "entity": "Taiwan",
+      "national_startup_score_concentration_pct": 69.3292,
+      "leader_city_score": 14.955,
+      "listed_city_score_sum": 21.571,
+      "listed_cities": 6
+    },
+    {
+      "entity": "Romania",
+      "national_startup_score_concentration_pct": 68.0652,
+      "leader_city_score": 6.765,
+      "listed_city_score_sum": 9.939,
+      "listed_cities": 6
+    },
+    {
+      "entity": "Denmark",
+      "national_startup_score_concentration_pct": 67.4515,
+      "leader_city_score": 13.149,
+      "listed_city_score_sum": 19.494,
+      "listed_cities": 5
+    },
+    {
+      "entity": "Japan",
+      "national_startup_score_concentration_pct": 66.5105,
+      "leader_city_score": 37.49,
+      "listed_city_score_sum": 56.367,
+      "listed_cities": 8
+    },
+    {
+      "entity": "United Kingdom",
+      "national_startup_score_concentration_pct": 65.794,
+      "leader_city_score": 125.637,
+      "listed_city_score_sum": 190.955,
+      "listed_cities": 10
+    }
+  ]
+}

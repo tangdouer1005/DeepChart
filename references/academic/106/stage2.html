@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = {
+    "B16-F0 21%O2": [
+        1,
+        1,
+        1,
+        1
+    ],
+    "B16-F0 1%O2": [
+        1.48403264,
+        1.68837926,
+        1.21210873,
+        1.34768451
+    ],
+    "B16-F0 1%O2 + Liprox": [
+        1.34308934,
+        1.43866036,
+        1.32754921
+    ],
+    "B16-F0 FSP1 KO 21%O2": [
+        1,
+        1,
+        1,
+        1
+    ],
+    "B16-F0 FSP1 KO 1%O2": [
+        2.13260939,
+        2.40660031,
+        1.73214387,
+        1.75709602
+    ],
+    "B16-F0 FSP1 KO 1%O2 + Liprox": [
+        1.19117817,
+        1.18719077,
+        1.18639812
+    ],
+    "LN71134BL 21%O2": [
+        1,
+        1,
+        1,
+        1
+    ],
+    "LN71134BL 1%O2": [
+        2.25799359,
+        1.9494307,
+        1.90228148,
+        2.19323958
+    ],
+    "LN71134BL 1%O2 + Liprox": [
+        1.15397846,
+        1.40481629,
+        1.449258435
+    ],
+    "LN71134BL FSP1 KO 21%O2": [
+        1,
+        1,
+        1,
+        1
+    ],
+    "LN71134BL FSP1 KO 1%O2": [
+        2.78758832,
+        2.77704055,
+        2.66783802,
+        2.87541627
+    ],
+    "LN71134BL FSP1 KO 1%O2 + Liprox": [
+        1.23286389,
+        1.24515659,
+        1.036090783
+    ]
+};
+
+        const keys = [
+            'B16-F0 21%O2', 'B16-F0 1%O2', 'B16-F0 1%O2 + Liprox',
+            'B16-F0 FSP1 KO 21%O2', 'B16-F0 FSP1 KO 1%O2', 'B16-F0 FSP1 KO 1%O2 + Liprox',
+            'LN71134BL 21%O2', 'LN71134BL 1%O2', 'LN71134BL 1%O2 + Liprox',
+            'LN71134BL FSP1 KO 21%O2', 'LN71134BL FSP1 KO 1%O2', 'LN71134BL FSP1 KO 1%O2 + Liprox'
+        ];
+
+        // Colors
+        const barColors = [
+            '#000000', '#FFFFFF', '#A9A9A9',
+            '#654321', '#C2B280', '#E6DCC3',
+            '#2E8B57', '#5F9EA0', '#B0E0E6',
+            '#1E90FF', '#87CEFA', '#E0FFFF'
+        ];
+
+        const dataStats = keys.map(key => {
+            const arr = rawData[key].filter(v => !isNaN(v));
+            const n = arr.length;
+            const mean = arr.reduce((a, b) => a + b, 0) / n;
+            const variance = arr.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / (n - 1);
+            const std = Math.sqrt(variance);
+            return { mean, std, values: arr };
+        });
+
+        // Chart Gap Logic: 3 bars, gap, 3 bars...
+        // ECharts Category Axis: 0,1,2, 3(gap), 4,5,6, 7(gap)...
+        const chartData = [];
+        const chartColors = [];
+        let dataIdx = 0;
+        let chartIdx = 0;
+        const xMapping = {}; // Map data index to chart x index
+
+        for (let g = 0; g < 4; g++) {
+            for (let b = 0; b < 3; b++) {
+                chartData.push({
+                    value: dataStats[dataIdx].mean,
+                    itemStyle: {
+                        color: barColors[dataIdx],
+                        borderColor: 'black',
+                        borderWidth: 1
+                    }
+                });
+                chartColors.push(barColors[dataIdx]);
+                xMapping[dataIdx] = chartIdx;
+                dataIdx++;
+                chartIdx++;
+            }
+            if (g < 3) {
+                chartData.push({
+                    value: 0,
+                    itemStyle: { opacity: 0 }
+                });
+                chartColors.push('transparent');
+                chartIdx++;
+            }
+        }
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const scatterData = [];
+        const errorData = [];
+
+        keys.forEach((key, idx) => {
+            const x = xMapping[idx];
+            const vals = dataStats[idx].values;
+            const mean = dataStats[idx].mean;
+            const std = dataStats[idx].std;
+
+            // Scatter
+            vals.forEach(v => {
+                const jitter = (Math.random() - 0.5) * 0.2;
+                scatterData.push([x + jitter, v, idx]);
+            });
+
+            // Error Bar
+            errorData.push({
+                x: x,
+                high: mean + std,
+                low: mean - std
+            });
+        });
+
+        // P-values
+        const pAnnotations = [
+            { idx1: 0, idx2: 1, text: 'P = 0.1667', y: 2.0 },
+            { idx1: 3, idx2: 4, text: 'P = 0.0115', y: 2.9 },
+            { idx1: 6, idx2: 7, text: 'P = 0.0078', y: 2.9 },
+            { idx1: 9, idx2: 10, text: 'P = 0.0007', y: 3.4 }
+        ];
+
+        // Table Data Preparation
+        const row1Data = [];
+        const row2Data = [];
+        const row3Data = [];
+        const groupData = [];
+        const groupNames = ["B16-F0\nWT", "B16-F0\nFsp1 KO", "LN7-1134BL\nWT", "LN7-1134BL\nFsp1 KO"];
+
+        let currentGroup = 0;
+        for(let i=0; i<15; i++) {
+            if (i===3 || i===7 || i===11) {
+                // Gap
+                row1Data.push(''); row2Data.push(''); row3Data.push(''); groupData.push('');
+                currentGroup++;
+            } else {
+                const mod = i % 4; // 0, 1, 2
+                if (mod === 0) { // 1st bar
+                    row1Data.push('+'); row2Data.push('-'); row3Data.push('-');
+                    groupData.push('');
+                } else if (mod === 1) { // 2nd bar
+                    row1Data.push('-'); row2Data.push('+'); row3Data.push('+');
+                    groupData.push(groupNames[currentGroup]);
+                } else if (mod === 2) { // 3rd bar
+                    row1Data.push('-'); row2Data.push('-'); row3Data.push('+');
+                    groupData.push('');
+                }
+            }
+        }
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 100, bottom: 220, left: 60 },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: chartData.map((_, i) => i),
+                    axisLabel: { show: false },
+                    axisTick: { show: false },
+                    axisLine: { show: true, lineStyle: { color: 'black' } }
+                },
+                {
+                    type: 'category',
+                    data: row1Data,
+                    position: 'bottom',
+                    offset: 10,
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { 
+                        interval: 0, 
+                        color: 'black',
+                        fontSize: 12,
+                        rich: { bold: { fontWeight: 'bold' } },
+                        formatter: function(val) { return val === '+' ? '{bold|+}' : val; }
+                    }
+                },
+                {
+                    type: 'category',
+                    data: row2Data,
+                    position: 'bottom',
+                    offset: 35,
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { 
+                        interval: 0, 
+                        color: 'black',
+                        fontSize: 12,
+                        rich: { bold: { fontWeight: 'bold' } },
+                        formatter: function(val) { return val === '+' ? '{bold|+}' : val; }
+                    }
+                },
+                {
+                    type: 'category',
+                    data: row3Data,
+                    position: 'bottom',
+                    offset: 60,
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { 
+                        interval: 0, 
+                        color: 'black',
+                        fontSize: 12,
+                        rich: { bold: { fontWeight: 'bold' } },
+                        formatter: function(val) { return val === '+' ? '{bold|+}' : val; }
+                    }
+                },
+                {
+                    type: 'category',
+                    data: groupData,
+                    position: 'bottom',
+                    offset: 95,
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { interval: 0, color: 'black', rotate: 0, align: 'center', verticalAlign: 'top', lineHeight: 18 }
+                }
+            ],
+            yAxis: {
+                type: 'value',
+                min: 0, max: 4,
+                interval: 1,
+                name: 'BODIPYox/BODIPYred\n(relative to 21% O2)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: chartData,
+                    barWidth: '80%',
+                    z: 1,
+                    xAxisIndex: 0
+                },
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const idx = params.dataIndex;
+                        const item = errorData[idx];
+                        if (!item) return; // Gap columns
+                        
+                        const start = api.coord([item.x, item.high]);
+                        const end = api.coord([item.x, item.low]);
+                        const style = api.style({ stroke: 'black', lineWidth: 1.5 });
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                { type: 'line', shape: { x1: start[0], y1: start[1], x2: end[0], y2: end[1] }, style: style },
+                                { type: 'line', shape: { x1: start[0]-5, y1: start[1], x2: start[0]+5, y2: start[1] }, style: style },
+                                { type: 'line', shape: { x1: end[0]-5, y1: end[1], x2: end[0]+5, y2: end[1] }, style: style }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 3,
+                    xAxisIndex: 0
+                },
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const val = api.value(1);
+                        const idx = api.value(0);
+                        const pos = api.coord([idx, val]);
+                        const colorIdx = api.value(2);
+                        
+                        // Determine border color based on bar color logic
+                        // 0 (Black bar): gray border?
+                        // Others: black border
+                        let borderColor = 'black';
+                        if (colorIdx === 0) borderColor = 'gray';
+                        
+                        return {
+                            type: 'circle',
+                            shape: { cx: pos[0], cy: pos[1], r: 4 },
+                            style: { fill: 'transparent', stroke: borderColor, lineWidth: 1.5 }
+                        };
+                    },
+                    data: scatterData,
+                    z: 4,
+                    xAxisIndex: 0
+                },
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const ann = pAnnotations[params.dataIndex];
+                        const x1 = xMapping[ann.idx1];
+                        const x2 = xMapping[ann.idx2];
+                        const p1 = api.coord([x1, ann.y]);
+                        const p2 = api.coord([x2, ann.y]);
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: { x1: p1[0], y1: p1[1], x2: p2[0], y2: p1[1] },
+                                    style: { stroke: 'black', lineWidth: 1.2 }
+                                },
+                                {
+                                    type: 'text',
+                                    style: {
+                                        text: ann.text,
+                                        x: (p1[0] + p2[0]) / 2,
+                                        y: p1[1] - 5,
+                                        textAlign: 'center',
+                                        textVerticalAlign: 'bottom',
+                                        fill: 'black',
+                                        fontSize: 12
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: pAnnotations,
+                    z: 5,
+                    xAxisIndex: 0
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'c', font: 'bold 24px Arial' } },
+                
+                // Row labels
+                { type: 'text', right: 10, bottom: 198, style: { text: '21% O₂', textAlign: 'right', font: '12px Arial' } },
+                { type: 'text', right: 10, bottom: 173, style: { text: '1% O₂', textAlign: 'right', font: '12px Arial' } },
+                { type: 'text', right: 10, bottom: 148, style: { text: 'Liproxstatin-1', textAlign: 'right', font: '12px Arial' } }
+            ]
+        };
+        
+        chart.setOption(option);
+    </script>
+</body>
+</html>

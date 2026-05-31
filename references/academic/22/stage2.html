@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const chartData = {
+    "plot_data": [
+        {
+            "Model": "ctranspath",
+            "Task Category": "Morphology",
+            "AUROC": 0.7245662906836026,
+            "k_WSIs": 32.0,
+            "k_Patients": 13.0,
+            "k_Sites": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Morphology",
+            "AUROC": 0.6986905923455256,
+            "k_WSIs": 6.0,
+            "k_Patients": 5.6,
+            "k_Sites": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Morphology",
+            "AUROC": 0.7242330131938731,
+            "k_WSIs": 171.0,
+            "k_Patients": 30.0,
+            "k_Sites": 31.0
+        },
+        {
+            "Model": "uni",
+            "Task Category": "Morphology",
+            "AUROC": 0.7351347723197759,
+            "k_WSIs": 100.0,
+            "k_Patients": NaN,
+            "k_Sites": 20.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Morphology",
+            "AUROC": 0.7300469326931298,
+            "k_WSIs": 1488.0,
+            "k_Patients": 120.0,
+            "k_Sites": 17.0
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Morphology",
+            "AUROC": 0.762773096016989,
+            "k_WSIs": 3135.0,
+            "k_Patients": 225.0,
+            "k_Sites": 175.0
+        },
+        {
+            "Model": "panakeia",
+            "Task Category": "Morphology",
+            "AUROC": 0.7306335682076608,
+            "k_WSIs": 6.0,
+            "k_Patients": NaN,
+            "k_Sites": 2.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Morphology",
+            "AUROC": 0.7073485188270819,
+            "k_WSIs": 29.0,
+            "k_Patients": 11.0,
+            "k_Sites": 25.0
+        },
+        {
+            "Model": "ctranspath",
+            "Task Category": "Biomarker",
+            "AUROC": 0.6865689130621666,
+            "k_WSIs": 32.0,
+            "k_Patients": 13.0,
+            "k_Sites": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Biomarker",
+            "AUROC": 0.6655231079066909,
+            "k_WSIs": 6.0,
+            "k_Patients": 5.6,
+            "k_Sites": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Biomarker",
+            "AUROC": 0.7222276213474471,
+            "k_WSIs": 171.0,
+            "k_Patients": 30.0,
+            "k_Sites": 31.0
+        },
+        {
+            "Model": "uni",
+            "Task Category": "Biomarker",
+            "AUROC": 0.7120236484959361,
+            "k_WSIs": 100.0,
+            "k_Patients": NaN,
+            "k_Sites": 20.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Biomarker",
+            "AUROC": 0.6850684143619094,
+            "k_WSIs": 1488.0,
+            "k_Patients": 120.0,
+            "k_Sites": 17.0
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Biomarker",
+            "AUROC": 0.732159659734404,
+            "k_WSIs": 3135.0,
+            "k_Patients": 225.0,
+            "k_Sites": 175.0
+        },
+        {
+            "Model": "panakeia",
+            "Task Category": "Biomarker",
+            "AUROC": 0.706014841052465,
+            "k_WSIs": 6.0,
+            "k_Patients": NaN,
+            "k_Sites": 2.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Biomarker",
+            "AUROC": 0.6807236915312719,
+            "k_WSIs": 29.0,
+            "k_Patients": 11.0,
+            "k_Sites": 25.0
+        },
+        {
+            "Model": "ctranspath",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5770248615268212,
+            "k_WSIs": 32.0,
+            "k_Patients": 13.0,
+            "k_Sites": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5897553541124554,
+            "k_WSIs": 6.0,
+            "k_Patients": 5.6,
+            "k_Sites": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5871979448905298,
+            "k_WSIs": 171.0,
+            "k_Patients": 30.0,
+            "k_Sites": 31.0
+        },
+        {
+            "Model": "uni",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5721758498408054,
+            "k_WSIs": 100.0,
+            "k_Patients": NaN,
+            "k_Sites": 20.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5873006733060928,
+            "k_WSIs": 1488.0,
+            "k_Patients": 120.0,
+            "k_Sites": 17.0
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Prognosis",
+            "AUROC": 0.6065370877164761,
+            "k_WSIs": 3135.0,
+            "k_Patients": 225.0,
+            "k_Sites": 175.0
+        },
+        {
+            "Model": "panakeia",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5866993918324305,
+            "k_WSIs": 6.0,
+            "k_Patients": NaN,
+            "k_Sites": 2.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Prognosis",
+            "AUROC": 0.5543899668068984,
+            "k_WSIs": 29.0,
+            "k_Patients": 11.0,
+            "k_Sites": 25.0
+        }
+    ],
+    "stats_data": [
+        {
+            "category": "Morphology",
+            "r": 0.7443450229025078,
+            "p": 0.03417349120757613
+        },
+        {
+            "category": "Biomarker",
+            "r": 0.6064670049508225,
+            "p": 0.11093353507975934
+        },
+        {
+            "category": "Prognosis",
+            "r": 0.5798363630222995,
+            "p": 0.131911772331571
+        }
+    ]
+};
+
+        const rawData = chartData.plot_data.map(d => ({
+            model: d["Model"],
+            cat: d["Task Category"],
+            auroc: d["AUROC"],
+            k_sites: d["k_Sites"]
+        })).filter(d => d.k_sites != null && !isNaN(d.k_sites));
+
+        const colors = {
+            'Morphology': '#563668',
+            'Biomarker': '#BC6C93',
+            'Prognosis': '#8E4D56'
+        };
+
+        // Linear Regression Helper
+        function linearRegression(x, y) {
+            const n = x.length;
+            let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+            for (let i = 0; i < n; i++) {
+                sumX += x[i];
+                sumY += y[i];
+                sumXY += x[i] * y[i];
+                sumXX += x[i] * x[i];
+            }
+            const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+            const intercept = (sumY - slope * sumX) / n;
+            return { slope, intercept };
+        }
+
+        const categories = ['Morphology', 'Biomarker', 'Prognosis'];
+        const series = [];
+
+        categories.forEach(cat => {
+            const catData = rawData.filter(d => d.cat === cat && !isNaN(d.k_sites))
+                                   .map(d => [d.k_sites, d.auroc]);
+            
+            // Sort by X
+            catData.sort((a, b) => a[0] - b[0]);
+
+            const xValues = catData.map(d => d[0]);
+            const yValues = catData.map(d => d[1]);
+
+            // Calculate Stats using JSON
+            const stat = chartData.stats_data.find(s => s.category === cat);
+            const r = stat ? stat.r : 0;
+            const p = stat ? stat.p : 0;
+            
+            let pStr = p.toFixed(2);
+            if (cat === 'Morphology') pStr = p.toFixed(3);
+
+            const label = `${cat} (r = ${r.toFixed(2)}, P = ${pStr})`;
+
+            // Calculate Regression Line Points
+            // Range 0 to 180
+            const reg = linearRegression(xValues, yValues);
+            const lineData = [
+                [0, reg.intercept],
+                [180, reg.slope * 180 + reg.intercept]
+            ];
+
+            // Scatter Series
+            series.push({
+                name: label,
+                type: 'scatter',
+                data: catData,
+                itemStyle: { color: colors[cat], opacity: 0.9, borderColor: 'none' },
+                symbolSize: 10,
+                z: 10
+            });
+
+            // Regression Line Series
+            series.push({
+                name: label, // Same name to be linked conceptually, but we filter legend
+                type: 'line',
+                data: lineData,
+                symbol: 'none',
+                lineStyle: { color: colors[cat], width: 2 },
+                silent: true,
+                tooltip: { show: false },
+                z: 1
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 80, left: 80 },
+            xAxis: {
+                name: 'Pretraining dataset (k anatomic tissue sites)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: -5,
+                max: 185,
+                interval: 25,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: '#D0D0D0' } },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                name: 'Average downstream performance\nby task type (AUROC)',
+                nameLocation: 'middle',
+                nameGap: 60,
+                type: 'value',
+                min: 0.50,
+                max: 0.85,
+                interval: 0.05,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: '#D0D0D0' } },
+                splitLine: { show: true, lineStyle: { color: '#E0E0E0' } }
+            },
+            legend: {
+                top: 20,
+                right: 20,
+                orient: 'vertical',
+                itemGap: 10,
+                textStyle: { fontSize: 12 },
+                backgroundColor: 'rgba(255,255,255,0.8)',
+                borderColor: '#D0D0D0',
+                borderWidth: 1,
+                // Only show scatter items in legend to avoid duplicates
+                data: series.filter(s => s.type === 'scatter').map(s => s.name)
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'b',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

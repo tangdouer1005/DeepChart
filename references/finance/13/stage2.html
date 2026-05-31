@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ABT 2016–2024 EBITDA 变化趋势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --accent-border: rgba(37, 99, 235, 0.7);
+      --muted: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: #1f2937;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.12);
+        --accent-border: rgba(96, 165, 250, 0.8);
+        --muted: #9ca3af;
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 0.25rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      border-radius: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1rem 1rem 1.25rem;
+      background:
+        radial-gradient(circle at top left, rgba(148, 163, 184, 0.12), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.08), transparent 55%);
+      height: 520px; /* ensure space for the chart */
+      box-sizing: border-box;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.8rem;
+      margin-top: 0.75rem;
+      color: var(--muted);
+      gap: 0.75rem;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-border);
+    }
+
+    .note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .unit-toggle {
+      display: inline-flex;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.02);
+      margin-left: auto;
+    }
+
+    .unit-toggle button {
+      border: none;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .unit-toggle button.active {
+      background: rgba(37, 99, 235, 0.12);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header-row">
+      <div>
+        <h1>Abbott (ABT) 息税折旧摊销前利润（EBITDA）</h1>
+        <div class="subtitle">2016–2024 财年变化趋势</div>
+      </div>
+      <div class="unit-toggle" id="unitToggle">
+        <button data-unit="billion" class="active">单位：十亿美元</button>
+        <button data-unit="million">单位：百万美元</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <canvas id="ebitdaChart"></canvas>
+      <div class="legend-row">
+        <div class="legend-item">
+          <span class="legend-swatch"></span>
+          <span>ABT EBITDA</span>
+        </div>
+        <span>数据来源：用户提供财报数据（2016–2024 财年）</span>
+      </div>
+      <div class="note">
+        说明：数值为年度 EBITDA（息税折旧摊销前利润），原始单位为美元。默认按“十亿美元”显示，可切换到“百万美元”查看。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 确保在 DOM 加载完成后再初始化图表
+    document.addEventListener("DOMContentLoaded", function () {
+      // 原始数据（美元）
+      const years = [
+        2016, 2017, 2018, 2019, 2020,
+        2021, 2022, 2023, 2024
+      ];
+
+      const ebitdaRaw = [
+        3407000000,
+        6256000000,
+        6914000000,
+        7909000000,
+        9027000000,
+        12159000000,
+        11888000000,
+        10605000000,
+        23612000000
+      ];
+
+      // 单位转换
+      function toBillionUSD(values) {
+        return values.map(v => v / 1e9);
+      }
+
+      function toMillionUSD(values) {
+        return values.map(v => v / 1e6);
+      }
+
+      let currentUnit = "billion";
+
+      const canvas = document.getElementById("ebitdaChart");
+      if (!canvas) {
+        console.error("Canvas element #ebitdaChart not found.");
+        return;
+      }
+      const ctx = canvas.getContext("2d");
+
+      // 读取 CSS 变量（增加兜底颜色，防止某些环境下返回空字符串导致报错）
+      const rootStyle = getComputedStyle(document.documentElement);
+      const accent = rootStyle.getPropertyValue("--accent").trim() || "#2563eb";
+      const accentSoft = rootStyle.getPropertyValue("--accent-soft").trim() || "rgba(37,99,235,0.12)";
+      const accentBorder = rootStyle.getPropertyValue("--accent-border").trim() || "rgba(37,99,235,0.7)";
+      const gridColor = rootStyle.getPropertyValue("--grid").trim() || "#e5e7eb";
+      const mutedColor = rootStyle.getPropertyValue("--muted").trim() || "#6b7280";
+
+      const chartConfig = {
+        type: "line",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "EBITDA",
+              data: toBillionUSD(ebitdaRaw),
+              borderColor: accent,
+              backgroundColor: accentSoft,
+              borderWidth: 2.3,
+              tension: 0.25,
+              pointRadius: 3.5,
+              pointHoverRadius: 5,
+              pointBackgroundColor: "#ffffff",
+              pointBorderColor: accentBorder,
+              pointBorderWidth: 1.4,
+              fill: "origin"
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              usePointStyle: true,
+              callbacks: {
+                label: function (context) {
+                  const value = context.parsed.y;
+                  const year = context.label;
+                  if (currentUnit === "billion") {
+                    return " " + year + " EBITDA：" + value.toFixed(2) + " 十亿美元";
+                  } else {
+                    return (
+                      " " +
+                      year +
+                      " EBITDA：" +
+                      value.toLocaleString(undefined, {
+                        maximumFractionDigits: 1,
+                        minimumFractionDigits: 0
+                      }) +
+                      " 百万美元"
+                    );
+                  }
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年",
+                color: mutedColor,
+                font: {
+                  size: 11,
+                  weight: "500"
+                }
+              },
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: mutedColor
+              }
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "EBITDA（十亿美元）",
+                color: mutedColor,
+                font: {
+                  size: 11,
+                  weight: "500"
+                }
+              },
+              grid: {
+                color: gridColor,
+                drawBorder: false
+              },
+              ticks: {
+                color: mutedColor,
+                callback: function (value) {
+                  if (currentUnit === "billion") {
+                    return value.toFixed(1) + "B";
+                  } else {
+                    return value + "M";
+                  }
+                }
+              }
+            }
+          }
+        }
+      };
+
+      const ebitdaChart = new Chart(ctx, chartConfig);
+
+      // 单位切换
+      const toggleContainer = document.getElementById("unitToggle");
+      if (toggleContainer) {
+        toggleContainer.addEventListener("click", (event) => {
+          const button = event.target.closest("button[data-unit]");
+          if (!button) return;
+          const unit = button.getAttribute("data-unit");
+          if (unit === currentUnit) return;
+
+          currentUnit = unit;
+
+          // 更新按钮状态
+          Array.from(toggleContainer.querySelectorAll("button")).forEach((btn) =>
+            btn.classList.toggle("active", btn === button)
+          );
+
+          // 更新图表数据与 Y 轴标题
+          if (currentUnit === "billion") {
+            ebitdaChart.data.datasets[0].data = toBillionUSD(ebitdaRaw);
+            ebitdaChart.options.scales.y.title.text = "EBITDA（十亿美元）";
+          } else {
+            ebitdaChart.data.datasets[0].data = toMillionUSD(ebitdaRaw);
+            ebitdaChart.options.scales.y.title.text = "EBITDA（百万美元）";
+          }
+
+          ebitdaChart.update();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

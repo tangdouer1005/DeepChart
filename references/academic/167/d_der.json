@@ -1,0 +1,78 @@
+[
+    {
+        "country": "Ireland",
+        "budget_shares": {
+            "Bread and cereals": 1.47,
+            "Meat": 1.52,
+            "Fish and seafood": 0.21,
+            "Milk, cheese and eggs": 1.08,
+            "Oils and fats": 0.23,
+            "Fruit": 0.49,
+            "Vegetables": 0.82,
+            "Sugar and confectionery": 0.62,
+            "Coffee, tea and cocoa": 0.2,
+            "Mineral waters and soft drinks": 0.63,
+            "Alcoholic drinks": 1.96,
+            "Tobacco": 2.57,
+            "Ultra‑processed foods": 4.69,
+            "Ultra‑processed beverages": 0.9
+        }
+    },
+    {
+        "country": "Italy",
+        "budget_shares": {
+            "Bread and cereals": 2.31,
+            "Meat": 2.97,
+            "Fish and seafood": 1.04,
+            "Milk, cheese and eggs": 1.74,
+            "Oils and fats": 0.48,
+            "Fruit": 1.19,
+            "Vegetables": 1.79,
+            "Sugar and confectionery": 0.61,
+            "Coffee, tea and cocoa": 0.41,
+            "Mineral waters and soft drinks": 0.67,
+            "Alcoholic drinks": 0.88,
+            "Tobacco": 3.1,
+            "Ultra‑processed foods": 4.72,
+            "Ultra‑processed beverages": 0.29
+        }
+    },
+    {
+        "country": "Netherlands",
+        "budget_shares": {
+            "Bread and cereals": 0.96,
+            "Meat": 1.7,
+            "Fish and seafood": 0.42,
+            "Milk, cheese and eggs": 1.36,
+            "Oils and fats": 0.34,
+            "Fruit": 0.68,
+            "Vegetables": 0.92,
+            "Sugar and confectionery": 1.15,
+            "Coffee, tea and cocoa": 0.31,
+            "Mineral waters and soft drinks": 0.46,
+            "Alcoholic drinks": 0.97,
+            "Tobacco": 1.69,
+            "Ultra‑processed foods": 3.29,
+            "Ultra‑processed beverages": 0.61
+        }
+    },
+    {
+        "country": "Norway",
+        "budget_shares": {
+            "Bread and cereals": 1.37,
+            "Meat": 1.96,
+            "Fish and seafood": 0.68,
+            "Milk, cheese and eggs": 1.73,
+            "Oils and fats": 0.21,
+            "Fruit": 0.73,
+            "Vegetables": 1.04,
+            "Sugar and confectionery": 0.99,
+            "Coffee, tea and cocoa": 0.35,
+            "Mineral waters and soft drinks": 0.96,
+            "Alcoholic drinks": 1.99,
+            "Tobacco": 1.59,
+            "Ultra‑processed foods": 5.28,
+            "Ultra‑processed beverages": 1.19
+        }
+    }
+]

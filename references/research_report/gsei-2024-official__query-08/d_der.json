@@ -1,0 +1,109 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a bubble chart for the 15 countries with the strongest combined elite depth in the 2024 country tables, where `x = count(global_rank <= 50)`, `y = median score of cities ranked 4-10`, bubble size = `score(rank 1)`, and the 15 countries are selected by first ranking all countries by `count(global_rank <= 50)` and breaking ties with the median tail score.",
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "2024 Combined Elite Depth by Country",
+  "value_unit": "mixed",
+  "sort_rule": "descending by cities_in_top50, then median_tail_score, then country",
+  "selection_rule": "top 15 countries ranked first by count(global_rank <= 50) and then by median score of ranks 4-10",
+  "records": [
+    {
+      "entity": "United States",
+      "cities_in_top50": 10,
+      "median_tail_score": 41.26,
+      "top_city_score": 710.97
+    },
+    {
+      "entity": "China",
+      "cities_in_top50": 5,
+      "median_tail_score": 9.57,
+      "top_city_score": 109.41
+    },
+    {
+      "entity": "India",
+      "cities_in_top50": 3,
+      "median_tail_score": 5.91,
+      "top_city_score": 68.15
+    },
+    {
+      "entity": "Canada",
+      "cities_in_top50": 3,
+      "median_tail_score": 4.54,
+      "top_city_score": 36.73
+    },
+    {
+      "entity": "Germany",
+      "cities_in_top50": 2,
+      "median_tail_score": 3.89,
+      "top_city_score": 49.92
+    },
+    {
+      "entity": "Australia",
+      "cities_in_top50": 2,
+      "median_tail_score": 1.13,
+      "top_city_score": 22.24
+    },
+    {
+      "entity": "Spain",
+      "cities_in_top50": 2,
+      "median_tail_score": 0.82,
+      "top_city_score": 21.98
+    },
+    {
+      "entity": "United Kingdom",
+      "cities_in_top50": 1,
+      "median_tail_score": 3.73,
+      "top_city_score": 144.38
+    },
+    {
+      "entity": "France",
+      "cities_in_top50": 1,
+      "median_tail_score": 2.06,
+      "top_city_score": 60.79
+    },
+    {
+      "entity": "The Netherlands",
+      "cities_in_top50": 1,
+      "median_tail_score": 1.25,
+      "top_city_score": 29.67
+    },
+    {
+      "entity": "Brazil",
+      "cities_in_top50": 1,
+      "median_tail_score": 0.85,
+      "top_city_score": 36.65
+    },
+    {
+      "entity": "Sweden",
+      "cities_in_top50": 1,
+      "median_tail_score": 0.46,
+      "top_city_score": 31.93
+    },
+    {
+      "entity": "Israel",
+      "cities_in_top50": 1,
+      "median_tail_score": 0.45,
+      "top_city_score": 63.71
+    },
+    {
+      "entity": "Taiwan",
+      "cities_in_top50": 1,
+      "median_tail_score": 0.43,
+      "top_city_score": 17.2
+    },
+    {
+      "entity": "Japan",
+      "cities_in_top50": 1,
+      "median_tail_score": 0.38,
+      "top_city_score": 49.42
+    }
+  ],
+  "x_field": "cities_in_top50",
+  "y_field": "median_tail_score",
+  "size_field": "top_city_score",
+  "x_label": "Count of listed cities in global top 50",
+  "y_label": "Median score of cities ranked 4-10",
+  "size_label": "Score of rank-1 city",
+  "annotate_all": true
+}

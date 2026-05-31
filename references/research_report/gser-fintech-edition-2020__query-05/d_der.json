@@ -1,0 +1,55 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a horizontal bar chart showing the top 10 Fintech ecosystems by `seed purchasing power = Median Seed Round / Software Engineer Salary`, expressed in `engineer-years`, excluding ecosystems where `Total Early-Stage Funding` is `<$50 m`, and sorted descending by the derived metric.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "engineer-years",
+  "sort_rule": "descending by seed_purchasing_power_engineer_years",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "Fintech 2020 Seed Purchasing Power",
+    "xlabel": "engineer-years",
+    "value_field": "seed_purchasing_power_engineer_years"
+  },
+  "records": [
+    {
+      "entity": "Beijing",
+      "seed_purchasing_power_engineer_years": 58.8235
+    },
+    {
+      "entity": "Shanghai",
+      "seed_purchasing_power_engineer_years": 50.0
+    },
+    {
+      "entity": "Manila",
+      "seed_purchasing_power_engineer_years": 45.0
+    },
+    {
+      "entity": "Tel Aviv",
+      "seed_purchasing_power_engineer_years": 19.4444
+    },
+    {
+      "entity": "Paris",
+      "seed_purchasing_power_engineer_years": 16.0377
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "seed_purchasing_power_engineer_years": 14.7559
+    },
+    {
+      "entity": "Curitiba",
+      "seed_purchasing_power_engineer_years": 14.7059
+    },
+    {
+      "entity": "Singapore",
+      "seed_purchasing_power_engineer_years": 14.0638
+    },
+    {
+      "entity": "Frankfurt",
+      "seed_purchasing_power_engineer_years": 11.1864
+    },
+    {
+      "entity": "Tokyo",
+      "seed_purchasing_power_engineer_years": 10.04
+    }
+  ]
+}

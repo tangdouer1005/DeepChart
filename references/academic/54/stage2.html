@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 600px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = {
+    "data": [
+        [
+            3.22,
+            2.5,
+            2.29,
+            2.37
+        ],
+        [
+            2.15,
+            1.72,
+            1.35,
+            2.07
+        ],
+        [
+            1.79,
+            1.58,
+            1.35,
+            1.42
+        ],
+        [
+            2.01,
+            1.51,
+            1.19,
+            2.14
+        ],
+        [
+            3.42,
+            3.01,
+            4.06,
+            3.32
+        ],
+        [
+            13,
+            11.7,
+            11.9,
+            11.7
+        ],
+        [
+            15.8,
+            16.2,
+            16.2,
+            16.1
+        ],
+        [
+            28,
+            31.5,
+            32.7,
+            32.6
+        ],
+        [
+            78.8,
+            73.6,
+            82.3,
+            83.2
+        ]
+    ],
+    "means": [
+        2.5950000000000006,
+        1.8225000000000002,
+        1.5350000000000001,
+        1.7125,
+        3.4524999999999997,
+        12.075,
+        16.075000000000003,
+        31.200000000000003,
+        79.475
+    ],
+    "stds": [
+        0.42555845661906433,
+        0.3661852900741189,
+        0.19536291016123475,
+        0.44169182318293676,
+        0.44101209356055826,
+        0.6238322424070969,
+        0.18929694486000853,
+        2.2015146301277833,
+        4.352298243457131
+    ],
+    "p_val": 3.527221372371117e-08,
+    "columns": [
+        "DMSO",
+        "Rapamycin_40nM",
+        "Rapamycin_100nM",
+        "Rapamycin_200nM",
+        "LY294002_1uM",
+        "LY294002_5uM",
+        "LY294002_10uM",
+        "MK2206_0.2uM",
+        "MK2206_1uM"
+    ]
+};
+
+        const rawData = jsonData.data;
+        const categories = [
+            'DMSO',
+            'Rapamycin_40nM', 'Rapamycin_100nM', 'Rapamycin_200nM',
+            'LY294002_1uM', 'LY294002_5uM', 'LY294002_10uM',
+            'MK2206_0.2uM', 'MK2206_1uM'
+        ];
+        const means = jsonData.means;
+        const stds = jsonData.stds;
+
+        // Define Colors (matching the chart image)
+        const colors = [
+            '#444444', // DMSO
+            '#CC7DA3', // Rap 40
+            '#CC7DA3', // Rap 100
+            '#CC7DA3', // Rap 200
+            '#99C0DB', // LY 1 (Light Blue)
+            '#99C0DB', // LY 5 (Light Blue)
+            '#5C85AD', // LY 10 (Medium Blue)
+            '#CDB5D9', // MK 0.2 (Light Purple)
+            '#705592'  // MK 1 (Dark Purple)
+        ];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [];
+
+        // Bars
+        series.push({
+            type: 'bar',
+            data: categories.map((cat, i) => ({
+                value: means[i],
+                itemStyle: { color: colors[i], borderColor: colors[i], borderWidth: 2, opacity: 0.3 }
+            })),
+            barWidth: '50%',
+            z: 1
+        });
+
+        // Error bars
+        series.push({
+            type: 'custom',
+            name: 'Error',
+            renderItem: (params, api) => {
+                const xIndex = api.value(0);
+                const meanVal = api.value(1);
+                const stdVal = api.value(2);
+                
+                const highPoint = api.coord([xIndex, meanVal + stdVal]);
+                const lowPoint = api.coord([xIndex, meanVal - stdVal]);
+                const capHalfWidth = 5; // Fixed cap width
+
+                const style = api.style({ stroke: colors[xIndex], lineWidth: 2 }); // Error bar color matches bar
+                return {
+                    type: 'group',
+                    children: [
+                        { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                    ]
+                };
+            },
+            data: categories.map((cat, i) => ([i, means[i], stds[i]])),
+            z: 2
+        });
+
+        // Scatter points
+        const scatterData = [];
+        rawData.forEach((vals, i) => {
+            vals.forEach(y => {
+                const jitter = (Math.random() - 0.5) * 0.2; // Small jitter for x
+                scatterData.push([i + jitter, y, colors[i]]); // Store color for itemStyle
+            });
+        });
+
+        series.push({
+            type: 'scatter',
+            name: 'Data Points',
+            data: scatterData.map(d => ({
+                value: [d[0], d[1]],
+                itemStyle: { color: d[2] } // Use stored color
+            })),
+            symbolSize: 8,
+            z: 3
+        });
+        
+        // Statistical Annotation (Lines and P-value)
+        const startY = 86; // Base height for lines
+        const stepY = 4; // Increment per line
+
+        // Lines connect DMSO (index 0) to specific bars
+        const annotationLines = [
+            { x1: 0, x2: 5, y: startY }, // DMSO to LY 5uM (index 5)
+            { x1: 0, x2: 6, y: startY + stepY }, // DMSO to LY 10uM (index 6)
+            { x1: 0, x2: 7, y: startY + 2 * stepY }, // DMSO to MK 0.2uM (index 7)
+            { x1: 0, x2: 8, y: startY + 3 * stepY }  // DMSO to MK 1uM (index 8) - This is the highest line for P-value
+        ];
+
+        // P-value Text Logic (Single P-value at the top, matching Python)
+        const pVal = jsonData.p_val;
+        let pValueText;
+        if (pVal < 0.0001) {
+            pValueText = 'P < 0.0001';
+        } else {
+            pValueText = `P = ${pVal.toFixed(4)}`;
+        }
+
+        series.push({
+            type: 'custom',
+            name: 'Statistical Annotations',
+            renderItem: (params, api) => {
+                const children = [];
+                const yTextOffset = 5; // Offset for text above line
+
+                // Render annotation lines
+                annotationLines.forEach(ann => {
+                    const x1Coord = api.coord([ann.x1, 0])[0]; // X pixel for start bar (category index)
+                    const x2Coord = api.coord([ann.x2, 0])[0]; // X pixel for end bar (category index)
+                    const yCoord = api.coord([0, ann.y])[1]; // Y pixel for annotation line value
+
+                    children.push({ // Horizontal line
+                        type: 'line',
+                        shape: { x1: x1Coord, y1: yCoord, x2: x2Coord, y2: yCoord },
+                        style: { stroke: 'black', lineWidth: 0.8 },
+                        z: 0
+                    });
+                });
+
+                // Render P-value text (only one, above the highest line)
+                const highestLine = annotationLines[annotationLines.length - 1];
+                const pTextYCoord = api.coord([0, highestLine.y])[1];
+                const pTextXCoord = api.coord([4, 0])[0]; // X position for text (category index 4.0 as per python)
+
+                children.push({
+                    type: 'text',
+                    x: pTextXCoord,
+                    y: pTextYCoord - yTextOffset, // Y position: 5 pixels above the highest line
+                    style: {
+                        text: pValueText,
+                        fill: 'black',
+                        fontSize: 12,
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    },
+                    z: 10
+                });
+                
+                return {
+                    type: 'group',
+                    children: children
+                };
+            },
+            data: [0], // Dummy data item to trigger renderItem
+            z: 10 // Ensure annotations are on top
+        });
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            title: {
+                text: 'SLAMF6⁺TIM-3⁻',
+                left: 'center',
+                top: 20,
+                textStyle: { fontSize: 16, color: 'black' }
+            },
+            grid: { top: 60, right: 20, bottom: 60, left: 60 },
+            xAxis: {
+                type: 'category',
+                data: categories,
+                axisLabel: { show: false }, // Hidden x-axis labels
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                axisTick: { alignWithLabel: true, length: 5, lineStyle: { width: 1.2 } }
+            },
+            yAxis: {
+                name: '% of live CD8⁺',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                type: 'value',
+                min: 0,
+                max: 115, // Extended to fit annotations
+                interval: 20,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                splitLine: { show: false }
+            },
+            series: series,
+            graphic: [] // graphic elements are now handled by custom series
+        };
+        chart.setOption(option);
+
+
+    </script>
+</body>
+</html>

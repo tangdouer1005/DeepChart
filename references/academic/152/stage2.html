@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "Group": "MSW-SAF",
+        "Subcategory": "MSW management",
+        "Central": 14.1,
+        "Low": 8.1,
+        "High": 30.1
+    },
+    {
+        "Group": "MSW-SAF",
+        "Subcategory": "SAF production",
+        "Central": null,
+        "Low": 8.6,
+        "High": 33.5
+    },
+    {
+        "Group": "MSW-SAF",
+        "Subcategory": "Energy and Others",
+        "Central": null,
+        "Low": 10.4,
+        "High": 24.7
+    },
+    {
+        "Group": "MSW-H2",
+        "Subcategory": "MSW management",
+        "Central": 7.3,
+        "Low": 3.2,
+        "High": 17.3
+    },
+    {
+        "Group": "MSW-H2",
+        "Subcategory": "SAF production",
+        "Central": null,
+        "Low": 3.6,
+        "High": 20.3
+    },
+    {
+        "Group": "MSW-H2",
+        "Subcategory": "Energy and Others",
+        "Central": null,
+        "Low": 5.1,
+        "High": 11.5
+    },
+    {
+        "Group": "MSW-PTL",
+        "Subcategory": "MSW management",
+        "Central": 25.4,
+        "Low": 23.4,
+        "High": 30.3
+    },
+    {
+        "Group": "MSW-PTL",
+        "Subcategory": "SAF production",
+        "Central": null,
+        "Low": 23.6,
+        "High": 31.8
+    },
+    {
+        "Group": "MSW-PTL",
+        "Subcategory": "Energy and Others",
+        "Central": null,
+        "Low": 7.6,
+        "High": 30.8
+    }
+];
+
+        // Group the flat JSON data
+        const groupsMap = {};
+        const groups = [];
+        
+        jsonData.forEach(item => {
+            if (!groupsMap[item.Group]) {
+                const newGroup = {
+                    name: item.Group,
+                    central: null,
+                    items: []
+                };
+                groupsMap[item.Group] = newGroup;
+                groups.push(newGroup);
+            }
+            
+            if (item.Central !== null && item.Central !== undefined) {
+                groupsMap[item.Group].central = item.Central;
+            }
+
+            groupsMap[item.Group].items.push({
+                subcategory: item.Subcategory,
+                low: item.Low,
+                high: item.High
+            });
+        });
+        
+        // Colors
+        const colors = {
+            'MSW-SAF': '#405E68',
+            'MSW-H2': '#DFA855',
+            'MSW-PTL': '#8F3B38'
+        };
+
+        // Prepare Axis Data
+        // Flatten data with gaps
+        const xAxisData = [];
+        const lowData = [];
+        const heightData = [];
+        const colorData = [];
+        
+        // Markers and Texts
+        const markLines = [];
+        const graphicElements = [];
+        
+        let globalIndex = 0;
+        
+        groups.forEach((group, gIdx) => {
+            const groupColor = colors[group.name];
+            
+            // Add items
+            const startIdx = globalIndex;
+            
+            group.items.forEach((item, i) => {
+                xAxisData.push(item.subcategory);
+                lowData.push(item.low);
+                heightData.push(item.high - item.low);
+                colorData.push(groupColor);
+                globalIndex++;
+            });
+            
+            const endIdx = globalIndex - 1;
+            
+            // Add Central Line
+            if (group.central !== null) {
+                markLines.push([
+                    {
+                        coord: [startIdx - 0.4, group.central],
+                        lineStyle: {
+                            color: groupColor,
+                            type: 'dashed',
+                            width: 2
+                        },
+                        label: {
+                            show: true,
+                            position: 'end',
+                            offset: [20, 0],
+                            formatter: group.central.toString(),
+                            color: groupColor,
+                            fontSize: 12
+                        }
+                    },
+                    { coord: [endIdx + 0.4, group.central] }
+                ]);
+            }
+            
+            // Add Gap after group
+            if (gIdx < groups.length - 1) {
+                xAxisData.push('');
+                lowData.push(null);
+                heightData.push(null);
+                colorData.push('transparent');
+                globalIndex++;
+            }
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Prepare Series for Labels
+        // Group Labels
+        const groupLabelData = groups.map((g, i) => {
+            // Calculate center index
+            // Each group has 3 items.
+            // Indices: 
+            // G1: 0, 1, 2. Center 1.
+            // Gap: 3.
+            // G2: 4, 5, 6. Center 5.
+            // Gap: 7.
+            // G3: 8, 9, 10. Center 9.
+            const centerIdx = i * 4 + 1; 
+            let name = g.name;
+            if (name === 'MSW-H2') name = 'MSW-H₂';
+            return {
+                value: [centerIdx, 38],
+                label: {
+                    show: true,
+                    formatter: name,
+                    color: colors[g.name],
+                    fontSize: 14,
+                    position: 'top'
+                },
+                itemStyle: { opacity: 0 }
+            };
+        });
+        
+        const series = [
+            {
+                name: 'Base',
+                type: 'bar',
+                stack: 'total',
+                itemStyle: {
+                    borderColor: 'transparent',
+                    color: 'transparent'
+                },
+                emphasis: { itemStyle: { borderColor: 'transparent', color: 'transparent' } },
+                data: lowData,
+                barWidth: '60%'
+            },
+            {
+                name: 'Range',
+                type: 'bar',
+                stack: 'total',
+                data: heightData.map((val, i) => ({
+                    value: val,
+                    itemStyle: { color: colorData[i] }
+                })),
+                barWidth: '60%',
+                markLine: {
+                    data: markLines,
+                    symbol: ['none', 'none'],
+                    animation: false
+                }
+            },
+            {
+                type: 'scatter',
+                data: groupLabelData,
+                symbolSize: 0,
+                z: 10,
+                clip: false
+            }
+        ];
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, bottom: 50, left: 60, right: 60 },
+            xAxis: {
+                type: 'category',
+                data: xAxisData,
+                show: true,
+                axisLabel: {
+                    interval: 0,
+                    rotate: 30,
+                    color: 'black',
+                    fontSize: 10
+                },
+                axisTick: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'GHG emission intensity\nvariation (gCO₂e MJ⁻¹)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                min: 0,
+                max: 40,
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black' },
+                splitLine: { show: false }
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'a',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

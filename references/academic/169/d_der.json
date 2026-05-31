@@ -1,0 +1,146 @@
+[
+    {
+        "Country": "South Africa",
+        "Plate waste rate": 0.463137,
+        "sd": 11.3842,
+        "rate_pct": 46.313700000000004
+    },
+    {
+        "Country": "Canada",
+        "Plate waste rate": 0.361057,
+        "sd": 0.0,
+        "rate_pct": 36.1057
+    },
+    {
+        "Country": "Italy",
+        "Plate waste rate": 0.322202,
+        "sd": 11.8637,
+        "rate_pct": 32.2202
+    },
+    {
+        "Country": "Latvia",
+        "Plate waste rate": 0.319073,
+        "sd": 7.07593,
+        "rate_pct": 31.9073
+    },
+    {
+        "Country": "Portugal",
+        "Plate waste rate": 0.290535,
+        "sd": 19.6385,
+        "rate_pct": 29.0535
+    },
+    {
+        "Country": "USA",
+        "Plate waste rate": 0.287659,
+        "sd": 12.9019,
+        "rate_pct": 28.7659
+    },
+    {
+        "Country": "France",
+        "Plate waste rate": 0.283855,
+        "sd": 0.0,
+        "rate_pct": 28.385500000000004
+    },
+    {
+        "Country": "Hungary",
+        "Plate waste rate": 0.277409,
+        "sd": 0.0,
+        "rate_pct": 27.740900000000003
+    },
+    {
+        "Country": "Denmark",
+        "Plate waste rate": 0.258459,
+        "sd": 8.91632,
+        "rate_pct": 25.8459
+    },
+    {
+        "Country": "Spain",
+        "Plate waste rate": 0.242257,
+        "sd": 9.88582,
+        "rate_pct": 24.2257
+    },
+    {
+        "Country": "China",
+        "Plate waste rate": 0.241117,
+        "sd": 0.0,
+        "rate_pct": 24.1117
+    },
+    {
+        "Country": "Finland",
+        "Plate waste rate": 0.221753,
+        "sd": 0.0,
+        "rate_pct": 22.1753
+    },
+    {
+        "Country": "UK",
+        "Plate waste rate": 0.208682,
+        "sd": 7.1671,
+        "rate_pct": 20.8682
+    },
+    {
+        "Country": "Iran",
+        "Plate waste rate": 0.201225,
+        "sd": 1.66657,
+        "rate_pct": 20.1225
+    },
+    {
+        "Country": "Germany",
+        "Plate waste rate": 0.18335,
+        "sd": 0.0,
+        "rate_pct": 18.335
+    },
+    {
+        "Country": "Jordan",
+        "Plate waste rate": 0.168129,
+        "sd": 0.0,
+        "rate_pct": 16.8129
+    },
+    {
+        "Country": "Croatia",
+        "Plate waste rate": 0.155559,
+        "sd": 0.0,
+        "rate_pct": 15.555900000000001
+    },
+    {
+        "Country": "Brazil",
+        "Plate waste rate": 0.147553,
+        "sd": 7.84035,
+        "rate_pct": 14.755299999999998
+    },
+    {
+        "Country": "Turkey",
+        "Plate waste rate": 0.136616,
+        "sd": 0.0,
+        "rate_pct": 13.661599999999998
+    },
+    {
+        "Country": "Thailand",
+        "Plate waste rate": 0.124509,
+        "sd": 9.46044,
+        "rate_pct": 12.450899999999999
+    },
+    {
+        "Country": "Ethiopia",
+        "Plate waste rate": 0.116182,
+        "sd": 0.0,
+        "rate_pct": 11.6182
+    },
+    {
+        "Country": "Sweden",
+        "Plate waste rate": 0.0834352,
+        "sd": 1.04935,
+        "rate_pct": 8.34352
+    },
+    {
+        "Country": "Japan",
+        "Plate waste rate": 0.0401832,
+        "sd": 5.1598,
+        "rate_pct": 4.01832
+    },
+    {
+        "Country": "Philippines",
+        "Plate waste rate": 0.0366431,
+        "sd": 2.6163,
+        "rate_pct": 3.66431
+    }
+]

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>CVX 投入资本回报率 (ROIC) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 6px 0;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 0 0 20px 0;
+      font-weight: normal;
+      color: #555;
+    }
+    .chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;
+      /* Use a fixed, reasonable height to avoid vertical stretching */
+      height: 420px;
+      width: 100%;
+      background: #fff;
+      padding: 16px 20px 22px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      box-sizing: border-box;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .note {
+      max-width: 900px;
+      margin: 12px auto 0;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>CVX 投入资本回报率 (ROIC)</h1>
+    <h2>按财年展示：2016–2024</h2>
+    <div class="chart-container">
+      <canvas id="roicChart"></canvas>
+    </div>
+  </div>
+
+  <div class="note">
+    数据来源：用户提供的财年 ROIC 数据（2016–2024）。<br />
+    ROIC = 投入资本回报率，图中数值以百分比形式展示。
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Source data (as provided)
+    const years = [
+      "2016","2017","2018","2019",
+      "2020","2021","2022","2023","2024"
+    ];
+    const roicRaw = [
+      -0.0299940242210928,
+       0.0169769691682625,
+       0.0576988160074158,
+       0.0002977706467446,
+      -0.0413879449114648,
+       0.0643980141834316,
+       0.2014450597043784,
+       0.144883940671978,
+       0.1096229235151563
+    ];
+
+    // Convert to percentage values
+    const roicPercent = roicRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("roicChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [{
+          label: "ROIC（%）",
+          data: roicPercent,
+          tension: 0.25,
+          borderColor: "#0066CC",
+          backgroundColor: "rgba(0, 102, 204, 0.12)",
+          borderWidth: 2,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointBackgroundColor: "#ffffff",
+          pointBorderColor: "#0066CC",
+          pointBorderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        // Let the CSS-fixed container height control the aspect ratio
+        maintainAspectRatio: false,
+        layout: {
+          padding: { left: 4, right: 8, top: 10, bottom: 4 }
+        },
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return " ROIC: " + value.toFixed(2) + "%";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              color: "#444",
+              font: { size: 12 }
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0,
+              autoSkip: false
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "投入资本回报率（%）",
+              color: "#444",
+              font: { size: 12 }
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(0) + "%";
+              }
+            },
+            grid: {
+              color: "rgba(0,0,0,0.06)"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

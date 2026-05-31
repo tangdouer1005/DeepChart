@@ -1,0 +1,46 @@
+{
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "Sector concentration vs early-stage mix",
+  "x_field": "x",
+  "y_field": "y",
+  "size_field": "size",
+  "hue_field": null,
+  "label_field": "label",
+  "x_label": "Top-3 Q3 deal concentration share (%)",
+  "y_label": "2025 YTD early-stage share (%)",
+  "size_label": "2025 YTD funding ($B)",
+  "annotate": true,
+  "data": [
+    {
+      "label": "AI",
+      "x": 47.698745,
+      "y": 74.0,
+      "size": 158.9
+    },
+    {
+      "label": "Fintech",
+      "x": 16.697248,
+      "y": 66.0,
+      "size": 32.6
+    },
+    {
+      "label": "Retail Tech",
+      "x": 29.740741,
+      "y": 60.0,
+      "size": 18.5
+    },
+    {
+      "label": "Digital Health",
+      "x": 16.733333,
+      "y": 57.0,
+      "size": 15.9
+    },
+    {
+      "label": "CVC",
+      "x": 17.647059,
+      "y": 62.0,
+      "size": 60.3
+    }
+  ]
+}

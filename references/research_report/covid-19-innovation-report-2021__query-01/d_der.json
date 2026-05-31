@@ -1,0 +1,63 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a ranked horizontal bar chart showing the top 12 countries by sampled-innovation density in the 2021 COVID-19 Innovation Report, where sampled-innovation density is defined as the sum of all six `Number Of Sampled Innovations Per Category` values divided by `population` in millions, values are expressed as sampled innovations per 1 million people, and bars are sorted from highest to lowest after the density is derived.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "sampled innovations per 1 million people",
+  "sort_rule": "descending by innovation_density",
+  "selection_rule": "top 12",
+  "plot_spec": {
+    "title": "2021 Sampled-Innovation Density",
+    "xlabel": "Sampled innovations per 1M people",
+    "value_field": "innovation_density"
+  },
+  "records": [
+    {
+      "entity": "Estonia",
+      "innovation_density": 8.2809
+    },
+    {
+      "entity": "Luxembourg",
+      "innovation_density": 8.0659
+    },
+    {
+      "entity": "Israel",
+      "innovation_density": 4.2222
+    },
+    {
+      "entity": "Singapore",
+      "innovation_density": 2.6316
+    },
+    {
+      "entity": "Switzerland",
+      "innovation_density": 2.5581
+    },
+    {
+      "entity": "Belgium",
+      "innovation_density": 2.5
+    },
+    {
+      "entity": "Canada",
+      "innovation_density": 2.1277
+    },
+    {
+      "entity": "Ireland",
+      "innovation_density": 2.0261
+    },
+    {
+      "entity": "Croatia",
+      "innovation_density": 2.0
+    },
+    {
+      "entity": "Finland",
+      "innovation_density": 1.8115
+    },
+    {
+      "entity": "Denmark",
+      "innovation_density": 1.5517
+    },
+    {
+      "entity": "Taiwan",
+      "innovation_density": 1.3857
+    }
+  ]
+}

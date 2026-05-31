@@ -1,0 +1,110 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2017,
+            "CFO": 31673000000,
+            "Net Income": 13643000000,
+            "Total Assets": 198825000000,
+            "Avg Total Assets": 199203000000.0,
+            "CFO per Asset": 0.1589986094586929,
+            "NI per Asset": 0.0684879243786489
+        },
+        {
+            "Fiscal Year": 2018,
+            "CFO": 28337000000,
+            "Net Income": 9862000000,
+            "Total Assets": 204522000000,
+            "Avg Total Assets": 201673500000.0,
+            "CFO per Asset": 0.1405092885282399,
+            "NI per Asset": 0.0489008223688288
+        },
+        {
+            "Fiscal Year": 2019,
+            "CFO": 27753000000,
+            "Net Income": 6670000000,
+            "Total Assets": 219295000000,
+            "Avg Total Assets": 211908500000.0,
+            "CFO per Asset": 0.1309669031681126,
+            "NI per Asset": 0.0314758492462548
+        },
+        {
+            "Fiscal Year": 2020,
+            "CFO": 25255000000,
+            "Net Income": 14881000000,
+            "Total Assets": 236495000000,
+            "Avg Total Assets": 227895000000.0,
+            "CFO per Asset": 0.1108185787314333,
+            "NI per Asset": 0.0652976151297746
+        },
+        {
+            "Fiscal Year": 2021,
+            "CFO": 36074000000,
+            "Net Income": 13510000000,
+            "Total Assets": 252496000000,
+            "Avg Total Assets": 244495500000.0,
+            "CFO per Asset": 0.1475446378358701,
+            "NI per Asset": 0.0552566407152687
+        },
+        {
+            "Fiscal Year": 2022,
+            "CFO": 24181000000,
+            "Net Income": 13673000000,
+            "Total Assets": 244860000000,
+            "Avg Total Assets": 248678000000.0,
+            "CFO per Asset": 0.0972381955782176,
+            "NI per Asset": 0.0549827487755249
+        },
+        {
+            "Fiscal Year": 2023,
+            "CFO": 29101000000,
+            "Net Income": 11680000000,
+            "Total Assets": 243457000000,
+            "Avg Total Assets": 244158500000.0,
+            "CFO per Asset": 0.1191889694604119,
+            "NI per Asset": 0.0478377775092818
+        },
+        {
+            "Fiscal Year": 2024,
+            "CFO": 35726000000,
+            "Net Income": 15511000000,
+            "Total Assets": 252399000000,
+            "Avg Total Assets": 247928000000.0,
+            "CFO per Asset": 0.1440982865993353,
+            "NI per Asset": 0.0625625181504307
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2017,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.09068276122218032
+        },
+        {
+            "Fiscal Year": 2018,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.09033258035810329
+        },
+        {
+            "Fiscal Year": 2019,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.0961399028705625
+        },
+        {
+            "Fiscal Year": 2020,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.043865620837649846
+        },
+        {
+            "Fiscal Year": 2021,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.08936379190165389
+        },
+        {
+            "Fiscal Year": 2022,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.042914318386016496
+        },
+        {
+            "Fiscal Year": 2023,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.0715567841549021
+        },
+        {
+            "Fiscal Year": 2024,
+            "盈余-现金质量剪刀差 (Earnings Quality Spread)": 0.08009144251760111
+        }
+    ]
+}

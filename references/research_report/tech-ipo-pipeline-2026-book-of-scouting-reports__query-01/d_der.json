@@ -1,0 +1,87 @@
+{
+  "report_id": "014",
+  "query_id": 1,
+  "query_text": "Create a ranked bar chart for the top 15 companies by `IPO readiness efficiency`, defined as `IPO probability divided by Total raised`, with `Total raised` normalized to `$B`, shown as `IPO-probability points per $1B raised`, filtered to companies with numeric `Total raised`, and sorted descending by the derived metric.",
+  "chart_type": "ranked_bar",
+  "value_unit": "IPO-probability points per $1B raised",
+  "sort_rule": "descending by IPO readiness efficiency",
+  "selection_rule": "top 15 companies with numeric funding",
+  "records": [
+    {
+      "label": "Zapier",
+      "value": 18923.076923
+    },
+    {
+      "label": "Team Blue",
+      "value": 1767.676768
+    },
+    {
+      "label": "Games24x7",
+      "value": 777.333333
+    },
+    {
+      "label": "Sword",
+      "value": 148.648649
+    },
+    {
+      "label": "DataArt",
+      "value": 148.340249
+    },
+    {
+      "label": "Formlabs",
+      "value": 130.351682
+    },
+    {
+      "label": "Justworks",
+      "value": 123.279099
+    },
+    {
+      "label": "Locus Robotics",
+      "value": 116.68207
+    },
+    {
+      "label": "Kraken",
+      "value": 112.093828
+    },
+    {
+      "label": "Porter",
+      "value": 103.971963
+    },
+    {
+      "label": "FourKites",
+      "value": 100.864553
+    },
+    {
+      "label": "Innovaccer",
+      "value": 89.59582
+    },
+    {
+      "label": "Noom",
+      "value": 86.915297
+    },
+    {
+      "label": "Strava",
+      "value": 86.158977
+    },
+    {
+      "label": "Kaseya",
+      "value": 85.52149
+    }
+  ],
+  "plot_config": {
+    "title": "Top companies by IPO readiness efficiency",
+    "x_label": "IPO-probability points per $1B raised",
+    "y_label": "Company"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with numeric disclosed funding.",
+    "Converted Total raised to billions of dollars.",
+    "Divided IPO probability by funding in $B.",
+    "Ranked descending and kept the top 15 companies."
+  ],
+  "stats": {
+    "eligible_count": 105,
+    "returned_count": 15
+  },
+  "open_issues": []
+}

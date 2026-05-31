@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMUS 资本再投资率（2016-2024）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    h2 {
+      margin: 0 0 20px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #555;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 24px 28px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    canvas {
+      max-height: 520px;
+    }
+
+    .note {
+      max-width: 900px;
+      margin: 12px auto 0;
+      font-size: 11px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px;
+      }
+      .chart-container {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>TMUS 资本再投资率（2016–2024）</h1>
+    <h2>Reinvestment Rate by Fiscal Year</h2>
+    <canvas id="reinvestmentChart"></canvas>
+  </div>
+  <div class="note">
+    数据来源：用户提供数据。<br>
+    指标：资本再投资率（RESULT_Reinvestment_Rate）。数值为比率（可视为倍数），未进行额外换算。
+  </div>
+
+  <script>
+    // Data from source
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const reinvestmentRates = [
+      3.0526871300524268,
+      3.1896163880554886,
+      1.6268470046943753,
+      1.717667488279519,
+      2.9338503032316,
+      3.426986027047693,
+      2.975324036947145,
+      1.2312542902327732,
+      0.8637785820157824
+    ];
+
+    const ctx = document.getElementById("reinvestmentChart");
+
+    // Compute min/max for y-axis padding
+    const minVal = Math.min(...reinvestmentRates);
+    const maxVal = Math.max(...reinvestmentRates);
+    const padding = (maxVal - minVal) * 0.15 || 0.3;
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "资本再投资率",
+            data: reinvestmentRates,
+            backgroundColor: "rgba(59, 130, 246, 0.72)",
+            borderColor: "rgba(37, 99, 235, 1)",
+            borderWidth: 1.2,
+            borderRadius: 6,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.9)",
+            hoverBorderColor: "rgba(30, 64, 175, 1)"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 10,
+            right: 16,
+            bottom: 10,
+            left: 0
+          }
+        },
+        plugins: {
+          title: {
+            display: false
+          },
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 14,
+              boxHeight: 14,
+              usePointStyle: true,
+              padding: 16
+            }
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: "rgba(15, 23, 42, 0.9)",
+            titleColor: "#f9fafb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.7)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: true,
+            callbacks: {
+              label: function (context) {
+                const val = context.parsed.y;
+                return " 资本再投资率: " + val.toFixed(3);
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: minVal - padding,
+            suggestedMax: maxVal + padding,
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(1);
+              }
+            },
+            title: {
+              display: true,
+              text: "资本再投资率（倍）",
+              color: "#374151",
+              font: {
+                size: 12
+              }
+            }
+          }
+        },
+        hover: {
+          mode: "nearest",
+          intersect: true
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutQuart"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

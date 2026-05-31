@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>tmo 奥特曼破产预测模型 (Altman Z-Score) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --text-color: #1f2933;
+      --grid-color: rgba(148, 163, 184, 0.4);
+      --line-color: #2563eb;
+      --line-fill: rgba(37, 99, 235, 0.12);
+      --point-border: #1d4ed8;
+      --point-hover: #1d4ed8;
+      --tooltip-bg: rgba(15, 23, 42, 0.94);
+      --border-color: #e5e7eb;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --text-color: #e5e7eb;
+        --grid-color: rgba(148, 163, 184, 0.3);
+        --line-color: #60a5fa;
+        --line-fill: rgba(96, 165, 250, 0.12);
+        --point-border: #93c5fd;
+        --point-hover: #bfdbfe;
+        --tooltip-bg: rgba(15, 23, 42, 0.94);
+        --border-color: #1f2937;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 24px 12px;
+      box-sizing: border-box;
+    }
+
+    .chart-wrapper {
+      width: 100%;
+      max-width: 900px;
+      background-color: var(--bg-color);
+      border-radius: 12px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.18),
+        0 0 0 1px var(--border-color);
+      padding: 20px 22px 24px;
+      box-sizing: border-box;
+    }
+
+    .chart-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    .chart-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .chart-subtitle {
+      font-size: 0.82rem;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .chart-subtitle {
+        color: #9ca3af;
+      }
+    }
+
+    .chart-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 4px;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .chart-meta {
+        color: #9ca3af;
+      }
+    }
+
+    .meta-pill {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px 8px;
+      }
+      .chart-wrapper {
+        padding: 16px 14px 20px;
+      }
+      .chart-container {
+        height: 320px;
+      }
+    }
+
+    .z-legend {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #6b7280;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .z-legend {
+        color: #9ca3af;
+      }
+    }
+
+    .z-badge {
+      border-radius: 999px;
+      padding: 1px 8px;
+      border: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .z-color-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .z-color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--line-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <div class="chart-header">
+      <div class="chart-title">tmo 奥特曼破产预测模型 (Altman Z-Score) 趋势</div>
+      <div class="chart-subtitle">2016–2024 财年，单位：Z-Score</div>
+      <div class="chart-meta">
+        <span class="meta-pill">模型：Altman Z-Score</span>
+        <span class="meta-pill">公司：tmo</span>
+        <span class="meta-pill">数据来源：给定结构化财报数据</span>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="zScoreChart"></canvas>
+    </div>
+
+    <div class="z-legend">
+      <span class="z-badge z-color-badge">
+        <span class="z-color-dot"></span>
+        Z-Score
+      </span>
+      <span class="z-badge">一般认为：Z &lt; 1.8 破产风险高</span>
+      <span class="z-badge">1.8 ≤ Z ≤ 3.0 灰色区域 / 中性</span>
+      <span class="z-badge">Z &gt; 3.0 风险较低</span>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('zScoreChart');
+
+    const years = [
+      '2016',
+      '2017',
+      '2018',
+      '2019',
+      '2020',
+      '2021',
+      '2022',
+      '2023',
+      '2024'
+    ];
+
+    const zScores = [
+      1.6149572819595055,
+      1.4906117035569937,
+      1.7992305835787656,
+      1.9453542375729596,
+      2.216035867988388,
+      1.8278962214318997,
+      1.955126073541424,
+      2.0040386798259284,
+      2.1972135155377086
+    ];
+
+    // Compute dynamic y-axis range with a margin
+    const minZ = Math.min(...zScores);
+    const maxZ = Math.max(...zScores);
+    const padding = (maxZ - minZ || 0.5) * 0.25;
+    const suggestedMin = Math.max(0, minZ - padding);
+    const suggestedMax = maxZ + padding;
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: 'Altman Z-Score',
+            data: zScores,
+            borderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--line-color')
+              .trim(),
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--line-fill')
+              .trim(),
+            pointBackgroundColor: '#ffffff',
+            pointBorderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--point-border')
+              .trim(),
+            pointHoverBackgroundColor: '#ffffff',
+            pointHoverBorderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--point-hover')
+              .trim(),
+            borderWidth: 2,
+            tension: 0.25,
+            fill: true,
+            pointRadius: 3.5,
+            pointHoverRadius: 5,
+            pointHitRadius: 10
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--tooltip-bg')
+              .trim(),
+            titleColor: '#f9fafb',
+            bodyColor: '#e5e7eb',
+            borderColor: 'rgba(148, 163, 184, 0.5)',
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function (ctx) {
+                const value = ctx.parsed.y;
+                let zone = '';
+                if (value < 1.8) {
+                  zone = '（高风险区）';
+                } else if (value <= 3.0) {
+                  zone = '（中性区）';
+                } else {
+                  zone = '（低风险区）';
+                }
+                return `Z-Score: ${value.toFixed(3)} ${zone}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: true,
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--grid-color')
+                .trim()
+            },
+            ticks: {
+              maxRotation: 0,
+              autoSkipPadding: 12
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--grid-color')
+                .trim()
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(1);
+              }
+            },
+            title: {
+              display: true,
+              text: 'Altman Z-Score',
+              font: {
+                size: 11
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

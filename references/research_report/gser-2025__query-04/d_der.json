@@ -1,0 +1,123 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a bubble chart of the top 15 ecosystems by `unicorn funding density`, defined as `Total VC Funding / Number of Unicorns`, with the x-axis as `Number of Unicorns`, the y-axis as `Total VC Funding / Number of Unicorns` in `$B per unicorn`, bubble size as `Ecosystem Value` in `$B`, sorted by the derived density descending, and restricted to ecosystems with at least 3 unicorns.",
+  "chart_type": "bubble chart",
+  "value_unit": "$B per unicorn",
+  "sort_rule": "descending by VC per unicorn",
+  "selection_rule": "top 15 ecosystems with unicorns >= 3",
+  "plot_spec": {
+    "title": "2025 Unicorn Funding Density",
+    "x_field": "x_number_of_unicorns",
+    "y_field": "y_vc_per_unicorn_busd",
+    "size_field": "size_ecosystem_value_busd",
+    "xlabel": "Number of Unicorns",
+    "ylabel": "Total VC Funding / Unicorns ($B per unicorn)"
+  },
+  "records": [
+    {
+      "entity": "Tokyo",
+      "x_number_of_unicorns": 8,
+      "y_vc_per_unicorn_busd": 2.95,
+      "size_ecosystem_value_busd": 68.0,
+      "label": true
+    },
+    {
+      "entity": "Seoul",
+      "x_number_of_unicorns": 14,
+      "y_vc_per_unicorn_busd": 2.7857,
+      "size_ecosystem_value_busd": 133.0,
+      "label": true
+    },
+    {
+      "entity": "Philadelphia",
+      "x_number_of_unicorns": 9,
+      "y_vc_per_unicorn_busd": 2.6667,
+      "size_ecosystem_value_busd": 76.0,
+      "label": true
+    },
+    {
+      "entity": "Sydney",
+      "x_number_of_unicorns": 7,
+      "y_vc_per_unicorn_busd": 1.8571,
+      "size_ecosystem_value_busd": 55.0,
+      "label": true
+    },
+    {
+      "entity": "Montréal",
+      "x_number_of_unicorns": 5,
+      "y_vc_per_unicorn_busd": 1.8,
+      "size_ecosystem_value_busd": 27.0,
+      "label": true
+    },
+    {
+      "entity": "Hong Kong",
+      "x_number_of_unicorns": 10,
+      "y_vc_per_unicorn_busd": 1.8,
+      "size_ecosystem_value_busd": 39.0,
+      "label": true
+    },
+    {
+      "entity": "Los Angeles",
+      "x_number_of_unicorns": 45,
+      "y_vc_per_unicorn_busd": 1.6444,
+      "size_ecosystem_value_busd": 385.0,
+      "label": true
+    },
+    {
+      "entity": "Boston",
+      "x_number_of_unicorns": 44,
+      "y_vc_per_unicorn_busd": 1.6364,
+      "size_ecosystem_value_busd": 192.0,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "x_number_of_unicorns": 20,
+      "y_vc_per_unicorn_busd": 1.6,
+      "size_ecosystem_value_busd": 144.0,
+      "label": true
+    },
+    {
+      "entity": "Melbourne",
+      "x_number_of_unicorns": 3,
+      "y_vc_per_unicorn_busd": 1.6,
+      "size_ecosystem_value_busd": 18.0,
+      "label": true
+    },
+    {
+      "entity": "London",
+      "x_number_of_unicorns": 67,
+      "y_vc_per_unicorn_busd": 1.5224,
+      "size_ecosystem_value_busd": 342.0,
+      "label": true
+    },
+    {
+      "entity": "Berlin",
+      "x_number_of_unicorns": 20,
+      "y_vc_per_unicorn_busd": 1.35,
+      "size_ecosystem_value_busd": 76.3,
+      "label": true
+    },
+    {
+      "entity": "Greater Lausanne Region",
+      "x_number_of_unicorns": 4,
+      "y_vc_per_unicorn_busd": 1.325,
+      "size_ecosystem_value_busd": 15.8,
+      "label": true
+    },
+    {
+      "entity": "Shenzhen",
+      "x_number_of_unicorns": 19,
+      "y_vc_per_unicorn_busd": 1.2632,
+      "size_ecosystem_value_busd": 116.0,
+      "label": true
+    },
+    {
+      "entity": "Shanghai",
+      "x_number_of_unicorns": 40,
+      "y_vc_per_unicorn_busd": 1.25,
+      "size_ecosystem_value_busd": 181.0,
+      "label": true
+    }
+  ]
+}

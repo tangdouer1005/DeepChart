@@ -1,0 +1,65 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a dumbbell chart for Blue Economy ecosystems with `Total VC Funding > $5B`, comparing each ecosystem's rank by `VC leverage ratio = Total VC Funding / Total Early-Stage Funding` with its rank by `maturity multiple = Ecosystem Value / Total Early-Stage Funding`, sorted by absolute rank gap descending and showing only the top 8 ecosystems with the largest rank gaps.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "rank position",
+  "sort_rule": "descending by absolute rank gap, ties broken by lower vc_leverage_rank then entity",
+  "selection_rule": "top 8 after deterministic tie-break",
+  "plot_spec": {
+    "title": "Blue Economy VC vs Maturity Rank Gap",
+    "left_field": "vc_leverage_rank",
+    "right_field": "maturity_rank",
+    "left_label": "vc_leverage_rank",
+    "right_label": "maturity_rank"
+  },
+  "records": [
+    {
+      "entity": "Sydney",
+      "vc_leverage_rank": 16,
+      "maturity_rank": 4,
+      "abs_rank_gap": 12
+    },
+    {
+      "entity": "Stockholm",
+      "vc_leverage_rank": 17,
+      "maturity_rank": 6,
+      "abs_rank_gap": 11
+    },
+    {
+      "entity": "New York City",
+      "vc_leverage_rank": 6,
+      "maturity_rank": 13,
+      "abs_rank_gap": 7
+    },
+    {
+      "entity": "Tel Aviv",
+      "vc_leverage_rank": 9,
+      "maturity_rank": 15,
+      "abs_rank_gap": 6
+    },
+    {
+      "entity": "Tokyo",
+      "vc_leverage_rank": 12,
+      "maturity_rank": 16,
+      "abs_rank_gap": 4
+    },
+    {
+      "entity": "Philadelphia",
+      "vc_leverage_rank": 4,
+      "maturity_rank": 7,
+      "abs_rank_gap": 3
+    },
+    {
+      "entity": "Boston",
+      "vc_leverage_rank": 7,
+      "maturity_rank": 10,
+      "abs_rank_gap": 3
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "vc_leverage_rank": 14,
+      "maturity_rank": 11,
+      "abs_rank_gap": 3
+    }
+  ]
+}

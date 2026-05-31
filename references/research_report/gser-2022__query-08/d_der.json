@@ -1,0 +1,60 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a heatmap aggregating all ecosystems with enough exact values across the seven regional sections for `Total VC Funding`, `Total Early-Stage Funding`, `Time to Exit`, and `Median Series A Round / Median Seed Round`, showing the median of three derived metrics for each region: `Median(Total Early-Stage Funding / Total VC Funding)`, `Median(Ecosystem Value / Time to Exit)`, and `Median(Median Series A Round / Median Seed Round)`; colors are expressed in `%`, `$B per year`, and `x multiple` respectively, and regions are sorted descending by the first metric.",
+  "chart_type": "heatmap",
+  "value_unit": "% / $B per year / x multiple",
+  "sort_rule": "descending by median early_to_vc_percent",
+  "selection_rule": "all 7 regions",
+  "plot_spec": {
+    "title": "2022 Regional Median Structure Heatmap",
+    "value_fields": [
+      "early_to_vc_percent",
+      "value_per_exit_year_busd",
+      "stage_multiple_median"
+    ]
+  },
+  "records": [
+    {
+      "entity": "Africa",
+      "early_to_vc_percent": 28.2548,
+      "value_per_exit_year_busd": 0.274,
+      "stage_multiple_median": 4.386
+    },
+    {
+      "entity": "Oceania",
+      "early_to_vc_percent": 26.3226,
+      "value_per_exit_year_busd": 1.828,
+      "stage_multiple_median": 5.8209
+    },
+    {
+      "entity": "MENA",
+      "early_to_vc_percent": 26.1905,
+      "value_per_exit_year_busd": 0.4,
+      "stage_multiple_median": 6.5714
+    },
+    {
+      "entity": "Europe",
+      "early_to_vc_percent": 21.1957,
+      "value_per_exit_year_busd": 1.5392,
+      "stage_multiple_median": 4.2967
+    },
+    {
+      "entity": "Latin America",
+      "early_to_vc_percent": 19.1896,
+      "value_per_exit_year_busd": 1.012,
+      "stage_multiple_median": 12.8008
+    },
+    {
+      "entity": "North America",
+      "early_to_vc_percent": 17.5,
+      "value_per_exit_year_busd": 4.6667,
+      "stage_multiple_median": 6.5657
+    },
+    {
+      "entity": "Asia",
+      "early_to_vc_percent": 14.1818,
+      "value_per_exit_year_busd": 8.7805,
+      "stage_multiple_median": 6.6667
+    }
+  ]
+}

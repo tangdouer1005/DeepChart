@@ -1,0 +1,50 @@
+[
+    {
+        "Group": "MSW management",
+        "Parameter": "MSW composition",
+        "Low": 13.9,
+        "High": 28.1
+    },
+    {
+        "Group": "MSW management",
+        "Parameter": "MSW moisture",
+        "Low": 11.4,
+        "High": 16.7
+    },
+    {
+        "Group": "MSW management",
+        "Parameter": "Pre-treatment",
+        "Low": 9.9,
+        "High": 14.1
+    },
+    {
+        "Group": "SAF production",
+        "Parameter": "Syngas yield",
+        "Low": 10.3,
+        "High": 16.7
+    },
+    {
+        "Group": "SAF production",
+        "Parameter": "CO+H2 ratio",
+        "Low": 12.7,
+        "High": 22.5
+    },
+    {
+        "Group": "SAF production",
+        "Parameter": "CO conversion",
+        "Low": 14.1,
+        "High": 15.1
+    },
+    {
+        "Group": "Energy and others",
+        "Parameter": "Electricity",
+        "Low": 3.6,
+        "High": 20.9
+    },
+    {
+        "Group": "Energy and others",
+        "Parameter": "Others",
+        "Low": 11.9,
+        "High": 20.3
+    }
+]

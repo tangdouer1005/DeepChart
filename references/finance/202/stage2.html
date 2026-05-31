@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ORCL 投入资本回报率 (ROIC) 2016–2024</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f7;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: 14px;
+      color: #666;
+    }
+
+    .chart-wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 420px; /* Fixed, reasonable height to avoid vertical stretching */
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+      padding: 18px 18px 14px;
+      box-sizing: border-box;
+    }
+
+    canvas {
+      width: 100% !important;  /* Let Chart.js fill the container width */
+      height: 100% !important; /* Match the fixed container height */
+    }
+
+    .note {
+      max-width: 820px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .note span.label {
+      font-weight: 600;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>ORCL 投入资本回报率 (ROIC)</h1>
+    <h2>按财年，2016–2024</h2>
+
+    <div class="chart-container">
+      <canvas id="roicChart"></canvas>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="label">说明：</span>
+    柱状图展示 ORCL 在 2016–2024 财年的投入资本回报率（ROIC）变化，数值以百分比形式显示。
+  </div>
+
+  <!-- Chart.js 最新稳定版 4.x -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // 源数据（按财年 ROIC）
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const roicRaw = [
+      0.1401737998274624,
+      0.1298297399926357,
+      0.0437139962471759,
+      0.1714219999997394,
+      0.2248009254006243,
+      0.2710107140998384,
+      0.1782724181517226,
+      0.1876148537635537,
+      0.1627397837742642
+    ];
+
+    // 转换为百分比
+    const roicPercent = roicRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("roicChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "ROIC（%）",
+            data: roicPercent,
+            backgroundColor: "rgba(37, 99, 235, 0.75)",
+            borderColor: "rgba(37, 99, 235, 1)",
+            borderWidth: 1,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.95)",
+            hoverBorderColor: "rgba(30, 64, 175, 1)",
+            borderRadius: 6,
+            maxBarThickness: 46
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // use container's fixed height
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 12
+              },
+              boxWidth: 12
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function (context) {
+                const value = context.raw;
+                return " ROIC: " + value.toFixed(2) + "%";
+              }
+            }
+          }
+        },
+        layout: {
+          padding: {
+            top: 8,
+            right: 10,
+            bottom: 0,
+            left: 0
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 12
+              },
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 30, // 30% 上限，让柱子不贴边
+            ticks: {
+              callback: function (value) {
+                return value + "%";
+              },
+              font: {
+                size: 12
+              }
+            },
+            title: {
+              display: true,
+              text: "ROIC（%）",
+              font: {
+                size: 13,
+                weight: "600"
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            }
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        animation: {
+          duration: 700,
+          easing: "easeOutCubic"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

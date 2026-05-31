@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const data = {
+    "index": [
+        "pyruvate",
+        "citrate",
+        "glutamate",
+        "succinate",
+        "fumarate",
+        "malate",
+        "aspartate"
+    ],
+    "columns": [
+        "control",
+        "Unnamed: 2",
+        "Unnamed: 3",
+        "K2",
+        "Unnamed: 5",
+        "Unnamed: 6",
+        "K10",
+        "Unnamed: 8",
+        "Unnamed: 9",
+        "K50",
+        "Unnamed: 11",
+        "Unnamed: 12"
+    ],
+    "data": [
+        [
+            0.1974000100143871,
+            0.11242187315422171,
+            -0.3098218831686088,
+            1.2765449445004882,
+            0.686888176848718,
+            1.8675217206217032,
+            1.7109521296517092,
+            0.4118771976622701,
+            1.4462385987347515,
+            2.9011436405097313,
+            2.5420944257816758,
+            1.6243913648360315
+        ],
+        [
+            -1.8935754496942592,
+            0.05194185299691883,
+            1.8416335966973425,
+            -0.026294373934703758,
+            0.6609743491256238,
+            -0.7262726786074643,
+            -0.44483535643514854,
+            -1.3125496962803769,
+            -0.9766209942607447,
+            -1.1125830754021293,
+            0.241900629671364,
+            -0.7071322009096974
+        ],
+        [
+            0.14600903899347348,
+            -0.5483142995198674,
+            0.4023052605263923,
+            -0.45010128115697223,
+            0.48019834405558587,
+            -0.6008516382783103,
+            -1.4278435368290874,
+            -2.3990775235182347,
+            -1.763151910766099,
+            -2.2923831410508373,
+            -0.897375440945776,
+            -1.7283724281014574
+        ],
+        [
+            0.3856402294339247,
+            -1.2552181544244543,
+            0.8695779249905313,
+            -0.2702038740492193,
+            0.5187938735406504,
+            -0.37087582216557297,
+            -1.0297336912560713,
+            -2.149210625042235,
+            -1.2697694671549096,
+            -2.1961827496093766,
+            -0.5813827835277129,
+            -1.4036841631826842
+        ],
+        [
+            -0.3500505291012576,
+            0.09294760969306451,
+            0.2571029194081941,
+            -1.2400752812157811,
+            -0.9247884987302533,
+            -2.3325292025176023,
+            -1.0045603378858172,
+            -2.6632729937496835,
+            -1.4021727844759275,
+            -2.5600408204167833,
+            -1.6804659714401073,
+            -2.221354030327519
+        ],
+        [
+            -0.6258646163892417,
+            0.272595619776153,
+            0.35326899661308786,
+            -1.0367313516739443,
+            -0.6817878397249649,
+            -2.4273507762340647,
+            -0.8168045056590101,
+            -2.2656686895789386,
+            -1.1110978889787824,
+            -2.490838337781596,
+            -1.6561107141884976,
+            -2.264501472855718
+        ],
+        [
+            -0.6063789809278634,
+            0.2361875148824809,
+            0.37019146604538244,
+            -0.9760498054077631,
+            -1.0666873767634042,
+            -2.194029495905537,
+            -0.734962134614857,
+            -2.6107969438795076,
+            -1.361983022315386,
+            -2.445039982417053,
+            -1.4794030083189431,
+            -2.319948189816237
+        ]
+    ]
+};
+
+        const heatmapData = [];
+        data.data.forEach((rowVals, rowIndex) => {
+            rowVals.forEach((val, colIndex) => {
+                heatmapData.push([colIndex, rowIndex, val]);
+            });
+        });
+        
+        const yLabels = data.index;
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: { top: 20, right: 100, bottom: 80, left: 100 },
+            visualMap: {
+                min: -3.5,
+                max: 3.5,
+                calculable: false,
+                orient: 'vertical',
+                right: 20,
+                top: 'center',
+                inRange: {
+                    // Blue-White-Red to match Seaborn vlag/coolwarm
+                    // Spectral (rainbow) is incorrect for this type of Z-score heatmap
+                    color: ['#2166ac', '#f7f7f7', '#b2182b']
+                },
+                formatter: function (value) {
+                    return value.toFixed(0);
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: Array(12).fill(''),
+                splitLine: { show: false },
+                axisLine: { show: false },
+                axisTick: { show: false }
+            },
+            yAxis: {
+                type: 'category',
+                data: yLabels,
+                inverse: true,
+                splitLine: { show: false },
+                axisLine: { show: false },
+                axisTick: { show: false },
+                axisLabel: { fontSize: 14, color: 'black' }
+            },
+            series: [
+                {
+                    type: 'heatmap',
+                    data: heatmapData,
+                    itemStyle: {
+                        borderColor: 'white',
+                        borderWidth: 1
+                    }
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'b', font: 'bold 20px Arial' } },
+                
+                // Group Separators
+                { type: 'line', shape: { x1: 250, y1: 20, x2: 250, y2: 420 }, style: { stroke: 'black', lineWidth: 2 } }, 
+                { type: 'line', shape: { x1: 400, y1: 20, x2: 400, y2: 420 }, style: { stroke: 'black', lineWidth: 2 } }, 
+                { type: 'line', shape: { x1: 550, y1: 20, x2: 550, y2: 420 }, style: { stroke: 'black', lineWidth: 2 } }, 
+                
+                // Brackets
+                { type: 'polyline', shape: { points: [[110, 430], [110, 435], [240, 435], [240, 430]] }, style: { stroke: 'black' } },
+                { type: 'text', left: 175, bottom: 45, style: { text: 'control', textAlign: 'center', font: '12px Arial' } },
+                
+                { type: 'polyline', shape: { points: [[260, 430], [260, 435], [390, 435], [390, 430]] }, style: { stroke: 'black' } },
+                { type: 'text', left: 325, bottom: 45, style: { text: '2 µM ket', textAlign: 'center', font: '12px Arial' } },
+
+                { type: 'polyline', shape: { points: [[410, 430], [410, 435], [540, 435], [540, 430]] }, style: { stroke: 'black' } },
+                { type: 'text', left: 475, bottom: 45, style: { text: '10 µM ket', textAlign: 'center', font: '12px Arial' } },
+
+                { type: 'polyline', shape: { points: [[560, 430], [560, 435], [690, 435], [690, 430]] }, style: { stroke: 'black' } },
+                { type: 'text', left: 625, bottom: 45, style: { text: '50 µM ket', textAlign: 'center', font: '12px Arial' } },
+                
+                { type: 'text', right: 5, top: 'center', rotation: -Math.PI/2, style: { text: 'Z-score (normalized to control)', font: '12px Arial' } }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

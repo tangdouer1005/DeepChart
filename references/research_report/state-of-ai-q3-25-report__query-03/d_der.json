@@ -1,0 +1,156 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a slope chart comparing each market’s `average funding per deal` in `2024 Q1-Q3` versus `2025 Q1-Q3`, expressed in `$M per deal`, after filtering to markets that have complete data in both periods and at least `40` deals in `2025 Q1-Q3`, and sort the lines by the 2025 value.",
+  "status": "completed",
+  "title": "2024 Q1-Q3 vs 2025 Q1-Q3 average funding per deal",
+  "chart_kind": "slope",
+  "chart_type": "slope chart",
+  "value_unit": "$M per deal",
+  "sort_rule": "descending by avg_2025_m_per_deal",
+  "selection_rule": "complete data in both periods and at least 40 deals in 2025 Q1-Q3",
+  "metadata": {
+    "entity_field": "market",
+    "left_field": "avg_2024_m_per_deal",
+    "right_field": "avg_2025_m_per_deal",
+    "left_label": "2024 Q1-Q3",
+    "right_label": "2025 Q1-Q3",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "market": "Silicon Valley",
+      "avg_2024_m_per_deal": 31.604342581423403,
+      "avg_2025_m_per_deal": 103.3170731707317,
+      "deals_2025": 1025
+    },
+    {
+      "market": "US",
+      "avg_2024_m_per_deal": 19.42512749188688,
+      "avg_2025_m_per_deal": 56.87841817416912,
+      "deals_2025": 2377
+    },
+    {
+      "market": "Los Angeles",
+      "avg_2024_m_per_deal": 22.641509433962263,
+      "avg_2025_m_per_deal": 53.125,
+      "deals_2025": 96
+    },
+    {
+      "market": "Austin",
+      "avg_2024_m_per_deal": 9.448979591836734,
+      "avg_2025_m_per_deal": 40.916666666666664,
+      "deals_2025": 48
+    },
+    {
+      "market": "France",
+      "avg_2024_m_per_deal": 18.88888888888889,
+      "avg_2025_m_per_deal": 28.75,
+      "deals_2025": 80
+    },
+    {
+      "market": "Israel",
+      "avg_2024_m_per_deal": 18.571428571428573,
+      "avg_2025_m_per_deal": 25.0,
+      "deals_2025": 80
+    },
+    {
+      "market": "New York",
+      "avg_2024_m_per_deal": 17.10144927536232,
+      "avg_2025_m_per_deal": 21.62162162162162,
+      "deals_2025": 333
+    },
+    {
+      "market": "Seattle",
+      "avg_2024_m_per_deal": 8.481012658227849,
+      "avg_2025_m_per_deal": 21.397590361445783,
+      "deals_2025": 83
+    },
+    {
+      "market": "Boston",
+      "avg_2024_m_per_deal": 10.714285714285714,
+      "avg_2025_m_per_deal": 21.296296296296298,
+      "deals_2025": 108
+    },
+    {
+      "market": "Canada",
+      "avg_2024_m_per_deal": 11.5,
+      "avg_2025_m_per_deal": 20.893333333333334,
+      "deals_2025": 75
+    },
+    {
+      "market": "Philadelphia",
+      "avg_2024_m_per_deal": 6.742268041237113,
+      "avg_2025_m_per_deal": 18.159663865546218,
+      "deals_2025": 119
+    },
+    {
+      "market": "Germany",
+      "avg_2024_m_per_deal": 15.224489795918368,
+      "avg_2025_m_per_deal": 18.054054054054053,
+      "deals_2025": 111
+    },
+    {
+      "market": "United Kingdom",
+      "avg_2024_m_per_deal": 9.737827715355806,
+      "avg_2025_m_per_deal": 18.0,
+      "deals_2025": 250
+    },
+    {
+      "market": "Europe",
+      "avg_2024_m_per_deal": 9.68421052631579,
+      "avg_2025_m_per_deal": 14.818763326226012,
+      "deals_2025": 938
+    },
+    {
+      "market": "Oceania",
+      "avg_2024_m_per_deal": 13.244444444444444,
+      "avg_2025_m_per_deal": 11.0,
+      "deals_2025": 54
+    },
+    {
+      "market": "China",
+      "avg_2024_m_per_deal": 14.56953642384106,
+      "avg_2025_m_per_deal": 10.72463768115942,
+      "deals_2025": 345
+    },
+    {
+      "market": "Miami",
+      "avg_2024_m_per_deal": 3.731707317073171,
+      "avg_2025_m_per_deal": 8.568181818181818,
+      "deals_2025": 44
+    },
+    {
+      "market": "India",
+      "avg_2024_m_per_deal": 5.553030303030303,
+      "avg_2025_m_per_deal": 8.075,
+      "deals_2025": 120
+    },
+    {
+      "market": "Singapore",
+      "avg_2024_m_per_deal": 6.1125,
+      "avg_2025_m_per_deal": 7.986301369863014,
+      "deals_2025": 73
+    },
+    {
+      "market": "Asia",
+      "avg_2024_m_per_deal": 9.052631578947368,
+      "avg_2025_m_per_deal": 7.570977917981073,
+      "deals_2025": 951
+    },
+    {
+      "market": "LatAm",
+      "avg_2024_m_per_deal": 3.276923076923077,
+      "avg_2025_m_per_deal": 4.033898305084746,
+      "deals_2025": 59
+    },
+    {
+      "market": "Japan",
+      "avg_2024_m_per_deal": 3.1758241758241756,
+      "avg_2025_m_per_deal": 2.7514450867052025,
+      "deals_2025": 173
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>tmo 净资产收益率-杜邦分析 (ROE) 2016-2024 折线图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f7f8fa;
+      color: #222;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      padding: 20px 24px 28px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 16px;
+    }
+
+    /* Explicit chart wrapper with a reasonable fixed aspect ratio */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      /* 16:9 aspect ratio using padding-top hack to avoid stretching */
+      padding-top: 56.25%;
+    }
+
+    .chart-wrapper canvas {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .container {
+        padding: 14px;
+      }
+      h1 {
+        font-size: 18px;
+      }
+      /* Keep same aspect ratio on mobile to prevent tall/narrow chart */
+      .chart-wrapper {
+        padding-top: 70%; /* slightly taller but still balanced */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>tmo 净资产收益率-杜邦分析 (ROE)</h1>
+    <div class="subtitle">2016-2024 年度变化（单位：%）</div>
+    <div class="chart-wrapper">
+      <canvas id="roeChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Source data (Original ROE(Avg))
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+    const roeRaw = [
+      0.0942794856549971,
+      0.0947770396764375,
+      0.110870016415404,
+      0.1290931000157175,
+      0.1986538281761241,
+      0.2051792828685259,
+      0.1639711693857569,
+      0.1321751016943547,
+      0.1315420633519866
+    ];
+
+    // Convert to percentage values
+    const roePercent = roeRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("roeChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "ROE（原始均值，%）",
+            data: roePercent,
+            fill: false,
+            borderColor: "#2563eb",
+            backgroundColor: "#2563eb",
+            tension: 0.3,
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#2563eb",
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 1.5
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        // Let Chart.js keep the natural aspect ratio of the canvas;
+        // our wrapper controls the visible ratio so it won't be tall & narrow.
+        maintainAspectRatio: true,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.92)",
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return "ROE: " + value.toFixed(2) + " %";
+              },
+              title: function (items) {
+                return "Fiscal Year: " + items[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              maxRotation: 0,
+              minRotation: 0,
+              autoSkip: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "ROE（%）",
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              callback: function (value) {
+                return value + "%";
+              },
+              font: {
+                size: 11
+              }
+            },
+            grid: {
+              color: "rgba(148,163,184,0.25)"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMO 内部增长率 (IGR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #222222;
+      --grid: #e5e7eb;
+      --accent: #2563eb;
+      --accent-light: rgba(37, 99, 235, 0.12);
+      --accent-point: #1d4ed8;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: var(--font-main);
+      background: var(--bg);
+      color: var(--fg);
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 0.4rem 0;
+      font-weight: 600;
+    }
+    .subtitle {
+      margin-bottom: 1rem;
+      color: #4b5563;
+      font-size: 0.95rem;
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 360px;
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 16px 16px 8px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+    canvas {
+      max-height: 460px;
+    }
+    .footer-note {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+      .chart-wrapper {
+        padding: 12px 10px 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TMO 内部增长率 (Internal Growth Rate, IGR)</h1>
+    <div class="subtitle">2016–2024 财年变化趋势（单位：百分比）</div>
+
+    <div class="chart-wrapper">
+      <canvas id="igrChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      数据来源：用户提供的 TMO 财年 RESULT_IGR（2016–2024）。<br />
+      说明：RESULT_IGR 原始值为小数形式，已转换为百分比显示。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Source data (as provided, kept explicit for transparency)
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+    const igrRaw = [
+      0.0428828200611959,
+      0.0403241346436648,
+      0.049685283152189,
+      0.0630524509576589,
+      0.1046837209705522,
+      0.0980503628398488,
+      0.0724536636789058,
+      0.0591772288791798,
+      0.0623377749359227,
+    ];
+
+    // Convert to percentage values with 2 decimal precision
+    const igrPercent = igrRaw.map((v) => +(v * 100).toFixed(2));
+
+    const ctx = document.getElementById("igrChart").getContext("2d");
+
+    const igrChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "内部增长率 (IGR)",
+            data: igrPercent,
+            borderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--accent")
+              .trim(),
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--accent-light")
+              .trim(),
+            pointBackgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--accent-point")
+              .trim(),
+            pointBorderColor: "#ffffff",
+            pointHoverRadius: 6,
+            pointRadius: 4,
+            tension: 0.3,
+            fill: true,
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              padding: 16,
+            },
+          },
+          tooltip: {
+            backgroundColor: "#111827",
+            titleColor: "#f9fafb",
+            bodyColor: "#e5e7eb",
+            cornerRadius: 6,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return "IGR: " + value.toFixed(2) + "%";
+              },
+            },
+          },
+          title: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              maxRotation: 0,
+              autoSkip: false,
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "内部增长率（%）",
+            },
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return value + "%";
+              },
+            },
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--grid")
+                .trim(),
+            },
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>

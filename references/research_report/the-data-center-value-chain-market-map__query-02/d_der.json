@@ -1,0 +1,586 @@
+{
+  "report_id": "010",
+  "query_id": 2,
+  "query_text": "Create a bubble chart for companies with numeric `Headcount` and numeric `Total raised`, where the x-axis is `Total raised ($M)`, the y-axis is `Mosaic score`, bubble size is `Headcount`, and color encodes `Commercial Maturity`, then label only the 12 companies with the largest positive gap between `Mosaic rank` and `Total raised rank`.",
+  "chart_type": "bubble",
+  "value_unit": "mixed",
+  "sort_rule": "all eligible companies plotted; labels restricted to the 12 largest positive funding-rank minus Mosaic-rank gaps",
+  "selection_rule": "numeric funding, headcount, and Mosaic required",
+  "records": [
+    {
+      "label": "Lonestar",
+      "x": 5.9,
+      "y": 678,
+      "size": 21,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": 4.0
+    },
+    {
+      "label": "Stamus Networks",
+      "x": 12.4,
+      "y": 729,
+      "size": 27,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": 11.0
+    },
+    {
+      "label": "Mobilint",
+      "x": 15.8,
+      "y": 741,
+      "size": 54,
+      "color": "4 / 5",
+      "highlight_label": true,
+      "rank_gap": 12.0
+    },
+    {
+      "label": "Natura Resources",
+      "x": 20.0,
+      "y": 797,
+      "size": 23,
+      "color": "3 / 5",
+      "highlight_label": true,
+      "rank_gap": 28.0
+    },
+    {
+      "label": "Starcloud",
+      "x": 23.9,
+      "y": 802,
+      "size": 11,
+      "color": "2 / 5",
+      "highlight_label": true,
+      "rank_gap": 28.0
+    },
+    {
+      "label": "Accelsius",
+      "x": 24.6,
+      "y": 747,
+      "size": 71,
+      "color": "4 / 5",
+      "highlight_label": true,
+      "rank_gap": 12.0
+    },
+    {
+      "label": "AlgoSec",
+      "x": 36.0,
+      "y": 710,
+      "size": 553,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": 0.0
+    },
+    {
+      "label": "Green Revolution Cooling",
+      "x": 36.3,
+      "y": 728,
+      "size": 37,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": 3.0
+    },
+    {
+      "label": "Ramon.Space",
+      "x": 43.5,
+      "y": 592,
+      "size": 95,
+      "color": "Unknown",
+      "highlight_label": false,
+      "rank_gap": -6.0
+    },
+    {
+      "label": "MemryX",
+      "x": 50.5,
+      "y": 746,
+      "size": 48,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": 7.0
+    },
+    {
+      "label": "Corintis",
+      "x": 53.5,
+      "y": 755,
+      "size": 52,
+      "color": "2 / 5",
+      "highlight_label": false,
+      "rank_gap": 9.0
+    },
+    {
+      "label": "Lumu Technologies",
+      "x": 53.5,
+      "y": 680,
+      "size": 169,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": -6.0
+    },
+    {
+      "label": "MangoBoost",
+      "x": 65.7,
+      "y": 746,
+      "size": 110,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": 4.0
+    },
+    {
+      "label": "Positron",
+      "x": 76.1,
+      "y": 761,
+      "size": 37,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": 11.0
+    },
+    {
+      "label": "David Energy",
+      "x": 79.9,
+      "y": 712,
+      "size": 60,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": -6.0
+    },
+    {
+      "label": "Leap",
+      "x": 80.9,
+      "y": 712,
+      "size": 119,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -7.0
+    },
+    {
+      "label": "ev.energy",
+      "x": 87.6,
+      "y": 726,
+      "size": 126,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -7.0
+    },
+    {
+      "label": "Phaidra",
+      "x": 88.5,
+      "y": 752,
+      "size": 96,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": 2.0
+    },
+    {
+      "label": "Stellar Cyber",
+      "x": 88.7,
+      "y": 830,
+      "size": 149,
+      "color": "4 / 5",
+      "highlight_label": true,
+      "rank_gap": 27.0
+    },
+    {
+      "label": "EdgeCortix",
+      "x": 93.7,
+      "y": 796,
+      "size": 52,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": 11.0
+    },
+    {
+      "label": "GridBeyond",
+      "x": 97.4,
+      "y": 761,
+      "size": 156,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": 4.0
+    },
+    {
+      "label": "DEEPX",
+      "x": 98.6,
+      "y": 874,
+      "size": 89,
+      "color": "4 / 5",
+      "highlight_label": true,
+      "rank_gap": 32.0
+    },
+    {
+      "label": "Forward Networks",
+      "x": 112.9,
+      "y": 759,
+      "size": 220,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": 0.0
+    },
+    {
+      "label": "Submer",
+      "x": 122.2,
+      "y": 805,
+      "size": 138,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": 11.0
+    },
+    {
+      "label": "Aalo Atomics",
+      "x": 133.3,
+      "y": 825,
+      "size": 77,
+      "color": "2 / 5",
+      "highlight_label": true,
+      "rank_gap": 20.0
+    },
+    {
+      "label": "Valar Atomics",
+      "x": 150.5,
+      "y": 809,
+      "size": 40,
+      "color": "2 / 5",
+      "highlight_label": false,
+      "rank_gap": 11.0
+    },
+    {
+      "label": "Dream",
+      "x": 155.0,
+      "y": 757,
+      "size": 223,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -5.0
+    },
+    {
+      "label": "DataCore Software",
+      "x": 185.4,
+      "y": 729,
+      "size": 367,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -15.0
+    },
+    {
+      "label": "Proxima Fusion",
+      "x": 202.7,
+      "y": 788,
+      "size": 109,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": -1.0
+    },
+    {
+      "label": "Axelera AI",
+      "x": 218.2,
+      "y": 810,
+      "size": 225,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": 8.0
+    },
+    {
+      "label": "Radiant",
+      "x": 225.2,
+      "y": 846,
+      "size": 260,
+      "color": "4 / 5",
+      "highlight_label": true,
+      "rank_gap": 17.0
+    },
+    {
+      "label": "Armada",
+      "x": 226.0,
+      "y": 884,
+      "size": 368,
+      "color": "4 / 5",
+      "highlight_label": true,
+      "rank_gap": 24.0
+    },
+    {
+      "label": "Tokamak Energy",
+      "x": 226.5,
+      "y": 809,
+      "size": 294,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": 4.0
+    },
+    {
+      "label": "Polarium",
+      "x": 298.8,
+      "y": 748,
+      "size": 300,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -15.0
+    },
+    {
+      "label": "Corelight",
+      "x": 309.2,
+      "y": 790,
+      "size": 417,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": -6.0
+    },
+    {
+      "label": "Vectra",
+      "x": 352.5,
+      "y": 739,
+      "size": 653,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": -22.0
+    },
+    {
+      "label": "d-Matrix",
+      "x": 429.0,
+      "y": 872,
+      "size": 234,
+      "color": "3 / 5",
+      "highlight_label": true,
+      "rank_gap": 16.0
+    },
+    {
+      "label": "Rebellions",
+      "x": 541.6,
+      "y": 902,
+      "size": 177,
+      "color": "4 / 5",
+      "highlight_label": true,
+      "rank_gap": 21.0
+    },
+    {
+      "label": "firmus",
+      "x": 546.3,
+      "y": 834,
+      "size": 33,
+      "color": "3 / 5",
+      "highlight_label": false,
+      "rank_gap": 8.0
+    },
+    {
+      "label": "SHINE Technologies",
+      "x": 578.1,
+      "y": 813,
+      "size": 298,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -1.0
+    },
+    {
+      "label": "newcleo",
+      "x": 584.8,
+      "y": 818,
+      "size": 720,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": 0.0
+    },
+    {
+      "label": "Scala Data Centers",
+      "x": 593.9,
+      "y": 577,
+      "size": 959,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": -40.0
+    },
+    {
+      "label": "Axiom Space",
+      "x": 630.3,
+      "y": 822,
+      "size": 853,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": -1.0
+    },
+    {
+      "label": "Fervo Energy",
+      "x": 884.6,
+      "y": 818,
+      "size": 183,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -3.0
+    },
+    {
+      "label": "Pacific Fusion",
+      "x": 900.0,
+      "y": 803,
+      "size": 117,
+      "color": "Unknown",
+      "highlight_label": false,
+      "rank_gap": -11.0
+    },
+    {
+      "label": "Helion Energy",
+      "x": 972.1,
+      "y": 858,
+      "size": 346,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": 4.0
+    },
+    {
+      "label": "Tenstorrent",
+      "x": 1000.0,
+      "y": 824,
+      "size": 966,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": -3.0
+    },
+    {
+      "label": "SambaNova Systems",
+      "x": 1100.0,
+      "y": 791,
+      "size": 449,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": -18.0
+    },
+    {
+      "label": "Cato Networks",
+      "x": 1200.0,
+      "y": 938,
+      "size": 1377,
+      "color": "5 / 5",
+      "highlight_label": true,
+      "rank_gap": 11.0
+    },
+    {
+      "label": "Base Power",
+      "x": 1200.0,
+      "y": 891,
+      "size": 172,
+      "color": "Unknown",
+      "highlight_label": false,
+      "rank_gap": 8.0
+    },
+    {
+      "label": "Lancium",
+      "x": 1300.0,
+      "y": 788,
+      "size": 76,
+      "color": "Unknown",
+      "highlight_label": false,
+      "rank_gap": -23.0
+    },
+    {
+      "label": "TerraPower",
+      "x": 1600.0,
+      "y": 860,
+      "size": 895,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": -1.0
+    },
+    {
+      "label": "DC BLOX",
+      "x": 1700.0,
+      "y": 571,
+      "size": 92,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -52.0
+    },
+    {
+      "label": "Cerebras",
+      "x": 1800.0,
+      "y": 926,
+      "size": 721,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": 4.0
+    },
+    {
+      "label": "X-energy",
+      "x": 1800.0,
+      "y": 876,
+      "size": 1167,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": -1.0
+    },
+    {
+      "label": "Echelon Data Centres",
+      "x": 1800.0,
+      "y": 786,
+      "size": 80,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -30.0
+    },
+    {
+      "label": "Commonwealth Fusion Systems",
+      "x": 2900.0,
+      "y": 865,
+      "size": 1046,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": -5.0
+    },
+    {
+      "label": "Princeton Digital Group",
+      "x": 3000.0,
+      "y": 851,
+      "size": 274,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -9.0
+    },
+    {
+      "label": "Groq",
+      "x": 3300.0,
+      "y": 950,
+      "size": 539,
+      "color": "5 / 5",
+      "highlight_label": false,
+      "rank_gap": 3.0
+    },
+    {
+      "label": "Rapidus",
+      "x": 5600.0,
+      "y": 887,
+      "size": 214,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -3.0
+    },
+    {
+      "label": "STACK Infrastructure",
+      "x": 10800.0,
+      "y": 625,
+      "size": 973,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -57.0
+    },
+    {
+      "label": "Aligned",
+      "x": 14600.0,
+      "y": 824,
+      "size": 428,
+      "color": "4 / 5",
+      "highlight_label": false,
+      "rank_gap": -18.0
+    }
+  ],
+  "plot_config": {
+    "title": "Quality vs funding with rank-gap highlights",
+    "x_label": "Total raised ($M)",
+    "y_label": "Mosaic score"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with numeric funding, headcount, and Mosaic.",
+    "Ranked companies by funding and Mosaic separately.",
+    "Computed funding rank minus Mosaic rank and flagged the 12 largest positive gaps for labeling.",
+    "Rendered all eligible companies as a bubble chart with maturity-based color."
+  ],
+  "stats": {
+    "eligible_count": 62,
+    "returned_count": 62,
+    "highlight_count": 12
+  },
+  "open_issues": []
+}

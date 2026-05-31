@@ -1,0 +1,47 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a ranked horizontal bar chart showing the top 8 countries by sampled innovations per visible ranked city in the 2020 report, where the metric is `total sampled innovations / number of entries in city_rankings`, values are expressed as sampled innovations per visible ranked city, countries must have at least one visible city in `city_rankings`, countries with `city_rankings = unavailable` are excluded, and bars are sorted from highest to lowest.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "sampled innovations per visible ranked city",
+  "sort_rule": "descending by innovations_per_city",
+  "selection_rule": "top 8 after excluding unavailable city_rankings",
+  "plot_spec": {
+    "title": "2020 Innovations per Visible Ranked City",
+    "xlabel": "Sampled innovations per visible city",
+    "value_field": "innovations_per_city"
+  },
+  "records": [
+    {
+      "entity": "United States",
+      "innovations_per_city": 101.0
+    },
+    {
+      "entity": "Russia",
+      "innovations_per_city": 29.0
+    },
+    {
+      "entity": "United Kingdom",
+      "innovations_per_city": 23.5
+    },
+    {
+      "entity": "France",
+      "innovations_per_city": 21.0
+    },
+    {
+      "entity": "Spain",
+      "innovations_per_city": 17.5
+    },
+    {
+      "entity": "Canada",
+      "innovations_per_city": 17.25
+    },
+    {
+      "entity": "Germany",
+      "innovations_per_city": 13.5
+    },
+    {
+      "entity": "South Korea",
+      "innovations_per_city": 13.0
+    }
+  ]
+}

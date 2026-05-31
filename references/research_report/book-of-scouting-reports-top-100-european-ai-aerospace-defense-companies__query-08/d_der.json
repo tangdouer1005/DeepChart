@@ -1,0 +1,42 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a slope chart comparing each segment’s share of companies in the top quartile of `Mosaic` with its share of companies in the top quartile of `Total raised`, using only rows where both fields are available, and express the plotted values as percentages of qualifying companies.",
+  "status": "completed",
+  "title": "Segment shares in top-quartile Mosaic vs Total raised",
+  "chart_kind": "slope",
+  "chart_type": "slope chart",
+  "value_unit": "percent of qualifying companies",
+  "sort_rule": "segment order preserved",
+  "selection_rule": "rows with non-missing mosaic and total_raised_m only",
+  "metadata": {
+    "entity_field": "segment",
+    "left_field": "top_quartile_mosaic_share_pct",
+    "right_field": "top_quartile_raised_share_pct",
+    "left_label": "Top-quartile Mosaic share",
+    "right_label": "Top-quartile Total raised share",
+    "figsize": [
+      10,
+      5
+    ]
+  },
+  "records": [
+    {
+      "segment": "Aerospace (commercial)",
+      "denominator": 28,
+      "top_quartile_mosaic_share_pct": 21.428571428571427,
+      "top_quartile_raised_share_pct": 25.0
+    },
+    {
+      "segment": "Aerospace (dual-use)",
+      "denominator": 41,
+      "top_quartile_mosaic_share_pct": 31.70731707317073,
+      "top_quartile_raised_share_pct": 29.268292682926827
+    },
+    {
+      "segment": "Defense",
+      "denominator": 17,
+      "top_quartile_mosaic_share_pct": 17.647058823529413,
+      "top_quartile_raised_share_pct": 17.647058823529413
+    }
+  ]
+}

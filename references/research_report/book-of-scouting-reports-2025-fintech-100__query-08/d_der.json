@@ -1,0 +1,58 @@
+{
+  "status": "complete",
+  "chart_type": "ranked_bar",
+  "title": "Funding per maturity point",
+  "label_field": "label",
+  "value_field": "value",
+  "x_label": "$M per maturity point",
+  "data": [
+    {
+      "label": "Clara",
+      "value": 110.0
+    },
+    {
+      "label": "Finom",
+      "value": 86.375
+    },
+    {
+      "label": "Campfire",
+      "value": 52.0
+    },
+    {
+      "label": "CredibleX",
+      "value": 51.666667
+    },
+    {
+      "label": "Securitize",
+      "value": 50.75
+    },
+    {
+      "label": "Descartes Underwriting",
+      "value": 47.266667
+    },
+    {
+      "label": "Uzum",
+      "value": 44.875
+    },
+    {
+      "label": "Highnote",
+      "value": 42.25
+    },
+    {
+      "label": "Xelix",
+      "value": 41.275
+    },
+    {
+      "label": "Upstage",
+      "value": 35.95
+    },
+    {
+      "label": "Alpaca",
+      "value": 34.725
+    },
+    {
+      "label": "Komainu",
+      "value": 33.333333
+    }
+  ]
+}

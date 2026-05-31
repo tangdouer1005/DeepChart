@@ -1,0 +1,213 @@
+{
+    "plot_data": [
+        {
+            "Model": "bioptimus",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7467894276890517,
+            "Pretraining Dataset (k WSIs)": 500.0,
+            "Pretraining Dataset (k Patients)": 333.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "ctranspath",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7245662906836026,
+            "Pretraining Dataset (k WSIs)": 32.0,
+            "Pretraining Dataset (k Patients)": 13.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.6986905923455256,
+            "Pretraining Dataset (k WSIs)": 6.0,
+            "Pretraining Dataset (k Patients)": 5.6,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7242330131938731,
+            "Pretraining Dataset (k WSIs)": 171.0,
+            "Pretraining Dataset (k Patients)": 30.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 31.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7300469326931298,
+            "Pretraining Dataset (k WSIs)": 1488.0,
+            "Pretraining Dataset (k Patients)": 120.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 17.0
+        },
+        {
+            "Model": "hibou-l",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7297320720088225,
+            "Pretraining Dataset (k WSIs)": 1139.0,
+            "Pretraining Dataset (k Patients)": 306.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.762773096016989,
+            "Pretraining Dataset (k WSIs)": 3135.0,
+            "Pretraining Dataset (k Patients)": 225.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 175.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Morphology",
+            "Average Downstream Performance (AUROC)": 0.7073485188270819,
+            "Pretraining Dataset (k WSIs)": 29.0,
+            "Pretraining Dataset (k Patients)": 11.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        },
+        {
+            "Model": "bioptimus",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.7046859564606631,
+            "Pretraining Dataset (k WSIs)": 500.0,
+            "Pretraining Dataset (k Patients)": 333.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "ctranspath",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.6865689130621666,
+            "Pretraining Dataset (k WSIs)": 32.0,
+            "Pretraining Dataset (k Patients)": 13.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.6655231079066909,
+            "Pretraining Dataset (k WSIs)": 6.0,
+            "Pretraining Dataset (k Patients)": 5.6,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.7222276213474471,
+            "Pretraining Dataset (k WSIs)": 171.0,
+            "Pretraining Dataset (k Patients)": 30.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 31.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.6850684143619094,
+            "Pretraining Dataset (k WSIs)": 1488.0,
+            "Pretraining Dataset (k Patients)": 120.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 17.0
+        },
+        {
+            "Model": "hibou-l",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.6854885628643554,
+            "Pretraining Dataset (k WSIs)": 1139.0,
+            "Pretraining Dataset (k Patients)": 306.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.732159659734404,
+            "Pretraining Dataset (k WSIs)": 3135.0,
+            "Pretraining Dataset (k Patients)": 225.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 175.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Biomarker",
+            "Average Downstream Performance (AUROC)": 0.6807236915312719,
+            "Pretraining Dataset (k WSIs)": 29.0,
+            "Pretraining Dataset (k Patients)": 11.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        },
+        {
+            "Model": "bioptimus",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5857513036006027,
+            "Pretraining Dataset (k WSIs)": 500.0,
+            "Pretraining Dataset (k Patients)": 333.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "ctranspath",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5770248615268212,
+            "Pretraining Dataset (k WSIs)": 32.0,
+            "Pretraining Dataset (k Patients)": 13.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        },
+        {
+            "Model": "phikon",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5897553541124554,
+            "Pretraining Dataset (k WSIs)": 6.0,
+            "Pretraining Dataset (k Patients)": 5.6,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 13.0
+        },
+        {
+            "Model": "prov-gigapath",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5871979448905298,
+            "Pretraining Dataset (k WSIs)": 171.0,
+            "Pretraining Dataset (k Patients)": 30.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 31.0
+        },
+        {
+            "Model": "virchow-class",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5873006733060928,
+            "Pretraining Dataset (k WSIs)": 1488.0,
+            "Pretraining Dataset (k Patients)": 120.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 17.0
+        },
+        {
+            "Model": "hibou-l",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5754285617170372,
+            "Pretraining Dataset (k WSIs)": 1139.0,
+            "Pretraining Dataset (k Patients)": 306.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": NaN
+        },
+        {
+            "Model": "virchow2-class",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.6065370877164761,
+            "Pretraining Dataset (k WSIs)": 3135.0,
+            "Pretraining Dataset (k Patients)": 225.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 175.0
+        },
+        {
+            "Model": "kaiko",
+            "Task Category": "Prognosis",
+            "Average Downstream Performance (AUROC)": 0.5543899668068984,
+            "Pretraining Dataset (k WSIs)": 29.0,
+            "Pretraining Dataset (k Patients)": 11.0,
+            "Pretraining Dataset (k Anatomic Tissue Sites)": 25.0
+        }
+    ],
+    "stats_data": [
+        {
+            "category": "Morphology",
+            "r": 0.7252874859979225,
+            "p": 0.041737391569081565
+        },
+        {
+            "category": "Biomarker",
+            "r": 0.3454421572318547,
+            "p": 0.40197846917947355
+        },
+        {
+            "category": "Prognosis",
+            "r": 0.2946265763094684,
+            "p": 0.4787114151864745
+        }
+    ]
+}

@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "Cash & Equiv": 5619000000.0,
+            "Receivables": 2740000000.0,
+            "Operating Expenses": 4435000000.0,
+            "Cost of Revenue": 2764000000.0,
+            "Quick Assets": 8359000000.0,
+            "Daily Burn": 19723287.671232875
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "Cash & Equiv": 9874000000.0,
+            "Receivables": 2554000000.0,
+            "Operating Expenses": 2966000000.0,
+            "Cost of Revenue": 3248000000.0,
+            "Quick Assets": 12428000000.0,
+            "Daily Burn": 17024657.534246575
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "Cash & Equiv": 8162000000.0,
+            "Receivables": 2790000000.0,
+            "Operating Expenses": 3799000000.0,
+            "Cost of Revenue": 3856000000.0,
+            "Quick Assets": 10952000000.0,
+            "Daily Burn": 20972602.739726026
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "Cash & Equiv": 7838000000.0,
+            "Receivables": 4590000000.0,
+            "Operating Expenses": 3811000000.0,
+            "Cost of Revenue": 4165000000.0,
+            "Quick Assets": 12428000000.0,
+            "Daily Burn": 21852054.79452055
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "Cash & Equiv": 16289000000.0,
+            "Receivables": 2882000000.0,
+            "Operating Expenses": 3253000000.0,
+            "Cost of Revenue": 4512000000.0,
+            "Quick Assets": 19171000000.0,
+            "Daily Burn": 21273972.602739725
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "Cash & Equiv": 16487000000.0,
+            "Receivables": 3726000000.0,
+            "Operating Expenses": 3331000000.0,
+            "Cost of Revenue": 4970000000.0,
+            "Quick Assets": 20213000000.0,
+            "Daily Burn": 22742465.75342466
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "Cash & Equiv": 15689000000.0,
+            "Receivables": 3952000000.0,
+            "Operating Expenses": 4764000000.0,
+            "Cost of Revenue": 5733000000.0,
+            "Quick Assets": 19641000000.0,
+            "Daily Burn": 28758904.10958904
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "Cash & Equiv": 16286000000.0,
+            "Receivables": 4474000000.0,
+            "Operating Expenses": 5086000000.0,
+            "Cost of Revenue": 6567000000.0,
+            "Quick Assets": 20760000000.0,
+            "Daily Burn": 31926027.397260275
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "Cash & Equiv": 11975000000.0,
+            "Receivables": 7015000000.0,
+            "Operating Expenses": 5289000000.0,
+            "Cost of Revenue": 7042000000.0,
+            "Quick Assets": 18990000000.0,
+            "Daily Burn": 33783561.64383562
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2016.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 423.813724
+        },
+        {
+            "Fiscal Year": 2017.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 730.0
+        },
+        {
+            "Fiscal Year": 2018.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 522.205095
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 568.733701
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 901.1481
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 888.777858
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 682.953701
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 650.253154
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 562.107696
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a ranked horizontal bar chart showing the top 12 countries by `breadth efficiency`, where the metric is `visible country-list score total divided by the number of distinct industries represented in that country's visible company list`, values are expressed in score points per represented industry, countries must have at least 5 visible companies on pages 38-67, and bars are sorted from highest to lowest after the ratio is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "score points per represented industry",
+  "sort_rule": "descending by breadth_efficiency, ties by visible_country_total_score then country",
+  "selection_rule": "top 12 eligible countries with at least 5 visible companies",
+  "plot_spec": {
+    "title": "Country Breadth Efficiency",
+    "xlabel": "Score points per represented industry",
+    "ylabel": "Country",
+    "value_field": "breadth_efficiency",
+    "label_decimals": 2
+  },
+  "records": [
+    {
+      "entity": "United States",
+      "breadth_efficiency": 364.9887
+    },
+    {
+      "entity": "Spain",
+      "breadth_efficiency": 30.7103
+    },
+    {
+      "entity": "Germany",
+      "breadth_efficiency": 28.1725
+    },
+    {
+      "entity": "Japan",
+      "breadth_efficiency": 25.1193
+    },
+    {
+      "entity": "France",
+      "breadth_efficiency": 24.479
+    },
+    {
+      "entity": "South Korea",
+      "breadth_efficiency": 23.938
+    },
+    {
+      "entity": "Australia",
+      "breadth_efficiency": 18.671
+    },
+    {
+      "entity": "China",
+      "breadth_efficiency": 16.186
+    },
+    {
+      "entity": "United Kingdom",
+      "breadth_efficiency": 14.571
+    },
+    {
+      "entity": "Sweden",
+      "breadth_efficiency": 10.2463
+    },
+    {
+      "entity": "Canada",
+      "breadth_efficiency": 10.1638
+    },
+    {
+      "entity": "The Netherlands",
+      "breadth_efficiency": 10.1045
+    }
+  ]
+}

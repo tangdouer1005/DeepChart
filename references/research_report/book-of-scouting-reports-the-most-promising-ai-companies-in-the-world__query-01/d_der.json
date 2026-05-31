@@ -1,0 +1,129 @@
+{
+  "query_id": 1,
+  "query_text": "Create a bubble chart for the top 15 companies with disclosed valuations, where the x-axis is company age in years, the y-axis is Valuation in $M, bubble size is months since Last Funded, color encodes Stage family, and companies are restricted to those with both Valuation and Last Funded disclosed.",
+  "status": "complete",
+  "chart": {
+    "type": "bubble",
+    "title": "Top disclosed valuations: age, valuation, and funding recency",
+    "x_field": "company_age_years",
+    "y_field": "valuation_value_m",
+    "size_field": "months_since_last_funded",
+    "hue_field": "stage_family",
+    "x_label": "Company age (years)",
+    "y_label": "Valuation ($M)",
+    "label_field": "company",
+    "annotate": false,
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "company": "OpenAI",
+      "company_age_years": 11,
+      "valuation_value_m": 80000.0,
+      "months_since_last_funded": 23,
+      "stage_family": "strategic / alternative"
+    },
+    {
+      "company": "Databricks",
+      "company_age_years": 13,
+      "valuation_value_m": 43000.0,
+      "months_since_last_funded": 28,
+      "stage_family": "Series C+"
+    },
+    {
+      "company": "Anthropic",
+      "company_age_years": 5,
+      "valuation_value_m": 18400.0,
+      "months_since_last_funded": 23,
+      "stage_family": "Series C+"
+    },
+    {
+      "company": "Hugging Face",
+      "company_age_years": 10,
+      "valuation_value_m": 4500.0,
+      "months_since_last_funded": 31,
+      "stage_family": "Series C+"
+    },
+    {
+      "company": "Shield AI",
+      "company_age_years": 11,
+      "valuation_value_m": 2800.0,
+      "months_since_last_funded": 26,
+      "stage_family": "strategic / alternative"
+    },
+    {
+      "company": "Figure",
+      "company_age_years": 4,
+      "valuation_value_m": 2680.0,
+      "months_since_last_funded": 25,
+      "stage_family": "Series B"
+    },
+    {
+      "company": "Cognition AI",
+      "company_age_years": 3,
+      "valuation_value_m": 2000.0,
+      "months_since_last_funded": 23,
+      "stage_family": "Series A"
+    },
+    {
+      "company": "Mistral AI",
+      "company_age_years": 3,
+      "valuation_value_m": 2000.0,
+      "months_since_last_funded": 24,
+      "stage_family": "Series A"
+    },
+    {
+      "company": "Helsing",
+      "company_age_years": 5,
+      "valuation_value_m": 1820.0,
+      "months_since_last_funded": 30,
+      "stage_family": "Series B"
+    },
+    {
+      "company": "Runway",
+      "company_age_years": 8,
+      "valuation_value_m": 1500.0,
+      "months_since_last_funded": 34,
+      "stage_family": "Series C+"
+    },
+    {
+      "company": "Together AI",
+      "company_age_years": 4,
+      "valuation_value_m": 1250.0,
+      "months_since_last_funded": 24,
+      "stage_family": "Series A"
+    },
+    {
+      "company": "Weights & Biases",
+      "company_age_years": 9,
+      "valuation_value_m": 1250.0,
+      "months_since_last_funded": 31,
+      "stage_family": "Series C+"
+    },
+    {
+      "company": "Lightmatter",
+      "company_age_years": 9,
+      "valuation_value_m": 1200.0,
+      "months_since_last_funded": 27,
+      "stage_family": "Series C+"
+    },
+    {
+      "company": "ElevenLabs",
+      "company_age_years": 4,
+      "valuation_value_m": 1100.0,
+      "months_since_last_funded": 25,
+      "stage_family": "strategic / alternative"
+    },
+    {
+      "company": "01.AI",
+      "company_age_years": 3,
+      "valuation_value_m": 1000.0,
+      "months_since_last_funded": 28,
+      "stage_family": "strategic / alternative"
+    }
+  ],
+  "notes": []
+}

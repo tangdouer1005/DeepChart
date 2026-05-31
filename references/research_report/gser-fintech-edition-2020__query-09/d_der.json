@@ -1,0 +1,67 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a slope chart for the top 10 Fintech ecosystems by `Total Early-Stage Funding`, comparing each ecosystem's `salary-adjusted Seed = Median Seed Round / Software Engineer Salary` with `salary-adjusted Series A = Median Series A Round / Software Engineer Salary`, expressed in `engineer-years`, ordered descending by the latter, and excluding `Nur-Sultan`.",
+  "chart_type": "slope chart",
+  "value_unit": "engineer-years",
+  "sort_rule": "descending by salary_adjusted_series_a",
+  "selection_rule": "top 10 ecosystems by total early-stage funding excluding Nur-Sultan",
+  "plot_spec": {
+    "title": "Fintech 2020 Salary-Adjusted Seed to Series A",
+    "left_field": "salary_adjusted_seed",
+    "right_field": "salary_adjusted_series_a",
+    "left_label": "Seed / Salary",
+    "right_label": "Series A / Salary"
+  },
+  "records": [
+    {
+      "entity": "Shanghai",
+      "salary_adjusted_seed": 50.0,
+      "salary_adjusted_series_a": 333.3333
+    },
+    {
+      "entity": "Beijing",
+      "salary_adjusted_seed": 58.8235,
+      "salary_adjusted_series_a": 294.1176
+    },
+    {
+      "entity": "Tel Aviv",
+      "salary_adjusted_seed": 19.4444,
+      "salary_adjusted_series_a": 79.1667
+    },
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "salary_adjusted_seed": 8.1301,
+      "salary_adjusted_series_a": 65.0407
+    },
+    {
+      "entity": "New York City",
+      "salary_adjusted_seed": 8.6735,
+      "salary_adjusted_series_a": 61.2245
+    },
+    {
+      "entity": "London",
+      "salary_adjusted_seed": 9.8485,
+      "salary_adjusted_series_a": 60.6061
+    },
+    {
+      "entity": "Boston",
+      "salary_adjusted_seed": 10.0,
+      "salary_adjusted_series_a": 60.0
+    },
+    {
+      "entity": "Los Angeles",
+      "salary_adjusted_seed": 6.087,
+      "salary_adjusted_series_a": 54.3478
+    },
+    {
+      "entity": "Paris",
+      "salary_adjusted_seed": 16.0377,
+      "salary_adjusted_series_a": 50.9434
+    },
+    {
+      "entity": "Tokyo",
+      "salary_adjusted_seed": 10.04,
+      "salary_adjusted_series_a": 36.0
+    }
+  ]
+}

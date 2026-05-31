@@ -1,0 +1,83 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2018.0,
+            "NOPAT": 3206195407.4741106,
+            "Avg Invested Capital": 13109500000.0,
+            "WACC": 0.1,
+            "Capital Charge": 1310950000.0
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "NOPAT": 3682234627.49213,
+            "Avg Invested Capital": 13505000000.0,
+            "WACC": 0.1,
+            "Capital Charge": 1350500000.0
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "NOPAT": 4110427613.191727,
+            "Avg Invested Capital": 13649000000.0,
+            "WACC": 0.1,
+            "Capital Charge": 1364900000.0
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "NOPAT": 5100289221.556887,
+            "Avg Invested Capital": 13706500000.0,
+            "WACC": 0.1,
+            "Capital Charge": 1370650000.0
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "NOPAT": 5879540178.571428,
+            "Avg Invested Capital": 15396500000.0,
+            "WACC": 0.1,
+            "Capital Charge": 1539650000.0
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "NOPAT": 6015469305.997408,
+            "Avg Invested Capital": 17406000000.0,
+            "WACC": 0.1,
+            "Capital Charge": 1740600000.0
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "NOPAT": 7022853696.098562,
+            "Avg Invested Capital": 18714500000.0,
+            "WACC": 0.1,
+            "Capital Charge": 1871450000.0
+        }
+    ],
+    "der_data": [
+        {
+            "Fiscal Year": 2018.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 1895245407.4741106
+        },
+        {
+            "Fiscal Year": 2019.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 2331734627.49213
+        },
+        {
+            "Fiscal Year": 2020.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 2745527613.191727
+        },
+        {
+            "Fiscal Year": 2021.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 3729639221.5568867
+        },
+        {
+            "Fiscal Year": 2022.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 4339890178.571428
+        },
+        {
+            "Fiscal Year": 2023.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 4274869305.997408
+        },
+        {
+            "Fiscal Year": 2024.0,
+            "经济增加值 (Economic Value Added, EVA) - 简化版": 5151403696.098562
+        }
+    ]
+}

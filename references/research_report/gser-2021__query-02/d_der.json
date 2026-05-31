@@ -1,0 +1,55 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a horizontal bar chart showing the top 10 `seed affordability multiple` values computed as `Median Seed Round / Software Engineer Salary` among ecosystems where both fields are exact values, with values expressed in `salary-years`, sorted descending, and excluding `N/A` and any `<` range-valued items.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "salary-years",
+  "sort_rule": "descending by seed_affordability_salary_years",
+  "selection_rule": "top 10",
+  "plot_spec": {
+    "title": "2021 Seed Affordability",
+    "xlabel": "salary-years",
+    "value_field": "seed_affordability_salary_years"
+  },
+  "records": [
+    {
+      "entity": "Shenzhen",
+      "seed_affordability_salary_years": 46.6667
+    },
+    {
+      "entity": "Shanghai",
+      "seed_affordability_salary_years": 38.9189
+    },
+    {
+      "entity": "Bangalore-Karnataka",
+      "seed_affordability_salary_years": 36.9231
+    },
+    {
+      "entity": "Beijing",
+      "seed_affordability_salary_years": 34.6429
+    },
+    {
+      "entity": "Manila",
+      "seed_affordability_salary_years": 25.2326
+    },
+    {
+      "entity": "Abu Dhabi",
+      "seed_affordability_salary_years": 21.4777
+    },
+    {
+      "entity": "Kyoto",
+      "seed_affordability_salary_years": 19.6889
+    },
+    {
+      "entity": "Paris",
+      "seed_affordability_salary_years": 17.1875
+    },
+    {
+      "entity": "Tel Aviv",
+      "seed_affordability_salary_years": 16.6667
+    },
+    {
+      "entity": "Buenos Aires",
+      "seed_affordability_salary_years": 15.3846
+    }
+  ]
+}

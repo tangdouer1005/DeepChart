@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <title>GOOG 格雷厄姆“烟蒂股”净值 (NNWC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2933;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --accent-border: rgba(37, 99, 235, 0.7);
+      --grid: rgba(148, 163, 184, 0.35);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.2);
+        --accent-border: rgba(96, 165, 250, 0.8);
+        --grid: rgba(148, 163, 184, 0.25);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background: radial-gradient(circle at top, rgba(148, 163, 184, 0.12), transparent 60%);
+      border-radius: 0.75rem;
+      padding: 1rem 1rem 1.25rem;
+      box-sizing: border-box;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(148, 163, 184, 0.2);
+    }
+
+    canvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .footer-note {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .footer-note {
+        color: #9ca3af;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GOOG 格雷厄姆“烟蒂股”净值 (NNWC) 变化</h1>
+    <div class="subtitle">按年度每股 NNWC（2016–2024）</div>
+
+    <div class="chart-wrapper">
+      <canvas id="nnwcChart" aria-label="GOOG NNWC per share from 2016 to 2024" role="img"></canvas>
+    </div>
+
+    <div class="footer-note">
+      数据来源：用户提供的每股 NNWC（Net-Net Working Capital）年度数值；单位：每股货币单位（未指定）。
+    </div>
+  </div>
+
+  <script>
+    // Data from the prompt (treated as authoritative)
+    const years = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+
+    const nnwcValues = [
+      5.501013469669327,
+      5.651834514856026,
+      5.723542112523458,
+      5.590892587530468,
+      5.620149397113364,
+      5.940174496517827,
+      4.204291964761728,
+      4.128045904731961,
+      3.0962480919096973
+    ];
+
+    const ctx = document.getElementById("nnwcChart").getContext("2d");
+
+    // Determine a nice max for the Y axis
+    const maxVal = Math.max(...nnwcValues);
+    const minVal = Math.min(...nnwcValues);
+    const paddingTop = 0.7;
+    const paddingBottom = 0.2;
+    const suggestedMax = Math.ceil((maxVal + paddingTop) * 2) / 2;
+    const suggestedMin = Math.floor((minVal - paddingBottom) * 2) / 2;
+
+    const nnwcChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "NNWC 每股净值",
+            data: nnwcValues,
+            backgroundColor: "rgba(37, 99, 235, 0.7)",
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.95)",
+            borderColor: "rgba(15, 23, 42, 0.08)",
+            borderWidth: 1,
+            borderRadius: 6,
+            borderSkipped: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 10,
+            right: 12,
+            bottom: 8,
+            left: 4
+          }
+        },
+        plugins: {
+          title: {
+            display: false
+          },
+          legend: {
+            display: true,
+            labels: {
+              color: getComputedStyle(document.documentElement).getPropertyValue('--fg') || "#111827",
+              font: {
+                size: 12
+              },
+              boxWidth: 14,
+              boxHeight: 14,
+              usePointStyle: true,
+              pointStyle: "rectRounded"
+            }
+          },
+          tooltip: {
+            enabled: true,
+            mode: "nearest",
+            intersect: false,
+            backgroundColor: "rgba(15, 23, 42, 0.92)",
+            titleColor: "#f9fafb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.5)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              title: (items) => {
+                const item = items[0];
+                return `财年 ${item.label}`;
+              },
+              label: (item) => {
+                return `NNWC 每股：${item.raw.toFixed(3)}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: getComputedStyle(document.documentElement).getPropertyValue('--fg') || "#111827",
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin,
+            suggestedMax,
+            grid: {
+              color: getComputedStyle(document.documentElement).getPropertyValue('--grid') || "rgba(148, 163, 184, 0.3)",
+              drawBorder: false
+            },
+            ticks: {
+              color: getComputedStyle(document.documentElement).getPropertyValue('--fg') || "#111827",
+              font: {
+                size: 11
+              },
+              callback: (value) => value.toFixed(1)
+            },
+            title: {
+              display: true,
+              text: "NNWC 每股净值",
+              color: getComputedStyle(document.documentElement).getPropertyValue('--fg') || "#111827",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        animation: {
+          duration: 700,
+          easing: "easeOutCubic"
+        }
+      }
+    });
+
+    // Optional: react to system dark/light changes after load
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", () => {
+      nnwcChart.options.scales.x.ticks.color =
+        getComputedStyle(document.documentElement).getPropertyValue('--fg');
+      nnwcChart.options.scales.y.ticks.color =
+        getComputedStyle(document.documentElement).getPropertyValue('--fg');
+      nnwcChart.options.scales.y.grid.color =
+        getComputedStyle(document.documentElement).getPropertyValue('--grid');
+      nnwcChart.options.scales.y.title.color =
+        getComputedStyle(document.documentElement).getPropertyValue('--fg');
+      nnwcChart.update();
+    });
+  </script>
+</body>
+</html>

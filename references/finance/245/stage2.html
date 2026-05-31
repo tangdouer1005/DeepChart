@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TSLA 格雷厄姆“烟蒂股”净值 (NNWC) 2016–2024</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f5f5f7;
+      color: #111827;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #020617;
+        color: #e5e7eb;
+      }
+      #chart-container {
+        background: #020617;
+        box-shadow: 0 1px 4px rgba(15, 23, 42, 0.65);
+      }
+    }
+    #chart-container {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 18px 20px 20px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+    }
+    h1 {
+      font-size: 1.25rem;
+      margin: 0 0 2px;
+    }
+    h2 {
+      font-size: 0.9rem;
+      font-weight: 400;
+      margin: 0 0 10px;
+      color: #6b7280;
+    }
+    @media (prefers-color-scheme: dark) {
+      h2 {
+        color: #9ca3af;
+      }
+    }
+    /* Fix the aspect ratio and avoid vertical stretching */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      /* Use a 3:2 aspect ratio for a compact, non-stretched chart */
+      padding-top: 66.666%;
+      /* min-height to ensure usability on very small screens */
+      min-height: 260px;
+    }
+    canvas {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .chart-footer {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+    @media (prefers-color-scheme: dark) {
+      .chart-footer {
+        color: #9ca3af;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>TSLA 格雷厄姆“烟蒂股”净值 (NNWC) 变化</h1>
+    <h2>按财年：2016–2024（单位：每股 NNWC，USD）</h2>
+    <div class="chart-wrapper">
+      <canvas id="nnwcChart" aria-label="TSLA NNWC per share by fiscal year" role="img"></canvas>
+    </div>
+    <div class="chart-footer">
+      说明：NNWC（Graham Net-Net Working Capital）为每股烟蒂股净值；负值表示按净流动资产法测算的安全边际不足，正值表示按该方法 TSLA 具备一定安全边际。
+    </div>
+  </div>
+
+  <!-- Chart.js latest stable 4.x (no integrity check) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    (function () {
+      const ctx = document.getElementById('nnwcChart').getContext('2d');
+
+      // Data from source (Fiscal Year, RESULT_NNWC_Per_Share)
+      const labels = [
+        '2016','2017','2018','2019','2020','2021','2022','2023','2024'
+      ];
+      const dataValues = [
+        -4.853574367366562,
+        -6.617088365770179,
+        -5.908558030480656,
+        -5.309227871939736,
+        -0.5392428439519852,
+        -1.29526541693428,
+        1.2883453237410072,
+        1.897064101643816,
+        2.8502001143510576
+      ];
+
+      // Colors: red for negative, blue for positive
+      const backgroundColors = dataValues.map(v =>
+        v >= 0 ? 'rgba(37, 99, 235, 0.8)' : 'rgba(239, 68, 68, 0.85)'
+      );
+      const borderColors = dataValues.map(v =>
+        v >= 0 ? 'rgba(30, 64, 175, 1)' : 'rgba(185, 28, 28, 1)'
+      );
+
+      // Y-axis bounds with margin
+      const minVal = Math.min(...dataValues);
+      const maxVal = Math.max(...dataValues);
+      const margin = (maxVal - minVal) * 0.15 || 1;
+      const suggestedMin = Math.floor(minVal - margin);
+      const suggestedMax = Math.ceil(maxVal + margin);
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'NNWC 每股净值 (USD)',
+            data: dataValues,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1.2,
+            borderRadius: 5,
+            hoverBorderWidth: 1.8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false, // handled by CSS aspect ratio wrapper
+          layout: {
+            padding: {
+              top: 8,
+              right: 10,
+              bottom: 6,
+              left: 6
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                boxWidth: 16,
+                usePointStyle: true,
+                pointStyle: 'rectRounded',
+                font: {
+                  size: 12
+                }
+              }
+            },
+            tooltip: {
+              mode: 'index',
+              intersect: false,
+              backgroundColor: 'rgba(15,23,42,0.96)',
+              titleFont: { size: 12, weight: '600' },
+              bodyFont: { size: 11 },
+              padding: 10,
+              callbacks: {
+                label: function (context) {
+                  const v = context.parsed.y;
+                  return ' NNWC 每股净值: ' + v.toFixed(3) + ' USD';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: '财年 (Fiscal Year)',
+                font: { size: 12 }
+              },
+              grid: {
+                display: false
+              },
+              ticks: {
+                font: { size: 12 }
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: '每股 NNWC (USD)',
+                font: { size: 12 }
+              },
+              grid: {
+                color: 'rgba(148, 163, 184, 0.35)',
+                drawBorder: false
+              },
+              ticks: {
+                font: { size: 12 }
+              },
+              suggestedMin,
+              suggestedMax
+            }
+          },
+          animation: {
+            duration: 800,
+            easing: 'easeOutQuart'
+          },
+          hover: {
+            mode: 'nearest',
+            intersect: true
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+{
+  "query_id": "query_05",
+  "query_text": "Create a scatter plot for companies founded in `2020 or later` with non-`N/A` `Total raised`, `Headcount`, and `Mosaic`, where the x-axis is `Total raised per employee` in `$M per employee`, the y-axis is `Mosaic`, points are colored by segment, and only the top 10 companies by `Total raised per employee` are labeled.",
+  "status": "completed",
+  "title": "Young companies by capital intensity and Mosaic",
+  "chart_kind": "scatter",
+  "chart_type": "scatter plot",
+  "value_unit": "$M per employee",
+  "sort_rule": "descending by raised_per_employee_m for labels",
+  "selection_rule": "founded in 2020 or later; labels top 10 by raised_per_employee_m",
+  "metadata": {
+    "x_field": "raised_per_employee_m",
+    "y_field": "mosaic",
+    "hue_field": "segment",
+    "label_field": "label",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "entity": "Helsing",
+      "segment": "Defense",
+      "raised_per_employee_m": 2.830188679245283,
+      "mosaic": 927,
+      "label": "Helsing",
+      "total_raised_m": 1500.0,
+      "headcount": 530.0,
+      "founded_year": 2021.0
+    },
+    {
+      "entity": "Ascento",
+      "segment": "Defense",
+      "raised_per_employee_m": 1.58,
+      "mosaic": 457,
+      "label": "Ascento",
+      "total_raised_m": 7.9,
+      "headcount": 5.0,
+      "founded_year": 2023.0
+    },
+    {
+      "entity": "Neuraspace",
+      "segment": "Aerospace (dual-use)",
+      "raised_per_employee_m": 1.2034482758620688,
+      "mosaic": 797,
+      "label": "Neuraspace",
+      "total_raised_m": 34.9,
+      "headcount": 29.0,
+      "founded_year": 2020.0
+    },
+    {
+      "entity": "sensmore",
+      "segment": "Defense",
+      "raised_per_employee_m": 1.03,
+      "mosaic": 674,
+      "label": "sensmore",
+      "total_raised_m": 10.3,
+      "headcount": 10.0,
+      "founded_year": 2022.0
+    },
+    {
+      "entity": "ARX Robotics",
+      "segment": "Defense",
+      "raised_per_employee_m": 0.7736842105263158,
+      "mosaic": 826,
+      "label": "ARX Robotics",
+      "total_raised_m": 58.8,
+      "headcount": 76.0,
+      "founded_year": 2021.0
+    },
+    {
+      "entity": "askEarth",
+      "segment": "Aerospace (dual-use)",
+      "raised_per_employee_m": 0.5333333333333333,
+      "mosaic": 514,
+      "label": "askEarth",
+      "total_raised_m": 3.2,
+      "headcount": 6.0,
+      "founded_year": 2023.0
+    },
+    {
+      "entity": "Alpine Eagle",
+      "segment": "Aerospace (dual-use)",
+      "raised_per_employee_m": 0.5238095238095238,
+      "mosaic": 691,
+      "label": "Alpine Eagle",
+      "total_raised_m": 11.0,
+      "headcount": 21.0,
+      "founded_year": 2023.0
+    },
+    {
+      "entity": "Blackshark.ai",
+      "segment": "Aerospace (commercial)",
+      "raised_per_employee_m": 0.49295774647887325,
+      "mosaic": 653,
+      "label": "Blackshark.ai",
+      "total_raised_m": 35.0,
+      "headcount": 71.0,
+      "founded_year": 2020.0
+    },
+    {
+      "entity": "Comand AI",
+      "segment": "Defense",
+      "raised_per_employee_m": 0.45185185185185184,
+      "mosaic": 649,
+      "label": "Comand AI",
+      "total_raised_m": 12.2,
+      "headcount": 27.0,
+      "founded_year": 2023.0
+    },
+    {
+      "entity": "Eoliann",
+      "segment": "Aerospace (commercial)",
+      "raised_per_employee_m": 0.3368421052631579,
+      "mosaic": 622,
+      "label": "Eoliann",
+      "total_raised_m": 6.4,
+      "headcount": 19.0,
+      "founded_year": 2022.0
+    },
+    {
+      "entity": "Roseman Labs",
+      "segment": "Aerospace (dual-use)",
+      "raised_per_employee_m": 0.28378378378378377,
+      "mosaic": 716,
+      "label": "",
+      "total_raised_m": 10.5,
+      "headcount": 37.0,
+      "founded_year": 2020.0
+    },
+    {
+      "entity": "Offset Labs",
+      "segment": "Defense",
+      "raised_per_employee_m": 0.26,
+      "mosaic": 499,
+      "label": "",
+      "total_raised_m": 1.3,
+      "headcount": 5.0,
+      "founded_year": 2022.0
+    },
+    {
+      "entity": "Unmanned Defense Systems",
+      "segment": "Defense",
+      "raised_per_employee_m": 0.21176470588235294,
+      "mosaic": 500,
+      "label": "",
+      "total_raised_m": 3.6,
+      "headcount": 17.0,
+      "founded_year": 2022.0
+    },
+    {
+      "entity": "FOSSA Systems",
+      "segment": "Aerospace (dual-use)",
+      "raised_per_employee_m": 0.17894736842105263,
+      "mosaic": 582,
+      "label": "",
+      "total_raised_m": 6.8,
+      "headcount": 38.0,
+      "founded_year": 2020.0
+    },
+    {
+      "entity": "AirDodge",
+      "segment": "Aerospace (commercial)",
+      "raised_per_employee_m": 0.175,
+      "mosaic": 440,
+      "label": "",
+      "total_raised_m": 0.7,
+      "headcount": 4.0,
+      "founded_year": 2022.0
+    },
+    {
+      "entity": "Atlas",
+      "segment": "Aerospace (commercial)",
+      "raised_per_employee_m": 0.11764705882352941,
+      "mosaic": 430,
+      "label": "",
+      "total_raised_m": 2.0,
+      "headcount": 17.0,
+      "founded_year": 2021.0
+    },
+    {
+      "entity": "Storming Universe",
+      "segment": "Aerospace (commercial)",
+      "raised_per_employee_m": 0.1142857142857143,
+      "mosaic": 441,
+      "label": "",
+      "total_raised_m": 0.8,
+      "headcount": 7.0,
+      "founded_year": 2024.0
+    },
+    {
+      "entity": "Zaitra",
+      "segment": "Aerospace (dual-use)",
+      "raised_per_employee_m": 0.08636363636363636,
+      "mosaic": 660,
+      "label": "",
+      "total_raised_m": 1.9,
+      "headcount": 22.0,
+      "founded_year": 2020.0
+    },
+    {
+      "entity": "Granta Autonomy",
+      "segment": "Defense",
+      "raised_per_employee_m": 0.07333333333333333,
+      "mosaic": 555,
+      "label": "",
+      "total_raised_m": 1.1,
+      "headcount": 15.0,
+      "founded_year": 2024.0
+    },
+    {
+      "entity": "Oinride",
+      "segment": "Defense",
+      "raised_per_employee_m": 0.06,
+      "mosaic": 396,
+      "label": "",
+      "total_raised_m": 0.6,
+      "headcount": 10.0,
+      "founded_year": 2022.0
+    }
+  ]
+}

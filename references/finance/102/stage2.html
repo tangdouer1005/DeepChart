@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>hd 现金循环周期 (CCC) 2016–2024 走势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC",
+        "Microsoft Yahei", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #666;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      padding: 16px 20px 22px;
+    }
+    /* Use a fixed-height wrapper so Chart.js can keep a normal aspect ratio */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px; /* Adjust this if you want a taller/shorter chart */
+    }
+    .footer-note {
+      max-width: 900px;
+      margin: 8px auto 0;
+      font-size: 12px;
+      color: #777;
+    }
+    canvas {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>hd 现金循环周期 (CCC) 2016–2024</h1>
+    <h2>单位：天，展示 2016 至 2024 年 CCC 的年度变化趋势</h2>
+    <div class="chart-wrapper">
+      <canvas id="cccChart"></canvas>
+    </div>
+  </div>
+  <div class="footer-note">
+    数据来源：用户提供的财年 CCC 数据；图表仅用于可视化展示。
+  </div>
+
+  <script>
+    // Data from source
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+    const cccValues = [
+      39.90105235184347,
+      39.18670934887415,
+      37.51177692155432,
+      36.54662435565601,
+      39.13155382365632,
+      31.6492675333604,
+      32.53750929480247,
+      46.27875370354772,
+      51.69288178508128,
+    ];
+
+    const ctx = document.getElementById("cccChart").getContext("2d");
+
+    // Compute min/max to set a good Y range
+    const minVal = Math.min(...cccValues);
+    const maxVal = Math.max(...cccValues);
+    const padding = 5; // days
+    const suggestedMin = Math.floor(minVal - padding);
+    const suggestedMax = Math.ceil(maxVal + padding);
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "现金循环周期 (CCC)",
+            data: cccValues,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            tension: 0.25,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#2563eb",
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 1.5,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // use the wrapper's fixed height
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              font: { size: 12 },
+            },
+          },
+          tooltip: {
+            callbacks: {
+              title: (tooltipItems) => {
+                const item = tooltipItems[0];
+                return `财年：${item.label}`;
+              },
+              label: (tooltipItem) => {
+                const value = tooltipItem.parsed.y;
+                return `CCC：${value.toFixed(2)} 天`;
+              },
+            },
+          },
+          title: {
+            display: false,
+          },
+        },
+        layout: {
+          padding: {
+            top: 4,
+            right: 8,
+            bottom: 4,
+            left: 4,
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              font: { size: 12 },
+            },
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "现金循环周期（天）",
+              font: { size: 12 },
+            },
+            suggestedMin,
+            suggestedMax,
+            ticks: {
+              callback: (val) => `${val} 天`,
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+            },
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ORCL 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f7f7f7;
+      color: #222;
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 24px 20px 32px;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 0 0 4px;
+      text-align: center;
+      color: #1f2933;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 0 0 20px;
+      text-align: center;
+      font-weight: 400;
+      color: #6b7280;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+    .note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+    .legend-inline {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 8px;
+      font-size: 12px;
+      color: #4b5563;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, #2563eb, #22c55e);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ORCL 自由现金流收益质量 (Quality of Income Ratio)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="qoiChart"></canvas>
+    </div>
+
+    <div class="legend-inline">
+      <div class="legend-item">
+        <span class="legend-color"></span>
+        <span>自由现金流收益质量 (Quality of Income Ratio)</span>
+      </div>
+    </div>
+
+    <p class="note">
+      注：自由现金流收益质量 = 自由现金流 / 净利润。数值越接近 1，表示收益质量越高、利润的现金含量越充足。
+    </p>
+  </div>
+
+  <script>
+    // Data from source
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const qoiData = [
+      0.8973069542777741,
+      0.9194220255141892,
+      0.9586890148918936,
+      0.8843442324054941,
+      0.779115275142315,
+      0.8763307408020299,
+      0.6790290432801822,
+      0.8939638560491641,
+      0.8688349153173274
+    ];
+
+    const ctx = document.getElementById("qoiChart").getContext("2d");
+
+    // Gradient for bars
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "#2563eb"); // blue
+    gradient.addColorStop(1, "#22c55e"); // green
+
+    // Helper to format to 3 decimal places
+    function formatRatio(value) {
+      if (value === null || value === undefined) return "";
+      return value.toFixed(3);
+    }
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "自由现金流收益质量 (Quality of Income Ratio)",
+            data: qoiData,
+            backgroundColor: gradient,
+            borderColor: "#1d4ed8",
+            borderWidth: 1,
+            hoverBackgroundColor: "#1d4ed8",
+            borderRadius: 6,
+            maxBarThickness: 42
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 20,
+            right: 16,
+            bottom: 10,
+            left: 8
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: "rgba(17,24,39,0.9)",
+            titleFont: {
+              size: 13,
+              weight: "600"
+            },
+            bodyFont: {
+              size: 12
+            },
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const v = context.parsed.y;
+                return " QoI: " + formatRatio(v);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 12
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: "rgba(148,163,184,0.3)",
+              borderDash: [4, 4]
+            },
+            ticks: {
+              color: "#4b5563",
+              font: {
+                size: 12
+              },
+              callback: function (value) {
+                return value.toFixed(1);
+              }
+            },
+            title: {
+              display: true,
+              text: "Quality of Income Ratio",
+              color: "#374151",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            suggestedMax: 1.05
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          intersect: true
+        },
+        animation: {
+          duration: 700,
+          easing: "easeOutQuart"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

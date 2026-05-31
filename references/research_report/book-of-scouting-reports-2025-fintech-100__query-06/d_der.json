@@ -1,0 +1,34 @@
+{
+  "status": "complete",
+  "chart_type": "ranked_bar",
+  "title": "Funding-share overrepresentation by stage family",
+  "label_field": "label",
+  "value_field": "value",
+  "x_label": "Percentage points",
+  "data": [
+    {
+      "label": "Series B",
+      "value": 13.846924
+    },
+    {
+      "label": "Series C+",
+      "value": 10.198679
+    },
+    {
+      "label": "Debt/Line of Credit",
+      "value": 10.087166
+    },
+    {
+      "label": "Other/Unattributed",
+      "value": -2.242877
+    },
+    {
+      "label": "Seed",
+      "value": -13.390507
+    },
+    {
+      "label": "Series A",
+      "value": -18.499385
+    }
+  ]
+}

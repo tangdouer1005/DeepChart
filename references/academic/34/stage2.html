@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 1000px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const corrData = {
+    "index": [
+        "SSL ratio",
+        "Eb",
+        "sigma_ion",
+        "Initial R_interface",
+        "SEI thickness",
+        "F%",
+        "C%",
+        "O%",
+        "R_interface",
+        "eta_15th",
+        "J_crit",
+        "Crystallite size",
+        "Thickness",
+        "Cycle performance"
+    ],
+    "columns": [
+        "SSL ratio",
+        "Eb",
+        "sigma_ion",
+        "Initial R_interface",
+        "SEI thickness",
+        "F%",
+        "C%",
+        "O%",
+        "R_interface",
+        "eta_15th",
+        "J_crit",
+        "Crystallite size",
+        "Thickness",
+        "Cycle performance"
+    ],
+    "data": [
+        [1.0, 0.9285714285714286, 0.9761904761904762, 0.4790505047653036, -0.38095238095238093, -0.16666666666666666, 0.23809523809523808, -0.11904761904761904, 0.5714285714285714, -0.1197626261913259, 0.9221722216732094, -0.9761904761904762, -0.8143858581010162, 0.8809523809523809],
+        [0.9285714285714286, 1.0, 0.9047619047619048, 0.28743030285918214, -0.40476190476190477, -0.2619047619047619, 0.16666666666666666, 0.09523809523809523, 0.5476190476190477, 0.1317388888104585, 0.9581010095306072, -0.9047619047619048, -0.7784570702436183, 0.8571428571428571],
+        [0.9761904761904762, 0.9047619047619048, 1.0, 0.3832404038122429, -0.2857142857142857, -0.2619047619047619, 0.21428571428571427, -0.047619047619047616, 0.5, -0.19162020190612145, 0.8982196964349443, -0.9523809523809523, -0.790433332862751, 0.8571428571428571],
+        [0.4790505047653036, 0.28743030285918214, 0.3832404038122429, 1.0, 0.10778636357219332, -0.263477777620917, 0.4910267673844362, -0.15569141404872366, 0.22754898976351923, -0.14457831325301204, 0.3674698795180723, -0.5030030300035688, -0.5481927710843374, 0.4910267673844362],
+        [-0.38095238095238093, -0.40476190476190477, -0.2857142857142857, 0.10778636357219332, 1.0, -0.5476190476190477, 0.40476190476190477, 0.09523809523809523, -0.11904761904761904, -0.3473116159548451, -0.4910267673844362, 0.4523809523809524, 0.16766767666785626, -0.42857142857142855],
+        [-0.16666666666666666, -0.2619047619047619, -0.2619047619047619, -0.263477777620917, -0.5476190476190477, 1.0, -0.3333333333333333, -0.7142857142857143, 0.19047619047619047, 0.02395252523826518, -0.29940656547831473, 0.21428571428571427, 0.5149792926227014, -0.38095238095238093],
+        [0.23809523809523808, 0.16666666666666666, 0.21428571428571427, 0.4910267673844362, 0.40476190476190477, -0.3333333333333333, 1.0, -0.2857142857142857, -0.023809523809523808, -0.5988131309566295, 0.15569141404872366, -0.21428571428571427, -0.4071929290505081, 0.23809523809523808],
+        [-0.11904761904761904, 0.09523809523809523, -0.047619047619047616, -0.15569141404872366, 0.09523809523809523, -0.7142857142857143, -0.2857142857142857, 1.0, -0.40476190476190477, 0.4790505047653036, 0.19162020190612145, 0.0, -0.22754898976351923, 0.23809523809523808],
+        [0.5714285714285714, 0.5476190476190477, 0.5, 0.22754898976351923, -0.11904761904761904, 0.19047619047619047, -0.023809523809523808, -0.40476190476190477, 1.0, 0.05988131309566295, 0.3473116159548451, -0.40476190476190477, -0.31138282809744733, 0.21428571428571427],
+        [-0.1197626261913259, 0.1317388888104585, -0.19162020190612145, -0.14457831325301204, -0.3473116159548451, 0.02395252523826518, -0.5988131309566295, 0.4790505047653036, 0.05988131309566295, 1.0, 0.1144578313253012, 0.08383383833392813, 0.1927710843373494, -0.02395252523826518],
+        [0.9221722216732094, 0.9581010095306072, 0.8982196964349443, 0.3674698795180723, -0.4910267673844362, -0.29940656547831473, 0.15569141404872366, 0.19162020190612145, 0.3473116159548451, 0.1144578313253012, 1.0, -0.9581010095306072, -0.8373493975903614, 0.9581010095306072],
+        [-0.9761904761904762, -0.9047619047619048, -0.9523809523809523, -0.5030030300035688, 0.4523809523809524, 0.21428571428571427, -0.21428571428571427, 0.0, -0.40476190476190477, 0.08383383833392813, -0.9581010095306072, 1.0, 0.8503146459584139, -0.9523809523809523],
+        [-0.8143858581010162, -0.7784570702436183, -0.790433332862751, -0.5481927710843374, 0.16766767666785626, 0.5149792926227014, -0.4071929290505081, -0.22754898976351923, -0.31138282809744733, 0.1927710843373494, -0.8373493975903614, 0.8503146459584139, 1.0, -0.9221722216732094],
+        [0.8809523809523809, 0.8571428571428571, 0.8571428571428571, 0.4910267673844362, -0.42857142857142855, -0.38095238095238093, 0.23809523809523808, 0.23809523809523808, 0.21428571428571427, -0.02395252523826518, 0.9581010095306072, -0.9523809523809523, -0.9221722216732094, 1.0]
+    ]
+};
+
+        const corrMatrix = corrData.data;
+        const columns = corrData.columns;
+        
+        // Prepare Heatmap Data (Upper Triangle + Diagonal)
+        const heatmapData = [];
+        // x axis: j, y axis: i.
+        // We want upper triangle: j >= i (if y-axis is inverted 0 at top)
+        for (let i = 0; i < columns.length; i++) {
+            for (let j = i; j < columns.length; j++) { 
+                heatmapData.push([j, i, corrMatrix[i][j]]);
+            }
+        }
+
+        // 4. ECharts Configuration
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const xLabels = columns; // Reuse columns from JSON
+        
+        // Rich text formatting for labels to approximate the Python output
+        const richLabels = {
+            'Eb': 'Eb Li+ binding energy',
+            'sigma_ion': 'σ_ion ionic conductivity',
+            'Initial R_interface': 'Initial R_interface\ninitial interfacial resistance',
+            'eta_15th': 'η_15th Li||Li overpotential at 15th cycle',
+            'J_crit': 'J_crit. critical current density',
+            'F%': 'F% F1s atomic percentage',
+            'C%': 'C% C1s atomic percentage',
+            'O%': 'O% O1s atomic percentage',
+            'R_interface': 'R_interface interfacial resistance at 15th cycle'
+        };
+
+        const yLabels = xLabels.map(label => richLabels[label] || label);
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { 
+                top: 200,    // Increased space for X-axis labels
+                bottom: 20, 
+                left: 320,   // Space for Y-axis labels and Colorbar
+                right: 50 
+            },
+            xAxis: {
+                type: 'category',
+                data: xLabels,
+                position: 'top',
+                axisLabel: { 
+                    rotate: 90, 
+                    align: 'right', // Change to right to make labels extend upwards
+                    verticalAlign: 'bottom', // Align bottom of label to the tick mark
+                    color: 'black', 
+                    fontSize: 12,
+                    formatter: function(value) {
+                         // Simple replacement for math symbols
+                        if(value === 'sigma_ion') return 'σ_ion';
+                        if(value === 'eta_15th') return 'η_15th';
+                        if(value === 'Eb') return 'Eb';
+                        if(value === 'J_crit.') return 'J_crit.';
+                        return value;
+                    }
+                },
+                axisTick: { show: false },
+                axisLine: { show: false },
+                splitArea: { show: false }
+            },
+            yAxis: {
+                type: 'category',
+                data: yLabels,
+                inverse: true, // Put first item at the top
+                axisLabel: { 
+                    rotate: 0, 
+                    align: 'right', 
+                    color: 'black', 
+                    fontSize: 12,
+                    formatter: function(value) {
+                        return value;
+                    }
+                },
+                axisTick: { show: false },
+                axisLine: { show: false },
+                splitArea: { show: false }
+            },
+            visualMap: {
+                min: -1, 
+                max: 1,
+                calculable: true,
+                orient: 'vertical',
+                left: 20,
+                bottom: 0, 
+                top: 'center', // Center vertically relative to container?
+                itemHeight: 300,
+                inRange: { 
+                    color: ['#b2182b', '#fddbc7', '#ffffff', '#d1e5f0', '#2166ac'] 
+                },
+                text: ['1.0', '-1.0'], // Text on ends
+                textStyle: { color: 'black' },
+                precision: 1,
+                handleIcon: 'none' // Remove the drag handles for cleaner look
+            },
+            series: [{
+                type: 'heatmap',
+                data: heatmapData,
+                label: {
+                    show: true,
+                    formatter: function(params) {
+                        return params.value[2].toFixed(2);
+                    },
+                    color: 'black',
+                    fontSize: 10
+                },
+                itemStyle: {
+                    borderColor: 'white',
+                    borderWidth: 1
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }],
+            graphic: [
+                { 
+                    type: 'text', 
+                    left: 10, 
+                    top: 10, 
+                    style: { text: 'a', font: 'bold 30px Arial', fill: 'black' } 
+                },
+                {
+                    type: 'text',
+                    left: 80, // Near the visualMap
+                    top: '90%', // Below visualMap
+                    style: { 
+                        text: 'Spearman coefficient', 
+                        textAlign: 'center', 
+                        fill: 'black', 
+                        fontSize: 14 
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

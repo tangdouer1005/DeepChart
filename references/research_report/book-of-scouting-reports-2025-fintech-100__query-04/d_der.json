@@ -1,0 +1,47 @@
+{
+  "status": "complete",
+  "chart_type": "stacked_bar",
+  "title": "Commercial maturity mix by cohort",
+  "index_field": "cohort",
+  "category_field": "band",
+  "value_field": "share_pct",
+  "x_label": "Founded-year cohort",
+  "y_label": "Share of companies (%)",
+  "data": [
+    {
+      "cohort": "2012-2016",
+      "band": "3",
+      "share_pct": 10.0
+    },
+    {
+      "cohort": "2012-2016",
+      "band": "4-5",
+      "share_pct": 90.0
+    },
+    {
+      "cohort": "2017-2019",
+      "band": "3",
+      "share_pct": 41.37931
+    },
+    {
+      "cohort": "2017-2019",
+      "band": "4-5",
+      "share_pct": 58.62069
+    },
+    {
+      "cohort": "2020-2024",
+      "band": "1-2",
+      "share_pct": 11.47541
+    },
+    {
+      "cohort": "2020-2024",
+      "band": "3",
+      "share_pct": 37.704918
+    },
+    {
+      "cohort": "2020-2024",
+      "band": "4-5",
+      "share_pct": 50.819672
+    }
+  ]
+}

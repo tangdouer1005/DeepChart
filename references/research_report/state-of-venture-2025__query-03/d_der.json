@@ -1,0 +1,70 @@
+{
+  "status": "complete",
+  "chart_type": "dumbbell",
+  "title": "Top 10 venture markets by growth divergence, 2024-2025",
+  "x_label": "Growth rate (%)",
+  "left_label": "Funding growth",
+  "right_label": "Deal growth",
+  "data": [
+    {
+      "label": "South Africa",
+      "left": 180.5194805194805,
+      "right": 12.12121212121211,
+      "abs_gap": 168.39826839826839
+    },
+    {
+      "label": "Kenya",
+      "left": 96.12903225806451,
+      "right": -36.7816091954023,
+      "abs_gap": 132.9106414534668
+    },
+    {
+      "label": "Silicon Valley",
+      "left": 119.87878787878788,
+      "right": -2.978859705317105,
+      "abs_gap": 122.85764758410498
+    },
+    {
+      "label": "Dallas",
+      "left": 108.82352941176472,
+      "right": 4.3689320388349495,
+      "abs_gap": 104.45459737292977
+    },
+    {
+      "label": "Mexico",
+      "left": 66.3265306122449,
+      "right": -37.22627737226277,
+      "abs_gap": 103.55280798450767
+    },
+    {
+      "label": "Austin",
+      "left": 114.70588235294117,
+      "right": 18.181818181818187,
+      "abs_gap": 96.52406417112299
+    },
+    {
+      "label": "Los Angeles",
+      "left": 82.35294117647058,
+      "right": -3.2511210762331877,
+      "abs_gap": 85.60406225270377
+    },
+    {
+      "label": "Netherlands",
+      "left": 59.25925925925925,
+      "right": -20.57692307692308,
+      "abs_gap": 79.83618233618233
+    },
+    {
+      "label": "Israel",
+      "left": 83.33333333333333,
+      "right": 13.239436619718315,
+      "abs_gap": 70.09389671361501
+    },
+    {
+      "label": "Seattle",
+      "left": 82.75862068965519,
+      "right": 21.42857142857142,
+      "abs_gap": 61.33004926108377
+    }
+  ]
+}

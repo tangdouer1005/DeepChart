@@ -1,0 +1,51 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a ranked horizontal bar chart comparing the five regions by flagship-city concentration, where the plotted value is `score of the highest-scoring city in each 3.1 regional city table / sum of scores of that region's top 5 listed cities`, values are percentages, and regions are sorted from highest to lowest after the concentration share is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by flagship_city_concentration_pct",
+  "selection_rule": "all five regions, using up to the first 5 listed cities per region",
+  "plot_spec": {
+    "title": "Regional Flagship-City Concentration",
+    "xlabel": "percent",
+    "value_field": "flagship_city_concentration_pct",
+    "value_as_percent": true
+  },
+  "records": [
+    {
+      "entity": "Middle East & Africa",
+      "flagship_city_concentration_pct": 58.2201,
+      "leader_city_score": 27.084,
+      "top5_listed_score_sum": 46.52,
+      "available_city_rows": 4
+    },
+    {
+      "entity": "North America",
+      "flagship_city_concentration_pct": 57.4766,
+      "leader_city_score": 328.966,
+      "top5_listed_score_sum": 572.348,
+      "available_city_rows": 10
+    },
+    {
+      "entity": "Europe",
+      "flagship_city_concentration_pct": 38.6556,
+      "leader_city_score": 56.913,
+      "top5_listed_score_sum": 147.231,
+      "available_city_rows": 10
+    },
+    {
+      "entity": "Latin America & Caribbean",
+      "flagship_city_concentration_pct": 38.1754,
+      "leader_city_score": 17.642,
+      "top5_listed_score_sum": 46.213,
+      "available_city_rows": 5
+    },
+    {
+      "entity": "Asia Pacific",
+      "flagship_city_concentration_pct": 37.1586,
+      "leader_city_score": 66.049,
+      "top5_listed_score_sum": 177.749,
+      "available_city_rows": 10
+    }
+  ]
+}

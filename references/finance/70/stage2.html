@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CSCO 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      background: #f7f7fb;
+      color: #222;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px 24px 28px;
+      border-radius: 10px;
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 16px;
+      font-weight: 400;
+      color: #555;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 12px;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    @media (max-width: 600px) {
+      body { padding: 10px; }
+      .container { padding: 16px 14px 22px; }
+      .chart-wrapper { height: 360px; }
+      h1 { font-size: 1.2rem; }
+      h2 { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CSCO 自由现金流收益质量 (Quality of Income Ratio)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="meta">数据来源：用户提供；单位：比率（自由现金流 / 净收益）</div>
+    <div class="chart-wrapper">
+      <canvas id="qoiChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Use a fixed, known-stable Chart.js version to avoid CDN changes -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script>
+    (function () {
+      // Guard in case library fails to load
+      if (typeof Chart === "undefined") {
+        console.error("Chart.js failed to load.");
+        return;
+      }
+
+      const labels = ["2016","2017","2018","2019","2020","2021","2022","2023","2024"];
+
+      const dataValues = [
+        0.9208740499457112,
+        0.9763580073177596,
+        0.9424827586206896,
+        0.9823157110945644,
+        0.9998703655690953,
+        1.0516502211636611,
+        0.830465904809745,
+        1.186727934594498,
+        0.7407407407407407
+      ];
+
+      const canvas = document.getElementById("qoiChart");
+      if (!canvas) {
+        console.error("Canvas element with id 'qoiChart' not found.");
+        return;
+      }
+      const ctx = canvas.getContext("2d");
+
+      const minVal = Math.min(...dataValues);
+      const maxVal = Math.max(...dataValues);
+      const padding = 0.1;
+      const yMin = Math.max(0, minVal - padding);
+      const yMax = maxVal + padding;
+
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Quality of Income Ratio",
+            data: dataValues,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.14)",
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderColor: "#ffffff",
+            pointHoverBackgroundColor: "#ffffff",
+            pointHoverBorderColor: "rgba(37, 99, 235, 1)",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBorderWidth: 1.5,
+            tension: 0.25,
+            fill: true,
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                boxWidth: 8,
+                padding: 18
+              }
+            },
+            tooltip: {
+              enabled: true,
+              usePointStyle: true,
+              callbacks: {
+                label: function (context) {
+                  const v = Number(context.raw);
+                  return " QoI 比率: " + (isNaN(v) ? context.raw : v.toFixed(3));
+                },
+                title: function (items) {
+                  return "Fiscal Year " + items[0].label;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Fiscal Year",
+                color: "#444",
+                font: { size: 12, weight: "500" }
+              },
+              grid: { display: false },
+              ticks: { maxRotation: 0, autoSkip: false }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Quality of Income Ratio",
+                color: "#444",
+                font: { size: 12, weight: "500" }
+              },
+              min: yMin,
+              max: yMax,
+              ticks: {
+                callback: function (value) {
+                  const num = Number(value);
+                  return isNaN(num) ? value : num.toFixed(1);
+                }
+              },
+              grid: { color: "rgba(148, 163, 184, 0.3)" }
+            }
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

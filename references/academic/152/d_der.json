@@ -1,0 +1,65 @@
+[
+    {
+        "Group": "MSW-SAF",
+        "Subcategory": "MSW management",
+        "Central": 14.1,
+        "Low": 8.1,
+        "High": 30.1
+    },
+    {
+        "Group": "MSW-SAF",
+        "Subcategory": "SAF production",
+        "Central": NaN,
+        "Low": 8.6,
+        "High": 33.5
+    },
+    {
+        "Group": "MSW-SAF",
+        "Subcategory": "Energy and Others",
+        "Central": NaN,
+        "Low": 10.4,
+        "High": 24.7
+    },
+    {
+        "Group": "MSW-H2",
+        "Subcategory": "MSW management",
+        "Central": 7.3,
+        "Low": 3.2,
+        "High": 17.3
+    },
+    {
+        "Group": "MSW-H2",
+        "Subcategory": "SAF production",
+        "Central": NaN,
+        "Low": 3.6,
+        "High": 20.3
+    },
+    {
+        "Group": "MSW-H2",
+        "Subcategory": "Energy and Others",
+        "Central": NaN,
+        "Low": 5.1,
+        "High": 11.5
+    },
+    {
+        "Group": "MSW-PTL",
+        "Subcategory": "MSW management",
+        "Central": 25.4,
+        "Low": 23.4,
+        "High": 30.3
+    },
+    {
+        "Group": "MSW-PTL",
+        "Subcategory": "SAF production",
+        "Central": NaN,
+        "Low": 23.6,
+        "High": 31.8
+    },
+    {
+        "Group": "MSW-PTL",
+        "Subcategory": "Energy and Others",
+        "Central": NaN,
+        "Low": 7.6,
+        "High": 30.8
+    }
+]

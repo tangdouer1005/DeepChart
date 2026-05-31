@@ -1,0 +1,78 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a bubble chart for countries in the 2020 report that have at least one visible ranked city and at least 8 total sampled innovations, where the x-axis is `number of visible ranked cities / population in tens of millions`, the y-axis is `total sampled innovations / number of visible ranked cities`, bubble size is `total sampled innovations`, both axes use derived country-level ratios, countries with `city_rankings = unavailable` are excluded, and only the top 10 countries by `total sampled innovations / number of visible ranked cities` should be plotted.",
+  "chart_type": "bubble chart",
+  "value_unit": "x in visible ranked cities per 10M people; y in sampled innovations per city; bubble size in sampled innovations",
+  "sort_rule": "descending by innovations_per_city",
+  "selection_rule": "top 10 after visible city count >= 1 and total_innovations >= 8",
+  "plot_spec": {
+    "title": "2020 City Coverage vs Innovations per City",
+    "x_field": "cities_per_10m_people",
+    "y_field": "innovations_per_city",
+    "size_field": "total_innovations",
+    "xlabel": "Visible ranked cities per 10M people",
+    "ylabel": "Sampled innovations per visible city"
+  },
+  "records": [
+    {
+      "entity": "United States",
+      "cities_per_10m_people": 0.1224,
+      "innovations_per_city": 101.0,
+      "total_innovations": 404
+    },
+    {
+      "entity": "Russia",
+      "cities_per_10m_people": 0.0692,
+      "innovations_per_city": 29.0,
+      "total_innovations": 29
+    },
+    {
+      "entity": "United Kingdom",
+      "cities_per_10m_people": 0.3008,
+      "innovations_per_city": 23.5,
+      "total_innovations": 47
+    },
+    {
+      "entity": "France",
+      "cities_per_10m_people": 0.1493,
+      "innovations_per_city": 21.0,
+      "total_innovations": 21
+    },
+    {
+      "entity": "Spain",
+      "cities_per_10m_people": 0.4184,
+      "innovations_per_city": 17.5,
+      "total_innovations": 35
+    },
+    {
+      "entity": "Canada",
+      "cities_per_10m_people": 1.0782,
+      "innovations_per_city": 17.25,
+      "total_innovations": 69
+    },
+    {
+      "entity": "Germany",
+      "cities_per_10m_people": 0.2413,
+      "innovations_per_city": 13.5,
+      "total_innovations": 27
+    },
+    {
+      "entity": "South Korea",
+      "cities_per_10m_people": 0.1938,
+      "innovations_per_city": 13.0,
+      "total_innovations": 13
+    },
+    {
+      "entity": "Taiwan",
+      "cities_per_10m_people": 0.4202,
+      "innovations_per_city": 13.0,
+      "total_innovations": 13
+    },
+    {
+      "entity": "Estonia",
+      "cities_per_10m_people": 7.6923,
+      "innovations_per_city": 11.0,
+      "total_innovations": 11
+    }
+  ]
+}

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cvx 可持续增长率 (SGR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #f7f8fa;
+      --card-bg: #ffffff;
+      --text-color: #1f2933;
+      --axis-color: #6b7280;
+      --accent-color: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --negative-color: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .container {
+      max-width: 960px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+      padding: 20px 20px 28px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin: 0;
+    }
+
+    .legend-note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 8px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      width: 100%;
+    }
+
+    .range-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.85rem;
+      margin-top: 8px;
+      color: #4b5563;
+    }
+
+    .range-controls button {
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      padding: 4px 10px;
+      background: #f9fafb;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: #374151;
+    }
+
+    .range-controls button.active {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      color: #ffffff;
+    }
+
+    @media (max-width: 640px) {
+      .chart-wrapper {
+        height: 320px;
+      }
+      h1 {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>cvx 可持续增长率 (Sustainable Growth Rate, SGR)</h1>
+        <p class="subtitle">年度变化：2016 – 2024（单位：%）</p>
+      </div>
+    </header>
+
+    <div class="chart-wrapper">
+      <canvas id="sgrChart"></canvas>
+    </div>
+
+    <div class="range-controls">
+      <span>视图范围:</span>
+      <button data-range="all" class="active">全部 (2016–2024)</button>
+      <button data-range="5y">近5年</button>
+      <button data-range="3y">近3年</button>
+    </div>
+
+    <p class="legend-note">
+      注：可持续增长率 (SGR) = 股本回报率 (ROE) × (1 − 股利支付率)。为便于阅读，图中数值以百分比显示。
+    </p>
+  </div>
+
+  <script>
+    // Source data (as provided)
+    const rawData = [
+      { year: 2016, sgr: -0.0571894110074026 },
+      { year: 2017, sgr: 0.0072391718877689 },
+      { year: 2018, sgr: 0.0417869815447439 },
+      { year: 2019, sgr: -0.040673836133174 },
+      { year: 2020, sgr: -0.110496156229952 },
+      { year: 2021, sgr: 0.0362796172082416 },
+      { year: 2022, sgr: 0.1497887711994122 },
+      { year: 2023, sgr: 0.0626594512223683 },
+      { year: 2024, sgr: 0.0374176043412337 }
+    ];
+
+    const labels = rawData.map(d => String(d.year));
+    const valuesPct = rawData.map(d => d.sgr * 100); // Convert to %
+
+    const ctx = document.getElementById("sgrChart").getContext("2d");
+
+    // Compute nice y-axis bounds around data
+    const minVal = Math.min(...valuesPct);
+    const maxVal = Math.max(...valuesPct);
+    const padding = 5; // percentage points padding
+    const suggestedMin = Math.floor((minVal - padding) / 5) * 5;
+    const suggestedMax = Math.ceil((maxVal + padding) / 5) * 5;
+
+    const gradientStroke = ctx.createLinearGradient(0, 0, 0, 400);
+    gradientStroke.addColorStop(0, "rgba(37, 99, 235, 1)");
+    gradientStroke.addColorStop(1, "rgba(37, 99, 235, 0.3)");
+
+    const gradientFill = ctx.createLinearGradient(0, 0, 0, 400);
+    gradientFill.addColorStop(0, "rgba(37, 99, 235, 0.18)");
+    gradientFill.addColorStop(1, "rgba(37, 99, 235, 0)");
+
+    const dataConfig = {
+      labels,
+      datasets: [
+        {
+          label: "可持续增长率 (SGR)",
+          data: valuesPct,
+          borderColor: gradientStroke,
+          backgroundColor: gradientFill,
+          fill: true,
+          tension: 0.25,
+          borderWidth: 2.2,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointBackgroundColor: valuesPct.map(v =>
+            v >= 0 ? "#2563eb" : "#dc2626"
+          ),
+          pointBorderColor: "#ffffff",
+          pointBorderWidth: 1.5,
+          pointHoverBorderWidth: 2,
+          segment: {
+            borderColor: ctx => {
+              const v0 = ctx.p0.parsed.y;
+              const v1 = ctx.p1.parsed.y;
+              // Color negative segments subtly red for emphasis
+              if (v0 < 0 && v1 < 0) return "rgba(220, 38, 38, 0.9)";
+              return gradientStroke;
+            }
+          }
+        }
+      ]
+    };
+
+    const sgrChart = new Chart(ctx, {
+      type: "line",
+      data: dataConfig,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.95)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.7)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              title: context => {
+                const year = context[0].label;
+                return `年度：${year}`;
+              },
+              label: context => {
+                const value = context.parsed.y;
+                const sign = value > 0 ? "+" : "";
+                return `SGR：${sign}${value.toFixed(2)}%`;
+              },
+              afterLabel: context => {
+                const value = context.parsed.y;
+                if (value < 0) {
+                  return "说明：负值表示不可持续的增长/收缩";
+                }
+                return "";
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#6b7280",
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin,
+            suggestedMax,
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+              borderDash: [4, 4]
+            },
+            ticks: {
+              color: "#6b7280",
+              font: {
+                size: 11
+              },
+              callback: value => `${value}%`
+            },
+            title: {
+              display: true,
+              text: "可持续增长率 (SGR, %)",
+              color: "#4b5563",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Simple range controls (all / last 5 years / last 3 years)
+    const buttons = document.querySelectorAll(".range-controls button");
+
+    function updateRange(range) {
+      let startIndex = 0;
+      if (range === "5y") {
+        startIndex = Math.max(0, labels.length - 5);
+      } else if (range === "3y") {
+        startIndex = Math.max(0, labels.length - 3);
+      }
+
+      sgrChart.data.labels = labels.slice(startIndex);
+      sgrChart.data.datasets[0].data = valuesPct.slice(startIndex);
+      sgrChart.update();
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const range = btn.getAttribute("data-range");
+        updateRange(range);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta 2016–2024 息税折旧摊销前利润（EBITDA）趋势图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --text-color: #111827;
+      --grid-color: rgba(148, 163, 184, 0.35);
+      --line-color: #2563eb;
+      --point-color: #1d4ed8;
+      --tooltip-bg: rgba(15, 23, 42, 0.9);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --text-color: #e5e7eb;
+        --grid-color: rgba(75, 85, 99, 0.7);
+        --line-color: #60a5fa;
+        --point-color: #93c5fd;
+        --tooltip-bg: rgba(15, 23, 42, 0.95);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background: radial-gradient(circle at top left, #eff6ff 0, transparent 45%),
+                  radial-gradient(circle at bottom right, #eef2ff 0, transparent 45%);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-sizing: border-box;
+      box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.12),
+        0 1px 2px rgba(15, 23, 42, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .chart-wrapper {
+        background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.35) 0, transparent 45%),
+                    radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.25) 0, transparent 45%);
+        box-shadow:
+          0 18px 45px rgba(0, 0, 0, 0.7),
+          0 1px 2px rgba(15, 23, 42, 0.9);
+      }
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Meta 2016–2024 年度息税折旧摊销前利润（EBITDA）</h1>
+    <div class="subtitle">单位：十亿美元（USD）</div>
+
+    <div class="chart-wrapper">
+      <canvas id="metaEbitdaChart" aria-label="Meta EBITDA Trend 2016–2024" role="img"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：用户提供的 Meta 2016–2024 财年 EBITDA（单位：美元）；图中数值按十亿美元展示。
+    </div>
+  </div>
+
+  <script>
+    // 原始数据（单位：美元）
+    const rawData = [
+      { year: 2016, ebitda: 14870000000.0 },
+      { year: 2017, ebitda: 23625000000.0 },
+      { year: 2018, ebitda: 29685000000.0 },
+      { year: 2019, ebitda: 30573000000.0 },
+      { year: 2020, ebitda: 40714000000.0 },
+      { year: 2021, ebitda: 55712000000.0 },
+      { year: 2022, ebitda: 37690000000.0 },
+      { year: 2023, ebitda: 58256000000.0 },
+      { year: 2024, ebitda: 86876000000.0 }
+    ];
+
+    // 转换为十亿美元
+    const labels = rawData.map(d => d.year.toString());
+    const ebitdaBillions = rawData.map(d => d.ebitda / 1_000_000_000);
+
+    const ctx = document.getElementById('metaEbitdaChart').getContext('2d');
+
+    const metaEbitdaChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'EBITDA（十亿美元）',
+            data: ebitdaBillions,
+            borderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--line-color')
+              .trim() || '#2563eb',
+            backgroundColor: function(context) {
+              const chart = context.chart;
+              const { ctx, chartArea } = chart;
+              if (!chartArea) {
+                return 'rgba(37, 99, 235, 0.08)';
+              }
+              const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+              gradient.addColorStop(0, 'rgba(37, 99, 235, 0.25)');
+              gradient.addColorStop(1, 'rgba(37, 99, 235, 0.02)');
+              return gradient;
+            },
+            pointBackgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--point-color')
+              .trim() || '#1d4ed8',
+            pointBorderColor: '#ffffff',
+            pointHoverRadius: 6,
+            pointRadius: 4,
+            pointBorderWidth: 1.5,
+            borderWidth: 2.5,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          title: {
+            display: false
+          },
+          legend: {
+            display: true,
+            labels: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--text-color')
+                .trim() || '#111827',
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--tooltip-bg')
+              .trim() || 'rgba(15, 23, 42, 0.9)',
+            titleColor: '#e5e7eb',
+            bodyColor: '#e5e7eb',
+            borderColor: 'rgba(148, 163, 184, 0.5)',
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                const formatted = value.toLocaleString('en-US', {
+                  maximumFractionDigits: 2,
+                  minimumFractionDigits: 2
+                });
+                return `EBITDA：${formatted} 十亿美元`;
+              },
+              title: function(context) {
+                return `财年：${context[0].label}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财年',
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--text-color')
+                .trim() || '#111827',
+              font: {
+                size: 12,
+                weight: '500'
+              }
+            },
+            ticks: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--text-color')
+                .trim() || '#111827'
+            },
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--grid-color')
+                .trim() || 'rgba(148, 163, 184, 0.35)',
+              drawBorder: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'EBITDA（十亿美元）',
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--text-color')
+                .trim() || '#111827',
+              font: {
+                size: 12,
+                weight: '500'
+              }
+            },
+            ticks: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--text-color')
+                .trim() || '#111827',
+              callback: function(value) {
+                return value.toLocaleString('en-US');
+              }
+            },
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--grid-color')
+                .trim() || 'rgba(148, 163, 184, 0.35)',
+              drawBorder: false
+            },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // 简单的窗口尺寸变化处理，确保渐变填充正确刷新
+    window.addEventListener('resize', () => {
+      metaEbitdaChart.resize();
+    });
+  </script>
+</body>
+</html>

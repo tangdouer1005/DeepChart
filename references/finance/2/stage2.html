@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>abbv 防御区间比率 (DIR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.1);
+      --accent-border: rgba(37, 99, 235, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-card {
+      background: #ffffff;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      padding: 1rem 1.25rem 1.25rem;
+    }
+
+    .chart-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .chart-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .chart-meta {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 0.1rem 0.5rem;
+      border: 1px solid #e5e7eb;
+      font-size: 0.75rem;
+      color: #4b5563;
+      background: #f9fafb;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+
+    .note {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 0.75rem;
+      }
+      .chart-wrapper {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>abbv 防御区间比率 (DIR) 趋势</h1>
+    <div class="subtitle">2016–2024 年度防御区间比率的变化（单位：天）</div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">Defensive Interval Ratio (DIR) – 2016 至 2024</div>
+        <div class="chart-meta">
+          <span class="badge">Line Chart</span>
+          <span>数据来源：用户提供财务数据</span>
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="dirChart"></canvas>
+      </div>
+
+      <div class="note">
+        说明：DIR（防御区间比率）≈ Quick Assets / Daily Burn，以“可维持运营的天数”表示公司短期防御能力。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data extracted from the provided table (RESULT_DIR)
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const dirValues = [
+      220.76016933554203,
+      281.3602763940222,
+      175.41315889268105,
+      816.1258196519252,
+      183.03519061583577,
+      188.09330337313511,
+      186.94631544682875,
+      210.5022737662713,
+      127.1626374557705
+    ];
+
+    // Helper to compute min/max with a margin for better y-axis scaling
+    function computeYBounds(values, paddingRatio = 0.08) {
+      const minVal = Math.min(...values);
+      const maxVal = Math.max(...values);
+      const range = maxVal - minVal || maxVal || 1;
+      const pad = range * paddingRatio;
+      let suggestedMin = minVal - pad;
+      let suggestedMax = maxVal + pad;
+      if (suggestedMin < 0) suggestedMin = 0;
+      return { suggestedMin, suggestedMax };
+    }
+
+    const { suggestedMin, suggestedMax } = computeYBounds(dirValues, 0.12);
+
+    const ctx = document.getElementById("dirChart").getContext("2d");
+
+    const dirChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "防御区间比率 (DIR)",
+            data: dirValues,
+            tension: 0.25,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.16)",
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: "rgba(37, 99, 235, 1)",
+            pointBorderWidth: 2,
+            fill: true,
+            hoverBorderWidth: 2.8
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              padding: 16,
+              color: "#4b5563",
+              font: {
+                size: 11
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: "rgba(15, 23, 42, 0.96)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#f9fafb",
+            borderColor: "rgba(55, 65, 81, 0.7)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return " DIR: " + value.toFixed(2) + " 天";
+              },
+              title: function (items) {
+                if (!items.length) return "";
+                return "年度：" + items[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            title: {
+              display: false
+            },
+            ticks: {
+              color: "#6b7280",
+              maxRotation: 0,
+              autoSkip: false
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            grid: {
+              color: "rgba(209, 213, 219, 0.6)",
+              drawBorder: false
+            },
+            ticks: {
+              color: "#6b7280",
+              callback: function (value) {
+                return value + " 天";
+              }
+            },
+            title: {
+              display: true,
+              text: "防御区间比率 (天)",
+              color: "#4b5563",
+              font: {
+                size: 11,
+                weight: "500"
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

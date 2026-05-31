@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>UNH 资本再投资率 (2016–2024)</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 0 0 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 0 18px;
+      color: #666;
+    }
+    .chart-container {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 22px 22px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.11);
+      /* Explicit height to avoid extreme stretching */
+      height: 480px;
+      box-sizing: border-box;
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 40px); /* leave room for title */
+    }
+    .footer-note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 11px;
+      color: #666;
+      line-height: 1.4;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .chart-container {
+        padding: 14px 14px 16px;
+        height: 420px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>UNH 资本再投资率变化</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="chart-wrapper">
+      <canvas id="reinvestmentChart"></canvas>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    数据来源：用户提供的 UNH 资本再投资率（RESULT_Reinvestment_Rate），单位为小数（已在图中转换为百分比）。
+  </div>
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // 数据
+    const fiscalYears = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const reinvestmentRatesRaw = [
+      -0.1882173956733825,
+      -0.151298832618954,
+      0.0858252456696752,
+      -0.0501655623439064,
+      -0.1461843481759761,
+      -0.0541168461855611,
+      -0.149564437157727,
+      0.1196132931853578,
+      0.2232565210814061
+    ];
+
+    // 转换为百分比
+    const reinvestmentRatesPct = reinvestmentRatesRaw.map(v => v * 100);
+
+    const barColors = reinvestmentRatesPct.map(v =>
+      v >= 0 ? "rgba(34, 197, 94, 0.85)" : "rgba(239, 68, 68, 0.85)"
+    );
+    const barBorderColors = reinvestmentRatesPct.map(v =>
+      v >= 0 ? "rgba(21, 128, 61, 1)" : "rgba(185, 28, 28, 1)"
+    );
+
+    const ctx = document.getElementById("reinvestmentChart").getContext("2d");
+
+    // y 轴范围
+    const minVal = Math.min(...reinvestmentRatesPct);
+    const maxVal = Math.max(...reinvestmentRatesPct);
+    const padding = (maxVal - minVal) * 0.15 || 5;
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [{
+          label: "资本再投资率（%）",
+          data: reinvestmentRatesPct,
+          backgroundColor: barColors,
+          borderColor: barBorderColors,
+          borderWidth: 1.2,
+          borderRadius: 4,
+          hoverBackgroundColor: barColors.map(c => c.replace("0.85", "1")),
+        }]
+      },
+      options: {
+        responsive: true,
+        // 让图表填充父容器的固定高度，避免极端纵横比
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "rectRounded",
+              padding: 16,
+              font: {
+                size: 11.5
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.95)",
+            titleFont: { size: 12, weight: "600" },
+            bodyFont: { size: 12 },
+            padding: 10,
+            cornerRadius: 6,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                const sign = value > 0 ? "+" : "";
+                return sign + value.toFixed(2) + "%";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+              drawBorder: false
+            },
+            ticks: {
+              font: { size: 11 },
+              callback: function(value) {
+                return value + "%";
+              }
+            },
+            suggestedMin: minVal - padding,
+            suggestedMax: maxVal + padding,
+            beginAtZero: false
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutQuart"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

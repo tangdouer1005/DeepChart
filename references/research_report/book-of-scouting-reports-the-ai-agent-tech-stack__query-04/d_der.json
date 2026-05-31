@@ -1,0 +1,144 @@
+{
+  "query_id": 4,
+  "query_text": "Create a scatter plot for directions with at least 4 companies, where the x-axis is median founded year, the y-axis is median Mosaic, point size is median Total raised in $M, and point color shows the share of companies in that direction with Commercial Maturity >= 4 / 5.",
+  "status": "complete",
+  "chart": {
+    "type": "scatter",
+    "title": "Direction medians: youth, quality, scale, and maturity",
+    "x_field": "median_founded_year",
+    "y_field": "median_mosaic",
+    "size_field": "median_total_raised_m",
+    "hue_field": "high_maturity_share_pct",
+    "x_label": "Median founded year",
+    "y_label": "Median Mosaic",
+    "label_field": "direction",
+    "annotate": true,
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "direction": "Large language model (LLM) developers",
+      "company_count": 10,
+      "median_founded_year": 2022.0,
+      "median_mosaic": 910.5,
+      "median_total_raised_m": 1300.0,
+      "high_maturity_share_pct": 50.0
+    },
+    {
+      "direction": "Model deployment & serving",
+      "company_count": 9,
+      "median_founded_year": 2019.0,
+      "median_mosaic": 887.0,
+      "median_total_raised_m": 77.0,
+      "high_maturity_share_pct": 88.88888888888889
+    },
+    {
+      "direction": "LLM data preparation platforms",
+      "company_count": 4,
+      "median_founded_year": 2022.5,
+      "median_mosaic": 868.0,
+      "median_total_raised_m": 49.2,
+      "high_maturity_share_pct": 50.0
+    },
+    {
+      "direction": "Vector databases",
+      "company_count": 6,
+      "median_founded_year": 2020.5,
+      "median_mosaic": 806.5,
+      "median_total_raised_m": 52.699999999999996,
+      "high_maturity_share_pct": 66.66666666666666
+    },
+    {
+      "direction": "Voice",
+      "company_count": 13,
+      "median_founded_year": 2022.0,
+      "median_mosaic": 803.0,
+      "median_total_raised_m": 38.5,
+      "high_maturity_share_pct": 38.46153846153847
+    },
+    {
+      "direction": "Developer frameworks & platforms",
+      "company_count": 9,
+      "median_founded_year": 2023.0,
+      "median_mosaic": 791.0,
+      "median_total_raised_m": 55.5,
+      "high_maturity_share_pct": 22.22222222222222
+    },
+    {
+      "direction": "Security & risk management platforms",
+      "company_count": 13,
+      "median_founded_year": 2022.0,
+      "median_mosaic": 769.5,
+      "median_total_raised_m": 27.5,
+      "high_maturity_share_pct": 38.46153846153847
+    },
+    {
+      "direction": "Tool libraries & integration platforms",
+      "company_count": 5,
+      "median_founded_year": 2020.0,
+      "median_mosaic": 762.0,
+      "median_total_raised_m": 25.0,
+      "high_maturity_share_pct": 40.0
+    },
+    {
+      "direction": "AI web search APIs & scrapers",
+      "company_count": 8,
+      "median_founded_year": 2021.5,
+      "median_mosaic": 749.5,
+      "median_total_raised_m": 30.0,
+      "high_maturity_share_pct": 25.0
+    },
+    {
+      "direction": "LLM benchmarking & model routing",
+      "company_count": 6,
+      "median_founded_year": 2023.0,
+      "median_mosaic": 714.0,
+      "median_total_raised_m": 21.05,
+      "high_maturity_share_pct": 16.666666666666664
+    },
+    {
+      "direction": "Observability, evaluation, & governance",
+      "company_count": 15,
+      "median_founded_year": 2023.0,
+      "median_mosaic": 694.0,
+      "median_total_raised_m": 6.6,
+      "high_maturity_share_pct": 13.333333333333334
+    },
+    {
+      "direction": "Low-code platforms",
+      "company_count": 13,
+      "median_founded_year": 2022.0,
+      "median_mosaic": 672.0,
+      "median_total_raised_m": 14.3,
+      "high_maturity_share_pct": 30.76923076923077
+    },
+    {
+      "direction": "Payments infrastructure",
+      "company_count": 8,
+      "median_founded_year": 2023.0,
+      "median_mosaic": 658.5,
+      "median_total_raised_m": 11.3,
+      "high_maturity_share_pct": 12.5
+    },
+    {
+      "direction": "Authentication platforms",
+      "company_count": 5,
+      "median_founded_year": 2021.0,
+      "median_mosaic": 655.0,
+      "median_total_raised_m": 40.3,
+      "high_maturity_share_pct": 20.0
+    },
+    {
+      "direction": "Memory management",
+      "company_count": 6,
+      "median_founded_year": 2024.0,
+      "median_mosaic": 600.0,
+      "median_total_raised_m": 7.9,
+      "high_maturity_share_pct": 0.0
+    }
+  ],
+  "notes": []
+}

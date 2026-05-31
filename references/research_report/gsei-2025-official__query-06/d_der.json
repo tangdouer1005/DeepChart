@@ -1,0 +1,55 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a bar chart of the top 10 countries whose listed cities reorder the most when sorted by numeric growth instead of ecosystem score in the 2025 country tables, where the metric is the mean absolute position shift across cities with numeric growth values, expressed in rank positions, sorted descending, and restricted to countries with at least 5 numeric growth entries.",
+  "status": "complete",
+  "chart_type": "bar",
+  "title": "2025 Reordering by Growth vs Score",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by mean_absolute_position_shift, tie-break alphabetically",
+  "selection_rule": "top 10 countries with at least 5 numeric growth entries",
+  "records": [
+    {
+      "entity": "Brazil",
+      "mean_absolute_position_shift": 4.2
+    },
+    {
+      "entity": "Israel",
+      "mean_absolute_position_shift": 4.2
+    },
+    {
+      "entity": "Australia",
+      "mean_absolute_position_shift": 4.0
+    },
+    {
+      "entity": "China",
+      "mean_absolute_position_shift": 4.0
+    },
+    {
+      "entity": "Mexico",
+      "mean_absolute_position_shift": 3.8
+    },
+    {
+      "entity": "Portugal",
+      "mean_absolute_position_shift": 3.625
+    },
+    {
+      "entity": "Italy",
+      "mean_absolute_position_shift": 3.4
+    },
+    {
+      "entity": "Spain",
+      "mean_absolute_position_shift": 3.4
+    },
+    {
+      "entity": "Sweden",
+      "mean_absolute_position_shift": 3.4
+    },
+    {
+      "entity": "The Netherlands",
+      "mean_absolute_position_shift": 3.4
+    }
+  ],
+  "value_field": "mean_absolute_position_shift",
+  "x_label": "Country",
+  "y_label": "Mean absolute position shift"
+}

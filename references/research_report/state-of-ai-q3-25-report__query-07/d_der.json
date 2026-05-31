@@ -1,0 +1,81 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a ranked bar chart for the top 10 markets by `headline-round amplification`, computed as `largest visible top equity deal amount / 2025 YTD average funding per deal`, expressed as a multiple, after filtering to markets with at least `20` total deals in `2025 YTD`.",
+  "status": "completed",
+  "title": "Top 10 markets by headline-round amplification",
+  "chart_kind": "horizontal_bar",
+  "chart_type": "ranked bar chart",
+  "value_unit": "multiple",
+  "sort_rule": "descending by headline_round_amplification",
+  "selection_rule": "top 10 with at least 20 deals in 2025 YTD",
+  "metadata": {
+    "entity_field": "market",
+    "value_field": "headline_round_amplification",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "market": "US",
+      "headline_round_amplification": 228.55769230769232,
+      "largest_visible_deal_m": 13000.0,
+      "avg_funding_per_deal_m": 56.87841817416912
+    },
+    {
+      "market": "Silicon Valley",
+      "headline_round_amplification": 125.82625118035884,
+      "largest_visible_deal_m": 13000.0,
+      "avg_funding_per_deal_m": 103.3170731707317
+    },
+    {
+      "market": "Europe",
+      "headline_round_amplification": 101.22302158273382,
+      "largest_visible_deal_m": 1500.0,
+      "avg_funding_per_deal_m": 14.818763326226012
+    },
+    {
+      "market": "United Kingdom",
+      "headline_round_amplification": 61.111111111111114,
+      "largest_visible_deal_m": 1100.0,
+      "avg_funding_per_deal_m": 18.0
+    },
+    {
+      "market": "France",
+      "headline_round_amplification": 52.17391304347826,
+      "largest_visible_deal_m": 1500.0,
+      "avg_funding_per_deal_m": 28.75
+    },
+    {
+      "market": "Asia",
+      "headline_round_amplification": 39.625,
+      "largest_visible_deal_m": 300.0,
+      "avg_funding_per_deal_m": 7.570977917981073
+    },
+    {
+      "market": "China",
+      "headline_round_amplification": 27.972972972972975,
+      "largest_visible_deal_m": 300.0,
+      "avg_funding_per_deal_m": 10.72463768115942
+    },
+    {
+      "market": "Singapore",
+      "headline_round_amplification": 23.540308747855917,
+      "largest_visible_deal_m": 188.0,
+      "avg_funding_per_deal_m": 7.986301369863014
+    },
+    {
+      "market": "New York",
+      "headline_round_amplification": 23.125,
+      "largest_visible_deal_m": 500.0,
+      "avg_funding_per_deal_m": 21.62162162162162
+    },
+    {
+      "market": "Japan",
+      "headline_round_amplification": 21.079831932773107,
+      "largest_visible_deal_m": 58.0,
+      "avg_funding_per_deal_m": 2.7514450867052025
+    }
+  ]
+}

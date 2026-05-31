@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ORCL 可持续增长率（SGR） 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f7fb;
+      color: #222;
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #666;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 16px 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    }
+    .chart-wrapper {
+      position: relative;
+      /* Fix height to avoid excessive vertical stretching */
+      height: 420px;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .note {
+      font-size: 12px;
+      color: #777;
+      margin-top: 12px;
+      line-height: 1.4;
+    }
+    .legend-note {
+      font-size: 12px;
+      color: #555;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>ORCL 可持续增长率（Sustainable Growth Rate, SGR）</h1>
+    <h2>财年 2016–2024（柱状图，含异常值注记）</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="sgrChart"></canvas>
+    </div>
+
+    <div class="legend-note">
+      • 蓝色柱：正常范围内的 SGR（-200% 至 +200%）<br />
+      • 红色柱：极端异常值（2016–2024 期间的显著负向异常）
+    </div>
+
+    <div class="note">
+      说明：可持续增长率（SGR）为公司在保持资本结构不变且不追加外部权益融资情况下，
+      销售额可维持的最大增长率。数值为年度 SGR；图中以百分比形式展示。
+      为保持可读性，主坐标轴聚焦在 -200% 至 +200% 区间，并将 2022 财年的极端负值突出显示。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest 4.x at time of generation) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <script>
+    // Fiscal years
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    // Raw SGR values from the provided data (as decimals)
+    const sgrValues = [
+      0.1325662831415708,
+      0.1348703397957469,
+      0.0089324967027696,
+      0.2397035686453263,
+      0.417318881242801,
+      1.2341728280961184,
+      -6.639511201629328,
+      -1.8787643287351847,
+      1.242917050219904
+    ];
+
+    // Convert to percentage for display
+    const sgrPercent = sgrValues.map(v => v * 100);
+
+    // We want a readable main range around most data.
+    // Most years are between roughly -200% and +130%.
+    // 2022 is an extreme outlier (-664%).
+    const mainMin = -200;
+    const mainMax = 200;
+
+    // For the bar chart, we will "cap" the bar at the mainMin if it goes below,
+    // and highlight this bar in a different color + tooltip note.
+    const cappedData = sgrPercent.map(v => {
+      if (v < mainMin) return mainMin;
+      if (v > mainMax) return mainMax;
+      return v;
+    });
+
+    const backgroundColors = sgrPercent.map((v, idx) => {
+      // Highlight 2022 extreme negative as dark red
+      if (idx === 6) {
+        return "rgba(185, 28, 28, 0.9)";
+      }
+      return v >= 0 ? "rgba(37, 99, 235, 0.7)" : "rgba(248, 113, 113, 0.8)";
+    });
+
+    const borderColors = sgrPercent.map((v, idx) => {
+      if (idx === 6) {
+        return "rgba(153, 27, 27, 1)";
+      }
+      return v >= 0 ? "rgba(37, 99, 235, 1)" : "rgba(220, 38, 38, 1)";
+    });
+
+    const ctx = document.getElementById("sgrChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "可持续增长率（%）",
+            data: cappedData,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1.2,
+            borderRadius: 4,
+            hoverBackgroundColor: backgroundColors,
+            hoverBorderColor: borderColors
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 14,
+              boxHeight: 14
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function (context) {
+                const index = context.dataIndex;
+                const raw = sgrValues[index];
+                const pct = sgrPercent[index];
+                const capped = cappedData[index];
+
+                let labelLines = [];
+                labelLines.push(" SGR: " + pct.toFixed(2) + "%");
+                labelLines.push(" 原始值: " + raw.toFixed(6));
+
+                // If the bar was capped, add an explanatory note
+                if (pct !== capped) {
+                  labelLines.push("（注意：此值超出主坐标轴范围，柱形高度已截断以保持可读性）");
+                }
+                return labelLines;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "可持续增长率（%）"
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            },
+            ticks: {
+              callback: function (value) {
+                return value + "%";
+              }
+            },
+            min: mainMin,
+            max: mainMax
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        animation: {
+          duration: 700,
+          easing: "easeOutQuart"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

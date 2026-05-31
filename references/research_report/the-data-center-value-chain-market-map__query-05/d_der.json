@@ -1,0 +1,155 @@
+{
+  "report_id": "010",
+  "query_id": 5,
+  "query_text": "Create a scatter plot for the top 20 youngest companies by `Founded year`, where the x-axis is `Headcount per $100M raised`, the y-axis is `Mosaic score`, point color shows segment, and points are limited to companies founded in 2020 or later with numeric `Headcount` and `Total raised`.",
+  "chart_type": "scatter",
+  "value_unit": "Headcount per $100M raised",
+  "sort_rule": "descending by Founded year, then company name",
+  "selection_rule": "companies founded in 2020 or later with numeric headcount, funding, and Mosaic",
+  "records": [
+    {
+      "label": "Starcloud",
+      "x": 46.025105,
+      "y": 802,
+      "color": "Data center facilities & operations",
+      "founded_year": 2024
+    },
+    {
+      "label": "Aalo Atomics",
+      "x": 57.764441,
+      "y": 825,
+      "color": "Power generation",
+      "founded_year": 2023
+    },
+    {
+      "label": "Base Power",
+      "x": 14.333333,
+      "y": 891,
+      "color": "Power generation",
+      "founded_year": 2023
+    },
+    {
+      "label": "Dream",
+      "x": 143.870968,
+      "y": 757,
+      "color": "Networking & connectivity",
+      "founded_year": 2023
+    },
+    {
+      "label": "Pacific Fusion",
+      "x": 13.0,
+      "y": 803,
+      "color": "Power generation",
+      "founded_year": 2023
+    },
+    {
+      "label": "Positron",
+      "x": 48.620237,
+      "y": 761,
+      "color": "AI computing hardware",
+      "founded_year": 2023
+    },
+    {
+      "label": "Proxima Fusion",
+      "x": 53.77405,
+      "y": 788,
+      "color": "Power generation",
+      "founded_year": 2023
+    },
+    {
+      "label": "Valar Atomics",
+      "x": 26.578073,
+      "y": 809,
+      "color": "Power generation",
+      "founded_year": 2023
+    },
+    {
+      "label": "Accelsius",
+      "x": 288.617886,
+      "y": 747,
+      "color": "Supporting hardware infrastructure",
+      "founded_year": 2022
+    },
+    {
+      "label": "Armada",
+      "x": 162.831858,
+      "y": 884,
+      "color": "Data center facilities & operations",
+      "founded_year": 2022
+    },
+    {
+      "label": "MangoBoost",
+      "x": 167.427702,
+      "y": 746,
+      "color": "AI computing hardware",
+      "founded_year": 2022
+    },
+    {
+      "label": "Rapidus",
+      "x": 3.821429,
+      "y": 887,
+      "color": "AI computing hardware",
+      "founded_year": 2022
+    },
+    {
+      "label": "Axelera AI",
+      "x": 103.116407,
+      "y": 810,
+      "color": "AI computing hardware",
+      "founded_year": 2021
+    },
+    {
+      "label": "Corintis",
+      "x": 97.196262,
+      "y": 755,
+      "color": "Supporting hardware infrastructure",
+      "founded_year": 2021
+    },
+    {
+      "label": "newcleo",
+      "x": 123.119015,
+      "y": 818,
+      "color": "Power generation",
+      "founded_year": 2021
+    },
+    {
+      "label": "Natura Resources",
+      "x": 115.0,
+      "y": 797,
+      "color": "Power generation",
+      "founded_year": 2020
+    },
+    {
+      "label": "Rebellions",
+      "x": 32.680945,
+      "y": 902,
+      "color": "AI computing hardware",
+      "founded_year": 2020
+    },
+    {
+      "label": "Scala Data Centers",
+      "x": 161.474996,
+      "y": 577,
+      "color": "Data center facilities & operations",
+      "founded_year": 2020
+    }
+  ],
+  "plot_config": {
+    "title": "Youngest companies: headcount intensity vs Mosaic",
+    "x_label": "Headcount per $100M raised",
+    "y_label": "Mosaic score"
+  },
+  "reasoning_summary": [
+    "Filtered to companies founded in 2020 or later with numeric headcount, funding, and Mosaic.",
+    "Converted funding to units of $100M and computed headcount intensity.",
+    "Assigned segments from section-2 boundaries.",
+    "Sorted by founded year descending and kept up to 20 companies."
+  ],
+  "stats": {
+    "eligible_count": 19,
+    "returned_count": 18
+  },
+  "open_issues": [
+    "Fewer than 20 companies may qualify when numeric funding/headcount requirements are applied."
+  ]
+}

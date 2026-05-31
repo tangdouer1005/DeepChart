@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>tmus 格雷厄姆“烟蒂股”净值 (NNWC) 2016–2024 变化柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --bar-negative: #dc2626;
+      --bar-hover: #b91c1c;
+      --accent: #4b5563;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: #1f2933;
+        --bar-negative: #f97373;
+        --bar-hover: #fb4f4f;
+        --accent: #9ca3af;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: min(65vh, 520px);
+      background: rgba(15, 23, 42, 0.02);
+      border-radius: 0.75rem;
+      padding: 0.75rem 0.75rem 0.5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .chart-wrapper {
+        background: rgba(15, 23, 42, 0.7);
+      }
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .note {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>tmus 格雷厄姆“烟蒂股”净值 (NNWC) 变化</h1>
+    <div class="subtitle">按年度计算的 NNWC 每股值（2016–2024，单位：货币单位/股）</div>
+
+    <div class="chart-wrapper">
+      <canvas id="nnwcChart"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：用户提供的年度 NNWC 每股值。<br />
+      说明：数值为负表示净流动资产不足以覆盖总负债，柱形图均位于 0 轴下方。
+    </div>
+  </div>
+
+  <script>
+    // 原始数据
+    const nnwcData = [
+      { year: 2016, value: -40.13902835137884 },
+      { year: 2017, value: -44.83778721178453 },
+      { year: 2018, value: -45.985622575120296 },
+      { year: 2019, value: -56.54977682138994 },
+      { year: 2020, value: -96.06676429249993 },
+      { year: 2021, value: -92.9014879220893 },
+      { year: 2022, value: -97.67185474960908 },
+      { year: 2023, value: -103.2687209548391 },
+      { year: 2024, value: -109.00824572499135 }
+    ];
+
+    const labels = nnwcData.map(d => d.year.toString());
+    const values = nnwcData.map(d => d.value);
+
+    const minValue = Math.min(...values); // all negative
+    const maxValue = 0;
+    const padding = Math.abs(minValue) * 0.1;
+
+    const ctx = document.getElementById('nnwcChart');
+
+    // 使用纯色值，避免 CSS 变量在 Chart.js 中解析问题导致柱子不显示
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'NNWC 每股值',
+          data: values,
+          backgroundColor: '#dc2626',       // 负值柱体颜色
+          hoverBackgroundColor: '#b91c1c',  // 悬停颜色
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+            titleFont: { weight: '600' },
+            bodyFont: { weight: '400' },
+            padding: 10,
+            callbacks: {
+              label: (ctx) => {
+                const v = ctx.parsed.y;
+                return `NNWC 每股: ${v.toFixed(2)}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: true,
+            min: minValue - padding,
+            max: maxValue + padding * 0.2,
+            grid: { color: '#e5e7eb' },
+            ticks: {
+              callback: (value) => value.toFixed(0)
+            },
+            title: {
+              display: true,
+              text: 'NNWC 每股值（负值）'
+            }
+          }
+        },
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        animation: {
+          duration: 900,
+          easing: 'easeOutCubic'
+        }
+      }
+    });
+
+    // 点击交互：控制台打印选中年份和数值
+    ctx.onclick = (evt) => {
+      const points = chart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+      if (points.length) {
+        const firstPoint = points[0];
+        const year = chart.data.labels[firstPoint.index];
+        const value = chart.data.datasets[firstPoint.datasetIndex].data[firstPoint.index];
+        console.log(`Year: ${year}, NNWC per share: ${value}`);
+      }
+    };
+  </script>
+</body>
+</html>

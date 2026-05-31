@@ -1,0 +1,76 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a ranked dot plot showing the top 10 countries by momentum breadth, where the plotted value is `count of cities with positive numeric rank_change / count of cities with numeric rank_change` inside each 3.2 national block, values are percentages, only countries with at least 4 numeric `rank_change` values are eligible, and countries are sorted from highest to lowest after the share is derived.",
+  "chart_type": "dot plot",
+  "value_unit": "percent",
+  "sort_rule": "descending by momentum_breadth_pct",
+  "selection_rule": "top 10 among countries with at least 4 numeric change values",
+  "plot_spec": {
+    "title": "Momentum Breadth",
+    "xlabel": "percent",
+    "value_field": "momentum_breadth_pct",
+    "value_as_percent": true
+  },
+  "records": [
+    {
+      "entity": "Denmark",
+      "momentum_breadth_pct": 100.0,
+      "positive_numeric_count": 5,
+      "numeric_count": 5
+    },
+    {
+      "entity": "Norway",
+      "momentum_breadth_pct": 100.0,
+      "positive_numeric_count": 4,
+      "numeric_count": 4
+    },
+    {
+      "entity": "China",
+      "momentum_breadth_pct": 87.5,
+      "positive_numeric_count": 7,
+      "numeric_count": 8
+    },
+    {
+      "entity": "Belgium",
+      "momentum_breadth_pct": 80.0,
+      "positive_numeric_count": 4,
+      "numeric_count": 5
+    },
+    {
+      "entity": "Pakistan",
+      "momentum_breadth_pct": 80.0,
+      "positive_numeric_count": 4,
+      "numeric_count": 5
+    },
+    {
+      "entity": "Japan",
+      "momentum_breadth_pct": 75.0,
+      "positive_numeric_count": 3,
+      "numeric_count": 4
+    },
+    {
+      "entity": "Portugal",
+      "momentum_breadth_pct": 75.0,
+      "positive_numeric_count": 3,
+      "numeric_count": 4
+    },
+    {
+      "entity": "France",
+      "momentum_breadth_pct": 71.4286,
+      "positive_numeric_count": 5,
+      "numeric_count": 7
+    },
+    {
+      "entity": "Israel",
+      "momentum_breadth_pct": 71.4286,
+      "positive_numeric_count": 5,
+      "numeric_count": 7
+    },
+    {
+      "entity": "Switzerland",
+      "momentum_breadth_pct": 71.4286,
+      "positive_numeric_count": 5,
+      "numeric_count": 7
+    }
+  ]
+}

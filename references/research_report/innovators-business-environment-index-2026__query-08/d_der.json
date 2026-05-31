@@ -1,0 +1,54 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a bubble chart comparing the five regions shown on pages 24-28, where the x-axis is `the average pillar spread of the countries visible in that region`, computed as the mean of `max pillar score minus min pillar score` across visible countries, the y-axis is `the coefficient of variation of visible-country total_score` within that region, bubble size represents `the region's mean visible total_score`, all x-values are index points, and the five regions are labeled directly on the chart.",
+  "chart_type": "bubble chart",
+  "value_unit": "mixed",
+  "sort_rule": "region display order from the regional pages",
+  "selection_rule": "the five regions shown on pages 24-28",
+  "records": [
+    {
+      "entity": "North America",
+      "average_pillar_spread": 30.7605,
+      "total_score_coefficient_of_variation": 0.07446,
+      "mean_visible_total_score": 93.07,
+      "visible_country_count": 2
+    },
+    {
+      "entity": "Europe",
+      "average_pillar_spread": 23.9417,
+      "total_score_coefficient_of_variation": 0.081206,
+      "mean_visible_total_score": 79.6772,
+      "visible_country_count": 10
+    },
+    {
+      "entity": "Asia Pacific",
+      "average_pillar_spread": 26.7828,
+      "total_score_coefficient_of_variation": 0.1932,
+      "mean_visible_total_score": 69.8401,
+      "visible_country_count": 10
+    },
+    {
+      "entity": "Middle East and Africa",
+      "average_pillar_spread": 22.7666,
+      "total_score_coefficient_of_variation": 0.248983,
+      "mean_visible_total_score": 59.1403,
+      "visible_country_count": 10
+    },
+    {
+      "entity": "Latin America and the Caribbean",
+      "average_pillar_spread": 32.6908,
+      "total_score_coefficient_of_variation": 0.104515,
+      "mean_visible_total_score": 54.5602,
+      "visible_country_count": 10
+    }
+  ],
+  "chart_title": "IBEI 2026 Regional Spread vs Total-Score Dispersion",
+  "x_field": "average_pillar_spread",
+  "x_label": "mean visible-country pillar spread",
+  "x_unit": "index points",
+  "y_field": "total_score_coefficient_of_variation",
+  "y_label": "coefficient of variation of visible-country total score",
+  "y_unit": "ratio",
+  "size_field": "mean_visible_total_score",
+  "size_unit": "index points"
+}

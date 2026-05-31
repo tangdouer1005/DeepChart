@@ -1,0 +1,76 @@
+{
+  "query_id": "query_01",
+  "query_text": "Create a ranked horizontal bar chart showing the top 10 countries by regional top-10 representation efficiency, where the plotted value is `number of that country's cities appearing in its region's 3.1 regional city top-10 table / ranked_cities from the matching 3.1 regional country table`, values are expressed as percentages, only countries with `ranked_cities >= 3` are eligible, and bars are sorted from highest to lowest after the ratio is computed.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by representation_efficiency_pct",
+  "selection_rule": "top 10 among countries with ranked_cities >= 3",
+  "plot_spec": {
+    "title": "Regional Top-10 Representation Efficiency",
+    "xlabel": "percent",
+    "value_field": "representation_efficiency_pct",
+    "value_as_percent": true
+  },
+  "records": [
+    {
+      "entity": "United Arab Emirates",
+      "representation_efficiency_pct": 33.3333,
+      "regional_top10_appearances": 1,
+      "ranked_cities": 3
+    },
+    {
+      "entity": "Israel",
+      "representation_efficiency_pct": 27.2727,
+      "regional_top10_appearances": 3,
+      "ranked_cities": 11
+    },
+    {
+      "entity": "Chile",
+      "representation_efficiency_pct": 25.0,
+      "regional_top10_appearances": 1,
+      "ranked_cities": 4
+    },
+    {
+      "entity": "Colombia",
+      "representation_efficiency_pct": 25.0,
+      "regional_top10_appearances": 1,
+      "ranked_cities": 4
+    },
+    {
+      "entity": "Argentina",
+      "representation_efficiency_pct": 20.0,
+      "regional_top10_appearances": 1,
+      "ranked_cities": 5
+    },
+    {
+      "entity": "South Korea",
+      "representation_efficiency_pct": 20.0,
+      "regional_top10_appearances": 1,
+      "ranked_cities": 5
+    },
+    {
+      "entity": "Finland",
+      "representation_efficiency_pct": 16.6667,
+      "regional_top10_appearances": 1,
+      "ranked_cities": 6
+    },
+    {
+      "entity": "Japan",
+      "representation_efficiency_pct": 12.5,
+      "regional_top10_appearances": 1,
+      "ranked_cities": 8
+    },
+    {
+      "entity": "China",
+      "representation_efficiency_pct": 10.0,
+      "regional_top10_appearances": 4,
+      "ranked_cities": 40
+    },
+    {
+      "entity": "Sweden",
+      "representation_efficiency_pct": 10.0,
+      "regional_top10_appearances": 1,
+      "ranked_cities": 10
+    }
+  ]
+}

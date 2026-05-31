@@ -1,0 +1,155 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a scatter plot covering all Fintech ecosystems with exact `Total Early-Stage Funding` and excluding `Nur-Sultan`, with the x-axis showing `stage escalation multiple = Median Series A Round / Median Seed Round`, the y-axis showing `maturity multiple = Ecosystem Value / Total Early-Stage Funding`, both expressed in `x multiple`, and labels added to ecosystems that fall in the top quartile on both metrics.",
+  "chart_type": "scatter plot",
+  "value_unit": "x multiple",
+  "sort_rule": "labels assigned to dual top-quartile points",
+  "selection_rule": "all exact-value fintech ecosystems excluding Nur-Sultan",
+  "plot_spec": {
+    "title": "Fintech 2020 Stage Escalation vs Maturity",
+    "x_field": "x_stage_escalation_multiple",
+    "y_field": "y_maturity_multiple",
+    "xlabel": "Median Series A / Median Seed (x)",
+    "ylabel": "Ecosystem Value / Early-Stage Funding (x)"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "x_stage_escalation_multiple": 8.0,
+      "y_maturity_multiple": 37.6111,
+      "label": true
+    },
+    {
+      "entity": "New York City",
+      "x_stage_escalation_multiple": 7.0588,
+      "y_maturity_multiple": 17.7108,
+      "label": false
+    },
+    {
+      "entity": "London",
+      "x_stage_escalation_multiple": 6.1538,
+      "y_maturity_multiple": 15.3333,
+      "label": false
+    },
+    {
+      "entity": "Singapore",
+      "x_stage_escalation_multiple": 5.4463,
+      "y_maturity_multiple": 15.0,
+      "label": false
+    },
+    {
+      "entity": "Beijing",
+      "x_stage_escalation_multiple": 5.0,
+      "y_maturity_multiple": 46.0,
+      "label": false
+    },
+    {
+      "entity": "Shanghai",
+      "x_stage_escalation_multiple": 6.6667,
+      "y_maturity_multiple": 15.8621,
+      "label": false
+    },
+    {
+      "entity": "Boston",
+      "x_stage_escalation_multiple": 6.0,
+      "y_maturity_multiple": 24.6154,
+      "label": false
+    },
+    {
+      "entity": "Paris",
+      "x_stage_escalation_multiple": 3.1765,
+      "y_maturity_multiple": 12.3077,
+      "label": false
+    },
+    {
+      "entity": "Chicago",
+      "x_stage_escalation_multiple": 4.3165,
+      "y_maturity_multiple": 17.5,
+      "label": false
+    },
+    {
+      "entity": "Los Angeles",
+      "x_stage_escalation_multiple": 8.9286,
+      "y_maturity_multiple": 33.3333,
+      "label": true
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "x_stage_escalation_multiple": 8.6,
+      "y_maturity_multiple": 10.625,
+      "label": false
+    },
+    {
+      "entity": "Sydney",
+      "x_stage_escalation_multiple": 6.9307,
+      "y_maturity_multiple": 14.3229,
+      "label": false
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "x_stage_escalation_multiple": 4.8,
+      "y_maturity_multiple": 22.9167,
+      "label": false
+    },
+    {
+      "entity": "Tel Aviv",
+      "x_stage_escalation_multiple": 4.0714,
+      "y_maturity_multiple": 15.6667,
+      "label": false
+    },
+    {
+      "entity": "Stockholm",
+      "x_stage_escalation_multiple": 2.9228,
+      "y_maturity_multiple": 46.6102,
+      "label": false
+    },
+    {
+      "entity": "Copenhagen",
+      "x_stage_escalation_multiple": 3.2751,
+      "y_maturity_multiple": 23.4043,
+      "label": false
+    },
+    {
+      "entity": "Curitiba",
+      "x_stage_escalation_multiple": 3.2,
+      "y_maturity_multiple": 15.6028,
+      "label": false
+    },
+    {
+      "entity": "Frankfurt",
+      "x_stage_escalation_multiple": 2.7273,
+      "y_maturity_multiple": 11.6667,
+      "label": false
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "x_stage_escalation_multiple": 10.6724,
+      "y_maturity_multiple": 151.5152,
+      "label": true
+    },
+    {
+      "entity": "Manila",
+      "x_stage_escalation_multiple": 6.3889,
+      "y_maturity_multiple": 15.6863,
+      "label": false
+    },
+    {
+      "entity": "Melbourne",
+      "x_stage_escalation_multiple": 5.1756,
+      "y_maturity_multiple": 13.2231,
+      "label": false
+    },
+    {
+      "entity": "Riyadh",
+      "x_stage_escalation_multiple": 13.3333,
+      "y_maturity_multiple": 7.0423,
+      "label": false
+    },
+    {
+      "entity": "Tokyo",
+      "x_stage_escalation_multiple": 3.5857,
+      "y_maturity_multiple": 14.7059,
+      "label": false
+    }
+  ]
+}

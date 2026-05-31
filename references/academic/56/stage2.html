@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = {
+    "data_map": {
+        "DMSO": {
+            "vals": [
+                9.07,
+                10.2,
+                12.2,
+                10.4
+            ],
+            "group": "DMSO",
+            "conc": "DMSO"
+        },
+        "Rapa_40": {
+            "vals": [
+                61.6,
+                56.6,
+                58.1,
+                57.0
+            ],
+            "group": "Rapamycin",
+            "conc": "40 nM"
+        },
+        "Rapa_100": {
+            "vals": [
+                59.0,
+                59.2,
+                60.1,
+                59.3
+            ],
+            "group": "Rapamycin",
+            "conc": "100 nM"
+        },
+        "Rapa_200": {
+            "vals": [
+                62.8,
+                60.0,
+                59.8,
+                60.8
+            ],
+            "group": "Rapamycin",
+            "conc": "200 nM"
+        },
+        "LY_1": {
+            "vals": [
+                20.8,
+                26.5,
+                27.6,
+                26.5
+            ],
+            "group": "LY294002",
+            "conc": "1 \u03bcM"
+        },
+        "LY_5": {
+            "vals": [
+                59.0,
+                59.6,
+                59.2,
+                56.7
+            ],
+            "group": "LY294002",
+            "conc": "5 \u03bcM"
+        },
+        "LY_10": {
+            "vals": [
+                78.6,
+                76.9,
+                75.5,
+                75.0
+            ],
+            "group": "LY294002",
+            "conc": "10 \u03bcM"
+        },
+        "MK_0.2": {
+            "vals": [
+                66.3,
+                67.1,
+                66.7,
+                67.3
+            ],
+            "group": "MK2206",
+            "conc": "0.2 \u03bcM"
+        },
+        "MK_1": {
+            "vals": [
+                71.1,
+                73.7,
+                74.1,
+                71.7
+            ],
+            "group": "MK2206",
+            "conc": "1 \u03bcM"
+        }
+    },
+    "order": [
+        "DMSO",
+        "Rapa_40",
+        "Rapa_100",
+        "Rapa_200",
+        "LY_1",
+        "LY_5",
+        "LY_10",
+        "MK_0.2",
+        "MK_1"
+    ],
+    "means": {
+        "DMSO": 10.4675,
+        "Rapa_40": 58.325,
+        "Rapa_100": 59.400000000000006,
+        "Rapa_200": 60.849999999999994,
+        "LY_1": 25.35,
+        "LY_5": 58.625,
+        "LY_10": 76.5,
+        "MK_0.2": 66.85,
+        "MK_1": 72.65
+    },
+    "stds": {
+        "DMSO": 1.1214583139822893,
+        "Rapa_40": 1.9689781613821928,
+        "Rapa_100": 0.41833001326703817,
+        "Rapa_200": 1.1863810517704667,
+        "LY_1": 2.665051594247286,
+        "LY_5": 1.1321991874224246,
+        "LY_10": 1.3982131454109545,
+        "MK_0.2": 0.3840572873934294,
+        "MK_1": 1.2757350822173075
+    },
+    "p_values": {
+        "Rapa_40": 2.7838460238198627e-08,
+        "Rapa_100": 5.338625877065949e-10,
+        "Rapa_200": 2.8776925714802747e-09,
+        "LY_1": 0.00011104178097881482,
+        "LY_5": 3.263844343026625e-09,
+        "LY_10": 9.961223386705112e-10,
+        "MK_0.2": 2.154031741116654e-10,
+        "MK_1": 1.0345334613247042e-09
+    }
+};
+
+        const dataMap = jsonData.data_map;
+        const order = jsonData.order;
+        
+        // Manual X-axis positions to create gaps
+        const positions = [0, 1.5, 2.3, 3.1, 4.6, 5.4, 6.2, 7.7, 8.5];
+        const xTickLabels = order.map(key => dataMap[key].conc);
+
+        const means = jsonData.means;
+        const stds = jsonData.stds;
+
+        // Colors
+        const colorsFill = [
+            "#666666", // DMSO (Grey)
+            "#F2C6D4", "#E897B3", "#D96593", // Rapamycin (Light -> Dark Pink)
+            "#D1EBF5", "#A8CCEB", "#6D8CC4", // LY (Light -> Dark Blue)
+            "#DCCBE6", "#967EB3"             // MK (Light -> Dark Purple)
+        ];
+        
+        // Edge colors (slightly darker or same as fill with solid alpha)
+        const colorsEdge = [
+            "#444444", 
+            "#DFA0B6", "#D07A9A", "#B84A78",
+            "#B0D5E5", "#8BB0D0", "#5070A8",
+            "#C0B0D0", "#7A6095"
+        ];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [];
+
+        // Bar series (each bar is a separate series to allow custom positioning)
+        order.forEach((key, i) => {
+            series.push({
+                name: dataMap[key].conc,
+                type: 'custom',
+                data: [{
+                    value: [positions[i], means[key]],
+                    itemStyle: { color: colorsFill[i], borderColor: colorsEdge[i], borderWidth: 1.5, opacity: 0.9 }
+                }],
+                // Custom renderItem for precise positioning of bars along value axis
+                renderItem: (params, api) => {
+                    const xVal = api.value(0);
+                    const yVal = api.value(1);
+                    
+                    const barX = api.coord([xVal, yVal]);
+                    const zeroY = api.coord([xVal, 0])[1];
+                    const barHeight = zeroY - barX[1];
+                    const barWidth = api.size([0.65, 0])[0]; // Match Python bar_width 0.65
+
+                    return {
+                        type: 'rect',
+                        shape: {
+                            x: barX[0] - barWidth / 2,
+                            y: barX[1],
+                            width: barWidth,
+                            height: barHeight
+                        },
+                        style: api.style()
+                    };
+                },
+                z: 1
+            });
+        });
+
+        // Error bars
+        series.push({
+            type: 'custom',
+            name: 'Error',
+            renderItem: (params, api) => {
+                const xIndex = api.value(0); // Category index
+                const meanVal = api.value(1);
+                const stdVal = api.value(2);
+                const customXPos = positions[xIndex]; // Get custom x position
+                
+                const barXCenter = api.coord([customXPos, meanVal])[0];
+
+                const highPoint = api.coord([customXPos, meanVal + stdVal]);
+                const lowPoint = api.coord([customXPos, meanVal - stdVal]);
+                
+                const capHalfWidth = api.size([0.05, 0])[0]; // Fixed cap width
+
+                const style = api.style({ stroke: 'black', lineWidth: 1.5 });
+                return {
+                    type: 'group',
+                    children: [
+                        { type: 'line', shape: { x1: barXCenter, y1: highPoint[1], x2: barXCenter, y2: lowPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: barXCenter - capHalfWidth, y1: highPoint[1], x2: barXCenter + capHalfWidth, y2: highPoint[1] }, style: style },
+                        { type: 'line', shape: { x1: barXCenter - capHalfWidth, y1: lowPoint[1], x2: barXCenter + capHalfWidth, y2: lowPoint[1] }, style: style }
+                    ]
+                };
+            },
+            data: order.map((key, i) => ([i, means[key], stds[key]])),
+            z: 2
+        });
+
+        // Scatter points
+        const scatterData = [];
+        order.forEach((key, i) => {
+            const yVals = dataMap[key].vals;
+            yVals.forEach(y => {
+                const jitter = (Math.random() - 0.5) * 0.2; // Small jitter for x
+                scatterData.push([positions[i] + jitter, y, colorsEdge[i]]); // Use custom x-position with jitter
+            });
+        });
+
+        series.push({
+            type: 'scatter',
+            name: 'Data Points',
+            data: scatterData.map(d => ({
+                value: [d[0], d[1]],
+                itemStyle: { color: d[2] } // Use stored color
+            })),
+            symbolSize: 8,
+            z: 3
+        });
+        
+        // Ladder Annotation Data
+        const pThreshold = 0.0001;
+        const dmsoKey = order[0]; // "DMSO"
+        const dmsoVals = dataMap[dmsoKey].vals;
+        
+        const significantTargets = [];
+        order.forEach((key, i) => {
+            if (i === 0) return; // Skip DMSO
+            const pVal = jsonData.p_values[key];
+            if (pVal < pThreshold) {
+                significantTargets.push(i);
+            }
+        });
+
+        const ladderStartY = 66; // Base height for ladder lines
+        const ladderStepY = 4.5; // Vertical spacing between ladder lines
+        
+        const dmsoXPos = positions[0];
+
+        // P-value Text for the ladder
+        let ladderPValueText = `P < ${pThreshold}`;
+        // If there are no significant targets, maybe display "ns" or similar, but the Python assumes significance
+
+        // Group Labels data
+        const groupLabels = [
+            { range: [positions[1], positions[3]], text: 'Rapamycin' },
+            { range: [positions[4], positions[6]], text: 'LY294002' },
+            { range: [positions[7], positions[8]], text: 'MK2206' }
+        ];
+
+        // Add Custom series for Statistical Ladder Annotation
+        series.push({
+            type: 'custom',
+            name: 'Statistical Ladder',
+            renderItem: (params, api) => {
+                const children = [];
+                const pTextOffset = 3; // Offset for P-value text above the highest line
+
+                if (significantTargets.length > 0) {
+                    const maxLineYVal = ladderStartY + (significantTargets.length - 1) * ladderStepY;
+                    const dmsoXPixel = api.coord([dmsoXPos, 0])[0];
+                    const lowestLineYPixel = api.coord([0, ladderStartY])[1];
+                    const highestLineYPixel = api.coord([0, maxLineYVal])[1];
+
+                    // Vertical spine at DMSO
+                    children.push({
+                        type: 'line',
+                        shape: { x1: dmsoXPixel, y1: lowestLineYPixel, x2: dmsoXPixel, y2: highestLineYPixel },
+                        style: { stroke: 'black', lineWidth: 0.8 },
+                        z: 1
+                    });
+
+                    // Horizontal lines branching to targets
+                    significantTargets.forEach((targetIdx, idx) => {
+                        const yVal = ladderStartY + idx * ladderStepY;
+                        const targetXPos = positions[targetIdx];
+                        
+                        const targetXPixel = api.coord([targetXPos, 0])[0];
+                        const lineYPixel = api.coord([0, yVal])[1];
+
+                        children.push({
+                            type: 'line',
+                            shape: { x1: dmsoXPixel, y1: lineYPixel, x2: targetXPixel, y2: lineYPixel },
+                            style: { stroke: 'black', lineWidth: 0.8 },
+                            z: 1
+                        });
+                    });
+
+                    // P-value Text
+                    const pTextXPixel = api.coord([(dmsoXPos + positions[positions.length - 1]) / 2, 0])[0]; // Center of chart
+                    children.push({
+                        type: 'text',
+                        x: pTextXPixel,
+                        y: highestLineYPixel - pTextOffset, // P-value text slightly above highest line
+                        style: { text: ladderPValueText, fill: 'black', fontSize: 12, align: 'center', verticalAlign: 'bottom' },
+                        z: 2
+                    });
+                }
+                return {
+                    type: 'group',
+                    children: children
+                };
+            },
+            data: [0], // Dummy data
+            z: 10,
+            animation: false
+        });
+
+        // Add Custom series for Group Labels below X-axis
+        series.push({
+            type: 'custom',
+            name: 'Group Labels',
+            renderItem: (params, api) => {
+                const children = [];
+                const yLineOffset = 35; // Offset for line below X-axis
+                const yTextOffset = 45; // Offset for text below X-axis
+
+                const yZero = api.coord([0, 0])[1]; // Y pixel of value 0 (X-axis line)
+
+                groupLabels.forEach(group => {
+                    const x1Pixel = api.coord([group.range[0], 0])[0];
+                    const x2Pixel = api.coord([group.range[1], 0])[0];
+                    const centerXPixel = (x1Pixel + x2Pixel) / 2;
+
+                    children.push({ // Horizontal line for group
+                        type: 'line',
+                        shape: { x1: x1Pixel, y1: yZero + yLineOffset, x2: x2Pixel, y2: yZero + yLineOffset },
+                        style: { stroke: 'black', lineWidth: 1 },
+                        z: 0
+                    });
+                    children.push({ // Text for group
+                        type: 'text',
+                        x: centerXPixel, y: yZero + yTextOffset,
+                        style: { text: group.text, fill: 'black', fontSize: 12, align: 'center', verticalAlign: 'top' },
+                        z: 0
+                    });
+                });
+                return {
+                    type: 'group',
+                    children: children
+                };
+            },
+            data: [0], // Dummy data
+            z: 10,
+            animation: false
+        });
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            title: {
+                text: 'CD44⁺CD62L⁺',
+                left: 'center',
+                top: 20,
+                textStyle: { fontSize: 16, color: 'black' }
+            },
+            grid: { top: 60, right: 20, bottom: 150, left: 60 }, // Increased bottom for labels
+            xAxis: {
+                type: 'value', // Use value axis for manual positioning
+                min: -0.5,
+                max: 9.0, // Max position is 8.5, give some padding
+                axisLabel: { show: false }, // Hidden x-axis labels
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                axisTick: { show: false } // No ticks at explicit categories
+            },
+            yAxis: {
+                name: '% of live CD8⁺',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                type: 'value',
+                min: 0,
+                max: 100, // Extended to fit annotations
+                interval: 20,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black', width: 1.2 } },
+                splitLine: { show: false }
+            },
+            series: series, // All series are now defined before option
+            graphic: [] // graphic elements are now handled by custom series
+        };
+        chart.setOption(option);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>JNJ 现金循环周期 (CCC) 2016–2024</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Chart.js (latest v4) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg-color: #ffffff;
+            --card-bg: #f5f5f7;
+            --text-color: #222222;
+            --axis-color: #555555;
+            --accent: #0b7285;
+            --accent-light: rgba(11, 114, 133, 0.12);
+            --grid-color: rgba(0, 0, 0, 0.06);
+            --tooltip-bg: rgba(25, 25, 28, 0.98);
+            --tooltip-border: rgba(255, 255, 255, 0.08);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #050509;
+                --card-bg: #12121a;
+                --text-color: #f5f5f7;
+                --axis-color: #cccccc;
+                --accent: #4dabf7;
+                --accent-light: rgba(77, 171, 247, 0.15);
+                --grid-color: rgba(255, 255, 255, 0.07);
+                --tooltip-bg: rgba(7, 7, 12, 0.98);
+                --tooltip-border: rgba(255, 255, 255, 0.12);
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 24px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            margin: 0 0 4px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--axis-color);
+            margin-bottom: 16px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 16px 18px 22px;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.13);
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: var(--axis-color);
+            margin-top: 10px;
+        }
+
+        .meta span {
+            opacity: 0.9;
+        }
+
+        .legend-inline {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            color: var(--axis-color);
+        }
+
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: linear-gradient(
+                90deg,
+                rgba(11, 114, 133, 0.3),
+                rgba(11, 114, 133, 0.9)
+            );
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>JNJ 现金循环周期 (Cash Conversion Cycle, CCC)</h1>
+    <div class="subtitle">2016–2024 年度变化（单位：天）</div>
+
+    <div class="card">
+        <canvas id="cccChart" aria-label="JNJ 现金循环周期 2016-2024 折线图" role="img"></canvas>
+        <div class="legend-inline">
+            <span class="legend-swatch"></span>
+            <span>CCC（天）</span>
+        </div>
+        <div class="meta">
+            <span>数据来源：用户提供的财务指标</span>
+            <span>说明：CCC 越高通常代表资金在营运资本中占用时间越长。</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Data from the source (Fiscal Year, RESULT_CCC)
+    const labels = [
+        "2016", "2017", "2018", "2019", "2020",
+        "2021", "2022", "2023", "2024"
+    ];
+
+    const cccValues = [
+        78.81760526183926,
+        79.36426505308447,
+        78.6713808315999,
+        73.74595395013083,
+        64.02464032919895,
+        69.00115203807024,
+        79.7604791136988,
+        81.28233134549106,
+        93.90955244424048
+    ];
+
+    const ctx = document.getElementById('cccChart').getContext('2d');
+
+    // Compute y-axis bounds with a small margin for clarity
+    const minVal = Math.min(...cccValues);
+    const maxVal = Math.max(...cccValues);
+    const padding = (maxVal - minVal) * 0.12 || 5;
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [
+                {
+                    label: '现金循环周期 (天)',
+                    data: cccValues,
+                    borderColor: 'rgba(11, 114, 133, 1)',
+                    borderWidth: 2.4,
+                    tension: 0.25,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    pointBackgroundColor: 'rgba(11, 114, 133, 1)',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 1.6,
+                    fill: true,
+                    backgroundColor: function(context) {
+                        const chart = context.chart;
+                        const {ctx, chartArea} = chart;
+                        if (!chartArea) {
+                            return null;
+                        }
+                        const gradient = ctx.createLinearGradient(
+                            0,
+                            chartArea.top,
+                            0,
+                            chartArea.bottom
+                        );
+                        gradient.addColorStop(0, 'rgba(11, 114, 133, 0.28)');
+                        gradient.addColorStop(1, 'rgba(11, 114, 133, 0.02)');
+                        return gradient;
+                    }
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            // Keep aspect ratio visually pleasant
+            aspectRatio: 2,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: getComputedStyle(document.documentElement)
+                        .getPropertyValue('--tooltip-bg').trim() || 'rgba(25,25,28,0.98)',
+                    borderColor: getComputedStyle(document.documentElement)
+                        .getPropertyValue('--tooltip-border').trim() || 'rgba(255,255,255,0.1)',
+                    borderWidth: 1,
+                    padding: 10,
+                    titleFont: {
+                        weight: '600',
+                        size: 12
+                    },
+                    bodyFont: {
+                        size: 12
+                    },
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.parsed.y;
+                            return ` CCC：${value.toFixed(2)} 天`;
+                        }
+                    }
+                },
+                title: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: '财年',
+                        color: getComputedStyle(document.documentElement)
+                            .getPropertyValue('--axis-color').trim() || '#555',
+                        font: {
+                            size: 11
+                        }
+                    },
+                    ticks: {
+                        color: getComputedStyle(document.documentElement)
+                            .getPropertyValue('--axis-color').trim() || '#555',
+                        font: {
+                            size: 11
+                        }
+                    },
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    beginAtZero: false,
+                    suggestedMin: minVal - padding,
+                    suggestedMax: maxVal + padding,
+                    title: {
+                        display: true,
+                        text: 'CCC（天）',
+                        color: getComputedStyle(document.documentElement)
+                            .getPropertyValue('--axis-color').trim() || '#555',
+                        font: {
+                            size: 11
+                        }
+                    },
+                    ticks: {
+                        color: getComputedStyle(document.documentElement)
+                            .getPropertyValue('--axis-color').trim() || '#555',
+                        font: {
+                            size: 11
+                        },
+                        callback: function(value) {
+                            return value + ' 天';
+                        }
+                    },
+                    grid: {
+                        color: getComputedStyle(document.documentElement)
+                            .getPropertyValue('--grid-color').trim() || 'rgba(0,0,0,0.06)'
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

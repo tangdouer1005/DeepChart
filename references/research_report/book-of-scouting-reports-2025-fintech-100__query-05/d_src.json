@@ -1,0 +1,612 @@
+{
+  "report_code": "018",
+  "query_id": "05",
+  "source_fields": [
+    "Company",
+    "Stage",
+    "Founded year",
+    "Mosaic"
+  ],
+  "records": [
+    {
+      "company": "Affinity",
+      "stage": "Seed VC",
+      "founded_year": 2022,
+      "mosaic": 694
+    },
+    {
+      "company": "interface.ai",
+      "stage": "Debt",
+      "founded_year": 2019,
+      "mosaic": 799
+    },
+    {
+      "company": "Uzum",
+      "stage": "Series B",
+      "founded_year": 2022,
+      "mosaic": 854
+    },
+    {
+      "company": "9Fin",
+      "stage": "Series B",
+      "founded_year": 2016,
+      "mosaic": 736
+    },
+    {
+      "company": "Claira",
+      "stage": "Seed VC - II",
+      "founded_year": 2019,
+      "mosaic": 703
+    },
+    {
+      "company": "Baanx",
+      "stage": "Series A",
+      "founded_year": 2018,
+      "mosaic": 771
+    },
+    {
+      "company": "Beam",
+      "stage": "Seed VC - II",
+      "founded_year": 2022,
+      "mosaic": 640
+    },
+    {
+      "company": "Breez Development",
+      "stage": "Seed VC - II",
+      "founded_year": 2018,
+      "mosaic": 781
+    },
+    {
+      "company": "BVNK",
+      "stage": "Series B - III",
+      "founded_year": 2021,
+      "mosaic": 872
+    },
+    {
+      "company": "Conduit",
+      "stage": "Series A",
+      "founded_year": 2021,
+      "mosaic": 836
+    },
+    {
+      "company": "Crossmint",
+      "stage": "Series A - II",
+      "founded_year": 2022,
+      "mosaic": 660
+    },
+    {
+      "company": "Due",
+      "stage": "Seed VC - III",
+      "founded_year": 2022,
+      "mosaic": 644
+    },
+    {
+      "company": "Noah",
+      "stage": "Seed VC - III",
+      "founded_year": 2020,
+      "mosaic": 868
+    },
+    {
+      "company": "Rain",
+      "stage": "Series B",
+      "founded_year": 2021,
+      "mosaic": 897
+    },
+    {
+      "company": "RD Technologies",
+      "stage": "Series A - II",
+      "founded_year": 2020,
+      "mosaic": 807
+    },
+    {
+      "company": "RedotPay",
+      "stage": "Series A - II",
+      "founded_year": 2023,
+      "mosaic": 957
+    },
+    {
+      "company": "Relai",
+      "stage": "Series A - IV",
+      "founded_year": 2020,
+      "mosaic": 796
+    },
+    {
+      "company": "Transak",
+      "stage": "Series B",
+      "founded_year": 2019,
+      "mosaic": 852
+    },
+    {
+      "company": "Banxware",
+      "stage": "Series A - II",
+      "founded_year": 2020,
+      "mosaic": 738
+    },
+    {
+      "company": "BKN301",
+      "stage": "Series B",
+      "founded_year": 2021,
+      "mosaic": 805
+    },
+    {
+      "company": "CredibleX",
+      "stage": "Line of Credit",
+      "founded_year": 2023,
+      "mosaic": 550
+    },
+    {
+      "company": "Fimple",
+      "stage": "Series A",
+      "founded_year": 2022,
+      "mosaic": 782
+    },
+    {
+      "company": "FISPAN",
+      "stage": "Series B",
+      "founded_year": 2016,
+      "mosaic": 789
+    },
+    {
+      "company": "NymCard",
+      "stage": "Series B - II",
+      "founded_year": 2018,
+      "mosaic": 827
+    },
+    {
+      "company": "Abacum",
+      "stage": "Series B",
+      "founded_year": 2020,
+      "mosaic": 794
+    },
+    {
+      "company": "Auditoria.AI",
+      "stage": "Series B",
+      "founded_year": 2019,
+      "mosaic": 852
+    },
+    {
+      "company": "Campfire",
+      "stage": "Series B",
+      "founded_year": 2023,
+      "mosaic": 721
+    },
+    {
+      "company": "Clara",
+      "stage": "Debt",
+      "founded_year": 2020,
+      "mosaic": 871
+    },
+    {
+      "company": "Crowded",
+      "stage": "Series A",
+      "founded_year": 2021,
+      "mosaic": 598
+    },
+    {
+      "company": "Datricks",
+      "stage": "Series A",
+      "founded_year": 2019,
+      "mosaic": 730
+    },
+    {
+      "company": "Finmo",
+      "stage": "Series A",
+      "founded_year": 2021,
+      "mosaic": 855
+    },
+    {
+      "company": "Mendel",
+      "stage": "Series B",
+      "founded_year": 2021,
+      "mosaic": 762
+    },
+    {
+      "company": "Xelix",
+      "stage": "Series B",
+      "founded_year": 2018,
+      "mosaic": 724
+    },
+    {
+      "company": "Amlyze",
+      "stage": "Seed VC - II",
+      "founded_year": 2019,
+      "mosaic": 674
+    },
+    {
+      "company": "Casap",
+      "stage": "Series A",
+      "founded_year": 2023,
+      "mosaic": 816
+    },
+    {
+      "company": "Greenlite",
+      "stage": "Series A",
+      "founded_year": 2023,
+      "mosaic": 801
+    },
+    {
+      "company": "Hawk",
+      "stage": "Series C",
+      "founded_year": 2018,
+      "mosaic": 850
+    },
+    {
+      "company": "Bolto",
+      "stage": "Seed VC",
+      "founded_year": 2023,
+      "mosaic": 604
+    },
+    {
+      "company": "Borderless",
+      "stage": "Seed VC - III",
+      "founded_year": 2022,
+      "mosaic": 646
+    },
+    {
+      "company": "Every",
+      "stage": "Series A",
+      "founded_year": 2021,
+      "mosaic": 645
+    },
+    {
+      "company": "InstaPay",
+      "stage": "Series A - II",
+      "founded_year": 2017,
+      "mosaic": 721
+    },
+    {
+      "company": "Jet HR",
+      "stage": "Series A",
+      "founded_year": 2012,
+      "mosaic": 783
+    },
+    {
+      "company": "Khazna",
+      "stage": "Series A - II",
+      "founded_year": 2019,
+      "mosaic": 791
+    },
+    {
+      "company": "Niural",
+      "stage": "Series A",
+      "founded_year": 2022,
+      "mosaic": 753
+    },
+    {
+      "company": "SeamlessHR",
+      "stage": "Series A - II",
+      "founded_year": 2017,
+      "mosaic": 671
+    },
+    {
+      "company": "Agora",
+      "stage": "Series A",
+      "founded_year": 2023,
+      "mosaic": 812
+    },
+    {
+      "company": "Cryptio",
+      "stage": "Series A - II",
+      "founded_year": 2018,
+      "mosaic": 693
+    },
+    {
+      "company": "DigiFT",
+      "stage": "Seed VC - II",
+      "founded_year": 2021,
+      "mosaic": 836
+    },
+    {
+      "company": "Komainu",
+      "stage": "Series B",
+      "founded_year": 2018,
+      "mosaic": 874
+    },
+    {
+      "company": "Maple Finance",
+      "stage": "Seed VC - III",
+      "founded_year": 2020,
+      "mosaic": 772
+    },
+    {
+      "company": "Securitize",
+      "stage": "Series C - III",
+      "founded_year": 2017,
+      "mosaic": 895
+    },
+    {
+      "company": "Utila",
+      "stage": "Series A - II",
+      "founded_year": 2022,
+      "mosaic": 852
+    },
+    {
+      "company": "Delos",
+      "stage": "Series A",
+      "founded_year": 2017,
+      "mosaic": 733
+    },
+    {
+      "company": "Descartes Underwriting",
+      "stage": "Series B - II",
+      "founded_year": 2019,
+      "mosaic": 757
+    },
+    {
+      "company": "Further AI",
+      "stage": "Series A",
+      "founded_year": 2023,
+      "mosaic": 826
+    },
+    {
+      "company": "Skarlett",
+      "stage": "Seed VC",
+      "founded_year": 2023,
+      "mosaic": 693
+    },
+    {
+      "company": "Sixfold",
+      "stage": "Series A",
+      "founded_year": 2023,
+      "mosaic": 763
+    },
+    {
+      "company": "Quandri",
+      "stage": "Series A - II",
+      "founded_year": 2020,
+      "mosaic": 698
+    },
+    {
+      "company": "Casca",
+      "stage": "Series A",
+      "founded_year": 2023,
+      "mosaic": 802
+    },
+    {
+      "company": "CrediLinq",
+      "stage": "Series A",
+      "founded_year": 2021,
+      "mosaic": 702
+    },
+    {
+      "company": "InDebted",
+      "stage": "Series C",
+      "founded_year": 2016,
+      "mosaic": 754
+    },
+    {
+      "company": "Murphy",
+      "stage": "Seed VC",
+      "founded_year": 2024,
+      "mosaic": 717
+    },
+    {
+      "company": "Nada",
+      "stage": "Series A",
+      "founded_year": 2019,
+      "mosaic": 695
+    },
+    {
+      "company": "Peach Finance",
+      "stage": "Series A - II",
+      "founded_year": 2018,
+      "mosaic": 754
+    },
+    {
+      "company": "PostEx",
+      "stage": "Seed VC - IV",
+      "founded_year": 2020,
+      "mosaic": 742
+    },
+    {
+      "company": "Scienaptic",
+      "stage": "Unattributed",
+      "founded_year": 2014,
+      "mosaic": 778
+    },
+    {
+      "company": "Versana",
+      "stage": "Series B",
+      "founded_year": 2021,
+      "mosaic": 748
+    },
+    {
+      "company": "WonderLend Hubs",
+      "stage": "Seed VC - II",
+      "founded_year": 2016,
+      "mosaic": 646
+    },
+    {
+      "company": "Aspora",
+      "stage": "Series B",
+      "founded_year": 2022,
+      "mosaic": 714
+    },
+    {
+      "company": "Capi",
+      "stage": "Series A",
+      "founded_year": 2023,
+      "mosaic": 737
+    },
+    {
+      "company": "Catena Labs",
+      "stage": "Series A",
+      "founded_year": 2022,
+      "mosaic": 770
+    },
+    {
+      "company": "Easebuzz",
+      "stage": "Series A",
+      "founded_year": 2017,
+      "mosaic": 878
+    },
+    {
+      "company": "Enza",
+      "stage": "Seed VC",
+      "founded_year": 2023,
+      "mosaic": 781
+    },
+    {
+      "company": "Finom",
+      "stage": "Series C",
+      "founded_year": 2019,
+      "mosaic": 874
+    },
+    {
+      "company": "Haball",
+      "stage": "Seed VC",
+      "founded_year": 2017,
+      "mosaic": 793
+    },
+    {
+      "company": "Highnote",
+      "stage": "Series B",
+      "founded_year": 2020,
+      "mosaic": 834
+    },
+    {
+      "company": "Payrails",
+      "stage": "Series A",
+      "founded_year": 2021,
+      "mosaic": 870
+    },
+    {
+      "company": "PayTic",
+      "stage": "Incubator/Accelerator",
+      "founded_year": 2020,
+      "mosaic": 736
+    },
+    {
+      "company": "Toku",
+      "stage": "Series A",
+      "founded_year": 2020,
+      "mosaic": 750
+    },
+    {
+      "company": "Yaspa",
+      "stage": "Series A",
+      "founded_year": 2017,
+      "mosaic": 826
+    },
+    {
+      "company": "Yuno",
+      "stage": "Series A",
+      "founded_year": 2022,
+      "mosaic": 790
+    },
+    {
+      "company": "Ziina",
+      "stage": "Series A",
+      "founded_year": 2020,
+      "mosaic": 844
+    },
+    {
+      "company": "Candidly",
+      "stage": "Series B",
+      "founded_year": 2016,
+      "mosaic": 718
+    },
+    {
+      "company": "Debbie",
+      "stage": "Seed VC",
+      "founded_year": 2021,
+      "mosaic": 620
+    },
+    {
+      "company": "Grifin",
+      "stage": "Series A",
+      "founded_year": 2016,
+      "mosaic": 705
+    },
+    {
+      "company": "Alpaca",
+      "stage": "Series C",
+      "founded_year": 2015,
+      "mosaic": 918
+    },
+    {
+      "company": "Axyon AI",
+      "stage": "Series B - III",
+      "founded_year": 2016,
+      "mosaic": 761
+    },
+    {
+      "company": "BridgeWise",
+      "stage": "Series A - II",
+      "founded_year": 2019,
+      "mosaic": 781
+    },
+    {
+      "company": "Conquest Planning",
+      "stage": "Series B",
+      "founded_year": 2018,
+      "mosaic": 849
+    },
+    {
+      "company": "Dub",
+      "stage": "Series A",
+      "founded_year": 2021,
+      "mosaic": 754
+    },
+    {
+      "company": "Flanks",
+      "stage": "Series B",
+      "founded_year": 2019,
+      "mosaic": 747
+    },
+    {
+      "company": "Jump",
+      "stage": "Series A",
+      "founded_year": 2023,
+      "mosaic": 881
+    },
+    {
+      "company": "Lightyear",
+      "stage": "Series B",
+      "founded_year": 2020,
+      "mosaic": 787
+    },
+    {
+      "company": "ModernFi",
+      "stage": "Series B - II",
+      "founded_year": 2022,
+      "mosaic": 859
+    },
+    {
+      "company": "Retirable",
+      "stage": "Series A",
+      "founded_year": 2019,
+      "mosaic": 737
+    },
+    {
+      "company": "Thndr",
+      "stage": "Series A - II",
+      "founded_year": 2020,
+      "mosaic": 832
+    },
+    {
+      "company": "Wealth.com",
+      "stage": "Series A - II",
+      "founded_year": 2021,
+      "mosaic": 877
+    },
+    {
+      "company": "Zocks",
+      "stage": "Corporate Minority",
+      "founded_year": 2022,
+      "mosaic": 897
+    },
+    {
+      "company": "Unique",
+      "stage": "Series A",
+      "founded_year": 2021,
+      "mosaic": 710
+    },
+    {
+      "company": "Upstage",
+      "stage": "Series B - IV",
+      "founded_year": 2020,
+      "mosaic": 937
+    }
+  ]
+}

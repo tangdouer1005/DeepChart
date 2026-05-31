@@ -1,0 +1,42 @@
+[
+    {
+        "income_cat": "High-income countries",
+        "consumerexpenditure": 827719.4,
+        "foodandnonalcoholicbeverage": 103461.6,
+        "alcoholicbeveragesandtobacco": 29194.2,
+        "disposable_income": 921403.5,
+        "food_share": 11.228696222664663,
+        "stim_share": 3.1684490019844724,
+        "remain_share": 85.60285477535086
+    },
+    {
+        "income_cat": "Upper-middle-income countries",
+        "consumerexpenditure": 126742.40000000001,
+        "foodandnonalcoholicbeverage": 34089.0,
+        "alcoholicbeveragesandtobacco": 4169.6,
+        "disposable_income": 133500.1,
+        "food_share": 25.534812333473905,
+        "stim_share": 3.1232935406040894,
+        "remain_share": 71.341894125922
+    },
+    {
+        "income_cat": "Lower-middle-income countries",
+        "consumerexpenditure": 52331.1,
+        "foodandnonalcoholicbeverage": 18094.1,
+        "alcoholicbeveragesandtobacco": 1405.0,
+        "disposable_income": 54815.2,
+        "food_share": 33.009274799690594,
+        "stim_share": 2.5631576642974943,
+        "remain_share": 64.42756753601192
+    },
+    {
+        "income_cat": "Low-income countries",
+        "consumerexpenditure": 1348.6999999999998,
+        "foodandnonalcoholicbeverage": 572.7,
+        "alcoholicbeveragesandtobacco": 26.700000000000003,
+        "disposable_income": 1413.3000000000002,
+        "food_share": 40.522182126936954,
+        "stim_share": 1.8891954998938654,
+        "remain_share": 57.58862237316918
+    }
+]

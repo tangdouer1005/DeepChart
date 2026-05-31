@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>abbv 盈余-现金质量剪刀差 (Earnings Quality Spread) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (stable v3, simpler API and widely compatible) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #ffffff;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      padding: 16px;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      margin: 0 0 4px 0;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin: 0 0 16px 0;
+      color: #6b7280;
+    }
+
+    .chart-wrapper {
+      background: #f3f4f6;
+      border-radius: 12px;
+      padding: 16px 18px 18px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+      height: 420px; /* ensures visible height */
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>abbv 盈余-现金质量剪刀差（Earnings Quality Spread）</h1>
+    <h2>年度变化：2016 – 2024</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="earningsSpreadChart"></canvas>
+    </div>
+
+    <div class="note">
+      单位：绝对值（无量纲）。数值越高表示盈余相对现金流的“剪刀差”越大。
+    </div>
+  </div>
+
+  <script>
+    // Run after DOM is ready
+    window.onload = function () {
+      // Data from your source
+      const labels = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ];
+
+      const spreadValues = [
+        0.0182628473591889,
+        0.0679548526135076,
+        0.1189506523843919,
+        0.0733092202307583,
+        0.1082443257676902,
+        0.0756326280571132,
+        0.0918712806745778,
+        0.1076658564059998
+      ];
+
+      function formatPercent(v, digits) {
+        return (v * 100).toFixed(digits) + "%";
+      }
+
+      const canvas = document.getElementById("earningsSpreadChart");
+      if (!canvas) return;
+
+      const ctx = canvas.getContext("2d");
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "盈余-现金质量剪刀差",
+              data: spreadValues,
+              backgroundColor: "rgba(37, 99, 235, 0.7)",
+              borderColor: "rgba(37, 99, 235, 1)",
+              borderWidth: 1,
+              hoverBackgroundColor: "rgba(37, 99, 235, 0.9)",
+              borderRadius: 6,
+              maxBarThickness: 50
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true
+            },
+            tooltip: {
+              mode: "index",
+              intersect: false,
+              callbacks: {
+                label: function (context) {
+                  const v = context.parsed.y;
+                  if (v == null || isNaN(v)) return "";
+                  return " 剪刀差: " + formatPercent(v, 2) + " (" + v.toFixed(6) + ")";
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                maxRotation: 0,
+                autoSkip: false
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: "rgba(148, 163, 184, 0.5)"
+              },
+              ticks: {
+                callback: function (value) {
+                  return formatPercent(value, 0);
+                }
+              },
+              title: {
+                display: true,
+                text: "剪刀差（%）"
+              }
+            }
+          },
+          interaction: {
+            mode: "nearest",
+            axis: "x",
+            intersect: false
+          },
+          animation: {
+            duration: 700,
+            easing: "easeOutCubic"
+          }
+        }
+      });
+    };
+  </script>
+</body>
+</html>

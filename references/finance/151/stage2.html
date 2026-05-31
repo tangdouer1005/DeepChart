@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta 内部增长率 (IGR) 2016–2024 - Bar Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --text: #1f2933;
+      --grid: #d3dce6;
+      --bar: #2563eb;
+      --bar-hover: #1d4ed8;
+      --accent: #4b5563;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --text: #e5e7eb;
+        --grid: #334155;
+        --bar: #38bdf8;
+        --bar-hover: #0ea5e9;
+        --accent: #9ca3af;
+      }
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #e5f0ff, #f9fafb);
+      color: var(--text);
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: radial-gradient(circle at top left, #020617, #020617);
+      }
+    }
+    .page {
+      max-width: 960px;
+      margin: 24px auto;
+      padding: 16px;
+    }
+    .card {
+      background: var(--bg);
+      border-radius: 12px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
+      padding: 20px 20px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+    header {
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px 16px;
+      justify-content: space-between;
+    }
+    h1 {
+      font-size: 1.3rem;
+      margin: 0;
+      font-weight: 600;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin: 0;
+    }
+    .note {
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    button {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 4px 10px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s ease, transform 0.05s ease;
+    }
+    button:hover {
+      background: rgba(148, 163, 184, 0.14);
+      transform: translateY(-0.5px);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    #chart-container {
+      position: relative;
+      width: 100%;
+      height: min(480px, 70vh);
+    }
+    footer {
+      margin-top: 12px;
+      font-size: 0.72rem;
+      color: var(--accent);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 4px 12px;
+    }
+    .legend-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      background: linear-gradient(135deg, var(--bar) 0%, var(--bar-hover) 100%);
+      border: 1px solid rgba(15, 23, 42, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <header>
+        <div>
+          <h1>Meta 内部增长率 (IGR) 变化：2016–2024</h1>
+          <p class="subtitle">
+            单位：百分比。展示 2016–2024 财年 Meta 的内部增长率变化情况。
+          </p>
+        </div>
+        <div class="toolbar" aria-label="Chart tools">
+          <button type="button" id="toggleValuesBtn">切换数值标签</button>
+          <button type="button" id="resetZoomBtn">重置缩放</button>
+        </div>
+      </header>
+
+      <div id="chart-container">
+        <canvas id="igrChart" aria-label="Meta 内部增长率 (IGR) 2016–2024 柱状图"></canvas>
+      </div>
+
+      <p class="note">
+        数据来源：用户提供的 Meta 2016–2024 财年内部增长率结果 (RESULT_IGR)。
+      </p>
+
+      <footer>
+        <span class="legend-inline">
+          <span class="legend-swatch"></span> 内部增长率 (IGR)
+        </span>
+        <span>交互：悬停查看精确数值，拖动可局部放大，点击按钮可切换数值标签／重置缩放。</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Zoom plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.umd.min.js"></script>
+
+  <script>
+    // Data from source (RESULT_IGR)
+    const igrData = [
+      { year: 2016, value: 0.2175357165669512 },
+      { year: 2017, value: 0.2709472270165027 },
+      { year: 2018, value: 0.3213159539067381 },
+      { year: 2019, value: 0.1627707722237342 },
+      { year: 2020, value: 0.2486860068259386 },
+      { year: 2021, value: 0.3193504297076203 },
+      { year: 2022, value: 0.1519746883536293 },
+      { year: 2023, value: 0.2319296226650136 },
+      { year: 2024, value: 0.2929575736190907 }
+    ];
+
+    // Extract labels & values; convert to percentage
+    const labels = igrData.map(d => d.year.toString());
+    const valuesPct = igrData.map(d => d.value * 100);
+
+    // Colors
+    const baseColor = getComputedStyle(document.documentElement)
+      .getPropertyValue('--bar')
+      .trim() || '#2563eb';
+    const hoverColor = getComputedStyle(document.documentElement)
+      .getPropertyValue('--bar-hover')
+      .trim() || '#1d4ed8';
+
+    const ctx = document.getElementById('igrChart').getContext('2d');
+
+    // Custom plugin to draw value labels on bars when enabled
+    const valueLabelPlugin = {
+      id: 'valueLabelPlugin',
+      afterDatasetsDraw(chart, args, pluginOptions) {
+        const { ctx } = chart;
+        const show = pluginOptions && pluginOptions.show;
+        if (!show) return;
+
+        const dataset = chart.data.datasets[0];
+        const meta = chart.getDatasetMeta(0);
+        ctx.save();
+        ctx.font = '11px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillStyle = '#4b5563';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+
+        meta.data.forEach((bar, index) => {
+          const value = dataset.data[index];
+          if (value == null) return;
+          const y = bar.y - 4;
+          const label = value.toFixed(1) + '%';
+          ctx.fillText(label, bar.x, y);
+        });
+        ctx.restore();
+      }
+    };
+
+    const igrChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: '内部增长率 (IGR)',
+            data: valuesPct,
+            backgroundColor: baseColor,
+            hoverBackgroundColor: hoverColor,
+            borderRadius: 6,
+            borderSkipped: false,
+            maxBarThickness: 58
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: { top: 10, right: 10, bottom: 0, left: 6 }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15, 23, 42, 0.96)',
+            titleColor: '#e5e7eb',
+            bodyColor: '#e5e7eb',
+            borderColor: 'rgba(148, 163, 184, 0.6)',
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8,
+            displayColors: false,
+            callbacks: {
+              label: (ctx) => {
+                const value = ctx.raw;
+                return `IGR：${value.toFixed(2)}%`;
+              },
+              title: (ctx) => `财年：${ctx[0].label}`
+            }
+          },
+          title: {
+            display: false
+          },
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: 'x'
+            },
+            zoom: {
+              drag: {
+                enabled: true,
+                borderColor: 'rgba(37, 99, 235, 0.4)',
+                borderWidth: 1,
+                backgroundColor: 'rgba(37, 99, 235, 0.12)'
+              },
+              wheel: {
+                enabled: true
+              },
+              pinch: {
+                enabled: true
+              },
+              mode: 'x'
+            }
+          },
+          valueLabelPlugin: {
+            show: false // initial state: off
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: 'var(--text)',
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 40,
+            ticks: {
+              color: 'var(--text)',
+              font: {
+                size: 11
+              },
+              callback: (value) => value + '%'
+            },
+            grid: {
+              color: 'var(--grid)'
+            },
+            title: {
+              display: true,
+              text: '内部增长率 (IGR, %)',
+              color: 'var(--accent)',
+              font: {
+                size: 11
+              }
+            }
+          }
+        },
+        animation: {
+          duration: 650,
+          easing: 'easeOutCubic'
+        }
+      },
+      plugins: [valueLabelPlugin]
+    });
+
+    // Toggle bar value labels
+    const toggleBtn = document.getElementById('toggleValuesBtn');
+    let showValues = false;
+    toggleBtn.addEventListener('click', () => {
+      showValues = !showValues;
+      igrChart.options.plugins.valueLabelPlugin.show = showValues;
+      toggleBtn.textContent = showValues ? '隐藏数值标签' : '切换数值标签';
+      igrChart.update();
+    });
+
+    // Reset zoom
+    const resetZoomBtn = document.getElementById('resetZoomBtn');
+    resetZoomBtn.addEventListener('click', () => {
+      igrChart.resetZoom();
+    });
+  </script>
+</body>
+</html>

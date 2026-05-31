@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MSFT Sustainable Growth Rate (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      background: #f5f5f7;
+      color: #111827;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 16px 20px 32px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 4px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 18px;
+      font-weight: 400;
+      color: #4b5563;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 480px;
+    }
+
+    .notes {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 16px;
+        padding: 14px 14px 22px;
+      }
+
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Microsoft (MSFT) Sustainable Growth Rate</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="sgrChart"></canvas>
+    </div>
+
+    <div class="notes">
+      <strong>Metric:</strong> 可持续增长率 (Sustainable Growth Rate, SGR), dimensionless.<br />
+      <strong>Source values (RESULT_SGR):</strong> 2016–2024 as provided in the dataset.
+    </div>
+  </div>
+
+  <script>
+    // Data from the source
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const sgrValuesRaw = [
+      0.1253682272488164,
+      0.1889868482107611,
+      0.0499252153282789,
+      0.2748367991007738,
+      0.2641841239337545,
+      0.3438446052894441,
+      0.3539558551842608,
+      0.2820060896275133,
+      0.2796081735833158
+    ];
+
+    // Convert raw values to percentage with one decimal for display
+    const sgrValuesPercent = sgrValuesRaw.map(v => v * 100);
+
+    const ctx = document.getElementById("sgrChart").getContext("2d");
+
+    const sgrChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "Sustainable Growth Rate (SGR)",
+            data: sgrValuesPercent,
+            backgroundColor: "#2563eb",
+            hoverBackgroundColor: "#1d4ed8",
+            borderRadius: 6,
+            borderSkipped: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: false
+          },
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              font: {
+                size: 11
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function (context) {
+                const value = context.raw;
+                return " SGR: " + value.toFixed(1) + "%";
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              font: {
+                size: 11,
+                weight: "500"
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Sustainable Growth Rate (%, RESULT_SGR × 100)",
+              font: {
+                size: 11,
+                weight: "500"
+              }
+            },
+            ticks: {
+              callback: function (value) {
+                return value + "%";
+              },
+              font: {
+                size: 11
+              }
+            },
+            beginAtZero: true,
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)"
+            }
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a horizontal bar chart for ecosystems in the North America section where `Median Seed Round` and `Software Engineer Salary` are both exact values, showing the top 8 `seed affordability multiple` values computed as `Median Seed Round / Software Engineer Salary`, expressed in `salary-years`, sorted descending, and excluding `N/A` values.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "salary-years",
+  "sort_rule": "descending by seed_affordability_salary_years",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "2022 North America Seed Affordability",
+    "xlabel": "salary-years",
+    "value_field": "seed_affordability_salary_years"
+  },
+  "records": [
+    {
+      "entity": "Atlantic Canada",
+      "seed_affordability_salary_years": 19.4255
+    },
+    {
+      "entity": "Boston",
+      "seed_affordability_salary_years": 16.6667
+    },
+    {
+      "entity": "Silicon Valley",
+      "seed_affordability_salary_years": 12.605
+    },
+    {
+      "entity": "Indiana",
+      "seed_affordability_salary_years": 12.4286
+    },
+    {
+      "entity": "Seattle",
+      "seed_affordability_salary_years": 12.2807
+    },
+    {
+      "entity": "San Diego",
+      "seed_affordability_salary_years": 11.9565
+    },
+    {
+      "entity": "New York City",
+      "seed_affordability_salary_years": 11.7647
+    },
+    {
+      "entity": "Austin",
+      "seed_affordability_salary_years": 11.6471
+    }
+  ]
+}

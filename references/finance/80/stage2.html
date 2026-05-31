@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>CVX 自由现金流收益质量（Quality of Income Ratio）2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+        sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+      margin: 0;
+      padding: 1.5rem;
+      background: #f5f5f7;
+      color: #222;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem 1.5rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+
+    /* Fix aspect ratio by controlling height instead of using Chart.js aspectRatio */
+    .canvas-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      height: 420px; /* Reasonable fixed height to avoid extreme stretching */
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.75rem;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>CVX 自由现金流收益质量（Quality of Income Ratio）</h1>
+    <div class="subtitle">2016–2024 年度变动趋势（按财年）</div>
+
+    <div class="canvas-wrapper">
+      <canvas id="qoiChart" aria-label="CVX Quality of Income Ratio 2016-2024" role="img"></canvas>
+    </div>
+
+    <div class="meta">
+      指标定义：自由现金流收益质量 = 经营活动产生的现金流量 / 净利润。<br />
+      数据区间：2016–2024 财年（单位：比率，无量纲）。
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('qoiChart');
+
+    const years = [
+      '2016',
+      '2017',
+      '2018',
+      '2019',
+      '2020',
+      '2021',
+      '2022',
+      '2023',
+      '2024'
+    ];
+
+    const qoiValues = [
+      1.218785578747628,
+      0.969122271990851,
+      0.9232578476012424,
+      1.51120952117354,
+      1.0341463414634149,
+      0.8817223782347435,
+      0.7459768386223492,
+      0.6907394475481068,
+      0.6727622302926725
+    ];
+
+    // Compute y-axis bounds with moderate padding to avoid excessive empty space
+    const minVal = Math.min(...qoiValues);
+    const maxVal = Math.max(...qoiValues);
+    const range = maxVal - minVal || 0.2;
+    const padding = range * 0.2;
+    const suggestedMin = Math.max(0, +(minVal - padding).toFixed(2));
+    const suggestedMax = +(maxVal + padding).toFixed(2);
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: '自由现金流收益质量（QoI Ratio）',
+            data: qoiValues,
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37, 99, 235, 0.10)',
+            tension: 0.25,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: '#2563eb',
+            pointBorderColor: '#ffffff',
+            pointBorderWidth: 1.5,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // Size is controlled by CSS (.canvas-wrapper)
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              color: '#374151'
+            }
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: 'rgba(15,23,42,0.9)',
+            titleColor: '#f9fafb',
+            bodyColor: '#e5e7eb',
+            borderColor: '#1f2937',
+            borderWidth: 1,
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return ' QoI: ' + value.toFixed(3);
+              },
+              title: function (items) {
+                return '财年 ' + items[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财年',
+              color: '#4b5563',
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#6b7280'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: '自由现金流收益质量（比率）',
+              color: '#4b5563',
+              font: {
+                size: 12
+              }
+            },
+            suggestedMin,
+            suggestedMax,
+            grid: {
+              color: 'rgba(209, 213, 219, 0.6)'
+            },
+            ticks: {
+              color: '#6b7280',
+              // Show concise ticks without unnecessary decimals
+              callback: function (value) {
+                return Number(value).toFixed(1);
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

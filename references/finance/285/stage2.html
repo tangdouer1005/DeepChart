@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XOM 净资产收益率-杜邦分析 (ROE) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest 4.x at time of writing) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 0;
+      color: #666;
+    }
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 20px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    /* Ensure the canvas has some height for Chart.js 4 */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 480px;
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .note {
+      font-size: 12px;
+      color: #777;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>XOM 净资产收益率-杜邦分析 (ROE)</h1>
+    <h2>2016–2024 财年，单位：百分比</h2>
+    <div class="chart-wrapper">
+      <canvas id="roeChart"></canvas>
+    </div>
+    <div class="note">
+      数据来源：用户提供的 ROE (Original ROE, Avg)。负值代表当年股东权益回报为负。
+    </div>
+  </div>
+
+  <script>
+    // Ensure the script runs after the DOM is ready
+    document.addEventListener('DOMContentLoaded', function () {
+      const years = [
+        "2016","2017","2018","2019",
+        "2020","2021","2022","2023","2024"
+      ];
+      const roeRaw = [
+        0.0463718740388482,
+        0.1110381873339849,
+        0.1098339315171734,
+        0.0747957980826404,
+        -0.1286697247706422,
+        0.1414681619884136,
+        0.3065787374940186,
+        0.1801170936173724,
+        0.1437758667426527
+      ];
+
+      // Convert decimals to percentage
+      const roePercent = roeRaw.map(function (v) {
+        return v * 100;
+      });
+
+      const canvas = document.getElementById('roeChart');
+      if (!canvas) {
+        console.error('Canvas element #roeChart not found.');
+        return;
+      }
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        console.error('2D context not available on canvas.');
+        return;
+      }
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: 'ROE (净资产收益率, 杜邦分析，%)',
+              data: roePercent,
+              borderColor: '#007bff',
+              backgroundColor: 'rgba(0,123,255,0.10)',
+              pointBackgroundColor: '#007bff',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: '#007bff',
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              borderWidth: 2,
+              tension: 0.25,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                boxWidth: 8
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  const value = context.parsed.y;
+                  return ' ROE: ' + value.toFixed(2) + '%';
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: '财年 (Fiscal Year)'
+              },
+              ticks: {
+                maxRotation: 0
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'ROE (%)'
+              },
+              ticks: {
+                callback: function (value) {
+                  return value + '%';
+                }
+              },
+              grid: {
+                color: 'rgba(0,0,0,0.06)'
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

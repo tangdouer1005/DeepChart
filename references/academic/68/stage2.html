@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffffff;
+        }
+        #chart {
+            width: 500px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+
+    <script>
+        // 1. Data Source (Embedded JSON)
+        const chartData = [
+    {
+        "label": "Vehicle",
+        "LogConc": [
+            -11.0,
+            -10.0,
+            -9.0,
+            -8.0,
+            -7.0,
+            -6.0,
+            -5.0,
+            -4.0
+        ],
+        "mean": [
+            0.0031570024670444447,
+            0.005923702654722222,
+            0.0038996477933333335,
+            0.0035948352632444447,
+            0.004266092695117778,
+            0.004354240029677778,
+            0.003195173472777778,
+            0.004715706566799999
+        ],
+        "sem": [
+            0.0007716053780773347,
+            0.0009526264796911384,
+            0.0010279152932595843,
+            0.0008385757299806418,
+            0.0008247449534924211,
+            0.0010232566234917614,
+            0.001122485650176868,
+            0.001377126205596796
+        ]
+    },
+    {
+        "label": "Vehicle + 100 nM NT",
+        "LogConc": [
+            -11.0,
+            -10.0,
+            -9.0,
+            -8.0,
+            -7.0,
+            -6.0,
+            -5.0,
+            -4.0
+        ],
+        "mean": [
+            0.13985982273333333,
+            0.13853683014444443,
+            0.1342246658888889,
+            0.1377056789,
+            0.13561998936666667,
+            0.12970982473333334,
+            0.13062243761111111,
+            0.12696947403333333
+        ],
+        "sem": [
+            0.004541131104995335,
+            0.004441144834379819,
+            0.0037984102161850997,
+            0.004336103337150979,
+            0.00405116542713521,
+            0.0037591567845897,
+            0.0033047278693864534,
+            0.0021533534453107893
+        ]
+    },
+    {
+        "label": "SBI-553 + 100 nM NT",
+        "LogConc": [
+            -11.0,
+            -8.522878745280337,
+            -8.0,
+            -7.522878745280337,
+            -7.0,
+            -6.522878745280337,
+            -6.0,
+            -5.522878745280337,
+            -5.0,
+            -4.522878745280337
+        ],
+        "mean": [
+            0.14354842914444443,
+            0.11912894548333335,
+            0.093214964615,
+            0.06720688934333334,
+            0.040325384292222224,
+            0.02272938540111111,
+            0.017866877144444446,
+            0.013917667548000001,
+            0.01352824927,
+            0.019265856449999997
+        ],
+        "sem": [
+            0.00351466161262944,
+            0.0034823193160701533,
+            0.0016485068070293271,
+            0.0019128963741423589,
+            0.0006866415484666734,
+            0.0005876678421901679,
+            0.0008249905963641557,
+            0.001008225915595464,
+            0.0008738719555479654,
+            0.0014727912457680869
+        ]
+    },
+    {
+        "label": "SR14 + 100 nM NT",
+        "LogConc": [
+            -11.0,
+            -10.0,
+            -9.0,
+            -8.0,
+            -7.0,
+            -6.0,
+            -5.0,
+            -4.0
+        ],
+        "mean": [
+            0.14608463452222223,
+            0.14047058932222223,
+            0.13630182796666668,
+            0.10590331132111111,
+            0.04896911294222222,
+            0.01005387965088889,
+            0.004625643186666667,
+            0.005505934982333333
+        ],
+        "sem": [
+            0.00546698610173857,
+            0.00467031506583415,
+            0.00468971247187329,
+            0.0063756937462964855,
+            0.0037818311454473385,
+            0.0015732394309910234,
+            0.0016594945693592623,
+            0.0017869611973641195
+        ]
+    }
+];
+
+        // 4. Optimization (Nelder-Mead)
+        function sigmoid(x, params) {
+            const [Top, Bottom, LogIC50, HillSlope] = params;
+            return Bottom + (Top - Bottom) / (1 + Math.pow(10, (LogIC50 - x) * HillSlope));
+        }
+
+        function minimize(func, x0) {
+            // Simple Nelder-Mead implementation
+            const dim = x0.length;
+            const alpha = 1, gamma = 2, rho = 0.5, sigma = 0.5;
+            const tol = 1e-6;
+            const maxIter = 5000;
+            
+            let simplex = [];
+            simplex.push({ p: x0.slice(), v: func(x0) });
+            
+            for (let i = 0; i < dim; i++) {
+                let p = x0.slice();
+                p[i] = p[i] !== 0 ? p[i] * 1.05 : 0.00025;
+                simplex.push({ p: p, v: func(p) });
+            }
+            
+            simplex.sort((a, b) => a.v - b.v);
+            
+            for (let iter = 0; iter < maxIter; iter++) {
+                const best = simplex[0];
+                const worst = simplex[dim];
+                const secondWorst = simplex[dim - 1];
+                
+                let centroid = new Array(dim).fill(0);
+                // Correct centroid calculation
+                centroid.fill(0);
+                for (let i = 0; i < dim; i++) {
+                     for (let j = 0; j < dim; j++) {
+                         centroid[j] += simplex[i].p[j];
+                     }
+                }
+                for (let j = 0; j < dim; j++) centroid[j] /= dim;
+                
+                let xr = new Array(dim);
+                for (let j = 0; j < dim; j++) xr[j] = centroid[j] + alpha * (centroid[j] - worst.p[j]);
+                let vr = func(xr);
+                
+                if (vr >= best.v && vr < secondWorst.v) {
+                    simplex[dim] = { p: xr, v: vr };
+                } else if (vr < best.v) {
+                    let xe = new Array(dim);
+                    for (let j = 0; j < dim; j++) xe[j] = centroid[j] + gamma * (xr[j] - centroid[j]);
+                    let ve = func(xe);
+                    simplex[dim] = (ve < vr) ? { p: xe, v: ve } : { p: xr, v: vr };
+                } else {
+                    let xc = new Array(dim);
+                    let vc;
+                    if (vr < worst.v) {
+                         for (let j = 0; j < dim; j++) xc[j] = centroid[j] + rho * (xr[j] - centroid[j]);
+                         vc = func(xc);
+                         if (vc < vr) {
+                             simplex[dim] = { p: xc, v: vc };
+                         } else {
+                             shrink();
+                         }
+                    } else {
+                        for (let j = 0; j < dim; j++) xc[j] = centroid[j] + rho * (worst.p[j] - centroid[j]);
+                        vc = func(xc);
+                        if (vc < worst.v) {
+                            simplex[dim] = { p: xc, v: vc };
+                        } else {
+                            shrink();
+                        }
+                    }
+                }
+                
+                simplex.sort((a, b) => a.v - b.v);
+                if (Math.abs(simplex[0].v - simplex[dim].v) < tol) break;
+            }
+            
+            function shrink() {
+                for (let i = 1; i <= dim; i++) {
+                    for (let j = 0; j < dim; j++) {
+                        simplex[i].p[j] = simplex[0].p[j] + sigma * (simplex[i].p[j] - simplex[0].p[j]);
+                    }
+                    simplex[i].v = func(simplex[i].p);
+                }
+            }
+            
+            return simplex[0].p;
+        }
+
+        // 5. Main Logic
+        // Helper to convert JSON format to internal structure (array of objects)
+        function getGroup(label) {
+            const group = chartData.find(g => g.label === label);
+            if (!group) return [];
+            return group.LogConc.map((logC, i) => ({
+                LogConc: logC,
+                mean: group.mean[i],
+                sem: group.sem[i]
+            }));
+        }
+
+        const vehicleData = getGroup("Vehicle");
+        const vehicleNtData = getGroup("Vehicle + 100 nM NT");
+        const sbiData = getGroup("SBI-553 + 100 nM NT");
+        const sr14Data = getGroup("SR14 + 100 nM NT");
+
+        const color_vehicle = '#808080';
+        const color_vehicle_nt = '#0000CD';
+        const color_sbi = '#B030B0';
+        const color_sr14 = '#FF8C00';
+
+        const traces = [];
+
+        // Plot Vehicle
+        if (vehicleData.length > 0) {
+            const mean_vehicle = vehicleData.reduce((acc, d) => acc + d.mean, 0) / vehicleData.length;
+            traces.push({
+                x: vehicleData.map(d => d.LogConc),
+                y: vehicleData.map(d => d.mean),
+                type: 'scatter',
+                mode: 'markers',
+                marker: { color: color_vehicle, size: 8 },
+                error_y: {
+                    type: 'data',
+                    array: vehicleData.map(d => d.sem),
+                    visible: true,
+                    color: color_vehicle,
+                    thickness: 1,
+                    width: 0
+                },
+                name: 'Vehicle',
+                showlegend: false
+            });
+            traces.push({
+                x: [-12, -3.5],
+                y: [mean_vehicle, mean_vehicle],
+                type: 'scatter',
+                mode: 'lines',
+                line: { color: color_vehicle, width: 2 },
+                showlegend: false,
+                hoverinfo: 'none'
+            });
+        }
+
+        // Plot Vehicle + NT
+        if (vehicleNtData.length > 0) {
+            const mean_vehicle_nt = vehicleNtData.reduce((acc, d) => acc + d.mean, 0) / vehicleNtData.length;
+            traces.push({
+                x: vehicleNtData.map(d => d.LogConc),
+                y: vehicleNtData.map(d => d.mean),
+                type: 'scatter',
+                mode: 'markers',
+                marker: { color: color_vehicle_nt, size: 8 },
+                error_y: {
+                    type: 'data',
+                    array: vehicleNtData.map(d => d.sem),
+                    visible: true,
+                    color: color_vehicle_nt,
+                    thickness: 1,
+                    width: 0
+                },
+                name: 'Vehicle + 100 nM NT',
+                showlegend: false
+            });
+            traces.push({
+                x: [-12, -3.5],
+                y: [mean_vehicle_nt, mean_vehicle_nt],
+                type: 'scatter',
+                mode: 'lines',
+                line: { color: color_vehicle_nt, width: 2 },
+                showlegend: false,
+                hoverinfo: 'none'
+            });
+        }
+
+        // Fit and Plot SBI
+        if (sbiData.length > 4) {
+            const yMax = Math.max(...sbiData.map(d => d.mean));
+            const yMin = Math.min(...sbiData.map(d => d.mean));
+            const p0 = [yMax, yMin, -8, 1];
+            
+            const costFunc = (params) => {
+                return sbiData.reduce((sum, d) => {
+                    const pred = sigmoid(d.LogConc, params);
+                    return sum + Math.pow(d.mean - pred, 2);
+                }, 0);
+            };
+            
+            const popt = minimize(costFunc, p0);
+            
+            const minX = Math.min(...sbiData.map(d => d.LogConc));
+            const maxX = Math.max(...sbiData.map(d => d.LogConc));
+            const step = (maxX - minX) / 100;
+            const xFitPlot = [];
+            const yFitPlot = [];
+            for (let i = 0; i <= 100; i++) {
+                const x = minX + i * step;
+                xFitPlot.push(x);
+                yFitPlot.push(sigmoid(x, popt));
+            }
+            
+            traces.push({
+                x: xFitPlot,
+                y: yFitPlot,
+                type: 'scatter',
+                mode: 'lines',
+                line: { color: color_sbi, width: 2 },
+                showlegend: false,
+                hoverinfo: 'none'
+            });
+        }
+        traces.push({
+            x: sbiData.map(d => d.LogConc),
+            y: sbiData.map(d => d.mean),
+            type: 'scatter',
+            mode: 'markers',
+            marker: { color: color_sbi, size: 8 },
+            error_y: {
+                type: 'data',
+                array: sbiData.map(d => d.sem),
+                visible: true,
+                color: color_sbi,
+                thickness: 1,
+                width: 0
+            },
+            name: 'SBI-553 + 100 nM NT',
+            showlegend: false
+        });
+
+        // Fit and Plot SR14
+        if (sr14Data.length > 4) {
+            const yMax = Math.max(...sr14Data.map(d => d.mean));
+            const yMin = Math.min(...sr14Data.map(d => d.mean));
+            const p0 = [yMax, yMin, -7, 1];
+            
+            const costFunc = (params) => {
+                return sr14Data.reduce((sum, d) => {
+                    const pred = sigmoid(d.LogConc, params);
+                    return sum + Math.pow(d.mean - pred, 2);
+                }, 0);
+            };
+            
+            const popt = minimize(costFunc, p0);
+            
+            const minX = Math.min(...sr14Data.map(d => d.LogConc));
+            const maxX = Math.max(...sr14Data.map(d => d.LogConc));
+            const step = (maxX - minX) / 100;
+            const xFitPlot = [];
+            const yFitPlot = [];
+            for (let i = 0; i <= 100; i++) {
+                const x = minX + i * step;
+                xFitPlot.push(x);
+                yFitPlot.push(sigmoid(x, popt));
+            }
+            
+            traces.push({
+                x: xFitPlot,
+                y: yFitPlot,
+                type: 'scatter',
+                mode: 'lines',
+                line: { color: color_sr14, width: 2 },
+                showlegend: false,
+                hoverinfo: 'none'
+            });
+        }
+        traces.push({
+            x: sr14Data.map(d => d.LogConc),
+            y: sr14Data.map(d => d.mean),
+            type: 'scatter',
+            mode: 'markers',
+            marker: { color: color_sr14, size: 8 },
+            error_y: {
+                type: 'data',
+                array: sr14Data.map(d => d.sem),
+                visible: true,
+                color: color_sr14,
+                thickness: 1,
+                width: 0
+            },
+            name: 'SR14 + 100 nM NT',
+            showlegend: false
+        });
+
+        const layout = {
+            width: 500,
+            height: 400,
+            showlegend: false,
+            xaxis: {
+                range: [-12, -3.5],
+                tickvals: [-12, -10, -8, -6, -4],
+                ticktext: ['-12', '-10', '-8', '-6', '-4'],
+                title: { text: '', font: { size: 12 } },
+                showline: true,
+                linecolor: 'black',
+                ticks: 'inside',
+                ticklen: 6,
+                tickfont: { size: 12, family: 'sans-serif' },
+                zeroline: false,
+                showgrid: false
+            },
+            yaxis: {
+                range: [-0.02, 0.20],
+                tickvals: [0.00, 0.05, 0.10, 0.15, 0.20],
+                ticktext: ['0.00', '0.05', '0.10', '0.15', '0.20'],
+                title: { text: 'Mini G<sub>q</sub> recruitment<br>(Δ Net BRET)', font: { size: 12 } },
+                showline: true,
+                linecolor: 'black',
+                ticks: 'inside',
+                ticklen: 6,
+                tickfont: { size: 12, family: 'sans-serif' },
+                zeroline: true,
+                zerolinewidth: 1.5,
+                zerolinecolor: 'black',
+                zerolinedash: 'dot',
+                showgrid: false
+            },
+            margin: { l: 80, r: 20, t: 30, b: 40 },
+            paper_bgcolor: 'white',
+            plot_bgcolor: 'white',
+            annotations: [
+                {
+                    x: 0, 
+                    y: 1, 
+                    xref: 'paper', 
+                    yref: 'paper', 
+                    text: 'a', 
+                    showarrow: false, 
+                    font: { size: 16, weight: 'bold', family: 'sans-serif' },
+                    xanchor: 'right',
+                    yanchor: 'top',
+                    xshift: -5,
+                    yshift: 0
+                }
+            ]
+        };
+        layout.annotations[0].x = -0.15;
+
+        Plotly.newPlot('chart', traces, layout, { staticPlot: false });
+
+    </script>
+</body>
+</html>

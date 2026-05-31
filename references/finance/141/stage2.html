@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ma 的内部增长率 (IGR) 2016–2024 变化趋势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js (latest stable 4.x at time of writing) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+                   Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 1.5rem 1.75rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+    }
+    h2 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin: 0 0 1.1rem;
+      color: #555;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      margin-top: 0.5rem;
+    }
+    .note {
+      margin-top: 0.9rem;
+      font-size: 0.78rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 0.8rem;
+      }
+      .container {
+        padding: 1rem 1rem 1.4rem;
+      }
+      h1 {
+        font-size: 1.15rem;
+      }
+      h2 {
+        font-size: 0.8rem;
+      }
+      .chart-wrapper {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ma 的内部增长率 (IGR) 变化趋势</h1>
+    <h2>2016–2024 财年</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="igrChart"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：用户提供的财年 IGR 结果。<br />
+      说明：内部增长率 (Internal Growth Rate, IGR) 为年度值，图中以百分比形式展示，便于比较不同年份的变化。
+    </div>
+  </div>
+
+  <script>
+    // 原始数据（按财年顺序）
+    const labels = [
+      "2016", "2017", "2018", "2019", "2020",
+      "2021", "2022", "2023", "2024"
+    ];
+
+    // IGR 原始值（小数形式）
+    const igrRaw = [
+      0.2261052631578947,
+      0.1745845322684832,
+      0.2634098306846467,
+      0.3340567200986437,
+      0.1806495263870094,
+      0.2421854570178344,
+      0.2660634084091549,
+      0.286443310406035,
+      0.2992666159564849
+    ];
+
+    // 转换为百分比并保留两位小数
+    const igrPercent = igrRaw.map(v => +(v * 100).toFixed(2));
+
+    const ctx = document.getElementById("igrChart").getContext("2d");
+
+    const igrChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "内部增长率 (IGR)",
+          data: igrPercent,
+          borderColor: "rgba(37, 99, 235, 1)",
+          backgroundColor: "rgba(37, 99, 235, 0.12)",
+          pointBackgroundColor: "rgba(37, 99, 235, 1)",
+          pointBorderColor: "#ffffff",
+          pointHoverRadius: 6,
+          pointRadius: 4,
+          pointBorderWidth: 2,
+          borderWidth: 2,
+          tension: 0.25,     // 平滑曲线
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              padding: 18,
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.94)",
+            titleColor: "#f9fafb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.5)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return " IGR: " + value.toFixed(2) + "%";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              minRotation: 0
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "内部增长率 (IGR，%)",
+              font: {
+                size: 12
+              }
+            },
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return value + "%";
+              }
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.2)"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

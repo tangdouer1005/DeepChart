@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>CSCO 经济增加值(EVA) 2016-2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #fafafa;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      margin-top: 0;
+      font-weight: normal;
+      color: #555;
+    }
+    #chart-container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 16px 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      /* Fixed, reasonable height for good aspect ratio */
+      height: 480px;
+      box-sizing: border-box;
+    }
+    /* Make the canvas fill the container properly */
+    #evaChart {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+    .footer-note {
+      max-width: 960px;
+      margin: 12px auto 0;
+      font-size: 11px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>CSCO 经济增加值 (EVA) - 简化版</h1>
+    <h2>2016 - 2024 年度变化（单位：人民币元）</h2>
+    <canvas id="evaChart"></canvas>
+  </div>
+
+  <div class="footer-note">
+    数据来源：用户提供的 CSCO EVA 简化数据（RESULT_EVA）。<br>
+    提示：将鼠标悬停在柱状上查看精确数值。
+  </div>
+
+  <!-- Chart.js latest stable -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // 原始数据（单位：元）
+    const years = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+
+    const evaValues = [
+      2384240092.879257,
+      726237535.606739,
+      -7295408447.733722,
+      6023964841.122778,
+      6573997959.914101,
+      6032401673.955664,
+      7089665231.056158,
+      8119081224.702965,
+      4756241809.710644
+    ];
+
+    // 转为“亿元”展示
+    function toYi(value) {
+      return value / 1e8;
+    }
+
+    const evaYi = evaValues.map(toYi);
+
+    // 数字格式化
+    function formatNumber(num, decimals = 2) {
+      const fixed = num.toFixed(decimals);
+      const parts = fixed.split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return parts.join(".");
+    }
+
+    const ctx = document.getElementById("evaChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [{
+          label: "EVA（亿元）",
+          data: evaYi,
+          backgroundColor: evaYi.map(v =>
+            v >= 0 ? "rgba(32, 132, 252, 0.7)" : "rgba(220, 76, 70, 0.75)"
+          ),
+          borderColor: evaYi.map(v =>
+            v >= 0 ? "rgba(32, 132, 252, 1)" : "rgba(220, 76, 70, 1)"
+          ),
+          borderWidth: 1.2,
+          borderRadius: 3,
+          hoverBackgroundColor: evaYi.map(v =>
+            v >= 0 ? "rgba(32, 132, 252, 0.9)" : "rgba(220, 76, 70, 0.95)"
+          )
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // use container's fixed height
+        layout: {
+          padding: {
+            top: 10,
+            right: 15,
+            bottom: 10,
+            left: 10
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: { size: 12 }
+            }
+          },
+          tooltip: {
+            mode: "index",
+            intersect: false,
+            callbacks: {
+              label: function (context) {
+                const originalValue = evaValues[context.dataIndex];
+                const valueYi = evaYi[context.dataIndex];
+                const sign = originalValue >= 0 ? "" : "-";
+                return [
+                  "EVA（亿元）: " + formatNumber(valueYi) + " 亿元",
+                  "EVA（元）: " + sign + formatNumber(Math.abs(originalValue), 0) + " 元"
+                ];
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: { size: 12 }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "EVA（亿元）",
+              font: { size: 13 }
+            },
+            ticks: {
+              font: { size: 12 },
+              callback: function (value) {
+                return value + " 亿元";
+              }
+            },
+            grid: {
+              color: "rgba(0,0,0,0.05)"
+            }
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutCubic"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

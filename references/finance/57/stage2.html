@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRM 奥特曼破产预测模型 (Altman Z-Score) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f8fa;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 0 0 18px;
+      color: #555;
+      font-weight: normal;
+    }
+    .chart-container {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 22px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .controls input[type="checkbox"] {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>CRM 奥特曼破产预测模型 (Altman Z-Score)</h1>
+    <h2>年度变化：2016–2024</h2>
+
+    <div class="controls">
+      <label>
+        <input type="checkbox" id="toggleLine" checked />
+        显示/隐藏折线趋势
+      </label>
+      <label>
+        <input type="checkbox" id="toggleBands" checked />
+        显示风险区间背景
+      </label>
+    </div>
+
+    <canvas id="zScoreChart"></canvas>
+
+    <div class="note">
+      数据来源：用户提供的 CRM Altman Z-Score 结果。<br>
+      常见参考阈值：Z &lt; 1.8（高风险），1.8–3.0（灰色区），Z &gt; 3.0（安全区）。
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    // 数据
+    const years = [
+      "2016","2017","2018","2019","2020","2021","2022","2023","2024"
+    ];
+    const zScores = [
+      0.7478841995165669,
+      0.8412598863306588,
+      0.950516101685538,
+      1.165005403727415,
+      1.3510124056237809,
+      1.4393078721810089,
+      1.3178131695542392,
+      1.39315578160393,
+      1.5993456552353584
+    ];
+
+    const ctx = document.getElementById("zScoreChart");
+
+    // 插件：绘制 Altman Z-Score 风险区间背景
+    const riskBandsPlugin = {
+      id: "riskBands",
+      beforeDraw(chart, args, options) {
+        const { ctx, chartArea, scales } = chart;
+        if (!chartArea) return;
+
+        const showBands = options.showBands;
+        if (!showBands) return;
+
+        const yAxis = scales.y;
+        const { left, right, top, bottom } = chartArea;
+
+        const toY = (val) => yAxis.getPixelForValue(val);
+
+        ctx.save();
+
+        // 高风险区：Z < 1.8
+        const highRiskTop = toY(1.8);
+        ctx.fillStyle = "rgba(255, 99, 132, 0.08)";
+        ctx.fillRect(left, highRiskTop, right - left, bottom - highRiskTop);
+
+        // 灰色区：1.8 <= Z <= 3.0
+        const greyZoneBottom = highRiskTop;
+        const greyZoneTop = toY(3.0);
+        ctx.fillStyle = "rgba(255, 205, 86, 0.06)";
+        ctx.fillRect(left, greyZoneTop, right - left, greyZoneBottom - greyZoneTop);
+
+        // 安全区：Z > 3.0（本数据未达到，仅示意）
+        const safeBottom = greyZoneTop;
+        const safeTop = top;
+        ctx.fillStyle = "rgba(75, 192, 192, 0.03)";
+        ctx.fillRect(left, safeTop, right - left, safeBottom - safeTop);
+
+        ctx.restore();
+      }
+    };
+
+    Chart.register(riskBandsPlugin);
+
+    const chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            type: "bar",
+            label: "Z-Score",
+            data: zScores,
+            backgroundColor: "rgba(54, 162, 235, 0.6)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1.5,
+            borderRadius: 4,
+            hoverBackgroundColor: "rgba(54, 162, 235, 0.8)",
+            hoverBorderColor: "rgba(54, 162, 235, 1)"
+          },
+          {
+            type: "line",
+            label: "趋势",
+            data: zScores,
+            borderColor: "rgba(75, 192, 192, 1)",
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderWidth: 2,
+            tension: 0.25,
+            pointRadius: 3.5,
+            pointHoverRadius: 5,
+            yAxisID: "y"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        aspectRatio: 2,
+        plugins: {
+          legend: {
+            position: "top",
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              padding: 16
+            }
+          },
+          tooltip: {
+            mode: "index",
+            intersect: false,
+            callbacks: {
+              label(ctx) {
+                const value = ctx.parsed.y;
+                if (ctx.dataset.type === "line") {
+                  return ` 趋势: ${value.toFixed(3)}`;
+                }
+                return ` Z-Score: ${value.toFixed(3)}`;
+              },
+              afterBody(ctx) {
+                const value = ctx[0].parsed.y;
+                let risk = "";
+                if (value < 1.8) risk = "高风险区";
+                else if (value < 3.0) risk = "灰色区";
+                else risk = "安全区";
+                return ` 风险区间: ${risk}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          },
+          riskBands: {
+            showBands: true
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: "财年",
+              color: "#555",
+              font: { size: 12 }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "Altman Z-Score",
+              color: "#555",
+              font: { size: 12 }
+            },
+            ticks: {
+              precision: 1
+            },
+            suggestedMax: 2.2 // 适度留白，便于观察变化
+          }
+        }
+      }
+    });
+
+    // 交互控制
+    const toggleLineCheckbox = document.getElementById("toggleLine");
+    toggleLineCheckbox.addEventListener("change", () => {
+      const lineDataset = chart.data.datasets[1]; // 第二个数据集为折线
+      lineDataset.hidden = !toggleLineCheckbox.checked;
+      chart.update();
+    });
+
+    const toggleBandsCheckbox = document.getElementById("toggleBands");
+    toggleBandsCheckbox.addEventListener("change", () => {
+      chart.options.plugins.riskBands.showBands = toggleBandsCheckbox.checked;
+      chart.update();
+    });
+  </script>
+</body>
+</html>

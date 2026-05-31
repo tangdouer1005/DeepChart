@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UNH Sloan Ratio (Accruals Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2933;
+      --grid: rgba(148, 163, 184, 0.4);
+      --accent: #2563eb;
+      --accent-light: rgba(37, 99, 235, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      margin-top: 0;
+      font-weight: 500;
+      color: #6b7280;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      margin-top: 1.5rem;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>UNH 斯隆比率 (Sloan Ratio / Accruals Ratio)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="sloanChart"></canvas>
+    </div>
+
+    <div class="note">
+      Data source (provided): Fiscal year results for UNH Sloan Ratio (Accruals Ratio), 2016–2024.
+      Negative values indicate that accruals reduce earnings relative to cash flows.
+    </div>
+  </div>
+
+  <script>
+    // Data from the prompt
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const sloanValues = [
+      -0.0237373003734053,
+      -0.0232142311336614,
+      -0.0255906728280199,
+      -0.0283585293305939,
+      -0.0364838433312319,
+      -0.0247035983345339,
+      -0.0265815846310745,
+      -0.0257477017856283,
+      -0.0342623575606907
+    ];
+
+    const ctx = document.getElementById("sloanChart").getContext("2d");
+
+    const sloanChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "UNH Sloan Ratio (Accruals Ratio)",
+            data: sloanValues,
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.15)",
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: "#2563eb",
+            pointHoverBackgroundColor: "#2563eb",
+            pointHoverBorderColor: "#1e40af",
+            borderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            tension: 0.25,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return (
+                  "Sloan Ratio: " +
+                  (Math.round(value * 10000) / 10000).toFixed(4)
+                );
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year"
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Sloan Ratio (Accruals Ratio)"
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.4)"
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(3);
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

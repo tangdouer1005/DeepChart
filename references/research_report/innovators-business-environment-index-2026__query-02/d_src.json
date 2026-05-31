@@ -1,0 +1,3758 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a ranked horizontal bar chart showing the top 12 countries by `business-incentives over-reliance`, defined as `business_incentives minus the average of ease_of_operating_business and market_perception`, with values shown in index points, restricted to countries whose simple three-pillar average is at least 50, and sorted from highest to lowest after the difference is derived.",
+  "source_summary_file": "/Users/tangjiahui/Desktop/chartbench/StartupBlink/summaries/innovators-business-environment-index-2026.md",
+  "source_query_file": "/Users/tangjiahui/Desktop/chartbench/StartupBlink/summaries/innovators-business-environment-index-2026_queries.md",
+  "records": [
+    {
+      "entity": "United States",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 100.0,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 30"
+    },
+    {
+      "entity": "United States",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 76.519,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 30"
+    },
+    {
+      "entity": "United States",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 88.54,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 30"
+    },
+    {
+      "entity": "Singapore",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 84.875,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 32"
+    },
+    {
+      "entity": "Singapore",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 100.0,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 32"
+    },
+    {
+      "entity": "Singapore",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 100.0,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 32"
+    },
+    {
+      "entity": "United Kingdom",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 86.249,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 34"
+    },
+    {
+      "entity": "United Kingdom",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 76.778,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 34"
+    },
+    {
+      "entity": "United Kingdom",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 87.143,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 34"
+    },
+    {
+      "entity": "Switzerland",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 70.433,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 36"
+    },
+    {
+      "entity": "Switzerland",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 75.033,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 36"
+    },
+    {
+      "entity": "Switzerland",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 91.696,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 36"
+    },
+    {
+      "entity": "United Arab Emirates",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 73.09,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 38"
+    },
+    {
+      "entity": "United Arab Emirates",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 98.233,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 38"
+    },
+    {
+      "entity": "United Arab Emirates",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 71.24,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 38"
+    },
+    {
+      "entity": "Canada",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 88.196,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 40"
+    },
+    {
+      "entity": "Canada",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 53.502,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 40"
+    },
+    {
+      "entity": "Canada",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 91.542,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 40"
+    },
+    {
+      "entity": "The Netherlands",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 85.397,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 44"
+    },
+    {
+      "entity": "The Netherlands",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 50.417,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 44"
+    },
+    {
+      "entity": "The Netherlands",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 94.121,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 44"
+    },
+    {
+      "entity": "Japan",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 89.187,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 46"
+    },
+    {
+      "entity": "Japan",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 60.514,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 46"
+    },
+    {
+      "entity": "Japan",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 73.515,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 46"
+    },
+    {
+      "entity": "Saudi Arabia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 60.52,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 50"
+    },
+    {
+      "entity": "Saudi Arabia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 84.163,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 50"
+    },
+    {
+      "entity": "Saudi Arabia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 51.573,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 50"
+    },
+    {
+      "entity": "Estonia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 85.988,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 52"
+    },
+    {
+      "entity": "Estonia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 73.221,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 52"
+    },
+    {
+      "entity": "Estonia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 81.515,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 52"
+    },
+    {
+      "entity": "New Zealand",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 87.139,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 54"
+    },
+    {
+      "entity": "New Zealand",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 57.702,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 54"
+    },
+    {
+      "entity": "New Zealand",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 94.45,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 54"
+    },
+    {
+      "entity": "Sweden",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 86.224,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 56"
+    },
+    {
+      "entity": "Sweden",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 52.955,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 56"
+    },
+    {
+      "entity": "Sweden",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 94.946,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 56"
+    },
+    {
+      "entity": "Luxembourg",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 74.82,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 58"
+    },
+    {
+      "entity": "Luxembourg",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 67.031,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 58"
+    },
+    {
+      "entity": "Luxembourg",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 90.076,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 58"
+    },
+    {
+      "entity": "Ireland",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 83.321,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 60"
+    },
+    {
+      "entity": "Ireland",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 58.292,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 60"
+    },
+    {
+      "entity": "Ireland",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 90.749,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 60"
+    },
+    {
+      "entity": "Cyprus",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 77.217,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 62"
+    },
+    {
+      "entity": "Cyprus",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 78.0,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 62"
+    },
+    {
+      "entity": "Cyprus",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 64.354,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 62"
+    },
+    {
+      "entity": "Belgium",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 82.925,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 64"
+    },
+    {
+      "entity": "Belgium",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 61.805,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 64"
+    },
+    {
+      "entity": "Belgium",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 79.441,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 64"
+    },
+    {
+      "entity": "Australia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 84.922,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 66"
+    },
+    {
+      "entity": "Australia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 49.235,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 66"
+    },
+    {
+      "entity": "Australia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 93.838,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 66"
+    },
+    {
+      "entity": "Bulgaria",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 79.388,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 68"
+    },
+    {
+      "entity": "Bulgaria",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 79.126,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 68"
+    },
+    {
+      "entity": "Bulgaria",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 60.329,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 68"
+    },
+    {
+      "entity": "Finland",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 88.911,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 70"
+    },
+    {
+      "entity": "Finland",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 45.514,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 70"
+    },
+    {
+      "entity": "Finland",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 91.507,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 70"
+    },
+    {
+      "entity": "Denmark",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 86.083,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 73"
+    },
+    {
+      "entity": "Denmark",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 40.991,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 73"
+    },
+    {
+      "entity": "Denmark",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 99.261,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 73"
+    },
+    {
+      "entity": "Norway",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 84.163,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 75"
+    },
+    {
+      "entity": "Norway",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 43.614,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 75"
+    },
+    {
+      "entity": "Norway",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 96.67,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 75"
+    },
+    {
+      "entity": "Lithuania",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 79.581,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 77"
+    },
+    {
+      "entity": "Lithuania",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 62.658,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 77"
+    },
+    {
+      "entity": "Lithuania",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 74.382,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 77"
+    },
+    {
+      "entity": "Germany",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 79.027,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 79"
+    },
+    {
+      "entity": "Germany",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 52.64,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 79"
+    },
+    {
+      "entity": "Germany",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 87.155,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 79"
+    },
+    {
+      "entity": "Israel",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 74.095,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 81"
+    },
+    {
+      "entity": "Israel",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 67.758,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 81"
+    },
+    {
+      "entity": "Israel",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 75.782,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 81"
+    },
+    {
+      "entity": "Romania",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 79.513,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 83"
+    },
+    {
+      "entity": "Romania",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 73.188,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 83"
+    },
+    {
+      "entity": "Romania",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 59.944,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 83"
+    },
+    {
+      "entity": "Austria",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 78.602,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 86"
+    },
+    {
+      "entity": "Austria",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 45.273,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 86"
+    },
+    {
+      "entity": "Austria",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 88.627,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 86"
+    },
+    {
+      "entity": "Iceland",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 80.416,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 88"
+    },
+    {
+      "entity": "Iceland",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 47.404,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 88"
+    },
+    {
+      "entity": "Iceland",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 86.112,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 88"
+    },
+    {
+      "entity": "France",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 85.259,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 90"
+    },
+    {
+      "entity": "France",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 52.637,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 90"
+    },
+    {
+      "entity": "France",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 73.056,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 90"
+    },
+    {
+      "entity": "Taiwan",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 83.133,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 92"
+    },
+    {
+      "entity": "Taiwan",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 72.428,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 92"
+    },
+    {
+      "entity": "Taiwan",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 78.79,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 92"
+    },
+    {
+      "entity": "Czechia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 77.702,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 94"
+    },
+    {
+      "entity": "Czechia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 58.537,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 94"
+    },
+    {
+      "entity": "Czechia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 74.39,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 94"
+    },
+    {
+      "entity": "Portugal",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 86.62,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 96"
+    },
+    {
+      "entity": "Portugal",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 45.947,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 96"
+    },
+    {
+      "entity": "Portugal",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 72.944,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 96"
+    },
+    {
+      "entity": "South Korea",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 72.403,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 98"
+    },
+    {
+      "entity": "South Korea",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 40.198,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 98"
+    },
+    {
+      "entity": "South Korea",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 73.589,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 98"
+    },
+    {
+      "entity": "Greece",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 77.621,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 102"
+    },
+    {
+      "entity": "Greece",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 59.269,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 102"
+    },
+    {
+      "entity": "Greece",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 69.461,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 102"
+    },
+    {
+      "entity": "Hungary",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 72.395,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 104"
+    },
+    {
+      "entity": "Hungary",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 73.263,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 104"
+    },
+    {
+      "entity": "Hungary",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 62.091,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 104"
+    },
+    {
+      "entity": "Latvia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 81.707,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 106"
+    },
+    {
+      "entity": "Latvia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 53.695,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 106"
+    },
+    {
+      "entity": "Latvia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 68.973,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 106"
+    },
+    {
+      "entity": "Slovakia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 77.185,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 108"
+    },
+    {
+      "entity": "Slovakia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 57.981,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 108"
+    },
+    {
+      "entity": "Slovakia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 66.903,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 108"
+    },
+    {
+      "entity": "Georgia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 81.348,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 110"
+    },
+    {
+      "entity": "Georgia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 47.617,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 110"
+    },
+    {
+      "entity": "Georgia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 54.366,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 110"
+    },
+    {
+      "entity": "Croatia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 74.185,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 112"
+    },
+    {
+      "entity": "Croatia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 56.748,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 112"
+    },
+    {
+      "entity": "Croatia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 66.956,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 112"
+    },
+    {
+      "entity": "Spain",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 82.103,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 114"
+    },
+    {
+      "entity": "Spain",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 49.14,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 114"
+    },
+    {
+      "entity": "Spain",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 61.25,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 114"
+    },
+    {
+      "entity": "Poland",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 69.561,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 118"
+    },
+    {
+      "entity": "Poland",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 54.216,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 118"
+    },
+    {
+      "entity": "Poland",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 66.638,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 118"
+    },
+    {
+      "entity": "Slovenia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 81.436,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 120"
+    },
+    {
+      "entity": "Slovenia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 34.592,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 120"
+    },
+    {
+      "entity": "Slovenia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 76.93,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 120"
+    },
+    {
+      "entity": "Brazil",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 74.71,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 122"
+    },
+    {
+      "entity": "Brazil",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 61.202,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 122"
+    },
+    {
+      "entity": "Brazil",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 40.222,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 122"
+    },
+    {
+      "entity": "Italy",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 80.654,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 124"
+    },
+    {
+      "entity": "Italy",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 43.8,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 124"
+    },
+    {
+      "entity": "Italy",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 59.815,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 124"
+    },
+    {
+      "entity": "Bahrain",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 63.013,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 126"
+    },
+    {
+      "entity": "Bahrain",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 93.21,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 126"
+    },
+    {
+      "entity": "Bahrain",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 50.948,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 126"
+    },
+    {
+      "entity": "Uruguay",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 69.139,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 128"
+    },
+    {
+      "entity": "Uruguay",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 51.407,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 128"
+    },
+    {
+      "entity": "Uruguay",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 67.832,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 128"
+    },
+    {
+      "entity": "Puerto Rico",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 87.693,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 130"
+    },
+    {
+      "entity": "Puerto Rico",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 35.585,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 130"
+    },
+    {
+      "entity": "Puerto Rico",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 59.877,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 130"
+    },
+    {
+      "entity": "Colombia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 71.327,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 132"
+    },
+    {
+      "entity": "Colombia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 46.298,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 132"
+    },
+    {
+      "entity": "Colombia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 39.455,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 132"
+    },
+    {
+      "entity": "Malaysia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 77.967,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 134"
+    },
+    {
+      "entity": "Malaysia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 69.123,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 134"
+    },
+    {
+      "entity": "Malaysia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 68.648,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 134"
+    },
+    {
+      "entity": "Malta",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 72.701,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 136"
+    },
+    {
+      "entity": "Malta",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 34.825,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 136"
+    },
+    {
+      "entity": "Malta",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 73.314,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 136"
+    },
+    {
+      "entity": "Serbia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 68.465,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 138"
+    },
+    {
+      "entity": "Serbia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 53.936,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 138"
+    },
+    {
+      "entity": "Serbia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 53.05,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 138"
+    },
+    {
+      "entity": "North Macedonia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 69.837,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 140"
+    },
+    {
+      "entity": "North Macedonia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 64.212,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 140"
+    },
+    {
+      "entity": "North Macedonia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 42.879,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 140"
+    },
+    {
+      "entity": "Vietnam",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 59.611,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 143"
+    },
+    {
+      "entity": "Vietnam",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 67.041,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 143"
+    },
+    {
+      "entity": "Vietnam",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 37.035,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 143"
+    },
+    {
+      "entity": "Indonesia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 64.518,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 146"
+    },
+    {
+      "entity": "Indonesia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 71.889,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 146"
+    },
+    {
+      "entity": "Indonesia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 42.873,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 146"
+    },
+    {
+      "entity": "India",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 68.053,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 148"
+    },
+    {
+      "entity": "India",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 51.511,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 148"
+    },
+    {
+      "entity": "India",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 37.811,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 148"
+    },
+    {
+      "entity": "Peru",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 69.344,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 150"
+    },
+    {
+      "entity": "Peru",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 49.709,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 150"
+    },
+    {
+      "entity": "Peru",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 47.187,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 150"
+    },
+    {
+      "entity": "Thailand",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 72.356,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 154"
+    },
+    {
+      "entity": "Thailand",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 71.874,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 154"
+    },
+    {
+      "entity": "Thailand",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 35.616,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 154"
+    },
+    {
+      "entity": "Chile",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 83.673,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 156"
+    },
+    {
+      "entity": "Chile",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 35.08,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 156"
+    },
+    {
+      "entity": "Chile",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 64.439,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 156"
+    },
+    {
+      "entity": "Mexico",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 77.0,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 158"
+    },
+    {
+      "entity": "Mexico",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 41.812,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 158"
+    },
+    {
+      "entity": "Mexico",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 37.997,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 158"
+    },
+    {
+      "entity": "Qatar",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 66.262,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 160"
+    },
+    {
+      "entity": "Qatar",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 73.594,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 160"
+    },
+    {
+      "entity": "Qatar",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 61.192,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 160"
+    },
+    {
+      "entity": "Albania",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 67.461,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 162"
+    },
+    {
+      "entity": "Albania",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 48.667,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 162"
+    },
+    {
+      "entity": "Albania",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 42.628,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 162"
+    },
+    {
+      "entity": "South Africa",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 68.271,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 164"
+    },
+    {
+      "entity": "South Africa",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 41.111,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 164"
+    },
+    {
+      "entity": "South Africa",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 49.396,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 164"
+    },
+    {
+      "entity": "Philippines",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 60.811,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 166"
+    },
+    {
+      "entity": "Philippines",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 47.996,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 166"
+    },
+    {
+      "entity": "Philippines",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 49.81,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 166"
+    },
+    {
+      "entity": "Panama",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 68.286,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 168"
+    },
+    {
+      "entity": "Panama",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 45.083,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 168"
+    },
+    {
+      "entity": "Panama",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 38.835,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 168"
+    },
+    {
+      "entity": "Moldova",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 62.699,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 170"
+    },
+    {
+      "entity": "Moldova",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 54.157,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 170"
+    },
+    {
+      "entity": "Moldova",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 39.3,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 170"
+    },
+    {
+      "entity": "Kosovo",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 66.611,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 172"
+    },
+    {
+      "entity": "Kosovo",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 49.872,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 172"
+    },
+    {
+      "entity": "Kosovo",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 39.759,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 172"
+    },
+    {
+      "entity": "Armenia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 68.988,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 174"
+    },
+    {
+      "entity": "Armenia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 61.131,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 174"
+    },
+    {
+      "entity": "Armenia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 43.936,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 174"
+    },
+    {
+      "entity": "Ukraine",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 59.364,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 176"
+    },
+    {
+      "entity": "Ukraine",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 52.094,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 176"
+    },
+    {
+      "entity": "Ukraine",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 32.753,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 176"
+    },
+    {
+      "entity": "Kenya",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 61.299,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 178"
+    },
+    {
+      "entity": "Kenya",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 47.267,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 178"
+    },
+    {
+      "entity": "Kenya",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 39.742,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 178"
+    },
+    {
+      "entity": "Kazakhstan",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 62.37,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 180"
+    },
+    {
+      "entity": "Kazakhstan",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 59.096,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 180"
+    },
+    {
+      "entity": "Kazakhstan",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 35.678,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 180"
+    },
+    {
+      "entity": "Cape Verde",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 42.477,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 184"
+    },
+    {
+      "entity": "Cape Verde",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 49.62,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 184"
+    },
+    {
+      "entity": "Cape Verde",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 48.122,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 184"
+    },
+    {
+      "entity": "Kuwait",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 65.369,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 186"
+    },
+    {
+      "entity": "Kuwait",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 71.611,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 186"
+    },
+    {
+      "entity": "Kuwait",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 51.577,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 186"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 44.556,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 188"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 60.891,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 188"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 37.258,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 188"
+    },
+    {
+      "entity": "Costa Rica",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 66.022,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 190"
+    },
+    {
+      "entity": "Costa Rica",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 40.729,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 190"
+    },
+    {
+      "entity": "Costa Rica",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 54.664,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 190"
+    },
+    {
+      "entity": "Azerbaijan",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 55.757,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 192"
+    },
+    {
+      "entity": "Azerbaijan",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 41.143,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 192"
+    },
+    {
+      "entity": "Azerbaijan",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 36.573,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 192"
+    },
+    {
+      "entity": "Argentina",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 62.003,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 194"
+    },
+    {
+      "entity": "Argentina",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 35.792,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 194"
+    },
+    {
+      "entity": "Argentina",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 41.125,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 194"
+    },
+    {
+      "entity": "Jamaica",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 69.409,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 196"
+    },
+    {
+      "entity": "Jamaica",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 38.309,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 196"
+    },
+    {
+      "entity": "Jamaica",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 52.59,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 196"
+    },
+    {
+      "entity": "Jordan",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 55.725,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 198"
+    },
+    {
+      "entity": "Jordan",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 60.773,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 198"
+    },
+    {
+      "entity": "Jordan",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 31.272,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 198"
+    },
+    {
+      "entity": "Uzbekistan",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 46.928,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 200"
+    },
+    {
+      "entity": "Uzbekistan",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 50.093,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 200"
+    },
+    {
+      "entity": "Uzbekistan",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 29.413,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 200"
+    },
+    {
+      "entity": "El Salvador",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 63.154,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 202"
+    },
+    {
+      "entity": "El Salvador",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 35.568,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 202"
+    },
+    {
+      "entity": "El Salvador",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 34.748,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 202"
+    },
+    {
+      "entity": "Morocco",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 63.466,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 204"
+    },
+    {
+      "entity": "Morocco",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 29.403,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 204"
+    },
+    {
+      "entity": "Morocco",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 38.548,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 204"
+    },
+    {
+      "entity": "Côte d’Ivoire",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 57.517,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 206"
+    },
+    {
+      "entity": "Côte d’Ivoire",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 42.752,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 206"
+    },
+    {
+      "entity": "Côte d’Ivoire",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 29.067,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 206"
+    },
+    {
+      "entity": "Paraguay",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 43.971,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 208"
+    },
+    {
+      "entity": "Paraguay",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 47.017,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 208"
+    },
+    {
+      "entity": "Paraguay",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 41.344,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 208"
+    },
+    {
+      "entity": "Namibia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 50.246,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 210"
+    },
+    {
+      "entity": "Namibia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 39.563,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 210"
+    },
+    {
+      "entity": "Namibia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 51.847,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 210"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 57.04,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 212"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 49.232,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 212"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 21.978,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 212"
+    },
+    {
+      "entity": "China",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 57.451,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 214"
+    },
+    {
+      "entity": "China",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 72.325,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 214"
+    },
+    {
+      "entity": "China",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 50.791,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 214"
+    },
+    {
+      "entity": "Ecuador",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 48.92,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 216"
+    },
+    {
+      "entity": "Ecuador",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 48.76,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 216"
+    },
+    {
+      "entity": "Ecuador",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 25.528,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 216"
+    },
+    {
+      "entity": "Tunisia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 61.54,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 218"
+    },
+    {
+      "entity": "Tunisia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 47.474,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 218"
+    },
+    {
+      "entity": "Tunisia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 29.561,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 218"
+    },
+    {
+      "entity": "Oman",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 56.858,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 220"
+    },
+    {
+      "entity": "Oman",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 63.648,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 220"
+    },
+    {
+      "entity": "Oman",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 41.627,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 220"
+    },
+    {
+      "entity": "Guatemala",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 60.587,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 222"
+    },
+    {
+      "entity": "Guatemala",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 48.482,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 222"
+    },
+    {
+      "entity": "Guatemala",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 30.688,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 222"
+    },
+    {
+      "entity": "Türkiye",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 54.021,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 224"
+    },
+    {
+      "entity": "Türkiye",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 54.468,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 224"
+    },
+    {
+      "entity": "Türkiye",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 32.055,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 224"
+    },
+    {
+      "entity": "Rwanda",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 61.213,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 226"
+    },
+    {
+      "entity": "Rwanda",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 29.773,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 226"
+    },
+    {
+      "entity": "Rwanda",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 37.402,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 226"
+    },
+    {
+      "entity": "Mongolia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 54.556,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 228"
+    },
+    {
+      "entity": "Mongolia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 33.646,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 228"
+    },
+    {
+      "entity": "Mongolia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 30.881,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 228"
+    },
+    {
+      "entity": "Bolivia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 46.893,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 230"
+    },
+    {
+      "entity": "Bolivia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 45.7,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 230"
+    },
+    {
+      "entity": "Bolivia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 26.114,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 230"
+    },
+    {
+      "entity": "Egypt",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 52.749,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 232"
+    },
+    {
+      "entity": "Egypt",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 37.915,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 232"
+    },
+    {
+      "entity": "Egypt",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 28.839,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 232"
+    },
+    {
+      "entity": "Nigeria",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 56.05,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 234"
+    },
+    {
+      "entity": "Nigeria",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 43.968,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 234"
+    },
+    {
+      "entity": "Nigeria",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 35.469,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 234"
+    },
+    {
+      "entity": "Dominican Republic",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 55.435,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 236"
+    },
+    {
+      "entity": "Dominican Republic",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 19.527,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 236"
+    },
+    {
+      "entity": "Dominican Republic",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 36.472,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 236"
+    },
+    {
+      "entity": "Zambia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 54.127,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 238"
+    },
+    {
+      "entity": "Zambia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 35.668,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 238"
+    },
+    {
+      "entity": "Zambia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 28.634,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 238"
+    },
+    {
+      "entity": "Tanzania",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 44.11,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 240"
+    },
+    {
+      "entity": "Tanzania",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 33.216,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 240"
+    },
+    {
+      "entity": "Tanzania",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 32.619,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 240"
+    },
+    {
+      "entity": "Uganda",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 50.816,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 242"
+    },
+    {
+      "entity": "Uganda",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 16.959,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 242"
+    },
+    {
+      "entity": "Uganda",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 34.655,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 242"
+    },
+    {
+      "entity": "Pakistan",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 48.845,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 244"
+    },
+    {
+      "entity": "Pakistan",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 29.995,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 244"
+    },
+    {
+      "entity": "Pakistan",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 23.476,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 244"
+    },
+    {
+      "entity": "Senegal",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 54.477,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 246"
+    },
+    {
+      "entity": "Senegal",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 23.831,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 246"
+    },
+    {
+      "entity": "Senegal",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 26.826,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 246"
+    },
+    {
+      "entity": "Ghana",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 59.831,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 248"
+    },
+    {
+      "entity": "Ghana",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 28.533,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 248"
+    },
+    {
+      "entity": "Ghana",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 35.651,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 248"
+    },
+    {
+      "entity": "Nepal",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 42.696,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 250"
+    },
+    {
+      "entity": "Nepal",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 33.233,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 250"
+    },
+    {
+      "entity": "Nepal",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 25.541,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 250"
+    },
+    {
+      "entity": "Sri Lanka",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 60.663,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 252"
+    },
+    {
+      "entity": "Sri Lanka",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 36.089,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 252"
+    },
+    {
+      "entity": "Sri Lanka",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 22.679,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 252"
+    },
+    {
+      "entity": "Russia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 36.227,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 254"
+    },
+    {
+      "entity": "Russia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 52.892,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 254"
+    },
+    {
+      "entity": "Russia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 27.009,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 254"
+    },
+    {
+      "entity": "Bangladesh",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 46.658,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 256"
+    },
+    {
+      "entity": "Bangladesh",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 31.858,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 256"
+    },
+    {
+      "entity": "Bangladesh",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 24.314,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 256"
+    },
+    {
+      "entity": "Liberia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 44.778,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 258"
+    },
+    {
+      "entity": "Liberia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 23.822,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 258"
+    },
+    {
+      "entity": "Liberia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 25.683,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 258"
+    },
+    {
+      "entity": "Tajikistan",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 30.507,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 260"
+    },
+    {
+      "entity": "Tajikistan",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 44.659,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 260"
+    },
+    {
+      "entity": "Tajikistan",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 18.017,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 260"
+    },
+    {
+      "entity": "Algeria",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 36.491,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 262"
+    },
+    {
+      "entity": "Algeria",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 34.211,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 262"
+    },
+    {
+      "entity": "Algeria",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 28.844,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 262"
+    },
+    {
+      "entity": "Guinea",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 34.088,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 264"
+    },
+    {
+      "entity": "Guinea",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 22.363,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 264"
+    },
+    {
+      "entity": "Guinea",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 23.429,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 264"
+    },
+    {
+      "entity": "Cambodia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 29.957,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 266"
+    },
+    {
+      "entity": "Cambodia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 36.485,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 266"
+    },
+    {
+      "entity": "Cambodia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 17.11,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 266"
+    },
+    {
+      "entity": "Nicaragua",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 35.733,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 268"
+    },
+    {
+      "entity": "Nicaragua",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 25.701,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 268"
+    },
+    {
+      "entity": "Nicaragua",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 21.769,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 268"
+    },
+    {
+      "entity": "Mauritania",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 40.406,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 270"
+    },
+    {
+      "entity": "Mauritania",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 17.469,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 270"
+    },
+    {
+      "entity": "Mauritania",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 25.294,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 270"
+    },
+    {
+      "entity": "Lebanon",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 31.953,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 272"
+    },
+    {
+      "entity": "Lebanon",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 46.429,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 272"
+    },
+    {
+      "entity": "Lebanon",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 12.829,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 272"
+    },
+    {
+      "entity": "Belarus",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 41.58,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 274"
+    },
+    {
+      "entity": "Belarus",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 38.592,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 274"
+    },
+    {
+      "entity": "Belarus",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 25.87,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 274"
+    },
+    {
+      "entity": "Angola",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 33.639,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 276"
+    },
+    {
+      "entity": "Angola",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 25.579,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 276"
+    },
+    {
+      "entity": "Angola",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 14.525,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 276"
+    },
+    {
+      "entity": "Iraq",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 20.931,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 278"
+    },
+    {
+      "entity": "Iraq",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 50.106,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 278"
+    },
+    {
+      "entity": "Iraq",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 10.77,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 278"
+    },
+    {
+      "entity": "Myanmar",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 24.235,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 280"
+    },
+    {
+      "entity": "Myanmar",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 44.74,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 280"
+    },
+    {
+      "entity": "Myanmar",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 8.411,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 280"
+    },
+    {
+      "entity": "Zimbabwe",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 19.948,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 282"
+    },
+    {
+      "entity": "Zimbabwe",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 9.765,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 282"
+    },
+    {
+      "entity": "Zimbabwe",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 25.985,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 282"
+    },
+    {
+      "entity": "Ethiopia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 19.406,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 284"
+    },
+    {
+      "entity": "Ethiopia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 13.617,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 284"
+    },
+    {
+      "entity": "Ethiopia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 19.519,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 284"
+    },
+    {
+      "entity": "Cameroon",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 41.888,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 286"
+    },
+    {
+      "entity": "Cameroon",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 16.252,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 286"
+    },
+    {
+      "entity": "Cameroon",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 11.265,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 286"
+    },
+    {
+      "entity": "Congo",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 18.141,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 288"
+    },
+    {
+      "entity": "Congo",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 0.1,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 288"
+    },
+    {
+      "entity": "Congo",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 16.579,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 288"
+    },
+    {
+      "entity": "Somalia",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 1.235,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 290"
+    },
+    {
+      "entity": "Somalia",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 17.137,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 290"
+    },
+    {
+      "entity": "Somalia",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 0.1,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 290"
+    },
+    {
+      "entity": "Venezuela",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 0.1,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 292"
+    },
+    {
+      "entity": "Venezuela",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 9.656,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 292"
+    },
+    {
+      "entity": "Venezuela",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 12.417,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 292"
+    },
+    {
+      "entity": "Iran",
+      "field_group": "country_profile",
+      "field": "ease_of_operating_business",
+      "value": 15.122,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 294"
+    },
+    {
+      "entity": "Iran",
+      "field_group": "country_profile",
+      "field": "business_incentives",
+      "value": 47.361,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 294"
+    },
+    {
+      "entity": "Iran",
+      "field_group": "country_profile",
+      "field": "market_perception",
+      "value": 15.809,
+      "value_unit": "index points",
+      "value_type": "score",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 294"
+    }
+  ]
+}

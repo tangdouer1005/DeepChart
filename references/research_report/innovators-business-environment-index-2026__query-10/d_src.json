@@ -1,0 +1,2508 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a ranked dumbbell chart showing the 12 countries with the largest absolute gap between `overall global_rank` and `market_perception global rank`, with the two endpoints plotted as the two ranks for each country, the selection determined after computing the absolute rank difference, values expressed in rank positions, and countries sorted from the largest gap to the smallest.",
+  "source_summary_file": "/Users/tangjiahui/Desktop/chartbench/StartupBlink/summaries/innovators-business-environment-index-2026.md",
+  "source_query_file": "/Users/tangjiahui/Desktop/chartbench/StartupBlink/summaries/innovators-business-environment-index-2026_queries.md",
+  "records": [
+    {
+      "entity": "United States",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 1,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 30"
+    },
+    {
+      "entity": "United States",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 14,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 30"
+    },
+    {
+      "entity": "Singapore",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 2,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 32"
+    },
+    {
+      "entity": "Singapore",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 1,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 32"
+    },
+    {
+      "entity": "United Kingdom",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 3,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 34"
+    },
+    {
+      "entity": "United Kingdom",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 16,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 34"
+    },
+    {
+      "entity": "Switzerland",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 4,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 36"
+    },
+    {
+      "entity": "Switzerland",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 8,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 36"
+    },
+    {
+      "entity": "United Arab Emirates",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 5,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 38"
+    },
+    {
+      "entity": "United Arab Emirates",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 30,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 38"
+    },
+    {
+      "entity": "Canada",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 6,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 40"
+    },
+    {
+      "entity": "Canada",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 9,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 40"
+    },
+    {
+      "entity": "The Netherlands",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 7,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 44"
+    },
+    {
+      "entity": "The Netherlands",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 6,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 44"
+    },
+    {
+      "entity": "Japan",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 8,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 46"
+    },
+    {
+      "entity": "Japan",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 26,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 46"
+    },
+    {
+      "entity": "Saudi Arabia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 9,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 50"
+    },
+    {
+      "entity": "Saudi Arabia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 53,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 50"
+    },
+    {
+      "entity": "Estonia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 10,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 52"
+    },
+    {
+      "entity": "Estonia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 18,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 52"
+    },
+    {
+      "entity": "New Zealand",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 11,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 54"
+    },
+    {
+      "entity": "New Zealand",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 5,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 54"
+    },
+    {
+      "entity": "Sweden",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 12,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 56"
+    },
+    {
+      "entity": "Sweden",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 4,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 56"
+    },
+    {
+      "entity": "Luxembourg",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 13,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 58"
+    },
+    {
+      "entity": "Luxembourg",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 12,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 58"
+    },
+    {
+      "entity": "Ireland",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 14,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 60"
+    },
+    {
+      "entity": "Ireland",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 11,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 60"
+    },
+    {
+      "entity": "Cyprus",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 15,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 62"
+    },
+    {
+      "entity": "Cyprus",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 39,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 62"
+    },
+    {
+      "entity": "Belgium",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 16,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 64"
+    },
+    {
+      "entity": "Belgium",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 19,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 64"
+    },
+    {
+      "entity": "Australia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 17,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 66"
+    },
+    {
+      "entity": "Australia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 7,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 66"
+    },
+    {
+      "entity": "Bulgaria",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 18,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 68"
+    },
+    {
+      "entity": "Bulgaria",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 43,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 68"
+    },
+    {
+      "entity": "Finland",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 19,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 70"
+    },
+    {
+      "entity": "Finland",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 10,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 70"
+    },
+    {
+      "entity": "Denmark",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 20,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 73"
+    },
+    {
+      "entity": "Denmark",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 2,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 73"
+    },
+    {
+      "entity": "Norway",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 21,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 75"
+    },
+    {
+      "entity": "Norway",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 3,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 75"
+    },
+    {
+      "entity": "Lithuania",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 22,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 77"
+    },
+    {
+      "entity": "Lithuania",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 24,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 77"
+    },
+    {
+      "entity": "Germany",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 23,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 79"
+    },
+    {
+      "entity": "Germany",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 15,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 79"
+    },
+    {
+      "entity": "Israel",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 24,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 81"
+    },
+    {
+      "entity": "Israel",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 22,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 81"
+    },
+    {
+      "entity": "Romania",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 25,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 83"
+    },
+    {
+      "entity": "Romania",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 44,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 83"
+    },
+    {
+      "entity": "Austria",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 26,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 86"
+    },
+    {
+      "entity": "Austria",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 13,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 86"
+    },
+    {
+      "entity": "Iceland",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 27,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 88"
+    },
+    {
+      "entity": "Iceland",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 17,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 88"
+    },
+    {
+      "entity": "France",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 28,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 90"
+    },
+    {
+      "entity": "France",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 28,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 90"
+    },
+    {
+      "entity": "Taiwan",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 29,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 92"
+    },
+    {
+      "entity": "Taiwan",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 20,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 92"
+    },
+    {
+      "entity": "Czechia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 30,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 94"
+    },
+    {
+      "entity": "Czechia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 23,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 94"
+    },
+    {
+      "entity": "Portugal",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 31,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 96"
+    },
+    {
+      "entity": "Portugal",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 29,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 96"
+    },
+    {
+      "entity": "South Korea",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 32,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 98"
+    },
+    {
+      "entity": "South Korea",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 25,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 98"
+    },
+    {
+      "entity": "Greece",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 33,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 102"
+    },
+    {
+      "entity": "Greece",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 31,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 102"
+    },
+    {
+      "entity": "Hungary",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 34,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 104"
+    },
+    {
+      "entity": "Hungary",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 40,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 104"
+    },
+    {
+      "entity": "Latvia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 35,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 106"
+    },
+    {
+      "entity": "Latvia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 32,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 106"
+    },
+    {
+      "entity": "Slovakia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 36,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 108"
+    },
+    {
+      "entity": "Slovakia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 36,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 108"
+    },
+    {
+      "entity": "Georgia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 37,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 110"
+    },
+    {
+      "entity": "Georgia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 48,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 110"
+    },
+    {
+      "entity": "Croatia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 38,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 112"
+    },
+    {
+      "entity": "Croatia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 35,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 112"
+    },
+    {
+      "entity": "Spain",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 39,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 114"
+    },
+    {
+      "entity": "Spain",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 41,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 114"
+    },
+    {
+      "entity": "Poland",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 40,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 118"
+    },
+    {
+      "entity": "Poland",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 37,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 118"
+    },
+    {
+      "entity": "Slovenia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 41,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 120"
+    },
+    {
+      "entity": "Slovenia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 21,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 120"
+    },
+    {
+      "entity": "Brazil",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 42,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 122"
+    },
+    {
+      "entity": "Brazil",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 67,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 122"
+    },
+    {
+      "entity": "Italy",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 43,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 124"
+    },
+    {
+      "entity": "Italy",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 46,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 124"
+    },
+    {
+      "entity": "Bahrain",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 44,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 126"
+    },
+    {
+      "entity": "Bahrain",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 54,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 126"
+    },
+    {
+      "entity": "Uruguay",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 45,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 128"
+    },
+    {
+      "entity": "Uruguay",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 34,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 128"
+    },
+    {
+      "entity": "Puerto Rico",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 46,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 130"
+    },
+    {
+      "entity": "Puerto Rico",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 45,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 130"
+    },
+    {
+      "entity": "Colombia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 47,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 132"
+    },
+    {
+      "entity": "Colombia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 70,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 132"
+    },
+    {
+      "entity": "Malaysia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 48,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 134"
+    },
+    {
+      "entity": "Malaysia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 33,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 134"
+    },
+    {
+      "entity": "Malta",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 49,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 136"
+    },
+    {
+      "entity": "Malta",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 27,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 136"
+    },
+    {
+      "entity": "Serbia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 50,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 138"
+    },
+    {
+      "entity": "Serbia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 49,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 138"
+    },
+    {
+      "entity": "North Macedonia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 51,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 140"
+    },
+    {
+      "entity": "North Macedonia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 61,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 140"
+    },
+    {
+      "entity": "Vietnam",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 52,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 143"
+    },
+    {
+      "entity": "Vietnam",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 78,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 143"
+    },
+    {
+      "entity": "Indonesia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 53,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 146"
+    },
+    {
+      "entity": "Indonesia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 62,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 146"
+    },
+    {
+      "entity": "India",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 54,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 148"
+    },
+    {
+      "entity": "India",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 75,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 148"
+    },
+    {
+      "entity": "Peru",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 55,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 150"
+    },
+    {
+      "entity": "Peru",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 59,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 150"
+    },
+    {
+      "entity": "Thailand",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 56,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 154"
+    },
+    {
+      "entity": "Thailand",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 83,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 154"
+    },
+    {
+      "entity": "Chile",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 57,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 156"
+    },
+    {
+      "entity": "Chile",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 38,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 156"
+    },
+    {
+      "entity": "Mexico",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 58,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 158"
+    },
+    {
+      "entity": "Mexico",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 74,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 158"
+    },
+    {
+      "entity": "Qatar",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 59,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 160"
+    },
+    {
+      "entity": "Qatar",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 42,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 160"
+    },
+    {
+      "entity": "Albania",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 60,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 162"
+    },
+    {
+      "entity": "Albania",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 63,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 162"
+    },
+    {
+      "entity": "South Africa",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 61,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 164"
+    },
+    {
+      "entity": "South Africa",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 57,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 164"
+    },
+    {
+      "entity": "Philippines",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 62,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 166"
+    },
+    {
+      "entity": "Philippines",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 56,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 166"
+    },
+    {
+      "entity": "Panama",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 63,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 168"
+    },
+    {
+      "entity": "Panama",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 72,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 168"
+    },
+    {
+      "entity": "Moldova",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 64,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 170"
+    },
+    {
+      "entity": "Moldova",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 71,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 170"
+    },
+    {
+      "entity": "Kosovo",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 65,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 172"
+    },
+    {
+      "entity": "Kosovo",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 68,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 172"
+    },
+    {
+      "entity": "Armenia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 66,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 174"
+    },
+    {
+      "entity": "Armenia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 60,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 174"
+    },
+    {
+      "entity": "Ukraine",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 67,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 176"
+    },
+    {
+      "entity": "Ukraine",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 87,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 176"
+    },
+    {
+      "entity": "Kenya",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 68,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 178"
+    },
+    {
+      "entity": "Kenya",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 69,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 178"
+    },
+    {
+      "entity": "Kazakhstan",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 69,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 180"
+    },
+    {
+      "entity": "Kazakhstan",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 81,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 180"
+    },
+    {
+      "entity": "Cape Verde",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 70,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 184"
+    },
+    {
+      "entity": "Cape Verde",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 58,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 184"
+    },
+    {
+      "entity": "Kuwait",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 71,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 186"
+    },
+    {
+      "entity": "Kuwait",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 52,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 186"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 72,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 188"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 77,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 188"
+    },
+    {
+      "entity": "Costa Rica",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 73,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 190"
+    },
+    {
+      "entity": "Costa Rica",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 47,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 190"
+    },
+    {
+      "entity": "Azerbaijan",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 74,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 192"
+    },
+    {
+      "entity": "Azerbaijan",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 79,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 192"
+    },
+    {
+      "entity": "Argentina",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 75,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 194"
+    },
+    {
+      "entity": "Argentina",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 66,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 194"
+    },
+    {
+      "entity": "Jamaica",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 76,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 196"
+    },
+    {
+      "entity": "Jamaica",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 50,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 196"
+    },
+    {
+      "entity": "Jordan",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 77,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 198"
+    },
+    {
+      "entity": "Jordan",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 90,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 198"
+    },
+    {
+      "entity": "Uzbekistan",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 78,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 200"
+    },
+    {
+      "entity": "Uzbekistan",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 94,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 200"
+    },
+    {
+      "entity": "El Salvador",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 79,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 202"
+    },
+    {
+      "entity": "El Salvador",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 85,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 202"
+    },
+    {
+      "entity": "Morocco",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 80,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 204"
+    },
+    {
+      "entity": "Morocco",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 73,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 204"
+    },
+    {
+      "entity": "Côte d’Ivoire",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 81,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 206"
+    },
+    {
+      "entity": "Côte d’Ivoire",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 95,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 206"
+    },
+    {
+      "entity": "Paraguay",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 82,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 208"
+    },
+    {
+      "entity": "Paraguay",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 65,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 208"
+    },
+    {
+      "entity": "Namibia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 83,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 210"
+    },
+    {
+      "entity": "Namibia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 51,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 210"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 84,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 212"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 112,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 212"
+    },
+    {
+      "entity": "China",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 85,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 214"
+    },
+    {
+      "entity": "China",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 55,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 214"
+    },
+    {
+      "entity": "Ecuador",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 86,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 216"
+    },
+    {
+      "entity": "Ecuador",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 106,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 216"
+    },
+    {
+      "entity": "Tunisia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 87,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 218"
+    },
+    {
+      "entity": "Tunisia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 93,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 218"
+    },
+    {
+      "entity": "Oman",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 88,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 220"
+    },
+    {
+      "entity": "Oman",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 64,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 220"
+    },
+    {
+      "entity": "Guatemala",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 89,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 222"
+    },
+    {
+      "entity": "Guatemala",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 92,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 222"
+    },
+    {
+      "entity": "Türkiye",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 90,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 224"
+    },
+    {
+      "entity": "Türkiye",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 89,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 224"
+    },
+    {
+      "entity": "Rwanda",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 91,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 226"
+    },
+    {
+      "entity": "Rwanda",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 76,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 226"
+    },
+    {
+      "entity": "Mongolia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 92,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 228"
+    },
+    {
+      "entity": "Mongolia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 91,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 228"
+    },
+    {
+      "entity": "Bolivia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 93,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 230"
+    },
+    {
+      "entity": "Bolivia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 101,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 230"
+    },
+    {
+      "entity": "Egypt",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 94,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 232"
+    },
+    {
+      "entity": "Egypt",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 97,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 232"
+    },
+    {
+      "entity": "Nigeria",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 95,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 234"
+    },
+    {
+      "entity": "Nigeria",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 84,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 234"
+    },
+    {
+      "entity": "Dominican Republic",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 96,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 236"
+    },
+    {
+      "entity": "Dominican Republic",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 80,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 236"
+    },
+    {
+      "entity": "Zambia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 97,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 238"
+    },
+    {
+      "entity": "Zambia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 98,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 238"
+    },
+    {
+      "entity": "Tanzania",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 98,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 240"
+    },
+    {
+      "entity": "Tanzania",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 88,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 240"
+    },
+    {
+      "entity": "Uganda",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 99,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 242"
+    },
+    {
+      "entity": "Uganda",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 86,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 242"
+    },
+    {
+      "entity": "Pakistan",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 100,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 244"
+    },
+    {
+      "entity": "Pakistan",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 109,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 244"
+    },
+    {
+      "entity": "Senegal",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 101,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 246"
+    },
+    {
+      "entity": "Senegal",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 100,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 246"
+    },
+    {
+      "entity": "Ghana",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 102,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 248"
+    },
+    {
+      "entity": "Ghana",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 82,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 248"
+    },
+    {
+      "entity": "Nepal",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 103,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 250"
+    },
+    {
+      "entity": "Nepal",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 105,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 250"
+    },
+    {
+      "entity": "Sri Lanka",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 104,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 252"
+    },
+    {
+      "entity": "Sri Lanka",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 111,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 252"
+    },
+    {
+      "entity": "Russia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 105,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 254"
+    },
+    {
+      "entity": "Russia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 99,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 254"
+    },
+    {
+      "entity": "Bangladesh",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 106,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 256"
+    },
+    {
+      "entity": "Bangladesh",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 108,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 256"
+    },
+    {
+      "entity": "Liberia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 107,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 258"
+    },
+    {
+      "entity": "Liberia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 104,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 258"
+    },
+    {
+      "entity": "Tajikistan",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 108,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 260"
+    },
+    {
+      "entity": "Tajikistan",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 115,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 260"
+    },
+    {
+      "entity": "Algeria",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 109,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 262"
+    },
+    {
+      "entity": "Algeria",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 96,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 262"
+    },
+    {
+      "entity": "Guinea",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 110,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 264"
+    },
+    {
+      "entity": "Guinea",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 110,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 264"
+    },
+    {
+      "entity": "Cambodia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 111,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 266"
+    },
+    {
+      "entity": "Cambodia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 116,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 266"
+    },
+    {
+      "entity": "Nicaragua",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 112,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 268"
+    },
+    {
+      "entity": "Nicaragua",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 113,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 268"
+    },
+    {
+      "entity": "Mauritania",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 113,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 270"
+    },
+    {
+      "entity": "Mauritania",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 107,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 270"
+    },
+    {
+      "entity": "Lebanon",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 114,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 272"
+    },
+    {
+      "entity": "Lebanon",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 120,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 272"
+    },
+    {
+      "entity": "Belarus",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 115,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 274"
+    },
+    {
+      "entity": "Belarus",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 103,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 274"
+    },
+    {
+      "entity": "Angola",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 116,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 276"
+    },
+    {
+      "entity": "Angola",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 119,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 276"
+    },
+    {
+      "entity": "Iraq",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 117,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 278"
+    },
+    {
+      "entity": "Iraq",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 123,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 278"
+    },
+    {
+      "entity": "Myanmar",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 118,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 280"
+    },
+    {
+      "entity": "Myanmar",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 124,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 280"
+    },
+    {
+      "entity": "Zimbabwe",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 119,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 282"
+    },
+    {
+      "entity": "Zimbabwe",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 102,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 282"
+    },
+    {
+      "entity": "Ethiopia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 120,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 284"
+    },
+    {
+      "entity": "Ethiopia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 114,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 284"
+    },
+    {
+      "entity": "Cameroon",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 121,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 286"
+    },
+    {
+      "entity": "Cameroon",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 122,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 286"
+    },
+    {
+      "entity": "Congo",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 122,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 288"
+    },
+    {
+      "entity": "Congo",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 117,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 288"
+    },
+    {
+      "entity": "Somalia",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 123,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 290"
+    },
+    {
+      "entity": "Somalia",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 125,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 290"
+    },
+    {
+      "entity": "Venezuela",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 124,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 292"
+    },
+    {
+      "entity": "Venezuela",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 121,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 292"
+    },
+    {
+      "entity": "Iran",
+      "field_group": "country_profile",
+      "field": "global_rank",
+      "value": 125,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 294"
+    },
+    {
+      "entity": "Iran",
+      "field_group": "country_profile",
+      "field": "market_perception_global_rank",
+      "value": 118,
+      "value_unit": "rank positions",
+      "value_type": "rank",
+      "source_section": "### 3.2 Organized by Country",
+      "source_note": "directly visible in section 3.2 country table, source page 294"
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>abt 现金消耗跑道（零收入情景）2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Use Chart.js 3.x for maximum compatibility -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #ffffff;
+      color: #111827;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 18px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      background: #f9fafb;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+      height: 420px; /* fixed height for responsiveness */
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>abt 现金消耗跑道（月）</h1>
+    <div class="subtitle">
+      零收入情景下 2016–2024 财年的现金消耗跑道（Runway，单位：月）
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="runwayChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      数据来源：提供的财年数据（RESULT_Runway_Months）。纵轴为在零收入情景下可维持运营的预计月数。
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener("load", function () {
+      // Data from source
+      const labels = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ];
+
+      const values = [
+        26.810655147588196,
+        9.308485198317802,
+        3.614763733249745,
+        3.5655453775690864,
+        6.399625643425362,
+        8.125207296849087,
+        8.363354256294521,
+        5.662127950735545,
+        6.043245387819877
+      ];
+
+      const ctx = document.getElementById("runwayChart").getContext("2d");
+
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "现金消耗跑道（月，零收入情景）",
+              data: values,
+              borderColor: "#2563eb",
+              backgroundColor: "rgba(37, 99, 235, 0.16)",
+              borderWidth: 2,
+              pointRadius: 4,
+              pointBackgroundColor: "#ffffff",
+              pointBorderColor: "#2563eb",
+              pointHoverRadius: 6,
+              tension: 0.25,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                padding: 16
+              }
+            },
+            tooltip: {
+              usePointStyle: true,
+              backgroundColor: "rgba(15,23,42,0.92)",
+              padding: 10,
+              callbacks: {
+                label: function (context) {
+                  const value = context.parsed.y;
+                  return " 跑道：" + value.toFixed(2) + " 个月";
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "财年（Fiscal Year）"
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "现金消耗跑道（个月）"
+              },
+              ticks: {
+                callback: function (value) {
+                  return value + " 月";
+                }
+              },
+              grid: {
+                color: "rgba(148, 163, 184, 0.35)"
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "report_id": "010",
+  "query_id": 8,
+  "query_text": "Create a slope chart comparing each value-chain segment’s share of all companies founded in or after 2020 against its share of all companies with `Mosaic >= 850`, counting each company once and sorting segments by the increase from founder-share to high-Mosaic-share.",
+  "chart_type": "slope",
+  "value_unit": "share (%)",
+  "sort_rule": "descending by increase from recent-founder share to high-Mosaic share",
+  "selection_rule": "segment shares within the recent-founder subset and the Mosaic>=850 subset",
+  "records": [
+    {
+      "label": "AI computing hardware",
+      "left_value": 26.315789,
+      "right_value": 42.857143,
+      "delta": 16.541353
+    },
+    {
+      "label": "Networking & connectivity",
+      "left_value": 5.263158,
+      "right_value": 7.142857,
+      "delta": 1.879699
+    },
+    {
+      "label": "Power generation",
+      "left_value": 36.842105,
+      "right_value": 35.714286,
+      "delta": -1.12782
+    },
+    {
+      "label": "Data center facilities & operations",
+      "left_value": 15.789474,
+      "right_value": 14.285714,
+      "delta": -1.503759
+    },
+    {
+      "label": "Supporting hardware infrastructure",
+      "left_value": 15.789474,
+      "right_value": 0.0,
+      "delta": -15.789474
+    }
+  ],
+  "plot_config": {
+    "title": "Segment share shift: recent founders vs high-Mosaic firms",
+    "left_label": "Share of companies founded in or after 2020",
+    "right_label": "Share of companies with Mosaic >= 850",
+    "y_label": "Share (%)"
+  },
+  "reasoning_summary": [
+    "Assigned segment membership from section-2 boundaries.",
+    "Built the recent-founder subset using Founded year >= 2020.",
+    "Built the high-Mosaic subset using Mosaic >= 850.",
+    "Computed segment shares within each subset and sorted by share increase."
+  ],
+  "stats": {
+    "recent_subset_count": 19,
+    "high_mosaic_subset_count": 14,
+    "returned_count": 5
+  },
+  "open_issues": []
+}

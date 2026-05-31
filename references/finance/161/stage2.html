@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>MRK 现金循环周期 (CCC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f7;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .container {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      max-width: 960px;
+      width: 100%;
+      padding: 20px 24px 28px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      font-weight: 600;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+    .meta span {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #f3f4f6;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      width: 100%;
+    }
+    .note {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 10px;
+    }
+    @media (max-width: 640px) {
+      .container {
+        padding: 16px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>MRK 现金循环周期 (CCC)</h1>
+    <div class="subtitle">2016–2024 年度表现（单位：天）</div>
+    <div class="meta">
+      <span>指标：现金循环周期 (Cash Conversion Cycle)</span>
+      <span>公司：MRK</span>
+      <span>频率：年度</span>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="cccChart"></canvas>
+    </div>
+    <div class="note">
+      数据来源：用户提供数据。柱状图展示 2016–2024 财年的 CCC 变化，数值为天数。
+    </div>
+  </div>
+
+  <script>
+    // Data from source
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const cccValues = [
+      116.87268326446308,
+      120.4706378294807,
+      115.77397039290368,
+      130.856190504121,
+      106.16036796791316,
+      94.51238341311868,
+      88.85682525103635,
+      106.3145857944624,
+      112.3112705943573
+    ];
+
+    // Helper to compute min/max with some padding
+    const minVal = Math.min(...cccValues);
+    const maxVal = Math.max(...cccValues);
+    const padding = 5; // days
+    const yMin = Math.floor(minVal - padding);
+    const yMax = Math.ceil(maxVal + padding);
+
+    const ctx = document.getElementById("cccChart").getContext("2d");
+
+    const cccChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "现金循环周期 (天)",
+            data: cccValues,
+            backgroundColor: function (ctx) {
+              const index = ctx.dataIndex;
+              const value = ctx.raw;
+
+              // Use a gradient on each bar for a clean but modern feel
+              const chart = ctx.chart;
+              const { ctx: canvasCtx, chartArea } = chart;
+              if (!chartArea) {
+                return "rgba(37, 99, 235, 0.75)";
+              }
+              const gradient = canvasCtx.createLinearGradient(
+                0,
+                chartArea.bottom,
+                0,
+                chartArea.top
+              );
+              // Slightly highlight the highest CCC year
+              const maxIndex = cccValues.indexOf(maxVal);
+              if (index === maxIndex) {
+                gradient.addColorStop(0, "rgba(220, 38, 38, 0.75)");
+                gradient.addColorStop(1, "rgba(248, 113, 113, 0.95)");
+              } else {
+                gradient.addColorStop(0, "rgba(37, 99, 235, 0.70)");
+                gradient.addColorStop(1, "rgba(59, 130, 246, 0.95)");
+              }
+              return gradient;
+            },
+            borderRadius: 6,
+            borderSkipped: false,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.95)"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 800,
+          easing: "easeOutQuart"
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 14,
+              boxHeight: 14,
+              usePointStyle: true,
+              pointStyle: "rectRounded",
+              font: {
+                size: 12
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            usePointStyle: true,
+            backgroundColor: "rgba(15, 23, 42, 0.95)",
+            titleFont: { size: 13, weight: "600" },
+            bodyFont: { size: 12 },
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const value = context.raw;
+                return ` CCC: ${value.toFixed(2)} 天`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 12
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            min: yMin,
+            max: yMax,
+            grid: {
+              color: "rgba(209, 213, 219, 0.5)"
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              callback: function (value) {
+                return value + " 天";
+              }
+            },
+            title: {
+              display: true,
+              text: "现金循环周期（天）",
+              font: {
+                size: 12
+              }
+            }
+          }
+        },
+        interaction: {
+          mode: "index",
+          intersect: false
+        }
+      }
+    });
+  </script>
+</body>
+</html>

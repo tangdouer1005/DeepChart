@@ -1,0 +1,173 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a scatter plot for ecosystems with at least `5 Unicorns`, where the x-axis is `Time to Exit` in `years`, the y-axis is `Exit Amount / Number of Unicorns` in `$B per unicorn`, and label only the 10 points with the highest derived y-value after filtering, using 2024 card values and excluding zero-unicorn ecosystems.",
+  "chart_type": "scatter plot",
+  "value_unit": "years / $B per unicorn",
+  "sort_rule": "labels assigned to top 10 by exit_per_unicorn",
+  "selection_rule": "all ecosystems with at least 5 unicorns",
+  "plot_spec": {
+    "title": "2024 Exit Intensity by Unicorn",
+    "x_field": "x_time_to_exit_years",
+    "y_field": "y_exit_per_unicorn_busd",
+    "xlabel": "Time to Exit (years)",
+    "ylabel": "Exit Amount / Unicorns ($B per unicorn)"
+  },
+  "records": [
+    {
+      "entity": "Beijing",
+      "x_time_to_exit_years": 9.3,
+      "y_exit_per_unicorn_busd": 10.7097,
+      "label": true
+    },
+    {
+      "entity": "Paris",
+      "x_time_to_exit_years": 9.9,
+      "y_exit_per_unicorn_busd": 0.0004,
+      "label": false
+    },
+    {
+      "entity": "Stockholm",
+      "x_time_to_exit_years": 11.1,
+      "y_exit_per_unicorn_busd": 1.8571,
+      "label": false
+    },
+    {
+      "entity": "Austin",
+      "x_time_to_exit_years": 9.5,
+      "y_exit_per_unicorn_busd": 0.9167,
+      "label": false
+    },
+    {
+      "entity": "Bengaluru - Karnataka",
+      "x_time_to_exit_years": 7.2,
+      "y_exit_per_unicorn_busd": 0.2273,
+      "label": false
+    },
+    {
+      "entity": "The Netherlands",
+      "x_time_to_exit_years": 11.1,
+      "y_exit_per_unicorn_busd": 2.3333,
+      "label": false
+    },
+    {
+      "entity": "Boston",
+      "x_time_to_exit_years": 10.2,
+      "y_exit_per_unicorn_busd": 3.3333,
+      "label": true
+    },
+    {
+      "entity": "Chicago",
+      "x_time_to_exit_years": 12.0,
+      "y_exit_per_unicorn_busd": 2.4167,
+      "label": true
+    },
+    {
+      "entity": "Los Angeles",
+      "x_time_to_exit_years": 9.9,
+      "y_exit_per_unicorn_busd": 2.3902,
+      "label": false
+    },
+    {
+      "entity": "Shenzhen",
+      "x_time_to_exit_years": 12.1,
+      "y_exit_per_unicorn_busd": 2.2222,
+      "label": false
+    },
+    {
+      "entity": "New York City",
+      "x_time_to_exit_years": 9.6,
+      "y_exit_per_unicorn_busd": 1.3095,
+      "label": false
+    },
+    {
+      "entity": "Singapore",
+      "x_time_to_exit_years": 7.6,
+      "y_exit_per_unicorn_busd": 0.95,
+      "label": false
+    },
+    {
+      "entity": "Philadelphia",
+      "x_time_to_exit_years": 11.2,
+      "y_exit_per_unicorn_busd": 2.6286,
+      "label": true
+    },
+    {
+      "entity": "Mexico City",
+      "x_time_to_exit_years": 8.8,
+      "y_exit_per_unicorn_busd": 0.1206,
+      "label": false
+    },
+    {
+      "entity": "San Diego",
+      "x_time_to_exit_years": 10.9,
+      "y_exit_per_unicorn_busd": 2.7273,
+      "label": true
+    },
+    {
+      "entity": "Seattle",
+      "x_time_to_exit_years": 9.3,
+      "y_exit_per_unicorn_busd": 2.1765,
+      "label": false
+    },
+    {
+      "entity": "Silicon Valley",
+      "x_time_to_exit_years": 8.3,
+      "y_exit_per_unicorn_busd": 2.5351,
+      "label": true
+    },
+    {
+      "entity": "Washington, D.C.",
+      "x_time_to_exit_years": 11.6,
+      "y_exit_per_unicorn_busd": 2.0667,
+      "label": false
+    },
+    {
+      "entity": "Berlin",
+      "x_time_to_exit_years": 7.7,
+      "y_exit_per_unicorn_busd": 1.0588,
+      "label": false
+    },
+    {
+      "entity": "Sydney",
+      "x_time_to_exit_years": 10.1,
+      "y_exit_per_unicorn_busd": 2.6,
+      "label": true
+    },
+    {
+      "entity": "Tel Aviv",
+      "x_time_to_exit_years": 7.6,
+      "y_exit_per_unicorn_busd": 1.1754,
+      "label": false
+    },
+    {
+      "entity": "London",
+      "x_time_to_exit_years": 10.5,
+      "y_exit_per_unicorn_busd": 2.0769,
+      "label": false
+    },
+    {
+      "entity": "Seoul",
+      "x_time_to_exit_years": 8.7,
+      "y_exit_per_unicorn_busd": 5.2,
+      "label": true
+    },
+    {
+      "entity": "Shanghai",
+      "x_time_to_exit_years": 10.4,
+      "y_exit_per_unicorn_busd": 3.7609,
+      "label": true
+    },
+    {
+      "entity": "São Paulo",
+      "x_time_to_exit_years": 8.4,
+      "y_exit_per_unicorn_busd": 4.9091,
+      "label": true
+    },
+    {
+      "entity": "Montréal",
+      "x_time_to_exit_years": 11.5,
+      "y_exit_per_unicorn_busd": 2.2,
+      "label": false
+    }
+  ]
+}

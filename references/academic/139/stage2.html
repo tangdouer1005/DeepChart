@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature 139 Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1200px; height: 700px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = [
+    {
+        "Year":2013,
+        "Category":"Brazil\/Domestic",
+        "LandUse":8.12523,
+        "Deforestation":0.18,
+        "Appropriation":23.9
+    },
+    {
+        "Year":2013,
+        "Category":"China",
+        "LandUse":11.0896,
+        "Deforestation":0.26,
+        "Appropriation":32.8
+    },
+    {
+        "Year":2013,
+        "Category":"EU28",
+        "LandUse":4.97095,
+        "Deforestation":0.18,
+        "Appropriation":14.4
+    },
+    {
+        "Year":2013,
+        "Category":"Other countries",
+        "LandUse":3.76588,
+        "Deforestation":0.12,
+        "Appropriation":10.6
+    },
+    {
+        "Year":2014,
+        "Category":"Brazil\/Domestic",
+        "LandUse":8.87591,
+        "Deforestation":0.16,
+        "Appropriation":25.8
+    },
+    {
+        "Year":2014,
+        "Category":"China",
+        "LandUse":11.6053,
+        "Deforestation":0.26,
+        "Appropriation":32.8
+    },
+    {
+        "Year":2014,
+        "Category":"EU28",
+        "LandUse":5.29244,
+        "Deforestation":0.18,
+        "Appropriation":15.2
+    },
+    {
+        "Year":2014,
+        "Category":"Other countries",
+        "LandUse":4.53771,
+        "Deforestation":0.12,
+        "Appropriation":12.9
+    },
+    {
+        "Year":2015,
+        "Category":"Brazil\/Domestic",
+        "LandUse":8.80051,
+        "Deforestation":0.2,
+        "Appropriation":26.3
+    },
+    {
+        "Year":2015,
+        "Category":"China",
+        "LandUse":13.3816,
+        "Deforestation":0.4,
+        "Appropriation":41.0
+    },
+    {
+        "Year":2015,
+        "Category":"EU28",
+        "LandUse":4.75845,
+        "Deforestation":0.22,
+        "Appropriation":15.9
+    },
+    {
+        "Year":2015,
+        "Category":"Other countries",
+        "LandUse":5.26896,
+        "Deforestation":0.18,
+        "Appropriation":14.2
+    },
+    {
+        "Year":2016,
+        "Category":"Brazil\/Domestic",
+        "LandUse":9.78178,
+        "Deforestation":0.25,
+        "Appropriation":28.8
+    },
+    {
+        "Year":2016,
+        "Category":"China",
+        "LandUse":13.3039,
+        "Deforestation":0.35,
+        "Appropriation":38.8
+    },
+    {
+        "Year":2016,
+        "Category":"EU28",
+        "LandUse":4.78287,
+        "Deforestation":0.12,
+        "Appropriation":15.3
+    },
+    {
+        "Year":2016,
+        "Category":"Other countries",
+        "LandUse":5.4739,
+        "Deforestation":0.1,
+        "Appropriation":13.5
+    },
+    {
+        "Year":2017,
+        "Category":"Brazil\/Domestic",
+        "LandUse":8.97895,
+        "Deforestation":0.21,
+        "Appropriation":30.8
+    },
+    {
+        "Year":2017,
+        "Category":"China",
+        "LandUse":15.8891,
+        "Deforestation":0.53,
+        "Appropriation":54.0
+    },
+    {
+        "Year":2017,
+        "Category":"EU28",
+        "LandUse":3.91805,
+        "Deforestation":0.12,
+        "Appropriation":17.0
+    },
+    {
+        "Year":2017,
+        "Category":"Other countries",
+        "LandUse":5.22136,
+        "Deforestation":0.15,
+        "Appropriation":12.9
+    },
+    {
+        "Year":2018,
+        "Category":"Brazil\/Domestic",
+        "LandUse":5.43421,
+        "Deforestation":0.16,
+        "Appropriation":18.9
+    },
+    {
+        "Year":2018,
+        "Category":"China",
+        "LandUse":19.9617,
+        "Deforestation":0.45,
+        "Appropriation":67.7
+    },
+    {
+        "Year":2018,
+        "Category":"EU28",
+        "LandUse":3.7941,
+        "Deforestation":0.08,
+        "Appropriation":18.4
+    },
+    {
+        "Year":2018,
+        "Category":"Other countries",
+        "LandUse":5.65329,
+        "Deforestation":0.11,
+        "Appropriation":12.9
+    },
+    {
+        "Year":2019,
+        "Category":"Brazil\/Domestic",
+        "LandUse":9.32629,
+        "Deforestation":0.15,
+        "Appropriation":30.1
+    },
+    {
+        "Year":2019,
+        "Category":"China",
+        "LandUse":16.7378,
+        "Deforestation":0.4,
+        "Appropriation":52.6
+    },
+    {
+        "Year":2019,
+        "Category":"EU28",
+        "LandUse":4.03213,
+        "Deforestation":0.1,
+        "Appropriation":18.7
+    },
+    {
+        "Year":2019,
+        "Category":"Other countries",
+        "LandUse":5.85281,
+        "Deforestation":0.1,
+        "Appropriation":12.9
+    },
+    {
+        "Year":2020,
+        "Category":"Brazil\/Domestic",
+        "LandUse":7.4605,
+        "Deforestation":0.12,
+        "Appropriation":23.9
+    },
+    {
+        "Year":2020,
+        "Category":"China",
+        "LandUse":17.8011,
+        "Deforestation":0.33,
+        "Appropriation":57.1
+    },
+    {
+        "Year":2020,
+        "Category":"EU28",
+        "LandUse":4.89951,
+        "Deforestation":0.08,
+        "Appropriation":24.2
+    },
+    {
+        "Year":2020,
+        "Category":"Other countries",
+        "LandUse":7.04959,
+        "Deforestation":0.1,
+        "Appropriation":16.7
+    }
+];
+
+        const years = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020];
+        const categories = ['Brazil/Domestic', 'China', 'EU28', 'Other countries'];
+        
+        // Prepare Data Structures
+        const landUseData = {};
+        const deforestationData = {};
+        const appropriationData = {};
+        
+        categories.forEach(cat => {
+            landUseData[cat] = [];
+            deforestationData[cat] = [];
+            appropriationData[cat] = [];
+        });
+
+        // Fill Data
+        // rawData is not sorted guaranteed, so iterate years and categories
+        years.forEach(year => {
+            categories.forEach(cat => {
+                // Find matching item
+                const item = rawData.find(d => d.Year === year && d.Category === cat);
+                if (item) {
+                    landUseData[cat].push(item.LandUse);
+                    deforestationData[cat].push(item.Deforestation);
+                    appropriationData[cat].push(item.Appropriation);
+                } else {
+                    // Fallback
+                    landUseData[cat].push(0);
+                    deforestationData[cat].push(0);
+                    appropriationData[cat].push(0);
+                }
+            });
+        });
+
+        const colors = {
+            'Brazil/Domestic': '#d73027', 
+            'China': '#fdae61',            
+            'EU28': '#abdda4',             
+            'Other countries': '#2b83ba'   
+        };
+
+        const markers = {
+            'Brazil/Domestic': 'circle',
+            'China': 'rect', // Square
+            'EU28': 'triangle',
+            'Other countries': 'diamond'
+        };
+
+        const series = [];
+
+        // 1. Deforestation Bars (Left Axis, Hatched)
+        categories.forEach(cat => {
+            series.push({
+                name: cat + ' (Deforestation)',
+                type: 'bar',
+                stack: 'deforestation',
+                yAxisIndex: 0,
+                data: deforestationData[cat],
+                itemStyle: {
+                    color: colors[cat],
+                    decal: {
+                        symbol: 'rect',
+                        symbolSize: 1,
+                        rotation: Math.PI / 4,
+                        color: 'rgba(0, 0, 0, 0.3)',
+                        dashArrayX: [1, 0],
+                        dashArrayY: [2, 5]
+                    },
+                    borderColor: 'black',
+                    borderWidth: 0.5
+                },
+                barWidth: '35%'
+            });
+        });
+
+        // 2. Land Use Bars (Right Axis, Solid)
+        categories.forEach(cat => {
+            series.push({
+                name: cat + ' (Land Use)',
+                type: 'bar',
+                stack: 'landuse',
+                yAxisIndex: 1,
+                data: landUseData[cat],
+                itemStyle: {
+                    color: colors[cat],
+                    borderColor: 'black',
+                    borderWidth: 0.5
+                },
+                barWidth: '35%'
+            });
+        });
+
+        // 3. Appropriation Markers (Right Axis, Scaled)
+        // Scaled by 0.5 to fit on the 0-42 axis (representing Mt but plotted on Mha scale visually)
+        categories.forEach(cat => {
+            const data = appropriationData[cat].map(val => val * 0.5);
+            series.push({
+                name: cat + ' (Appropriation)',
+                type: 'scatter',
+                yAxisIndex: 1,
+                data: data,
+                symbol: markers[cat],
+                symbolSize: 12,
+                itemStyle: {
+                    color: colors[cat],
+                    borderColor: 'black',
+                    borderWidth: 1
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    formatter: function(params) {
+                        return appropriationData[cat][params.dataIndex].toFixed(1);
+                    },
+                    backgroundColor: 'white',
+                    borderColor: 'black',
+                    borderWidth: 0.5,
+                    padding: [2, 4],
+                    fontSize: 10,
+                    color: 'black'
+                },
+                z: 10
+            });
+        });
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: 150, // Space for legend
+                left: 80,
+                right: 80,
+                bottom: 50
+            },
+            legend: {
+                show: false // Custom legend via graphic
+            },
+            xAxis: {
+                type: 'category',
+                data: years,
+                axisTick: { show: false },
+                axisLine: { lineStyle: { color: '#333' } },
+                axisLabel: { fontSize: 12, color: 'black' }
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    name: 'Brazil deforestation exposure (Mha)',
+                    min: 0,
+                    max: 1.25,
+                    position: 'left',
+                    axisLine: { show: false },
+                    axisTick: { show: true },
+                    splitLine: { show: false }, // Clean look
+                    nameTextStyle: { fontSize: 12, padding: [0, 0, 0, 20] }
+                },
+                {
+                    type: 'value',
+                    name: 'Brazil soy land use (Mha)',
+                    min: 0,
+                    max: 42,
+                    position: 'right',
+                    axisLine: { show: false },
+                    axisTick: { show: true },
+                    splitLine: { show: false },
+                    nameTextStyle: { fontSize: 12, padding: [0, 0, 0, 20] }
+                }
+            ],
+            series: series,
+            graphic: [
+                // Legend Container
+                {
+                    type: 'group',
+                    left: 20,
+                    top: 20,
+                    children: [
+                        // Headers
+                        { type: 'text', left: 50, top: 0, style: { text: 'Brazil', fontSize: 11, fontWeight: 'bold' } },
+                        { type: 'text', left: 100, top: 0, style: { text: 'China', fontSize: 11, fontWeight: 'bold' } },
+                        { type: 'text', left: 150, top: 0, style: { text: 'EU28', fontSize: 11, fontWeight: 'bold' } },
+                        { type: 'text', left: 200, top: 0, style: { text: 'Other', fontSize: 11, fontWeight: 'bold' } },
+                        
+                        // Row 1: Land Use (Solid)
+                        { type: 'rect', left: 50, top: 20, shape: { width: 30, height: 15 }, style: { fill: colors['Brazil/Domestic'], stroke: 'black' } },
+                        { type: 'rect', left: 100, top: 20, shape: { width: 30, height: 15 }, style: { fill: colors['China'], stroke: 'black' } },
+                        { type: 'rect', left: 150, top: 20, shape: { width: 30, height: 15 }, style: { fill: colors['EU28'], stroke: 'black' } },
+                        { type: 'rect', left: 200, top: 20, shape: { width: 30, height: 15 }, style: { fill: colors['Other countries'], stroke: 'black' } },
+                        { type: 'text', left: 240, top: 25, style: { text: 'Brazil soy land use (Mha)', fontSize: 11 } },
+
+                        // Row 2: Deforestation (Hatched)
+                        // Simulating hatch with opacity or pattern logic is hard in graphic. using lighter color + border.
+                        { type: 'rect', left: 50, top: 45, shape: { width: 30, height: 15 }, style: { fill: colors['Brazil/Domestic'], stroke: 'black', lineDash: [2, 2] } }, // dashed border to hint diff?
+                        { type: 'rect', left: 100, top: 45, shape: { width: 30, height: 15 }, style: { fill: colors['China'], stroke: 'black', lineDash: [2, 2] } },
+                        { type: 'rect', left: 150, top: 45, shape: { width: 30, height: 15 }, style: { fill: colors['EU28'], stroke: 'black', lineDash: [2, 2] } },
+                        { type: 'rect', left: 200, top: 45, shape: { width: 30, height: 15 }, style: { fill: colors['Other countries'], stroke: 'black', lineDash: [2, 2] } },
+                        { type: 'text', left: 240, top: 50, style: { text: 'Brazil deforestation exposure (Mha)', fontSize: 11 } },
+
+                        // Row 3: Appropriation (Markers)
+                        { type: 'circle', shape: { cx: 65, cy: 77, r: 6 }, style: { fill: colors['Brazil/Domestic'], stroke: 'black' } },
+                        { type: 'rect', left: 110, top: 71, shape: { width: 12, height: 12 }, style: { fill: colors['China'], stroke: 'black' } },
+                        // Triangle approx
+                        { type: 'polygon', shape: { points: [[165, 71], [171, 83], [159, 83]] }, style: { fill: colors['EU28'], stroke: 'black' } },
+                        // Diamond approx
+                        { type: 'polygon', shape: { points: [[215, 71], [221, 77], [215, 83], [209, 77]] }, style: { fill: colors['Other countries'], stroke: 'black' } },
+                        
+                        { type: 'text', left: 240, top: 75, style: { text: 'Brazil soy appropriation (Mt)', fontSize: 11 } }
+                    ]
+                }
+            ]
+        };
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+        chart.setOption(option);
+    </script>
+</body>
+</html>

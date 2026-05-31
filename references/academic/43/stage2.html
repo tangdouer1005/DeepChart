@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "Current_Density": 50,
+        "AEM_mean": -2.1933333333333334,
+        "AEM_std": 0.012472191289246403,
+        "Separator_mean": -2.1133333333333333,
+        "Separator_std": 0.012472191289246403
+    },
+    {
+        "Current_Density": 100,
+        "AEM_mean": -2.3033333333333332,
+        "AEM_std": 0.012472191289246403,
+        "Separator_mean": -2.2,
+        "Separator_std": 0.008164965809277268
+    },
+    {
+        "Current_Density": 200,
+        "AEM_mean": -2.4333333333333336,
+        "AEM_std": 0.012472191289246561,
+        "Separator_mean": -2.2866666666666666,
+        "Separator_std": 0.012472191289246403
+    },
+    {
+        "Current_Density": 300,
+        "AEM_mean": -2.53,
+        "AEM_std": 0.016329931618554536,
+        "Separator_mean": -2.3633333333333333,
+        "Separator_std": 0.016996731711975993
+    },
+    {
+        "Current_Density": 400,
+        "AEM_mean": -2.62,
+        "AEM_std": 0.016329931618554536,
+        "Separator_mean": -2.44,
+        "Separator_std": 0.016329931618554536
+    },
+    {
+        "Current_Density": 500,
+        "AEM_mean": -2.706666666666667,
+        "AEM_std": 0.016996731711975934,
+        "Separator_mean": -2.5033333333333334,
+        "Separator_std": 0.020548046676563177
+    },
+    {
+        "Current_Density": 600,
+        "AEM_mean": -2.776666666666667,
+        "AEM_std": 0.016996731711975934,
+        "Separator_mean": -2.5666666666666664,
+        "Separator_std": 0.024944382578492966
+    },
+    {
+        "Current_Density": 700,
+        "AEM_mean": -2.84,
+        "AEM_std": 0.014142135623730857,
+        "Separator_mean": -2.603333333333333,
+        "Separator_std": 0.024944382578492966
+    },
+    {
+        "Current_Density": 800,
+        "AEM_mean": -2.9000000000000004,
+        "AEM_std": 0.014142135623730857,
+        "Separator_mean": -2.6366666666666667,
+        "Separator_std": 0.02624669291337269
+    }
+];
+
+        const currentDensity = jsonData.map(item => item.Current_Density);
+        const aem_mean = jsonData.map(item => item.AEM_mean);
+        const aem_std = jsonData.map(item => item.AEM_std);
+        const sep_mean = jsonData.map(item => item.Separator_mean);
+        const sep_std = jsonData.map(item => item.Separator_std);
+
+        // Colors
+        const color_aem_line = '#5F768F';
+        const color_aem_face = '#CFD8E3';
+        const color_sep_line = '#C08376';
+        const color_sep_face = '#EEDCD8';
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const series = [
+            {
+                name: 'AEM',
+                type: 'line',
+                data: currentDensity.map((cd, i) => [cd, aem_mean[i]]),
+                symbol: 'circle',
+                symbolSize: 10,
+                itemStyle: {
+                    color: color_aem_line,
+                    borderColor: color_aem_line,
+                    borderWidth: 1,
+                    areaStyle: {
+                        color: color_aem_face, // This isn't how error area works in matplotlib. We need custom.
+                        opacity: 0 // No fill area for standard errorbar.
+                    }
+                },
+                lineStyle: {
+                    color: color_aem_line,
+                    width: 1
+                },
+                markLine: {
+                    silent: true,
+                    symbol: 'none',
+                    data: currentDensity.map((cd, i) => ([
+                        { xAxis: cd, yAxis: aem_mean[i] - aem_std[i] },
+                        { xAxis: cd, yAxis: aem_mean[i] + aem_std[i] }
+                    ])),
+                    lineStyle: {
+                        color: color_aem_line,
+                        width: 1.5
+                    }
+                },
+                // Custom error bars (matplotlib errorbar type)
+                // Use custom series to draw vertical error lines
+                z: 2
+            },
+            {
+                type: 'custom',
+                name: 'AEM Error',
+                renderItem: (params, api) => {
+                    const x = api.value(0); // current_density
+                    const meanVal = api.value(1); // mean
+                    const stdVal = api.value(2); // std
+                    
+                    const highPoint = api.coord([x, meanVal + stdVal]);
+                    const lowPoint = api.coord([x, meanVal - stdVal]);
+                    const capHalfWidth = api.size([5, 0])[0]; // A small fixed width for caps
+
+                    const style = api.style({ stroke: 'black', lineWidth: 1 });
+                    return {
+                        type: 'group',
+                        children: [
+                            // Vertical error line
+                            { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                            // Top cap
+                            { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                            // Bottom cap
+                            { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                        ]
+                    };
+                },
+                data: currentDensity.map((cd, i) => ([cd, aem_mean[i], aem_std[i]])),
+                z: 3
+            },
+            {
+                name: 'Separator',
+                type: 'line',
+                data: currentDensity.map((cd, i) => [cd, sep_mean[i]]),
+                symbol: 'circle',
+                symbolSize: 10,
+                itemStyle: {
+                    color: color_sep_line,
+                    borderColor: color_sep_line,
+                    borderWidth: 1,
+                    areaStyle: {
+                        color: color_sep_face,
+                        opacity: 0
+                    }
+                },
+                lineStyle: {
+                    color: color_sep_line,
+                    width: 1
+                },
+                z: 1 // Separator behind AEM
+            },
+            {
+                type: 'custom',
+                name: 'Separator Error',
+                renderItem: (params, api) => {
+                    const x = api.value(0);
+                    const meanVal = api.value(1);
+                    const stdVal = api.value(2);
+                    
+                    const highPoint = api.coord([x, meanVal + stdVal]);
+                    const lowPoint = api.coord([x, meanVal - stdVal]);
+                    const capHalfWidth = api.size([5, 0])[0];
+
+                    const style = api.style({ stroke: 'black', lineWidth: 1 });
+                    return {
+                        type: 'group',
+                        children: [
+                            { type: 'line', shape: { x1: highPoint[0], y1: highPoint[1], x2: lowPoint[0], y2: lowPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: highPoint[0] - capHalfWidth, y1: highPoint[1], x2: highPoint[0] + capHalfWidth, y2: highPoint[1] }, style: style },
+                            { type: 'line', shape: { x1: lowPoint[0] - capHalfWidth, y1: lowPoint[1], x2: lowPoint[0] + capHalfWidth, y2: lowPoint[1] }, style: style }
+                        ]
+                    };
+                },
+                data: currentDensity.map((cd, i) => ([cd, sep_mean[i], sep_std[i]])),
+                z: 0 // Separator errors behind AEM errors
+            }
+        ];
+
+        const option = {
+            animation: false,
+            backgroundColor: 'white',
+            grid: { top: 60, right: 20, bottom: 60, left: 80 },
+            xAxis: {
+                type: 'value',
+                name: 'Current density (mA cm⁻²)',
+                nameLocation: 'middle',
+                nameGap: 30,
+                min: 0,
+                max: 850,
+                interval: 100,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black' } },
+                axisTick: { alignWithLabel: true }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Cell voltage (V)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 14 },
+                min: -3.0, // Visual top is -3.0
+                max: -2.0, // Visual bottom is -2.0
+                inverse: true, // Invert axis so -2.0 is at the bottom, -3.0 at the top
+                interval: 0.2,
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            legend: {
+                data: ['AEM', 'Separator'],
+                left: 'left',
+                top: 20,
+                orient: 'vertical',
+                textStyle: { fontSize: 12 }
+            },
+            series: series,
+            graphic: [
+                {
+                    type: 'text',
+                    left: 10,
+                    top: 10,
+                    style: {
+                        text: 'e',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a horizontal bar chart for ecosystems in the Middle East and North Africa section where `Median Series A Round` and `Software Engineer Salary` are both exact values, showing the top 6 `Series A affordability multiple` values computed as `Median Series A Round / Software Engineer Salary`, expressed in `salary-years`, sorted descending, and excluding `N/A` and `<` range values.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "salary-years",
+  "sort_rule": "descending by series_a_affordability_salary_years",
+  "selection_rule": "top 6",
+  "plot_spec": {
+    "title": "2021 MENA Series A Affordability",
+    "xlabel": "salary-years",
+    "value_field": "series_a_affordability_salary_years"
+  },
+  "records": [
+    {
+      "entity": "Abu Dhabi",
+      "series_a_affordability_salary_years": 707.9038
+    },
+    {
+      "entity": "Cairo",
+      "series_a_affordability_salary_years": 142.8571
+    },
+    {
+      "entity": "Dubai",
+      "series_a_affordability_salary_years": 89.1892
+    },
+    {
+      "entity": "Tel Aviv",
+      "series_a_affordability_salary_years": 64.4444
+    },
+    {
+      "entity": "Riyadh",
+      "series_a_affordability_salary_years": 62.8415
+    },
+    {
+      "entity": "Sharjah",
+      "series_a_affordability_salary_years": 37.7734
+    }
+  ]
+}

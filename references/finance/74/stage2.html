@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CVX Sloan Ratio (Accruals Ratio) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --text-color: #111827;
+      --card-bg: #f9fafb;
+      --grid-color: rgba(156, 163, 175, 0.35);
+      --accent-color: #2563eb;
+      --accent-fill: rgba(37, 99, 235, 0.12);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --text-color: #e5e7eb;
+        --card-bg: #020617;
+        --grid-color: rgba(75, 85, 99, 0.65);
+        --accent-color: #60a5fa;
+        --accent-fill: rgba(37, 99, 235, 0.25);
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #e5f0ff 0, var(--bg-color) 45%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-color);
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 960px;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 18px;
+      box-shadow:
+        0 22px 45px rgba(15, 23, 42, 0.15),
+        0 0 0 1px rgba(148, 163, 184, 0.15);
+      padding: 20px 24px 24px;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 16px;
+      }
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      margin: 0;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    .legend-inline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    .legend-swatch {
+      width: 14px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #93c5fd, var(--accent-color));
+    }
+
+    .chart-container {
+      position: relative;
+      margin-top: 8px;
+      height: 420px;
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #9ca3af;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .stat-item b {
+      color: #374151;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle,
+      .legend-inline,
+      .stat-item b {
+        color: #e5e7eb;
+      }
+      .stat-row,
+      .footer-note {
+        color: #9ca3af;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <div class="header">
+        <div>
+          <h1>CVX Sloan Ratio (Accruals Ratio), 2016–2024</h1>
+          <div class="subtitle">
+            Annual Sloan Ratio (Accruals Ratio) based on fiscal-year data
+          </div>
+        </div>
+        <div class="legend-inline">
+          <span class="legend-swatch"></span>
+          <span>斯隆比率 / Sloan Ratio</span>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-item">
+          <b>Years covered:</b> 2016–2024
+        </div>
+        <div class="stat-item">
+          <b>Min ratio:</b> -0.0992 (2019)
+        </div>
+        <div class="stat-item">
+          <b>Max ratio:</b> -0.0434 (2017)
+        </div>
+        <div class="stat-item">
+          <b>2024 value:</b> -0.0533
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="sloanChart"></canvas>
+      </div>
+
+      <div class="footer-note">
+        Data source: provided fiscal-year Sloan Ratio (RESULT_Sloan) values for CVX, 2016–2024.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data from the provided source
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const sloanValues = [
+      -0.0508674883438997,
+      -0.0433677639311595,
+      -0.0622216444179179,
+      -0.099232430473996,
+      -0.0676546148720291,
+      -0.0566421530276951,
+      -0.0568533758074506,
+      -0.0548387283114562,
+      -0.0533428466745087
+    ];
+
+    const ctx = document.getElementById("sloanChart").getContext("2d");
+
+    // Create gradient for line and fill
+    const gradientLine = ctx.createLinearGradient(0, 0, ctx.canvas.width, 0);
+    gradientLine.addColorStop(0, "#93c5fd");
+    gradientLine.addColorStop(1, "#2563eb");
+
+    const gradientFill = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
+    gradientFill.addColorStop(0, "rgba(37, 99, 235, 0.18)");
+    gradientFill.addColorStop(1, "rgba(37, 99, 235, 0)");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "Sloan Ratio (Accruals Ratio)",
+            data: sloanValues,
+            borderColor: gradientLine,
+            backgroundColor: gradientFill,
+            borderWidth: 2.2,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: "#2563eb",
+            pointBorderWidth: 1.4,
+            tension: 0.28,
+            fill: "start"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.92)",
+            borderColor: "rgba(148,163,184,0.6)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              title: (items) =>
+                `Fiscal Year ${items[0].label}`,
+              label: (context) => {
+                const v = context.parsed.y;
+                return `Sloan Ratio: ${v.toFixed(4)}`;
+              },
+              footer: () =>
+                "Note: Negative values often indicate higher cash-based earnings."
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              color: "rgba(0,0,0,0)",
+              tickLength: 4
+            },
+            ticks: {
+              padding: 6
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Sloan Ratio",
+              padding: { top: 0, bottom: 8 }
+            },
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--grid-color")
+            },
+            ticks: {
+              callback: (value) => value.toFixed(2)
+            },
+            suggestedMin: -0.11,
+            suggestedMax: -0.04
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

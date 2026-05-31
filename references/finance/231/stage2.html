@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMUS Internal Growth Rate (IGR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f7f9;
+      --card-bg: #ffffff;
+      --text: #222222;
+      --muted: #666666;
+      --accent: #6c5ce7;
+      --accent-soft: rgba(108, 92, 231, 0.12);
+      --negative: #d63031;
+      --grid: rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      max-width: 960px;
+      width: 100%;
+      padding: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.08);
+      padding: 18px 18px 24px;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    canvas {
+      max-height: 480px;
+    }
+
+    .legend-inline {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .legend-swatch.dashed {
+      background: transparent;
+      border-radius: 0;
+      border-bottom: 2px dashed var(--muted);
+      width: 18px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 14px 12px 18px;
+      }
+      .title {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <div class="header">
+        <div>
+          <div class="title">
+            TMUS 内部增长率 (Internal Growth Rate, IGR) — 2016–2024
+          </div>
+          <div class="subtitle">
+            Fiscal years 2016–2024, IGR expressed as a decimal (e.g., 0.04 = 4%)
+          </div>
+        </div>
+      </div>
+
+      <canvas id="igrChart"></canvas>
+
+      <div class="legend-inline">
+        <span class="legend-swatch"></span> IGR
+        <span class="legend-swatch dashed"></span> Zero line (0%)
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Source data (as provided)
+    const labels = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const igrValues = [
+      0.0223874056900658,
+      0.0702946067204216,
+      0.0420822556555316,
+      0.0454959889277351,
+      -0.262215540392943,
+      0.0150944526389086,
+      0.0125508515437789,
+      0.0374863820936912,
+      0.0402313087561524
+    ];
+
+    const ctx = document.getElementById("igrChart").getContext("2d");
+
+    const igrChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "内部增长率 (IGR)",
+            data: igrValues.map(v => v * 100), // convert to percentage for display
+            borderColor: "#6c5ce7",
+            backgroundColor: "rgba(108, 92, 231, 0.15)",
+            tension: 0.25,
+            fill: "origin",
+            pointRadius: 4,
+            pointHoverRadius: 5,
+            pointBackgroundColor: "#6c5ce7",
+            pointBorderWidth: 1.5,
+            pointHitRadius: 10
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: false
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function (ctx) {
+                const v = ctx.raw;
+                return ` IGR: ${v.toFixed(2)}%`;
+              }
+            }
+          },
+          title: { display: false }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: "rgba(0,0,0,0.07)"
+            },
+            ticks: {
+              callback: function (value) {
+                return value + "%";
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Draw a dashed zero line (0% line) for reference
+    // Using Chart.js plugin to overlay after datasets
+    Chart.register({
+      id: "zeroLinePlugin",
+      afterDatasetsDraw(chart, args, opts) {
+        const {
+          ctx,
+          chartArea: { left, right },
+          scales: { y }
+        } = chart;
+
+        const yZero = y.getPixelForValue(0);
+        ctx.save();
+        ctx.beginPath();
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = "rgba(100,100,100,0.7)";
+        ctx.lineWidth = 1;
+        ctx.moveTo(left, yZero);
+        ctx.lineTo(right, yZero);
+        ctx.stroke();
+        ctx.restore();
+      }
+    });
+
+    igrChart.update();
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a horizontal bar chart showing the top 8 Cleantech ecosystems by `Median Series A Round - Median Seed Round`, expressed in `$M`, sorted descending by the gap, and excluding ecosystems with either round missing.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "$M",
+  "sort_rule": "descending by series_a_minus_seed_musd",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "Cleantech Series A - Seed Gap",
+    "xlabel": "$M",
+    "value_field": "series_a_minus_seed_musd"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "series_a_minus_seed_musd": 7.8
+    },
+    {
+      "entity": "Berlin",
+      "series_a_minus_seed_musd": 5.6
+    },
+    {
+      "entity": "New York City",
+      "series_a_minus_seed_musd": 5.19
+    },
+    {
+      "entity": "Boston",
+      "series_a_minus_seed_musd": 5.0
+    },
+    {
+      "entity": "Los Angeles",
+      "series_a_minus_seed_musd": 4.573
+    },
+    {
+      "entity": "Washington, D.C.",
+      "series_a_minus_seed_musd": 4.375
+    },
+    {
+      "entity": "Tel Aviv - Jerusalem",
+      "series_a_minus_seed_musd": 4.3
+    },
+    {
+      "entity": "Singapore",
+      "series_a_minus_seed_musd": 4.2
+    }
+  ]
+}

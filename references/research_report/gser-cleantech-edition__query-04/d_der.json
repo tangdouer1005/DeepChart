@@ -1,0 +1,137 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a bubble chart for Cleantech ecosystems with `Total Early-Stage Funding >= $500M`, with the x-axis showing `Median Seed Round / Software Engineer Salary`, the y-axis showing `Median Series A Round / Software Engineer Salary`, both expressed in `engineer-years`, bubble size representing `Ecosystem Value`, and labels added to the top 10 ecosystems by highest y-axis value.",
+  "chart_type": "bubble chart",
+  "value_unit": "engineer-years / $B",
+  "sort_rule": "labels assigned to top 10 by y axis",
+  "selection_rule": "all ecosystems with early-stage funding >= 500M",
+  "plot_spec": {
+    "title": "Cleantech Salary-Adjusted Rounds",
+    "x_field": "x_seed_over_salary",
+    "y_field": "y_series_a_over_salary",
+    "size_field": "size_ecosystem_value_busd",
+    "xlabel": "Median Seed / Salary (engineer-years)",
+    "ylabel": "Median Series A / Salary (engineer-years)"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "x_seed_over_salary": 8.4034,
+      "y_series_a_over_salary": 73.9496,
+      "size_ecosystem_value_busd": 1029.0,
+      "label": true
+    },
+    {
+      "entity": "Tel Aviv - Jerusalem",
+      "x_seed_over_salary": 16.6667,
+      "y_series_a_over_salary": 64.4444,
+      "size_ecosystem_value_busd": 61.6,
+      "label": true
+    },
+    {
+      "entity": "Stockholm",
+      "x_seed_over_salary": 11.0345,
+      "y_series_a_over_salary": 29.3103,
+      "size_ecosystem_value_busd": 46.0,
+      "label": false
+    },
+    {
+      "entity": "London",
+      "x_seed_over_salary": 8.5921,
+      "y_series_a_over_salary": 52.6316,
+      "size_ecosystem_value_busd": 142.0,
+      "label": false
+    },
+    {
+      "entity": "Los Angeles",
+      "x_seed_over_salary": 6.5312,
+      "y_series_a_over_salary": 54.1667,
+      "size_ecosystem_value_busd": 119.0,
+      "label": true
+    },
+    {
+      "entity": "Boston",
+      "x_seed_over_salary": 11.0132,
+      "y_series_a_over_salary": 66.0793,
+      "size_ecosystem_value_busd": 133.0,
+      "label": true
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "x_seed_over_salary": 6.027,
+      "y_series_a_over_salary": 31.0811,
+      "size_ecosystem_value_busd": 26.9,
+      "label": false
+    },
+    {
+      "entity": "New York City",
+      "x_seed_over_salary": 7.6415,
+      "y_series_a_over_salary": 56.6038,
+      "size_ecosystem_value_busd": 189.0,
+      "label": true
+    },
+    {
+      "entity": "Beijing",
+      "x_seed_over_salary": 34.6429,
+      "y_series_a_over_salary": 102.381,
+      "size_ecosystem_value_busd": 445.0,
+      "label": true
+    },
+    {
+      "entity": "Washington, D.C.",
+      "x_seed_over_salary": 6.5104,
+      "y_series_a_over_salary": 52.0833,
+      "size_ecosystem_value_busd": 28.9,
+      "label": false
+    },
+    {
+      "entity": "Berlin",
+      "x_seed_over_salary": 14.4928,
+      "y_series_a_over_salary": 95.6522,
+      "size_ecosystem_value_busd": 36.9,
+      "label": true
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "x_seed_over_salary": 7.1429,
+      "y_series_a_over_salary": 62.8571,
+      "size_ecosystem_value_busd": 20.8,
+      "label": true
+    },
+    {
+      "entity": "Paris",
+      "x_seed_over_salary": 17.1875,
+      "y_series_a_over_salary": 51.5625,
+      "size_ecosystem_value_busd": 47.1,
+      "label": false
+    },
+    {
+      "entity": "Seattle",
+      "x_seed_over_salary": 11.4286,
+      "y_series_a_over_salary": 42.8571,
+      "size_ecosystem_value_busd": 49.0,
+      "label": false
+    },
+    {
+      "entity": "Greater Helsinki",
+      "x_seed_over_salary": 7.5556,
+      "y_series_a_over_salary": 50.0,
+      "size_ecosystem_value_busd": 6.6,
+      "label": false
+    },
+    {
+      "entity": "Sydney",
+      "x_seed_over_salary": 7.3944,
+      "y_series_a_over_salary": 56.338,
+      "size_ecosystem_value_busd": 17.4,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "x_seed_over_salary": 12.5,
+      "y_series_a_over_salary": 100.0,
+      "size_ecosystem_value_busd": 22.5,
+      "label": true
+    }
+  ]
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: white;
+        }
+        #chart-container {
+            width: 350px; /* Approx 3.5 inches * 100 */
+            height: 550px; /* Approx 5.5 inches * 100 */
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. Data
+        // ---------------------------------------------------------
+        
+        const data = {"parental_data": [455236.17862429336, 374854.50703331234, 500874.4223320226, 466937.56824526587, 526218.035058101], "ln_data": [7253.489863424753, 17490.643208638903, 207263.77376446282, 100374.46817310246, 150631.5739676901, 224441.8038986802, 129019.30608176917, 88956.35533622571, 233707.8500794956, 131170.17823033908, 133441.93648697663, 123497.4118948018, 229925.4941502907, 187742.7464008859, 177946.0039862014, 162259.7645429363, 155074.21131701427, 153575.2223311653, 284545.9510167087, 240852.638916042, 222731.42120165497, 215774.5807455938, 206790.9561720754, 196147.94800028956]};
+        const parentalData = data.parental_data;
+        const lnData = data.ln_data;
+
+        // ---------------------------------------------------------\n        // 2. Calculations
+        // ---------------------------------------------------------
+        function calculateMean(data) {
+            return data.reduce((a, b) => a + b, 0) / data.length;
+        }
+
+        function calculateStd(data, mean) {
+            const variance = data.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / (data.length - 1); // ddof=1
+            return Math.sqrt(variance);
+        }
+
+        const meanParental = calculateMean(parentalData);
+        const meanLn = calculateMean(lnData);
+        
+        const stdParental = calculateStd(parentalData, meanParental);
+        const stdLn = calculateStd(lnData, meanLn);
+
+        const means = [meanParental, meanLn];
+        const stds = [stdParental, stdLn];
+        const categories = ['Parental', 'LN'];
+
+        // ---------------------------------------------------------
+        // 3. Styling Configuration
+        // ---------------------------------------------------------
+        const colorParentalBar = '#D9D9D9';
+        const colorParentalEdge = '#808080';
+        const colorParentalDots = '#000000';
+        
+        const colorLnBar = '#A9D18E';
+        const colorLnEdge = '#548235';
+        const colorLnDots = '#2E7D32';
+
+        // ---------------------------------------------------------
+        // 4. Series Data Preparation
+        // ---------------------------------------------------------
+        
+        // Bar Data
+        const barData = [
+            {
+                value: meanParental,
+                itemStyle: {
+                    color: colorParentalBar,
+                    borderColor: colorParentalEdge,
+                    borderWidth: 1
+                }
+            },
+            {
+                value: meanLn,
+                itemStyle: {
+                    color: colorLnBar,
+                    borderColor: colorLnEdge,
+                    borderWidth: 1
+                }
+            }
+        ];
+
+        // Error Bar Data
+        const errorData = [
+            {
+                value: [0, meanParental - stdParental, meanParental + stdParental],
+                itemStyle: { color: 'gray' }
+            },
+            {
+                value: [1, meanLn - stdLn, meanLn + stdLn],
+                itemStyle: { color: 'gray' }
+            }
+        ];
+
+        // Scatter Data with Jitter
+        // Seeded random generator for reproducibility logic
+        let seed = 42;
+        function random() {
+            var x = Math.sin(seed++) * 10000;
+            return x - Math.floor(x);
+        }
+
+        function getJitteredPoints(data, xIndex, width, color) {
+            return data.map(val => {
+                const jitter = (random() - 0.5) * (width / 1.75); // width/3.5 range (- to +) is roughly width/1.75 total span
+                return {
+                    value: [xIndex + jitter, val],
+                    itemStyle: {
+                        color: color,
+                        borderColor: 'none',
+                        opacity: 0.9
+                    }
+                };
+            });
+        }
+
+        const scatterParental = getJitteredPoints(parentalData, 0, 0.5, colorParentalDots);
+        const scatterLn = getJitteredPoints(lnData, 1, 0.5, colorLnDots);
+        const allScatterData = [...scatterParental, ...scatterLn];
+
+        // ---------------------------------------------------------
+        // 5. Chart Options
+        // ---------------------------------------------------------
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        const option = {
+            animation: false,
+            grid: {
+                top: '15%',
+                bottom: '15%',
+                left: '25%',
+                right: '10%'
+            },
+            xAxis: {
+                type: 'category',
+                data: categories,
+                axisLabel: {
+                    rotate: 45,
+                    fontSize: 13,
+                    color: 'black',
+                    margin: 14,
+                    align: 'right',  // Mimic ha='right'
+                    verticalAlign: 'top'
+                },
+                axisTick: {
+                    show: true,
+                    alignWithLabel: false, // Matplotlib defaults align ticks with labels but centered
+                    lineStyle: { color: 'black' }
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: { color: 'black', width: 1 }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                min: 0,
+                max: 850000,
+                interval: 200000,
+                name: 'GSH peak intensity',
+                nameLocation: 'middle',
+                nameGap: 50, // labelpad=10 + space for ticks
+                nameTextStyle: {
+                    fontSize: 13,
+                    color: 'black'
+                },
+                axisLabel: {
+                    fontSize: 12,
+                    color: 'black',
+                    formatter: function(value) {
+                        if (value === 0) return '0';
+                        // Convert to scientific notation like 2 x 10^5
+                        const mantissa = value / 100000;
+                        return mantissa + ' × 10⁵';
+                    }
+                },
+                splitLine: { show: false },
+                axisLine: {
+                    show: true,
+                    lineStyle: { color: 'black', width: 1 }
+                },
+                axisTick: {
+                    show: true,
+                    lineStyle: { color: 'black' }
+                }
+            },
+            series: [
+                // Bar Series
+                {
+                    type: 'bar',
+                    data: barData,
+                    barWidth: '50%', // Corresponds to width=0.5 in matplotlib relative to category width
+                    z: 1
+                },
+                // Custom Series for Error Bars
+                {
+                    type: 'custom',
+                    name: 'error',
+                    itemStyle: {
+                        borderWidth: 1.5,
+                        color: 'gray'
+                    },
+                    renderItem: function (params, api) {
+                        var xValue = api.value(0);
+                        var highPoint = api.coord([xValue, api.value(2)]);
+                        var lowPoint = api.coord([xValue, api.value(1)]);
+                        var halfWidth = 3; // capsize=6 -> half is 3px approx
+                        
+                        var style = api.style({
+                            stroke: api.visual('color'),
+                            fill: null
+                        });
+
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0] - halfWidth, y1: highPoint[1],
+                                        x2: highPoint[0] + halfWidth, y2: highPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0], y1: highPoint[1],
+                                        x2: lowPoint[0], y2: lowPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0] - halfWidth, y1: lowPoint[1],
+                                        x2: lowPoint[0] + halfWidth, y2: lowPoint[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 2
+                },
+                // Scatter Series
+                {
+                    type: 'scatter',
+                    data: allScatterData,
+                    symbolSize: 6, // s=40 in matplotlib is area, sqrt(40/pi)*2 approx 7. But 6 looks close.
+                    z: 3
+                },
+                // Significance Line Series
+                {
+                    type: 'line',
+                    data: [
+                        [0, 750000],
+                        [1, 750000]
+                    ],
+                    symbol: 'none',
+                    lineStyle: {
+                        color: 'black',
+                        width: 1
+                    },
+                    markPoint: {
+                        symbol: 'path://', // Invisible symbol or use graphic for text
+                        data: [
+                            {
+                                coord: [0.5, 750000],
+                                value: 'P = 2.9 × 10⁻⁵',
+                                label: {
+                                    show: true,
+                                    formatter: 'P = 2.9 × 10⁻⁵',
+                                    position: 'top',
+                                    distance: 5,
+                                    fontSize: 12,
+                                    color: 'black'
+                                }
+                            }
+                        ]
+                    },
+                    z: 10
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0, // -0.3 relative axes coordinates is tricky, hardcode absolute or pct
+                    top: '2%',
+                    style: {
+                        text: 'g',
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

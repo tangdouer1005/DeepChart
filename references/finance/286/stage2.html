@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>xom 格雷厄姆“烟蒂股”净值 (NNWC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --fg-color: #111827;
+      --grid-color: rgba(0, 0, 0, 0.08);
+      --bar-color: #2b8cff;
+      --bar-hover-color: #1c65c4;
+      --card-bg: #f9fafb;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --fg-color: #e5e7eb;
+        --grid-color: rgba(148, 163, 184, 0.35);
+        --bar-color: #38bdf8;
+        --bar-hover-color: #0ea5e9;
+        --card-bg: #020617;
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background-color: var(--bg-color);
+      color: var(--fg-color);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 1.25rem;
+      font-weight: 400;
+      color: #6b7280;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      h2 {
+        color: #9ca3af;
+      }
+    }
+
+    .chart-card {
+      background: var(--card-bg);
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem 1.25rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      width: 100%;
+    }
+
+    .subtitle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      margin-bottom: 0.75rem;
+      color: #6b7280;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle-row {
+        color: #9ca3af;
+      }
+    }
+
+    .note {
+      font-size: 0.75rem;
+      margin-top: 0.6rem;
+      color: #6b7280;
+      line-height: 1.35;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .note {
+        color: #9ca3af;
+      }
+    }
+
+    .legend-swatch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      background: linear-gradient(
+        135deg,
+        rgba(59, 130, 246, 0.9),
+        rgba(59, 130, 246, 0.5)
+      );
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>xom 格雷厄姆“烟蒂股”净值 (NNWC) 每股变化</h1>
+    <h2>2016 – 2024 财年（单位：每股货币单位）</h2>
+
+    <div class="chart-card">
+      <div class="subtitle-row">
+        <div class="legend-swatch">
+          <span class="legend-color"></span>
+          <span>NNWC 每股</span>
+        </div>
+        <div>数据来源：用户提供年度 NNWC 每股结果</div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="nnwcBarChart"></canvas>
+      </div>
+
+      <div class="note">
+        说明：NNWC（Net-Net Working Capital，格雷厄姆“烟蒂股”净值）通常为
+        流动资产减去全部负债后按股数折算的数值。数值为负时，表示负的净净营运资本。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 年度标签
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    // 对应 NNWC 每股数据
+    const nnwcPerShare = [
+      -27.59283673441232,
+      -25.15437030075188,
+      -23.52962001416096,
+      -26.60585480093677,
+      -28.969093889018964,
+      -24.34760233918129,
+      -16.40023781212842,
+      -16.57699901283317,
+      -21.144485807352257
+    ];
+
+    // 等待 DOM 加载完成后再初始化图表，避免取不到 canvas
+    window.addEventListener("load", function () {
+      const canvas = document.getElementById("nnwcBarChart");
+      if (!canvas) return;
+
+      const ctx = canvas.getContext("2d");
+
+      // 渐变填充
+      const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, "rgba(56, 189, 248, 0.9)");
+      gradient.addColorStop(1, "rgba(59, 130, 246, 0.5)");
+
+      const gradientHover = ctx.createLinearGradient(0, 0, 0, 400);
+      gradientHover.addColorStop(0, "rgba(56, 189, 248, 1)");
+      gradientHover.addColorStop(1, "rgba(37, 99, 235, 0.9)");
+
+      const gridColor = getComputedStyle(document.documentElement)
+        .getPropertyValue("--grid-color")
+        .trim();
+
+      const nnwcChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "NNWC 每股",
+              data: nnwcPerShare,
+              backgroundColor: gradient,
+              hoverBackgroundColor: gradientHover,
+              borderColor: "rgba(15, 23, 42, 0.5)",
+              borderWidth: 1,
+              borderRadius: 6,
+              borderSkipped: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "index",
+            intersect: false
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  const value = context.parsed.y;
+                  return "NNWC 每股: " + value.toFixed(3);
+                }
+              }
+            },
+            legend: {
+              display: false
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                maxRotation: 0,
+                autoSkip: true,
+                autoSkipPadding: 10
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: gridColor
+              },
+              ticks: {
+                callback: function (value) {
+                  return value.toFixed(0);
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // 一些旧浏览器不支持 addEventListener("change")，做兼容处理
+      if (window.matchMedia) {
+        const mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+        function handleThemeChange() {
+          const newGridColor = getComputedStyle(document.documentElement)
+            .getPropertyValue("--grid-color")
+            .trim();
+          nnwcChart.options.scales.y.grid.color = newGridColor;
+          nnwcChart.update();
+        }
+
+        if (typeof mq.addEventListener === "function") {
+          mq.addEventListener("change", handleThemeChange);
+        } else if (typeof mq.addListener === "function") {
+          // 兼容旧接口
+          mq.addListener(handleThemeChange);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

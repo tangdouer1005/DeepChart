@@ -1,0 +1,345 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a heatmap showing, for each market, the difference in `average funding per deal` between adjacent periods (`2021`, `2022`, `2023`, `2024`, `2025 YTD`), where each cell is the period-over-period change in `$M per deal`, and limit the rows to the 15 markets with the largest absolute change from `2024` to `2025 YTD`.",
+  "status": "completed",
+  "title": "Adjacent-period changes in average funding per deal",
+  "chart_kind": "heatmap",
+  "chart_type": "heatmap",
+  "value_unit": "$M per deal",
+  "sort_rule": "top 15 by absolute 2024→2025 YTD swing",
+  "selection_rule": "markets limited to largest absolute final swing",
+  "metadata": {
+    "row_field": "market",
+    "col_field": "transition",
+    "value_field": "delta_m_per_deal",
+    "col_order": [
+      "2021→2022",
+      "2022→2023",
+      "2023→2024",
+      "2024→2025 YTD"
+    ],
+    "row_order": [
+      "Silicon Valley",
+      "Los Angeles",
+      "Austin",
+      "US",
+      "Philadelphia",
+      "Seattle",
+      "France",
+      "Boston",
+      "United Kingdom",
+      "Israel",
+      "Europe",
+      "China",
+      "New York",
+      "Germany",
+      "Canada"
+    ],
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "market": "Silicon Valley",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -17.809801808683314
+    },
+    {
+      "market": "Los Angeles",
+      "transition": "2021→2022",
+      "delta_m_per_deal": 11.680305510092747
+    },
+    {
+      "market": "Austin",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -9.994159636599612
+    },
+    {
+      "market": "US",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -9.949260354628578
+    },
+    {
+      "market": "Philadelphia",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -0.7943207235242635
+    },
+    {
+      "market": "Seattle",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -3.049427365883064
+    },
+    {
+      "market": "France",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -7.816377171215882
+    },
+    {
+      "market": "Boston",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -6.519690974185039
+    },
+    {
+      "market": "United Kingdom",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -6.003153088593599
+    },
+    {
+      "market": "Israel",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -2.298761609907121
+    },
+    {
+      "market": "Europe",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -1.3888069114621935
+    },
+    {
+      "market": "China",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -7.206802542843418
+    },
+    {
+      "market": "New York",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -15.843484680693983
+    },
+    {
+      "market": "Germany",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -1.4112562427967728
+    },
+    {
+      "market": "Canada",
+      "transition": "2021→2022",
+      "delta_m_per_deal": -0.15822784810126578
+    },
+    {
+      "market": "Silicon Valley",
+      "transition": "2022→2023",
+      "delta_m_per_deal": 13.507874119602203
+    },
+    {
+      "market": "Los Angeles",
+      "transition": "2022→2023",
+      "delta_m_per_deal": -23.07692307692308
+    },
+    {
+      "market": "Austin",
+      "transition": "2022→2023",
+      "delta_m_per_deal": -3.4571256038647356
+    },
+    {
+      "market": "US",
+      "transition": "2022→2023",
+      "delta_m_per_deal": 0.9671203892542621
+    },
+    {
+      "market": "Philadelphia",
+      "transition": "2022→2023",
+      "delta_m_per_deal": -1.388934869803272
+    },
+    {
+      "market": "Seattle",
+      "transition": "2022→2023",
+      "delta_m_per_deal": -4.506462358427715
+    },
+    {
+      "market": "France",
+      "transition": "2022→2023",
+      "delta_m_per_deal": 5.002891844997107
+    },
+    {
+      "market": "Boston",
+      "transition": "2022→2023",
+      "delta_m_per_deal": -9.133084060379447
+    },
+    {
+      "market": "United Kingdom",
+      "transition": "2022→2023",
+      "delta_m_per_deal": -1.8635445230191952
+    },
+    {
+      "market": "Israel",
+      "transition": "2022→2023",
+      "delta_m_per_deal": -9.411764705882351
+    },
+    {
+      "market": "Europe",
+      "transition": "2022→2023",
+      "delta_m_per_deal": -2.649225340925242
+    },
+    {
+      "market": "China",
+      "transition": "2022→2023",
+      "delta_m_per_deal": -2.962761465966212
+    },
+    {
+      "market": "New York",
+      "transition": "2022→2023",
+      "delta_m_per_deal": 2.8660854012966688
+    },
+    {
+      "market": "Germany",
+      "transition": "2022→2023",
+      "delta_m_per_deal": 3.7472415549142752
+    },
+    {
+      "market": "Canada",
+      "transition": "2022→2023",
+      "delta_m_per_deal": -3.5066416627598063
+    },
+    {
+      "market": "Silicon Valley",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 19.013428358928678
+    },
+    {
+      "market": "Los Angeles",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 13.216783216783215
+    },
+    {
+      "market": "Austin",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 1.2891414141414153
+    },
+    {
+      "market": "US",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 9.435671446793457
+    },
+    {
+      "market": "Philadelphia",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 0.26831867839062085
+    },
+    {
+      "market": "Seattle",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 0.6168421052631583
+    },
+    {
+      "market": "France",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 1.2364243943191333
+    },
+    {
+      "market": "Boston",
+      "transition": "2023→2024",
+      "delta_m_per_deal": -1.5854830364402392
+    },
+    {
+      "market": "United Kingdom",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 2.4850115819593963
+    },
+    {
+      "market": "Israel",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 7.204301075268816
+    },
+    {
+      "market": "Europe",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 1.4775577374971318
+    },
+    {
+      "market": "China",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 3.8698581968365993
+    },
+    {
+      "market": "New York",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 1.6171851251393257
+    },
+    {
+      "market": "Germany",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 1.006518675123326
+    },
+    {
+      "market": "Canada",
+      "transition": "2023→2024",
+      "delta_m_per_deal": 7.487654320987655
+    },
+    {
+      "market": "Silicon Valley",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 48.4005611113625
+    },
+    {
+      "market": "Los Angeles",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 31.446678321678323
+    },
+    {
+      "market": "Austin",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 30.780303030303028
+    },
+    {
+      "market": "US",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 28.180924351366436
+    },
+    {
+      "market": "Philadelphia",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 12.085589791472144
+    },
+    {
+      "market": "Seattle",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 11.717590361445783
+    },
+    {
+      "market": "France",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 10.972222222222221
+    },
+    {
+      "market": "Boston",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 9.026357645989549
+    },
+    {
+      "market": "United Kingdom",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 8.502793296089385
+    },
+    {
+      "market": "Israel",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 7.795698924731184
+    },
+    {
+      "market": "Europe",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 5.609246825842282
+    },
+    {
+      "market": "China",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": -5.104508047483796
+    },
+    {
+      "market": "New York",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 5.074859031693563
+    },
+    {
+      "market": "Germany",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 5.00102375102375
+    },
+    {
+      "market": "Canada",
+      "transition": "2024→2025 YTD",
+      "delta_m_per_deal": 4.893333333333334
+    }
+  ]
+}

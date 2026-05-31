@@ -1,0 +1,1076 @@
+{
+    "plot_data": [
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.6371023790430368
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.5915174195847812
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.664367816091954
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.5926757551456829
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.6138643856366389
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.6267486411832843
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.6487213757462353
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.631221598503074
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.7040363539160651
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.6571861356143633
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.5547892720306514
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.6128664349995543
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.6670943597968458
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.5896819032344294
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.64031007751938
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.6841486233627372
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.6927737681546823
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.5801835516350351
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.7027933707564822
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.4093422025129342
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.4333086967233308
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.3554471544715447
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.384449371766445
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.4364523281596453
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.2907021433850702
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.3673121458487312
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.3628282828282828
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.3733234786893323
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.3943040157674303
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.5551909337275192
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.515989159891599
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.3424685883222468
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.3635649174673564
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.2965262379896526
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.2995910322739591
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.3813944321261394
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.3155654101995565
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.3422517861542252
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.5490566037735849
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.5392183288409704
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.4766846361185984
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.5208894878706201
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.4642857142857142
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.49366576819407
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.5838274932614556
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.5388140161725066
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.504177897574124
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.5164420485175203
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.5064690026954177
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.5037735849056604
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.5340970350404313
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.4130727762803234
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.5479784366576819
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.4831536388140162
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.4708894878706199
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.5119946091644204
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.484366576819407
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.6532263044149429
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.6307502315529484
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.6992281568385305
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.5748687866625504
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.6997838839147885
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.6753318925594319
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.7770916949675826
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.6272306267366472
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.6253782031491201
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.7036739734485952
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.5838221673355973
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.7202840382834206
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.7523309663476382
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.5637696820006174
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.5725841309046003
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.5422661315220748
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.7094164865699291
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.543933312750849
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.8090768755788824
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.6510285714285715
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.573657142857143
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.7086285714285715
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.6338285714285714
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.6750857142857141
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.544057142857143
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.5296000000000001
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.5583428571428571
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.6541714285714286
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.6258857142857144
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.5833142857142857
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.7030857142857143
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.5938285714285714
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.5301714285714286
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.556
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.5430285714285714
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.6221142857142856
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.6194285714285714
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.6788571428571428
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.438446726572529
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.4077663671373555
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.464762516046213
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.4637997432605905
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.510012836970475
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.4853658536585366
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.4678433889602053
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.4507060333761233
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.4627086007702182
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.4801668806161746
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.4377406931964057
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.5855584082156612
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.4118741976893453
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.441270860077022
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.4522464698331193
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.3948010269576379
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.4432605905006418
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.4671373555840822
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.4893453145057767
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.5705494505494506
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.5709890109890111
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.6678388278388279
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.5353846153846153
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.5443223443223444
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.4996336996336996
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.5884249084249084
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.5686446886446885
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.4807326007326008
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.5227838827838828
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.5008058608058609
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.5241025641025641
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.5632234432234432
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.44996336996337
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.5709890109890109
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.5945787545787546
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.6133333333333333
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.4836630036630037
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.492014652014652
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.5006172839506173
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.4731481481481482
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.5655349794238684
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.5141975308641976
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.392283950617284
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.4253086419753086
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.451954732510288
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.5131687242798354
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.462037037037037
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.6326131687242799
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.5287294238683128
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.5151234567901235
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.539917695473251
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.4650205761316873
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.466358024691358
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.5268518518518518
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.4603909465020576
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.5290123456790123
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.5338477366255145
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.5004283286933702
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.5046033968125407
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.4883504851607528
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.5156699468897796
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.4889299078316164
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.491797098445815
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.531819027690694
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.5177573487817849
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.4988288366398137
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.5523747842641852
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.5462732238492607
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.5602398092628509
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.5459378680853335
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.594593206768322
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.5673101435866413
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.5598464494777858
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.5652629219080831
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.5656978097254595
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.5610360301051545
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.5705762325854492
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.5937339287938366
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.7141280353200883
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.7159676232523916
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.7653053715967622
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.6147167034584252
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.6775570272259015
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.7797277409860192
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.6788079470198676
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.5157836644591611
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.5371228844738778
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.7543046357615893
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.6944352465047829
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.7815673289183223
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.5568800588668139
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.6664459161147903
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.5501471670345841
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.6385945548197205
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.6484547461368653
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.7837932303164091
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.6214495952906549
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.645936038427506
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.6137024396410062
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.6770319807862469
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.5973960308431299
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.6004550625711036
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.6913727720894955
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.6317532549614462
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.6400960687650107
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.6808747313866768
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.644425483503982
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.5640500568828214
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.5586651497914297
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.6794336999115156
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.6377701934015927
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.6639868537479459
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.6542788522310706
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.6791303248641132
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.6049551257742385
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.6822209581595245
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.5077916323817963
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.4794512310905753
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.4740173428698019
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.4807646053547693
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.4714728780302551
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.5290208241027915
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.5222988796759289
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.5111747578960693
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.4918792328628395
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.5345275017406166
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.5008671434900943
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.5407684030634852
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.4772200772200772
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.4938793594531299
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.5010823469839865
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.504183809101842
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.4985758592315968
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.5075289575289574
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.4818532818532819
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.5334896120610407
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.5238830667402097
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.5697646626218055
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.5666482809339952
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.5912300055157198
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.5505423791138078
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.5815958815958817
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.561040632469204
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.5572623644052215
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.5297756940614082
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.6002114359257218
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.5767696267696267
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.5532358889501747
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.6036771465342895
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.6207207207207208
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.6048078690935833
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.5635410921125207
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.5912300055157196
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.6058926273211988
+        },
+        {
+            "Model": "BiomedCLIP",
+            "AUROC": 0.5300348459649956
+        },
+        {
+            "Model": "CHIEF",
+            "AUROC": 0.5173903144056388
+        },
+        {
+            "Model": "CONCH",
+            "AUROC": 0.5366664686782292
+        },
+        {
+            "Model": "CTransPath",
+            "AUROC": 0.5156490060980439
+        },
+        {
+            "Model": "DinoSSLPath",
+            "AUROC": 0.5364932287954384
+        },
+        {
+            "Model": "H-optimus-0",
+            "AUROC": 0.5009107468123861
+        },
+        {
+            "Model": "Hibou-B",
+            "AUROC": 0.4958501623505187
+        },
+        {
+            "Model": "Hibou-L",
+            "AUROC": 0.5147580581294052
+        },
+        {
+            "Model": "Kaiko",
+            "AUROC": 0.544575116813178
+        },
+        {
+            "Model": "MADELEINE",
+            "AUROC": 0.4988001900689
+        },
+        {
+            "Model": "PLIP",
+            "AUROC": 0.4719054407222618
+        },
+        {
+            "Model": "PRISM",
+            "AUROC": 0.5281480161558565
+        },
+        {
+            "Model": "Panakeia*",
+            "AUROC": 0.5075314801615587
+        },
+        {
+            "Model": "Phikon",
+            "AUROC": 0.4833372931020828
+        },
+        {
+            "Model": "ProvGigaPath-S",
+            "AUROC": 0.5151500752356062
+        },
+        {
+            "Model": "ProvGigaPath-T",
+            "AUROC": 0.4937831630632771
+        },
+        {
+            "Model": "UNI",
+            "AUROC": 0.5030381325730577
+        },
+        {
+            "Model": "Virchow",
+            "AUROC": 0.5283361051714579
+        },
+        {
+            "Model": "Virchow2",
+            "AUROC": 0.477647105409044
+        }
+    ]
+}

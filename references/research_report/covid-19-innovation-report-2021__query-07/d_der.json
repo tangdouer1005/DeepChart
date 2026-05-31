@@ -1,0 +1,47 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a ranked horizontal bar chart for the top 8 countries by sampled innovations per visible Top-50 city in the 2021 report, where the metric is `total sampled innovations / number of visible cities ranked 50th or better`, values are expressed as sampled innovations per Top-50 city, countries must have at least one visible Top-50 city, Canada and Sweden are excluded because of city-rank conflicts, and bars are sorted from highest to lowest after the ratio is derived.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "sampled innovations per Top-50 city",
+  "sort_rule": "descending by innovations_per_top50_city",
+  "selection_rule": "top 8 after at least one visible Top-50 city and excluding Canada/Sweden",
+  "plot_spec": {
+    "title": "2021 Innovations per Visible Top-50 City",
+    "xlabel": "Sampled innovations per Top-50 city",
+    "value_field": "innovations_per_top50_city"
+  },
+  "records": [
+    {
+      "entity": "United States",
+      "innovations_per_top50_city": 81.0
+    },
+    {
+      "entity": "United Kingdom",
+      "innovations_per_top50_city": 50.0
+    },
+    {
+      "entity": "Russia",
+      "innovations_per_top50_city": 48.0
+    },
+    {
+      "entity": "Taiwan",
+      "innovations_per_top50_city": 33.0
+    },
+    {
+      "entity": "France",
+      "innovations_per_top50_city": 25.0
+    },
+    {
+      "entity": "Italy",
+      "innovations_per_top50_city": 24.0
+    },
+    {
+      "entity": "Spain",
+      "innovations_per_top50_city": 19.5
+    },
+    {
+      "entity": "Australia",
+      "innovations_per_top50_city": 19.0
+    }
+  ]
+}

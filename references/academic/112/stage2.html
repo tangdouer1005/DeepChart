@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 500px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = {
+    "Intranodal_WT_Vehicle": [
+        1.226013991989289,
+        0.9137241501300842,
+        1.2593749169413784,
+        1.3181705861405943,
+        0.46320361183478104,
+        1.1517888949997317,
+        0.667723847964141
+    ],
+    "Intranodal_WT_viFSP1": [
+        0.26919108005571524,
+        0.4740587435691917,
+        0.03158430764694863,
+        0.1172567421392968,
+        0.030024832456880545,
+        0.28110033805784285,
+        0.5876161736753397,
+        0.18387347551958827,
+        0.5379202396120939,
+        0.52758427493463
+    ],
+    "Intranodal_Fsp1_KO_Vehicle": [
+        0.7439762627007868,
+        0.8433562867119107,
+        0.03158430764694863,
+        0.03158430764694863,
+        0.03158430764694863,
+        0.03158430764694863,
+        0.03158430764694863,
+        0.03158430764694863,
+        0.03158430764694863
+    ],
+    "Intranodal_Fsp1_KO_viFSP1": [
+        0.6323691635918379,
+        0.10994497491902819,
+        0.09440549555672946,
+        0.6810129454065946,
+        0.25673107068899403,
+        0.03158430764694863,
+        0.09960901024156425,
+        0.03656278413979891
+    ],
+    "Subcutaneous_WT_Vehicle": [
+        0.47505561344221175,
+        0.6275176971758019,
+        0.8627640623994038,
+        1.07262093290512,
+        1.5483034001667353,
+        0.9886672051858337,
+        1.425071088724893
+    ],
+    "Subcutaneous_WT_viFSP1": [
+        0.32442302364590364,
+        0.5469331491498078,
+        0.5017894606485539,
+        0.48018662260755507,
+        0.9407594871142966,
+        0.29633971719901214,
+        1.6253259886079303,
+        0.789999228515666
+    ],
+    "Subcutaneous_Fsp1_KO_Vehicle": [
+        1.6476616455742605,
+        0.31997887263705566,
+        0.4379039919663494,
+        1.302964816119536,
+        0.5985279422324202,
+        1.058976968000909,
+        1.7172092256394702,
+        1.3238654757477606
+    ],
+    "Subcutaneous_Fsp1_KO_viFSP1": [
+        1.5255694165371587,
+        1.1622329419433417,
+        0.6292029253664596,
+        0.806938325207822,
+        1.9126420748587845
+    ]
+};
+
+        const groups = [
+            { id: 'Intranodal_WT', label: 'WT', loc: 'Intranodal' },
+            { id: 'Intranodal_Fsp1_KO', label: 'Fsp1 KO', loc: 'Intranodal' },
+            { id: 'Subcutaneous_WT', label: 'WT', loc: 'Subcutaneous' },
+            { id: 'Subcutaneous_Fsp1_KO', label: 'Fsp1 KO', loc: 'Subcutaneous' }
+        ];
+
+        // Colors
+        const colors = { 'Vehicle': '#999999', 'viFSP1': '#6daebf' };
+
+        // Box data
+        const boxDataVeh = [];
+        const boxDataVi = [];
+        const scatterVeh = [];
+        const scatterVi = [];
+
+        function getBoxStats(arr) {
+            const sorted = arr.sort((a,b)=>a-b);
+            const q1 = jStat.percentile(sorted, 0.25);
+            const median = jStat.median(sorted);
+            const q3 = jStat.percentile(sorted, 0.75);
+            const iqr = q3 - q1;
+            const lowerFence = q1 - 1.5 * iqr;
+            const upperFence = q3 + 1.5 * iqr;
+            
+            // Find data points within fences
+            const min = sorted.find(v => v >= lowerFence) || sorted[0];
+            const max = [...sorted].reverse().find(v => v <= upperFence) || sorted[sorted.length-1];
+            
+            return [min, q1, median, q3, max];
+        }
+
+        groups.forEach((g, i) => {
+            // Vehicle
+            const arrVeh = rawData[g.id + '_Vehicle'];
+            boxDataVeh.push(getBoxStats(arrVeh));
+            arrVeh.forEach(v => {
+                const jitter = (Math.random() - 0.5) * 0.2;
+                scatterVeh.push([i - 0.15 + jitter, v, 0]); // 0 for Veh
+            });
+
+            // viFSP1
+            const arrVi = rawData[g.id + '_viFSP1'];
+            boxDataVi.push(getBoxStats(arrVi));
+            arrVi.forEach(v => {
+                const jitter = (Math.random() - 0.5) * 0.2;
+                scatterVi.push([i + 0.15 + jitter, v, 1]); // 1 for Vi
+            });
+        });
+
+        // Annotations
+        // X positions: 
+        // Group 0: 0-0.15, 0+0.15
+        // Group 1: 1-0.15, 1+0.15 ...
+        
+        // Helper to get x
+        const getX = (grp, type) => grp + (type==='Veh' ? -0.15 : 0.15);
+
+        const annotations = [
+            // IN: WT Veh vs WT Vi
+            { x1: getX(0,'Veh'), x2: getX(0,'Vi'), y: 1.5, text: 'P = 0.0001' },
+            // IN: WT Veh vs KO Veh
+            { x1: getX(0,'Veh'), x2: getX(1,'Veh'), y: 1.9, text: 'P = 2.1 × 10⁻⁵' },
+            // IN: WT Vi vs KO Veh
+            { x1: getX(0,'Vi'), x2: getX(1,'Veh'), y: 2.25, text: 'P = 0.9015' },
+            // IN: KO Veh vs KO Vi
+            { x1: getX(1,'Veh'), x2: getX(1,'Vi'), y: 1.25, text: 'P = 0.997' },
+            // SubQ: WT Veh vs WT Vi
+            { x1: getX(2,'Veh'), x2: getX(2,'Vi'), y: 1.7, text: 'P = 0.623' },
+            // SubQ: WT Veh vs KO Veh
+            { x1: getX(2,'Veh'), x2: getX(3,'Veh'), y: 2.2, text: 'P = 0.9993' },
+            // SubQ: WT Vi vs KO Veh
+            { x1: getX(2,'Vi'), x2: getX(3,'Veh'), y: 2.5, text: 'P = 0.4516' },
+            // SubQ: KO Veh vs KO Vi
+            { x1: getX(3,'Veh'), x2: getX(3,'Vi'), y: 2.0, text: 'P = 0.9653' }
+        ];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 80, left: 60 },
+            legend: {
+                data: ['Vehicle', 'viFSP1'],
+                top: 50, left: 60, orient: 'vertical',
+                itemGap: 5, textStyle: { fontSize: 11 },
+                icon: 'rect'
+            },
+            xAxis: {
+                type: 'category',
+                data: groups.map(g => g.label),
+                axisLabel: { 
+                    formatter: function(value) {
+                        return value.includes('Fsp1') ? '{it|Fsp1} KO' : value;
+                    },
+                    rich: {
+                        it: { fontStyle: 'italic', fontFamily: 'serif' }
+                    },
+                    color: 'black', fontSize: 11 
+                },
+                axisTick: { alignWithLabel: true },
+                axisLine: { show: true, lineStyle: { color: 'black' } }
+            },
+            yAxis: {
+                type: 'value',
+                min: -0.2, max: 2.6,
+                name: 'End-point tumour volume\n(compared with vehicle)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { color: 'black', fontSize: 12 },
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    name: 'Vehicle',
+                    type: 'boxplot',
+                    data: boxDataVeh,
+                    itemStyle: { color: colors.Vehicle, borderColor: 'black' },
+                    boxWidth: '25%' // half of 0.5? No, relative to category width.
+                    // We need to shift bars. ECharts doesn't support dodging boxplots natively well without custom.
+                    // But with multiple series it dodges automatically? Yes if barGap is set.
+                    // But boxplot doesn't support barGap?
+                    // ECharts boxplot centers on category.
+                    // Workaround: Use custom series or multiple axes.
+                    // Or simpler: layout property? 
+                    // Actually, ECharts boxplot supports layout: 'horizontal'? No that's orientation.
+                    // Let's use custom render for boxplot or just accept overlap? No overlap is bad.
+                    // We can use 2 series, but they overlay by default.
+                    // Trick: Use empty data slots and interleaved categories? 
+                    // Or layout property 'boxWidth' and manipulate offsets? Not supported.
+                    
+                    // Let's use 'custom' series for boxplots to control position precisely.
+                },
+                {
+                    name: 'viFSP1',
+                    type: 'boxplot',
+                    data: boxDataVi,
+                    itemStyle: { color: colors.viFSP1, borderColor: 'black' },
+                    boxWidth: '25%'
+                }
+            ]
+        };
+        
+        // Implementing custom boxplot rendering for dodging
+        // Series 0: Vehicle (Shift Left)
+        // Series 1: viFSP1 (Shift Right)
+        
+        // Actually, let's use the 'bar' chart logic but with custom renderer for boxplot shapes.
+        // Or simply use dataset and layout?
+        // Standard ECharts boxplot doesn't dodge.
+        
+        // We will use custom series for everything to be safe.
+        
+        option.series = [
+            {
+                type: 'custom',
+                name: 'Vehicle',
+                renderItem: (params, api) => renderBox(params, api, 0, -0.15, colors.Vehicle),
+                data: boxDataVeh,
+                z: 1
+            },
+            {
+                type: 'custom',
+                name: 'viFSP1',
+                renderItem: (params, api) => renderBox(params, api, 1, 0.15, colors.viFSP1),
+                data: boxDataVi,
+                z: 1
+            },
+            // Scatter
+            {
+                type: 'custom',
+                renderItem: (params, api) => {
+                    const xVal = api.value(0);
+                    const yVal = api.value(1);
+                    const colorCode = api.value(2);
+
+                    // Manually calculate X position to preserve offset and jitter
+                    // because api.coord() on category axis might not handle fractional indices as expected for positioning.
+                    const categoryIdx = Math.round(xVal);
+                    const offset = xVal - categoryIdx;
+                    
+                    const center = api.coord([categoryIdx, yVal]);
+                    const unitWidth = api.size([1, 0])[0];
+                    const pxX = center[0] + offset * unitWidth;
+                    const pxY = center[1];
+
+                    return {
+                        type: 'circle',
+                        shape: { cx: pxX, cy: pxY, r: 3 },
+                        style: { 
+                            fill: colorCode===0 ? colors.Vehicle : colors.viFSP1, 
+                            stroke: 'black', lineWidth: 0.5,
+                            fillOpacity: 0.7
+                        }
+                    };
+                },
+                data: [...scatterVeh, ...scatterVi],
+                z: 2
+            },
+            // Annotations
+            {
+                type: 'custom',
+                renderItem: (params, api) => {
+                    const ann = annotations[params.dataIndex];
+                    const p1 = api.coord([ann.x1, ann.y]);
+                    const p2 = api.coord([ann.x2, ann.y]);
+                    
+                    return {
+                        type: 'group',
+                        children: [
+                            {
+                                type: 'polyline',
+                                shape: { points: [[p1[0], p1[1]+5], [p1[0], p1[1]], [p2[0], p2[1]], [p2[0], p2[1]+5]] },
+                                style: { stroke: 'black', lineWidth: 1, fill: null }
+                            },
+                            {
+                                type: 'text',
+                                style: {
+                                    text: ann.text,
+                                    x: (p1[0]+p2[0])/2, y: p1[1]-5,
+                                    textAlign: 'center', textVerticalAlign: 'bottom',
+                                    fill: 'black', fontSize: 10
+                                }
+                            }
+                        ]
+                    };
+                },
+                data: annotations,
+                z: 3
+            }
+        ];
+        
+        // Add Reference lines
+        option.graphic = [
+            { type: 'text', left: 0, top: 0, style: { text: 'i', font: 'bold 24px Arial' } },
+            // Dashed line y=1
+            // Use markLine in a dummy series
+        ];
+        
+        option.series.push({
+            type: 'line',
+            markLine: {
+                silent: true, symbol: 'none',
+                data: [{ yAxis: 1 }, { xAxis: 1.5 }], // Horizontal and Vertical
+                lineStyle: { type: 'dashed', color: 'black', width: 1 }
+            }
+        });
+        
+        // Custom Box Renderer
+        function renderBox(params, api, seriesIdx, offset, color) {
+            const xVal = api.value(0); // category index
+            const min = api.value(1);
+            const q1 = api.value(2);
+            const median = api.value(3);
+            const q3 = api.value(4);
+            const max = api.value(5); // data has 5 dims
+            // But data passed is array of arrays [min, q1, med, q3, max].
+            // api.value(0) is index in data array.
+            // category index is params.dataIndex.
+            
+            const categoryIndex = params.dataIndex;
+            const center = api.coord([categoryIndex, 0])[0];
+            const bandWidth = api.size([0, 0])[0];
+            const x = center + bandWidth * offset; // Offset is fraction? No offset is 0.15 units?
+            // category axis unit is 1. offset is 0.15.
+            // api.size([1, 0])[0] is width of 1 unit.
+            const unitWidth = api.size([1, 0])[0];
+            const pxOffset = unitWidth * offset;
+            const pxX = center + pxOffset;
+            const width = unitWidth * 0.25; // 25% width
+            
+            // Y coords
+            const yMin = api.coord([0, min])[1];
+            const yQ1 = api.coord([0, q1])[1];
+            const yMedian = api.coord([0, median])[1];
+            const yQ3 = api.coord([0, q3])[1];
+            const yMax = api.coord([0, max])[1];
+            
+            return {
+                type: 'group',
+                children: [
+                    {
+                        type: 'line',
+                        shape: { x1: pxX, y1: yMin, x2: pxX, y2: yQ1 },
+                        style: { stroke: 'black' }
+                    },
+                    {
+                        type: 'line',
+                        shape: { x1: pxX, y1: yQ3, x2: pxX, y2: yMax },
+                        style: { stroke: 'black' }
+                    },
+                    {
+                        type: 'line',
+                        shape: { x1: pxX - width/4, y1: yMin, x2: pxX + width/4, y2: yMin },
+                        style: { stroke: 'black' }
+                    },
+                    {
+                        type: 'line',
+                        shape: { x1: pxX - width/4, y1: yMax, x2: pxX + width/4, y2: yMax },
+                        style: { stroke: 'black' }
+                    },
+                    {
+                        type: 'rect',
+                        shape: { x: pxX - width/2, y: yQ3, width: width, height: yQ1 - yQ3 },
+                        style: { fill: color, stroke: 'black' }
+                    },
+                    {
+                        type: 'line',
+                        shape: { x1: pxX - width/2, y1: yMedian, x2: pxX + width/2, y2: yMedian },
+                        style: { stroke: 'black' }
+                    }
+                ]
+            };
+        }
+        
+        // Add Location Labels
+        option.graphic.push({
+            type: 'text',
+            left: '30%', bottom: 20,
+            style: { text: 'Intranodal', textAlign: 'center', fontSize: 12 }
+        });
+        option.graphic.push({
+            type: 'text',
+            left: '70%', bottom: 20,
+            style: { text: 'Subcutaneous', textAlign: 'center', fontSize: 12 }
+        });
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

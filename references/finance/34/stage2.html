@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>AMZN EBITDA（2016–2024）折线图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x at time of writing) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: rgba(37,99,235,0.1);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: #1f2937;
+        --accent: #60a5fa;
+        --accent-soft: rgba(96,165,250,0.15);
+      }
+    }
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: radial-gradient(circle at top left, #e5f0ff 0, #f9fafb 40%, var(--bg) 100%);
+      color: var(--fg);
+    }
+    .card {
+      max-width: 960px;
+      margin: 0 auto;
+      background-color: rgba(255,255,255,0.88);
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      box-shadow:
+        0 18px 45px rgba(15,23,42,0.18),
+        0 0 0 1px rgba(148,163,184,0.35);
+      padding: 1.5rem 1.75rem 2rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .card {
+        background-color: rgba(15,23,42,0.96);
+        box-shadow:
+          0 20px 60px rgba(0,0,0,0.65),
+          0 0 0 1px rgba(148,163,184,0.25);
+      }
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .title-block h1 {
+      font-size: 1.3rem;
+      margin: 0 0 0.25rem;
+    }
+    .title-block p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+    @media (prefers-color-scheme: dark) {
+      .title-block p {
+        color: #9ca3af;
+      }
+    }
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(37,99,235,0.08);
+      color: var(--accent);
+      border: 1px solid rgba(37,99,235,0.22);
+      white-space: nowrap;
+      align-self: center;
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      max-height: 520px;
+    }
+    .footer-note {
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .footer-note {
+        color: #9ca3af;
+      }
+    }
+    .unit-toggle {
+      display: flex;
+      gap: 0.35rem;
+      align-items: center;
+      font-size: 0.78rem;
+    }
+    .unit-btn {
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      padding: 0.12rem 0.65rem;
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: #4b5563;
+    }
+    .unit-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      .unit-btn {
+        background: #020617;
+        border-color: #4b5563;
+        color: #e5e7eb;
+      }
+      .unit-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #0b1120;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="title-block">
+        <h1>亚马逊（AMZN）EBITDA 走势（2016–2024）</h1>
+        <p>息税折旧摊销前利润（EBITDA），单位可在右下角切换</p>
+      </div>
+      <div class="badge">Line Chart · Interactive</div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      <span>数据区间：2016–2024 财年，货币单位：美元（USD）。</span>
+      <div class="unit-toggle">
+        显示单位：
+        <button class="unit-btn active" data-unit="b">十亿美元</button>
+        <button class="unit-btn" data-unit="m">百万美元</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 原始数据（单位：美元）
+    const rawYears = [
+      "2016","2017","2018","2019","2020",
+      "2021","2022","2023","2024"
+    ];
+
+    const rawEBITDA = [
+      12396000000,
+      16917000000,
+      28185000000,
+      38386000000,
+      51021000000,
+      74397000000,
+      44783000000,
+      89390000000,
+      123714000000
+    ];
+
+    // 格式化函数
+    function formatNumber(value, unit) {
+      if (unit === "b") { // billion
+        return (value / 1e9).toFixed(2);
+      } else { // "m" million
+        return (value / 1e6).toFixed(0);
+      }
+    }
+
+    function getDisplayData(unit) {
+      return rawEBITDA.map(v => unit === "b" ? v / 1e9 : v / 1e6);
+    }
+
+    // 初始化 Chart.js
+    const ctx = document.getElementById("ebitdaChart").getContext("2d");
+
+    const gradientLine = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientLine.addColorStop(0, "rgba(37,99,235,1)");
+    gradientLine.addColorStop(1, "rgba(96,165,250,1)");
+
+    const gradientFill = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientFill.addColorStop(0, "rgba(37,99,235,0.25)");
+    gradientFill.addColorStop(1, "rgba(37,99,235,0)");
+
+    let currentUnit = "b"; // 默认十亿美元
+
+    const chartConfig = {
+      type: "line",
+      data: {
+        labels: rawYears,
+        datasets: [{
+          label: "EBITDA",
+          data: getDisplayData(currentUnit),
+          borderColor: gradientLine,
+          backgroundColor: gradientFill,
+          borderWidth: 2.5,
+          fill: true,
+          pointRadius: 3.5,
+          pointHoverRadius: 6,
+          pointBackgroundColor: "#ffffff",
+          pointBorderWidth: 2,
+          tension: 0.25
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.95)",
+            titleColor: "#e5e7eb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148,163,184,0.6)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              title: (items) => {
+                const year = items[0].label;
+                return `财年 ${year}`;
+              },
+              label: (item) => {
+                const idx = item.dataIndex;
+                const raw = rawEBITDA[idx];
+                const unitLabel = currentUnit === "b" ? "十亿美元" : "百万美元";
+                const displayVal = formatNumber(raw, currentUnit);
+                return `EBITDA：${displayVal} ${unitLabel}`;
+              },
+              footer: (items) => {
+                const idx = items[0].dataIndex;
+                const raw = rawEBITDA[idx];
+                // 显示精确数值
+                return "精确值：" + raw.toLocaleString("en-US", {
+                  maximumFractionDigits: 0
+                }) + " USD";
+              }
+            },
+            footerFont: {
+              style: "normal"
+            }
+          },
+          title: {
+            display: true,
+            text: "AMZN EBITDA（息税折旧摊销前利润）",
+            color: "#111827",
+            font: {
+              size: 14,
+              weight: "600"
+            },
+            padding: {
+              bottom: 8
+            }
+          },
+          subtitle: {
+            display: true,
+            text: "2016–2024 财年，趋势明显上升，2022 年出现回调后再创新高",
+            color: "#6b7280",
+            font: {
+              size: 11
+            },
+            padding: {
+              bottom: 10
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#6b7280"
+            }
+          },
+          y: {
+            grid: {
+              color: "rgba(148,163,184,0.25)"
+            },
+            ticks: {
+              color: "#6b7280",
+              callback: function(value) {
+                const unitSuffix = currentUnit === "b" ? "B" : "M";
+                return value + unitSuffix;
+              }
+            },
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    const ebitdaChart = new Chart(ctx, chartConfig);
+
+    // 单位切换按钮逻辑
+    const unitButtons = document.querySelectorAll(".unit-btn");
+    unitButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const unit = btn.getAttribute("data-unit");
+        if (unit === currentUnit) return;
+
+        currentUnit = unit;
+
+        // 更新按钮样式
+        unitButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // 更新数据
+        ebitdaChart.data.datasets[0].data = getDisplayData(currentUnit);
+
+        // 更新 y 轴和标题副标题（若需要）
+        ebitdaChart.options.scales.y.ticks.callback = function(value) {
+          const unitSuffix = currentUnit === "b" ? "B" : "M";
+          return value + unitSuffix;
+        };
+
+        ebitdaChart.update();
+      });
+    });
+  </script>
+</body>
+</html>

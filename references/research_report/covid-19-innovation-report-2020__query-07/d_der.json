@@ -1,0 +1,47 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a ranked horizontal bar chart for the top 8 countries by support-and-adaptation yield per Top-30 city in the 2020 report, where the metric is `(grants_support_initiatives + life_business_adaptation) / number of visible cities ranked 30th or better`, values are expressed as sampled innovations per Top-30 city, only countries with at least one visible city ranked 30th or better are eligible, countries with `city_rankings = unavailable` are excluded, and bars are sorted from highest to lowest.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "sampled innovations per Top-30 city",
+  "sort_rule": "descending by yield_per_top30_city",
+  "selection_rule": "top 8 after requiring at least one visible Top-30 city",
+  "plot_spec": {
+    "title": "2020 Support-Adaptation Yield per Top-30 City",
+    "xlabel": "Support + adaptation innovations per Top-30 city",
+    "value_field": "yield_per_top30_city"
+  },
+  "records": [
+    {
+      "entity": "United States",
+      "yield_per_top30_city": 26.25
+    },
+    {
+      "entity": "United Kingdom",
+      "yield_per_top30_city": 19.0
+    },
+    {
+      "entity": "Canada",
+      "yield_per_top30_city": 8.0
+    },
+    {
+      "entity": "Germany",
+      "yield_per_top30_city": 8.0
+    },
+    {
+      "entity": "Russia",
+      "yield_per_top30_city": 8.0
+    },
+    {
+      "entity": "France",
+      "yield_per_top30_city": 6.0
+    },
+    {
+      "entity": "Italy",
+      "yield_per_top30_city": 6.0
+    },
+    {
+      "entity": "Spain",
+      "yield_per_top30_city": 5.0
+    }
+  ]
+}

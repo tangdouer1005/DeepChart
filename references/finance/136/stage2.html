@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>lly 现金消耗跑道（零收入情景）2016-2024</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #fafafa;
+      color: #333;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: 18px;
+      color: #666;
+    }
+    #chart-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    #chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      /* fixed, balanced aspect ratio to avoid extreme stretching */
+      height: 480px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px 18px 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-sizing: border-box;
+    }
+    canvas {
+      /* make the canvas fill the container predictably */
+      width: 100% !important;
+      height: calc(100% - 40px) !important;
+    }
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #777;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-wrapper">
+    <h1>lly 现金消耗跑道（月）</h1>
+    <h2>零收入情景（2016–2024）</h2>
+    <div id="chart-container">
+      <canvas id="runwayChart"></canvas>
+    </div>
+  </div>
+  <div class="note">
+    数据来源：用户提供财务数据。<br>
+    指标：RESULT_Runway_Months，表示在零收入情景下的现金消耗跑道（月数）。
+  </div>
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const labels = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const runwayMonths = [
+      4.649557327560693,
+      6.81961169606914,
+      7.965724545034139,
+      2.337597399891662,
+      3.595585524321401,
+      3.416390802540932,
+      1.825178993222908,
+      2.020441444401302,
+      1.9705676948043795
+    ];
+
+    const ctx = document.getElementById('runwayChart').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '现金消耗跑道（月）',
+          data: runwayMonths,
+          borderColor: '#0d6efd',
+          backgroundColor: 'rgba(13, 110, 253, 0.15)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointBackgroundColor: '#0d6efd',
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 1.5
+        }]
+      },
+      options: {
+        // Control aspect ratio via CSS height; avoid distortion
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          intersect: false
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                return ' 现金消耗跑道：' + value.toFixed(2) + ' 个月';
+              }
+            }
+          },
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              font: { size: 12 }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财政年度',
+              color: '#555',
+              font: { size: 12 }
+            },
+            ticks: {
+              font: { size: 11 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: '现金消耗跑道（月）',
+              color: '#555',
+              font: { size: 12 }
+            },
+            beginAtZero: true,
+            suggestedMax: 9,
+            ticks: {
+              font: { size: 11 },
+              callback: function(value) {
+                return value;
+              }
+            },
+            grid: {
+              color: 'rgba(0,0,0,0.06)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

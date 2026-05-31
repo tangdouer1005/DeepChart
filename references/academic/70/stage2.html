@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Replication</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
+        #chart { width: 500px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+    <script>
+
+        // --- Embedded Data ---
+        const chartRawData = {
+    "Vehicle": {
+        "Compound": [
+            0.0001,
+            1e-05,
+            1e-06,
+            1e-07,
+            1e-08,
+            1e-09,
+            1e-10,
+            1e-11
+        ],
+        "Mean": [
+            0.0021608424391111112,
+            0.0040839192675633336,
+            0.0028137641020444444,
+            0.0039493064791111115,
+            0.004739993179733334,
+            0.004477086898111111,
+            0.002279669219155556,
+            0.004149485336222222
+        ],
+        "SEM": [
+            0.0008577368833768264,
+            0.0009866027226703158,
+            0.0009307239691200526,
+            0.0012557602333997458,
+            0.001193646253178301,
+            0.0009930145669178787,
+            0.0006856167675900359,
+            0.0005636077611375468
+        ]
+    },
+    "Vehicle + 100 nM NT": {
+        "Compound": [
+            0.0001,
+            1e-05,
+            1e-06,
+            1e-07,
+            1e-08,
+            1e-09,
+            1e-10,
+            1e-11
+        ],
+        "Mean": [
+            0.10089798142555556,
+            0.10305500707888889,
+            0.10216754474111112,
+            0.10040420197333333,
+            0.10219104252888887,
+            0.09661909500666667,
+            0.09838559972,
+            0.10530998947111112
+        ],
+        "SEM": [
+            0.0027931959534690247,
+            0.0018050645913804224,
+            0.0016621065266829672,
+            0.002017035425085438,
+            0.001521823913340523,
+            0.002946425539829553,
+            0.0017169887622847128,
+            0.0023112436054796895
+        ]
+    },
+    "SBI-553 + 100 nM NT": {
+        "Compound": [
+            3e-05,
+            1e-05,
+            3e-06,
+            1e-06,
+            3e-07,
+            1e-07,
+            3e-08,
+            1e-08,
+            3e-09,
+            1e-11
+        ],
+        "Mean": [
+            0.0524837104,
+            0.04609935212,
+            0.048000121771111105,
+            0.047976744870000004,
+            0.04616515029222223,
+            0.04791672841333334,
+            0.05803574735666666,
+            0.07022833173833333,
+            0.08335949810333332,
+            0.10399820007
+        ],
+        "SEM": [
+            0.003483934391937099,
+            0.0021332003965146245,
+            0.0015495744228761937,
+            0.001426667497177931,
+            0.0008949186973128396,
+            0.0012110575592522326,
+            0.001482193917212248,
+            0.0013537533254796136,
+            0.001853533671318403,
+            0.001463292536944127
+        ]
+    },
+    "SR142948A + 100 nM NT": {
+        "Compound": [
+            0.0001,
+            1e-05,
+            1e-06,
+            1e-07,
+            1e-08,
+            1e-09,
+            1e-10,
+            1e-11
+        ],
+        "Mean": [
+            0.0030983608274444446,
+            0.0020880080419444446,
+            0.0039907211052222225,
+            0.019629708384777775,
+            0.05976594788888889,
+            0.08717026037666667,
+            0.0978932866288889,
+            0.10268219241444444
+        ],
+        "SEM": [
+            0.0011750724260890973,
+            0.0009589613952435543,
+            0.0006988463441268316,
+            0.0025660359975630646,
+            0.004713663597687335,
+            0.0045662656673764795,
+            0.002607495118360561,
+            0.002541662789814772
+        ]
+    }
+};
+
+        const transformData = (jsonData) => {
+            const result = {};
+            for (const key in jsonData) {
+                if (jsonData.hasOwnProperty(key)) {
+                    const group = jsonData[key];
+                    result[key] = group.Compound.map((compound, i) => ({
+                        x: Math.log10(compound),
+                        y: group.Mean[i],
+                        sem: group.SEM[i]
+                    }));
+                }
+            }
+            return result;
+        };
+        const chartData = transformData(chartRawData);
+
+
+// --- Curve Fitting Logic (Simple Gradient Descent for 4PL) ---
+        function sigmoid(x, top, bottom, logEC50, hillSlope) {
+            return bottom + (top - bottom) / (1 + Math.pow(10, (logEC50 - x) * hillSlope));
+        }
+
+        function fitCurve(dataPoints) {
+            if (dataPoints.length < 4) return null; // Not enough points
+
+            const x = dataPoints.map(p => p.x);
+            const y = dataPoints.map(p => p.y);
+            
+            const maxY = Math.max(...y);
+            const minY = Math.min(...y);
+            const minX = Math.min(...x);
+            const maxX = Math.max(...x);
+
+            // Initial Guesses
+            let top = maxY;
+            let bottom = minY;
+            let logEC50 = (minX + maxX) / 2;
+            let hillSlope = 1.0;
+
+            const learningRate = 0.01;
+            const iterations = 5000;
+
+            // Simple Gradient Descent
+            // Loss = Sum (y_pred - y_actual)^2
+            // We need gradients for Top, Bottom, LogEC50, HillSlope.
+            // This is non-trivial to write out manually without bugs in one go.
+            // Alternative: Nelder-Mead (Simplex) is derivative-free and robust for this.
+            
+            // Simplified implementation of Nelder-Mead for 4 vars
+            // Or better: Use a very simple grid search refinement since we know bounds well.
+            // Actually, let's try a randomized hill climbing (simulated annealing-ish) 
+            // because it's easiest to implement without derivatives.
+            
+            let bestParams = [top, bottom, logEC50, hillSlope];
+            let bestError = Infinity;
+
+            function error(params) {
+                const [t, b, ec, h] = params;
+                let sumSq = 0;
+                for (let i = 0; i < x.length; i++) {
+                    const pred = sigmoid(x[i], t, b, ec, h);
+                    sumSq += (pred - y[i]) ** 2;
+                }
+                return sumSq;
+            }
+
+            // Refine loop
+            let currentParams = [...bestParams];
+            let stepSizes = [0.1, 0.1, 0.5, 0.5]; // Initial steps
+            
+            for(let iter=0; iter<10000; iter++) {
+                // Try moving each param
+                let improved = false;
+                for(let i=0; i<4; i++) {
+                    const original = currentParams[i];
+                    
+                    // Try + step
+                    currentParams[i] = original + stepSizes[i];
+                    let err = error(currentParams);
+                    if(err < bestError) {
+                        bestError = err;
+                        bestParams = [...currentParams];
+                        improved = true;
+                        continue;
+                    }
+                    
+                    // Try - step
+                    currentParams[i] = original - stepSizes[i];
+                    err = error(currentParams);
+                    if(err < bestError) {
+                        bestError = err;
+                        bestParams = [...currentParams];
+                        improved = true;
+                        continue;
+                    }
+
+                    // Reset if no improvement
+                    currentParams[i] = original;
+                }
+                
+                if (!improved) {
+                    // Reduce steps
+                    for(let i=0; i<4; i++) stepSizes[i] *= 0.95;
+                }
+                
+                if (Math.max(...stepSizes) < 1e-6) break;
+            }
+
+            // Generate smooth curve
+            const curveData = [];
+            const steps = 100;
+            const padding = 0.5;
+            const start = minX - padding;
+            const end = maxX + padding;
+            const step = (end - start) / steps;
+            
+            for (let i = 0; i <= steps; i++) {
+                const curX = start + i * step;
+                const curY = sigmoid(curX, ...bestParams);
+                curveData.push([curX, curY]);
+            }
+            return curveData;
+        }
+
+        const seriesList = [];
+        
+        // Configuration map
+        const configs = [
+            { data: chartData.Vehicle, color: '#808080', name: 'Vehicle', fit: true },
+            { data: chartData['SR142948A + 100 nM NT'], color: '#F57C20', name: 'SR142948A', fit: true },
+            { data: chartData['SBI-553 + 100 nM NT'], color: '#B030B0', name: 'SBI-553', fit: true },
+            { data: chartData['Vehicle + 100 nM NT'], color: '#00008B', name: 'Vehicle + NT', fit: true }
+        ];
+
+        configs.forEach(cfg => {
+            // Scatter + Error Bar
+            // ECharts Error Bar requires custom render or specific data format
+            // Data format: [x, y, low, high] (for error bar series type) usually requires 'custom' series.
+            
+            const scatterData = cfg.data.map(item => [item.x, item.y]);
+            
+            // Error bars: construct segments
+            const errorBarData = cfg.data.map(item => {
+                return {
+                    value: [item.x, item.y], // Coordinates
+                    itemStyle: {
+                        color: cfg.color
+                    },
+                    // We need to encode the error range. 
+                    // Let's use `custom` series for error bars for full control.
+                    low: item.y - item.sem,
+                    high: item.y + item.sem
+                };
+            });
+
+            // Add Scatter Series
+            seriesList.push({
+                name: cfg.name,
+                type: 'scatter',
+                data: scatterData,
+                itemStyle: { color: cfg.color },
+                symbolSize: 9,
+                z: 10
+            });
+
+            // Add Error Bar Series (Custom)
+            seriesList.push({
+                type: 'custom',
+                name: cfg.name + ' Error',
+                itemStyle: {
+                    color: cfg.color,
+                    borderWidth: 1.5
+                },
+                renderItem: function (params, api) {
+                    const xValue = api.value(0);
+                    const highPoint = api.coord([xValue, api.value(3)]); // Using data index 3 for high? No.
+                    // We need to pass data carefully.
+                    // Let's use data: [[x, y, low, high], ...]
+                    // value(0) -> x, value(1) -> y, value(2) -> low, value(3) -> high
+                    
+                    const pos = api.coord([api.value(0), api.value(1)]); // center
+                    const low = api.coord([api.value(0), api.value(2)]);
+                    const high = api.coord([api.value(0), api.value(3)]);
+                    
+                    const barWidth = 6;
+                    
+                    return {
+                        type: 'group',
+                        children: [{
+                            type: 'line',
+                            shape: {
+                                x1: low[0], y1: low[1],
+                                x2: high[0], y2: high[1]
+                            },
+                            style: api.style()
+                        }, {
+                            type: 'line',
+                            shape: {
+                                x1: low[0] - barWidth/2, y1: low[1],
+                                x2: low[0] + barWidth/2, y2: low[1]
+                            },
+                            style: api.style()
+                        }, {
+                            type: 'line',
+                            shape: {
+                                x1: high[0] - barWidth/2, y1: high[1],
+                                x2: high[0] + barWidth/2, y2: high[1]
+                            },
+                            style: api.style()
+                        }]
+                    };
+                },
+                data: cfg.data.map(d => [d.x, d.y, d.y - d.sem, d.y + d.sem]),
+                z: 9,
+                silent: true
+            });
+
+            // Add Fit Line
+            if (cfg.fit) {
+                const curve = fitCurve(cfg.data);
+                if (curve) {
+                     seriesList.push({
+                        name: cfg.name + ' Fit',
+                        type: 'line',
+                        data: curve,
+                        showSymbol: false,
+                        lineStyle: { color: cfg.color, width: 2 },
+                        z: 8,
+                        silent: true,
+                        animation: false
+                    });
+                } else {
+                     // Fallback: Connect dots if fit fails (or too few points)
+                     seriesList.push({
+                        name: cfg.name + ' Line',
+                        type: 'line',
+                        data: scatterData,
+                        showSymbol: false,
+                        lineStyle: { color: cfg.color, width: 2, opacity: 0.7 },
+                        z: 8,
+                        silent: true
+                    });
+                }
+            }
+        });
+
+        // --- ECharts Option ---
+        const chart = echarts.init(document.getElementById('chart'));
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: 20,
+                right: 20,
+                bottom: 50,
+                left: 60,
+                containLabel: false
+            },
+            xAxis: {
+                type: 'value',
+                min: -11.5,
+                max: -3.5,
+                interval: 2, // -11.5 to -3.5 is range 8. Interval 2 -> -12 (hidden), -10, -8, -6, -4
+                axisLabel: {
+                    show: true,
+                    fontSize: 12,
+                    formatter: function(val) {
+                        // Ticks matching python: [-12, -10, -8, -6, -4]
+                        // Our range starts at -11.5, so -12 is out.
+                        // We will just let ECharts handle it or force ticks.
+                        return val;
+                    }
+                },
+                // Force specific ticks
+                min: -12,
+                max: -3.5, // range
+                
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true, length: 5, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                min: -0.02,
+                max: 0.15,
+                interval: 0.05,
+                axisLabel: {
+                    fontSize: 12,
+                    formatter: function(val) {
+                         // 0, 0.05, 0.10, 0.15
+                         return val.toFixed(2);
+                    }
+                },
+                name: 'Mini Gi1 recruitment (Δ Net BRET)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: {
+                    fontSize: 12,
+                    padding: [0, 0, 0, 0] // Centered
+                },
+                // Use rich text for subscript if needed, but standard text is fine for simplified
+                // Python uses LaTeX: Mini G$_{i1}$
+                // ECharts supports rich text but it's complex. Plain text is safer for quick replication.
+                
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true, length: 5, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                ...seriesList,
+                // Dotted line at y=0
+                {
+                    type: 'line',
+                    markLine: {
+                        symbol: 'none',
+                        data: [{ yAxis: 0 }],
+                        lineStyle: {
+                            type: 'dotted',
+                            color: 'black',
+                            width: 1.5
+                        },
+                        silent: true,
+                        z: 0
+                    }
+                }
+            ]
+        };
+        
+        // Manual Tick override to match Python exactly
+        option.xAxis.min = -11.5;
+        option.xAxis.max = -3.5;
+        // The python script sets ticks [-12, -10, -8, -6, -4].
+        // But limits are -11.5 to -3.5. So -12 is not visible.
+        // Let's just use interval 2 starting from even numbers.
+        
+        chart.setOption(option);
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a ranked horizontal bar chart showing the bottom 8 countries by support-to-clinical ratio in the 2021 report, where support-to-clinical ratio is `(grants_support_initiatives + life_business_adaptation) / (diagnostics + treatment)`, values are expressed as a ratio, countries must have `(diagnostics + treatment) > 0` and at least 8 total sampled innovations, and bars are sorted from the lowest ratio to the highest after the ratio is derived.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "ratio",
+  "sort_rule": "ascending by support_to_clinical_ratio",
+  "selection_rule": "bottom 8 after clinical_count > 0 and total_innovations >= 8",
+  "plot_spec": {
+    "title": "2021 Support-to-Clinical Ratio",
+    "xlabel": "Support-to-clinical ratio",
+    "value_field": "support_to_clinical_ratio"
+  },
+  "records": [
+    {
+      "entity": "Croatia",
+      "support_to_clinical_ratio": 0.0
+    },
+    {
+      "entity": "Japan",
+      "support_to_clinical_ratio": 0.0
+    },
+    {
+      "entity": "Kenya",
+      "support_to_clinical_ratio": 0.0
+    },
+    {
+      "entity": "South Korea",
+      "support_to_clinical_ratio": 0.0345
+    },
+    {
+      "entity": "Poland",
+      "support_to_clinical_ratio": 0.1111
+    },
+    {
+      "entity": "China",
+      "support_to_clinical_ratio": 0.125
+    },
+    {
+      "entity": "The Netherlands",
+      "support_to_clinical_ratio": 0.125
+    },
+    {
+      "entity": "Taiwan",
+      "support_to_clinical_ratio": 0.1667
+    }
+  ]
+}

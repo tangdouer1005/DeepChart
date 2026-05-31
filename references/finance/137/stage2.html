@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>lly 盈余-现金质量剪刀差 (2016–2024)</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px 0;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: normal;
+      margin: 0 0 18px 0;
+      color: #555;
+    }
+
+    #chartContainer {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 22px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Fix aspect ratio and avoid excessive vertical stretching */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 760px;
+      height: 360px; /* fixed reasonable height */
+      margin-top: 4px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .legend-inline {
+      display: flex;
+      gap: 16px;
+      font-size: 11px;
+      margin-bottom: 6px;
+      color: #444;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    .positive-swatch {
+      background: #16a34a;
+    }
+
+    .negative-swatch {
+      background: #dc2626;
+    }
+
+    .zero-line-label {
+      font-size: 11px;
+      color: #444;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="chartContainer">
+    <h1>lly 盈余-现金质量剪刀差</h1>
+    <h2>2016–2024 年度变化（RESULT_Spread）</h2>
+
+    <div class="legend-inline">
+      <div class="legend-item">
+        <div class="legend-swatch positive-swatch"></div>
+        <span>正剪刀差（盈余质量高于现金质量）</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch negative-swatch"></div>
+        <span>负剪刀差（盈余质量低于现金质量）</span>
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="spreadChart"></canvas>
+    </div>
+    <div class="zero-line-label">虚线为 0 轴，表示盈余-现金质量剪刀差的分界线。</div>
+
+    <div class="note">
+      数据来源：用户提供数据（RESULT_Spread）；单位为绝对值（无量纲）。
+    </div>
+  </div>
+
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Data from source (kept exactly as provided)
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const spreadValues = [
+      0.0568310771928126,
+      0.1389167041625839,
+      0.0515809534095178,
+      -0.0837026486125885,
+      0.0071206435814113,
+      0.0351847408452091,
+      0.0170831307136215,
+      -0.0176270374048095,
+      -0.0248330311124065
+    ];
+
+    // Bar colors: positive = green, negative = red
+    const barColors = spreadValues.map(v =>
+      v >= 0 ? "rgba(22, 163, 74, 0.8)" : "rgba(220, 38, 38, 0.85)"
+    );
+    const borderColors = spreadValues.map(v =>
+      v >= 0 ? "rgba(21, 128, 61, 1)" : "rgba(185, 28, 28, 1)"
+    );
+
+    // Register zero line plugin BEFORE creating the chart
+    const zeroLinePlugin = {
+      id: "zeroLinePlugin",
+      afterDraw(chart) {
+        const yScale = chart.scales.y;
+        if (!yScale) return;
+        const zeroY = yScale.getPixelForValue(0);
+        const ctx = chart.ctx;
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(chart.chartArea.left, zeroY);
+        ctx.lineTo(chart.chartArea.right, zeroY);
+        ctx.setLineDash([4, 3]);
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "rgba(75, 85, 99, 0.9)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    };
+
+    Chart.register(zeroLinePlugin);
+
+    const ctx = document.getElementById("spreadChart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "盈余-现金质量剪刀差 (RESULT_Spread)",
+            data: spreadValues,
+            backgroundColor: barColors,
+            borderColor: borderColors,
+            borderWidth: 1.2,
+            borderRadius: 4,
+            hoverBackgroundColor: barColors,
+            hoverBorderColor: borderColors
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // use the fixed height from CSS
+        interaction: {
+          mode: "nearest",
+          intersect: true
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: "rgba(15, 23, 42, 0.9)",
+            titleColor: "#f9fafb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.7)",
+            borderWidth: 1,
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return "剪刀差: " + value.toFixed(4);
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: "#374151",
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: "rgba(209, 213, 219, 0.5)",
+              lineWidth: 0.7
+            },
+            ticks: {
+              color: "#374151",
+              font: {
+                size: 11
+              },
+              callback: function (value) {
+                return value.toFixed(2);
+              }
+            },
+            // Slight padding above/below for visual comfort
+            suggestedMin: -0.15,
+            suggestedMax: 0.15
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

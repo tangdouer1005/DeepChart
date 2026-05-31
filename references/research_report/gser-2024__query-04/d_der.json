@@ -1,0 +1,123 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a bubble chart of the top 15 ecosystems by `seed capital leverage`, defined as `Total Early-Stage Funding / Median Seed Round`, using 2024 card values with the x-axis as `Median Seed Round` in `$M`, the y-axis as `seed capital leverage` in `estimated seed-round counts`, bubble size as `Number of Unicorns`, sorted for labeling by leverage descending, and excluding rows with missing or zero seed-round values.",
+  "chart_type": "bubble chart",
+  "value_unit": "seed-round counts",
+  "sort_rule": "descending by seed_capital_leverage",
+  "selection_rule": "top 15 ecosystems",
+  "plot_spec": {
+    "title": "2024 Seed Capital Leverage",
+    "x_field": "x_seed_round_musd",
+    "y_field": "y_seed_capital_leverage",
+    "size_field": "size_unicorns",
+    "xlabel": "Median Seed Round ($M)",
+    "ylabel": "Estimated Seed-Round Counts"
+  },
+  "records": [
+    {
+      "entity": "London",
+      "x_seed_round_musd": 1.0,
+      "y_seed_capital_leverage": 16000.0,
+      "size_unicorns": 52,
+      "label": true
+    },
+    {
+      "entity": "Silicon Valley",
+      "x_seed_round_musd": 2.2,
+      "y_seed_capital_leverage": 14590.9091,
+      "size_unicorns": 271,
+      "label": true
+    },
+    {
+      "entity": "New York City",
+      "x_seed_round_musd": 1.7,
+      "y_seed_capital_leverage": 12352.9412,
+      "size_unicorns": 126,
+      "label": true
+    },
+    {
+      "entity": "Seoul",
+      "x_seed_round_musd": 0.836,
+      "y_seed_capital_leverage": 5622.0096,
+      "size_unicorns": 20,
+      "label": true
+    },
+    {
+      "entity": "Boston",
+      "x_seed_round_musd": 2.0,
+      "y_seed_capital_leverage": 5250.0,
+      "size_unicorns": 39,
+      "label": true
+    },
+    {
+      "entity": "Los Angeles",
+      "x_seed_round_musd": 1.5,
+      "y_seed_capital_leverage": 5200.0,
+      "size_unicorns": 41,
+      "label": true
+    },
+    {
+      "entity": "Bengaluru - Karnataka",
+      "x_seed_round_musd": 0.75,
+      "y_seed_capital_leverage": 5066.6667,
+      "size_unicorns": 33,
+      "label": true
+    },
+    {
+      "entity": "The Netherlands",
+      "x_seed_round_musd": 0.856,
+      "y_seed_capital_leverage": 4205.6075,
+      "size_unicorns": 6,
+      "label": true
+    },
+    {
+      "entity": "São Paulo",
+      "x_seed_round_musd": 0.5,
+      "y_seed_capital_leverage": 4200.0,
+      "size_unicorns": 11,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "x_seed_round_musd": 1.4,
+      "y_seed_capital_leverage": 4142.8571,
+      "size_unicorns": 14,
+      "label": true
+    },
+    {
+      "entity": "Paris",
+      "x_seed_round_musd": 1.7,
+      "y_seed_capital_leverage": 4117.6471,
+      "size_unicorns": 31,
+      "label": true
+    },
+    {
+      "entity": "Philadelphia",
+      "x_seed_round_musd": 0.655,
+      "y_seed_capital_leverage": 3816.7939,
+      "size_unicorns": 7,
+      "label": true
+    },
+    {
+      "entity": "Washington, D.C.",
+      "x_seed_round_musd": 0.75,
+      "y_seed_capital_leverage": 3600.0,
+      "size_unicorns": 15,
+      "label": true
+    },
+    {
+      "entity": "Austin",
+      "x_seed_round_musd": 1.0,
+      "y_seed_capital_leverage": 3500.0,
+      "size_unicorns": 12,
+      "label": true
+    },
+    {
+      "entity": "Stockholm",
+      "x_seed_round_musd": 1.0,
+      "y_seed_capital_leverage": 3200.0,
+      "size_unicorns": 7,
+      "label": true
+    }
+  ]
+}

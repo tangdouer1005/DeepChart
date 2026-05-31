@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XOM 防御区间比率 (DIR) 2016–2024 - Bar Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #f5f5f7;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: #ffffff;
+      margin: 24px;
+      padding: 24px 24px 32px;
+      border-radius: 12px;
+      box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.08),
+        0 1px 3px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+      margin: 0 0 16px;
+      font-weight: 400;
+      color: #4b5563;
+    }
+
+    .meta {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+      width: 100%;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        margin: 12px;
+        padding: 16px 14px 20px;
+      }
+      .chart-wrapper {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>XOM 防御区间比率 (DIR) 变化</h1>
+    <h2>2016–2024 财年</h2>
+    <div class="meta">
+      指标：防御区间比率 (Defensive Interval Ratio, DIR) &nbsp;|&nbsp;
+      单位：比率值 &nbsp;|&nbsp;
+      来源：用户提供数据
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="dirBarChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Data from source
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const dirValues = [
+      46.213249973465686,
+      47.0241288063651,
+      39.36967357158409,
+      45.178364776766045,
+      43.769048466027634,
+      56.60488061644892,
+      77.86409261101997,
+      87.47092021665128,
+      81.27355262938299
+    ];
+
+    // Compute min/max for y-axis padding
+    const minVal = Math.min(...dirValues);
+    const maxVal = Math.max(...dirValues);
+    const padding = 5;
+    const suggestedMin = Math.floor((minVal - padding) / 5) * 5;
+    const suggestedMax = Math.ceil((maxVal + padding) / 5) * 5;
+
+    const ctx = document.getElementById("dirBarChart").getContext("2d");
+
+    const dirBarChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "防御区间比率 (DIR)",
+            data: dirValues,
+            backgroundColor: fiscalYears.map((year, idx) => {
+              // Highlight latest year
+              return idx === fiscalYears.length - 1
+                ? "rgba(37, 99, 235, 0.9)"    // deep blue
+                : "rgba(37, 99, 235, 0.55)";  // lighter blue
+            }),
+            borderColor: "rgba(30, 64, 175, 1)",
+            borderWidth: 1.2,
+            borderRadius: 6,
+            hoverBackgroundColor: "rgba(37, 99, 235, 1)",
+            hoverBorderColor: "rgba(15, 23, 42, 0.9)"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: true
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "rectRounded",
+              padding: 16,
+              font: {
+                size: 11.5
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.9)",
+            borderColor: "rgba(55, 65, 81, 0.7)",
+            borderWidth: 1,
+            titleFont: { size: 12, weight: "600" },
+            bodyFont: { size: 11 },
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return " DIR: " + value.toFixed(2);
+              },
+              afterLabel: function (context) {
+                return " 财年: " + context.label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: suggestedMin,
+            suggestedMax: suggestedMax,
+            grid: {
+              color: "rgba(156, 163, 175, 0.25)",
+              drawBorder: false
+            },
+            ticks: {
+              font: { size: 11 },
+              callback: function (value) {
+                return value.toFixed(0);
+              }
+            },
+            title: {
+              display: true,
+              text: "防御区间比率 (DIR)",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

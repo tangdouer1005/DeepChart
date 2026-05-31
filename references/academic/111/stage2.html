@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 350px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const vehicleData = [
+    0.6362426544252882,
+    1.3637573455747118,
+    1.3186889049497537,
+    0.7234410435525506,
+    0.6335460026377365,
+    1.2396240761070576,
+    0.7431799017428403,
+    1.4644298527637458,
+    0.8770902182463151
+];
+        
+        const fsen1Data = [
+    0.642841400598503,
+    0.35865193141724816,
+    0.2055757563149134,
+    0.7189498587703381,
+    0.6489407265757056,
+    0.6164231377015815,
+    0.6317029164814143,
+    0.48835837703325524
+];
+
+        // Prepare Boxplot Data
+        const prepareBoxData = (arr) => {
+            const sorted = arr.sort((a, b) => a - b);
+            const q1 = jStat.percentile(sorted, 0.25);
+            const median = jStat.median(sorted);
+            const q3 = jStat.percentile(sorted, 0.75);
+            const min = sorted[0];
+            const max = sorted[sorted.length - 1];
+            return [min, q1, median, q3, max];
+        };
+
+        const boxData = [
+            prepareBoxData(vehicleData),
+            prepareBoxData(fsen1Data)
+        ];
+
+        // Prepare Scatter Data with Jitter
+        const scatterData = [];
+        vehicleData.forEach(val => scatterData.push([0 + (Math.random() - 0.5) * 0.2, val, 0]));
+        fsen1Data.forEach(val => scatterData.push([1 + (Math.random() - 0.5) * 0.2, val, 1]));
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 80, bottom: 80, left: 80, right: 20 },
+            xAxis: {
+                type: 'category',
+                data: ['Vehicle', 'FSEN1'],
+                axisLabel: { rotate: 45, color: 'black', fontSize: 13 },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                type: 'value',
+                min: 0, max: 1.8,
+                interval: 0.3, // To match ticks approx? Chart uses custom ticks.
+                // 0, 0.3, 0.5, 0.8, 1.0, 1.3, 1.5
+                // ECharts interval cannot be non-uniform easily.
+                // We use standard interval 0.3 or 0.5 and just let it be.
+                // Or max 1.8 with interval 0.25?
+                axisLabel: { color: 'black', fontSize: 12 },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false },
+                name: 'End-point tumour volume\n(compared with vehicle)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: { color: 'black', fontSize: 13 }
+            },
+            series: [
+                {
+                    type: 'boxplot',
+                    data: [
+                        {
+                            value: boxData[0],
+                            itemStyle: { color: '#D9D9D9', borderColor: '#595959', borderWidth: 1.5 }
+                        },
+                        {
+                            value: boxData[1],
+                            itemStyle: { color: '#F28E82', borderColor: '#B03A2E', borderWidth: 1.5 }
+                        }
+                    ],
+                    boxWidth: '50%',
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const val = api.value(1);
+                        const x = api.coord([api.value(0), val])[0];
+                        const y = api.coord([api.value(0), val])[1];
+                        const colorIdx = api.value(2);
+                        const color = colorIdx === 0 ? '#999999' : '#E74C3C';
+                        
+                        return {
+                            type: 'circle',
+                            shape: { cx: x, cy: y, r: 5 },
+                            style: { fill: color, stroke: 'black', lineWidth: 1 }
+                        };
+                    },
+                    data: scatterData,
+                    z: 2
+                },
+                // Reference Line Y=1
+                {
+                    type: 'line',
+                    markLine: {
+                        silent: true,
+                        symbol: 'none',
+                        data: [{ yAxis: 1 }],
+                        lineStyle: { type: 'dashed', color: 'black', width: 1.5 }
+                    }
+                },
+                // P-value Annotation
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const p1 = api.coord([0, 1.6]);
+                        const p2 = api.coord([1, 1.6]);
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: { x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1] },
+                                    style: { stroke: 'black', lineWidth: 1.5 }
+                                },
+                                {
+                                    type: 'text',
+                                    style: {
+                                        text: 'P = 0.0038',
+                                        x: (p1[0] + p2[0]) / 2,
+                                        y: p1[1] - 5,
+                                        textAlign: 'center',
+                                        textVerticalAlign: 'bottom',
+                                        fill: 'black',
+                                        font: 'italic 12px Arial' // P is italic
+                                    }
+                                }
+                            ]
+                        };
+                    },
+                    data: [0],
+                    z: 3
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'h', font: 'bold 24px Arial' } }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

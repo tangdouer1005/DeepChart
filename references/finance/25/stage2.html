@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ACN 2016-2024 EBITDA 变化趋势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --text-color: #1f2933;
+      --card-bg: #f8fafc;
+      --grid-color: #d0d7e2;
+      --line-color: #2563eb;
+      --line-fill: rgba(37, 99, 235, 0.08);
+      --point-hover: #1d4ed8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #020617;
+        --text-color: #e5e7eb;
+        --card-bg: #0b1120;
+        --grid-color: #1f2937;
+        --line-color: #60a5fa;
+        --line-fill: rgba(96, 165, 250, 0.12);
+        --point-hover: #93c5fd;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #eff6ff, #ffffff);
+      background-attachment: fixed;
+      color: var(--text-color);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 980px;
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.16),
+        0 2px 8px rgba(15, 23, 42, 0.08);
+      padding: 20px 22px 24px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 22px 26px 26px;
+      }
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .title-area {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      opacity: 0.78;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .subtitle span {
+      white-space: nowrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 2px 8px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--line-color);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    .meta-item {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .meta-label {
+      opacity: 0.7;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 360px;
+    }
+
+    @media (max-width: 640px) {
+      .chart-container {
+        height: 300px;
+      }
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 10px;
+      opacity: 0.7;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .unit-label {
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="card">
+    <div class="header">
+      <div class="title-area">
+        <h1>ACN 息税折旧摊销前利润（EBITDA）趋势</h1>
+        <div class="subtitle">
+          <span>Fiscal Year 2016 – 2024</span>
+          <span>·</span>
+          <span>单位：美元</span>
+        </div>
+      </div>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>EBITDA</span>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="meta-item">
+        <span class="meta-label">公司：</span>
+        <span>Accenture plc (ACN)</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">指标：</span>
+        <span>息税折旧摊销前利润 (EBITDA)</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">期间：</span>
+        <span>2016 – 2024 财年</span>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+      <span class="unit-label">图表说明：纵轴以 “十亿美元 (Billions USD)” 为单位显示 EBITDA。</span>
+      <span>交互：将鼠标悬停或在移动端轻触折线查看精确数值。</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 确保在 DOM 加载后再初始化图表，避免找不到 canvas 的错误
+  window.addEventListener('DOMContentLoaded', function () {
+    // Source data (raw, in USD)
+    const fiscalYears = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const ebitdaValues = [
+      6111171000,
+      5243583000,
+      6599721000,
+      7100391000,
+      8503052000,
+      9628114000,
+      10162341000,
+      10116500000,
+      10681879000
+    ];
+
+    // Convert to billions
+    const ebitdaBillions = ebitdaValues.map(v => v / 1e9);
+
+    const canvas = document.getElementById('ebitdaChart');
+    if (!canvas) return; // 安全检查
+    const ctx = canvas.getContext('2d');
+
+    const rootStyle = getComputedStyle(document.documentElement);
+    const lineColor = rootStyle.getPropertyValue('--line-color').trim() || '#2563eb';
+    const fillColor = rootStyle.getPropertyValue('--line-fill').trim() || 'rgba(37, 99, 235, 0.1)';
+    const pointHover = rootStyle.getPropertyValue('--point-hover').trim() || '#1d4ed8';
+    const gridColor = rootStyle.getPropertyValue('--grid-color').trim() || '#d0d7e2';
+
+    const ebitdaChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: fiscalYears,
+        datasets: [{
+          label: 'EBITDA（十亿美元）',
+          data: ebitdaBillions,
+          borderColor: lineColor,
+          backgroundColor: fillColor,
+          fill: true,
+          tension: 0.28,
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          pointBackgroundColor: '#ffffff',
+          pointBorderWidth: 2,
+          pointBorderColor: lineColor,
+          pointHoverBackgroundColor: pointHover
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            titleFont: { size: 12, weight: '600' },
+            bodyFont: { size: 12 },
+            padding: 10,
+            cornerRadius: 8,
+            displayColors: false,
+            callbacks: {
+              title: (items) => {
+                const year = items[0].label;
+                return `Fiscal Year ${year}`;
+              },
+              label: (item) => {
+                const raw = ebitdaValues[item.dataIndex];
+                const billions = ebitdaBillions[item.dataIndex];
+                const rawFormatted = raw.toLocaleString('en-US');
+                const bFormatted = billions.toLocaleString('en-US', {
+                  maximumFractionDigits: 2,
+                  minimumFractionDigits: 2
+                });
+                return [
+                  `EBITDA: $${bFormatted} B`,
+                  `（精确：$${rawFormatted}）`
+                ];
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: false,
+            grace: '5%',
+            grid: {
+              color: gridColor
+            },
+            ticks: {
+              font: {
+                size: 11
+              },
+              callback: (value) => {
+                return value.toLocaleString('en-US', {
+                  maximumFractionDigits: 1,
+                  minimumFractionDigits: 1
+                }) + ' B';
+              }
+            },
+            title: {
+              display: true,
+              text: 'EBITDA（十亿美元，美元计）',
+              font: {
+                size: 11,
+                weight: '500'
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // 监听暗黑模式变化（部分旧浏览器不支持 addEventListener）
+    if (window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const onThemeChange = () => {
+        const rs = getComputedStyle(document.documentElement);
+        const newLineColor = rs.getPropertyValue('--line-color').trim() || '#2563eb';
+        const newFillColor = rs.getPropertyValue('--line-fill').trim() || 'rgba(37, 99, 235, 0.1)';
+        const newPointHover = rs.getPropertyValue('--point-hover').trim() || '#1d4ed8';
+        const newGridColor = rs.getPropertyValue('--grid-color').trim() || '#d0d7e2';
+
+        ebitdaChart.data.datasets[0].borderColor = newLineColor;
+        ebitdaChart.data.datasets[0].backgroundColor = newFillColor;
+        ebitdaChart.data.datasets[0].pointBorderColor = newLineColor;
+        ebitdaChart.data.datasets[0].pointHoverBackgroundColor = newPointHover;
+        ebitdaChart.options.scales.y.grid.color = newGridColor;
+        ebitdaChart.update();
+      };
+
+      // 兼容性处理
+      if (typeof mediaQuery.addEventListener === 'function') {
+        mediaQuery.addEventListener('change', onThemeChange);
+      } else if (typeof mediaQuery.addListener === 'function') {
+        mediaQuery.addListener(onThemeChange);
+      }
+    }
+  });
+</script>
+</body>
+</html>

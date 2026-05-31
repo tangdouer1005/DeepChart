@@ -1,0 +1,786 @@
+{
+  "report_id": "010",
+  "query_id": 7,
+  "query_text": "Create a ranked bar chart of the top 10 companies by `Mosaic momentum`, defined as the one-year Mosaic change divided by `Founded age in years`, using only companies with numeric Mosaic change and numeric Founded year, with values shown as `Mosaic-change points per company-year`.",
+  "source_summary_file": "/Users/tangjiahui/Desktop/chartbench/data/aim/010_The data center value chain market map_0c1b327a.md",
+  "source_query_file": "/Users/tangjiahui/Desktop/chartbench/data/aim/010_The data center value chain market map_0c1b327a_query_recommendations.md",
+  "companies": [
+    {
+      "company": "Aalo Atomics",
+      "row_order": 1,
+      "founded_year_raw": "2023",
+      "stage_raw": "Series B",
+      "total_raised_raw": "$133.3M",
+      "headcount_raw": "77",
+      "commercial_maturity_raw": "2 / 5",
+      "mosaic_raw": "825 / 1000 +71 (1-y)"
+    },
+    {
+      "company": "Base Power",
+      "row_order": 2,
+      "founded_year_raw": "2023",
+      "stage_raw": "Series C",
+      "total_raised_raw": "$1.2B",
+      "headcount_raw": "172",
+      "commercial_maturity_raw": "N/A / 5",
+      "mosaic_raw": "891 / 1000 -5 (1-y)"
+    },
+    {
+      "company": "Commonwealth Fusion Systems",
+      "row_order": 3,
+      "founded_year_raw": "2018",
+      "stage_raw": "Series B - II",
+      "total_raised_raw": "$2.9B",
+      "headcount_raw": "1046",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "865 / 1000 +76 (1-y)"
+    },
+    {
+      "company": "Fervo Energy",
+      "row_order": 4,
+      "founded_year_raw": "2017",
+      "stage_raw": "Line of Credit - II",
+      "total_raised_raw": "$884.6M",
+      "headcount_raw": "183",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "818 / 1000 +24 (1-y)"
+    },
+    {
+      "company": "Helion Energy",
+      "row_order": 5,
+      "founded_year_raw": "2010",
+      "stage_raw": "Series F",
+      "total_raised_raw": "$972.1M",
+      "headcount_raw": "346",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "858 / 1000 +93 (1-y)"
+    },
+    {
+      "company": "Natura Resources",
+      "row_order": 6,
+      "founded_year_raw": "2020",
+      "stage_raw": "Series A",
+      "total_raised_raw": "$20.0M",
+      "headcount_raw": "23",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "797 / 1000 -7 (1-y)"
+    },
+    {
+      "company": "newcleo",
+      "row_order": 7,
+      "founded_year_raw": "2021",
+      "stage_raw": "Biz Plan Competition",
+      "total_raised_raw": "$584.8M",
+      "headcount_raw": "720",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "818 / 1000 +1 (1-y)"
+    },
+    {
+      "company": "Pacific Fusion",
+      "row_order": 8,
+      "founded_year_raw": "2023",
+      "stage_raw": "Series A",
+      "total_raised_raw": "$900.0M",
+      "headcount_raw": "117",
+      "commercial_maturity_raw": "N/A / 5",
+      "mosaic_raw": "803 / 1000 +77 (1-y)"
+    },
+    {
+      "company": "Proxima Fusion",
+      "row_order": 9,
+      "founded_year_raw": "2023",
+      "stage_raw": "Series A - II",
+      "total_raised_raw": "$202.7M",
+      "headcount_raw": "109",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "788 / 1000 +75 (1-y)"
+    },
+    {
+      "company": "Radiant",
+      "row_order": 10,
+      "founded_year_raw": "2019",
+      "stage_raw": "Series C - II",
+      "total_raised_raw": "$225.2M",
+      "headcount_raw": "260",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "846 / 1000 -11 (1-y)"
+    },
+    {
+      "company": "SHINE Technologies",
+      "row_order": 11,
+      "founded_year_raw": "2005",
+      "stage_raw": "Unattributed VC - II",
+      "total_raised_raw": "$578.1M",
+      "headcount_raw": "298",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "813 / 1000 +2 (1-y)"
+    },
+    {
+      "company": "TerraPower",
+      "row_order": 12,
+      "founded_year_raw": "2006",
+      "stage_raw": "Unattributed VC",
+      "total_raised_raw": "$1.6B",
+      "headcount_raw": "895",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "860 / 1000 +13 (1-y)"
+    },
+    {
+      "company": "Tokamak Energy",
+      "row_order": 13,
+      "founded_year_raw": "2009",
+      "stage_raw": "Series C - II",
+      "total_raised_raw": "$226.5M",
+      "headcount_raw": "294",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "809 / 1000 +52 (1-y)"
+    },
+    {
+      "company": "Valar Atomics",
+      "row_order": 14,
+      "founded_year_raw": "2023",
+      "stage_raw": "Series A",
+      "total_raised_raw": "$150.5M",
+      "headcount_raw": "40",
+      "commercial_maturity_raw": "2 / 5",
+      "mosaic_raw": "809 / 1000 +34 (1-y)"
+    },
+    {
+      "company": "X-energy",
+      "row_order": 15,
+      "founded_year_raw": "2009",
+      "stage_raw": "Series D",
+      "total_raised_raw": "$1.8B",
+      "headcount_raw": "1167",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "876 / 1000 +49 (1-y)"
+    },
+    {
+      "company": "Axelera AI",
+      "row_order": 16,
+      "founded_year_raw": "2021",
+      "stage_raw": "Grant - II",
+      "total_raised_raw": "$218.2M",
+      "headcount_raw": "225",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "810 / 1000 +13 (1-y)"
+    },
+    {
+      "company": "Cerebras",
+      "row_order": 17,
+      "founded_year_raw": "2015",
+      "stage_raw": "Series G",
+      "total_raised_raw": "$1.8B",
+      "headcount_raw": "721",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "926 / 1000 +8 (1-y)"
+    },
+    {
+      "company": "d-Matrix",
+      "row_order": 18,
+      "founded_year_raw": "2019",
+      "stage_raw": "Series C",
+      "total_raised_raw": "$429.0M",
+      "headcount_raw": "234",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "872 / 1000 +86 (1-y)"
+    },
+    {
+      "company": "DEEPX",
+      "row_order": 19,
+      "founded_year_raw": "2018",
+      "stage_raw": "Incubator/Accelerator",
+      "total_raised_raw": "$98.6M",
+      "headcount_raw": "89",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "874 / 1000 +30 (1-y)"
+    },
+    {
+      "company": "EdgeCortix",
+      "row_order": 20,
+      "founded_year_raw": "2019",
+      "stage_raw": "Series B - III",
+      "total_raised_raw": "$93.7M",
+      "headcount_raw": "52",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "796 / 1000 +46 (1-y)"
+    },
+    {
+      "company": "FuriosaAI",
+      "row_order": 21,
+      "founded_year_raw": "2017",
+      "stage_raw": "Bridge",
+      "total_raised_raw": "$268.1M",
+      "headcount_raw": "N/A",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "749 / 1000 -23 (1-y)"
+    },
+    {
+      "company": "Groq",
+      "row_order": 22,
+      "founded_year_raw": "2016",
+      "stage_raw": "Series E",
+      "total_raised_raw": "$3.3B",
+      "headcount_raw": "539",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "950 / 1000 +29 (1-y)"
+    },
+    {
+      "company": "MangoBoost",
+      "row_order": 23,
+      "founded_year_raw": "2022",
+      "stage_raw": "Incubator/Accelerator",
+      "total_raised_raw": "$65.7M",
+      "headcount_raw": "110",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "746 / 1000 +53 (1-y)"
+    },
+    {
+      "company": "MemryX",
+      "row_order": 24,
+      "founded_year_raw": "2019",
+      "stage_raw": "Series B - II",
+      "total_raised_raw": "$50.5M",
+      "headcount_raw": "48",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "746 / 1000 +214 (1-y)"
+    },
+    {
+      "company": "Mobilint",
+      "row_order": 25,
+      "founded_year_raw": "2019",
+      "stage_raw": "Series B",
+      "total_raised_raw": "$15.8M",
+      "headcount_raw": "54",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "741 / 1000 +43 (1-y)"
+    },
+    {
+      "company": "Positron",
+      "row_order": 26,
+      "founded_year_raw": "2023",
+      "stage_raw": "Series A",
+      "total_raised_raw": "$76.1M",
+      "headcount_raw": "37",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "761 / 1000 +271 (1-y)"
+    },
+    {
+      "company": "Rapidus",
+      "row_order": 27,
+      "founded_year_raw": "2022",
+      "stage_raw": "Grant",
+      "total_raised_raw": "$5.6B",
+      "headcount_raw": "214",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "887 / 1000 +36 (1-y)"
+    },
+    {
+      "company": "Rebellions",
+      "row_order": 28,
+      "founded_year_raw": "2020",
+      "stage_raw": "Series C - II",
+      "total_raised_raw": "$541.6M",
+      "headcount_raw": "177",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "902 / 1000 +62 (1-y)"
+    },
+    {
+      "company": "SambaNova Systems",
+      "row_order": 29,
+      "founded_year_raw": "2017",
+      "stage_raw": "Unattributed VC - II",
+      "total_raised_raw": "$1.1B",
+      "headcount_raw": "449",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "791 / 1000 +25 (1-y)"
+    },
+    {
+      "company": "Tenstorrent",
+      "row_order": 30,
+      "founded_year_raw": "2016",
+      "stage_raw": "Series D",
+      "total_raised_raw": "$1.0B",
+      "headcount_raw": "966",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "824 / 1000 -33 (1-y)"
+    },
+    {
+      "company": "Accelsius",
+      "row_order": 31,
+      "founded_year_raw": "2022",
+      "stage_raw": "Series A - II",
+      "total_raised_raw": "$24.6M",
+      "headcount_raw": "71",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "747 / 1000 -21 (1-y)"
+    },
+    {
+      "company": "Corintis",
+      "row_order": 32,
+      "founded_year_raw": "2021",
+      "stage_raw": "Corporate Minority",
+      "total_raised_raw": "$53.5M",
+      "headcount_raw": "52",
+      "commercial_maturity_raw": "2 / 5",
+      "mosaic_raw": "755 / 1000 +298 (1-y)"
+    },
+    {
+      "company": "DataCore Software",
+      "row_order": 33,
+      "founded_year_raw": "1998",
+      "stage_raw": "Growth Equity",
+      "total_raised_raw": "$185.4M",
+      "headcount_raw": "367",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "729 / 1000 -36 (1-y)"
+    },
+    {
+      "company": "David Energy",
+      "row_order": 34,
+      "founded_year_raw": "2019",
+      "stage_raw": "Series A - III",
+      "total_raised_raw": "$79.9M",
+      "headcount_raw": "60",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "712 / 1000 -3 (1-y)"
+    },
+    {
+      "company": "Emerald AI",
+      "row_order": 35,
+      "founded_year_raw": "2024",
+      "stage_raw": "Series A",
+      "total_raised_raw": "$58.7M",
+      "headcount_raw": "N/A",
+      "commercial_maturity_raw": "2 / 5",
+      "mosaic_raw": "744 / 1000 -33 (1-y)"
+    },
+    {
+      "company": "ev.energy",
+      "row_order": 36,
+      "founded_year_raw": "2018",
+      "stage_raw": "Grant - III",
+      "total_raised_raw": "$87.6M",
+      "headcount_raw": "126",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "726 / 1000 +10 (1-y)"
+    },
+    {
+      "company": "firmus",
+      "row_order": 37,
+      "founded_year_raw": "2019",
+      "stage_raw": "Unattributed",
+      "total_raised_raw": "$546.3M",
+      "headcount_raw": "33",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "834 / 1000 +96 (1-y)"
+    },
+    {
+      "company": "Green Revolution Cooling",
+      "row_order": 38,
+      "founded_year_raw": "2009",
+      "stage_raw": "Series D",
+      "total_raised_raw": "$36.3M",
+      "headcount_raw": "37",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "728 / 1000 +196 (1-y)"
+    },
+    {
+      "company": "GridBeyond",
+      "row_order": 39,
+      "founded_year_raw": "2010",
+      "stage_raw": "Series C - II",
+      "total_raised_raw": "$97.4M",
+      "headcount_raw": "156",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "761 / 1000 -5 (1-y)"
+    },
+    {
+      "company": "Lancium",
+      "row_order": 40,
+      "founded_year_raw": "2017",
+      "stage_raw": "Line of Credit",
+      "total_raised_raw": "$1.3B",
+      "headcount_raw": "76",
+      "commercial_maturity_raw": "N/A / 5",
+      "mosaic_raw": "788 / 1000 +96 (1-y)"
+    },
+    {
+      "company": "Leap",
+      "row_order": 41,
+      "founded_year_raw": "2017",
+      "stage_raw": "Incubator/Accelerator",
+      "total_raised_raw": "$80.9M",
+      "headcount_raw": "119",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "712 / 1000 -36 (1-y)"
+    },
+    {
+      "company": "Phaidra",
+      "row_order": 42,
+      "founded_year_raw": "2019",
+      "stage_raw": "Series B",
+      "total_raised_raw": "$88.5M",
+      "headcount_raw": "96",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "752 / 1000 -15 (1-y)"
+    },
+    {
+      "company": "Polarium",
+      "row_order": 43,
+      "founded_year_raw": "2015",
+      "stage_raw": "Unattributed - V",
+      "total_raised_raw": "$298.8M",
+      "headcount_raw": "300",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "748 / 1000 +16 (1-y)"
+    },
+    {
+      "company": "Rittal",
+      "row_order": 44,
+      "founded_year_raw": "1961",
+      "stage_raw": "N/A",
+      "total_raised_raw": "N/A",
+      "headcount_raw": "79",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "730 / 1000 +111 (1-y)"
+    },
+    {
+      "company": "Submer",
+      "row_order": 45,
+      "founded_year_raw": "2015",
+      "stage_raw": "Debt",
+      "total_raised_raw": "$122.2M",
+      "headcount_raw": "138",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "805 / 1000 +145 (1-y)"
+    },
+    {
+      "company": "AlgoSec",
+      "row_order": 46,
+      "founded_year_raw": "2004",
+      "stage_raw": "Private Equity",
+      "total_raised_raw": "$36.0M",
+      "headcount_raw": "553",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "710 / 1000 +27 (1-y)"
+    },
+    {
+      "company": "Cato Networks",
+      "row_order": 47,
+      "founded_year_raw": "2015",
+      "stage_raw": "Series G - II",
+      "total_raised_raw": "$1.2B",
+      "headcount_raw": "1377",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "938 / 1000 +19 (1-y)"
+    },
+    {
+      "company": "CDN77",
+      "row_order": 48,
+      "founded_year_raw": "2011",
+      "stage_raw": "N/A",
+      "total_raised_raw": "N/A",
+      "headcount_raw": "117",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "655 / 1000 +95 (1-y)"
+    },
+    {
+      "company": "Corelight",
+      "row_order": 49,
+      "founded_year_raw": "2013",
+      "stage_raw": "Series E",
+      "total_raised_raw": "$309.2M",
+      "headcount_raw": "417",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "790 / 1000 -40 (1-y)"
+    },
+    {
+      "company": "Dream",
+      "row_order": 50,
+      "founded_year_raw": "2023",
+      "stage_raw": "Series B",
+      "total_raised_raw": "$155.0M",
+      "headcount_raw": "223",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "757 / 1000 +50 (1-y)"
+    },
+    {
+      "company": "eG Innovations",
+      "row_order": 51,
+      "founded_year_raw": "N/A",
+      "stage_raw": "N/A",
+      "total_raised_raw": "N/A",
+      "headcount_raw": "331",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "705 / 1000 +167 (1-y)"
+    },
+    {
+      "company": "Forward Networks",
+      "row_order": 52,
+      "founded_year_raw": "2013",
+      "stage_raw": "Series D",
+      "total_raised_raw": "$112.9M",
+      "headcount_raw": "220",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "759 / 1000 +57 (1-y)"
+    },
+    {
+      "company": "Huawei",
+      "row_order": 53,
+      "founded_year_raw": "1987",
+      "stage_raw": "N/A",
+      "total_raised_raw": "N/A",
+      "headcount_raw": "N/A",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "745 / 1000 -11 (1-y)"
+    },
+    {
+      "company": "Lumu Technologies",
+      "row_order": 54,
+      "founded_year_raw": "2019",
+      "stage_raw": "Debt - II",
+      "total_raised_raw": "$53.5M",
+      "headcount_raw": "169",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "680 / 1000 -47 (1-y)"
+    },
+    {
+      "company": "Namecheap",
+      "row_order": 55,
+      "founded_year_raw": "2001",
+      "stage_raw": "N/A",
+      "total_raised_raw": "N/A",
+      "headcount_raw": "1633",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "688 / 1000 -4 (1-y)"
+    },
+    {
+      "company": "Orange Business",
+      "row_order": 56,
+      "founded_year_raw": "2006",
+      "stage_raw": "N/A",
+      "total_raised_raw": "N/A",
+      "headcount_raw": "27118",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "761 / 1000 +67 (1-y)"
+    },
+    {
+      "company": "Orange Cyberdefense",
+      "row_order": 57,
+      "founded_year_raw": "1988",
+      "stage_raw": "N/A",
+      "total_raised_raw": "N/A",
+      "headcount_raw": "3961",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "659 / 1000 -53 (1-y)"
+    },
+    {
+      "company": "Stamus Networks",
+      "row_order": 58,
+      "founded_year_raw": "2014",
+      "stage_raw": "Series B - II",
+      "total_raised_raw": "$12.4M",
+      "headcount_raw": "27",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "729 / 1000 +16 (1-y)"
+    },
+    {
+      "company": "Stellar Cyber",
+      "row_order": 59,
+      "founded_year_raw": "2015",
+      "stage_raw": "Series C",
+      "total_raised_raw": "$88.7M",
+      "headcount_raw": "149",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "830 / 1000 +18 (1-y)"
+    },
+    {
+      "company": "Vectra",
+      "row_order": 60,
+      "founded_year_raw": "2011",
+      "stage_raw": "Series F",
+      "total_raised_raw": "$352.5M",
+      "headcount_raw": "653",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "739 / 1000 -50 (1-y)"
+    },
+    {
+      "company": "Aligned",
+      "row_order": 61,
+      "founded_year_raw": "2013",
+      "stage_raw": "Debt - II",
+      "total_raised_raw": "$14.6B",
+      "headcount_raw": "428",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "824 / 1000 +314 (1-y)"
+    },
+    {
+      "company": "Armada",
+      "row_order": 62,
+      "founded_year_raw": "2022",
+      "stage_raw": "Series B - II",
+      "total_raised_raw": "$226.0M",
+      "headcount_raw": "368",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "884 / 1000 +113 (1-y)"
+    },
+    {
+      "company": "Axiom Space",
+      "row_order": 63,
+      "founded_year_raw": "2016",
+      "stage_raw": "Series C",
+      "total_raised_raw": "$630.3M",
+      "headcount_raw": "853",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "822 / 1000 -59 (1-y)"
+    },
+    {
+      "company": "Colt Data Centre Services",
+      "row_order": 64,
+      "founded_year_raw": "N/A",
+      "stage_raw": "N/A",
+      "total_raised_raw": "N/A",
+      "headcount_raw": "421",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "641 / 1000 +65 (1-y)"
+    },
+    {
+      "company": "DC BLOX",
+      "row_order": 65,
+      "founded_year_raw": "2014",
+      "stage_raw": "Loan - III",
+      "total_raised_raw": "$1.7B",
+      "headcount_raw": "92",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "571 / 1000 -45 (1-y)"
+    },
+    {
+      "company": "Echelon Data Centres",
+      "row_order": 66,
+      "founded_year_raw": "2016",
+      "stage_raw": "Private Equity",
+      "total_raised_raw": "$1.8B",
+      "headcount_raw": "80",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "786 / 1000 +41 (1-y)"
+    },
+    {
+      "company": "Lonestar",
+      "row_order": 67,
+      "founded_year_raw": "2018",
+      "stage_raw": "Unattributed VC",
+      "total_raised_raw": "$5.9M",
+      "headcount_raw": "21",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "678 / 1000 -8 (1-y)"
+    },
+    {
+      "company": "Princeton Digital Group",
+      "row_order": 68,
+      "founded_year_raw": "2017",
+      "stage_raw": "Loan - II",
+      "total_raised_raw": "$3.0B",
+      "headcount_raw": "274",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "851 / 1000 +74 (1-y)"
+    },
+    {
+      "company": "Ramon.Space",
+      "row_order": 69,
+      "founded_year_raw": "2004",
+      "stage_raw": "Series B",
+      "total_raised_raw": "$43.5M",
+      "headcount_raw": "95",
+      "commercial_maturity_raw": "N/A / 5",
+      "mosaic_raw": "592 / 1000 -44 (1-y)"
+    },
+    {
+      "company": "Scala Data Centers",
+      "row_order": 70,
+      "founded_year_raw": "2020",
+      "stage_raw": "Loan - II",
+      "total_raised_raw": "$593.9M",
+      "headcount_raw": "959",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "577 / 1000 -52 (1-y)"
+    },
+    {
+      "company": "STACK Infrastructure",
+      "row_order": 71,
+      "founded_year_raw": "2019",
+      "stage_raw": "Line of Credit",
+      "total_raised_raw": "$10.8B",
+      "headcount_raw": "973",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "625 / 1000 +99 (1-y)"
+    },
+    {
+      "company": "Starcloud",
+      "row_order": 72,
+      "founded_year_raw": "2024",
+      "stage_raw": "Seed VC - IV",
+      "total_raised_raw": "$23.9M",
+      "headcount_raw": "11",
+      "commercial_maturity_raw": "2 / 5",
+      "mosaic_raw": "802 / 1000 +68 (1-y)"
+    },
+    {
+      "company": "Thales Alenia Space",
+      "row_order": 73,
+      "founded_year_raw": "2000",
+      "stage_raw": "N/A",
+      "total_raised_raw": "N/A",
+      "headcount_raw": "85",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "633 / 1000 +46 (1-y)"
+    },
+    {
+      "company": "Yotta",
+      "row_order": 74,
+      "founded_year_raw": "2019",
+      "stage_raw": "N/A",
+      "total_raised_raw": "N/A",
+      "headcount_raw": "946",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "677 / 1000 -13 (1-y)"
+    }
+  ],
+  "segment_boundaries": [
+    {
+      "segment": "Power generation",
+      "start_row": 1,
+      "end_row": 15,
+      "source_section": "2",
+      "source_note": "Rows 1-15 align to the Power generation page block described in section 2."
+    },
+    {
+      "segment": "AI computing hardware",
+      "start_row": 16,
+      "end_row": 30,
+      "source_section": "2",
+      "source_note": "Rows 16-30 align to the AI computing hardware page block described in section 2."
+    },
+    {
+      "segment": "Supporting hardware infrastructure",
+      "start_row": 31,
+      "end_row": 45,
+      "source_section": "2",
+      "source_note": "Rows 31-45 align to the Supporting hardware infrastructure page block described in section 2."
+    },
+    {
+      "segment": "Networking & connectivity",
+      "start_row": 46,
+      "end_row": 60,
+      "source_section": "2",
+      "source_note": "Rows 46-60 align to the Networking & connectivity page block described in section 2."
+    },
+    {
+      "segment": "Data center facilities & operations",
+      "start_row": 61,
+      "end_row": 74,
+      "source_section": "2",
+      "source_note": "Rows 61-74 align to the Data center facilities & operations page block described in section 2."
+    }
+  ]
+}

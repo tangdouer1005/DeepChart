@@ -1,0 +1,179 @@
+{
+  "report_id": "014",
+  "query_id": 5,
+  "query_text": "Create a scatter plot for the top 25 companies by `scale-adjusted IPO readiness`, where the plotted value is `IPO probability divided by log10(Headcount)`, the x-axis is `Total raised ($B)`, the y-axis is that derived readiness metric, color encodes `Commercial Maturity`, and points are restricted to companies with numeric `Headcount` and `Total raised`.",
+  "chart_type": "scatter",
+  "value_unit": "IPO probability divided by log10(headcount)",
+  "sort_rule": "descending by scale-adjusted IPO readiness",
+  "selection_rule": "top 25 companies with numeric funding, headcount, and Commercial Maturity",
+  "records": [
+    {
+      "label": "Kraken",
+      "x": 0.5201,
+      "y": 28.138668,
+      "color": "4 / 5"
+    },
+    {
+      "label": "Socure",
+      "x": 0.7433,
+      "y": 21.729026,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Sword",
+      "x": 0.3922,
+      "y": 19.386025,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Games24x7",
+      "x": 0.075,
+      "y": 18.93138,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Skydio",
+      "x": 0.744,
+      "y": 18.896219,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Locus Robotics",
+      "x": 0.4328,
+      "y": 18.83456,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Commure",
+      "x": 1.0,
+      "y": 18.436149,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Brex",
+      "x": 1.7,
+      "y": 18.203046,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Grammarly",
+      "x": 1.4,
+      "y": 18.189168,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Innovaccer",
+      "x": 0.6507,
+      "y": 18.170817,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Clio",
+      "x": 1.3,
+      "y": 18.136123,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Noom",
+      "x": 0.6328,
+      "y": 17.855603,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Anthropic",
+      "x": 31.5,
+      "y": 17.333527,
+      "color": "4 / 5"
+    },
+    {
+      "label": "RELEX",
+      "x": 0.8029,
+      "y": 17.333527,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Arctic Wolf",
+      "x": 0.8997,
+      "y": 16.632669,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Octopus Energy",
+      "x": 2.8,
+      "y": 16.035494,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Zapier",
+      "x": 0.0026,
+      "y": 15.774662,
+      "color": "4 / 5"
+    },
+    {
+      "label": "Kaseya",
+      "x": 0.6817,
+      "y": 15.62506,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Motive",
+      "x": 0.7173,
+      "y": 14.243201,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Stripe",
+      "x": 9.4,
+      "y": 14.228308,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Canva",
+      "x": 0.9793,
+      "y": 14.145017,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Kurly",
+      "x": 0.8609,
+      "y": 13.4941,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Indigo",
+      "x": 1.4,
+      "y": 13.492772,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Fivetran",
+      "x": 0.853,
+      "y": 13.443477,
+      "color": "5 / 5"
+    },
+    {
+      "label": "Lendable",
+      "x": 0.5274,
+      "y": 13.285805,
+      "color": "5 / 5"
+    }
+  ],
+  "plot_config": {
+    "title": "Scale-adjusted IPO readiness",
+    "x_label": "Total raised ($B)",
+    "y_label": "IPO probability / log10(headcount)"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with numeric funding, headcount, and Commercial Maturity.",
+    "Computed log10(headcount) and divided IPO probability by that scale term.",
+    "Ranked descending by the derived readiness metric.",
+    "Kept the top 25 companies for plotting."
+  ],
+  "stats": {
+    "eligible_count": 104,
+    "returned_count": 25
+  },
+  "open_issues": [
+    "The log10(headcount) normalization is a documented modeling choice from the query recommendation."
+  ]
+}

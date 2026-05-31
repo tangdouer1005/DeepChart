@@ -1,0 +1,109 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a scatter plot for the 15 countries with at least 8 numeric growth entries in the 2025 country tables, where `x = score(rank 1) / sum(score ranks 1-10)`, `y = score-weighted average numeric growth of cities ranked 2-10`, bubble size = `sum(score ranks 1-10)`, values shown as percentages and score points, and the plotted countries are the top 15 by listed top-10 score total after the 8-entry growth filter.",
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "2025 Concentration vs Bench Momentum",
+  "value_unit": "mixed",
+  "sort_rule": "descending by listed_top10_score_total after requiring at least 8 numeric growth entries, tie-break alphabetically",
+  "selection_rule": "top 15 countries by listed top-10 city-score total after the 8-entry numeric-growth filter",
+  "records": [
+    {
+      "entity": "United States",
+      "top_city_score_share_pct": 49.756569,
+      "bench_weighted_growth_pct": 19.149249,
+      "listed_top10_score_total": 1713.629
+    },
+    {
+      "entity": "China",
+      "top_city_score_share_pct": 33.574141,
+      "bench_weighted_growth_pct": 36.948497,
+      "listed_top10_score_total": 407.933
+    },
+    {
+      "entity": "United Kingdom",
+      "top_city_score_share_pct": 75.130834,
+      "bench_weighted_growth_pct": 20.746627,
+      "listed_top10_score_total": 249.361
+    },
+    {
+      "entity": "India",
+      "top_city_score_share_pct": 32.362059,
+      "bench_weighted_growth_pct": 19.560679,
+      "listed_top10_score_total": 239.685
+    },
+    {
+      "entity": "Canada",
+      "top_city_score_share_pct": 34.725198,
+      "bench_weighted_growth_pct": 17.528276,
+      "listed_top10_score_total": 138.136
+    },
+    {
+      "entity": "Germany",
+      "top_city_score_share_pct": 45.984221,
+      "bench_weighted_growth_pct": 34.585967,
+      "listed_top10_score_total": 131.058
+    },
+    {
+      "entity": "France",
+      "top_city_score_share_pct": 69.738008,
+      "bench_weighted_growth_pct": 51.762973,
+      "listed_top10_score_total": 117.332
+    },
+    {
+      "entity": "Israel",
+      "top_city_score_share_pct": 80.814572,
+      "bench_weighted_growth_pct": 6.782425,
+      "listed_top10_score_total": 97.72
+    },
+    {
+      "entity": "Japan",
+      "top_city_score_share_pct": 79.410166,
+      "bench_weighted_growth_pct": 26.961091,
+      "listed_top10_score_total": 77.276
+    },
+    {
+      "entity": "Australia",
+      "top_city_score_share_pct": 43.618864,
+      "bench_weighted_growth_pct": 21.201951,
+      "listed_top10_score_total": 72.73
+    },
+    {
+      "entity": "The Netherlands",
+      "top_city_score_share_pct": 57.340688,
+      "bench_weighted_growth_pct": 23.718071,
+      "listed_top10_score_total": 68.168
+    },
+    {
+      "entity": "Brazil",
+      "top_city_score_share_pct": 63.683514,
+      "bench_weighted_growth_pct": 34.289556,
+      "listed_top10_score_total": 66.518
+    },
+    {
+      "entity": "Spain",
+      "top_city_score_share_pct": 49.787042,
+      "bench_weighted_growth_pct": 25.246138,
+      "listed_top10_score_total": 61.984
+    },
+    {
+      "entity": "Sweden",
+      "top_city_score_share_pct": 74.99867,
+      "bench_weighted_growth_pct": 28.158063,
+      "listed_top10_score_total": 56.405
+    },
+    {
+      "entity": "Switzerland",
+      "top_city_score_share_pct": 31.779023,
+      "bench_weighted_growth_pct": 21.437704,
+      "listed_top10_score_total": 53.164
+    }
+  ],
+  "x_field": "top_city_score_share_pct",
+  "y_field": "bench_weighted_growth_pct",
+  "size_field": "listed_top10_score_total",
+  "x_label": "score(rank 1) / sum(score ranks 1-10) (%)",
+  "y_label": "Score-weighted average numeric growth of ranks 2-10 (%)",
+  "size_label": "Sum of listed city scores",
+  "annotate_all": true
+}

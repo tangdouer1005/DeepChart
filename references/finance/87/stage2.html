@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GE 盈余-现金质量剪刀差 (Earnings Quality Spread) 2016–2024</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #fafafa;
+            color: #222;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        h2 {
+            font-size: 14px;
+            font-weight: normal;
+            color: #666;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        #chartContainer {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            padding: 18px 20px 16px 20px;
+            box-shadow: 0 1px 3px rgba(15, 15, 15, 0.12);
+        }
+
+        /* Use a fixed but reasonable aspect ratio box to avoid vertical stretching */
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            /* 16:9 aspect ratio (height = width * 9/16) */
+            padding-bottom: 56.25%;
+        }
+
+        .chart-wrapper canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .footer-note {
+            font-size: 11px;
+            color: #777;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+<div id="chartContainer">
+    <h1>GE 盈余-现金质量剪刀差 (Earnings Quality Spread)</h1>
+    <h2>2016–2024 年度变化</h2>
+
+    <div class="chart-wrapper">
+        <canvas id="eqsChart"></canvas>
+    </div>
+
+    <div class="footer-note">
+        单位：比率（无量纲）。数值来源于提供的 RESULT_Spread 数据。
+    </div>
+</div>
+
+<!-- Chart.js (latest 4.x) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels = [
+        "2016", "2017", "2018", "2019", "2020",
+        "2021", "2022", "2023", "2024"
+    ];
+
+    const dataValues = [
+        -0.0147733892578352,
+        0.0402185032394375,
+        0.0790296581684653,
+        0.0478212484785254,
+        -0.0080695351112864,
+        0.042493160618346,
+        0.029010252111677,
+        -0.0235808602109289,
+        -0.0122305518655566
+    ];
+
+    const ctx = document.getElementById('eqsChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '盈余-现金质量剪刀差 (RESULT_Spread)',
+                data: dataValues,
+                borderColor: '#1f77b4',
+                backgroundColor: 'rgba(31,119,180,0.08)',
+                borderWidth: 2,
+                tension: 0.25,
+                pointRadius: 3,
+                pointHoverRadius: 5,
+                pointBackgroundColor: '#1f77b4',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 1.2,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // we control aspect ratio via CSS wrapper
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        usePointStyle: true,
+                        boxWidth: 6,
+                        font: { size: 11 }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.parsed.y;
+                            return ' ' + value.toFixed(4);
+                        }
+                    }
+                },
+                title: { display: false }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Fiscal Year',
+                        font: { size: 12 }
+                    },
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        autoSkip: false
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Earnings Quality Spread (RESULT_Spread)',
+                        font: { size: 12 }
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.06)'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value.toFixed(2);
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

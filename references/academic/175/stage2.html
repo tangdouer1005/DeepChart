@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 800px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = [
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Reduce the size of the plate, provide appropriate portion sizes",
+        "Frequency in literatures": 19,
+        "Percentage": 0.141791,
+        "ShortLabel": "Reduce portions",
+        "pct_display": 14.1791
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Plan and assess menus regularly",
+        "Frequency in literatures": 13,
+        "Percentage": 0.0970149,
+        "ShortLabel": "Assess menu",
+        "pct_display": 9.70149
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Improve sensory quality",
+        "Frequency in literatures": 11,
+        "Percentage": 0.0820896,
+        "ShortLabel": "Improve\nsensory\nquality",
+        "pct_display": 8.20896
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Go trayless",
+        "Frequency in literatures": 8,
+        "Percentage": 0.0597015,
+        "ShortLabel": "Trayless",
+        "pct_display": 5.970149999999999
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Supervise children's meals",
+        "Frequency in literatures": 6,
+        "Percentage": 0.0447761,
+        "ShortLabel": "Supervise\nchildren's\nmeals",
+        "pct_display": 4.47761
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Extend lunchtime",
+        "Frequency in literatures": 6,
+        "Percentage": 0.0447761,
+        "ShortLabel": "Extend\nlunchtime",
+        "pct_display": 4.47761
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Improve canteen atmosphere",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0373134,
+        "ShortLabel": "Improve canteen\natmosphere",
+        "pct_display": 3.7313399999999994
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Taste test",
+        "Frequency in literatures": 5,
+        "Percentage": 0.0373134,
+        "ShortLabel": "Taste test",
+        "pct_display": 3.7313399999999994
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Survey student feedback",
+        "Frequency in literatures": 4,
+        "Percentage": 0.0298507,
+        "ShortLabel": "Survey feedback",
+        "pct_display": 2.98507
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Monitor food waste",
+        "Frequency in literatures": 4,
+        "Percentage": 0.0298507,
+        "ShortLabel": "Monitor food waste",
+        "pct_display": 2.98507
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Allow sharing and saving of leftovers",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0223881,
+        "ShortLabel": "Share and pack",
+        "pct_display": 2.23881
+    },
+    {
+        "Type": "Canteen management",
+        "Food waste reduction approaches (operational strategies)": "Optimize food production plan",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0223881,
+        "ShortLabel": "Optimize\nproduction plan",
+        "pct_display": 2.23881
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Comprehensive food education",
+        "Frequency in literatures": 14,
+        "Percentage": 0.104478,
+        "ShortLabel": "Comprehensive\nfood education",
+        "pct_display": 10.4478
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Poster information",
+        "Frequency in literatures": 13,
+        "Percentage": 0.0970149,
+        "ShortLabel": "Poster\ninformation",
+        "pct_display": 9.70149
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Train canteen staff",
+        "Frequency in literatures": 10,
+        "Percentage": 0.0746269,
+        "ShortLabel": "Train canteen staff",
+        "pct_display": 7.462689999999999
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Course teaching",
+        "Frequency in literatures": 6,
+        "Percentage": 0.0447761,
+        "ShortLabel": "Course teaching",
+        "pct_display": 4.47761
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Train teacher",
+        "Frequency in literatures": 3,
+        "Percentage": 0.0223881,
+        "ShortLabel": "Train teacher",
+        "pct_display": 2.23881
+    },
+    {
+        "Type": "Food education",
+        "Food waste reduction approaches (operational strategies)": "Educational text messages",
+        "Frequency in literatures": 1,
+        "Percentage": 0.00746269,
+        "ShortLabel": "Text messages",
+        "pct_display": 0.746269
+    }
+];
+
+        const totalFreq = rawData.reduce((sum, d) => sum + d["Frequency in literatures"], 0);
+
+        // Group data
+        const groups = {};
+        rawData.forEach(d => {
+            if(!groups[d.Type]) groups[d.Type] = {name: d.Type, children: [], total: 0};
+            groups[d.Type].children.push(d);
+            groups[d.Type].total += d["Frequency in literatures"];
+        });
+
+        // Colors
+        // Inner: Purple, Brown
+        const innerColors = {
+            'Canteen management': '#533698',
+            'Food education': '#9C6536'
+        };
+        // Gradients
+        const gradients = {
+            'Canteen management': ['#5e4fa2', '#766db3', '#8e8bc4', '#a6a9d5', '#bebad6', '#d0d1e6'], // Simplified manual gradient
+            'Food education': ['#bf812d', '#cc9752', '#d9ad77', '#e6c39c', '#f3d9c1', '#f6e8c3']
+        };
+
+        const chartData = [];
+        const order = ['Canteen management', 'Food education']; // Clockwise starting 12
+
+        order.forEach(type => {
+            const group = groups[type];
+            const node = {
+                name: type === 'Canteen management' ? 'Canteen\nmanagement' : 'Food\neducation',
+                value: group.total,
+                itemStyle: { color: innerColors[type] },
+                label: {
+                    rotate: 'tangential',
+                    formatter: function(params) {
+                        const pct = (params.value / totalFreq * 100).toFixed(1);
+                        return `${params.name}\n{pct|${pct}%}`;
+                    },
+                    rich: { pct: { fontSize: 14, color: 'white' } },
+                    color: 'white',
+                    fontSize: 14
+                },
+                children: []
+            };
+
+            // Interpolate colors for children
+            const children = group.children;
+            const n = children.length;
+            // ECharts doesn't interpolate automatically for list.
+            // We use simple linear interpolation logic or predefined.
+            // Let's use simple logic: map 0..n-1 to gradient array
+            const palette = gradients[type];
+            
+            children.forEach((child, i) => {
+                const colorIdx = Math.floor(i / (n-1) * (palette.length-1)) || 0;
+                // Better interpolation:
+                // Just cycle or pick?
+                // Let's use ECharts visualMap if possible? No, sunburst itemStyle.
+                // We pick colors manually.
+                const color = palette[Math.min(i, palette.length-1)]; 
+                // Wait, gradient should spread.
+                // Let's create a helper to generate N colors.
+                // Reusing fixed palette might be chunky.
+                // But it's acceptable for HTML reproduction.
+                
+                const shortName = child.ShortLabel || child["Food waste reduction approaches (operational strategies)"];
+                
+                node.children.push({
+                    name: shortName,
+                    value: child["Frequency in literatures"],
+                    itemStyle: { color: color }, // Should ideally implement fine-grained gradient
+                    label: {
+                        color: type === 'Canteen management' ? '#533698' : '#8c510a',
+                        formatter: function(params) {
+                            const pct = (params.value / totalFreq * 100).toFixed(1);
+                            return `{name|${params.name}} {pct|${pct}%}`;
+                        },
+                        rich: {
+                            name: { fontSize: 12 },
+                            pct: { fontSize: 12, fontWeight: 'bold' }
+                        }
+                    }
+                });
+            });
+            chartData.push(node);
+        });
+
+        // Improve gradient logic for 'children' loop
+        // We have start/end hex.
+        function interpolateColor(color1, color2, factor) {
+            let result = "#";
+            for (let i = 1; i <= 5; i += 2) {
+                const v1 = parseInt(color1.substr(i, 2), 16);
+                const v2 = parseInt(color2.substr(i, 2), 16);
+                const val = Math.round(v1 + factor * (v2 - v1));
+                result += val.toString(16).padStart(2, '0');
+            }
+            return result;
+        }
+
+        order.forEach((type, idx) => {
+            const children = chartData[idx].children;
+            const startColor = gradients[type][0];
+            const endColor = gradients[type][gradients[type].length-1];
+            children.forEach((child, i) => {
+                child.itemStyle = {
+                    color: interpolateColor(startColor, endColor, i / (children.length - 1))
+                };
+            });
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            series: {
+                type: 'sunburst',
+                data: chartData,
+                radius: [0, '90%'],
+                center: ['50%', '50%'],
+                sort: null,
+                startAngle: 90,
+                levels: [
+                    {},
+                    {
+                        r0: '30%',
+                        r: '60%',
+                        itemStyle: { borderWidth: 2, borderColor: 'white' },
+                        label: { rotate: 0 }
+                    },
+                    {
+                        r0: '60%',
+                        r: '75%',
+                        itemStyle: { borderWidth: 1, borderColor: 'white' },
+                        label: {
+                            position: 'outside',
+                            padding: 3,
+                            rotate: 'auto',
+                            silent: false
+                        }
+                    }
+                ]
+            },
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'b',
+                        font: 'bold 24px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

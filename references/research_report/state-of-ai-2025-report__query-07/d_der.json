@@ -1,0 +1,543 @@
+{
+  "status": "complete",
+  "chart_type": "heatmap",
+  "title": "2025 funding share minus deal share by quarter",
+  "x_label": "Quarter",
+  "y_label": "Market",
+  "value_label": "Share gap (pp)",
+  "row_order": [
+    "Oceania",
+    "Miami",
+    "Silicon Valley",
+    "China",
+    "Japan",
+    "US",
+    "Netherlands",
+    "New York",
+    "Asia",
+    "United Kingdom",
+    "DC",
+    "Boston",
+    "Philadelphia",
+    "Sweden",
+    "Singapore",
+    "Europe",
+    "Canada",
+    "Germany",
+    "Israel",
+    "LatAm",
+    "Austin",
+    "India",
+    "Seattle",
+    "France",
+    "Los Angeles"
+  ],
+  "col_order": [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4"
+  ],
+  "data": [
+    {
+      "label": "US",
+      "quarter": "Q1",
+      "value": -9.411594014871309
+    },
+    {
+      "label": "US",
+      "quarter": "Q2",
+      "value": -6.478860105667621
+    },
+    {
+      "label": "US",
+      "quarter": "Q3",
+      "value": -0.13666012953028783
+    },
+    {
+      "label": "US",
+      "quarter": "Q4",
+      "value": 16.027114250069214
+    },
+    {
+      "label": "Silicon Valley",
+      "quarter": "Q1",
+      "value": -10.850496080529926
+    },
+    {
+      "label": "Silicon Valley",
+      "quarter": "Q2",
+      "value": -9.64464435509531
+    },
+    {
+      "label": "Silicon Valley",
+      "quarter": "Q3",
+      "value": 0.16090075496803635
+    },
+    {
+      "label": "Silicon Valley",
+      "quarter": "Q4",
+      "value": 20.3342396806572
+    },
+    {
+      "label": "New York",
+      "quarter": "Q1",
+      "value": -10.314734829710403
+    },
+    {
+      "label": "New York",
+      "quarter": "Q2",
+      "value": -7.236422856333636
+    },
+    {
+      "label": "New York",
+      "quarter": "Q3",
+      "value": 3.232316080152941
+    },
+    {
+      "label": "New York",
+      "quarter": "Q4",
+      "value": 14.318841605891098
+    },
+    {
+      "label": "Los Angeles",
+      "quarter": "Q1",
+      "value": -11.224489795918366
+    },
+    {
+      "label": "Los Angeles",
+      "quarter": "Q2",
+      "value": 25.434618291761144
+    },
+    {
+      "label": "Los Angeles",
+      "quarter": "Q3",
+      "value": -0.2267573696145142
+    },
+    {
+      "label": "Los Angeles",
+      "quarter": "Q4",
+      "value": -13.98337112622827
+    },
+    {
+      "label": "Boston",
+      "quarter": "Q1",
+      "value": 7.7519379844961165
+    },
+    {
+      "label": "Boston",
+      "quarter": "Q2",
+      "value": -11.82170542635659
+    },
+    {
+      "label": "Boston",
+      "quarter": "Q3",
+      "value": -4.7157622739018095
+    },
+    {
+      "label": "Boston",
+      "quarter": "Q4",
+      "value": 8.785529715762273
+    },
+    {
+      "label": "Seattle",
+      "quarter": "Q1",
+      "value": 1.0401265480675974
+    },
+    {
+      "label": "Seattle",
+      "quarter": "Q2",
+      "value": 15.240218756458564
+    },
+    {
+      "label": "Seattle",
+      "quarter": "Q3",
+      "value": -10.712866250139108
+    },
+    {
+      "label": "Seattle",
+      "quarter": "Q4",
+      "value": -5.567479054387054
+    },
+    {
+      "label": "DC",
+      "quarter": "Q1",
+      "value": -16.603823685608077
+    },
+    {
+      "label": "DC",
+      "quarter": "Q2",
+      "value": -2.6163922818197918
+    },
+    {
+      "label": "DC",
+      "quarter": "Q3",
+      "value": 9.57691626836608
+    },
+    {
+      "label": "DC",
+      "quarter": "Q4",
+      "value": 9.643299699061782
+    },
+    {
+      "label": "Austin",
+      "quarter": "Q1",
+      "value": 26.346153846153843
+    },
+    {
+      "label": "Austin",
+      "quarter": "Q2",
+      "value": -18.653846153846153
+    },
+    {
+      "label": "Austin",
+      "quarter": "Q3",
+      "value": -5.7692307692307665
+    },
+    {
+      "label": "Austin",
+      "quarter": "Q4",
+      "value": -1.9230769230769234
+    },
+    {
+      "label": "Miami",
+      "quarter": "Q1",
+      "value": -10.172272354388841
+    },
+    {
+      "label": "Miami",
+      "quarter": "Q2",
+      "value": -10.254306808859722
+    },
+    {
+      "label": "Miami",
+      "quarter": "Q3",
+      "value": -0.05468963631391688
+    },
+    {
+      "label": "Miami",
+      "quarter": "Q4",
+      "value": 20.48126879956248
+    },
+    {
+      "label": "Philadelphia",
+      "quarter": "Q1",
+      "value": -6.829518112450533
+    },
+    {
+      "label": "Philadelphia",
+      "quarter": "Q2",
+      "value": -4.290078001418209
+    },
+    {
+      "label": "Philadelphia",
+      "quarter": "Q3",
+      "value": 2.951568816402723
+    },
+    {
+      "label": "Philadelphia",
+      "quarter": "Q4",
+      "value": 8.168027297466015
+    },
+    {
+      "label": "Canada",
+      "quarter": "Q1",
+      "value": -7.972027972027973
+    },
+    {
+      "label": "Canada",
+      "quarter": "Q2",
+      "value": 2.587412587412583
+    },
+    {
+      "label": "Canada",
+      "quarter": "Q3",
+      "value": -0.34965034965035
+    },
+    {
+      "label": "Canada",
+      "quarter": "Q4",
+      "value": 5.73426573426573
+    },
+    {
+      "label": "Asia",
+      "quarter": "Q1",
+      "value": -7.231856728021565
+    },
+    {
+      "label": "Asia",
+      "quarter": "Q2",
+      "value": -8.035332091581154
+    },
+    {
+      "label": "Asia",
+      "quarter": "Q3",
+      "value": 1.2743385355808279
+    },
+    {
+      "label": "Asia",
+      "quarter": "Q4",
+      "value": 13.992850284021888
+    },
+    {
+      "label": "China",
+      "quarter": "Q1",
+      "value": -8.132227249874306
+    },
+    {
+      "label": "China",
+      "quarter": "Q2",
+      "value": -9.539969834087483
+    },
+    {
+      "label": "China",
+      "quarter": "Q3",
+      "value": -2.3252890899949783
+    },
+    {
+      "label": "China",
+      "quarter": "Q4",
+      "value": 19.997486173956762
+    },
+    {
+      "label": "India",
+      "quarter": "Q1",
+      "value": 4.392135642135639
+    },
+    {
+      "label": "India",
+      "quarter": "Q2",
+      "value": 5.429292929292931
+    },
+    {
+      "label": "India",
+      "quarter": "Q3",
+      "value": -6.619769119769124
+    },
+    {
+      "label": "India",
+      "quarter": "Q4",
+      "value": -3.2016594516594523
+    },
+    {
+      "label": "Singapore",
+      "quarter": "Q1",
+      "value": -9.965332286760859
+    },
+    {
+      "label": "Singapore",
+      "quarter": "Q2",
+      "value": -10.207352171637885
+    },
+    {
+      "label": "Singapore",
+      "quarter": "Q3",
+      "value": 13.504055468341178
+    },
+    {
+      "label": "Singapore",
+      "quarter": "Q4",
+      "value": 6.668628990057563
+    },
+    {
+      "label": "Japan",
+      "quarter": "Q1",
+      "value": -16.407098877218395
+    },
+    {
+      "label": "Japan",
+      "quarter": "Q2",
+      "value": -9.706628033321255
+    },
+    {
+      "label": "Japan",
+      "quarter": "Q3",
+      "value": 6.157189424121693
+    },
+    {
+      "label": "Japan",
+      "quarter": "Q4",
+      "value": 19.956537486417965
+    },
+    {
+      "label": "Europe",
+      "quarter": "Q1",
+      "value": -6.477727656280731
+    },
+    {
+      "label": "Europe",
+      "quarter": "Q2",
+      "value": -5.564437846171419
+    },
+    {
+      "label": "Europe",
+      "quarter": "Q3",
+      "value": 5.410583883718125
+    },
+    {
+      "label": "Europe",
+      "quarter": "Q4",
+      "value": 6.6315816187340175
+    },
+    {
+      "label": "United Kingdom",
+      "quarter": "Q1",
+      "value": -3.57415277323744
+    },
+    {
+      "label": "United Kingdom",
+      "quarter": "Q2",
+      "value": -15.582434346736406
+    },
+    {
+      "label": "United Kingdom",
+      "quarter": "Q3",
+      "value": 6.930369401765283
+    },
+    {
+      "label": "United Kingdom",
+      "quarter": "Q4",
+      "value": 12.226217718208563
+    },
+    {
+      "label": "Germany",
+      "quarter": "Q1",
+      "value": -8.114200846030421
+    },
+    {
+      "label": "Germany",
+      "quarter": "Q2",
+      "value": 17.784540716871547
+    },
+    {
+      "label": "Germany",
+      "quarter": "Q3",
+      "value": -14.916921934465794
+    },
+    {
+      "label": "Germany",
+      "quarter": "Q4",
+      "value": 5.246582063624672
+    },
+    {
+      "label": "France",
+      "quarter": "Q1",
+      "value": -14.38172043010753
+    },
+    {
+      "label": "France",
+      "quarter": "Q2",
+      "value": -19.04121863799283
+    },
+    {
+      "label": "France",
+      "quarter": "Q3",
+      "value": 46.908602150537625
+    },
+    {
+      "label": "France",
+      "quarter": "Q4",
+      "value": -13.485663082437277
+    },
+    {
+      "label": "Israel",
+      "quarter": "Q1",
+      "value": -10.92436974789916
+    },
+    {
+      "label": "Israel",
+      "quarter": "Q2",
+      "value": 8.823529411764707
+    },
+    {
+      "label": "Israel",
+      "quarter": "Q3",
+      "value": -2.731092436974791
+    },
+    {
+      "label": "Israel",
+      "quarter": "Q4",
+      "value": 4.831932773109244
+    },
+    {
+      "label": "Netherlands",
+      "quarter": "Q1",
+      "value": -14.482515012363123
+    },
+    {
+      "label": "Netherlands",
+      "quarter": "Q2",
+      "value": 1.6160367361356407
+    },
+    {
+      "label": "Netherlands",
+      "quarter": "Q3",
+      "value": -3.09961144471918
+    },
+    {
+      "label": "Netherlands",
+      "quarter": "Q4",
+      "value": 15.966089720946666
+    },
+    {
+      "label": "Sweden",
+      "quarter": "Q1",
+      "value": 12.297507788161997
+    },
+    {
+      "label": "Sweden",
+      "quarter": "Q2",
+      "value": -8.94080996884735
+    },
+    {
+      "label": "Sweden",
+      "quarter": "Q3",
+      "value": -11.004672897196262
+    },
+    {
+      "label": "Sweden",
+      "quarter": "Q4",
+      "value": 7.647975077881622
+    },
+    {
+      "label": "LatAm",
+      "quarter": "Q1",
+      "value": -6.158962421017627
+    },
+    {
+      "label": "LatAm",
+      "quarter": "Q2",
+      "value": -8.802793481875625
+    },
+    {
+      "label": "LatAm",
+      "quarter": "Q3",
+      "value": 14.87196541403392
+    },
+    {
+      "label": "LatAm",
+      "quarter": "Q4",
+      "value": 0.08979048885932883
+    },
+    {
+      "label": "Oceania",
+      "quarter": "Q1",
+      "value": -12.993197278911566
+    },
+    {
+      "label": "Oceania",
+      "quarter": "Q2",
+      "value": 5.917152575315839
+    },
+    {
+      "label": "Oceania",
+      "quarter": "Q3",
+      "value": -15.573372206025267
+    },
+    {
+      "label": "Oceania",
+      "quarter": "Q4",
+      "value": 22.64941690962099
+    }
+  ]
+}

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>xom 经济增加值 (EVA) 2016–2024 趋势图 - 简化版</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js 最新稳定版 4.x -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px 0;
+      text-align: center;
+    }
+    h2 {
+      font-size: 14px;
+      margin: 0 0 16px 0;
+      text-align: center;
+      font-weight: normal;
+      color: #666;
+    }
+    .chart-container {
+      max-width: 960px;
+      height: 480px; /* 固定高度，避免 0 高度导致不显示 */
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      padding: 16px 20px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+    .controls button {
+      border: 1px solid #d0d7de;
+      background: #fff;
+      border-radius: 4px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #333;
+    }
+    .controls button.active {
+      background: #2563eb;
+      border-color: #2563eb;
+      color: #fff;
+    }
+    .canvas-wrapper {
+      flex: 1;
+      min-height: 0;
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .note {
+      font-size: 11px;
+      color: #777;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>xom 经济增加值 (EVA) - 简化版</h1>
+    <h2>2016–2024 财年变化趋势</h2>
+    <div class="controls">
+      <span style="align-self:center;margin-right:4px;color:#666;">刻度单位：</span>
+      <button id="btn-billion" class="active">十亿 (10⁹)</button>
+      <button id="btn-million">百万 (10⁶)</button>
+      <button id="btn-raw">原始值</button>
+    </div>
+    <div class="canvas-wrapper">
+      <canvas id="evaChart"></canvas>
+    </div>
+    <div class="note">
+      数据来源：用户提供；单位：美元（负值表示经济增加值为负，可能代表经济利润为负）。
+    </div>
+  </div>
+
+  <script>
+    // 防止在 Chart.js 未加载或 DOM 未就绪时执行
+    document.addEventListener('DOMContentLoaded', function () {
+      // 原始数据（单位：美元）
+      const evaDataRaw = [
+        { year: 2016, value: -17858175304.30418 },
+        { year: 2017, value: -8586025088.358145 },
+        { year: 2018, value: -7227352704.099766 },
+        { year: 2019, value: -13548886757.080175 },
+        { year: 2020, value: -52075850000.0 },
+        { year: 2021, value: -3176297201.7673035 },
+        { year: 2022, value: 26697478013.710083 },
+        { year: 2023, value: 10584604020.233784 },
+        { year: 2024, value: 3975919741.984325 }
+      ];
+
+      const canvas = document.getElementById('evaChart');
+      if (!canvas || typeof Chart === 'undefined') {
+        console.error('Canvas 或 Chart.js 未正确加载');
+        return;
+      }
+      const ctx = canvas.getContext('2d');
+
+      // 当前刻度模式：'billion' | 'million' | 'raw'
+      let scaleMode = 'billion';
+
+      function formatValue(value, mode) {
+        if (mode === 'billion') return value / 1e9;
+        if (mode === 'million') return value / 1e6;
+        return value;
+      }
+
+      function valueToLabel(value, mode) {
+        if (mode === 'raw') {
+          return value.toLocaleString('en-US', { maximumFractionDigits: 2 });
+        }
+        if (mode === 'billion') {
+          return (
+            (value / 1e9).toLocaleString('en-US', {
+              maximumFractionDigits: 2
+            }) + ' 十亿美元'
+          );
+        }
+        if (mode === 'million') {
+          return (
+            (value / 1e6).toLocaleString('en-US', {
+              maximumFractionDigits: 2
+            }) + ' 百万美元'
+          );
+        }
+        return value.toString();
+      }
+
+      function axisLabelFormatter(value, mode) {
+        if (mode === 'raw') {
+          if (Math.abs(value) >= 1e9) return (value / 1e9).toFixed(1) + 'B';
+          if (Math.abs(value) >= 1e6) return (value / 1e6).toFixed(1) + 'M';
+          return value.toFixed(0);
+        }
+        if (mode === 'billion') return value.toFixed(1);
+        if (mode === 'million') return value.toFixed(0);
+        return value;
+      }
+
+      function getYAxisTitle(mode) {
+        if (mode === 'billion') return 'EVA（十亿美元）';
+        if (mode === 'million') return 'EVA（百万美元）';
+        return 'EVA（美元，原始值）';
+      }
+
+      function getScaledData(mode) {
+        return evaDataRaw.map(d => formatValue(d.value, mode));
+      }
+
+      const evaChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: evaDataRaw.map(d => d.year.toString()),
+          datasets: [
+            {
+              label: '经济增加值 (EVA)',
+              data: getScaledData(scaleMode),
+              borderColor: '#2563eb',
+              backgroundColor: 'rgba(37, 99, 235, 0.12)',
+              pointBackgroundColor: '#2563eb',
+              pointBorderColor: '#ffffff',
+              pointBorderWidth: 1.5,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              tension: 0.25,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: 'rgba(15, 23, 42, 0.92)',
+              titleColor: '#f9fafb',
+              bodyColor: '#e5e7eb',
+              borderColor: '#0f172a',
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                title: (items) => '财年：' + items[0].label,
+                label: (item) => {
+                  const rawValue = evaDataRaw[item.dataIndex].value;
+                  return 'EVA：' + valueToLabel(rawValue, scaleMode);
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                autoSkip: false
+              }
+            },
+            y: {
+              beginAtZero: false,
+              grid: {
+                color: 'rgba(148, 163, 184, 0.25)'
+              },
+              ticks: {
+                callback: function (value) {
+                  return axisLabelFormatter(value, scaleMode);
+                }
+              },
+              title: {
+                display: true,
+                text: getYAxisTitle(scaleMode),
+                color: '#374151',
+                font: {
+                  size: 12
+                }
+              }
+            }
+          }
+        }
+      });
+
+      function updateScale(newMode) {
+        scaleMode = newMode;
+        evaChart.data.datasets[0].data = getScaledData(scaleMode);
+        evaChart.options.scales.y.title.text = getYAxisTitle(scaleMode);
+        evaChart.update();
+
+        document
+          .getElementById('btn-billion')
+          .classList.toggle('active', scaleMode === 'billion');
+        document
+          .getElementById('btn-million')
+          .classList.toggle('active', scaleMode === 'million');
+        document
+          .getElementById('btn-raw')
+          .classList.toggle('active', scaleMode === 'raw');
+      }
+
+      document
+        .getElementById('btn-billion')
+        .addEventListener('click', () => updateScale('billion'));
+      document
+        .getElementById('btn-million')
+        .addEventListener('click', () => updateScale('million'));
+      document
+        .getElementById('btn-raw')
+        .addEventListener('click', () => updateScale('raw'));
+    });
+  </script>
+</body>
+</html>

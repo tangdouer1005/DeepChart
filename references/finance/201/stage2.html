@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ORCL Defensive Interval Ratio (DIR) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      background: #f7f7f9;
+      color: #222;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      max-width: 960px;
+      width: 95%;
+      background: #ffffff;
+      padding: 1.5rem 1.75rem 2rem;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+      border-radius: 12px;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+    .meta {
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 0.25rem;
+    }
+    canvas {
+      max-height: 520px;
+    }
+    @media (max-width: 640px) {
+      .container {
+        padding: 1.1rem 1.1rem 1.4rem;
+      }
+      h1 {
+        font-size: 1.1rem;
+      }
+      .subtitle {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <h1>Oracle (ORCL) 防御区间比率 (Defensive Interval Ratio, DIR)</h1>
+      <div class="subtitle">Fiscal Years 2016–2024</div>
+      <div class="meta">Source: Provided dataset (RESULT_DIR)</div>
+    </div>
+    <canvas id="dirChart"></canvas>
+  </div>
+
+  <script>
+    // Data from the provided source
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const dirValues = [
+      381.33637442212495,
+      397.34957192813215,
+      373.6442590963002,
+      360.4605136498402,
+      620.4651994279358,
+      512.9444708303649,
+      316.60976074125784,
+      165.16643607064375,
+      177.88023824718147
+    ];
+
+    const ctx = document.getElementById("dirChart").getContext("2d");
+
+    // Find min and max for nicer y-axis padding
+    const minVal = Math.min(...dirValues);
+    const maxVal = Math.max(...dirValues);
+    const padding = (maxVal - minVal) * 0.1 || 10;
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "防御区间比率 (DIR)",
+            data: dirValues,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: "rgba(37, 99, 235, 0.12)",
+            fill: true,
+            tension: 0.25,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderWidth: 1.5
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8
+            }
+          },
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return " DIR: " + value.toFixed(2);
+              },
+              title: function (items) {
+                if (!items.length) return "";
+                return "Fiscal Year " + items[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year"
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Defensive Interval Ratio (DIR)"
+            },
+            beginAtZero: false,
+            min: Math.max(0, minVal - padding),
+            max: maxVal + padding,
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(0);
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

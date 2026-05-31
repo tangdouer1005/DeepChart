@@ -1,0 +1,137 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a scatter plot covering all Cleantech ecosystems with exact values, with the x-axis showing `Ecosystem Value / Total Early-Stage Funding`, the y-axis showing `Median Series A Round / Median Seed Round`, both expressed in `x multiple`, and labels added to ecosystems that fall in the top quartile on both metrics.",
+  "chart_type": "scatter plot",
+  "value_unit": "x multiple",
+  "sort_rule": "labels assigned to dual top-quartile points",
+  "selection_rule": "all exact-value cleantech ecosystems",
+  "plot_spec": {
+    "title": "Cleantech Efficiency vs Stage Multiple",
+    "x_field": "x_value_to_funding",
+    "y_field": "y_stage_multiple",
+    "xlabel": "Ecosystem Value / Early-Stage Funding (x)",
+    "ylabel": "Median Series A / Median Seed (x)"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "x_value_to_funding": 46.7727,
+      "y_stage_multiple": 8.8,
+      "label": true
+    },
+    {
+      "entity": "Tel Aviv - Jerusalem",
+      "x_value_to_funding": 13.6889,
+      "y_stage_multiple": 3.8667,
+      "label": false
+    },
+    {
+      "entity": "Stockholm",
+      "x_value_to_funding": 46.0,
+      "y_stage_multiple": 2.6562,
+      "label": false
+    },
+    {
+      "entity": "London",
+      "x_value_to_funding": 16.7059,
+      "y_stage_multiple": 6.1256,
+      "label": false
+    },
+    {
+      "entity": "Los Angeles",
+      "x_value_to_funding": 23.8,
+      "y_stage_multiple": 8.2935,
+      "label": false
+    },
+    {
+      "entity": "Boston",
+      "x_value_to_funding": 20.7812,
+      "y_stage_multiple": 6.0,
+      "label": false
+    },
+    {
+      "entity": "Amsterdam-Delta",
+      "x_value_to_funding": 24.4545,
+      "y_stage_multiple": 5.157,
+      "label": false
+    },
+    {
+      "entity": "New York City",
+      "x_value_to_funding": 18.5294,
+      "y_stage_multiple": 7.4074,
+      "label": false
+    },
+    {
+      "entity": "Beijing",
+      "x_value_to_funding": 41.2037,
+      "y_stage_multiple": 2.9553,
+      "label": false
+    },
+    {
+      "entity": "Washington, D.C.",
+      "x_value_to_funding": 13.7619,
+      "y_stage_multiple": 8.0,
+      "label": false
+    },
+    {
+      "entity": "Berlin",
+      "x_value_to_funding": 16.0435,
+      "y_stage_multiple": 6.6,
+      "label": false
+    },
+    {
+      "entity": "Toronto-Waterloo",
+      "x_value_to_funding": 9.0435,
+      "y_stage_multiple": 8.8,
+      "label": false
+    },
+    {
+      "entity": "Paris",
+      "x_value_to_funding": 13.4571,
+      "y_stage_multiple": 3.0,
+      "label": false
+    },
+    {
+      "entity": "Seattle",
+      "x_value_to_funding": 16.3333,
+      "y_stage_multiple": 3.75,
+      "label": false
+    },
+    {
+      "entity": "Greater Helsinki",
+      "x_value_to_funding": 12.0219,
+      "y_stage_multiple": 6.6176,
+      "label": false
+    },
+    {
+      "entity": "Sydney",
+      "x_value_to_funding": 18.872,
+      "y_stage_multiple": 7.619,
+      "label": false
+    },
+    {
+      "entity": "Pittsburgh",
+      "x_value_to_funding": 28.8889,
+      "y_stage_multiple": 45.3333,
+      "label": true
+    },
+    {
+      "entity": "Calgary",
+      "x_value_to_funding": 8.7209,
+      "y_stage_multiple": 3.1496,
+      "label": false
+    },
+    {
+      "entity": "Frankfurt",
+      "x_value_to_funding": 37.176,
+      "y_stage_multiple": 2.6077,
+      "label": false
+    },
+    {
+      "entity": "Singapore",
+      "x_value_to_funding": 11.25,
+      "y_stage_multiple": 8.0,
+      "label": false
+    }
+  ]
+}

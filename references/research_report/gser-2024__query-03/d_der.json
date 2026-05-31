@@ -1,0 +1,77 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a dumbbell chart comparing, for the 10 ecosystems with the highest `growth-maturity gap`, `Early-Stage Funding Growth` score versus `capital maturity`, where `capital maturity` is the percentile rank of `Total Early-Stage Funding` across all 2024 ecosystems, with both ends shown on a `0-10 equivalent score` scale, sorted by `(Growth score - funding percentile score)` descending and excluding missing rows.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "0-10 equivalent score",
+  "sort_rule": "descending by growth_maturity_gap",
+  "selection_rule": "top 10 gaps",
+  "plot_spec": {
+    "title": "2024 Growth vs Capital Maturity Gap",
+    "left_field": "growth_score",
+    "right_field": "capital_maturity_score",
+    "left_label": "Growth score",
+    "right_label": "Capital maturity score"
+  },
+  "records": [
+    {
+      "entity": "Addis Ababa",
+      "growth_score": 10.0,
+      "capital_maturity_score": 0.3333,
+      "growth_maturity_gap": 9.6667
+    },
+    {
+      "entity": "Sharjah",
+      "growth_score": 10.0,
+      "capital_maturity_score": 1.0,
+      "growth_maturity_gap": 9.0
+    },
+    {
+      "entity": "Accra",
+      "growth_score": 10.0,
+      "capital_maturity_score": 1.6667,
+      "growth_maturity_gap": 8.3333
+    },
+    {
+      "entity": "Tunisia",
+      "growth_score": 9.0,
+      "capital_maturity_score": 1.3333,
+      "growth_maturity_gap": 7.6667
+    },
+    {
+      "entity": "Kerala",
+      "growth_score": 9.0,
+      "capital_maturity_score": 1.5,
+      "growth_maturity_gap": 7.5
+    },
+    {
+      "entity": "Muscat",
+      "growth_score": 8.0,
+      "capital_maturity_score": 0.8333,
+      "growth_maturity_gap": 7.1667
+    },
+    {
+      "entity": "Palestine",
+      "growth_score": 7.0,
+      "capital_maturity_score": 0.1667,
+      "growth_maturity_gap": 6.8333
+    },
+    {
+      "entity": "Mid-East Region, Ireland",
+      "growth_score": 8.0,
+      "capital_maturity_score": 1.1667,
+      "growth_maturity_gap": 6.8333
+    },
+    {
+      "entity": "Rio de Janeiro",
+      "growth_score": 8.0,
+      "capital_maturity_score": 2.1667,
+      "growth_maturity_gap": 5.8333
+    },
+    {
+      "entity": "Belgrade and Novi Sad",
+      "growth_score": 7.0,
+      "capital_maturity_score": 1.8333,
+      "growth_maturity_gap": 5.1667
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "query_id": 8,
+  "query_text": "Create a dumbbell chart for the 12 companies with the largest gap between valuation rank and recency rank, where valuation rank is descending by Valuation in $M and recency rank is ascending by months since Last Funded, using only companies with both fields disclosed.",
+  "status": "complete",
+  "chart": {
+    "type": "dumbbell",
+    "title": "Valuation-rank vs recency-rank mismatches",
+    "entity_field": "company",
+    "left_field": "valuation_rank",
+    "right_field": "recency_rank",
+    "x_label": "Rank",
+    "order": [
+      "Binarly",
+      "Groq",
+      "Runway",
+      "Adept",
+      "Hugging Face",
+      "Adaptive ML",
+      "Weights & Biases",
+      "SuperAGI",
+      "Flip AI",
+      "Iambic Therapeutics",
+      "Extropic",
+      "KoBold Metals"
+    ],
+    "figsize": [
+      13,
+      8
+    ]
+  },
+  "data": [
+    {
+      "company": "Binarly",
+      "valuation_rank": 56,
+      "recency_rank": 2,
+      "rank_gap": 54,
+      "valuation_value_m": 11.6,
+      "months_since_last_funded": 23
+    },
+    {
+      "company": "Groq",
+      "valuation_rank": 17,
+      "recency_rank": 55,
+      "rank_gap": 38,
+      "valuation_value_m": 1000.0,
+      "months_since_last_funded": 59
+    },
+    {
+      "company": "Runway",
+      "valuation_rank": 10,
+      "recency_rank": 48,
+      "rank_gap": 38,
+      "valuation_value_m": 1500.0,
+      "months_since_last_funded": 34
+    },
+    {
+      "company": "Adept",
+      "valuation_rank": 16,
+      "recency_rank": 51,
+      "rank_gap": 35,
+      "valuation_value_m": 1000.0,
+      "months_since_last_funded": 36
+    },
+    {
+      "company": "Hugging Face",
+      "valuation_rank": 4,
+      "recency_rank": 37,
+      "rank_gap": 33,
+      "valuation_value_m": 4500.0,
+      "months_since_last_funded": 31
+    },
+    {
+      "company": "Adaptive ML",
+      "valuation_rank": 38,
+      "recency_rank": 7,
+      "rank_gap": 31,
+      "valuation_value_m": 100.0,
+      "months_since_last_funded": 24
+    },
+    {
+      "company": "Weights & Biases",
+      "valuation_rank": 12,
+      "recency_rank": 43,
+      "rank_gap": 31,
+      "valuation_value_m": 1250.0,
+      "months_since_last_funded": 31
+    },
+    {
+      "company": "SuperAGI",
+      "valuation_rank": 40,
+      "recency_rank": 10,
+      "rank_gap": 30,
+      "valuation_value_m": 100.0,
+      "months_since_last_funded": 24
+    },
+    {
+      "company": "Flip AI",
+      "valuation_rank": 54,
+      "recency_rank": 26,
+      "rank_gap": 28,
+      "valuation_value_m": 19.54,
+      "months_since_last_funded": 28
+    },
+    {
+      "company": "Iambic Therapeutics",
+      "valuation_rank": 32,
+      "recency_rank": 4,
+      "rank_gap": 28,
+      "valuation_value_m": 266.5,
+      "months_since_last_funded": 23
+    },
+    {
+      "company": "Extropic",
+      "valuation_rank": 48,
+      "recency_rank": 21,
+      "rank_gap": 27,
+      "valuation_value_m": 42.92,
+      "months_since_last_funded": 27
+    },
+    {
+      "company": "KoBold Metals",
+      "valuation_rank": 18,
+      "recency_rank": 45,
+      "rank_gap": 27,
+      "valuation_value_m": 1000.0,
+      "months_since_last_funded": 33
+    }
+  ],
+  "notes": []
+}

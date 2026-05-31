@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ma 盈余-现金质量剪刀差 (Earnings Quality Spread) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-weight: 400;
+      color: #555;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 20px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    /* Fix aspect ratio: horizontal, not overly tall */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      /* 16:9 aspect ratio */
+      aspect-ratio: 16 / 9;
+      /* Fallback for older browsers */
+      max-height: 480px;
+      min-height: 260px;
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .note {
+      font-size: 11px;
+      color: #777;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>ma 盈余-现金质量剪刀差 (Earnings Quality Spread)</h1>
+    <h2>年度变化（2016–2024）</h2>
+
+    <div class="controls">
+      <label>
+        <input type="checkbox" id="toggleLine" checked />
+        显示趋势折线
+      </label>
+      <label>
+        <input type="checkbox" id="toggleDataLabels" />
+        显示数值标签
+      </label>
+    </div>
+    <div class="note">
+      指标单位：比率（无量纲）。数值为 RESULT_Spread。
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="earningsChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <script>
+    const ctx = document.getElementById('earningsChart').getContext('2d');
+
+    // Source data (exact as provided)
+    const years = [
+      '2016','2017','2018','2019','2020','2021','2022','2023','2024'
+    ];
+    const spreads = [
+      0.0243246336996336,
+      0.081991800819918,
+      0.0157613284548269,
+      0.0024031351671103,
+      0.0258834765998089,
+      0.0217815390229183,
+      0.0331182176377417,
+      0.019341644902183,
+      0.0421080537728241
+    ];
+
+    // Bar colors
+    const barColors = spreads.map(v =>
+      v >= 0 ? 'rgba(54, 162, 235, 0.75)' : 'rgba(255, 99, 132, 0.75)'
+    );
+    const barBorderColors = spreads.map(v =>
+      v >= 0 ? 'rgba(54, 162, 235, 1)' : 'rgba(255, 99, 132, 1)'
+    );
+
+    // Plugin for simple data labels (toggleable)
+    const valueLabelPlugin = {
+      id: 'valueLabelPlugin',
+      afterDatasetsDraw(chart, args, pluginOptions) {
+        const {ctx} = chart;
+        const showLabels = pluginOptions.showLabels;
+        if (!showLabels) return;
+
+        ctx.save();
+        ctx.font = '11px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillStyle = '#333';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+
+        chart.data.datasets.forEach((dataset, datasetIndex) => {
+          if (dataset.type === 'line') return; // labels only on bars
+          const meta = chart.getDatasetMeta(datasetIndex);
+          meta.data.forEach((bar, index) => {
+            const raw = dataset.data[index];
+            const formatted = raw.toFixed(3);
+            const posY = bar.y - 4;
+            ctx.fillText(formatted, bar.x, posY);
+          });
+        });
+
+        ctx.restore();
+      }
+    };
+
+    const earningsChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: '盈余-现金质量剪刀差 (RESULT_Spread)',
+            data: spreads,
+            backgroundColor: barColors,
+            borderColor: barBorderColors,
+            borderWidth: 1.2,
+            borderRadius: 4,
+            maxBarThickness: 46
+          },
+          {
+            type: 'line',
+            label: '趋势',
+            data: spreads,
+            borderColor: 'rgba(255, 159, 64, 1)',
+            backgroundColor: 'rgba(255, 159, 64, 0.15)',
+            pointBackgroundColor: 'rgba(255, 159, 64, 1)',
+            pointRadius: 3.5,
+            pointHoverRadius: 5,
+            tension: 0.3,
+            yAxisID: 'y'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        // Important: let Chart.js handle aspect ratio based on container
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const v = context.raw;
+                return `${context.dataset.label}: ${v.toFixed(4)}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          },
+          valueLabelPlugin: {
+            showLabels: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '年度 (Fiscal Year)',
+              font: { size: 12 }
+            },
+            ticks: {
+              autoSkip: false
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: '盈余-现金质量剪刀差 (比率)',
+              font: { size: 12 }
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(2);
+              }
+            },
+            beginAtZero: true,
+            suggestedMax: 0.09   // keeps bars in a sensible range for readability
+          }
+        }
+      },
+      plugins: [valueLabelPlugin]
+    });
+
+    // Interactivity controls
+    const toggleLineCheckbox = document.getElementById('toggleLine');
+    const toggleDataLabelsCheckbox = document.getElementById('toggleDataLabels');
+
+    toggleLineCheckbox.addEventListener('change', () => {
+      // Line dataset is index 1
+      earningsChart.isDatasetVisible(1)
+        ? earningsChart.hide(1)
+        : earningsChart.show(1);
+    });
+
+    toggleDataLabelsCheckbox.addEventListener('change', (e) => {
+      earningsChart.options.plugins.valueLabelPlugin.showLabels = e.target.checked;
+      earningsChart.update();
+    });
+  </script>
+</body>
+</html>

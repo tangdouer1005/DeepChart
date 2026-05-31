@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMUS 2016–2024 息税折旧摊销前利润（EBITDA）走势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x at time of writing) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2933;
+      --grid: rgba(148, 163, 184, 0.3);
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: rgba(148, 163, 184, 0.35);
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.12);
+      }
+    }
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: radial-gradient(circle at top left, #eef2ff 0, var(--bg) 40%);
+      min-height: 100vh;
+      color: var(--fg);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .container {
+      width: 100%;
+      max-width: 960px;
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      padding: 1.75rem 1.75rem 1.5rem;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(148, 163, 184, 0.25);
+    }
+    @media (prefers-color-scheme: dark) {
+      .container {
+        background-color: rgba(15, 23, 42, 0.92);
+      }
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+      align-items: baseline;
+    }
+    .title-block {
+      min-width: 0;
+    }
+    h1 {
+      font-size: 1.25rem;
+      margin: 0 0 0.25rem 0;
+      letter-spacing: 0.02em;
+    }
+    .subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+    }
+    .meta {
+      font-size: 0.78rem;
+      text-align: right;
+      color: #6b7280;
+    }
+    @media (prefers-color-scheme: dark) {
+      .meta {
+        color: #9ca3af;
+      }
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      margin-top: 0.75rem;
+    }
+    .footnote {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    @media (prefers-color-scheme: dark) {
+      .footnote {
+        color: #9ca3af;
+      }
+    }
+    .units-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      padding: 0.25rem 0.5rem;
+      background: rgba(148, 163, 184, 0.08);
+      border-radius: 999px;
+    }
+    .units-toggle button {
+      border: none;
+      background: transparent;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: #4b5563;
+    }
+    @media (prefers-color-scheme: dark) {
+      .units-toggle button {
+        color: #e5e7eb;
+      }
+    }
+    .units-toggle button.active {
+      background: var(--accent);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title-block">
+        <h1>TMUS 息税折旧摊销前利润（EBITDA）趋势</h1>
+        <div class="subtitle">2016–2024 财年，单位：十亿美元（USD）</div>
+      </div>
+      <div class="meta">
+        <div>数据来源：用户提供的财报数据文本</div>
+        <div>交互：悬停查看精确数值，拖拽/缩放查看局部</div>
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <div class="footnote">
+      <div>
+        说明：EBITDA = Earnings Before Interest, Taxes, Depreciation, and Amortization（息税折旧摊销前利润）。
+      </div>
+      <div class="units-toggle" aria-label="数值显示单位切换">
+        <span>单位显示：</span>
+        <button type="button" id="btnBillions" class="active">十亿美元</button>
+        <button type="button" id="btnMillions">百万美元</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Raw data (USD)
+    const fiscalYears = [
+      "2016", "2017", "2018", "2019",
+      "2020", "2021", "2022", "2023", "2024"
+    ];
+    const ebitdaValuesUSD = [
+      10300000000,
+      13566000000,
+      11760000000,
+      12354000000,
+      20702000000,
+      23076000000,
+      20161000000,
+      27152000000,
+      31042000000
+    ];
+
+    // Unit state: "B" for billions, "M" for millions
+    let currentUnit = "B";
+
+    function formatValue(value, unit) {
+      if (unit === "B") {
+        return value / 1e9;
+      }
+      return value / 1e6;
+    }
+
+    function buildDataset(unit) {
+      const converted = ebitdaValuesUSD.map(v => formatValue(v, unit));
+      const labelSuffix = unit === "B" ? "十亿美元" : "百万美元";
+
+      return {
+        label: "EBITDA（" + labelSuffix + "）",
+        data: converted,
+        tension: 0.3,
+        borderColor: getComputedStyle(document.documentElement)
+          .getPropertyValue("--accent")
+          .trim() || "#2563eb",
+        backgroundColor: getComputedStyle(document.documentElement)
+          .getPropertyValue("--accent-soft")
+          .trim() || "rgba(37, 99, 235, 0.12)",
+        fill: true,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointBorderWidth: 1.5,
+        pointBackgroundColor: "#ffffff",
+        pointHoverBackgroundColor: "#ffffff"
+      };
+    }
+
+    const ctx = document.getElementById("ebitdaChart").getContext("2d");
+
+    const ebitdaChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: fiscalYears,
+        datasets: [buildDataset(currentUnit)]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+              boxWidth: 8,
+              padding: 16
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.9)",
+            titleFont: { size: 13, weight: "600" },
+            bodyFont: { size: 12 },
+            padding: 10,
+            callbacks: {
+              label: ctx => {
+                const unitLabel = currentUnit === "B" ? "十亿美元" : "百万美元";
+                const raw = ebitdaValuesUSD[ctx.dataIndex];
+                const displayVal = formatValue(raw, currentUnit);
+                return " EBITDA: " +
+                  displayVal.toLocaleString(undefined, {
+                    maximumFractionDigits: 2
+                  }) +
+                  " " + unitLabel;
+              },
+              footer: ctx => {
+                const idx = ctx[0].dataIndex;
+                const raw = ebitdaValuesUSD[idx];
+                return " 原始值: " + raw.toLocaleString() + " USD";
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+              drawBorder: false
+            },
+            ticks: {
+              maxRotation: 0,
+              font: { size: 11 }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: "rgba(148, 163, 184, 0.25)",
+              drawBorder: false
+            },
+            ticks: {
+              font: { size: 11 },
+              callback: (value) => {
+                const unitLabel = currentUnit === "B" ? "B" : "M";
+                return value.toLocaleString() + unitLabel;
+              }
+            },
+            title: {
+              display: true,
+              text: "EBITDA（" + (currentUnit === "B" ? "十亿美元" : "百万美元") + "）",
+              font: { size: 12, weight: "500" }
+            }
+          }
+        }
+      }
+    });
+
+    // Unit toggle behavior
+    const btnBillions = document.getElementById("btnBillions");
+    const btnMillions = document.getElementById("btnMillions");
+
+    function updateUnit(unit) {
+      if (unit === currentUnit) return;
+      currentUnit = unit;
+      ebitdaChart.data.datasets[0] = buildDataset(unit);
+      ebitdaChart.options.scales.y.title.text =
+        "EBITDA（" + (unit === "B" ? "十亿美元" : "百万美元") + "）";
+      ebitdaChart.update();
+
+      // Toggle button styles
+      if (unit === "B") {
+        btnBillions.classList.add("active");
+        btnMillions.classList.remove("active");
+      } else {
+        btnMillions.classList.add("active");
+        btnBillions.classList.remove("active");
+      }
+    }
+
+    btnBillions.addEventListener("click", () => updateUnit("B"));
+    btnMillions.addEventListener("click", () => updateUnit("M"));
+  </script>
+</body>
+</html>

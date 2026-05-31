@@ -1,0 +1,87 @@
+{
+  "status": "complete",
+  "chart_type": "heatmap",
+  "title": "Average Mosaic by stage family and cohort",
+  "x_field": "cohort",
+  "y_field": "stage_family",
+  "value_field": "avg_mosaic",
+  "x_label": "Founded-year cohort",
+  "y_label": "Stage family",
+  "data": [
+    {
+      "stage_family": "Debt/Line of Credit",
+      "cohort": "2017-2019",
+      "avg_mosaic": 799.0
+    },
+    {
+      "stage_family": "Debt/Line of Credit",
+      "cohort": "2020-2024",
+      "avg_mosaic": 710.5
+    },
+    {
+      "stage_family": "Other/Unattributed",
+      "cohort": "2012-2016",
+      "avg_mosaic": 778.0
+    },
+    {
+      "stage_family": "Other/Unattributed",
+      "cohort": "2020-2024",
+      "avg_mosaic": 816.5
+    },
+    {
+      "stage_family": "Seed",
+      "cohort": "2012-2016",
+      "avg_mosaic": 646.0
+    },
+    {
+      "stage_family": "Seed",
+      "cohort": "2017-2019",
+      "avg_mosaic": 737.75
+    },
+    {
+      "stage_family": "Seed",
+      "cohort": "2020-2024",
+      "avg_mosaic": 712.076923
+    },
+    {
+      "stage_family": "Series A",
+      "cohort": "2012-2016",
+      "avg_mosaic": 744.0
+    },
+    {
+      "stage_family": "Series A",
+      "cohort": "2017-2019",
+      "avg_mosaic": 752.384615
+    },
+    {
+      "stage_family": "Series A",
+      "cohort": "2020-2024",
+      "avg_mosaic": 784.322581
+    },
+    {
+      "stage_family": "Series B",
+      "cohort": "2012-2016",
+      "avg_mosaic": 751.0
+    },
+    {
+      "stage_family": "Series B",
+      "cohort": "2017-2019",
+      "avg_mosaic": 810.25
+    },
+    {
+      "stage_family": "Series B",
+      "cohort": "2020-2024",
+      "avg_mosaic": 814.153846
+    },
+    {
+      "stage_family": "Series C+",
+      "cohort": "2012-2016",
+      "avg_mosaic": 836.0
+    },
+    {
+      "stage_family": "Series C+",
+      "cohort": "2017-2019",
+      "avg_mosaic": 873.0
+    }
+  ]
+}

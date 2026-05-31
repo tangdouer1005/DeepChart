@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 400px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        
+        const data = {
+    "raw_data": {
+        "K5": [
+            2.02859,
+            0.878401,
+            0.98349,
+            0.785771,
+            0.388214,
+            2.19805,
+            1.57333,
+            1.50217,
+            3.44616
+        ],
+        "DCK5": [
+            7.2504,
+            3.31785,
+            7.06946,
+            7.76414,
+            4.70172,
+            6.59061,
+            7.09779,
+            6.17586
+        ],
+        "K10": [
+            5.40501,
+            2.23115,
+            6.34756,
+            2.56239,
+            4.55303,
+            5.07432,
+            4.39348,
+            4.89635,
+            3.20176,
+            3.7647,
+            3.76893,
+            3.87353
+        ],
+        "DCK10": [
+            9.87058,
+            8.92622,
+            7.82007,
+            8.22059,
+            10.6351,
+            6.57444,
+            11.0517
+        ]
+    },
+    "derived_data": {
+        "p_val_left": 1.0396733305698452e-06,
+        "p_val_right": 8.173454589351513e-07
+    }
+};
+
+        function calculateBoxPlotData(arr) {
+            arr.sort((a, b) => a - b);
+            const q1 = jStat.percentile(arr, 0.25);
+            const median = jStat.percentile(arr, 0.5);
+            const q3 = jStat.percentile(arr, 0.75);
+            const min = arr[0];
+            const max = arr[arr.length - 1];
+            return [min, q1, median, q3, max];
+        }
+
+        const groups = ['K5', 'DCK5', 'K10', 'DCK10'];
+        const boxData = groups.map(g => calculateBoxPlotData(data.raw_data[g]));
+
+        const annotations = [];
+        const sigY = 12;
+
+        const pVals = [data.derived_data.p_val_left, data.derived_data.p_val_right];
+        
+        pVals.forEach(pVal => {
+            let sigText = "";
+            if (pVal < 0.001) sigText = "***";
+            else if (pVal < 0.01) sigText = "**";
+            else if (pVal < 0.05) sigText = "*";
+            else sigText = `P = ${pVal.toFixed(2)}`;
+            
+            annotations.push({ y: sigY, text: sigText });
+        });
+
+        const colors = ['#E08E8E', '#4D8596', '#992626', '#1A5276'];
+        
+        const chartCols = [0, 1, null, 2, 3];
+        const chartBoxData = [boxData[0], boxData[1], [0,0,0,0,0], boxData[2], boxData[3]];
+        const chartColors = [colors[0], colors[1], 'transparent', colors[2], colors[3]];
+        
+        const chartAnnotations = annotations.map((a, i) => ({
+            x1: i === 0 ? 0 : 3,
+            x2: i === 0 ? 1 : 4,
+            y: a.y,
+            text: a.text
+        }));
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 20, bottom: 80, left: 60 },
+            xAxis: {
+                type: 'category',
+                data: ['Ketamine', 'DCK', '', 'Ketamine', 'DCK'],
+                axisLabel: { color: 'black', rotate: 45 },
+                axisTick: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } }
+            },
+            yAxis: {
+                type: 'value',
+                max: 13,
+                name: 'AUC normalized',
+                nameLocation: 'middle',
+                nameGap: 40,
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisLabel: { color: 'black' }
+            },
+            series: [
+                {
+                    type: 'boxplot',
+                    data: chartBoxData.map((d, i) => ({
+                        value: d,
+                        itemStyle: {
+                            color: 'white', 
+                            borderColor: chartColors[i],
+                            borderWidth: 2
+                        }
+                    })),
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const ann = chartAnnotations[params.dataIndex];
+                        if(!ann) return;
+                        const p1 = api.coord([ann.x1, ann.y]);
+                        const p2 = api.coord([ann.x2, ann.y]);
+                        const style = api.style({ stroke: 'black', lineWidth: 1 });
+                        return {
+                            type: 'group',
+                            children: [
+                                { type: 'line', shape: { x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1] }, style: style },
+                                { type: 'text', style: { text: ann.text, x: (p1[0]+p2[0])/2, y: p1[1]-5, textAlign: 'center', textVerticalAlign: 'bottom', fill: 'black', font: '14px Arial' } }
+                            ]
+                        };
+                    },
+                    data: [0, 1],
+                    z: 2
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'd', font: 'bold 20px Arial' } },
+                { type: 'line', shape: { x1: 200, y1: 50, x2: 200, y2: 420 }, style: { stroke: 'black', lineDash: [4, 4] } },
+                
+                { type: 'line', shape: { x1: 85, y1: 470, x2: 175, y2: 470 }, style: { stroke: 'black' } },
+                { type: 'text', left: 130, bottom: 5, style: { text: '5 mg kg⁻¹', textAlign: 'center', font: '12px Arial' } },
+                
+                { type: 'line', shape: { x1: 235, y1: 470, x2: 325, y2: 470 }, style: { stroke: 'black' } },
+                { type: 'text', left: 280, bottom: 5, style: { text: '10 mg kg⁻¹', textAlign: 'center', font: '12px Arial' } }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

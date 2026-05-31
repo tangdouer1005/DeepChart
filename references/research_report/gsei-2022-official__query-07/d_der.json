@@ -1,0 +1,74 @@
+{
+  "query_id": "query_07",
+  "query_text": "Create a ranked dumbbell chart showing the 8 countries with the largest leader resilience gap, where each country has one endpoint for the leader city's numeric global_rank_change and one endpoint for the average numeric global_rank_change of cities ranked 2 through 5 in the same 3.2 national block, countries are selected only after computing `leader global_rank_change - average follower global_rank_change`, values are in rank positions, and the dumbbells are sorted from highest to lowest gap.",
+  "chart_type": "dumbbell chart",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by leader_resilience_gap",
+  "selection_rule": "top 8 countries; required a numeric leader change and at least 2 numeric follower changes in ranks 2-5",
+  "plot_spec": {
+    "title": "Leader Resilience Gap",
+    "start_field": "follower_avg_global_rank_change",
+    "end_field": "leader_global_rank_change",
+    "start_label": "Ranks 2-5 average",
+    "end_label": "Leader",
+    "xlabel": "global rank change"
+  },
+  "records": [
+    {
+      "entity": "Ukraine",
+      "leader_global_rank_change": -45,
+      "follower_avg_global_rank_change": -394.6667,
+      "leader_resilience_gap": 349.6667,
+      "numeric_follower_count": 3
+    },
+    {
+      "entity": "Chile",
+      "leader_global_rank_change": 3,
+      "follower_avg_global_rank_change": -240.5,
+      "leader_resilience_gap": 243.5,
+      "numeric_follower_count": 2
+    },
+    {
+      "entity": "Nigeria",
+      "leader_global_rank_change": 41,
+      "follower_avg_global_rank_change": -157.5,
+      "leader_resilience_gap": 198.5,
+      "numeric_follower_count": 2
+    },
+    {
+      "entity": "Morocco",
+      "leader_global_rank_change": 39,
+      "follower_avg_global_rank_change": -152.5,
+      "leader_resilience_gap": 191.5,
+      "numeric_follower_count": 2
+    },
+    {
+      "entity": "Cyprus",
+      "leader_global_rank_change": 56,
+      "follower_avg_global_rank_change": -121.5,
+      "leader_resilience_gap": 177.5,
+      "numeric_follower_count": 2
+    },
+    {
+      "entity": "The Philippines",
+      "leader_global_rank_change": -13,
+      "follower_avg_global_rank_change": -189.6667,
+      "leader_resilience_gap": 176.6667,
+      "numeric_follower_count": 3
+    },
+    {
+      "entity": "Romania",
+      "leader_global_rank_change": 3,
+      "follower_avg_global_rank_change": -154.0,
+      "leader_resilience_gap": 157.0,
+      "numeric_follower_count": 3
+    },
+    {
+      "entity": "Saudi Arabia",
+      "leader_global_rank_change": -62,
+      "follower_avg_global_rank_change": -186.5,
+      "leader_resilience_gap": 124.5,
+      "numeric_follower_count": 2
+    }
+  ]
+}

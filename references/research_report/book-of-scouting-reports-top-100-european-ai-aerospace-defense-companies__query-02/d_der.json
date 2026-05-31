@@ -1,0 +1,753 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a bubble chart showing all companies with non-`N/A` `Commercial Maturity` and `Mosaic`, where the x-axis is `Commercial Maturity / 5`, the y-axis is `Mosaic / 1000`, bubble size is `Total raised` in `$M`, color encodes segment, and labels are shown only for the 12 companies with the largest positive gap between `Mosaic percentile rank` and `Total raised percentile rank`.",
+  "status": "completed",
+  "title": "Commercial maturity vs Mosaic with overperformer labels",
+  "chart_kind": "bubble",
+  "chart_type": "bubble chart",
+  "value_unit": "x: maturity share of 5; y: Mosaic share of 1000; bubble size: $M",
+  "sort_rule": "descending by rank_gap for labels",
+  "selection_rule": "all companies with non-missing maturity, mosaic, and total_raised_m; labels top 12 positive rank gaps",
+  "metadata": {
+    "x_field": "maturity_norm",
+    "y_field": "mosaic_norm",
+    "size_field": "total_raised_m",
+    "hue_field": "segment",
+    "label_field": "label",
+    "figsize": [
+      12,
+      8
+    ]
+  },
+  "records": [
+    {
+      "entity": "Sees.ai",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.786,
+      "total_raised_m": 5.1,
+      "rank_gap": 0.5308641975308641,
+      "label": "Sees.ai"
+    },
+    {
+      "entity": "Zaitra",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.66,
+      "total_raised_m": 1.9,
+      "rank_gap": 0.4197530864197532,
+      "label": "Zaitra"
+    },
+    {
+      "entity": "Meteomatics",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.821,
+      "total_raised_m": 13.9,
+      "rank_gap": 0.32098765432098764,
+      "label": "Meteomatics"
+    },
+    {
+      "entity": "Granta Autonomy",
+      "segment": "Defense",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.555,
+      "total_raised_m": 1.1,
+      "rank_gap": 0.24691358024691357,
+      "label": "Granta Autonomy"
+    },
+    {
+      "entity": "Roseman Labs",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.716,
+      "total_raised_m": 10.5,
+      "rank_gap": 0.23456790123456794,
+      "label": "Roseman Labs"
+    },
+    {
+      "entity": "Satim",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.63,
+      "total_raised_m": 3.7,
+      "rank_gap": 0.22839506172839502,
+      "label": "Satim"
+    },
+    {
+      "entity": "Involi",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.521,
+      "total_raised_m": 0.8,
+      "rank_gap": 0.20987654320987653,
+      "label": "Involi"
+    },
+    {
+      "entity": "Hive Robotics",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.2,
+      "mosaic_norm": 0.57,
+      "total_raised_m": 2.3,
+      "rank_gap": 0.18518518518518517,
+      "label": "Hive Robotics"
+    },
+    {
+      "entity": "LMO",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.464,
+      "total_raised_m": 0.1,
+      "rank_gap": 0.18518518518518517,
+      "label": "LMO"
+    },
+    {
+      "entity": "RigiTech",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.493,
+      "total_raised_m": 0.3,
+      "rank_gap": 0.18518518518518517,
+      "label": "RigiTech"
+    },
+    {
+      "entity": "Skyral",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.772,
+      "total_raised_m": 20.0,
+      "rank_gap": 0.18518518518518512,
+      "label": "Skyral"
+    },
+    {
+      "entity": "VRAI",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.698,
+      "total_raised_m": 10.7,
+      "rank_gap": 0.18518518518518512,
+      "label": "VRAI"
+    },
+    {
+      "entity": "Luna Robotics",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.532,
+      "total_raised_m": 1.3,
+      "rank_gap": 0.17901234567901234,
+      "label": ""
+    },
+    {
+      "entity": "Tencore",
+      "segment": "Defense",
+      "maturity_norm": 0.2,
+      "mosaic_norm": 0.594,
+      "total_raised_m": 3.7,
+      "rank_gap": 0.16666666666666663,
+      "label": ""
+    },
+    {
+      "entity": "Neuraspace",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.797,
+      "total_raised_m": 34.9,
+      "rank_gap": 0.16049382716049376,
+      "label": ""
+    },
+    {
+      "entity": "Blackswan Space",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.508,
+      "total_raised_m": 0.9,
+      "rank_gap": 0.15432098765432098,
+      "label": ""
+    },
+    {
+      "entity": "ARX Robotics",
+      "segment": "Defense",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.826,
+      "total_raised_m": 58.8,
+      "rank_gap": 0.14814814814814814,
+      "label": ""
+    },
+    {
+      "entity": "Alpine Eagle",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.691,
+      "total_raised_m": 11.0,
+      "rank_gap": 0.14814814814814814,
+      "label": ""
+    },
+    {
+      "entity": "Ubotica",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.606,
+      "total_raised_m": 4.2,
+      "rank_gap": 0.14814814814814814,
+      "label": ""
+    },
+    {
+      "entity": "sensmore",
+      "segment": "Defense",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.674,
+      "total_raised_m": 10.3,
+      "rank_gap": 0.14197530864197527,
+      "label": ""
+    },
+    {
+      "entity": "Voltrac",
+      "segment": "Defense",
+      "maturity_norm": 0.2,
+      "mosaic_norm": 0.55,
+      "total_raised_m": 2.4,
+      "rank_gap": 0.13580246913580246,
+      "label": ""
+    },
+    {
+      "entity": "Hammer",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.53,
+      "total_raised_m": 1.9,
+      "rank_gap": 0.12962962962962962,
+      "label": ""
+    },
+    {
+      "entity": "SwissDrones",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.66,
+      "total_raised_m": 10.0,
+      "rank_gap": 0.12345679012345684,
+      "label": ""
+    },
+    {
+      "entity": "Robin Radar",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.77,
+      "total_raised_m": 26.0,
+      "rank_gap": 0.12345679012345678,
+      "label": ""
+    },
+    {
+      "entity": "Maritime Robotics",
+      "segment": "Defense",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.68,
+      "total_raised_m": 12.0,
+      "rank_gap": 0.1049382716049383,
+      "label": ""
+    },
+    {
+      "entity": "Eoliann",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.622,
+      "total_raised_m": 6.4,
+      "rank_gap": 0.10493827160493824,
+      "label": ""
+    },
+    {
+      "entity": "OKAPI:Orbits",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.718,
+      "total_raised_m": 20.6,
+      "rank_gap": 0.09876543209876543,
+      "label": ""
+    },
+    {
+      "entity": "ORUS",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.2,
+      "mosaic_norm": 0.582,
+      "total_raised_m": 5.8,
+      "rank_gap": 0.08024691358024694,
+      "label": ""
+    },
+    {
+      "entity": "Voliro",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.68,
+      "total_raised_m": 13.0,
+      "rank_gap": 0.08024691358024694,
+      "label": ""
+    },
+    {
+      "entity": "Offset Labs",
+      "segment": "Defense",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.499,
+      "total_raised_m": 1.3,
+      "rank_gap": 0.06790123456790123,
+      "label": ""
+    },
+    {
+      "entity": "OroraTech",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.849,
+      "total_raised_m": 84.2,
+      "rank_gap": 0.06172839506172845,
+      "label": ""
+    },
+    {
+      "entity": "TEKEVER",
+      "segment": "Defense",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.882,
+      "total_raised_m": 96.3,
+      "rank_gap": 0.06172839506172845,
+      "label": ""
+    },
+    {
+      "entity": "AirDodge",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.44,
+      "total_raised_m": 0.7,
+      "rank_gap": 0.05555555555555555,
+      "label": ""
+    },
+    {
+      "entity": "Wingtra",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.792,
+      "total_raised_m": 63.1,
+      "rank_gap": 0.03703703703703709,
+      "label": ""
+    },
+    {
+      "entity": "Bright Ascension",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.569,
+      "total_raised_m": 5.9,
+      "rank_gap": 0.037037037037037035,
+      "label": ""
+    },
+    {
+      "entity": "Storming Universe",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.441,
+      "total_raised_m": 0.8,
+      "rank_gap": 0.037037037037037035,
+      "label": ""
+    },
+    {
+      "entity": "Swarm Biotactics",
+      "segment": "Defense",
+      "maturity_norm": 0.2,
+      "mosaic_norm": 0.674,
+      "total_raised_m": 15.1,
+      "rank_gap": 0.030864197530864224,
+      "label": ""
+    },
+    {
+      "entity": "Deftak",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.431,
+      "total_raised_m": 0.7,
+      "rank_gap": 0.030864197530864196,
+      "label": ""
+    },
+    {
+      "entity": "LiveEO",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.779,
+      "total_raised_m": 62.5,
+      "rank_gap": 0.024691358024691357,
+      "label": ""
+    },
+    {
+      "entity": "askEarth",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.514,
+      "total_raised_m": 3.2,
+      "rank_gap": 0.024691358024691357,
+      "label": ""
+    },
+    {
+      "entity": "FloFleet",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.444,
+      "total_raised_m": 0.9,
+      "rank_gap": 0.018518518518518517,
+      "label": ""
+    },
+    {
+      "entity": "FOSSA Systems",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.582,
+      "total_raised_m": 6.8,
+      "rank_gap": 0.012345679012345678,
+      "label": ""
+    },
+    {
+      "entity": "Quantum Systems",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.891,
+      "total_raised_m": 350.5,
+      "rank_gap": 0.012345679012345623,
+      "label": ""
+    },
+    {
+      "entity": "Helsing",
+      "segment": "Defense",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.927,
+      "total_raised_m": 1500.0,
+      "rank_gap": 0.0,
+      "label": ""
+    },
+    {
+      "entity": "Oinride",
+      "segment": "Defense",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.396,
+      "total_raised_m": 0.6,
+      "rank_gap": 0.0,
+      "label": ""
+    },
+    {
+      "entity": "AIKO",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.549,
+      "total_raised_m": 6.2,
+      "rank_gap": -0.012345679012345678,
+      "label": ""
+    },
+    {
+      "entity": "Skyfora",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.585,
+      "total_raised_m": 8.0,
+      "rank_gap": -0.012345679012345678,
+      "label": ""
+    },
+    {
+      "entity": "Comand AI",
+      "segment": "Defense",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.649,
+      "total_raised_m": 12.2,
+      "rank_gap": -0.024691358024691357,
+      "label": ""
+    },
+    {
+      "entity": "Fotokite",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.681,
+      "total_raised_m": 27.1,
+      "rank_gap": -0.024691358024691357,
+      "label": ""
+    },
+    {
+      "entity": "ICEYE",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 1.0,
+      "mosaic_norm": 0.88,
+      "total_raised_m": 516.9,
+      "rank_gap": -0.024691358024691357,
+      "label": ""
+    },
+    {
+      "entity": "Senhive",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.415,
+      "total_raised_m": 0.8,
+      "rank_gap": -0.024691358024691357,
+      "label": ""
+    },
+    {
+      "entity": "ReOrbit",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.727,
+      "total_raised_m": 60.2,
+      "rank_gap": -0.030864197530864224,
+      "label": ""
+    },
+    {
+      "entity": "Unmanned Defense Systems",
+      "segment": "Defense",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.5,
+      "total_raised_m": 3.6,
+      "rank_gap": -0.037037037037037035,
+      "label": ""
+    },
+    {
+      "entity": "Varjo",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.804,
+      "total_raised_m": 171.7,
+      "rank_gap": -0.03703703703703709,
+      "label": ""
+    },
+    {
+      "entity": "D-Orbit",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 1.0,
+      "mosaic_norm": 0.799,
+      "total_raised_m": 256.8,
+      "rank_gap": -0.061728395061728336,
+      "label": ""
+    },
+    {
+      "entity": "Manna",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.763,
+      "total_raised_m": 64.2,
+      "rank_gap": -0.06172839506172845,
+      "label": ""
+    },
+    {
+      "entity": "Craft Prospect",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.457,
+      "total_raised_m": 3.1,
+      "rank_gap": -0.07407407407407407,
+      "label": ""
+    },
+    {
+      "entity": "Flybotix",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.65,
+      "total_raised_m": 18.0,
+      "rank_gap": -0.07407407407407407,
+      "label": ""
+    },
+    {
+      "entity": "Lendurai",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.2,
+      "mosaic_norm": 0.526,
+      "total_raised_m": 6.4,
+      "rank_gap": -0.08024691358024694,
+      "label": ""
+    },
+    {
+      "entity": "Dronamics",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.767,
+      "total_raised_m": 91.3,
+      "rank_gap": -0.09876543209876543,
+      "label": ""
+    },
+    {
+      "entity": "Wingcopter",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.768,
+      "total_raised_m": 107.7,
+      "rank_gap": -0.11111111111111116,
+      "label": ""
+    },
+    {
+      "entity": "Flyability",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.662,
+      "total_raised_m": 42.9,
+      "rank_gap": -0.1358024691358024,
+      "label": ""
+    },
+    {
+      "entity": "Hadean",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.7,
+      "total_raised_m": 65.7,
+      "rank_gap": -0.1358024691358024,
+      "label": ""
+    },
+    {
+      "entity": "Atlas",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.43,
+      "total_raised_m": 2.0,
+      "rank_gap": -0.13580246913580246,
+      "label": ""
+    },
+    {
+      "entity": "Mitiga Solutions",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.645,
+      "total_raised_m": 24.5,
+      "rank_gap": -0.13580246913580252,
+      "label": ""
+    },
+    {
+      "entity": "Verity",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.701,
+      "total_raised_m": 69.4,
+      "rank_gap": -0.13580246913580252,
+      "label": ""
+    },
+    {
+      "entity": "Drone Geofencing",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.384,
+      "total_raised_m": 1.5,
+      "rank_gap": -0.14814814814814814,
+      "label": ""
+    },
+    {
+      "entity": "Altitude Angel",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.62,
+      "total_raised_m": 15.8,
+      "rank_gap": -0.1481481481481482,
+      "label": ""
+    },
+    {
+      "entity": "Blackshark.ai",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.653,
+      "total_raised_m": 35.0,
+      "rank_gap": -0.16049382716049376,
+      "label": ""
+    },
+    {
+      "entity": "Overstory",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.629,
+      "total_raised_m": 24.9,
+      "rank_gap": -0.18518518518518512,
+      "label": ""
+    },
+    {
+      "entity": "Shark Robotics",
+      "segment": "Defense",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.534,
+      "total_raised_m": 10.9,
+      "rank_gap": -0.19753086419753085,
+      "label": ""
+    },
+    {
+      "entity": "Elistair",
+      "segment": "Defense",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.504,
+      "total_raised_m": 8.4,
+      "rank_gap": -0.20987654320987653,
+      "label": ""
+    },
+    {
+      "entity": "Look Up",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.659,
+      "total_raised_m": 60.2,
+      "rank_gap": -0.21604938271604945,
+      "label": ""
+    },
+    {
+      "entity": "Donecle",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.457,
+      "total_raised_m": 7.4,
+      "rank_gap": -0.25925925925925924,
+      "label": ""
+    },
+    {
+      "entity": "Ascento",
+      "segment": "Defense",
+      "maturity_norm": 0.4,
+      "mosaic_norm": 0.457,
+      "total_raised_m": 7.9,
+      "rank_gap": -0.2716049382716049,
+      "label": ""
+    },
+    {
+      "entity": "Tinamu Labs",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.372,
+      "total_raised_m": 3.9,
+      "rank_gap": -0.2962962962962963,
+      "label": ""
+    },
+    {
+      "entity": "Picterra",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.446,
+      "total_raised_m": 10.0,
+      "rank_gap": -0.3395061728395062,
+      "label": ""
+    },
+    {
+      "entity": "Perceptual Robotics",
+      "segment": "Aerospace (commercial)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.403,
+      "total_raised_m": 6.8,
+      "rank_gap": -0.36419753086419754,
+      "label": ""
+    },
+    {
+      "entity": "Unseenlabs",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.631,
+      "total_raised_m": 125.4,
+      "rank_gap": -0.40740740740740733,
+      "label": ""
+    },
+    {
+      "entity": "Azur Drones",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.8,
+      "mosaic_norm": 0.503,
+      "total_raised_m": 36.3,
+      "rank_gap": -0.5061728395061729,
+      "label": ""
+    },
+    {
+      "entity": "Destinus",
+      "segment": "Aerospace (dual-use)",
+      "maturity_norm": 0.6,
+      "mosaic_norm": 0.436,
+      "total_raised_m": 57.2,
+      "rank_gap": -0.6790123456790124,
+      "label": ""
+    }
+  ]
+}

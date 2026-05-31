@@ -1,0 +1,109 @@
+{
+  "query_id": "query_04",
+  "query_text": "Create a scatter plot for the 15 countries with the highest listed top-10 city-score total in the 2023 country tables, with `x = sum(score ranks 1-10)`, `y = share of listed cities that fall inside the global top 100`, bubble size equal to the median listed city score, values expressed as score points and percentages, and country labels shown for all plotted points.",
+  "status": "complete",
+  "chart_type": "scatter",
+  "title": "2023 Country Scale vs Top-100 Breadth",
+  "value_unit": "mixed",
+  "sort_rule": "descending by listed_top10_score_total, tie-break alphabetically",
+  "selection_rule": "top 15 countries by listed top-10 city-score total",
+  "records": [
+    {
+      "entity": "United States",
+      "listed_top10_score_total": 1206.71,
+      "top100_city_share_pct": 100.0,
+      "median_listed_city_score": 43.27
+    },
+    {
+      "entity": "China",
+      "listed_top10_score_total": 285.0,
+      "top100_city_share_pct": 80.0,
+      "median_listed_city_score": 17.24
+    },
+    {
+      "entity": "United Kingdom",
+      "listed_top10_score_total": 179.49,
+      "top100_city_share_pct": 40.0,
+      "median_listed_city_score": 6.555
+    },
+    {
+      "entity": "India",
+      "listed_top10_score_total": 171.94,
+      "top100_city_share_pct": 50.0,
+      "median_listed_city_score": 7.535
+    },
+    {
+      "entity": "Canada",
+      "listed_top10_score_total": 105.67,
+      "top100_city_share_pct": 50.0,
+      "median_listed_city_score": 7.45
+    },
+    {
+      "entity": "Germany",
+      "listed_top10_score_total": 101.93,
+      "top100_city_share_pct": 30.0,
+      "median_listed_city_score": 3.9
+    },
+    {
+      "entity": "France",
+      "listed_top10_score_total": 82.3,
+      "top100_city_share_pct": 10.0,
+      "median_listed_city_score": 2.465
+    },
+    {
+      "entity": "Israel",
+      "listed_top10_score_total": 75.75,
+      "top100_city_share_pct": 20.0,
+      "median_listed_city_score": 1.035
+    },
+    {
+      "entity": "Japan",
+      "listed_top10_score_total": 58.61,
+      "top100_city_share_pct": 10.0,
+      "median_listed_city_score": 0.865
+    },
+    {
+      "entity": "Brazil",
+      "listed_top10_score_total": 53.7,
+      "top100_city_share_pct": 10.0,
+      "median_listed_city_score": 1.915
+    },
+    {
+      "entity": "Australia",
+      "listed_top10_score_total": 52.82,
+      "top100_city_share_pct": 30.0,
+      "median_listed_city_score": 2.095
+    },
+    {
+      "entity": "The Netherlands",
+      "listed_top10_score_total": 48.05,
+      "top100_city_share_pct": 10.0,
+      "median_listed_city_score": 2.645
+    },
+    {
+      "entity": "Sweden",
+      "listed_top10_score_total": 46.66,
+      "top100_city_share_pct": 10.0,
+      "median_listed_city_score": 0.935
+    },
+    {
+      "entity": "Spain",
+      "listed_top10_score_total": 41.47,
+      "top100_city_share_pct": 20.0,
+      "median_listed_city_score": 1.1
+    },
+    {
+      "entity": "Switzerland",
+      "listed_top10_score_total": 39.69,
+      "top100_city_share_pct": 10.0,
+      "median_listed_city_score": 3.43
+    }
+  ],
+  "x_field": "listed_top10_score_total",
+  "y_field": "top100_city_share_pct",
+  "size_field": "median_listed_city_score",
+  "x_label": "Sum of listed city scores",
+  "y_label": "Share of listed cities in global top 100 (%)",
+  "size_label": "Median listed city score",
+  "annotate_all": true
+}

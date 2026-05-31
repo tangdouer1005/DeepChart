@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AbbVie ROIC (2016–2024) Line Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Latest stable Chart.js (no integrity) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f8;
+      color: #1f2933;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #6b7280;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 18px 18px 8px 18px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
+    /* Important: give the chart a height so maintainAspectRatio: false works */
+    .chart-wrapper {
+      position: relative;
+      height: 480px;
+    }
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0 auto;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>AbbVie 投入资本回报率 (ROIC)</h1>
+    <h2>2016 – 2024</h2>
+    <div class="chart-wrapper">
+      <canvas id="roicChart"></canvas>
+    </div>
+  </div>
+  <div class="note">
+    数据来源：用户提供的 AbbVie ROIC（Return on Invested Capital）年度数据，单位：百分比。
+  </div>
+
+  <script>
+    // Ensure code runs after the DOM is ready
+    document.addEventListener("DOMContentLoaded", function () {
+      const canvas = document.getElementById("roicChart");
+      if (!canvas) {
+        console.error("Canvas element with id 'roicChart' not found.");
+        return;
+      }
+      const ctx = canvas.getContext("2d");
+
+      const years = [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ];
+
+      // Source data (ROIC as proportions)
+      const roicRaw = [
+        0.221790616027692,
+        0.188613622049744,
+        0.2002590295609977,
+        0.5621677343020484,
+        0.1327959138068086,
+        0.1838355874045878,
+        0.2067749461163351,
+        0.1549026679437163,
+        0.1269399846341908
+      ];
+
+      // Convert to percentage for display
+      const roicPercent = roicRaw.map(v => v * 100);
+
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "投入资本回报率 (ROIC)",
+              data: roicPercent,
+              borderColor: "rgba(37, 99, 235, 1)",
+              backgroundColor: "rgba(37, 99, 235, 0.12)",
+              pointBackgroundColor: "rgba(37, 99, 235, 1)",
+              pointHoverBackgroundColor: "#ffffff",
+              pointBorderColor: "#ffffff",
+              pointHoverBorderColor: "rgba(37, 99, 235, 1)",
+              borderWidth: 2.3,
+              tension: 0.3,
+              fill: true,
+              pointRadius: 4,
+              pointHoverRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: "nearest",
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                usePointStyle: true,
+                boxWidth: 8,
+                padding: 16
+              }
+            },
+            tooltip: {
+              backgroundColor: "rgba(15, 23, 42, 0.95)",
+              titleFont: { size: 12, weight: "600" },
+              bodyFont: { size: 12 },
+              padding: 10,
+              cornerRadius: 6,
+              callbacks: {
+                label: function (context) {
+                  const value = context.raw;
+                  return " ROIC: " + value.toFixed(2) + "%";
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                maxRotation: 0
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "ROIC (%)",
+                font: { size: 12 }
+              },
+              ticks: {
+                callback: function (value) {
+                  return value.toFixed(0) + "%";
+                }
+              },
+              grid: {
+                color: "rgba(148, 163, 184, 0.25)"
+              },
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+{
+    "data_records": [
+        {
+            "Group": "Vehicle",
+            "Value": 1.67691414
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.85776341
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.85776341
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 1.52754235
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.79955316
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.98719009
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.5492265
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.90853999
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 1.4973423
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.33816465
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.91338701
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 1.08661299
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 1.3186889
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.72344104
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.633546
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 1.23962408
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.7431799
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 1.46442985
+        },
+        {
+            "Group": "Vehicle",
+            "Value": 0.87709022
+        },
+        {
+            "Group": "icFSP1",
+            "Value": 0.63799637
+        },
+        {
+            "Group": "icFSP1",
+            "Value": 0.9680146
+        },
+        {
+            "Group": "icFSP1",
+            "Value": 0.82384558
+        },
+        {
+            "Group": "icFSP1",
+            "Value": 1.06462968
+        },
+        {
+            "Group": "icFSP1",
+            "Value": 0.21999558
+        },
+        {
+            "Group": "icFSP1",
+            "Value": 0.57015749
+        },
+        {
+            "Group": "icFSP1",
+            "Value": 1.46761419
+        },
+        {
+            "Group": "icFSP1",
+            "Value": 0.65525489
+        },
+        {
+            "Group": "viFSP1",
+            "Value": 0.414588
+        },
+        {
+            "Group": "viFSP1",
+            "Value": 0.11516141
+        },
+        {
+            "Group": "viFSP1",
+            "Value": 0.86840956
+        },
+        {
+            "Group": "viFSP1",
+            "Value": 0.15949909
+        },
+        {
+            "Group": "viFSP1",
+            "Value": 0.07711164
+        },
+        {
+            "Group": "viFSP1",
+            "Value": 0.61260379
+        },
+        {
+            "Group": "viFSP1",
+            "Value": 0.72365508
+        },
+        {
+            "Group": "viFSP1",
+            "Value": 0.59192079
+        },
+        {
+            "Group": "viFSP1",
+            "Value": 0.70135255
+        },
+        {
+            "Group": "viFSP1",
+            "Value": 0.62916065
+        },
+        {
+            "Group": "BSO",
+            "Value": 0.661774471
+        },
+        {
+            "Group": "BSO",
+            "Value": 1.4176097
+        },
+        {
+            "Group": "BSO",
+            "Value": 0.323789802
+        },
+        {
+            "Group": "BSO",
+            "Value": 1.406779054
+        },
+        {
+            "Group": "BSO",
+            "Value": 1.597920275
+        },
+        {
+            "Group": "BSO",
+            "Value": 1.487901399
+        },
+        {
+            "Group": "BSO",
+            "Value": 1.107086638
+        },
+        {
+            "Group": "BSO",
+            "Value": 1.572788207
+        },
+        {
+            "Group": "BSO",
+            "Value": 0.791496725
+        },
+        {
+            "Group": "BSO",
+            "Value": 0.879682758
+        },
+        {
+            "Group": "BSO",
+            "Value": 0.779937778
+        },
+        {
+            "Group": "BSO",
+            "Value": 0.924634707
+        },
+        {
+            "Group": "BSO",
+            "Value": 0.716008452
+        },
+        {
+            "Group": "BSO",
+            "Value": 1.334819278
+        },
+        {
+            "Group": "icFSP1 + BSO",
+            "Value": 1.48194219
+        },
+        {
+            "Group": "icFSP1 + BSO",
+            "Value": 0.91662165
+        },
+        {
+            "Group": "icFSP1 + BSO",
+            "Value": 0.14804192
+        },
+        {
+            "Group": "icFSP1 + BSO",
+            "Value": 0.83834204
+        },
+        {
+            "Group": "icFSP1 + BSO",
+            "Value": 0.80823838
+        },
+        {
+            "Group": "icFSP1 + BSO",
+            "Value": 0.57720985
+        },
+        {
+            "Group": "icFSP1 + BSO",
+            "Value": 0.76833597
+        },
+        {
+            "Group": "icFSP1 + BSO",
+            "Value": 0.72874142
+        },
+        {
+            "Group": "viFSP1 + BSO",
+            "Value": 0.17624038
+        },
+        {
+            "Group": "viFSP1 + BSO",
+            "Value": 0.29652135
+        },
+        {
+            "Group": "viFSP1 + BSO",
+            "Value": 0.2772585
+        },
+        {
+            "Group": "viFSP1 + BSO",
+            "Value": 1.12237907
+        },
+        {
+            "Group": "viFSP1 + BSO",
+            "Value": 1.13213888
+        },
+        {
+            "Group": "viFSP1 + BSO",
+            "Value": 0.76512095
+        },
+        {
+            "Group": "viFSP1 + BSO",
+            "Value": 0.51511285
+        },
+        {
+            "Group": "viFSP1 + BSO",
+            "Value": 0.71736243
+        },
+        {
+            "Group": "viFSP1 + BSO",
+            "Value": 0.6371418
+        },
+        {
+            "Group": "viFSP1 + BSO",
+            "Value": 0.54660466
+        }
+    ],
+    "annotations": [
+        [
+            0,
+            1,
+            1.75,
+            "0.7767"
+        ],
+        [
+            3,
+            4,
+            1.75,
+            "0.4194"
+        ],
+        [
+            0,
+            2,
+            1.95,
+            "0.0038"
+        ],
+        [
+            3,
+            5,
+            1.95,
+            "0.0232"
+        ],
+        [
+            0,
+            3,
+            2.15,
+            "0.9974"
+        ],
+        [
+            0,
+            4,
+            2.35,
+            "0.6975"
+        ],
+        [
+            0,
+            5,
+            2.55,
+            "0.0573"
+        ]
+    ]
+}

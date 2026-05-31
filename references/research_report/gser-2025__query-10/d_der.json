@@ -1,0 +1,321 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a scatter plot for ecosystems with at least `1 Unicorn` and non-missing round data, where the x-axis is `Median Series A Round / Median Seed Round` in `x multiple`, the y-axis is `Ecosystem Value / Number of Unicorns` in `$B per unicorn`, and label the 12 ecosystems with the greatest positive deviation above the best-fit relationship after deriving both metrics.",
+  "chart_type": "scatter plot",
+  "value_unit": "x multiple / $B per unicorn",
+  "sort_rule": "labels assigned to top 12 by positive residual above best fit",
+  "selection_rule": "all ecosystems with at least 1 unicorn and round data",
+  "plot_spec": {
+    "title": "2025 Stage Multiple vs Value per Unicorn",
+    "x_field": "x_stage_multiple",
+    "y_field": "y_value_per_unicorn_busd",
+    "xlabel": "Median Series A / Median Seed (x)",
+    "ylabel": "Ecosystem Value / Unicorns ($B per unicorn)"
+  },
+  "records": [
+    {
+      "entity": "Beijing",
+      "x_stage_multiple": 2.5172,
+      "y_value_per_unicorn_busd": 8.7377,
+      "best_fit_y": 5.5011,
+      "positive_residual": 3.2366,
+      "label": true
+    },
+    {
+      "entity": "North Rhine-Westphalia",
+      "x_stage_multiple": 4.5385,
+      "y_value_per_unicorn_busd": 12.5,
+      "best_fit_y": 5.4557,
+      "positive_residual": 7.0443,
+      "label": true
+    },
+    {
+      "entity": "Boston",
+      "x_stage_multiple": 5.0,
+      "y_value_per_unicorn_busd": 4.3636,
+      "best_fit_y": 5.4454,
+      "positive_residual": -1.0817,
+      "label": false
+    },
+    {
+      "entity": "Bengaluru-Karnataka",
+      "x_stage_multiple": 8.6667,
+      "y_value_per_unicorn_busd": 4.25,
+      "best_fit_y": 5.363,
+      "positive_residual": -1.113,
+      "label": false
+    },
+    {
+      "entity": "Paris",
+      "x_stage_multiple": 4.7059,
+      "y_value_per_unicorn_busd": 3.9211,
+      "best_fit_y": 5.452,
+      "positive_residual": -1.5309,
+      "label": false
+    },
+    {
+      "entity": "Calgary",
+      "x_stage_multiple": 3.3846,
+      "y_value_per_unicorn_busd": 3.35,
+      "best_fit_y": 5.4816,
+      "positive_residual": -2.1316,
+      "label": false
+    },
+    {
+      "entity": "Hong Kong",
+      "x_stage_multiple": 6.1333,
+      "y_value_per_unicorn_busd": 3.9,
+      "best_fit_y": 5.4199,
+      "positive_residual": -1.5199,
+      "label": false
+    },
+    {
+      "entity": "Porto",
+      "x_stage_multiple": 6.4,
+      "y_value_per_unicorn_busd": 3.75,
+      "best_fit_y": 5.4139,
+      "positive_residual": -1.6639,
+      "label": false
+    },
+    {
+      "entity": "Kerala",
+      "x_stage_multiple": 10.0,
+      "y_value_per_unicorn_busd": 1.5,
+      "best_fit_y": 5.3331,
+      "positive_residual": -3.8331,
+      "label": false
+    },
+    {
+      "entity": "Los Angeles",
+      "x_stage_multiple": 5.5556,
+      "y_value_per_unicorn_busd": 8.5556,
+      "best_fit_y": 5.4329,
+      "positive_residual": 3.1227,
+      "label": true
+    },
+    {
+      "entity": "Kuala Lumpur",
+      "x_stage_multiple": 10.3797,
+      "y_value_per_unicorn_busd": 4.8,
+      "best_fit_y": 5.3246,
+      "positive_residual": -0.5246,
+      "label": false
+    },
+    {
+      "entity": "Turin",
+      "x_stage_multiple": 8.2742,
+      "y_value_per_unicorn_busd": 3.0,
+      "best_fit_y": 5.3718,
+      "positive_residual": -2.3718,
+      "label": false
+    },
+    {
+      "entity": "Manila",
+      "x_stage_multiple": 13.1818,
+      "y_value_per_unicorn_busd": 6.3,
+      "best_fit_y": 5.2616,
+      "positive_residual": 1.0384,
+      "label": true
+    },
+    {
+      "entity": "New York City",
+      "x_stage_multiple": 5.4,
+      "y_value_per_unicorn_busd": 4.14,
+      "best_fit_y": 5.4364,
+      "positive_residual": -1.2964,
+      "label": false
+    },
+    {
+      "entity": "Seoul",
+      "x_stage_multiple": 4.881,
+      "y_value_per_unicorn_busd": 9.5,
+      "best_fit_y": 5.448,
+      "positive_residual": 4.052,
+      "label": true
+    },
+    {
+      "entity": "Philadelphia",
+      "x_stage_multiple": 7.4684,
+      "y_value_per_unicorn_busd": 8.4444,
+      "best_fit_y": 5.3899,
+      "positive_residual": 3.0545,
+      "label": true
+    },
+    {
+      "entity": "Shanghai",
+      "x_stage_multiple": 4.7793,
+      "y_value_per_unicorn_busd": 4.525,
+      "best_fit_y": 5.4503,
+      "positive_residual": -0.9253,
+      "label": false
+    },
+    {
+      "entity": "Silicon Valley",
+      "x_stage_multiple": 5.7143,
+      "y_value_per_unicorn_busd": 5.3412,
+      "best_fit_y": 5.4293,
+      "positive_residual": -0.0881,
+      "label": false
+    },
+    {
+      "entity": "Shenzhen",
+      "x_stage_multiple": 1.6897,
+      "y_value_per_unicorn_busd": 6.1053,
+      "best_fit_y": 5.5197,
+      "positive_residual": 0.5856,
+      "label": false
+    },
+    {
+      "entity": "Singapore",
+      "x_stage_multiple": 4.2857,
+      "y_value_per_unicorn_busd": 7.2,
+      "best_fit_y": 5.4614,
+      "positive_residual": 1.7386,
+      "label": true
+    },
+    {
+      "entity": "Tamil Nadu",
+      "x_stage_multiple": 17.8707,
+      "y_value_per_unicorn_busd": 6.15,
+      "best_fit_y": 5.1563,
+      "positive_residual": 0.9937,
+      "label": true
+    },
+    {
+      "entity": "Mexico City",
+      "x_stage_multiple": 13.8571,
+      "y_value_per_unicorn_busd": 3.625,
+      "best_fit_y": 5.2465,
+      "positive_residual": -1.6215,
+      "label": false
+    },
+    {
+      "entity": "Brisbane",
+      "x_stage_multiple": 25.0,
+      "y_value_per_unicorn_busd": 4.7,
+      "best_fit_y": 4.9962,
+      "positive_residual": -0.2962,
+      "label": false
+    },
+    {
+      "entity": "Telangana",
+      "x_stage_multiple": 14.6,
+      "y_value_per_unicorn_busd": 5.7,
+      "best_fit_y": 5.2298,
+      "positive_residual": 0.4702,
+      "label": false
+    },
+    {
+      "entity": "Melbourne",
+      "x_stage_multiple": 6.25,
+      "y_value_per_unicorn_busd": 6.0,
+      "best_fit_y": 5.4173,
+      "positive_residual": 0.5827,
+      "label": false
+    },
+    {
+      "entity": "Tokyo",
+      "x_stage_multiple": 2.8571,
+      "y_value_per_unicorn_busd": 8.5,
+      "best_fit_y": 5.4935,
+      "positive_residual": 3.0065,
+      "label": true
+    },
+    {
+      "entity": "Sydney",
+      "x_stage_multiple": 10.7527,
+      "y_value_per_unicorn_busd": 7.8571,
+      "best_fit_y": 5.3162,
+      "positive_residual": 2.541,
+      "label": true
+    },
+    {
+      "entity": "Abu Dhabi",
+      "x_stage_multiple": 11.1111,
+      "y_value_per_unicorn_busd": 2.2,
+      "best_fit_y": 5.3081,
+      "positive_residual": -3.1081,
+      "label": false
+    },
+    {
+      "entity": "Lagos",
+      "x_stage_multiple": 34.3158,
+      "y_value_per_unicorn_busd": 3.2667,
+      "best_fit_y": 4.7871,
+      "positive_residual": -1.5204,
+      "label": false
+    },
+    {
+      "entity": "Berlin",
+      "x_stage_multiple": 6.0,
+      "y_value_per_unicorn_busd": 3.815,
+      "best_fit_y": 5.4229,
+      "positive_residual": -1.6079,
+      "label": false
+    },
+    {
+      "entity": "Nairobi",
+      "x_stage_multiple": 82.8571,
+      "y_value_per_unicorn_busd": 5.1,
+      "best_fit_y": 3.697,
+      "positive_residual": 1.403,
+      "label": true
+    },
+    {
+      "entity": "Riyadh",
+      "x_stage_multiple": 6.1538,
+      "y_value_per_unicorn_busd": 3.3333,
+      "best_fit_y": 5.4195,
+      "positive_residual": -2.0861,
+      "label": false
+    },
+    {
+      "entity": "Greater Lausanne Region",
+      "x_stage_multiple": 9.6545,
+      "y_value_per_unicorn_busd": 3.95,
+      "best_fit_y": 5.3408,
+      "positive_residual": -1.3908,
+      "label": false
+    },
+    {
+      "entity": "Istanbul",
+      "x_stage_multiple": 4.1068,
+      "y_value_per_unicorn_busd": 6.45,
+      "best_fit_y": 5.4654,
+      "positive_residual": 0.9846,
+      "label": true
+    },
+    {
+      "entity": "Tel Aviv",
+      "x_stage_multiple": 3.7,
+      "y_value_per_unicorn_busd": 3.7358,
+      "best_fit_y": 5.4746,
+      "positive_residual": -1.7387,
+      "label": false
+    },
+    {
+      "entity": "London",
+      "x_stage_multiple": 8.8,
+      "y_value_per_unicorn_busd": 5.1045,
+      "best_fit_y": 5.36,
+      "positive_residual": -0.2556,
+      "label": false
+    },
+    {
+      "entity": "São Paulo",
+      "x_stage_multiple": 9.6296,
+      "y_value_per_unicorn_busd": 3.1875,
+      "best_fit_y": 5.3414,
+      "positive_residual": -2.1539,
+      "label": false
+    },
+    {
+      "entity": "Montréal",
+      "x_stage_multiple": 7.2667,
+      "y_value_per_unicorn_busd": 5.4,
+      "best_fit_y": 5.3945,
+      "positive_residual": 0.0055,
+      "label": false
+    }
+  ]
+}

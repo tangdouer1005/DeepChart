@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JNJ Altman Z-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --axis: #6b7280;
+      --grid: #e5e7eb;
+      --bar: #2563eb;
+      --bar-hover: #1d4ed8;
+      --border: #1d4ed8;
+      --tooltip-bg: rgba(17, 24, 39, 0.9);
+      --tooltip-fg: #f9fafb;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --axis: #9ca3af;
+        --grid: #1f2937;
+        --bar: #38bdf8;
+        --bar-hover: #0ea5e9;
+        --border: #0ea5e9;
+        --tooltip-bg: rgba(15, 23, 42, 0.95);
+        --tooltip-fg: #f9fafb;
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #eff6ff, var(--bg) 55%);
+      color: var(--fg);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 1.5rem 1.75rem 1.75rem;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.16),
+        0 0 0 1px rgba(148, 163, 184, 0.25);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .container {
+        background-color: rgba(15, 23, 42, 0.92);
+      }
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--axis);
+      margin-bottom: 1.25rem;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 440px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      font-size: 0.85rem;
+      color: var(--axis);
+      margin-top: 0.9rem;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      background: var(--bar);
+      border: 1px solid rgba(15, 23, 42, 0.15);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .legend-swatch {
+        border-color: rgba(148, 163, 184, 0.5);
+      }
+    }
+
+    .note {
+      margin-top: 0.65rem;
+      font-size: 0.78rem;
+      color: var(--axis);
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JNJ 奥特曼破产预测模型 (Altman Z-Score)</h1>
+    <div class="subtitle">Fiscal years 2016–2024 · Bar chart · Interactive</div>
+
+    <div class="chart-wrapper">
+      <canvas id="zScoreChart" aria-label="JNJ Altman Z-Score from 2016 to 2024" role="img"></canvas>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <span class="legend-swatch"></span>
+        <span>年度 Altman Z-Score（越高代表破产风险越低）</span>
+      </div>
+    </div>
+
+    <div class="note">
+      数据来源：提供的 JNJ 2016–2024 财年奥特曼 Z-Score 数据。<br />
+      提示：将鼠标悬停在柱状上可查看精确数值，拖拽放大查看局部区间。
+    </div>
+  </div>
+
+  <script>
+    // Source data
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const zScores = [
+      3.0194838317335293,
+      2.255719901063855,
+      2.4632241092485314,
+      2.3751929836197903,
+      2.1563510574029348,
+      2.2739281040849564,
+      2.1693968509854837,
+      2.693411339509075,
+      2.5420503460954365
+    ];
+
+    const ctx = document.getElementById("zScoreChart").getContext("2d");
+
+    // Plugin: custom tooltip background styling
+    const customTooltip = {
+      id: "customTooltip",
+      beforeRender: (chart, args, options) => {
+        // No-op; styling is handled via callbacks in options
+      }
+    };
+
+    const zScoreChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "Altman Z-Score",
+            data: zScores,
+            backgroundColor: (context) => {
+              const { chart, dataIndex } = context;
+              const hovered =
+                chart.getActiveElements().length &&
+                chart.getActiveElements()[0].index === dataIndex;
+              const base = hovered ? getComputedStyle(document.documentElement)
+                .getPropertyValue("--bar-hover")
+                : getComputedStyle(document.documentElement)
+                .getPropertyValue("--bar");
+              return base.trim();
+            },
+            borderColor: () =>
+              getComputedStyle(document.documentElement)
+                .getPropertyValue("--border")
+                .trim(),
+            borderWidth: 1.3,
+            borderRadius: 5,
+            hoverBorderWidth: 1.6
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 900,
+          easing: "easeOutQuart"
+        },
+        plugins: {
+          tooltip: {
+            backgroundColor: () =>
+              getComputedStyle(document.documentElement)
+                .getPropertyValue("--tooltip-bg")
+                .trim(),
+            titleColor: () =>
+              getComputedStyle(document.documentElement)
+                .getPropertyValue("--tooltip-fg")
+                .trim(),
+            bodyColor: () =>
+              getComputedStyle(document.documentElement)
+                .getPropertyValue("--tooltip-fg")
+                .trim(),
+            borderWidth: 0,
+            padding: 10,
+            cornerRadius: 8,
+            displayColors: false,
+            callbacks: {
+              title: (items) => {
+                const item = items[0];
+                return `Fiscal Year ${item.label}`;
+              },
+              label: (item) => {
+                const value = item.raw;
+                return `Altman Z-Score: ${value.toFixed(3)}`;
+              }
+            }
+          },
+          legend: {
+            display: false
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: () =>
+                getComputedStyle(document.documentElement)
+                  .getPropertyValue("--axis")
+                  .trim()
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: 1.5,
+            suggestedMax: 3.2,
+            title: {
+              display: true,
+              text: "Altman Z-Score",
+              color: () =>
+                getComputedStyle(document.documentElement)
+                  .getPropertyValue("--axis")
+                  .trim(),
+              font: {
+                size: 11.5,
+                weight: "500"
+              }
+            },
+            ticks: {
+              color: () =>
+                getComputedStyle(document.documentElement)
+                  .getPropertyValue("--axis")
+                  .trim(),
+              callback: (value) => value.toFixed(1)
+            },
+            grid: {
+              color: () =>
+                getComputedStyle(document.documentElement)
+                  .getPropertyValue("--grid")
+                  .trim()
+            }
+          }
+        },
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: true
+        }
+      },
+      plugins: [customTooltip]
+    });
+
+    // Simple drag-to-zoom using native Chart.js functionality (4.x)
+    // We'll implement a minimal wheel zoom for usability.
+    (function enableWheelZoom(chart) {
+      const canvas = chart.canvas;
+      let scaleFactor = 1;
+
+      canvas.addEventListener("wheel", (event) => {
+        event.preventDefault();
+
+        const delta = event.deltaY;
+        const zoomIntensity = 0.1;
+        const direction = delta > 0 ? 1 : -1;
+
+        scaleFactor *= 1 + zoomIntensity * direction;
+        scaleFactor = Math.max(1, Math.min(scaleFactor, 4)); // clamp
+
+        const totalPoints = chart.data.labels.length;
+        const visibleCount = Math.max(
+          3,
+          Math.round(totalPoints / scaleFactor)
+        );
+
+        const centerIndex = Math.round(
+          (event.offsetX / canvas.clientWidth) * (totalPoints - 1)
+        );
+
+        let start = centerIndex - Math.floor(visibleCount / 2);
+        let end = centerIndex + Math.ceil(visibleCount / 2);
+
+        if (start < 0) {
+          start = 0;
+          end = visibleCount;
+        }
+        if (end > totalPoints) {
+          end = totalPoints;
+          start = totalPoints - visibleCount;
+        }
+
+        chart.options.scales.x.min = start;
+        chart.options.scales.x.max = end - 1;
+        chart.update("none");
+      });
+
+      canvas.addEventListener("dblclick", () => {
+        chart.options.scales.x.min = undefined;
+        chart.options.scales.x.max = undefined;
+        scaleFactor = 1;
+        chart.update("none");
+      });
+    })(zScoreChart);
+  </script>
+</body>
+</html>

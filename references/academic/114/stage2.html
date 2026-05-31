@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 700px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const raw_data = {
+    "0": [
+        18.3852,
+        18.9828,
+        29.2471
+    ],
+    "1": [
+        23.8849,
+        22.2176,
+        30.8746,
+        16.6495
+    ],
+    "2": [
+        28.1565,
+        50.9344,
+        25.8434
+    ],
+    "3": [
+        18.4267,
+        44.67,
+        24.6989
+    ],
+    "4": [
+        18.4647,
+        15.9874,
+        43.8441
+    ],
+    "5": [
+        38.9606,
+        25.1849,
+        22.7408
+    ],
+    "6": [
+        42.5473,
+        21.3322,
+        17.5755,
+        26.8835,
+        22.4924
+    ],
+    "7": [
+        29.1812,
+        48.6689,
+        26.2712
+    ],
+    "8": [
+        17.2065,
+        20.452,
+        23.9359
+    ],
+    "9": [
+        18.4808,
+        26.2369
+    ]
+};
+
+        const colors = {
+            'control': '#000000',
+            'early': '#E040FB',
+            'mid': '#E69F00',
+            'mid-late': '#8D6E63',
+            'late': '#66BB6A'
+        };
+
+        const stages = {
+            0: 'control',
+            1: 'early', 2: 'early',
+            3: 'mid', 4: 'mid', 5: 'mid',
+            6: 'mid-late',
+            7: 'late', 8: 'late', 9: 'late'
+        };
+
+        const scatterData = [];
+        const regressionData = [];
+        
+        Object.keys(raw_data).forEach(gen => {
+            const generation = parseInt(gen);
+            raw_data[gen].forEach(val => {
+                const stage = stages[generation];
+                const color = colors[stage];
+                scatterData.push({
+                    value: [generation, val],
+                    itemStyle: { color: color },
+                    name: stage
+                });
+                regressionData.push([generation, val]);
+            });
+        });
+
+        // Manual Linear Regression for CI
+        const n = regressionData.length;
+        let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+        regressionData.forEach(p => {
+            sumX += p[0];
+            sumY += p[1];
+            sumXY += p[0] * p[1];
+            sumXX += p[0] * p[0];
+        });
+        const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+        const intercept = (sumY - slope * sumX) / n;
+        
+        // CI Calculation (95%)
+        let sse = 0;
+        let meanX = sumX / n;
+        let sxx = 0;
+        regressionData.forEach(p => {
+            const yPred = slope * p[0] + intercept;
+            sse += Math.pow(p[1] - yPred, 2);
+            sxx += Math.pow(p[0] - meanX, 2);
+        });
+        const se = Math.sqrt(sse / (n - 2));
+        const tScore = 2.0; 
+
+        const ciDataUpper = [];
+        const ciDataLower = [];
+        const regLineData = [];
+        
+        for(let x=0; x<=9.2; x+=0.5) {
+            const yPred = slope * x + intercept;
+            const ci = tScore * se * Math.sqrt(1/n + Math.pow(x - meanX, 2) / sxx);
+            regLineData.push([x, yPred]);
+            ciDataUpper.push([x, yPred + ci]);
+            ciDataLower.push([x, yPred - ci]);
+        }
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            title: {
+                text: 'Acsl4',
+                left: 'center',
+                top: 10,
+                textStyle: { fontStyle: 'italic', fontSize: 18, fontWeight: 'bold' }
+            },
+            grid: { top: 60, right: 120, bottom: 60, left: 80 },
+            xAxis: {
+                name: 'Generation',
+                nameLocation: 'middle',
+                nameGap: 30,
+                type: 'value',
+                min: -0.2, max: 9.2,
+                interval: 1,
+                axisLabel: { color: 'black', fontWeight: 'bold' },
+                axisLine: { show: true, lineStyle: { color: 'black', width: 1.5 } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: 'Transcripts per million',
+                nameLocation: 'middle',
+                nameGap: 50,
+                type: 'value',
+                min: 0, max: 80,
+                interval: 20,
+                axisLabel: {
+                    formatter: function (value) {
+                        if (value === 0) return '0';
+                        return (value / 10) + '×10¹';
+                    },
+                    color: 'black',
+                    fontWeight: 'bold'
+                },
+                axisLine: { show: true, lineStyle: { color: 'black', width: 1.5 } },
+                splitLine: { show: false }
+            },
+            legend: {
+                data: ['early', 'mid', 'mid-late', 'late'],
+                orient: 'vertical',
+                right: 10, top: 50,
+                itemGap: 10,
+                backgroundColor: 'white',
+                borderColor: 'black',
+                borderWidth: 1.5,
+                padding: 10,
+                textStyle: { fontWeight: 'bold' }
+            },
+            series: [
+                {
+                    name: 'Scatter',
+                    type: 'scatter',
+                    data: scatterData,
+                    symbolSize: 10,
+                    z: 5
+                },
+                { name: 'early', type: 'scatter', data: [], itemStyle: { color: colors.early } },
+                { name: 'mid', type: 'scatter', data: [], itemStyle: { color: colors.mid } },
+                { name: 'mid-late', type: 'scatter', data: [], itemStyle: { color: colors['mid-late'] } },
+                { name: 'late', type: 'scatter', data: [], itemStyle: { color: colors.late } },
+                {
+                    type: 'line',
+                    data: regLineData,
+                    showSymbol: false,
+                    lineStyle: { color: 'black', width: 1.5 },
+                    z: 4
+                },
+                {
+                    type: 'line',
+                    data: ciDataUpper,
+                    showSymbol: false,
+                    lineStyle: { color: 'black', width: 1.5, type: 'dashed' },
+                    z: 4
+                },
+                {
+                    type: 'line',
+                    data: ciDataLower,
+                    showSymbol: false,
+                    lineStyle: { color: 'black', width: 1.5, type: 'dashed' },
+                    z: 4
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 0, top: 0, style: { text: 'f', font: 'bold 24px Arial' } },
+                {
+                    type: 'text',
+                    left: 80, // Approx
+                    bottom: 100, // Approx
+                    style: {
+                        text: 'R² = 0.0001256',
+                        font: '14px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

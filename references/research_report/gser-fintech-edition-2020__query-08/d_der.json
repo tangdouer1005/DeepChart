@@ -1,0 +1,47 @@
+{
+  "query_id": "query_08",
+  "query_text": "Create a horizontal bar chart for Fintech ecosystems with `Investor Activity Index >= 8` and exact `Total Early-Stage Funding`, comparing `early-stage funding per investor point = Total Early-Stage Funding / Investor Activity Index`, expressed in `$M per index point`, sorted descending by the derived value and keeping the top 8 ecosystems.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "$M per index point",
+  "sort_rule": "descending by early_stage_funding_per_investor_point",
+  "selection_rule": "top 8",
+  "plot_spec": {
+    "title": "Fintech 2020 Early-Stage Funding per Investor Point",
+    "xlabel": "$M per index point",
+    "value_field": "early_stage_funding_per_investor_point"
+  },
+  "records": [
+    {
+      "entity": "Silicon Valley - Bay Area",
+      "early_stage_funding_per_investor_point": 1800.0
+    },
+    {
+      "entity": "Shanghai",
+      "early_stage_funding_per_investor_point": 870.0
+    },
+    {
+      "entity": "New York City",
+      "early_stage_funding_per_investor_point": 830.0
+    },
+    {
+      "entity": "Beijing",
+      "early_stage_funding_per_investor_point": 750.0
+    },
+    {
+      "entity": "London",
+      "early_stage_funding_per_investor_point": 600.0
+    },
+    {
+      "entity": "Boston",
+      "early_stage_funding_per_investor_point": 390.0
+    },
+    {
+      "entity": "Los Angeles",
+      "early_stage_funding_per_investor_point": 360.0
+    },
+    {
+      "entity": "Tel Aviv",
+      "early_stage_funding_per_investor_point": 300.0
+    }
+  ]
+}

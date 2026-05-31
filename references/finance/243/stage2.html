@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>TSLA EBITDA 2016–2024 折线图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --card-bg: #f7f7f9;
+      --text-color: #222222;
+      --grid-color: rgba(0, 0, 0, 0.08);
+      --accent: #1976d2;
+      --accent-soft: rgba(25, 118, 210, 0.15);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #0b1020;
+        --card-bg: #141a33;
+        --text-color: #f5f5f5;
+        --grid-color: rgba(255, 255, 255, 0.1);
+        --accent-soft: rgba(100, 181, 246, 0.2);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: radial-gradient(circle at top, #e3f2fd 0, #ffffff 50%, #e8eaf6 100%);
+      background-attachment: fixed;
+      color: var(--text-color);
+    }
+
+    .page-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 960px;
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.22),
+        0 0 0 1px rgba(15, 23, 42, 0.04);
+      padding: 20px 22px 26px;
+      box-sizing: border-box;
+      backdrop-filter: blur(12px);
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 22px 28px 30px;
+      }
+    }
+
+    .card-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px 16px;
+      margin-bottom: 14px;
+    }
+
+    .title {
+      font-size: 1.15rem;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.82rem;
+      opacity: 0.8;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(25, 118, 210, 0.25);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+    }
+
+    @media (max-width: 640px) {
+      .chart-container {
+        height: 300px;
+      }
+    }
+
+    .footer-note {
+      margin-top: 12px;
+      font-size: 0.74rem;
+      line-height: 1.45;
+      opacity: 0.78;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 6px 10px;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 6px;
+      background: linear-gradient(135deg, #42a5f5, #1565c0);
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="title">特斯拉（TSLA）息税折旧摊销前利润（EBITDA）</div>
+          <div class="subtitle">2016–2024 财年，单位：百万美元</div>
+        </div>
+        <div class="tag">Line Chart</div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="tslaEbitdaChart"></canvas>
+      </div>
+
+      <div class="footer-note">
+        <span><span class="legend-dot"></span>EBITDA（折线与区域）</span>
+        <span>数据来源：用户提供的 TSLA 财报汇总；数值为原始美元金额除以 1,000,000 后取两位小数。</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Source data (exact values from the prompt)
+    const rawData = [
+      { year: 2016, ebitda: 497693000 },
+      { year: 2017, ebitda: 177000000 },
+      { year: 2018, ebitda: 1646000000 },
+      { year: 2019, ebitda: 2087000000 },
+      { year: 2020, ebitda: 4083000000 },
+      { year: 2021, ebitda: 9625000000 },
+      { year: 2022, ebitda: 17453000000 },
+      { year: 2023, ebitda: 24798000000 },
+      { year: 2024, ebitda: 14685000000 }
+    ];
+
+    // Transform to “million USD” and keep 2 decimals for clean display
+    const labels = rawData.map(d => String(d.year));
+    const dataMillions = rawData.map(d => +(d.ebitda / 1_000_000).toFixed(2));
+
+    const ctx = document.getElementById('tslaEbitdaChart').getContext('2d');
+
+    const gradientLine = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientLine.addColorStop(0, 'rgba(66, 165, 245, 1)');
+    gradientLine.addColorStop(1, 'rgba(21, 101, 192, 1)');
+
+    const gradientFill = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientFill.addColorStop(0, 'rgba(66, 165, 245, 0.36)');
+    gradientFill.addColorStop(0.55, 'rgba(66, 165, 245, 0.10)');
+    gradientFill.addColorStop(1, 'rgba(66, 165, 245, 0)');
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'EBITDA（百万美元）',
+            data: dataMillions,
+            borderColor: gradientLine,
+            backgroundColor: gradientFill,
+            fill: 'start',
+            tension: 0.28,
+            borderWidth: 2.4,
+            pointRadius: 3.8,
+            pointHoverRadius: 5,
+            pointBackgroundColor: '#ffffff',
+            pointBorderColor: '#1565c0',
+            pointBorderWidth: 1.4,
+            clip: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15,23,42,0.9)',
+            titleColor: '#ffffff',
+            bodyColor: '#e0e7ff',
+            borderColor: 'rgba(148, 163, 184, 0.6)',
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: ctx => {
+                // Show full-dollar amount in tooltip for accuracy
+                const idx = ctx.dataIndex;
+                const fullValue = rawData[idx].ebitda;
+                const fullFormatted = fullValue.toLocaleString('en-US');
+                const millions = dataMillions[idx].toLocaleString('en-US', {
+                  maximumFractionDigits: 2
+                });
+                return [
+                  `EBITDA：$${millions}M`,
+                  `约等于：$${fullFormatted}`
+                ];
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: 'rgba(100,116,139,0.9)',
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--grid-color'),
+              drawBorder: false
+            },
+            ticks: {
+              color: 'rgba(100,116,139,0.9)',
+              font: {
+                size: 11
+              },
+              callback: value => value + 'M'
+            },
+            title: {
+              display: true,
+              text: 'EBITDA（百万美元）',
+              color: 'rgba(100,116,139,0.95)',
+              font: { size: 11, weight: '500' }
+            }
+          }
+        }
+      }
+    });
+
+    // Optional: simple hover cursor feedback
+    document.getElementById('tslaEbitdaChart').addEventListener('mousemove', e => {
+      const points = chart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+      e.target.style.cursor = points.length ? 'pointer' : 'default';
+    });
+  </script>
+</body>
+</html>

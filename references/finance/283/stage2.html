@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XOM 投入资本回报率 (ROIC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js latest stable -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111827;
+      --grid: #e5e7eb;
+      --accent-line: rgba(37, 99, 235, 0.9);
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #020617;
+        --fg: #e5e7eb;
+        --grid: #1f2937;
+        --accent-line: rgba(96, 165, 250, 1);
+        --accent-soft: rgba(59, 130, 246, 0.16);
+      }
+    }
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--fg);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 0.25rem;
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+    @media (prefers-color-scheme: dark) {
+      .subtitle { color: #9ca3af; }
+    }
+
+    .chart-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem 1.25rem;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+    }
+    @media (prefers-color-scheme: dark) {
+      .chart-card {
+        background: rgba(15, 23, 42, 0.97);
+        box-shadow: 0 18px 35px rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    .chart-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .chart-subtitle {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    @media (prefers-color-scheme: dark) {
+      .chart-subtitle { color: #9ca3af; }
+    }
+
+    .legend-inline {
+      font-size: 0.8rem;
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    @media (prefers-color-scheme: dark) {
+      .legend-inline { color: #9ca3af; }
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent-line);
+    }
+
+    /* Fixed-height responsive wrapper to avoid distortion and script errors */
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      height: 360px; /* Reasonable height for readability */
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .footnote {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+    @media (prefers-color-scheme: dark) {
+      .footnote { color: #9ca3af; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>XOM 投入资本回报率 (ROIC)</h1>
+    <div class="subtitle">2016–2024 财年 | 单位：%</div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">ROIC 趋势</div>
+          <div class="chart-subtitle">
+            展示 2016–2024 年 ROIC 的年度变化（含 2020 年负值）。
+          </div>
+        </div>
+        <div class="legend-inline">
+          <span class="legend-dot"></span> XOM ROIC
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="roicChart"
+          aria-label="XOM 2016–2024 年 ROIC 折线图"
+          role="img"></canvas>
+      </div>
+
+      <div class="footnote">
+        数据来源：用户提供；RESULT_ROIC × 100 转换为百分比。
+        将鼠标悬停在折线上可查看具体年度数值。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Ensure Chart.js is loaded before running the chart code
+    (function initWhenReady() {
+      function createChart() {
+        const canvas = document.getElementById('roicChart');
+        if (!canvas || typeof Chart === 'undefined') {
+          // If either the canvas or Chart.js is not ready, try again shortly.
+          setTimeout(createChart, 50);
+          return;
+        }
+
+        // Data from user
+        const years = [
+          2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024
+        ];
+        const roicRaw = [
+          0.0128359268630213,
+          0.0601322185229176,
+          0.0679329464173138,
+          0.0409706582330688,
+          -0.1301405126867997,
+          0.0851040312815745,
+          0.228873711207328,
+          0.1506925479896254,
+          0.1162470439957433
+        ];
+        const roicPercent = roicRaw.map(v => v * 100);
+
+        const ctx = canvas.getContext('2d');
+
+        // Use safe defaults if CSS variables are not available
+        let lineColor = 'rgba(37,99,235,0.9)';
+        let fillColor = 'rgba(37,99,235,0.12)';
+        let gridColor = '#e5e7eb';
+
+        try {
+          const styles = getComputedStyle(document.documentElement);
+          lineColor = (styles.getPropertyValue('--accent-line').trim()) || lineColor;
+          fillColor = (styles.getPropertyValue('--accent-soft').trim()) || fillColor;
+          gridColor = (styles.getPropertyValue('--grid').trim()) || gridColor;
+        } catch (e) {
+          // Fallbacks are already set above
+        }
+
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: years,
+            datasets: [
+              {
+                label: 'ROIC (%)',
+                data: roicPercent,
+                tension: 0.25,
+                borderColor: lineColor,
+                backgroundColor: fillColor,
+                pointRadius: 3.5,
+                pointHoverRadius: 5,
+                pointBackgroundColor: '#ffffff',
+                pointBorderWidth: 1.8,
+                pointBorderColor: lineColor,
+                fill: true
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false, // height controlled via CSS
+            interaction: {
+              mode: 'nearest',
+              intersect: false
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: 'rgba(15,23,42,0.96)',
+                titleColor: '#e5e7eb',
+                bodyColor: '#e5e7eb',
+                borderColor: '#0f172a',
+                borderWidth: 1,
+                padding: 10,
+                displayColors: false,
+                callbacks: {
+                  title: items => 'Fiscal Year: ' + items[0].label,
+                  label: ctx => 'ROIC: ' + ctx.raw.toFixed(2) + '%'
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: {
+                  color: gridColor
+                },
+                ticks: {
+                  font: { size: 11 }
+                }
+              },
+              y: {
+                grid: {
+                  color: gridColor
+                },
+                ticks: {
+                  callback: value => value + '%',
+                  font: { size: 11 }
+                },
+                title: {
+                  display: true,
+                  text: 'ROIC (%)',
+                  font: { size: 11 }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', createChart);
+      } else {
+        createChart();
+      }
+    })();
+  </script>
+</body>
+</html>

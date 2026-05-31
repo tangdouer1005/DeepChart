@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "chart_type": "barh",
+  "title": "Top 10 markets by 2025 average funding per deal",
+  "x_label": "Average funding per deal ($M)",
+  "y_label": "Market",
+  "value_format": "float2",
+  "data": [
+    {
+      "label": "Silicon Valley",
+      "value": 94.76439790575917
+    },
+    {
+      "label": "US",
+      "value": 51.66849015317287
+    },
+    {
+      "label": "Los Angeles",
+      "value": 36.734693877551024
+    },
+    {
+      "label": "Austin",
+      "value": 32.5
+    },
+    {
+      "label": "New York",
+      "value": 23.81930184804928
+    },
+    {
+      "label": "Israel",
+      "value": 23.529411764705884
+    },
+    {
+      "label": "France",
+      "value": 21.52777777777778
+    },
+    {
+      "label": "Boston",
+      "value": 20.930232558139537
+    },
+    {
+      "label": "Seattle",
+      "value": 18.698275862068964
+    },
+    {
+      "label": "Miami",
+      "value": 17.666666666666668
+    }
+  ]
+}

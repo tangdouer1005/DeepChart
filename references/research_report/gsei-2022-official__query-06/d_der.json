@@ -1,0 +1,55 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a ranked lollipop chart showing the top 10 countries by domestic reshuffle pressure, where the plotted value is `average absolute national_rank_change across cities ranked 2 through the end of each 3.2 national block that have numeric national_rank_change values`, values are expressed in rank positions, only countries with at least 4 qualifying non-leader cities are eligible, and countries are sorted from highest to lowest after the average is derived.",
+  "chart_type": "lollipop chart",
+  "value_unit": "rank positions",
+  "sort_rule": "descending by domestic_reshuffle_pressure",
+  "selection_rule": "top 10 among countries with at least 4 numeric non-leader national_rank_change values",
+  "plot_spec": {
+    "title": "Domestic Reshuffle Pressure",
+    "xlabel": "average absolute national rank change",
+    "value_field": "domestic_reshuffle_pressure"
+  },
+  "records": [
+    {
+      "entity": "Germany",
+      "domestic_reshuffle_pressure": 3.0,
+      "qualifying_nonleader_city_count": 7
+    },
+    {
+      "entity": "United Kingdom",
+      "domestic_reshuffle_pressure": 2.75,
+      "qualifying_nonleader_city_count": 4
+    },
+    {
+      "entity": "Italy",
+      "domestic_reshuffle_pressure": 2.5,
+      "qualifying_nonleader_city_count": 4
+    },
+    {
+      "entity": "Israel",
+      "domestic_reshuffle_pressure": 2.3333,
+      "qualifying_nonleader_city_count": 6
+    },
+    {
+      "entity": "Spain",
+      "domestic_reshuffle_pressure": 2.0,
+      "qualifying_nonleader_city_count": 4
+    },
+    {
+      "entity": "France",
+      "domestic_reshuffle_pressure": 1.3333,
+      "qualifying_nonleader_city_count": 6
+    },
+    {
+      "entity": "China",
+      "domestic_reshuffle_pressure": 1.25,
+      "qualifying_nonleader_city_count": 4
+    },
+    {
+      "entity": "Sweden",
+      "domestic_reshuffle_pressure": 1.0,
+      "qualifying_nonleader_city_count": 4
+    }
+  ]
+}

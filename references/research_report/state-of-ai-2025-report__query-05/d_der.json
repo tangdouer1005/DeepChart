@@ -1,0 +1,42 @@
+{
+  "status": "complete",
+  "chart_type": "barh",
+  "title": "Top 8 child markets by share of parent 2025 funding",
+  "x_label": "Child share of parent annual funding (%)",
+  "y_label": "Child / parent pair",
+  "value_format": "float2",
+  "data": [
+    {
+      "label": "Silicon Valley / US",
+      "value": 76.65431445209106
+    },
+    {
+      "label": "China / Asia",
+      "value": 55.73770491803278
+    },
+    {
+      "label": "United Kingdom / Europe",
+      "value": 32.70142180094787
+    },
+    {
+      "label": "France / Europe",
+      "value": 14.691943127962084
+    },
+    {
+      "label": "Israel / Europe",
+      "value": 13.270142180094787
+    },
+    {
+      "label": "Germany / Europe",
+      "value": 13.23696682464455
+    },
+    {
+      "label": "India / Asia",
+      "value": 11.016393442622952
+    },
+    {
+      "label": "Japan / Asia",
+      "value": 9.01639344262295
+    }
+  ]
+}

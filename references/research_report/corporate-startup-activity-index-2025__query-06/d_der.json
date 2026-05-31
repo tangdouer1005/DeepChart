@@ -1,0 +1,96 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a bubble chart for countries that have at least 8 visible companies in the country tables, where the x-axis is `the number of distinct industries represented`, the y-axis is `flagship dependence` computed as `the top-ranked company score divided by the country's visible total score`, bubble size represents `the country's visible total score`, y-values are percentages, and country labels are shown for all plotted bubbles.",
+  "chart_type": "bubble chart",
+  "value_unit": "count / percent / score points",
+  "sort_rule": "descending by visible_country_total_score for deterministic plotting",
+  "selection_rule": "all countries with at least 8 visible companies",
+  "plot_spec": {
+    "title": "Country Breadth vs Flagship Dependence",
+    "x_field": "distinct_industry_count",
+    "y_field": "flagship_dependence_percent",
+    "size_field": "visible_country_total_score",
+    "xlabel": "Distinct industries represented",
+    "ylabel": "Top company share of visible total (%)",
+    "ylabel_suffix": "%"
+  },
+  "records": [
+    {
+      "entity": "United States",
+      "distinct_industry_count": 6,
+      "flagship_dependence_percent": 17.3562,
+      "visible_country_total_score": 2189.932,
+      "label": true
+    },
+    {
+      "entity": "Japan",
+      "distinct_industry_count": 9,
+      "flagship_dependence_percent": 17.6186,
+      "visible_country_total_score": 226.074,
+      "label": true
+    },
+    {
+      "entity": "Germany",
+      "distinct_industry_count": 8,
+      "flagship_dependence_percent": 19.0004,
+      "visible_country_total_score": 225.38,
+      "label": true
+    },
+    {
+      "entity": "France",
+      "distinct_industry_count": 7,
+      "flagship_dependence_percent": 39.8196,
+      "visible_country_total_score": 171.353,
+      "label": true
+    },
+    {
+      "entity": "South Korea",
+      "distinct_industry_count": 6,
+      "flagship_dependence_percent": 78.4137,
+      "visible_country_total_score": 143.628,
+      "label": true
+    },
+    {
+      "entity": "United Kingdom",
+      "distinct_industry_count": 9,
+      "flagship_dependence_percent": 13.8723,
+      "visible_country_total_score": 131.139,
+      "label": true
+    },
+    {
+      "entity": "China",
+      "distinct_industry_count": 5,
+      "flagship_dependence_percent": 20.2891,
+      "visible_country_total_score": 80.93,
+      "label": true
+    },
+    {
+      "entity": "Sweden",
+      "distinct_industry_count": 6,
+      "flagship_dependence_percent": 16.4482,
+      "visible_country_total_score": 61.478,
+      "label": true
+    },
+    {
+      "entity": "The Netherlands",
+      "distinct_industry_count": 6,
+      "flagship_dependence_percent": 45.1103,
+      "visible_country_total_score": 60.627,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "distinct_industry_count": 5,
+      "flagship_dependence_percent": 57.9796,
+      "visible_country_total_score": 46.932,
+      "label": true
+    },
+    {
+      "entity": "India",
+      "distinct_industry_count": 5,
+      "flagship_dependence_percent": 26.4267,
+      "visible_country_total_score": 32.558,
+      "label": true
+    }
+  ]
+}

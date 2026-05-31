@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>KO 净资产收益率-杜邦分析（ROE）2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2933;
+      --grid: #d3dce6;
+      --accent: #1d4ed8;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --accent-point: #1d4ed8;
+      --accent-hover: #1e40af;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1120;
+        --fg: #e5e7eb;
+        --grid: #1f2937;
+        --accent: #38bdf8;
+        --accent-soft: rgba(56, 189, 248, 0.15);
+        --accent-point: #38bdf8;
+        --accent-hover: #0284c7;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #e0edff 0, var(--bg) 45%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg);
+    }
+    .container {
+      width: min(1000px, 95vw);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(14px);
+      box-shadow:
+        0 22px 60px rgba(15, 23, 42, 0.28),
+        0 0 0 1px rgba(148, 163, 184, 0.2);
+      border-radius: 18px;
+      padding: 20px 22px 24px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .container {
+        background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
+        box-shadow:
+          0 24px 70px rgba(0, 0, 0, 0.75),
+          0 0 0 1px rgba(75, 85, 99, 0.5);
+      }
+    }
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    h1 {
+      font-size: 1.15rem;
+      margin: 0;
+      font-weight: 600;
+    }
+    .subtitle {
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .meta {
+        color: #9ca3af;
+      }
+    }
+    .meta span {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.16);
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 420px;
+    }
+    .footer-note {
+      margin-top: 10px;
+      font-size: 0.72rem;
+      color: #9ca3af;
+    }
+    .footer-note strong {
+      color: #6b7280;
+    }
+    @media (prefers-color-scheme: dark) {
+      .footer-note {
+        color: #6b7280;
+      }
+      .footer-note strong {
+        color: #e5e7eb;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>KO 净资产收益率-杜邦分析（ROE）走势：2016–2024</h1>
+      <div class="subtitle">单位：百分比（%），基于年度平均 ROE</div>
+    </div>
+    <div class="meta">
+      <span>图表类型：折线图</span>
+      <span>维度：2016–2024 财年</span>
+      <span>指标：Original ROE (Avg)</span>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="roeChart"></canvas>
+    </div>
+    <div class="footer-note">
+      <strong>说明：</strong>数据来源于给定的“Original ROE(Avg)”字段；已转换为百分比形式展示。
+    </div>
+  </div>
+
+  <script>
+    // Data from source (Original ROE(Avg))
+    const years = [
+      2016, 2017, 2018, 2019, 2020,
+      2021, 2022, 2023, 2024
+    ];
+
+    const roeRaw = [
+      0.2685124238933684,
+      0.0621916579458812,
+      0.377881537603148,
+      0.4960791947055225,
+      0.4047544409613375,
+      0.46200765993664,
+      0.4051460597826087,
+      0.4281660871997762,
+      0.4185680256708073
+    ];
+
+    // Convert to percentage for display (e.g., 0.26 -> 26%)
+    const roePercent = roeRaw.map(v => v * 100);
+
+    const ctx = document.getElementById('roeChart').getContext('2d');
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(37, 99, 235, 0.25)');
+    gradient.addColorStop(1, 'rgba(37, 99, 235, 0.00)');
+
+    const roeChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: 'ROE（Original ROE Avg）',
+            data: roePercent,
+            tension: 0.25,
+            borderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--accent').trim() || '#1d4ed8',
+            borderWidth: 2.4,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--accent-point').trim() || '#1d4ed8',
+            pointHoverBackgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue('--accent-hover').trim() || '#1e40af',
+            pointBorderWidth: 0,
+            fill: true,
+            backgroundColor: gradient
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 6,
+              font: {
+                size: 11.5
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15, 23, 42, 0.94)',
+            titleColor: '#f9fafb',
+            bodyColor: '#e5e7eb',
+            padding: 10,
+            borderColor: 'rgba(148, 163, 184, 0.6)',
+            borderWidth: 1,
+            displayColors: false,
+            callbacks: {
+              label: function (ctx) {
+                const value = ctx.parsed.y;
+                return ' ROE: ' + value.toFixed(2) + '%';
+              },
+              title: function (items) {
+                if (!items.length) return '';
+                return '财年: ' + items[0].label;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(0) + '%';
+              },
+              font: {
+                size: 11
+              }
+            },
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--grid').trim() || '#e5e7eb'
+            }
+          }
+        }
+      }
+    });
+
+    // Optional: adjust chart colors on theme change (for systems that support it)
+    if (window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      mediaQuery.addEventListener('change', () => {
+        // Rebuild chart to pick up CSS variable changes
+        roeChart.destroy();
+        location.reload(); // simplest reliable approach for a single-chart page
+      });
+    }
+  </script>
+</body>
+</html>

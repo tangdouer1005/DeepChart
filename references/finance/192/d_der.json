@@ -1,0 +1,123 @@
+{
+    "scr_data": [
+        {
+            "Fiscal Year": 2016,
+            "Cash & Equiv": 596000000,
+            "Receivables": 505000000,
+            "Operating Expenses": 2064000000,
+            "Cost of Revenue": 2199000000,
+            "Quick Assets": 1101000000,
+            "Daily Burn": 11679452.05479452
+        },
+        {
+            "Fiscal Year": 2017,
+            "Cash & Equiv": 1766000000,
+            "Receivables": 826000000,
+            "Operating Expenses": 2129000000,
+            "Cost of Revenue": 2847000000,
+            "Quick Assets": 2592000000,
+            "Daily Burn": 13632876.712328767
+        },
+        {
+            "Fiscal Year": 2018,
+            "Cash & Equiv": 4002000000,
+            "Receivables": 1265000000,
+            "Operating Expenses": 2612000000,
+            "Cost of Revenue": 3892000000,
+            "Quick Assets": 5267000000,
+            "Daily Burn": 17819178.08219178
+        },
+        {
+            "Fiscal Year": 2019,
+            "Cash & Equiv": 782000000,
+            "Receivables": 1424000000,
+            "Operating Expenses": 3367000000,
+            "Cost of Revenue": 4545000000,
+            "Quick Assets": 2206000000,
+            "Daily Burn": 21676712.328767125
+        },
+        {
+            "Fiscal Year": 2020,
+            "Cash & Equiv": 10896000000,
+            "Receivables": 1657000000,
+            "Operating Expenses": 3922000000,
+            "Cost of Revenue": 4150000000,
+            "Quick Assets": 12553000000,
+            "Daily Burn": 22115068.493150685
+        },
+        {
+            "Fiscal Year": 2021,
+            "Cash & Equiv": 847000000,
+            "Receivables": 2429000000,
+            "Operating Expenses": 5864000000,
+            "Cost of Revenue": 6279000000,
+            "Quick Assets": 3276000000,
+            "Daily Burn": 33268493.15068493
+        },
+        {
+            "Fiscal Year": 2022,
+            "Cash & Equiv": 1990000000,
+            "Receivables": 4650000000,
+            "Operating Expenses": 7434000000,
+            "Cost of Revenue": 9439000000,
+            "Quick Assets": 6640000000,
+            "Daily Burn": 46227397.26027397
+        },
+        {
+            "Fiscal Year": 2023,
+            "Cash & Equiv": 3389000000,
+            "Receivables": 3827000000,
+            "Operating Expenses": 11132000000,
+            "Cost of Revenue": 11618000000,
+            "Quick Assets": 7216000000,
+            "Daily Burn": 62328767.12328767
+        },
+        {
+            "Fiscal Year": 2024,
+            "Cash & Equiv": 7280000000,
+            "Receivables": 9999000000,
+            "Operating Expenses": 11329000000,
+            "Cost of Revenue": 16621000000,
+            "Quick Assets": 17279000000,
+            "Daily Burn": 76575342.46575342
+        }
+    ],
+    "der_data": [
+        {
+            "Year": 2016,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 94.26812104152006
+        },
+        {
+            "Year": 2017,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 190.12861736334403
+        },
+        {
+            "Year": 2018,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 295.58041205412053
+        },
+        {
+            "Year": 2019,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 101.76820020222446
+        },
+        {
+            "Year": 2020,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 567.6220267591675
+        },
+        {
+            "Year": 2021,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 98.47154739356007
+        },
+        {
+            "Year": 2022,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 143.63776447578974
+        },
+        {
+            "Year": 2023,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 115.77318681318681
+        },
+        {
+            "Year": 2024,
+            "防御区间比率 (Defensive Interval Ratio, DIR)": 225.64704830053668
+        }
+    ]
+}

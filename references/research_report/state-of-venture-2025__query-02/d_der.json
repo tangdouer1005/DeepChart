@@ -1,0 +1,34 @@
+{
+  "status": "complete",
+  "chart_type": "bubble",
+  "title": "Sector Spotlights: concentration vs late-stage share",
+  "x_label": "Visible top-deal concentration share of annual funding (%)",
+  "y_label": "Late-stage share in 2025 (%)",
+  "size_label": "Annual funding ($B)",
+  "data": [
+    {
+      "label": "AI",
+      "x": 24.402125775022142,
+      "y": 7,
+      "size": 225.8
+    },
+    {
+      "label": "Retail Tech",
+      "x": 15.079999999999998,
+      "y": 13,
+      "size": 27.5
+    },
+    {
+      "label": "Fintech",
+      "x": 13.922053231939163,
+      "y": 12,
+      "size": 52.6
+    },
+    {
+      "label": "Digital Health",
+      "x": 10.315315315315315,
+      "y": 11,
+      "size": 22.2
+    }
+  ]
+}

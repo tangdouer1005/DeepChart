@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>v 的内部增长率（IGR）变化 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 0;
+      color: #666;
+    }
+
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    canvas {
+      max-height: 460px;
+    }
+
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .chart-container {
+        padding: 14px 12px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>v 的内部增长率（IGR）变化</h1>
+    <h2>2016–2024 财年</h2>
+    <canvas id="igrChart"></canvas>
+  </div>
+
+  <div class="note">
+    数据来源：用户提供的 RESULT_IGR（内部增长率）数据。<br />
+    说明：图中 IGR 以小数形式给出，并在工具提示中以百分比显示。
+  </div>
+
+  <script>
+    // Source data (exact values from the prompt)
+    const fiscalYears = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ];
+
+    const igrValues = [
+      0.0986187845303867,
+      0.0840915809874191,
+      0.13921086718257,
+      0.1606030594956497,
+      0.1196594912793878,
+      0.1314050100491059,
+      0.1622483418340936,
+      0.1815569698434437,
+      0.2016913703737383
+    ];
+
+    // Utility: convert to percentage string with 2 decimal places
+    function toPercent(value) {
+      return (value * 100).toFixed(2) + "%";
+    }
+
+    const ctx = document.getElementById("igrChart").getContext("2d");
+
+    const igrChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "内部增长率 (IGR)",
+            data: igrValues,
+            backgroundColor: "rgba(54, 162, 235, 0.65)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1.5,
+            hoverBackgroundColor: "rgba(54, 162, 235, 0.85)",
+            hoverBorderColor: "rgba(54, 162, 235, 1)"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          intersect: true
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return " IGR: " + toPercent(value);
+              }
+            }
+          },
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              boxWidth: 8,
+              font: {
+                size: 11
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年 (Fiscal Year)",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "内部增长率 (IGR)",
+              font: {
+                size: 12,
+                weight: "500"
+              }
+            },
+            ticks: {
+              // Show as percentage on axis
+              callback: function (value) {
+                return (value * 100).toFixed(0) + "%";
+              }
+            },
+            grid: {
+              color: "rgba(0, 0, 0, 0.05)"
+            }
+          }
+        },
+        animation: {
+          duration: 900,
+          easing: "easeOutCubic"
+        }
+      }
+    });
+  </script>
+</body>
+</html>

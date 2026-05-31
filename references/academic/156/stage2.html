@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "Region": "China",
+        "Scenario": "S1",
+        "Central": 18.6,
+        "Low": 14.4,
+        "High": 23.4,
+        "Label": "China-S1"
+    },
+    {
+        "Region": "China",
+        "Scenario": "S2",
+        "Central": 35.5,
+        "Low": 25.3,
+        "High": 36.3,
+        "Label": "China-S2"
+    },
+    {
+        "Region": "China",
+        "Scenario": "S3",
+        "Central": 57.8,
+        "Low": 41.6,
+        "High": 70.8,
+        "Label": "China-S3"
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S1",
+        "Central": 9.0,
+        "Low": 7.0,
+        "High": 11.5,
+        "Label": "EU27-S1"
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S2",
+        "Central": 17.4,
+        "Low": 12.2,
+        "High": 17.9,
+        "Label": "EU27-S2"
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S3",
+        "Central": 28.4,
+        "Low": 20.1,
+        "High": 35.0,
+        "Label": "EU27-S3"
+    },
+    {
+        "Region": "US",
+        "Scenario": "S1",
+        "Central": 8.3,
+        "Low": 6.5,
+        "High": 10.8,
+        "Label": "US-S1"
+    },
+    {
+        "Region": "US",
+        "Scenario": "S2",
+        "Central": 16.5,
+        "Low": 11.3,
+        "High": 17.1,
+        "Label": "US-S2"
+    },
+    {
+        "Region": "US",
+        "Scenario": "S3",
+        "Central": 26.8,
+        "Low": 18.6,
+        "High": 33.4,
+        "Label": "US-S3"
+    },
+    {
+        "Region": "India",
+        "Scenario": "S1",
+        "Central": 8.1,
+        "Low": 6.3,
+        "High": 10.2,
+        "Label": "India-S1"
+    },
+    {
+        "Region": "India",
+        "Scenario": "S2",
+        "Central": 15.5,
+        "Low": 11.0,
+        "High": 15.9,
+        "Label": "India-S2"
+    },
+    {
+        "Region": "India",
+        "Scenario": "S3",
+        "Central": 25.3,
+        "Low": 18.1,
+        "High": 31.0,
+        "Label": "India-S3"
+    }
+];
+
+        const colors = {
+            'China': '#F0B956',
+            'EU27': '#D66A48',
+            'US': '#235793',
+            'India': '#316B75'
+        };
+
+        const chartData = {};
+        jsonData.forEach(d => {
+            chartData[d.Label] = {
+                central: d.Central,
+                low: d.Low,
+                high: d.High,
+                color: colors[d.Region]
+            };
+        });
+
+        const labels = Object.keys(chartData);
+        const centralValues = labels.map(label => chartData[label].central);
+        const lowValues = labels.map(label => chartData[label].low);
+        const highValues = labels.map(label => chartData[label].high);
+        const barColors = labels.map(label => chartData[label].color);
+
+        // Prepare error bar data
+        const errorData = labels.map((label, index) => [
+            index, 
+            chartData[label].low, 
+            chartData[label].high
+        ]);
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 30, bottom: 50, left: 60 },
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            xAxis: {
+                type: 'category',
+                data: labels,
+                axisLabel: { interval: 0, rotate: 0, fontSize: 11, color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'GHG mitigation (MtCO₂e yr⁻¹)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                min: 0,
+                max: 90,
+                interval: 10,
+                axisLabel: { color: 'black', fontSize: 11 },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    name: 'Mitigation',
+                    type: 'bar',
+                    data: centralValues,
+                    itemStyle: {
+                        color: function(params) {
+                            return barColors[params.dataIndex];
+                        },
+                        borderColor: 'grey',
+                        borderWidth: 0.5
+                    },
+                    barWidth: '70%',
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    name: 'error',
+                    itemStyle: {
+                        borderWidth: 1.5,
+                        borderColor: 'gray'
+                    },
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const low = api.value(1);
+                        const high = api.value(2);
+                        const style = api.style();
+                        
+                        const lowPoint = api.coord([xValue, low]);
+                        const highPoint = api.coord([xValue, high]);
+                        const halfWidth = 5; // Width of cap
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0], y1: lowPoint[1],
+                                        x2: highPoint[0], y2: highPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0] - halfWidth, y1: lowPoint[1],
+                                        x2: lowPoint[0] + halfWidth, y2: lowPoint[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0] - halfWidth, y1: highPoint[1],
+                                        x2: highPoint[0] + halfWidth, y2: highPoint[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 2
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 10, top: 10, style: { text: 'd', font: 'bold 24px Arial' } }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

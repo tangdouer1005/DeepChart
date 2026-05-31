@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AMZN 投入资本回报率 (ROIC) 2016–2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js latest stable 4.x (no integrity) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f7f7f9;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 1.5rem 2rem 2rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 0.2rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 0 0 1.2rem;
+      color: #555;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .meta {
+      font-size: 0.78rem;
+      color: #666;
+      margin-top: 1rem;
+      line-height: 1.4;
+    }
+
+    .meta span.label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      .container {
+        padding: 1rem 1rem 1.5rem;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      h2 {
+        font-size: 0.9rem;
+      }
+      .chart-wrapper {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>亚马逊 (AMZN) 投入资本回报率 (ROIC)</h1>
+    <h2>2016–2024 财年变化（单位：%）</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="roicChart"></canvas>
+    </div>
+
+    <div class="meta">
+      <div><span class="label">说明：</span>ROIC（Return on Invested Capital，投入资本回报率）= 税后营业利润 / 投入资本，用于衡量企业使用资本创造回报的效率。</div>
+      <div><span class="label">数据来源：</span>用户提供的 AMZN 2016–2024 财年 ROIC 数据。</div>
+    </div>
+  </div>
+
+  <script>
+    // Wrap everything in DOMContentLoaded to ensure the canvas exists
+    document.addEventListener('DOMContentLoaded', function () {
+      // Source data (decimal ROIC)
+      const roicDataRaw = [
+        { year: 2016, roic: 0.2821368616202789 },
+        { year: 2017, roic: 0.0951915023103793 },
+        { year: 2018, roic: 0.263606019495229 },
+        { year: 2019, roic: 0.2528361023988069 },
+        { year: 2020, roic: 0.2693419805166358 },
+        { year: 2021, roic: 0.1636275877660635 },
+        { year: 2022, roic: 0.0718671795007202 },
+        { year: 2023, roic: 0.1572265394475029 },
+        { year: 2024, roic: 0.2547376130104782 }
+      ];
+
+      const labels = roicDataRaw.map(d => d.year.toString());
+      const roicPercent = roicDataRaw.map(d => d.roic * 100);
+
+      const canvas = document.getElementById('roicChart');
+      if (!canvas) {
+        console.error('Canvas with id "roicChart" not found.');
+        return;
+      }
+
+      const ctx = canvas.getContext('2d');
+
+      // Gradient for line fill
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height || 400);
+      gradient.addColorStop(0, 'rgba(37, 99, 235, 0.35)');
+      gradient.addColorStop(1, 'rgba(37, 99, 235, 0.02)');
+
+      const roicChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'ROIC (%)',
+              data: roicPercent,
+              borderColor: 'rgba(37, 99, 235, 1)',
+              backgroundColor: gradient,
+              tension: 0.25,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              pointBackgroundColor: '#ffffff',
+              pointBorderColor: 'rgba(37, 99, 235, 1)',
+              pointBorderWidth: 2,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: 'rgba(15, 23, 42, 0.95)',
+              borderColor: 'rgba(148, 163, 184, 0.5)',
+              borderWidth: 1,
+              padding: 10,
+              titleFont: { size: 13, weight: '600' },
+              bodyFont: { size: 12 },
+              callbacks: {
+                label: function (context) {
+                  const value = context.parsed.y;
+                  if (value == null || isNaN(value)) return '';
+                  return 'ROIC: ' + value.toFixed(2) + '%';
+                }
+              }
+            },
+            title: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                font: { size: 12 }
+              }
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'ROIC (%)',
+                font: { size: 12 }
+              },
+              ticks: {
+                callback: function (value) {
+                  return value + '%';
+                },
+                font: { size: 12 }
+              },
+              grid: {
+                color: 'rgba(148, 163, 184, 0.2)'
+              }
+            }
+          }
+        }
+      });
+
+      // Expose chart for inspection
+      window.roicChart = roicChart;
+    });
+  </script>
+</body>
+</html>

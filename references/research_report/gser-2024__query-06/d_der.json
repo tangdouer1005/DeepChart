@@ -1,0 +1,131 @@
+{
+  "query_id": "query_06",
+  "query_text": "Create a scatter plot showing ecosystems with `Software Engineer Salary <= $80k`, where the x-axis is `Software Engineer Salary` in `$k`, the y-axis is `Total Early-Stage Funding per Unicorn` in `$M per unicorn`, and include only ecosystems with at least 1 unicorn and at least `$500M` total early-stage funding; label the 12 highest y-value ecosystems after deriving the metric.",
+  "chart_type": "scatter plot",
+  "value_unit": "$k / $M per unicorn",
+  "sort_rule": "labels assigned to top 12 by funding_per_unicorn",
+  "selection_rule": "all filtered ecosystems",
+  "plot_spec": {
+    "title": "2024 Salary vs Funding per Unicorn",
+    "x_field": "x_salary_kusd",
+    "y_field": "y_funding_per_unicorn_musd",
+    "xlabel": "Software Engineer Salary ($k)",
+    "ylabel": "Early-Stage Funding / Unicorns ($M per unicorn)"
+  },
+  "records": [
+    {
+      "entity": "Beijing",
+      "x_salary_kusd": 60.0,
+      "y_funding_per_unicorn_musd": 190.3226,
+      "label": false
+    },
+    {
+      "entity": "Paris",
+      "x_salary_kusd": 64.0,
+      "y_funding_per_unicorn_musd": 225.8065,
+      "label": false
+    },
+    {
+      "entity": "Stockholm",
+      "x_salary_kusd": 73.0,
+      "y_funding_per_unicorn_musd": 457.1429,
+      "label": true
+    },
+    {
+      "entity": "Bengaluru - Karnataka",
+      "x_salary_kusd": 12.0,
+      "y_funding_per_unicorn_musd": 115.1515,
+      "label": false
+    },
+    {
+      "entity": "Lagos",
+      "x_salary_kusd": 11.0,
+      "y_funding_per_unicorn_musd": 376.0,
+      "label": true
+    },
+    {
+      "entity": "Shenzhen",
+      "x_salary_kusd": 41.0,
+      "y_funding_per_unicorn_musd": 411.1111,
+      "label": true
+    },
+    {
+      "entity": "Singapore",
+      "x_salary_kusd": 74.0,
+      "y_funding_per_unicorn_musd": 414.2857,
+      "label": true
+    },
+    {
+      "entity": "Mexico City",
+      "x_salary_kusd": 25.0,
+      "y_funding_per_unicorn_musd": 162.5,
+      "label": false
+    },
+    {
+      "entity": "Tamil Nadu",
+      "x_salary_kusd": 10.0,
+      "y_funding_per_unicorn_musd": 303.5,
+      "label": true
+    },
+    {
+      "entity": "Telangana",
+      "x_salary_kusd": 10.0,
+      "y_funding_per_unicorn_musd": 404.5,
+      "label": true
+    },
+    {
+      "entity": "Tokyo",
+      "x_salary_kusd": 55.0,
+      "y_funding_per_unicorn_musd": 450.0,
+      "label": true
+    },
+    {
+      "entity": "Berlin",
+      "x_salary_kusd": 71.0,
+      "y_funding_per_unicorn_musd": 235.2941,
+      "label": false
+    },
+    {
+      "entity": "Melbourne",
+      "x_salary_kusd": 70.5,
+      "y_funding_per_unicorn_musd": 235.6667,
+      "label": true
+    },
+    {
+      "entity": "Istanbul",
+      "x_salary_kusd": 27.0,
+      "y_funding_per_unicorn_musd": 249.3333,
+      "label": true
+    },
+    {
+      "entity": "London",
+      "x_salary_kusd": 78.0,
+      "y_funding_per_unicorn_musd": 307.6923,
+      "label": true
+    },
+    {
+      "entity": "Seoul",
+      "x_salary_kusd": 45.0,
+      "y_funding_per_unicorn_musd": 235.0,
+      "label": false
+    },
+    {
+      "entity": "Shanghai",
+      "x_salary_kusd": 48.0,
+      "y_funding_per_unicorn_musd": 260.8696,
+      "label": true
+    },
+    {
+      "entity": "São Paulo",
+      "x_salary_kusd": 31.0,
+      "y_funding_per_unicorn_musd": 190.9091,
+      "label": false
+    },
+    {
+      "entity": "Montréal",
+      "x_salary_kusd": 72.0,
+      "y_funding_per_unicorn_musd": 280.0,
+      "label": true
+    }
+  ]
+}

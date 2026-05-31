@@ -1,0 +1,54 @@
+{
+  "query_id": "query_10",
+  "query_text": "Create a bubble chart for the 12 non-conflict countries in the 2021 report with the largest positive best-city advantage, where the x-axis is `covid_rank - best visible city rank`, the y-axis is `total sampled innovations / number of visible ranked cities`, bubble size is sampled-innovation density in sampled innovations per 1 million people, Canada and Sweden are excluded, countries must have at least one visible ranked city, and the 12 plotted countries are chosen only after `covid_rank - best visible city rank` has been derived.",
+  "chart_type": "bubble chart",
+  "value_unit": "x in rank positions; y in sampled innovations per visible city; bubble size in sampled innovations per 1M people",
+  "sort_rule": "descending by best_city_advantage",
+  "selection_rule": "positive advantages only, capped at top 12 after excluding Canada/Sweden",
+  "plot_spec": {
+    "title": "2021 Best-City Advantage vs Innovations per City",
+    "x_field": "best_city_advantage",
+    "y_field": "innovations_per_city",
+    "size_field": "innovation_density",
+    "xlabel": "Country rank minus best visible city rank",
+    "ylabel": "Sampled innovations per visible city"
+  },
+  "records": [
+    {
+      "entity": "Russia",
+      "best_city_advantage": 14,
+      "innovations_per_city": 48.0,
+      "innovation_density": 0.3324
+    },
+    {
+      "entity": "Taiwan",
+      "best_city_advantage": 5,
+      "innovations_per_city": 33.0,
+      "innovation_density": 1.3857
+    },
+    {
+      "entity": "Kenya",
+      "best_city_advantage": 4,
+      "innovations_per_city": 9.0,
+      "innovation_density": 0.1712
+    },
+    {
+      "entity": "France",
+      "best_city_advantage": 3,
+      "innovations_per_city": 25.0,
+      "innovation_density": 0.3731
+    },
+    {
+      "entity": "Nigeria",
+      "best_city_advantage": 3,
+      "innovations_per_city": 11.0,
+      "innovation_density": 0.0547
+    },
+    {
+      "entity": "South Korea",
+      "best_city_advantage": 1,
+      "innovations_per_city": 17.0,
+      "innovation_density": 0.6576
+    }
+  ]
+}

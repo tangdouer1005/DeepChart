@@ -1,0 +1,47 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a ranked horizontal bar chart for the top 8 countries by diagnostics specialization in the 2020 report, where diagnostics specialization is computed as `diagnostics / total sampled innovations`, values are expressed as percentages, countries must have at least 15 total sampled innovations, and bars are sorted from highest to lowest after the percentage is derived.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percent",
+  "sort_rule": "descending by diagnostics_share_pct",
+  "selection_rule": "top 8 after total_innovations >= 15",
+  "plot_spec": {
+    "title": "2020 Diagnostics Specialization",
+    "xlabel": "Diagnostics share (%)",
+    "value_field": "diagnostics_share_pct"
+  },
+  "records": [
+    {
+      "entity": "Belgium",
+      "diagnostics_share_pct": 38.2353
+    },
+    {
+      "entity": "Spain",
+      "diagnostics_share_pct": 31.4286
+    },
+    {
+      "entity": "Switzerland",
+      "diagnostics_share_pct": 30.4348
+    },
+    {
+      "entity": "France",
+      "diagnostics_share_pct": 28.5714
+    },
+    {
+      "entity": "Canada",
+      "diagnostics_share_pct": 27.5362
+    },
+    {
+      "entity": "India",
+      "diagnostics_share_pct": 26.6667
+    },
+    {
+      "entity": "United States",
+      "diagnostics_share_pct": 25.495
+    },
+    {
+      "entity": "Russia",
+      "diagnostics_share_pct": 24.1379
+    }
+  ]
+}

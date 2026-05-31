@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "year": 2027.0,
+        "central": 823.0,
+        "low": 458.6,
+        "high": 2499.9,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2028.0,
+        "central": 535.3,
+        "low": 153.5,
+        "high": 2296.2,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2029.0,
+        "central": 277.0,
+        "low": -153.8,
+        "high": 2115.3,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2030.0,
+        "central": 60.5,
+        "low": -449.5,
+        "high": 1986.5,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2031.0,
+        "central": -114.2,
+        "low": -733.8,
+        "high": 1910.0,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2032.0,
+        "central": -334.8,
+        "low": -1006.6,
+        "high": 1804.0,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2033.0,
+        "central": -535.3,
+        "low": -1237.2,
+        "high": 1693.9,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2034.0,
+        "central": -735.8,
+        "low": -1481.9,
+        "high": 1626.2,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2035.0,
+        "central": -936.3,
+        "low": -1715.2,
+        "high": 1571.3,
+        "label": "central estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2027.0,
+        "central": 1299.5,
+        "low": 935.1,
+        "high": 2976.5,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2028.0,
+        "central": 1118.4,
+        "low": 736.7,
+        "high": 2879.4,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2029.0,
+        "central": 977.7,
+        "low": 546.9,
+        "high": 2816.0,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2030.0,
+        "central": 889.7,
+        "low": 379.6,
+        "high": 2815.7,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2031.0,
+        "central": 854.5,
+        "low": 235.0,
+        "high": 2878.7,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2032.0,
+        "central": 784.7,
+        "low": 112.9,
+        "high": 2923.5,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2033.0,
+        "central": 715.2,
+        "low": 13.3,
+        "high": 2944.4,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2034.0,
+        "central": 682.4,
+        "low": -63.7,
+        "high": 3044.4,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2035.0,
+        "central": 660.8,
+        "low": -118.1,
+        "high": 3168.4,
+        "label": "low estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2027.0,
+        "central": 279.2,
+        "low": -85.2,
+        "high": 1956.2,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2028.0,
+        "central": -131.6,
+        "low": -513.4,
+        "high": 1629.3,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2029.0,
+        "central": -525.6,
+        "low": -956.5,
+        "high": 1312.6,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2030.0,
+        "central": -890.6,
+        "low": -1400.7,
+        "high": 1035.3,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2031.0,
+        "central": -1226.8,
+        "low": -1846.4,
+        "high": 797.4,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2032.0,
+        "central": -1621.8,
+        "low": -2293.7,
+        "high": 516.9,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2033.0,
+        "central": -1974.2,
+        "low": -2676.1,
+        "high": 255.0,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2034.0,
+        "central": -2369.0,
+        "low": -3115.1,
+        "high": -7.0,
+        "label": "high estimate of CORSIA offset cost"
+    },
+    {
+        "year": 2035.0,
+        "central": -2776.6,
+        "low": -3555.5,
+        "high": -269.0,
+        "label": "high estimate of CORSIA offset cost"
+    }
+];
+
+        function getSeriesData(labelName) {
+            return jsonData.filter(d => d.label === labelName)
+                           .sort((a, b) => a.year - b.year);
+        }
+
+        const dataHigh = getSeriesData('high estimate of CORSIA offset cost');
+        const dataMed = getSeriesData('central estimate of CORSIA offset cost');
+        const dataLow = getSeriesData('low estimate of CORSIA offset cost');
+
+        const years = [2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035];
+
+        const central_high = dataHigh.map(d => d.central);
+        const low_high = dataHigh.map(d => d.low);
+        const high_high = dataHigh.map(d => d.high);
+
+        const central_med = dataMed.map(d => d.central);
+        const low_med = dataMed.map(d => d.low);
+        const high_med = dataMed.map(d => d.high);
+
+        const central_low = dataLow.map(d => d.central);
+        const low_low = dataLow.map(d => d.low);
+        const high_low = dataLow.map(d => d.high);
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 50, right: 100, bottom: 50, left: 80 },
+            legend: {
+                data: ['High offset price', 'Low offset price', 'Medium offset price'],
+                bottom: 10,
+                left: 10,
+                orient: 'vertical'
+            },
+            xAxis: {
+                type: 'category',
+                data: years,
+                axisLabel: { color: 'black' },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true, alignWithLabel: true }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Net costs of max usage of SAF (million US$)',
+                nameLocation: 'middle',
+                nameGap: 50,
+                min: -4000,
+                max: 6000,
+                interval: 1000,
+                axisLabel: { 
+                    color: 'black',
+                    formatter: function(value) {
+                        return value.toLocaleString();
+                    }
+                },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            series: [
+                // High offset price (Yellow)
+                {
+                    name: 'High offset price',
+                    type: 'line',
+                    data: central_high,
+                    lineStyle: { color: '#d8d228', width: 3 },
+                    symbol: 'none',
+                    z: 1
+                },
+                {
+                    name: 'High offset price CI',
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const points = [];
+                        for (let i = 0; i < years.length; i++) {
+                            points.push(api.coord([i, high_high[i]]));
+                        }
+                        for (let i = years.length - 1; i >= 0; i--) {
+                            points.push(api.coord([i, low_high[i]]));
+                        }
+                        return {
+                            type: 'polygon',
+                            shape: { points: points },
+                            style: api.style({ fill: '#f5e4b3', stroke: 'none', opacity: 0.5 })
+                        };
+                    },
+                    data: [0],
+                    z: 0
+                },
+                // Medium offset price (Pink)
+                {
+                    name: 'Medium offset price',
+                    type: 'line',
+                    data: central_med,
+                    lineStyle: { color: '#e46b7a', width: 3 },
+                    symbol: 'none',
+                    z: 2
+                },
+                {
+                    name: 'Medium offset price CI',
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const points = [];
+                        for (let i = 0; i < years.length; i++) {
+                            points.push(api.coord([i, high_med[i]]));
+                        }
+                        for (let i = years.length - 1; i >= 0; i--) {
+                            points.push(api.coord([i, low_med[i]]));
+                        }
+                        return {
+                            type: 'polygon',
+                            shape: { points: points },
+                            style: api.style({ fill: '#ead6e6', stroke: 'none', opacity: 0.5 })
+                        };
+                    },
+                    data: [0],
+                    z: 0
+                },
+                // Low offset price (Blue)
+                {
+                    name: 'Low offset price',
+                    type: 'line',
+                    data: central_low,
+                    lineStyle: { color: '#23446b', width: 3 },
+                    symbol: 'none',
+                    z: 3
+                },
+                {
+                    name: 'Low offset price CI',
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const points = [];
+                        for (let i = 0; i < years.length; i++) {
+                            points.push(api.coord([i, high_low[i]]));
+                        }
+                        for (let i = years.length - 1; i >= 0; i--) {
+                            points.push(api.coord([i, low_low[i]]));
+                        }
+                        return {
+                            type: 'polygon',
+                            shape: { points: points },
+                            style: api.style({ fill: '#e1edf7', stroke: 'none', opacity: 0.5 })
+                        };
+                    },
+                    data: [0],
+                    z: 0
+                },
+                // Mark Line
+                {
+                    name: 'Zero Line',
+                    type: 'line',
+                    markLine: {
+                        symbol: 'none',
+                        label: { show: false },
+                        lineStyle: { type: 'dotted', color: 'grey', width: 1.5 },
+                        data: [{ yAxis: 0 }]
+                    }
+                }
+            ],
+            graphic: [
+                { type: 'text', left: 10, top: 10, style: { text: 'c', font: 'bold 24px Arial' } },
+                { type: 'text', left: 80, bottom: 100, style: { text: 'US-S2', font: 'bold 14px Arial' } },
+                // Annotations
+                { type: 'text', right: 30, top: '65%', style: { text: '-11.2 B', fill: '#d8d228', font: '14px Arial' } },
+                { type: 'text', right: 30, top: '55%', style: { text: '-1.0 B', fill: '#e46b7a', font: '14px Arial' } },
+                { type: 'text', right: 30, top: '45%', style: { text: '8.0 B', fill: '#23446b', font: '14px Arial' } }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

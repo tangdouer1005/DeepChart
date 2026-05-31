@@ -1,0 +1,954 @@
+{
+  "report_id": "014",
+  "query_id": 8,
+  "query_text": "Create a slope chart comparing each founded-year cohort’s share of all pipeline companies with its share of the pipeline’s total disclosed funding, using cohorts `pre-2010`, `2010-2014`, `2015-2019`, and `2020+`, with funding converted to `$B` and cohorts sorted by the increase from company share to funding share.",
+  "source_summary_file": "/Users/tangjiahui/Desktop/chartbench/data/aim/014_Tech IPO Pipeline 2026_ Book of Scouting Reports_a639a9ce.md",
+  "source_query_file": "/Users/tangjiahui/Desktop/chartbench/data/aim/014_Tech IPO Pipeline 2026_ Book of Scouting Reports_a639a9ce_query_recommendations.md",
+  "companies": [
+    {
+      "company": "Acorns",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "17.3%",
+      "total_raised_raw": "$564.0M",
+      "headcount_raw": "560",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "728 / 1000"
+    },
+    {
+      "company": "Akulaku",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "14.9%",
+      "total_raised_raw": "$765.0M",
+      "headcount_raw": "1119",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "742 / 1000"
+    },
+    {
+      "company": "Alan",
+      "founded_year_raw": "2016",
+      "ipo_probability_raw": "34.4%",
+      "total_raised_raw": "$749.3M",
+      "headcount_raw": "1224",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "795 / 1000"
+    },
+    {
+      "company": "Andela",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "13.3%",
+      "total_raised_raw": "$374.6M",
+      "headcount_raw": "1294",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "702 / 1000"
+    },
+    {
+      "company": "Anthropic",
+      "founded_year_raw": "2021",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$31.5B",
+      "headcount_raw": "2309",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "960 / 1000"
+    },
+    {
+      "company": "Arctic Wolf",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$899.7M",
+      "headcount_raw": "3200",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "845 / 1000"
+    },
+    {
+      "company": "Attentive",
+      "founded_year_raw": "2016",
+      "ipo_probability_raw": "13.4%",
+      "total_raised_raw": "$864.5M",
+      "headcount_raw": "1544",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "792 / 1000"
+    },
+    {
+      "company": "Automation Anywhere",
+      "founded_year_raw": "2003",
+      "ipo_probability_raw": "14.1%",
+      "total_raised_raw": "$1.1B",
+      "headcount_raw": "2626",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "688 / 1000"
+    },
+    {
+      "company": "Avathon",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "16.0%",
+      "total_raised_raw": "$290.9M",
+      "headcount_raw": "286",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "717 / 1000"
+    },
+    {
+      "company": "BetterUp",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "15.4%",
+      "total_raised_raw": "$566.9M",
+      "headcount_raw": "2776",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "776 / 1000"
+    },
+    {
+      "company": "Bloomreach",
+      "founded_year_raw": "2009",
+      "ipo_probability_raw": "13.2%",
+      "total_raised_raw": "$452.0M",
+      "headcount_raw": "1092",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "825 / 1000"
+    },
+    {
+      "company": "Bolt",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "14.5%",
+      "total_raised_raw": "$2.2B",
+      "headcount_raw": "13612",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "902 / 1000"
+    },
+    {
+      "company": "Booksy",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "12.9%",
+      "total_raised_raw": "$200.7M",
+      "headcount_raw": "1010",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "818 / 1000"
+    },
+    {
+      "company": "Brex",
+      "founded_year_raw": "2017",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$1.7B",
+      "headcount_raw": "1595",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "886 / 1000"
+    },
+    {
+      "company": "Canva",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$979.3M",
+      "headcount_raw": "13231",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "903 / 1000"
+    },
+    {
+      "company": "Carta",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "13.9%",
+      "total_raised_raw": "$1.2B",
+      "headcount_raw": "1945",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "794 / 1000"
+    },
+    {
+      "company": "Clio",
+      "founded_year_raw": "2008",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$1.3B",
+      "headcount_raw": "1639",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "901 / 1000"
+    },
+    {
+      "company": "Cohesity",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "22.7%",
+      "total_raised_raw": "$661.7M",
+      "headcount_raw": "7720",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "905 / 1000"
+    },
+    {
+      "company": "Collibra",
+      "founded_year_raw": "2008",
+      "ipo_probability_raw": "22.4%",
+      "total_raised_raw": "$595.9M",
+      "headcount_raw": "1031",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "763 / 1000"
+    },
+    {
+      "company": "Commure",
+      "founded_year_raw": "2017",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$1.0B",
+      "headcount_raw": "1453",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "898 / 1000"
+    },
+    {
+      "company": "Contentful",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "14.8%",
+      "total_raised_raw": "$331.0M",
+      "headcount_raw": "953",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "724 / 1000"
+    },
+    {
+      "company": "Cyara",
+      "founded_year_raw": "2006",
+      "ipo_probability_raw": "15.6%",
+      "total_raised_raw": "$375.0M",
+      "headcount_raw": "369",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "694 / 1000"
+    },
+    {
+      "company": "DataArt",
+      "founded_year_raw": "1997",
+      "ipo_probability_raw": "14.3%",
+      "total_raised_raw": "$96.4M",
+      "headcount_raw": "5328",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "701 / 1000"
+    },
+    {
+      "company": "DataRobot",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "14.5%",
+      "total_raised_raw": "$1.1B",
+      "headcount_raw": "863",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "791 / 1000"
+    },
+    {
+      "company": "Deel",
+      "founded_year_raw": "2019",
+      "ipo_probability_raw": "16.2%",
+      "total_raised_raw": "$979.7M",
+      "headcount_raw": "5436",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "887 / 1000"
+    },
+    {
+      "company": "Dialpad",
+      "founded_year_raw": "2011",
+      "ipo_probability_raw": "17.0%",
+      "total_raised_raw": "$426.0M",
+      "headcount_raw": "1502",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "827 / 1000"
+    },
+    {
+      "company": "Discord",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "28.4%",
+      "total_raised_raw": "$989.5M",
+      "headcount_raw": "3797",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "866 / 1000"
+    },
+    {
+      "company": "Fivetran",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "43.1%",
+      "total_raised_raw": "$853.0M",
+      "headcount_raw": "1607",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "854 / 1000"
+    },
+    {
+      "company": "Formlabs",
+      "founded_year_raw": "2011",
+      "ipo_probability_raw": "34.1%",
+      "total_raised_raw": "$261.6M",
+      "headcount_raw": "721",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "721 / 1000"
+    },
+    {
+      "company": "FourKites",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "24.5%",
+      "total_raised_raw": "$242.9M",
+      "headcount_raw": "576",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "699 / 1000"
+    },
+    {
+      "company": "Games24x7",
+      "founded_year_raw": "2006",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$75.0M",
+      "headcount_raw": "1201",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "618 / 1000"
+    },
+    {
+      "company": "Gong",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "23.4%",
+      "total_raised_raw": "$583.0M",
+      "headcount_raw": "2042",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "798 / 1000"
+    },
+    {
+      "company": "Grafana Labs",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "17.7%",
+      "total_raised_raw": "$840.2M",
+      "headcount_raw": "1667",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "907 / 1000"
+    },
+    {
+      "company": "Grammarly",
+      "founded_year_raw": "2009",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$1.4B",
+      "headcount_raw": "1604",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "802 / 1000"
+    },
+    {
+      "company": "Headspace",
+      "founded_year_raw": "2010",
+      "ipo_probability_raw": "19.6%",
+      "total_raised_raw": "$327.0M",
+      "headcount_raw": "1539",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "717 / 1000"
+    },
+    {
+      "company": "Hibob",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "19.1%",
+      "total_raised_raw": "$565.0M",
+      "headcount_raw": "1884",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "884 / 1000"
+    },
+    {
+      "company": "Highspot",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "16.7%",
+      "total_raised_raw": "$652.8M",
+      "headcount_raw": "1063",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "847 / 1000"
+    },
+    {
+      "company": "HoneyBook",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "19.5%",
+      "total_raised_raw": "$481.6M",
+      "headcount_raw": "357",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "778 / 1000"
+    },
+    {
+      "company": "Hopper",
+      "founded_year_raw": "2007",
+      "ipo_probability_raw": "20.2%",
+      "total_raised_raw": "$710.2M",
+      "headcount_raw": "1208",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "789 / 1000"
+    },
+    {
+      "company": "Impact Tech",
+      "founded_year_raw": "2008",
+      "ipo_probability_raw": "12.7%",
+      "total_raised_raw": "$274.1M",
+      "headcount_raw": "3227",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "731 / 1000"
+    },
+    {
+      "company": "Included Health",
+      "founded_year_raw": "2011",
+      "ipo_probability_raw": "14.7%",
+      "total_raised_raw": "$296.1M",
+      "headcount_raw": "1672",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "616 / 1000"
+    },
+    {
+      "company": "Indigo",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "42.5%",
+      "total_raised_raw": "$1.4B",
+      "headcount_raw": "1412",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "862 / 1000"
+    },
+    {
+      "company": "Innovaccer",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$650.7M",
+      "headcount_raw": "1616",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "898 / 1000"
+    },
+    {
+      "company": "Intercom",
+      "founded_year_raw": "2011",
+      "ipo_probability_raw": "11.5%",
+      "total_raised_raw": "$240.8M",
+      "headcount_raw": "1790",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "656 / 1000"
+    },
+    {
+      "company": "Ironclad",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "21.1%",
+      "total_raised_raw": "$331.1M",
+      "headcount_raw": "684",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "843 / 1000"
+    },
+    {
+      "company": "Jio",
+      "founded_year_raw": "2010",
+      "ipo_probability_raw": "17.7%",
+      "total_raised_raw": "$20.6B",
+      "headcount_raw": "96226",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "766 / 1000"
+    },
+    {
+      "company": "JumpCloud",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "13.8%",
+      "total_raised_raw": "$418.5M",
+      "headcount_raw": "906",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "805 / 1000"
+    },
+    {
+      "company": "Justworks",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "19.7%",
+      "total_raised_raw": "$159.8M",
+      "headcount_raw": "1423",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "764 / 1000"
+    },
+    {
+      "company": "Kaseya",
+      "founded_year_raw": "2000",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$681.7M",
+      "headcount_raw": "5385",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "635 / 1000"
+    },
+    {
+      "company": "Komodo Health",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "22.7%",
+      "total_raised_raw": "$515.0M",
+      "headcount_raw": "800",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "802 / 1000"
+    },
+    {
+      "company": "Kraken",
+      "founded_year_raw": "2011",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$520.1M",
+      "headcount_raw": "118",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "906 / 1000"
+    },
+    {
+      "company": "Kurly",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "37.0%",
+      "total_raised_raw": "$860.9M",
+      "headcount_raw": "552",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "815 / 1000"
+    },
+    {
+      "company": "Lattice",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "19.4%",
+      "total_raised_raw": "$330.3M",
+      "headcount_raw": "611",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "755 / 1000"
+    },
+    {
+      "company": "Lendable",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "35.8%",
+      "total_raised_raw": "$527.4M",
+      "headcount_raw": "495",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "742 / 1000"
+    },
+    {
+      "company": "Lightricks",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "11.6%",
+      "total_raised_raw": "$335.0M",
+      "headcount_raw": "577",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "N/A / 1000"
+    },
+    {
+      "company": "Locus Robotics",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "50.5%",
+      "total_raised_raw": "$432.8M",
+      "headcount_raw": "480",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "813 / 1000"
+    },
+    {
+      "company": "Lyra Health",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "39.2%",
+      "total_raised_raw": "$906.1M",
+      "headcount_raw": "2566",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "806 / 1000"
+    },
+    {
+      "company": "ManyPets",
+      "founded_year_raw": "2017",
+      "ipo_probability_raw": "31.3%",
+      "total_raised_raw": "$477.3M",
+      "headcount_raw": "377",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "637 / 1000"
+    },
+    {
+      "company": "Mapbox",
+      "founded_year_raw": "2010",
+      "ipo_probability_raw": "12.6%",
+      "total_raised_raw": "$505.6M",
+      "headcount_raw": "858",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "831 / 1000"
+    },
+    {
+      "company": "MasterClass",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "25.4%",
+      "total_raised_raw": "$461.4M",
+      "headcount_raw": "769",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "723 / 1000"
+    },
+    {
+      "company": "MoMo",
+      "founded_year_raw": "2007",
+      "ipo_probability_raw": "13.5%",
+      "total_raised_raw": "$433.7M",
+      "headcount_raw": "2220",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "795 / 1000"
+    },
+    {
+      "company": "Motive",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "52.7%",
+      "total_raised_raw": "$717.3M",
+      "headcount_raw": "5012",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "944 / 1000"
+    },
+    {
+      "company": "Nextiva",
+      "founded_year_raw": "2008",
+      "ipo_probability_raw": "14.1%",
+      "total_raised_raw": "$207.5M",
+      "headcount_raw": "1709",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "591 / 1000"
+    },
+    {
+      "company": "Noom",
+      "founded_year_raw": "2008",
+      "ipo_probability_raw": "55.0%",
+      "total_raised_raw": "$632.8M",
+      "headcount_raw": "1203",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "809 / 1000"
+    },
+    {
+      "company": "Notion",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "13.6%",
+      "total_raised_raw": "$344.1M",
+      "headcount_raw": "4036",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "780 / 1000"
+    },
+    {
+      "company": "o9 Solutions",
+      "founded_year_raw": "2009",
+      "ipo_probability_raw": "12.2%",
+      "total_raised_raw": "$536.0M",
+      "headcount_raw": "3351",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "875 / 1000"
+    },
+    {
+      "company": "Octopus Energy",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$2.8B",
+      "headcount_raw": "4322",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "882 / 1000"
+    },
+    {
+      "company": "Odoo",
+      "founded_year_raw": "2005",
+      "ipo_probability_raw": "24.1%",
+      "total_raised_raw": "$482.6M",
+      "headcount_raw": "7045",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "908 / 1000"
+    },
+    {
+      "company": "OpenAI",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$64.1B",
+      "headcount_raw": "N/A",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "905 / 1000"
+    },
+    {
+      "company": "Outreach",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "14.2%",
+      "total_raised_raw": "$489.9M",
+      "headcount_raw": "1377",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "775 / 1000"
+    },
+    {
+      "company": "OutSystems",
+      "founded_year_raw": "2001",
+      "ipo_probability_raw": "16.2%",
+      "total_raised_raw": "$800.4M",
+      "headcount_raw": "2009",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "827 / 1000"
+    },
+    {
+      "company": "OYO",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "16.1%",
+      "total_raised_raw": "$3.4B",
+      "headcount_raw": "15909",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "863 / 1000"
+    },
+    {
+      "company": "Paxos",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "10.8%",
+      "total_raised_raw": "$535.3M",
+      "headcount_raw": "296",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "767 / 1000"
+    },
+    {
+      "company": "Porter",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "26.7%",
+      "total_raised_raw": "$256.8M",
+      "headcount_raw": "3872",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "868 / 1000"
+    },
+    {
+      "company": "project44",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "17.6%",
+      "total_raised_raw": "$879.3M",
+      "headcount_raw": "807",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "793 / 1000"
+    },
+    {
+      "company": "RELEX",
+      "founded_year_raw": "2005",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$802.9M",
+      "headcount_raw": "2309",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "799 / 1000"
+    },
+    {
+      "company": "ReliaQuest",
+      "founded_year_raw": "2007",
+      "ipo_probability_raw": "20.8%",
+      "total_raised_raw": "$830.0M",
+      "headcount_raw": "1169",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "881 / 1000"
+    },
+    {
+      "company": "Rippling",
+      "founded_year_raw": "2016",
+      "ipo_probability_raw": "23.4%",
+      "total_raised_raw": "$1.8B",
+      "headcount_raw": "5997",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "961 / 1000"
+    },
+    {
+      "company": "Rokt",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "13.2%",
+      "total_raised_raw": "$488.5M",
+      "headcount_raw": "684",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "792 / 1000"
+    },
+    {
+      "company": "Seismic",
+      "founded_year_raw": "2010",
+      "ipo_probability_raw": "18.3%",
+      "total_raised_raw": "$926.5M",
+      "headcount_raw": "695",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "805 / 1000"
+    },
+    {
+      "company": "Shield AI",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "23.5%",
+      "total_raised_raw": "$1.3B",
+      "headcount_raw": "1032",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "902 / 1000"
+    },
+    {
+      "company": "Skydio",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "55.1%",
+      "total_raised_raw": "$744.0M",
+      "headcount_raw": "824",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "907 / 1000"
+    },
+    {
+      "company": "Snyk",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "24.0%",
+      "total_raised_raw": "$1.2B",
+      "headcount_raw": "1271",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "818 / 1000"
+    },
+    {
+      "company": "Socure",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$743.3M",
+      "headcount_raw": "482",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "878 / 1000"
+    },
+    {
+      "company": "Sonar",
+      "founded_year_raw": "2008",
+      "ipo_probability_raw": "12.7%",
+      "total_raised_raw": "$457.1M",
+      "headcount_raw": "827",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "802 / 1000"
+    },
+    {
+      "company": "Strava",
+      "founded_year_raw": "2009",
+      "ipo_probability_raw": "15.5%",
+      "total_raised_raw": "$179.9M",
+      "headcount_raw": "636",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "929 / 1000"
+    },
+    {
+      "company": "Stripe",
+      "founded_year_raw": "2010",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$9.4B",
+      "headcount_raw": "12516",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "900 / 1000"
+    },
+    {
+      "company": "Swile",
+      "founded_year_raw": "2016",
+      "ipo_probability_raw": "19.2%",
+      "total_raised_raw": "$328.4M",
+      "headcount_raw": "708",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "779 / 1000"
+    },
+    {
+      "company": "Sword",
+      "founded_year_raw": "2015",
+      "ipo_probability_raw": "58.3%",
+      "total_raised_raw": "$392.2M",
+      "headcount_raw": "1017",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "875 / 1000"
+    },
+    {
+      "company": "Tanium",
+      "founded_year_raw": "2007",
+      "ipo_probability_raw": "18.2%",
+      "total_raised_raw": "$1.2B",
+      "headcount_raw": "2271",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "740 / 1000"
+    },
+    {
+      "company": "Team Blue",
+      "founded_year_raw": "2000",
+      "ipo_probability_raw": "35.0%",
+      "total_raised_raw": "$19.8M",
+      "headcount_raw": "2960",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "640 / 1000"
+    },
+    {
+      "company": "Teamworks",
+      "founded_year_raw": "2006",
+      "ipo_probability_raw": "21.5%",
+      "total_raised_raw": "$396.6M",
+      "headcount_raw": "628",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "857 / 1000"
+    },
+    {
+      "company": "ThoughtSpot",
+      "founded_year_raw": "2012",
+      "ipo_probability_raw": "15.6%",
+      "total_raised_raw": "$673.7M",
+      "headcount_raw": "1678",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "803 / 1000"
+    },
+    {
+      "company": "Thumbtack",
+      "founded_year_raw": "2008",
+      "ipo_probability_raw": "16.6%",
+      "total_raised_raw": "$773.8M",
+      "headcount_raw": "1585",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "763 / 1000"
+    },
+    {
+      "company": "Toss",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "18.6%",
+      "total_raised_raw": "$1.7B",
+      "headcount_raw": "471",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "N/A / 1000"
+    },
+    {
+      "company": "Tradeshift",
+      "founded_year_raw": "2009",
+      "ipo_probability_raw": "10.3%",
+      "total_raised_raw": "$1.2B",
+      "headcount_raw": "387",
+      "commercial_maturity_raw": "3 / 5",
+      "mosaic_raw": "745 / 1000"
+    },
+    {
+      "company": "TradingView",
+      "founded_year_raw": "2011",
+      "ipo_probability_raw": "15.3%",
+      "total_raised_raw": "$339.4M",
+      "headcount_raw": "2221",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "777 / 1000"
+    },
+    {
+      "company": "Transmit Security",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "19.9%",
+      "total_raised_raw": "$583.0M",
+      "headcount_raw": "316",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "756 / 1000"
+    },
+    {
+      "company": "Uniphore",
+      "founded_year_raw": "2008",
+      "ipo_probability_raw": "25.1%",
+      "total_raised_raw": "$886.6M",
+      "headcount_raw": "879",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "889 / 1000"
+    },
+    {
+      "company": "VAST Data",
+      "founded_year_raw": "2016",
+      "ipo_probability_raw": "19.2%",
+      "total_raised_raw": "$381.0M",
+      "headcount_raw": "1012",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "841 / 1000"
+    },
+    {
+      "company": "Verkada",
+      "founded_year_raw": "2016",
+      "ipo_probability_raw": "14.9%",
+      "total_raised_raw": "$644.6M",
+      "headcount_raw": "2517",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "948 / 1000"
+    },
+    {
+      "company": "Virta",
+      "founded_year_raw": "2014",
+      "ipo_probability_raw": "13.1%",
+      "total_raised_raw": "$376.5M",
+      "headcount_raw": "776",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "669 / 1000"
+    },
+    {
+      "company": "Workato",
+      "founded_year_raw": "2013",
+      "ipo_probability_raw": "18.8%",
+      "total_raised_raw": "$415.0M",
+      "headcount_raw": "1200",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "846 / 1000"
+    },
+    {
+      "company": "Yotpo",
+      "founded_year_raw": "2011",
+      "ipo_probability_raw": "16.1%",
+      "total_raised_raw": "$436.0M",
+      "headcount_raw": "1033",
+      "commercial_maturity_raw": "5 / 5",
+      "mosaic_raw": "780 / 1000"
+    },
+    {
+      "company": "Zapier",
+      "founded_year_raw": "2011",
+      "ipo_probability_raw": "49.2%",
+      "total_raised_raw": "$2.6M",
+      "headcount_raw": "1315",
+      "commercial_maturity_raw": "4 / 5",
+      "mosaic_raw": "789 / 1000"
+    }
+  ]
+}

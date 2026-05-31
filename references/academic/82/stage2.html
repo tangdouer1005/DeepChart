@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const sourceData = [
+    {
+        "Station":"BERN",
+        "PM_size":"PM10",
+        "Site_type":"Traffic",
+        "N_samples":738,
+        "OP_DTT_m_mean":0.14,
+        "OP_DTT_m_SD":0.03,
+        "PM_mass_mean":19.42,
+        "PM_mass_SD":10.22
+    },
+    {
+        "Station":"BERN",
+        "PM_size":"PM2.5",
+        "Site_type":"Traffic",
+        "N_samples":644,
+        "OP_DTT_m_mean":0.1,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":12.61,
+        "PM_mass_SD":7.52
+    },
+    {
+        "Station":"ZURICH",
+        "PM_size":"PM10",
+        "Site_type":"Urban",
+        "N_samples":204,
+        "OP_DTT_m_mean":0.13,
+        "OP_DTT_m_SD":0.05,
+        "PM_mass_mean":18.38,
+        "PM_mass_SD":12.57
+    },
+    {
+        "Station":"ZURICH",
+        "PM_size":"PM2.5",
+        "Site_type":"Urban",
+        "N_samples":90,
+        "OP_DTT_m_mean":0.08,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":10.8,
+        "PM_mass_SD":6.97
+    },
+    {
+        "Station":"BCN",
+        "PM_size":"PM1",
+        "Site_type":"Urban",
+        "N_samples":94,
+        "OP_DTT_m_mean":0.06,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":14.71,
+        "PM_mass_SD":4.91
+    },
+    {
+        "Station":"BCN",
+        "PM_size":"PM10",
+        "Site_type":"Urban",
+        "N_samples":270,
+        "OP_DTT_m_mean":0.11,
+        "OP_DTT_m_SD":0.04,
+        "PM_mass_mean":23.31,
+        "PM_mass_SD":8.94
+    },
+    {
+        "Station":"BCN",
+        "PM_size":"PM2.5",
+        "Site_type":"Urban",
+        "N_samples":197,
+        "OP_DTT_m_mean":0.07,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":17.48,
+        "PM_mass_SD":6.32
+    },
+    {
+        "Station":"MRS-lcp",
+        "PM_size":"PM1",
+        "Site_type":"Urban",
+        "N_samples":262,
+        "OP_DTT_m_mean":0.09,
+        "OP_DTT_m_SD":0.07,
+        "PM_mass_mean":13.65,
+        "PM_mass_SD":13.48
+    },
+    {
+        "Station":"MRS-lcp",
+        "PM_size":"PM10",
+        "Site_type":"Urban",
+        "N_samples":271,
+        "OP_DTT_m_mean":0.1,
+        "OP_DTT_m_SD":0.04,
+        "PM_mass_mean":18.69,
+        "PM_mass_SD":8.2
+    },
+    {
+        "Station":"PARIS-lcpp",
+        "PM_size":"PM10",
+        "Site_type":"Urban",
+        "N_samples":184,
+        "OP_DTT_m_mean":0.12,
+        "OP_DTT_m_SD":0.06,
+        "PM_mass_mean":19.4,
+        "PM_mass_SD":9.26
+    },
+    {
+        "Station":"PARIS-lcpp",
+        "PM_size":"PM2.5",
+        "Site_type":"Urban",
+        "N_samples":69,
+        "OP_DTT_m_mean":0.08,
+        "OP_DTT_m_SD":0.04,
+        "PM_mass_mean":12.51,
+        "PM_mass_SD":7.26
+    },
+    {
+        "Station":"PARIS-lh",
+        "PM_size":"PM10",
+        "Site_type":"Urban",
+        "N_samples":386,
+        "OP_DTT_m_mean":0.09,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":20.74,
+        "PM_mass_SD":13.22
+    },
+    {
+        "Station":"PARIS-lh",
+        "PM_size":"PM2.5",
+        "Site_type":"Urban",
+        "N_samples":807,
+        "OP_DTT_m_mean":0.08,
+        "OP_DTT_m_SD":0.03,
+        "PM_mass_mean":10.32,
+        "PM_mass_SD":6.06
+    },
+    {
+        "Station":"ATH",
+        "PM_size":"PM10",
+        "Site_type":"Urban",
+        "N_samples":147,
+        "OP_DTT_m_mean":0.08,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":31.99,
+        "PM_mass_SD":14.89
+    },
+    {
+        "Station":"ATH",
+        "PM_size":"PM2.5",
+        "Site_type":"Urban",
+        "N_samples":152,
+        "OP_DTT_m_mean":0.08,
+        "OP_DTT_m_SD":0.03,
+        "PM_mass_mean":24.7,
+        "PM_mass_SD":16.61
+    },
+    {
+        "Station":"KRAK",
+        "PM_size":"PM1",
+        "Site_type":"Urban",
+        "N_samples":63,
+        "OP_DTT_m_mean":0.06,
+        "OP_DTT_m_SD":0.01,
+        "PM_mass_mean":19.73,
+        "PM_mass_SD":17.28
+    },
+    {
+        "Station":"KRAK",
+        "PM_size":"PM10",
+        "Site_type":"Urban",
+        "N_samples":63,
+        "OP_DTT_m_mean":0.07,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":28.69,
+        "PM_mass_SD":18.9
+    },
+    {
+        "Station":"BASEL",
+        "PM_size":"PM10",
+        "Site_type":"Suburban",
+        "N_samples":90,
+        "OP_DTT_m_mean":0.06,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":13.97,
+        "PM_mass_SD":9.26
+    },
+    {
+        "Station":"BASEL",
+        "PM_size":"PM2.5",
+        "Site_type":"Suburban",
+        "N_samples":90,
+        "OP_DTT_m_mean":0.06,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":10.6,
+        "PM_mass_SD":7.76
+    },
+    {
+        "Station":"MGD",
+        "PM_size":"PM10",
+        "Site_type":"Rural",
+        "N_samples":240,
+        "OP_DTT_m_mean":0.09,
+        "OP_DTT_m_SD":0.05,
+        "PM_mass_mean":16.7,
+        "PM_mass_SD":10.6
+    },
+    {
+        "Station":"MGD",
+        "PM_size":"PM2.5",
+        "Site_type":"Rural",
+        "N_samples":153,
+        "OP_DTT_m_mean":0.08,
+        "OP_DTT_m_SD":0.04,
+        "PM_mass_mean":10.61,
+        "PM_mass_SD":7.2
+    },
+    {
+        "Station":"PAYRN",
+        "PM_size":"PM10",
+        "Site_type":"Rural",
+        "N_samples":103,
+        "OP_DTT_m_mean":0.07,
+        "OP_DTT_m_SD":0.03,
+        "PM_mass_mean":13.49,
+        "PM_mass_SD":8.31
+    },
+    {
+        "Station":"PAYRN",
+        "PM_size":"PM2.5",
+        "Site_type":"Rural",
+        "N_samples":102,
+        "OP_DTT_m_mean":0.06,
+        "OP_DTT_m_SD":0.03,
+        "PM_mass_mean":9.68,
+        "PM_mass_SD":6.73
+    },
+    {
+        "Station":"MSY",
+        "PM_size":"PM1",
+        "Site_type":"Rural",
+        "N_samples":93,
+        "OP_DTT_m_mean":0.04,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":9.35,
+        "PM_mass_SD":4.39
+    },
+    {
+        "Station":"MSY",
+        "PM_size":"PM10",
+        "Site_type":"Rural",
+        "N_samples":106,
+        "OP_DTT_m_mean":0.05,
+        "OP_DTT_m_SD":0.02,
+        "PM_mass_mean":12.82,
+        "PM_mass_SD":6.24
+    },
+    {
+        "Station":"MSY",
+        "PM_size":"PM2.5",
+        "Site_type":"Rural",
+        "N_samples":107,
+        "OP_DTT_m_mean":0.05,
+        "OP_DTT_m_SD":0.04,
+        "PM_mass_mean":9.62,
+        "PM_mass_SD":4.68
+    },
+    {
+        "Station":"OPE",
+        "PM_size":"PM10",
+        "Site_type":"Rural",
+        "N_samples":200,
+        "OP_DTT_m_mean":0.07,
+        "OP_DTT_m_SD":0.06,
+        "PM_mass_mean":9.54,
+        "PM_mass_SD":6.54
+    },
+    {
+        "Station":"OPE",
+        "PM_size":"PM2.5",
+        "Site_type":"Rural",
+        "N_samples":102,
+        "OP_DTT_m_mean":0.05,
+        "OP_DTT_m_SD":0.03,
+        "PM_mass_mean":9,
+        "PM_mass_SD":7.23
+    }
+];
+
+        const df = sourceData;
+        
+        const colors = {
+            'PM1': '#4E79A7',
+            'PM2.5': '#F28E2B',
+            'PM10': '#59A14F'
+        };
+        const stationOrder = [
+            'BERN', 'ZURICH', 'BCN', 'MRS-lcp', 'PARIS-lcpp', 'PARIS-lh', 
+            'ATH', 'KRAK', 'BASEL', 'MGD', 'PAYRN', 'MSY', 'OPE'
+        ];
+        const pmOrder = ['PM1', 'PM2.5', 'PM10'];
+
+        const barData = [];
+        const errorData = [];
+        const scatterData = [];
+        
+        let currentX = 0;
+        const barWidth = 0.22;
+        
+        stationOrder.forEach((station, i) => {
+            const stationData = df.filter(d => d.Station === station);
+            stationData.sort((a, b) => pmOrder.indexOf(a.PM_size) - pmOrder.indexOf(b.PM_size));
+            
+            const nBars = stationData.length;
+            const totalWidth = nBars * barWidth;
+            const startOffset = -totalWidth / 2 + barWidth / 2;
+            
+            stationData.forEach((row, j) => {
+                const offset = startOffset + j * barWidth;
+                const xPos = i + offset;
+                const color = colors[row.PM_size];
+                
+                barData.push({
+                    value: [xPos, row.OP_DTT_m_mean],
+                    itemStyle: { color: color }
+                });
+                
+                errorData.push([
+                    xPos,
+                    row.OP_DTT_m_mean - row.OP_DTT_m_SD,
+                    row.OP_DTT_m_mean + row.OP_DTT_m_SD
+                ]);
+                
+                scatterData.push({
+                    value: [xPos, row.PM_mass_mean],
+                    itemStyle: { color: color, borderColor: 'black', borderWidth: 1 }
+                });
+            });
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 80, bottom: 80, left: 60, right: 60 },
+            xAxis: {
+                type: 'value',
+                min: -0.6,
+                max: stationOrder.length - 0.4,
+                interval: 1,
+                axisLabel: {
+                    formatter: function (value) {
+                        return stationOrder[value];
+                    },
+                    rotate: 60,
+                    color: 'black'
+                },
+                axisTick: { show: false },
+                splitLine: { show: false }
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    name: 'OPᴰᵀᵀₘ (nmolDTT min⁻¹ μg⁻¹)',
+                    nameLocation: 'middle',
+                    nameGap: 45,
+                    min: 0,
+                    max: 0.25,
+                    splitLine: { show: true, lineStyle: { type: 'dashed' } },
+                    axisLabel: { color: 'black' }
+                },
+                {
+                    type: 'value',
+                    name: 'PM (μg m⁻³)',
+                    nameLocation: 'middle',
+                    nameGap: 45,
+                    min: 0,
+                    max: 50,
+                    splitLine: { show: false },
+                    axisLabel: { color: 'black' }
+                }
+            ],
+            series: [
+                {
+                    type: 'custom',
+                    data: barData,
+                    renderItem: function(params, api) {
+                        const xVal = api.value(0);
+                        const yVal = api.value(1);
+                        const start = api.coord([xVal - barWidth/2, 0]);
+                        const size = api.size([barWidth, yVal]);
+                        return {
+                            type: 'rect',
+                            shape: {
+                                x: start[0],
+                                y: start[1] - size[1], // y grows down
+                                width: size[0],
+                                height: size[1]
+                            },
+                            style: api.style()
+                        };
+                    },
+                    z: 2
+                },
+                {
+                    type: 'custom',
+                    renderItem: function(params, api) {
+                        const xValue = api.value(0);
+                        const low = api.value(1);
+                        const high = api.value(2);
+                        const style = api.style({ stroke: 'gray', lineWidth: 1.5 });
+                        const xCoord = api.coord([xValue, high])[0];
+                        const lowCoord = api.coord([xValue, low]);
+                        const highCoord = api.coord([xValue, high]);
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                { type: 'line', shape: { x1: lowCoord[0], y1: lowCoord[1], x2: highCoord[0], y2: highCoord[1] }, style: style },
+                                { type: 'line', shape: { x1: xCoord-5, y1: lowCoord[1], x2: xCoord+5, y2: lowCoord[1] }, style: style },
+                                { type: 'line', shape: { x1: xCoord-5, y1: highCoord[1], x2: xCoord+5, y2: highCoord[1] }, style: style }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 3
+                },
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    yAxisIndex: 1,
+                    symbolSize: 10,
+                    z: 4
+                }
+            ],
+            graphic: [
+                // Dividers: 0.5, 7.5, 8.5
+                {
+                    type: 'text',
+                    left: 20, top: 20,
+                    style: { text: 'b)', font: 'bold 16px Arial' }
+                }
+            ]
+        };
+        
+        // Add MarkLines for dividers
+        option.series.push({
+            type: 'line',
+            markLine: {
+                symbol: 'none',
+                lineStyle: { color: 'gray', width: 2, type: 'solid' },
+                label: { show: false },
+                data: [
+                    { xAxis: 0.5 },
+                    { xAxis: 7.5 },
+                    { xAxis: 8.5 }
+                ],
+                animation: false
+            },
+            data: []
+        });
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

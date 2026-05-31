@@ -1,0 +1,121 @@
+{
+  "query_id": "query_09",
+  "query_text": "Create a heatmap for the 15 countries with the smallest `pillar score spread`, where rows are countries selected after computing `max pillar score minus min pillar score`, columns are the three pillars, each cell shows `pillar score minus that country's three-pillar average`, values are expressed in index points, and rows are sorted from the smallest spread to the largest.",
+  "chart_type": "heatmap",
+  "value_unit": "index points",
+  "sort_rule": "ascending by pillar_score_spread",
+  "selection_rule": "15 countries with the smallest pillar score spread",
+  "records": [
+    {
+      "entity": "Paraguay",
+      "pillar_score_spread": 5.673,
+      "ease_of_operating_business_centered": -0.139667,
+      "business_incentives_centered": 2.906333,
+      "market_perception_centered": -2.766667
+    },
+    {
+      "entity": "Ethiopia",
+      "pillar_score_spread": 5.902,
+      "ease_of_operating_business_centered": 1.892,
+      "business_incentives_centered": -3.897,
+      "market_perception_centered": 2.005
+    },
+    {
+      "entity": "Cape Verde",
+      "pillar_score_spread": 7.143,
+      "ease_of_operating_business_centered": -4.262667,
+      "business_incentives_centered": 2.880333,
+      "market_perception_centered": 1.382333
+    },
+    {
+      "entity": "Algeria",
+      "pillar_score_spread": 7.647,
+      "ease_of_operating_business_centered": 3.309,
+      "business_incentives_centered": 1.029,
+      "market_perception_centered": -4.338
+    },
+    {
+      "entity": "Israel",
+      "pillar_score_spread": 8.024,
+      "ease_of_operating_business_centered": 1.55,
+      "business_incentives_centered": -4.787,
+      "market_perception_centered": 3.237
+    },
+    {
+      "entity": "Malaysia",
+      "pillar_score_spread": 9.319,
+      "ease_of_operating_business_centered": 6.054333,
+      "business_incentives_centered": -2.789667,
+      "market_perception_centered": -3.264667
+    },
+    {
+      "entity": "United Kingdom",
+      "pillar_score_spread": 10.365,
+      "ease_of_operating_business_centered": 2.859,
+      "business_incentives_centered": -6.612,
+      "market_perception_centered": 3.753
+    },
+    {
+      "entity": "Taiwan",
+      "pillar_score_spread": 10.705,
+      "ease_of_operating_business_centered": 5.016,
+      "business_incentives_centered": -5.689,
+      "market_perception_centered": 0.673
+    },
+    {
+      "entity": "Hungary",
+      "pillar_score_spread": 11.172,
+      "ease_of_operating_business_centered": 3.145333,
+      "business_incentives_centered": 4.013333,
+      "market_perception_centered": -7.158667
+    },
+    {
+      "entity": "Tanzania",
+      "pillar_score_spread": 11.491,
+      "ease_of_operating_business_centered": 7.461667,
+      "business_incentives_centered": -3.432333,
+      "market_perception_centered": -4.029333
+    },
+    {
+      "entity": "Guinea",
+      "pillar_score_spread": 11.725,
+      "ease_of_operating_business_centered": 7.461333,
+      "business_incentives_centered": -4.263667,
+      "market_perception_centered": -3.197667
+    },
+    {
+      "entity": "Namibia",
+      "pillar_score_spread": 12.284,
+      "ease_of_operating_business_centered": 3.027333,
+      "business_incentives_centered": -7.655667,
+      "market_perception_centered": 4.628333
+    },
+    {
+      "entity": "Venezuela",
+      "pillar_score_spread": 12.317,
+      "ease_of_operating_business_centered": -7.291,
+      "business_incentives_centered": 2.265,
+      "market_perception_centered": 5.026
+    },
+    {
+      "entity": "Qatar",
+      "pillar_score_spread": 12.402,
+      "ease_of_operating_business_centered": -0.754,
+      "business_incentives_centered": 6.578,
+      "market_perception_centered": -5.824
+    },
+    {
+      "entity": "Estonia",
+      "pillar_score_spread": 12.767,
+      "ease_of_operating_business_centered": 5.746667,
+      "business_incentives_centered": -7.020333,
+      "market_perception_centered": 1.273667
+    }
+  ],
+  "chart_title": "IBEI 2026 Most Balanced Pillar Profiles",
+  "heatmap_fields": [
+    "ease_of_operating_business_centered",
+    "business_incentives_centered",
+    "market_perception_centered"
+  ]
+}

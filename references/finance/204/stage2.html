@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>ORCL 2016–2024 息税折旧摊销前利润（EBITDA）折线图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f9;
+      color: #222;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    p.subtitle {
+      margin-top: 0;
+      margin-bottom: 18px;
+      color: #555;
+      font-size: 14px;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 18px 18px 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      font-size: 12px;
+      color: #666;
+    }
+    canvas {
+      max-height: 520px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>甲骨文公司（ORCL）2016–2024 财年 EBITDA 变化</h1>
+    <p class="subtitle">单位：亿美元（USD Billions）</p>
+    <canvas id="ebitdaChart"></canvas>
+  </div>
+  <div class="note">
+    数据来源：用户提供的财报数据（RESULT_EBITDA, 2016–2024）。<br />
+    说明：EBITDA = Earnings Before Interest, Taxes, Depreciation, and Amortization（息税折旧摊销前利润）。
+  </div>
+
+  <script>
+    // 原始数据（单位：美元）
+    const rawData = [
+      { year: 2016, ebitda: 15418000000 },
+      { year: 2017, ebitda: 15929000000 },
+      { year: 2018, ebitda: 17234000000 },
+      { year: 2019, ebitda: 17269000000 },
+      { year: 2020, ebitda: 17026000000 },
+      { year: 2021, ebitda: 19905000000 },
+      { year: 2022, ebitda: 13526000000 },
+      { year: 2023, ebitda: 18739000000 },
+      { year: 2024, ebitda: 21394000000 }
+    ];
+
+    const labels = rawData.map(d => d.year.toString());
+    // 转为“亿美元”（billions of USD）
+    const dataBillions = rawData.map(d => d.ebitda / 1e9);
+
+    const ctx = document.getElementById('ebitdaChart');
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'EBITDA（亿美元）',
+          data: dataBillions,
+          borderColor: 'rgba(54, 162, 235, 1)',
+          backgroundColor: 'rgba(54, 162, 235, 0.12)',
+          pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 1.5,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          tension: 0.25,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        },
+        plugins: {
+          tooltip: {
+            usePointStyle: true,
+            callbacks: {
+              label: function(context) {
+                const value = context.raw;
+                return ' EBITDA: ' + value.toFixed(2) + ' 亿美元';
+              }
+            }
+          },
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 12,
+              usePointStyle: true
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: '财年（Fiscal Year）',
+              color: '#555'
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'EBITDA（亿美元，USD Billions）',
+              color: '#555'
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(0) + ' ';
+              }
+            },
+            beginAtZero: false
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

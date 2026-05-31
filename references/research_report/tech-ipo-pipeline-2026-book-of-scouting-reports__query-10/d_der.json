@@ -1,0 +1,75 @@
+{
+  "report_id": "014",
+  "query_id": 10,
+  "query_text": "Create a ranked bar chart for the top 12 companies by `IPO probability per 1,000 employees`, using companies with numeric `Headcount`, with values shown as `percentage points of IPO probability per 1,000 employees`, sorted descending by the derived metric.",
+  "chart_type": "ranked_bar",
+  "value_unit": "percentage points of IPO probability per 1,000 employees",
+  "sort_rule": "descending by IPO probability per 1,000 employees",
+  "selection_rule": "top 12 companies with numeric headcount",
+  "records": [
+    {
+      "label": "Kraken",
+      "value": 494.067797
+    },
+    {
+      "label": "Socure",
+      "value": 120.954357
+    },
+    {
+      "label": "Locus Robotics",
+      "value": 105.208333
+    },
+    {
+      "label": "ManyPets",
+      "value": 83.023873
+    },
+    {
+      "label": "Lendable",
+      "value": 72.323232
+    },
+    {
+      "label": "Kurly",
+      "value": 67.028986
+    },
+    {
+      "label": "Skydio",
+      "value": 66.868932
+    },
+    {
+      "label": "Transmit Security",
+      "value": 62.974684
+    },
+    {
+      "label": "Sword",
+      "value": 57.325467
+    },
+    {
+      "label": "Avathon",
+      "value": 55.944056
+    },
+    {
+      "label": "HoneyBook",
+      "value": 54.621849
+    },
+    {
+      "label": "Games24x7",
+      "value": 48.542881
+    }
+  ],
+  "plot_config": {
+    "title": "Top companies by IPO probability per 1,000 employees",
+    "x_label": "IPO-probability points per 1,000 employees",
+    "y_label": "Company"
+  },
+  "reasoning_summary": [
+    "Filtered to companies with numeric headcount.",
+    "Scaled headcount to units of 1,000 employees.",
+    "Divided IPO probability by scaled headcount and ranked descending.",
+    "Kept the top 12 companies."
+  ],
+  "stats": {
+    "eligible_count": 104,
+    "returned_count": 12
+  },
+  "open_issues": []
+}

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 1200px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const df = [
+    {
+        "Scenario": "Red and processed meat (25%)",
+        "Nutrient": "Free sugars",
+        "Mean difference from observed (%)": -0.588834,
+        "95% CI": "(-0.56, -0.62)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Red and processed meat (50%)",
+        "Nutrient": "Free sugars",
+        "Mean difference from observed (%)": -0.867064,
+        "95% CI": "(-0.83, -0.91)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Dairy (25%)",
+        "Nutrient": "Free sugars",
+        "Mean difference from observed (%)": 0.211354,
+        "95% CI": "(0.2, 0.22)",
+        "P-value": "P = 0.08"
+    },
+    {
+        "Scenario": "Dairy (50%)",
+        "Nutrient": "Free sugars",
+        "Mean difference from observed (%)": 0.640388,
+        "95% CI": "(0.61, 0.67)",
+        "P-value": "P = 0.008"
+    },
+    {
+        "Scenario": "Red and processed meat (25%)",
+        "Nutrient": "Saturated fat",
+        "Mean difference from observed (%)": -0.838248,
+        "95% CI": "(-0.8, -0.88)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Red and processed meat (50%)",
+        "Nutrient": "Saturated fat",
+        "Mean difference from observed (%)": -4.70775,
+        "95% CI": "(-4.5, -4.92)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Dairy (25%)",
+        "Nutrient": "Saturated fat",
+        "Mean difference from observed (%)": -13.4857,
+        "95% CI": "(-12.88, -14.09)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Dairy (50%)",
+        "Nutrient": "Saturated fat",
+        "Mean difference from observed (%)": -33.3778,
+        "95% CI": "(-31.89, -34.87)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Red and processed meat (25%)",
+        "Nutrient": "Sodium",
+        "Mean difference from observed (%)": -1.51633,
+        "95% CI": "(-1.45, -1.58)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Red and processed meat (50%)",
+        "Nutrient": "Sodium",
+        "Mean difference from observed (%)": -3.18769,
+        "95% CI": "(-3.05, -3.33)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Dairy (25%)",
+        "Nutrient": "Sodium",
+        "Mean difference from observed (%)": -1.4256,
+        "95% CI": "(-1.36, -1.49)",
+        "P-value": "P < 0.0001"
+    },
+    {
+        "Scenario": "Dairy (50%)",
+        "Nutrient": "Sodium",
+        "Mean difference from observed (%)": -2.9479,
+        "95% CI": "(-2.82, -3.08)",
+        "P-value": "P < 0.0001"
+    }
+];
+
+        // Colors from Python script
+        const colors = {
+            'Red and processed meat (25%)': '#D37228',
+            'Red and processed meat (50%)': '#8B4513',
+            'Dairy (25%)': '#4A86BC',
+            'Dairy (50%)': '#205283'
+        };
+
+        const nutrientOrder = ['Free sugars', 'Saturated fat', 'Sodium'];
+        const scenarioOrder = [
+            'Red and processed meat (25%)',
+            'Red and processed meat (50%)',
+            'Dairy (25%)',
+            'Dairy (50%)'
+        ];
+
+        // Prepare Series Data
+        const scatterData = [];
+        const labelData = [];
+        const nutrientLabelData = [];
+        const separatorLines = [];
+
+        let yBase = 0;
+        const groupGap = 2.5;
+
+        nutrientOrder.forEach((nutrient, nIdx) => {
+            scenarioOrder.forEach((scenario, sIdx) => {
+                const row = df.find(d => d.Nutrient === nutrient && d.Scenario === scenario);
+                if (!row) return;
+
+                const yPos = yBase + sIdx;
+                const meanVal = row['Mean difference from observed (%)'];
+                // Clean CI text
+                let ciText = row['95% CI'].replace('·', '.').replace('·', '.'); // Replace all just in case
+                
+                const pVal = row['P-value'];
+                const labelText = `${ciText} ${pVal}`;
+
+                // 1. Dot Point
+                scatterData.push({
+                    value: [meanVal, yPos],
+                    itemStyle: { color: colors[scenario] },
+                    // tooltip info could be added here
+                });
+
+                // 2. Annotation Label
+                // Python logic: if mean < -30: left aligned (text to right of dot). Else right aligned (text to left).
+                // ECharts 'position': 'left' means label is on the left side of the point.
+                // Python `ha='right'` (at x - 0.8) means text is on the left.
+                // So: if mean >= -30 -> ECharts position 'left'.
+                // if mean < -30 -> ECharts position 'right'.
+                
+                const isOutlier = meanVal < -30;
+                const position = isOutlier ? 'right' : 'left';
+                const offset = isOutlier ? [10, 0] : [-10, 0];
+
+                labelData.push({
+                    value: [meanVal, yPos],
+                    label: {
+                        show: true,
+                        formatter: labelText,
+                        position: position,
+                        offset: offset,
+                        color: 'black',
+                        fontSize: 14,
+                        fontFamily: 'Arial'
+                    }
+                });
+            });
+
+            // 3. Nutrient Label (Left Axis Group Label)
+            const yCenter = yBase + 1.5;
+            nutrientLabelData.push({
+                value: [-35, yCenter], // Anchored at left edge of axis
+                label: {
+                    show: true,
+                    formatter: nutrient,
+                    position: 'left',
+                    distance: 30, // Push further left into the margin
+                    color: 'black',
+                    fontSize: 16,
+                    fontWeight: 'bold' // Matches Python
+                }
+            });
+
+            // 4. Separator Line
+            if (nIdx !== nutrientOrder.length - 1) {
+                const lineY = yBase + 4 + (groupGap / 2) - 0.5;
+                separatorLines.push([
+                    { coord: [-35, lineY], lineStyle: { color: '#D3D3D3', width: 1.5 } },
+                    { coord: [5, lineY] }
+                ]);
+            }
+
+            yBase += 4 + groupGap;
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            // Increase left grid to accommodate Nutrient labels
+            grid: {
+                top: 50,
+                bottom: 150, // Space for legend
+                left: 250,
+                right: 50
+            },
+            xAxis: {
+                type: 'value',
+                min: -35,
+                max: 5,
+                interval: 5,
+                name: 'Mean difference from observed diets (%)',
+                nameLocation: 'middle',
+                nameGap: 30,
+                nameTextStyle: { fontSize: 16, fontFamily: 'Arial' },
+                axisLabel: { fontSize: 14, color: 'black' },
+                axisLine: { show: false }, // Python hides top/right/left spines, but shows bottom?
+                // Python: spines['bottom'].set_linewidth(1.2).
+                axisTick: { show: true },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'value',
+                min: -1,
+                max: yBase - groupGap + 1,
+                show: false, // Hide all Y axis elements (ticks, lines, labels)
+                splitLine: { show: false }
+            },
+            series: [
+                // Main Dots
+                {
+                    name: 'Data',
+                    type: 'scatter',
+                    symbolSize: 20, // Python s=180 (area) -> r approx 7.5 -> dia 15. Let's say 18-20 for visibility.
+                    data: scatterData,
+                    z: 5
+                },
+                // Annotation Labels (transparent dots)
+                {
+                    type: 'scatter',
+                    symbolSize: 0,
+                    data: labelData,
+                    z: 6,
+                    silent: true
+                },
+                // Nutrient Labels (transparent dots, clip=false to draw in margin)
+                {
+                    type: 'scatter',
+                    symbolSize: 0,
+                    data: nutrientLabelData,
+                    clip: false,
+                    z: 6,
+                    silent: true
+                },
+                // Separator Lines
+                {
+                    type: 'scatter',
+                    data: [],
+                    markLine: {
+                        data: separatorLines,
+                        symbol: 'none',
+                        silent: true,
+                        animation: false
+                    },
+                    z: 1
+                },
+                // Vertical Zero Line
+                {
+                    type: 'scatter',
+                    data: [],
+                    markLine: {
+                        data: [
+                            { xAxis: 0, lineStyle: { color: 'gray', type: 'dashed', width: 2 } }
+                        ],
+                        symbol: 'none',
+                        silent: true,
+                        animation: false
+                    },
+                    z: 2
+                },
+                // Dummy Series for Legend
+                ...scenarioOrder.map(name => ({
+                    name: name,
+                    type: 'scatter',
+                    symbol: 'circle',
+                    itemStyle: { color: colors[name] },
+                    data: [] 
+                }))
+            ],
+            legend: {
+                data: scenarioOrder, // Order: Meat 25, Meat 50, Dairy 25, Dairy 50
+                left: 250, // Align with grid left roughly
+                bottom: 50,
+                orient: 'vertical',
+                itemGap: 10,
+                textStyle: { fontSize: 14, color: 'black' },
+                icon: 'circle'
+            }
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

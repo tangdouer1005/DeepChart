@@ -1,0 +1,47 @@
+{
+  "query_id": "query_03",
+  "query_text": "Create a ranked horizontal bar chart showing the top 8 countries by clinical-versus-public response gap in the 2020 report, where the plotted value is `((diagnostics + treatment) / total sampled innovations) - ((prevention + information) / total sampled innovations)`, expressed in percentage points, countries must have at least 10 total sampled innovations, and bars are sorted from the largest positive gap to the smallest.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "percentage points",
+  "sort_rule": "descending by clinical_public_gap_pp",
+  "selection_rule": "top 8 after total_innovations >= 10",
+  "plot_spec": {
+    "title": "2020 Clinical vs Public Response Gap",
+    "xlabel": "Gap (pp)",
+    "value_field": "clinical_public_gap_pp"
+  },
+  "records": [
+    {
+      "entity": "Taiwan",
+      "clinical_public_gap_pp": 61.5385
+    },
+    {
+      "entity": "South Korea",
+      "clinical_public_gap_pp": 46.1538
+    },
+    {
+      "entity": "France",
+      "clinical_public_gap_pp": 33.3333
+    },
+    {
+      "entity": "Belgium",
+      "clinical_public_gap_pp": 26.4706
+    },
+    {
+      "entity": "Spain",
+      "clinical_public_gap_pp": 25.7143
+    },
+    {
+      "entity": "United States",
+      "clinical_public_gap_pp": 20.5446
+    },
+    {
+      "entity": "India",
+      "clinical_public_gap_pp": 13.3333
+    },
+    {
+      "entity": "Switzerland",
+      "clinical_public_gap_pp": 13.0435
+    }
+  ]
+}

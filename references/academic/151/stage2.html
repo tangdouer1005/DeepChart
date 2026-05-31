@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 800px; height: 500px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "Group": "MSW management",
+        "Parameter": "MSW composition",
+        "Low": 13.9,
+        "High": 28.1
+    },
+    {
+        "Group": "MSW management",
+        "Parameter": "MSW moisture",
+        "Low": 11.4,
+        "High": 16.7
+    },
+    {
+        "Group": "MSW management",
+        "Parameter": "Pre-treatment",
+        "Low": 9.9,
+        "High": 14.1
+    },
+    {
+        "Group": "SAF production",
+        "Parameter": "Syngas yield",
+        "Low": 10.3,
+        "High": 16.7
+    },
+    {
+        "Group": "SAF production",
+        "Parameter": "CO+H2 ratio",
+        "Low": 12.7,
+        "High": 22.5
+    },
+    {
+        "Group": "SAF production",
+        "Parameter": "CO conversion",
+        "Low": 14.1,
+        "High": 15.1
+    },
+    {
+        "Group": "Energy and others",
+        "Parameter": "Electricity",
+        "Low": 3.6,
+        "High": 20.9
+    },
+    {
+        "Group": "Energy and others",
+        "Parameter": "Others",
+        "Low": 11.9,
+        "High": 20.3
+    }
+];
+
+        const data = jsonData.map(d => ({
+            group: d.Group,
+            parameter: d.Parameter === "Pre-treatment" ? "Pretreatment" : d.Parameter,
+            low: d.Low,
+            high: d.High
+        }));
+        
+        const colors = {
+            'MSW management': '#3F5D68',
+            'SAF production': '#DDAA55',
+            'Energy and others': '#993333'
+        };
+        const textColors = {
+            'MSW management': '#C0D0D8',
+            'SAF production': '#967130',
+            'Energy and others': '#E0B0B0'
+        };
+
+        const chartData = [];
+        const xLabels = [];
+        let lastGroup = null;
+        
+        data.forEach(d => {
+            if (lastGroup && d.group !== lastGroup) {
+                // Add gap
+                chartData.push(null);
+                xLabels.push('');
+            }
+            chartData.push(d);
+            xLabels.push(d.parameter); // Not actually shown on axis
+            lastGroup = d.group;
+        });
+
+        // Series Data
+        const seriesLow = chartData.map(d => d ? d.low : null);
+        const seriesHeight = chartData.map(d => d ? d.high - d.low : null);
+        
+        // Colors array for each bar
+        const itemStyles = chartData.map(d => {
+            if (!d) return {};
+            return { color: colors[d.group] };
+        });
+        
+        const seriesDataVisible = chartData.map((d, i) => {
+            if (!d) return null;
+            return {
+                value: d.high - d.low,
+                itemStyle: { color: colors[d.group] },
+                label: {
+                    show: true,
+                    position: 'insideBottom',
+                    rotate: 90,
+                    align: 'left',
+                    verticalAlign: 'middle',
+                    distance: 5,
+                    formatter: d.parameter,
+                    color: textColors[d.group],
+                    fontSize: 11
+                }
+            };
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: 60,
+                bottom: 40,
+                left: 60,
+                right: 150 // Space for baseline label
+            },
+            xAxis: {
+                type: 'category',
+                data: chartData.map(() => ''), // No labels
+                axisTick: { show: false },
+                axisLine: { show: false },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: 'GHG emission intensity\nvariation (gCO₂e MJ⁻¹)',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: 0,
+                max: 30,
+                splitLine: { show: false },
+                axisLine: { show: true },
+                axisLabel: { color: 'black' }
+            },
+            series: [
+                {
+                    name: 'Base',
+                    type: 'bar',
+                    stack: 'total',
+                    itemStyle: {
+                        borderColor: 'transparent',
+                        color: 'transparent'
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            borderColor: 'transparent',
+                            color: 'transparent'
+                        }
+                    },
+                    data: seriesLow,
+                    barWidth: '65%'
+                },
+                {
+                    name: 'Range',
+                    type: 'bar',
+                    stack: 'total',
+                    data: seriesDataVisible,
+                    barWidth: '65%'
+                },
+                // Baseline Line
+                {
+                    type: 'line',
+                    markLine: {
+                        symbol: 'none',
+                        data: [{ yAxis: 14.1 }],
+                        lineStyle: {
+                            color: 'grey',
+                            type: 'dashed',
+                            width: 1
+                        },
+                        label: {
+                            show: true,
+                            position: 'end',
+                            formatter: 'Baseline\n14.1\ngCO₂e MJ⁻¹',
+                            color: '#2F4F4F',
+                            fontSize: 12,
+                            lineHeight: 16
+                        },
+                        animation: false
+                    }
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'c',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+        
+        // Group Labels
+        const groupLabels = [
+            { name: 'MSW management', index: 1, color: colors['MSW management'] },
+            { name: 'SAF production', index: 5, color: colors['SAF production'] },
+            { name: 'Energy and others', index: 8.5, color: colors['Energy and others'] }
+        ];
+        
+        const groupLabelData = groupLabels.map(g => ({
+            value: [g.index, 28.5],
+            label: {
+                show: true,
+                formatter: g.name,
+                position: 'top',
+                color: g.color,
+                fontSize: 13
+            },
+            itemStyle: { opacity: 0 }
+        }));
+        
+        option.series.push({
+            type: 'scatter',
+            data: groupLabelData,
+            symbolSize: 0
+        });
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

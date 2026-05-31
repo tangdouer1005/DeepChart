@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const jsonData = [
+    {
+        "Region": "China",
+        "Scenario": "S1",
+        "Central": 0.154,
+        "Low": 0.114,
+        "High": 0.254,
+        "Label": "China-S1",
+        "Percentile_10": 0.026,
+        "Percentile_25": 0.04,
+        "Percentile_50": 0.076,
+        "Percentile_75": 0.235,
+        "Percentile_90": 0.397
+    },
+    {
+        "Region": "China",
+        "Scenario": "S2",
+        "Central": 0.294,
+        "Low": 0.199,
+        "High": 0.394,
+        "Label": "China-S2",
+        "Percentile_10": 0.049,
+        "Percentile_25": 0.077,
+        "Percentile_50": 0.144,
+        "Percentile_75": 0.449,
+        "Percentile_90": 0.757
+    },
+    {
+        "Region": "China",
+        "Scenario": "S3",
+        "Central": 0.439,
+        "Low": 0.297,
+        "High": 0.588,
+        "Label": "China-S3",
+        "Percentile_10": 0.073,
+        "Percentile_25": 0.115,
+        "Percentile_50": 0.216,
+        "Percentile_75": 0.67,
+        "Percentile_90": 1.13
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S1",
+        "Central": 0.067,
+        "Low": 0.05,
+        "High": 0.113,
+        "Label": "EU27-S1",
+        "Percentile_10": 0.007,
+        "Percentile_25": 0.021,
+        "Percentile_50": 0.056,
+        "Percentile_75": 0.139,
+        "Percentile_90": 0.328
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S2",
+        "Central": 0.13,
+        "Low": 0.087,
+        "High": 0.176,
+        "Label": "EU27-S2",
+        "Percentile_10": 0.013,
+        "Percentile_25": 0.04,
+        "Percentile_50": 0.109,
+        "Percentile_75": 0.269,
+        "Percentile_90": 0.636
+    },
+    {
+        "Region": "EU27",
+        "Scenario": "S3",
+        "Central": 0.194,
+        "Low": 0.13,
+        "High": 0.263,
+        "Label": "EU27-S3",
+        "Percentile_10": 0.02,
+        "Percentile_25": 0.06,
+        "Percentile_50": 0.162,
+        "Percentile_75": 0.401,
+        "Percentile_90": 0.95
+    },
+    {
+        "Region": "US",
+        "Scenario": "S1",
+        "Central": 0.044,
+        "Low": 0.033,
+        "High": 0.075,
+        "Label": "US-S1",
+        "Percentile_10": 0.006,
+        "Percentile_25": 0.018,
+        "Percentile_50": 0.064,
+        "Percentile_75": 0.211,
+        "Percentile_90": 0.592
+    },
+    {
+        "Region": "US",
+        "Scenario": "S2",
+        "Central": 0.087,
+        "Low": 0.057,
+        "High": 0.119,
+        "Label": "US-S2",
+        "Percentile_10": 0.011,
+        "Percentile_25": 0.035,
+        "Percentile_50": 0.127,
+        "Percentile_75": 0.418,
+        "Percentile_90": 1.17
+    },
+    {
+        "Region": "US",
+        "Scenario": "S3",
+        "Central": 0.13,
+        "Low": 0.085,
+        "High": 0.178,
+        "Label": "US-S3",
+        "Percentile_10": 0.017,
+        "Percentile_25": 0.053,
+        "Percentile_50": 0.189,
+        "Percentile_75": 0.624,
+        "Percentile_90": 1.747
+    },
+    {
+        "Region": "India",
+        "Scenario": "S1",
+        "Central": 0.376,
+        "Low": 0.278,
+        "High": 0.623,
+        "Label": "India-S1",
+        "Percentile_10": 0.021,
+        "Percentile_25": 0.042,
+        "Percentile_50": 0.094,
+        "Percentile_75": 0.223,
+        "Percentile_90": 0.726
+    },
+    {
+        "Region": "India",
+        "Scenario": "S2",
+        "Central": 0.721,
+        "Low": 0.486,
+        "High": 0.97,
+        "Label": "India-S2",
+        "Percentile_10": 0.04,
+        "Percentile_25": 0.08,
+        "Percentile_50": 0.179,
+        "Percentile_75": 0.427,
+        "Percentile_90": 1.393
+    },
+    {
+        "Region": "India",
+        "Scenario": "S3",
+        "Central": 1.076,
+        "Low": 0.725,
+        "High": 1.448,
+        "Label": "India-S3",
+        "Percentile_10": 0.06,
+        "Percentile_25": 0.12,
+        "Percentile_50": 0.268,
+        "Percentile_75": 0.637,
+        "Percentile_90": 2.079
+    }
+];
+
+        const data = jsonData.map(d => ({
+            region: d.Region === "US" ? "United States" : d.Region, // Match color map key
+            scenario: d.Scenario,
+            central: d.Central,
+            low: d.Low,
+            high: d.High,
+            points: [d.Percentile_10, d.Percentile_25, d.Percentile_50, d.Percentile_75, d.Percentile_90]
+        }));
+        
+        const colors = {
+            'China': '#EBC05C',
+            'EU27': '#CC5C45',
+            'United States': '#265586',
+            'India': '#306873'
+        };
+
+        const xLabels = [];
+        const barData = [];
+        const errorData = [];
+        const scatterSeriesData = [];
+
+        data.forEach((d, i) => {
+            let labelRegion = d.region === 'United States' ? 'US' : d.region;
+            xLabels.push(`${labelRegion}-${d.scenario}`);
+            
+            barData.push({
+                value: d.central,
+                itemStyle: { color: colors[d.region], opacity: 0.9 }
+            });
+            
+            errorData.push([i, d.low, d.high]);
+            
+            // Scatter points
+            const points = d.points || [];
+            points.forEach(pt => {
+                // Jitter
+                const jitter = (Math.random() - 0.5) * 0.2;
+                scatterSeriesData.push([i + jitter, pt]);
+            });
+        });
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        const option = {
+            backgroundColor: 'white',
+            grid: { top: 40, right: 20, bottom: 60, left: 60 },
+            xAxis: {
+                type: 'category',
+                data: xLabels,
+                axisLabel: { 
+                    color: 'black',
+                    rotate: 0,
+                    interval: 0,
+                    fontSize: 11
+                },
+                axisTick: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                name: 'Ratio of MSW-SAF/jet fuel',
+                nameLocation: 'middle',
+                nameGap: 40,
+                type: 'value',
+                min: 0,
+                max: 2.0,
+                interval: 0.5,
+                axisLabel: { color: 'black' },
+                axisLine: { show: false },
+                axisTick: { show: true, length: 4, inside: false },
+                splitLine: { show: false }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: barData,
+                    barWidth: '70%',
+                    z: 1
+                },
+                {
+                    type: 'custom',
+                    name: 'error',
+                    itemStyle: {
+                        borderWidth: 1,
+                        stroke: 'gray'
+                    },
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const low = api.value(1);
+                        const high = api.value(2);
+                        const start = api.coord([xValue, low]);
+                        const end = api.coord([xValue, high]);
+                        const halfWidth = 5;
+                        
+                        const style = api.style({
+                            stroke: 'gray',
+                            lineWidth: 1
+                        });
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0], y1: start[1],
+                                        x2: end[0], y2: end[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: start[0] - halfWidth, y1: start[1],
+                                        x2: start[0] + halfWidth, y2: start[1]
+                                    },
+                                    style: style
+                                },
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: end[0] - halfWidth, y1: end[1],
+                                        x2: end[0] + halfWidth, y2: end[1]
+                                    },
+                                    style: style
+                                }
+                            ]
+                        };
+                    },
+                    data: errorData,
+                    z: 2
+                },
+                {
+                    type: 'scatter',
+                    data: scatterSeriesData,
+                    symbolSize: 4,
+                    itemStyle: {
+                        color: 'black',
+                        opacity: 0.6
+                    },
+                    z: 3
+                }
+            ],
+            graphic: [
+                {
+                    type: 'text',
+                    left: 0,
+                    top: 0,
+                    style: {
+                        text: 'c',
+                        font: 'bold 20px Arial',
+                        fill: 'black'
+                    }
+                }
+            ]
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

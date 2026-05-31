@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>lly 自由现金流收益质量 (Quality of Income Ratio) 2016–2024</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f7fa;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px 0;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: 400;
+      margin: 0 0 16px 0;
+      color: #666;
+    }
+
+    #chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px 24px 28px 24px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+
+      /* FIX: give the container a fixed (but responsive) height
+         and let Chart.js manage the canvas height */
+      height: 420px;
+    }
+
+    /* Let Chart.js fully control canvas sizing inside its container */
+    #qoiChart {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .chart-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      font-size: 11px;
+      color: #777;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .legend-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      background: #3b82f6;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <h1>lly 自由现金流收益质量 (Quality of Income Ratio)</h1>
+    <h2>2016 – 2024（按财年）</h2>
+    <canvas id="qoiChart"></canvas>
+    <div class="chart-footer">
+      <div class="legend-note">
+        <span class="legend-color"></span>
+        <span>指标：自由现金流 / 净利润（Quality of Income Ratio）</span>
+      </div>
+      <div>数据单位：比率（Ratio）</div>
+    </div>
+  </div>
+
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('qoiChart').getContext('2d');
+
+    const dataYears = [
+      '2016',
+      '2017',
+      '2018',
+      '2019',
+      '2020',
+      '2021',
+      '2022',
+      '2023',
+      '2024'
+    ];
+
+    const qoiValues = [
+      0.9037053596378471,
+      0.9653607467638514,
+      0.7235945931786032,
+      0.6687776548672566,
+      0.7615499080225433,
+      0.7658481530704808,
+      0.6962007901098685,
+      0.3443148782745684,
+      0.4576376743148072
+    ];
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: dataYears,
+        datasets: [
+          {
+            label: '自由现金流收益质量 (Quality of Income Ratio)',
+            data: qoiValues,
+            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+            borderColor: 'rgba(37, 99, 235, 1)',
+            borderWidth: 1.5,
+            borderRadius: 6,
+            hoverBackgroundColor: 'rgba(37, 99, 235, 0.9)',
+            hoverBorderColor: 'rgba(30, 64, 175, 1)'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // fill the container height
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return ' ' + value.toFixed(3);
+              }
+            },
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            borderColor: 'rgba(148, 163, 184, 0.5)',
+            borderWidth: 1,
+            titleFont: { size: 12, weight: '600' },
+            bodyFont: { size: 12 },
+            padding: 8,
+            cornerRadius: 6
+          },
+          title: {
+            display: false
+          }
+        },
+        layout: {
+          padding: { top: 8, right: 8, bottom: 8, left: 4 }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: { size: 12 }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: 1.1,
+            grid: {
+              color: 'rgba(148, 163, 184, 0.25)',
+              drawBorder: false
+            },
+            ticks: {
+              font: { size: 12 },
+              callback: function (value) {
+                return value.toFixed(1);
+              }
+            },
+            title: {
+              display: true,
+              text: 'Ratio',
+              font: { size: 12, weight: '500' },
+              color: '#555'
+            }
+          }
+        },
+        animation: {
+          duration: 700,
+          easing: 'easeOutQuart'
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AbbVie Reinvestment Rate (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f6f7fb;
+      color: #222;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem 0;
+    }
+    h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #555;
+      margin: 0 0 1rem 0;
+    }
+    .chart-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem 1.25rem 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+    }
+    canvas {
+      max-height: 520px;
+    }
+    .note {
+      font-size: 0.78rem;
+      color: #666;
+      margin-top: 0.75rem;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <h1>AbbVie 资本再投资率 (Reinvestment Rate)</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <canvas id="reinvestmentChart"></canvas>
+    <div class="note">
+      说明：资本再投资率 = Reinvestment / NOPAT。<br />
+      数据来源：提供的 AbbVie 财务数据（2016–2024）。
+    </div>
+  </div>
+
+  <script>
+    // Data from source (RESULT_Reinvestment_Rate)
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+
+    const reinvestmentRates = [
+      0.3878119502124241,
+      0.0785288944191845,
+      -0.5761801691947763,
+      0.0485804998291541,
+      -0.1685027204209728,
+      0.0444252272354026,
+      -0.0590336631136858,
+      -0.3731006492558553,
+      -0.0583028660078019,
+    ];
+
+    // Helper to get color based on rate sign
+    function getBarColors(values) {
+      const positiveColor = "rgba(46, 189, 133, 0.85)";
+      const positiveBorder = "rgba(46, 189, 133, 1)";
+      const negativeColor = "rgba(232, 81, 90, 0.85)";
+      const negativeBorder = "rgba(232, 81, 90, 1)";
+
+      return values.map((v) =>
+        v >= 0
+          ? { bg: positiveColor, border: positiveBorder }
+          : { bg: negativeColor, border: negativeBorder }
+      );
+    }
+
+    const barColors = getBarColors(reinvestmentRates);
+
+    const ctx = document.getElementById("reinvestmentChart").getContext("2d");
+
+    const reinvestmentChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "资本再投资率 (Reinvestment Rate)",
+            data: reinvestmentRates,
+            backgroundColor: barColors.map((c) => c.bg),
+            borderColor: barColors.map((c) => c.border),
+            borderWidth: 1.5,
+            borderRadius: 4,
+            hoverBackgroundColor: barColors.map((c) => c.border),
+            hoverBorderColor: barColors.map((c) => c.border),
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            backgroundColor: "rgba(35, 40, 53, 0.95)",
+            titleFont: { size: 13, weight: "600" },
+            bodyFont: { size: 12 },
+            padding: 10,
+            cornerRadius: 6,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                const pct = (value * 100).toFixed(2);
+                return ` 资本再投资率: ${pct}%`;
+              },
+              footer: function (context) {
+                const value = context[0].parsed.y;
+                if (value >= 0) {
+                  return " 正值：对业务进行再投资";
+                } else {
+                  return " 负值：净撤资（资本回收/减少）";
+                }
+              },
+            },
+          },
+          title: {
+            display: true,
+            text: "AbbVie 资本再投资率走势 (2016–2024)",
+            font: {
+              size: 15,
+              weight: "600",
+            },
+            padding: {
+              top: 10,
+              bottom: 10,
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              font: {
+                size: 11,
+              },
+            },
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: "rgba(0, 0, 0, 0.06)",
+            },
+            ticks: {
+              callback: function (value) {
+                return value * 100 + "%";
+              },
+              font: {
+                size: 11,
+              },
+            },
+            title: {
+              display: true,
+              text: "Reinvestment Rate (%)",
+              font: {
+                size: 12,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    // Simple interactivity: click legend to toggle (kept minimal since a single dataset)
+    // If more datasets added later, this still works naturally.
+  </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMO 皮奥特罗斯基 F-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-color: #ffffff;
+      --text-color: #222222;
+      --grid-color: rgba(0, 0, 0, 0.08);
+      --line-color: #0074d9;
+      --point-border-color: #ffffff;
+      --tooltip-bg: rgba(0, 0, 0, 0.8);
+      --tooltip-color: #ffffff;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #111827;
+        --text-color: #e5e7eb;
+        --grid-color: rgba(255, 255, 255, 0.08);
+        --line-color: #38bdf8;
+        --point-border-color: #020617;
+        --tooltip-bg: rgba(15, 23, 42, 0.95);
+        --tooltip-color: #f9fafb;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      padding: 1.5rem;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .subtitle {
+        color: #9ca3af;
+      }
+    }
+
+    .chart-wrapper {
+      position: relative;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .chart-wrapper {
+        background: rgba(15, 23, 42, 0.98);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    canvas {
+      max-height: 480px;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.75rem;
+      line-height: 1.4;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .note {
+        color: #9ca3af;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TMO 皮奥特罗斯基 F-Score (Piotroski F-Score)</h1>
+    <div class="subtitle">年度变化：2016–2024</div>
+
+    <div class="chart-wrapper">
+      <canvas id="fScoreChart"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：用户提供的财年 F-Score 数据。<br />
+      皮奥特罗斯基 F-Score 通常范围为 0–9，数值越高一般代表财务质量相对更好。
+    </div>
+  </div>
+
+  <script>
+    // Source data (as provided)
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+    const fScores = [7, 3, 7, 8, 8, 5, 5, 5, 7];
+
+    const ctx = document.getElementById("fScoreChart").getContext("2d");
+
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "Piotroski F-Score",
+            data: fScores,
+            borderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--line-color")
+              .trim(),
+            backgroundColor: "rgba(56, 189, 248, 0.15)",
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--line-color")
+              .trim(),
+            pointBorderWidth: 1.5,
+            tension: 0.25, // smoothness of line
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--text-color")
+                .trim(),
+            },
+          },
+          tooltip: {
+            backgroundColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-bg")
+              .trim(),
+            titleColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-color")
+              .trim(),
+            bodyColor: getComputedStyle(document.documentElement)
+              .getPropertyValue("--tooltip-color")
+              .trim(),
+            borderColor: "rgba(148, 163, 184, 0.4)",
+            borderWidth: 1,
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                return " F-Score: " + context.parsed.y;
+              },
+            },
+          },
+          title: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--grid-color")
+                .trim(),
+            },
+            ticks: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--text-color")
+                .trim(),
+            },
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMin: 0,
+            suggestedMax: 9,
+            grid: {
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--grid-color")
+                .trim(),
+            },
+            ticks: {
+              stepSize: 1,
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--text-color")
+                .trim(),
+            },
+            title: {
+              display: true,
+              text: "Piotroski F-Score",
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue("--text-color")
+                .trim(),
+            },
+          },
+        },
+      },
+    });
+
+    // Optional: live update of colors when system theme changes
+    // (helps keep chart consistent with dark/light mode)
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", () => {
+      const rootStyle = getComputedStyle(document.documentElement);
+      const textColor = rootStyle.getPropertyValue("--text-color").trim();
+      const gridColor = rootStyle.getPropertyValue("--grid-color").trim();
+      const lineColor = rootStyle.getPropertyValue("--line-color").trim();
+      const tooltipBg = rootStyle.getPropertyValue("--tooltip-bg").trim();
+      const tooltipColor = rootStyle
+        .getPropertyValue("--tooltip-color")
+        .trim();
+
+      chart.data.datasets[0].borderColor = lineColor;
+      chart.data.datasets[0].pointBorderColor = lineColor;
+
+      chart.options.plugins.legend.labels.color = textColor;
+      chart.options.plugins.tooltip.backgroundColor = tooltipBg;
+      chart.options.plugins.tooltip.titleColor = tooltipColor;
+      chart.options.plugins.tooltip.bodyColor = tooltipColor;
+
+      chart.options.scales.x.grid.color = gridColor;
+      chart.options.scales.x.ticks.color = textColor;
+
+      chart.options.scales.y.grid.color = gridColor;
+      chart.options.scales.y.ticks.color = textColor;
+      chart.options.scales.y.title.color = textColor;
+
+      chart.update();
+    });
+  </script>
+</body>
+</html>

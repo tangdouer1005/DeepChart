@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PG 皮奥特罗斯基 F-Score (2016–2024)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable 4.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --card-bg: #f7f7f9;
+      --axis-color: #444;
+      --grid-color: rgba(0, 0, 0, 0.06);
+      --accent-color: #1f78b4;
+      --accent-light: rgba(31, 120, 180, 0.15);
+      --accent-point: #145078;
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: var(--font-family);
+      background: var(--bg-color);
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 4px;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 1rem;
+      margin: 0 0 16px;
+      font-weight: 400;
+      color: #666;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 16px 18px 22px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .meta span.label {
+      font-weight: 600;
+      color: #444;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 420px;
+    }
+
+    .note {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 14px;
+      }
+      .chart-wrapper {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PG 皮奥特罗斯基 F-Score 变化</h1>
+    <h2>Fiscal Years 2016–2024</h2>
+    <div class="card">
+      <div class="meta">
+        <div>
+          <span class="label">指标：</span>
+          Piotroski F-Score（0–9，分数越高财务质量越好）
+        </div>
+        <div>
+          <span class="label">数据来源：</span>
+          用户提供数据（Fiscal Year, RESULT_F_Score）
+        </div>
+      </div>
+      <div class="chart-wrapper">
+        <canvas id="fscoreChart"></canvas>
+      </div>
+      <div class="note">
+        注：本图基于用户提供的 PG（Procter &amp; Gamble）2016–2024 财报年度
+        Piotroski F-Score 数据绘制，仅用于可视化展示。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Source data (exactly as provided)
+    const years = [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+    ];
+
+    const fScores = [7, 7, 5, 7, 7, 8, 6, 6, 7];
+
+    const ctx = document.getElementById("fscoreChart").getContext("2d");
+
+    const fScoreChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "Piotroski F-Score",
+            data: fScores,
+            borderColor: "#1f78b4",
+            backgroundColor: "rgba(31, 120, 180, 0.15)",
+            pointBackgroundColor: "#145078",
+            pointBorderColor: "#ffffff",
+            pointHoverBackgroundColor: "#ffffff",
+            pointHoverBorderColor: "#145078",
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBorderWidth: 1.5,
+            borderWidth: 2.2,
+            tension: 0.25,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+              padding: 16,
+              color: "#333",
+              font: {
+                size: 12,
+              },
+            },
+          },
+          title: {
+            display: false,
+          },
+          tooltip: {
+            backgroundColor: "rgba(15, 23, 42, 0.92)",
+            titleColor: "#f9fafb",
+            bodyColor: "#e5e7eb",
+            borderColor: "rgba(148, 163, 184, 0.5)",
+            borderWidth: 1,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function (context) {
+                return (
+                  " F-Score: " +
+                  context.formattedValue +
+                  " / 9"
+                );
+              },
+              title: function (items) {
+                if (!items.length) return "";
+                return "Fiscal Year " + items[0].label;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Fiscal Year",
+              color: "#444",
+              font: {
+                size: 12,
+                weight: "500",
+              },
+            },
+            ticks: {
+              color: "#444",
+              maxRotation: 0,
+              autoSkipPadding: 10,
+            },
+            grid: {
+              color: "rgba(0, 0, 0, 0.02)",
+            },
+          },
+          y: {
+            suggestedMin: 0,
+            suggestedMax: 9,
+            title: {
+              display: true,
+              text: "Piotroski F-Score",
+              color: "#444",
+              font: {
+                size: 12,
+                weight: "500",
+              },
+            },
+            ticks: {
+              color: "#444",
+              stepSize: 1,
+              precision: 0,
+            },
+            grid: {
+              color: "rgba(0, 0, 0, 0.06)",
+            },
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>

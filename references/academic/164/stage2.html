@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #ffffff; font-family: Arial, sans-serif; }
+        #chart-container { width: 1000px; height: 1200px; }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const rawData = [
+            {'Scenario': 'Red and processed meat (25%)', 'Nutrient': 'Potassium', 'Mean': -0.089396, 'CI': '(-0.091, -0.087)', 'P_text': 'P < 0.0001'},
+            {'Scenario': 'Red and processed meat (50%)', 'Nutrient': 'Potassium', 'Mean': -0.186498, 'CI': '(-0.19, -0.18)',   'P_text': 'P < 0.0001'},
+            {'Scenario': 'Dairy (25%)',                  'Nutrient': 'Potassium', 'Mean': -0.362246, 'CI': '(-0.37, -0.36)',   'P_text': 'P < 0.0001'},
+            {'Scenario': 'Dairy (50%)',                  'Nutrient': 'Potassium', 'Mean': -0.799946, 'CI': '(-0.81, -0.79)',   'P_text': 'P = 0.0001'},
+            
+            {'Scenario': 'Red and processed meat (25%)', 'Nutrient': 'Iron',      'Mean': -0.136205, 'CI': '(-0.14, -0.13)',    'P_text': 'P = 0.02'},
+            {'Scenario': 'Red and processed meat (50%)', 'Nutrient': 'Iron',      'Mean': -0.269597, 'CI': '(-0.274, -0.265)',  'P_text': 'P = 0.01'},
+            {'Scenario': 'Dairy (25%)',                  'Nutrient': 'Iron',      'Mean': -0.873633, 'CI': '(-0.88, -0.87)',    'P_text': 'P < 0.0001'},
+            {'Scenario': 'Dairy (50%)',                  'Nutrient': 'Iron',      'Mean': -1.49412,  'CI': '(-1.5, -1.48)',     'P_text': 'P < 0.0001'},
+            
+            {'Scenario': 'Red and processed meat (25%)', 'Nutrient': 'Calcium',   'Mean': -1.11836,  'CI': '(-1.13, -1.11)',    'P_text': 'P < 0.0001'},
+            {'Scenario': 'Red and processed meat (50%)', 'Nutrient': 'Calcium',   'Mean': -2.25949,  'CI': '(-2.28, -2.24)',    'P_text': 'P < 0.0001'},
+            {'Scenario': 'Dairy (25%)',                  'Nutrient': 'Calcium',   'Mean': 4.66082,   'CI': '(4.64, 4.69)',      'P_text': 'P < 0.0001'},
+            {'Scenario': 'Dairy (50%)',                  'Nutrient': 'Calcium',   'Mean': 9.37513,   'CI': '(9.33, 9.42)',      'P_text': 'P < 0.0001'},
+            
+            {'Scenario': 'Red and processed meat (25%)', 'Nutrient': 'Vitamin D', 'Mean': 0.119448,  'CI': '(0.116, 0.123)',    'P_text': 'P < 0.0001'},
+            {'Scenario': 'Red and processed meat (50%)', 'Nutrient': 'Vitamin D', 'Mean': 0.231836,  'CI': '(0.23, 0.24)',      'P_text': 'P < 0.0001'},
+            {'Scenario': 'Dairy (25%)',                  'Nutrient': 'Vitamin D', 'Mean': 0.428505,  'CI': '(0.42, 0.43)',      'P_text': 'P < 0.0001'},
+            {'Scenario': 'Dairy (50%)',                  'Nutrient': 'Vitamin D', 'Mean': 0.815726,  'CI': '(0.81, 0.83)',      'P_text': 'P = 0.0001'}
+        ];
+
+        const colors = {
+            'Red and processed meat (25%)': '#D97C28',
+            'Red and processed meat (50%)': '#8C4B15',
+            'Dairy (25%)': '#5B8CC0',
+            'Dairy (50%)': '#265586'
+        };
+
+        const nutrientOrder = ['Potassium', 'Iron', 'Calcium', 'Vitamin D'];
+        const scenarioOrder = [
+            'Red and processed meat (25%)',
+            'Red and processed meat (50%)',
+            'Dairy (25%)',
+            'Dairy (50%)'
+        ];
+
+        const chart = echarts.init(document.getElementById('chart-container'));
+
+        // Prepare Data in a linear coordinate system
+        const scatterData = [];
+        const ciData = []; // For custom renderer or line segments
+        const textLabelData = [];
+        const nutrientLabelData = [];
+        const separatorLines = [];
+        
+        let currentY = 0;
+        const spacingWithinGroup = 1; // 1 unit per scenario
+        const spacingBetweenGroups = 2.5; // Gap between nutrients
+        
+        nutrientOrder.forEach((nutrient, nIdx) => {
+            const groupStartY = currentY;
+            
+            scenarioOrder.forEach((scenario, sIdx) => {
+                const row = rawData.find(d => d.Nutrient === nutrient && d.Scenario === scenario);
+                if (!row) return;
+
+                const yPos = currentY; // 0, 1, 2...
+                
+                // Parse CI
+                const ciMatch = row.CI.match(/\((.*?),\s*(.*?)\)/);
+                const ciLow = parseFloat(ciMatch[1]);
+                const ciHigh = parseFloat(ciMatch[2]);
+                
+                // 1. Scatter Dot
+                scatterData.push({
+                    value: [row.Mean, yPos],
+                    itemStyle: { color: colors[scenario] }
+                });
+
+                // 2. CI Line Data (Low, High, Y)
+                ciData.push([ciLow, yPos, ciHigh]);
+
+                // 3. Text Label (CI + P-value)
+                let labelText = `${row.CI.replace(/[()]/g, '')} ${row.P_text}`;
+                // Logic: Mean < 0 -> Label on Left (align right). Mean > 0 -> Label on Right (align left).
+                const isNegative = row.Mean < 0;
+                textLabelData.push({
+                    value: [row.Mean, yPos],
+                    label: {
+                        show: true,
+                        formatter: labelText,
+                        position: isNegative ? 'left' : 'right',
+                        offset: isNegative ? [-15, 0] : [15, 0], // Distance from dot
+                        color: 'black',
+                        fontSize: 16, // Visible font size
+                        fontFamily: 'Arial',
+                        align: isNegative ? 'right' : 'left'
+                    }
+                });
+
+                currentY += spacingWithinGroup;
+            });
+            
+            // 4. Nutrient Group Label (Left Axis)
+            // Center of the group
+            const groupCenterY = groupStartY + (scenarioOrder.length * spacingWithinGroup - spacingWithinGroup) / 2;
+            nutrientLabelData.push({
+                value: [-6, groupCenterY], // Anchor at x-min (will offset manually)
+                label: {
+                    show: true,
+                    formatter: nutrient,
+                    position: 'left',
+                    distance: 30, // Push left into margin
+                    color: 'black',
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                }
+            });
+
+            // 5. Separator Line
+            if (nIdx < nutrientOrder.length - 1) {
+                const sepY = currentY - spacingWithinGroup + (spacingBetweenGroups / 2); // Halfway in gap
+                separatorLines.push([
+                    { coord: [-6, sepY], lineStyle: { color: '#d9d9d9', width: 1.5 } },
+                    { coord: [12, sepY] }
+                ]);
+                currentY += spacingBetweenGroups - spacingWithinGroup; // Adjust for next loop start
+            }
+        });
+        
+        // Reverse Y-axis to match visual order (Top to Bottom) or Standard (Bottom to Top)
+        // Python chart: Potassium (bottom) -> Vitamin D (top)?
+        // Original code: `nutrientOrder = ['Potassium', 'Iron', 'Calcium', 'Vitamin D']`
+        // And plotted currentY increasing.
+        // Standard graphs usually have first item at top. 
+        // Let's check original 164.py:
+        // `nutrient_order = ['Potassium', 'Iron', 'Calcium', 'Vitamin D']`
+        // `for nutrient in nutrientOrder...` -> plots increasing Y.
+        // So Vitamin D is at the top (highest Y).
+        // That means Y-axis matches array order if Y increases upwards.
+        // ECharts Y-axis usually increases upwards.
+        
+        const option = {
+            backgroundColor: 'white',
+            grid: {
+                top: 50,
+                bottom: 100,
+                left: 250, // Space for Nutrient labels
+                right: 50
+            },
+            xAxis: {
+                type: 'value',
+                min: -6,
+                max: 12,
+                interval: 2,
+                name: 'Mean difference from observed diets (%)',
+                nameLocation: 'middle',
+                nameGap: 35,
+                nameTextStyle: { fontSize: 16, fontFamily: 'Arial' },
+                axisLabel: { fontSize: 14, color: 'black' },
+                splitLine: { show: false },
+                axisLine: { show: true, lineStyle: { color: 'black' } },
+                axisTick: { show: true }
+            },
+            yAxis: {
+                type: 'value',
+                min: -0.5,
+                max: currentY,
+                show: false, // Hide default axis
+                splitLine: { show: false }
+            },
+            series: [
+                // 1. CI Lines (Custom Renderer)
+                {
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        const yVal = api.value(1);
+                        const lowVal = api.value(0);
+                        const highVal = api.value(2);
+                        const start = api.coord([lowVal, yVal]);
+                        const end = api.coord([highVal, yVal]);
+                        
+                        return {
+                            type: 'line',
+                            shape: {
+                                x1: start[0], y1: start[1],
+                                x2: end[0], y2: end[1]
+                            },
+                            style: {
+                                stroke: 'black',
+                                lineWidth: 2
+                            }
+                        };
+                    },
+                    data: ciData,
+                    z: 2
+                },
+                // 2. Main Dots
+                {
+                    type: 'scatter',
+                    symbolSize: 20,
+                    data: scatterData,
+                    z: 3
+                },
+                // 3. Text Labels (Transparent dots)
+                {
+                    type: 'scatter',
+                    symbolSize: 0,
+                    data: textLabelData,
+                    z: 4
+                },
+                // 4. Nutrient Labels (Transparent dots, clip: false)
+                {
+                    type: 'scatter',
+                    symbolSize: 0,
+                    data: nutrientLabelData,
+                    clip: false,
+                    z: 5
+                },
+                // 5. Separator Lines (MarkLine)
+                {
+                    type: 'line', // Dummy series to hold markLine
+                    data: [],
+                    markLine: {
+                        data: separatorLines,
+                        symbol: 'none',
+                        silent: true,
+                        animation: false,
+                        lineStyle: { type: 'solid' }
+                    }
+                },
+                // 6. Zero Line (MarkLine)
+                {
+                    type: 'line',
+                    data: [],
+                    markLine: {
+                        data: [
+                            { xAxis: 0, lineStyle: { color: 'gray', type: 'dashed', width: 1.5 } }
+                        ],
+                        symbol: 'none',
+                        silent: true
+                    }
+                },
+                // 7. Legend Dummy Series
+                ...scenarioOrder.map(name => ({
+                    name: name,
+                    type: 'scatter',
+                    symbol: 'circle',
+                    itemStyle: { color: colors[name] },
+                    data: []
+                }))
+            ],
+            legend: {
+                data: scenarioOrder,
+                bottom: 20,
+                right: 50,
+                orient: 'vertical',
+                itemGap: 10,
+                textStyle: { fontSize: 14 }
+            }
+        };
+
+        chart.setOption(option);
+    </script>
+</body>
+</html>

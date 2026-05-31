@@ -1,0 +1,58 @@
+{
+  "status": "complete",
+  "chart_type": "ranked_bar",
+  "title": "Top markets by 2025 YTD funding per deal",
+  "label_field": "label",
+  "value_field": "value",
+  "x_label": "$M per deal",
+  "data": [
+    {
+      "label": "Silicon Valley",
+      "value": 61.312439
+    },
+    {
+      "label": "Dallas",
+      "value": 45.454545
+    },
+    {
+      "label": "Los Angeles",
+      "value": 24.236253
+    },
+    {
+      "label": "Austin",
+      "value": 22.790698
+    },
+    {
+      "label": "Boston",
+      "value": 20.902613
+    },
+    {
+      "label": "South Africa",
+      "value": 19.27451
+    },
+    {
+      "label": "Israel",
+      "value": 19.266055
+    },
+    {
+      "label": "Seattle",
+      "value": 18.40796
+    },
+    {
+      "label": "Raleigh",
+      "value": 16.304348
+    },
+    {
+      "label": "Toronto",
+      "value": 14.953271
+    },
+    {
+      "label": "New York",
+      "value": 14.948454
+    },
+    {
+      "label": "Singapore",
+      "value": 12.933754
+    }
+  ]
+}

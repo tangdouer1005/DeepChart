@@ -1,0 +1,42 @@
+{
+  "status": "complete",
+  "chart_type": "ranked_bar",
+  "title": "Top US child markets by Q3 acceleration",
+  "label_field": "label",
+  "value_field": "value",
+  "x_label": "Acceleration (percentage points)",
+  "data": [
+    {
+      "label": "Miami",
+      "value": 118.823529
+    },
+    {
+      "label": "Austin",
+      "value": 117.5
+    },
+    {
+      "label": "New York",
+      "value": 109.515251
+    },
+    {
+      "label": "Philadelphia",
+      "value": 89.414183
+    },
+    {
+      "label": "Dallas",
+      "value": 66.0
+    },
+    {
+      "label": "Los Angeles",
+      "value": 51.323423
+    },
+    {
+      "label": "Raleigh",
+      "value": 50.0
+    },
+    {
+      "label": "Denver",
+      "value": 35.46798
+    }
+  ]
+}

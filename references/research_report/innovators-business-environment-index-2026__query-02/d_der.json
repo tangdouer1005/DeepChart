@@ -1,0 +1,85 @@
+{
+  "query_id": "query_02",
+  "query_text": "Create a ranked horizontal bar chart showing the top 12 countries by `business-incentives over-reliance`, defined as `business_incentives minus the average of ease_of_operating_business and market_perception`, with values shown in index points, restricted to countries whose simple three-pillar average is at least 50, and sorted from highest to lowest after the difference is derived.",
+  "chart_type": "horizontal bar chart",
+  "value_unit": "index points",
+  "sort_rule": "descending by business_incentives_over_reliance after filtering to three-pillar average >= 50",
+  "selection_rule": "top 12 eligible countries",
+  "records": [
+    {
+      "entity": "Bahrain",
+      "business_incentives_over_reliance": 36.2295,
+      "three_pillar_average": 69.057,
+      "other_two_pillar_average": 56.9805
+    },
+    {
+      "entity": "Saudi Arabia",
+      "business_incentives_over_reliance": 28.1165,
+      "three_pillar_average": 65.418667,
+      "other_two_pillar_average": 56.0465
+    },
+    {
+      "entity": "United Arab Emirates",
+      "business_incentives_over_reliance": 26.068,
+      "three_pillar_average": 80.854333,
+      "other_two_pillar_average": 72.165
+    },
+    {
+      "entity": "Vietnam",
+      "business_incentives_over_reliance": 18.718,
+      "three_pillar_average": 54.562333,
+      "other_two_pillar_average": 48.323
+    },
+    {
+      "entity": "China",
+      "business_incentives_over_reliance": 18.204,
+      "three_pillar_average": 60.189,
+      "other_two_pillar_average": 54.121
+    },
+    {
+      "entity": "Indonesia",
+      "business_incentives_over_reliance": 18.1935,
+      "three_pillar_average": 59.76,
+      "other_two_pillar_average": 53.6955
+    },
+    {
+      "entity": "Thailand",
+      "business_incentives_over_reliance": 17.888,
+      "three_pillar_average": 59.948667,
+      "other_two_pillar_average": 53.986
+    },
+    {
+      "entity": "Oman",
+      "business_incentives_over_reliance": 14.4055,
+      "three_pillar_average": 54.044333,
+      "other_two_pillar_average": 49.2425
+    },
+    {
+      "entity": "Kuwait",
+      "business_incentives_over_reliance": 13.138,
+      "three_pillar_average": 62.852333,
+      "other_two_pillar_average": 58.473
+    },
+    {
+      "entity": "Kazakhstan",
+      "business_incentives_over_reliance": 10.072,
+      "three_pillar_average": 52.381333,
+      "other_two_pillar_average": 49.024
+    },
+    {
+      "entity": "Qatar",
+      "business_incentives_over_reliance": 9.867,
+      "three_pillar_average": 67.016,
+      "other_two_pillar_average": 63.727
+    },
+    {
+      "entity": "Bulgaria",
+      "business_incentives_over_reliance": 9.2675,
+      "three_pillar_average": 72.947667,
+      "other_two_pillar_average": 69.8585
+    }
+  ],
+  "chart_title": "IBEI 2026 Top 12 by Business-Incentives Over-Reliance",
+  "metric_field": "business_incentives_over_reliance",
+  "x_label": "business incentives minus average(ease, market perception)"
+}

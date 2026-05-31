@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Chart Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+        }
+        #chart-container {
+            width: 700px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. Data Preparation (Matching Python Logic)
+        // ---------------------------------------------------------
+        
+        // ---------------------------------------------------------
+        // 1. Data Preparation (From JSON)
+        // ---------------------------------------------------------
+        const data = {"groups": ["B16-F0", "LN1-18IL", "LN7-1112AR", "LN7-1120BL", "LN7-1134BL", "LN8-1194BR", "LN8-1198AR", "LN8-1205BL", "LN9-1315BL", "LN9-1358IR"], "p_values": {"LN7-1112AR": 0.4237, "LN7-1120BL": 0.7995, "LN7-1134BL": 0.0342, "LN8-1194BR": 0.0225, "LN8-1198AR": 0.7291, "LN8-1205BL": 0.6822, "LN9-1315BL": 0.0249, "LN9-1358IR": 0.0001}, "means": [1.0001808078571428, 1.2410805714285718, 0.732751117, 1.2064086666666667, 0.5525541242500001, 0.48044053200000003, 1.22376348, 0.7657186613333332, 0.6026939641428573, 0.369334481], "stds": [0.07922800262336735, 0.33921476804076856, 0.18516309541001255, 0.21083560124972575, 0.22804140793178473, 0.3013409752436139, 0.45105360908011793, 0.2727894725866692, 0.19264062289105696, 0.12392313249076677], "clean_data_points": [[0.999999823, 1.00032767, 1.000005438, 0.861667086, 1.003190644, 1.136074996, 0.999999998], [0.800686, 1.500677, 1.341806, 1.640613, 1.483361, 1.106523, 0.813898], [0.587407, 0.932256, 0.847907, 0.563434468], [1.054753, 1.447167, 1.117306], [0.270697051, 0.731263444, 0.744321601, 0.463934401], [0.179749188, 0.782426964, 0.479145444], [0.70873371, 1.548417104, 1.414139626], [0.485153079, 1.03000271, 0.782000195], [0.492599693, 0.953486003, 0.618357257, 0.371824586, 0.625783402, 0.705343274, 0.451463534], [0.33207914, 0.455197984, 0.453811153, 0.537530998, 0.160409973, 0.327652464, 0.318659655]]};
+        
+        const groups = data.groups;
+        const pValues = data.p_values;
+        const means = data.means;
+        const stds = data.stds;
+        const clean_data_points = data.clean_data_points;
+        
+        const scatterData = [];
+
+        // Seeded random number generator
+        let seed = 42;
+        function random() {
+            seed = (seed * 9301 + 49297) % 233280;
+            return seed / 233280;
+        }
+
+        const jitterStrength = 0.15;
+
+        groups.forEach((group, index) => {
+            const points = clean_data_points[index];
+            points.forEach(val => {
+                const xJitter = (random() * 2 * jitterStrength) - jitterStrength;
+                scatterData.push([index + xJitter, val]);
+            });
+        });
+
+
+        // ---------------------------------------------------------
+        // 2. Chart Configuration
+        // ---------------------------------------------------------
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        // Styling constants
+        const colorControl = '#D9D9D9';
+        const colorLn1 = '#E6A5E9';
+        const colorOthers = '#8CC685';
+        const edgeColor = 'black';
+        const scatterColor = '#222222';
+
+        const option = {
+            backgroundColor: 'white',
+            // Custom positioning for title 'i'
+            title: {
+                text: 'i',
+                left: '2%',
+                top: '2%',
+                textStyle: {
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: 'black'
+                }
+            },
+            grid: {
+                left: '10%',
+                right: '5%',
+                bottom: '15%',
+                top: '10%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: groups,
+                axisLabel: {
+                    rotate: 45,
+                    fontSize: 12,
+                    align: 'right', // Helps with the rotation alignment
+                    verticalAlign: 'top',
+                    padding: [5, 0, 0, 0] // Add some padding
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'black'
+                    }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Relative GPX4 levels',
+                nameLocation: 'middle',
+                nameGap: 50,
+                nameTextStyle: {
+                    fontSize: 14,
+                    color: 'black'
+                },
+                min: 0,
+                max: 3.0,
+                interval: 0.5,
+                axisLabel: {
+                    fontSize: 12,
+                    color: 'black'
+                },
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'black'
+                    }
+                }
+            },
+            series: [
+                // 1. Bars
+                {
+                    type: 'bar',
+                    data: means,
+                    barWidth: '65%',
+                    z: 1,
+                    itemStyle: {
+                        color: function(params) {
+                            if (params.dataIndex === 0) return colorControl;
+                            if (params.dataIndex === 1) return colorLn1;
+                            return colorOthers;
+                        },
+                        borderColor: edgeColor,
+                        borderWidth: 1
+                    }
+                },
+                // 2. Error Bars (Custom Series)
+                {
+                    type: 'custom',
+                    name: 'error',
+                    itemStyle: {
+                        borderWidth: 1.2,
+                        borderColor: 'black'
+                    },
+                    renderItem: function (params, api) {
+                        const xValue = api.value(0);
+                        const mean = means[xValue];
+                        const std = stds[xValue];
+                        
+                        const highPoint = api.coord([xValue, mean + std]);
+                        const lowPoint = api.coord([xValue, mean - std]);
+                        
+                        // Cap width (horizontal line at ends of error bar)
+                        // In Python code: capsize=4 points. In ECharts pixels:
+                        const capWidth = 10; 
+                        
+                        return {
+                            type: 'group',
+                            children: [
+                                // Vertical line
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0], y1: highPoint[1],
+                                        x2: lowPoint[0], y2: lowPoint[1]
+                                    },
+                                    style: api.style()
+                                },
+                                // Top cap
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: highPoint[0] - capWidth / 2, y1: highPoint[1],
+                                        x2: highPoint[0] + capWidth / 2, y2: highPoint[1]
+                                    },
+                                    style: api.style()
+                                },
+                                // Bottom cap
+                                {
+                                    type: 'line',
+                                    shape: {
+                                        x1: lowPoint[0] - capWidth / 2, y1: lowPoint[1],
+                                        x2: lowPoint[0] + capWidth / 2, y2: lowPoint[1]
+                                    },
+                                    style: api.style()
+                                }
+                            ]
+                        };
+                    },
+                    data: means, // Just dummy data to trigger render for each group
+                    z: 2
+                },
+                // 3. Scatter Points
+                {
+                    type: 'scatter',
+                    data: scatterData,
+                    symbolSize: 8, // ~s=30 in matplotlib is area, sqrt(30/pi)*2 ≈ 6.18, let's say 7-8
+                    itemStyle: {
+                        color: scatterColor
+                    },
+                    z: 3
+                }
+            ],
+            // 4. Annotations (Graphic Elements)
+            graphic: [
+                // Top significance line
+                {
+                    type: 'line',
+                    left: 'center', // This is tricky with coordinates. Better to use coordinate system logic.
+                    shape: {
+                        // We will set these dynamically in the 'render' event or use 'group' with bounding rects?
+                        // Actually, 'graphic' elements can't easily map to data coordinates without conversion.
+                        // However, we can use 'markLine' or 'markPoint' or a 'custom' series for this too.
+                    }
+                }
+            ]
+        };
+
+        // We'll use a custom series for the text annotations and the top line
+        // to easily map to data coordinates.
+        option.series.push({
+            type: 'custom',
+            renderItem: function(params, api) {
+                const children = [];
+                
+                // 1. P-values (Rotated text above bars)
+                const textYVal = 1.85;
+                groups.forEach((g, idx) => {
+                    if (pValues[g]) {
+                        const pt = api.coord([idx, textYVal]);
+                        children.push({
+                            type: 'text',
+                            position: pt,
+                            rotation: -Math.PI / 2, // 90 degrees CCW
+                            style: {
+                                text: 'P = ' + pValues[g].toFixed(4),
+                                font: '10px sans-serif',
+                                fill: '#333333',
+                                textAlign: 'left', // Anchor at bottom (start of rotated text)
+                                textVerticalAlign: 'middle'
+                            }
+                        });
+                    }
+                });
+
+                // 2. Top Significance Line
+                const lineStartIdx = 1;
+                const lineEndIdx = groups.length - 1;
+                const lineYVal = 2.7;
+                
+                const startPt = api.coord([lineStartIdx, lineYVal]);
+                const endPt = api.coord([lineEndIdx, lineYVal]);
+                
+                children.push({
+                    type: 'line',
+                    shape: {
+                        x1: startPt[0], y1: startPt[1],
+                        x2: endPt[0], y2: endPt[1]
+                    },
+                    style: {
+                        stroke: 'black',
+                        lineWidth: 1
+                    }
+                });
+
+                // 3. Overall P-value Text
+                const midX = (lineStartIdx + lineEndIdx) / 2;
+                const textY = lineYVal + 0.05;
+                const textPt = api.coord([midX, textY]);
+                
+                children.push({
+                    type: 'text',
+                    position: textPt,
+                    style: {
+                        text: 'P = 2 × 10⁻⁷', // Simplified scientific notation
+                        font: '12px sans-serif',
+                        fill: 'black',
+                        textAlign: 'center',
+                        textVerticalAlign: 'bottom'
+                    }
+                });
+
+                return {
+                    type: 'group',
+                    children: children
+                };
+            },
+            data: [0] // Dummy data
+        });
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

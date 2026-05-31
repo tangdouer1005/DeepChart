@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>GOOG 现金循环周期 (CCC) 2016–2022 柱状图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js 最新稳定版 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background: #f6f7fb;
+      color: #222;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 1.5rem 1.8rem 1.6rem;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    }
+    h1 {
+      margin: 0 0 0.3rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #111827;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 0.9rem;
+    }
+    .chart-wrapper {
+      /* 固定一个合理的高度，避免画布被拉得过高 */
+      position: relative;
+      width: 100%;
+      max-width: 840px;
+      height: 420px; /* 关键修复点：显式高度，保证纵横比正常 */
+      margin: 0 auto;
+    }
+    .note {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-top: 0.8rem;
+      line-height: 1.4;
+    }
+    canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important; /* 跟随 chart-wrapper 的高度 */
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 0.75rem;
+      }
+      .container {
+        padding: 1rem 1.1rem 1.2rem;
+      }
+      .chart-wrapper {
+        height: 320px; /* 小屏幕略低一些但仍保持可读性 */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GOOG 现金循环周期 (CCC)</h1>
+    <div class="subtitle">2016–2022 年度变动（单位：天）</div>
+
+    <div class="chart-wrapper">
+      <canvas id="cccChart" aria-label="GOOG 现金循环周期柱状图" role="img"></canvas>
+    </div>
+
+    <div class="note">
+      数据来源：用户提供的年度 CCC 数值（RESULT_CCC），单位为天。悬停可查看精确数值。
+    </div>
+  </div>
+
+  <script>
+    const fiscalYears = ["2016", "2017", "2018", "2019", "2020", "2021", "2022"];
+    const cccValues = [
+      35.44706769953619,
+      37.56467312311406,
+      35.87595261830583,
+      35.0110128314484,
+      38.571564340568905,
+      34.75386958015615,
+      41.36815498562649
+    ];
+
+    const canvas = document.getElementById("cccChart");
+    const ctx = canvas.getContext("2d");
+
+    // 渐变色填充
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, "rgba(59, 130, 246, 0.9)");
+    gradient.addColorStop(1, "rgba(96, 165, 250, 0.35)");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: fiscalYears,
+        datasets: [
+          {
+            label: "现金循环周期 (天)",
+            data: cccValues,
+            backgroundColor: gradient,
+            borderColor: "rgba(37, 99, 235, 0.9)",
+            borderWidth: 1.3,
+            borderRadius: 6,
+            hoverBackgroundColor: "rgba(37, 99, 235, 0.95)",
+            hoverBorderColor: "rgba(30, 64, 175, 1)"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, // 配合外部容器高度控制纵横比
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: { size: 12 },
+              color: "#374151"
+            }
+          },
+          title: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(17,24,39,0.94)",
+            titleFont: { size: 13, weight: "600" },
+            bodyFont: { size: 12 },
+            padding: 10,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return " CCC: " + value.toFixed(2) + " 天";
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财政年度",
+              color: "#4b5563",
+              font: { size: 12 }
+            },
+            ticks: {
+              color: "#4b5563",
+              font: { size: 11 }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: false,
+            suggestedMin: 32,  // 让变化区间更集中
+            suggestedMax: 43,
+            title: {
+              display: true,
+              text: "现金循环周期 (天)",
+              color: "#4b5563",
+              font: { size: 12 }
+            },
+            ticks: {
+              color: "#4b5563",
+              font: { size: 11 },
+              callback: function(value) {
+                return value + " 天";
+              }
+            },
+            grid: {
+              color: "rgba(209, 213, 219, 0.6)",
+              drawBorder: false
+            }
+          }
+        },
+        animation: {
+          duration: 800,
+          easing: "easeOutCubic"
+        },
+        hover: {
+          mode: "nearest",
+          intersect: true
+        }
+      }
+    });
+  </script>
+</body>
+</html>

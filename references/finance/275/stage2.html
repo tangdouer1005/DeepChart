@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>WMT EBITDA 2017–2024 折线图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+        sans-serif;
+      background: #fafafa;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 0 16px 32px;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+    }
+    header {
+      padding: 24px 24px 0 24px;
+    }
+    h1 {
+      margin: 0 0 4px 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .subtitle {
+      margin: 0 0 16px 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .chart-wrapper {
+      position: relative;
+      padding: 16px 24px 24px 24px;
+    }
+    .info {
+      font-size: 0.8rem;
+      color: #777;
+      padding: 0 24px 16px 24px;
+      border-top: 1px solid #eee;
+      margin-top: 8px;
+    }
+    .legend-inline {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.85rem;
+      margin: 0 24px 16px 24px;
+      color: #555;
+    }
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      margin-right: 6px;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #111;
+        color: #eee;
+      }
+      .container {
+        background: #1c1c1c;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+      }
+      .subtitle,
+      .info,
+      .legend-inline {
+        color: #bbb;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>沃尔玛 (WMT) 息税折旧摊销前利润（EBITDA）变化</h1>
+      <p class="subtitle">2017–2024 财年，单位：十亿美元</p>
+    </header>
+
+    <div class="legend-inline">
+      <span style="display:flex;align-items:center;">
+        <span class="legend-color" id="line-color"></span>
+        EBITDA（息税折旧摊销前利润）
+      </span>
+      <span>提示：移动鼠标或点击触摸点查看具体数值</span>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="ebitdaChart"></canvas>
+    </div>
+
+    <div class="info">
+      数据来源（用户提供原始数值，以美元计）：<br />
+      2017: 32,294,000,000；2018: 27,321,000,000；2019: 23,975,000,000；2020:
+      33,382,000,000；2021: 33,835,000,000；2022: 31,081,000,000；2023:
+      30,477,000,000；2024: 35,625,000,000。
+    </div>
+  </div>
+
+  <script>
+    // Raw data (USD)
+    const years = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const ebitdaRaw = [
+      32294000000,
+      27321000000,
+      23975000000,
+      33382000000,
+      33835000000,
+      31081000000,
+      30477000000,
+      35625000000
+    ];
+
+    // Convert to billions for readability
+    const ebitdaBillions = ebitdaRaw.map(v => v / 1e9);
+
+    const ctx = document.getElementById("ebitdaChart").getContext("2d");
+
+    const primaryColor = "rgba(46, 120, 214, 1)";
+    const primaryFill = "rgba(46, 120, 214, 0.12)";
+    document.getElementById("line-color").style.backgroundColor = primaryColor;
+
+    // Plugin to draw a subtle horizontal line at last value
+    const lastValueLine = {
+      id: "lastValueLine",
+      afterDatasetsDraw(chart, args, pluginOptions) {
+        const {
+          ctx,
+          scales: { x, y }
+        } = chart;
+
+        const dataset = chart.data.datasets[0];
+        if (!dataset || !dataset.data || dataset.data.length === 0) return;
+
+        const lastIndex = dataset.data.length - 1;
+        const lastX = x.getPixelForValue(lastIndex);
+        const lastY = y.getPixelForValue(dataset.data[lastIndex]);
+
+        ctx.save();
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = "rgba(150,150,150,0.6)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x.left, lastY);
+        ctx.lineTo(x.right, lastY);
+        ctx.stroke();
+        ctx.restore();
+      }
+    };
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "EBITDA（十亿美元）",
+            data: ebitdaBillions,
+            borderColor: primaryColor,
+            backgroundColor: primaryFill,
+            tension: 0.25,
+            fill: true,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#ffffff",
+            pointBorderColor: primaryColor,
+            pointBorderWidth: 2,
+            pointHitRadius: 10
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(0,0,0,0.85)",
+            titleColor: "#fff",
+            bodyColor: "#fff",
+            padding: 10,
+            cornerRadius: 6,
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return (
+                  " EBITDA: " +
+                  value.toFixed(2) +
+                  " 十亿美元（≈ " +
+                  (value * 1e3).toLocaleString("en-US", {
+                    maximumFractionDigits: 0
+                  }) +
+                  " 百万美元）"
+                );
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "财年",
+              color: "#666",
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: "EBITDA（十亿美元）",
+              color: "#666",
+              font: {
+                size: 12
+              }
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed(0);
+              }
+            },
+            grid: {
+              color: "rgba(0,0,0,0.05)"
+            }
+          }
+        }
+      },
+      plugins: [lastValueLine]
+    });
+  </script>
+</body>
+</html>

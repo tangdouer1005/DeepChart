@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMO 2016-2024 息税折旧摊销前利润 (EBITDA) 变化趋势</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js (latest stable) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: #6b7280;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    .chart-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      /* Use a fixed but reasonable aspect ratio to avoid vertical stretching */
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px 20px 20px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+    .chart-box {
+      position: relative;
+      width: 100%;
+      /* 16:9 aspect ratio – keeps chart proportional on all screens */
+      aspect-ratio: 16 / 9;
+    }
+    .note {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+    .legend-inline {
+      font-size: 13px;
+      margin-bottom: 8px;
+      color: #374151;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend-color-box {
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background: linear-gradient(90deg, rgba(37,99,235,0.2), rgba(37,99,235,0.9));
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-wrapper">
+    <h1>TMO 2016-2024 年度 EBITDA 变化趋势</h1>
+    <h2>单位：美元（十亿美元）</h2>
+
+    <div class="chart-container">
+      <div class="legend-inline">
+        <div class="legend-color-box"></div>
+        <span>息税折旧摊销前利润 (EBITDA)</span>
+      </div>
+      <div class="chart-box">
+        <canvas id="ebitdaChart"></canvas>
+      </div>
+      <div class="note">
+        数据来源：提供的财报数据文本。<br />
+        说明：为便于阅读，图中数值按“十亿美元”缩放显示，悬停可查看精确数值。
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Fiscal years
+    const years = [
+      "2016", "2017", "2018", "2019",
+      "2020", "2021", "2022", "2023", "2024"
+    ];
+
+    // EBITDA in dollars
+    const ebitdaRaw = [
+      4250800000,
+      5051000000,
+      6195000000,
+      7023000000,
+      10103000000,
+      11962000000,
+      11760000000,
+      11060000000,
+      11754000000
+    ];
+
+    // Convert to billions for display
+    const ebitdaBillions = ebitdaRaw.map(v => v / 1e9);
+
+    const canvas = document.getElementById("ebitdaChart");
+    const ctx = canvas.getContext("2d");
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(37, 99, 235, 0.25)");
+    gradient.addColorStop(1, "rgba(37, 99, 235, 0)");
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "EBITDA",
+            data: ebitdaBillions,
+            borderColor: "rgba(37, 99, 235, 1)",
+            backgroundColor: gradient,
+            tension: 0.2,
+            fill: true,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderWidth: 1.5,
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        // Keep Chart.js aspect ratio logic; we control overall proportions via CSS aspect-ratio
+        maintainAspectRatio: true,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: "rgba(15,23,42,0.92)",
+            padding: 10,
+            cornerRadius: 6,
+            displayColors: false,
+            callbacks: {
+              label: function (context) {
+                const value = context.raw; // in billions
+                const rawValue = ebitdaRaw[context.dataIndex]; // exact dollars
+                const formattedExact = rawValue.toLocaleString("en-US");
+                return [
+                  `EBITDA: ${value.toFixed(2)} 十亿美元`,
+                  `精确值: $${formattedExact}`
+                ];
+              },
+              title: function (items) {
+                return `财政年度：${items[0].label}`;
+              }
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              maxRotation: 0,
+              autoSkipPadding: 12
+            }
+          },
+          y: {
+            beginAtZero: false,
+            grid: {
+              color: "rgba(148,163,184,0.25)"
+            },
+            ticks: {
+              callback: function (value) {
+                return value.toFixed ? value.toFixed(1) : value;
+              }
+            },
+            title: {
+              display: true,
+              text: "EBITDA（十亿美元）",
+              color: "#4b5563",
+              font: {
+                size: 12
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
