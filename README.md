@@ -83,13 +83,18 @@ See [`eval/README.md`](eval/README.md) for the metrics (`F1_src`, `F1_der`,
 | Finance | SEC 10-K filings (OCR'd markdown, public record) | **yes** — three text variants + ground-truth |
 | Research Report | CB Insights / StartupBlink / Startup Genome reports | **no** — third-party copyright |
 
-Research Report **source PDFs are not redistributed** (they are commercial,
-copyrighted reports). The queries, OCR'd `summary` text, and all ground-truth
-(`d_src` / `d_der` / programs / chart images) **are** included, so queries and
-scoring work without the raw PDFs. To run the multimodal RR input, obtain the
-reports from their publishers — see
-[`data/research_report/SOURCES.md`](data/research_report/SOURCES.md), then
-`python scripts/download_reports.py` reports which PDFs are still missing.
+Research Report **source PDFs are not stored in this git repository** (they are
+commercial, copyrighted reports). The queries, OCR'd `summary` text, and all
+ground-truth (`d_src` / `d_der` / programs / chart images) **are** included, so
+queries and scoring work without the raw PDFs. To run the multimodal RR input,
+fetch the report bundle (~940 MB) from Zenodo:
+
+```bash
+python scripts/download_reports.py --fetch    # downloads + places all 26 report PDFs
+```
+
+See [`data/research_report/SOURCES.md`](data/research_report/SOURCES.md) for the
+Zenodo record and the per-report list.
 
 ## License
 

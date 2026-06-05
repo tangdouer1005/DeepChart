@@ -1,14 +1,29 @@
 # Research Report — source documents (NOT redistributed)
 
 The Research Report domain uses third-party industry reports as multimodal
-input. These reports are copyrighted by their publishers and are **not
-redistributed** in this repository. Each instance's `context.variants.normal`
-still references the expected PDF path under `data/research_report/<id>/normal/`;
-obtain the PDFs from the publishers below and place them there (or run
-`scripts/download_reports.py`). The OCR'd `summary` text and all ground-truth
-artifacts ARE included, so queries + scoring work without the raw PDF.
+input. These reports are copyrighted by their publishers and are **not** stored
+in this git repository. The OCR'd `summary` text and all ground-truth artifacts
+ARE included, so queries + scoring work without the raw PDFs; the PDFs are only
+needed to feed the multimodal input.
 
-**26 reports** across 3 publishers:
+## Get the PDFs
+
+The 26 unique report PDFs are distributed as a single archive on Zenodo:
+
+> **https://zenodo.org/records/20543123**
+> file: `research_report_pdfs.tar.gz` (~940 MB)
+
+```bash
+python scripts/download_reports.py --fetch
+```
+
+This downloads the archive and places each report PDF into every instance
+directory that references it (`data/research_report/<id>/normal/<report>.pdf`).
+The reports' copyright remains with the original publishers (CB Insights,
+StartupBlink, Startup Genome); they are redistributed only for research
+reproducibility.
+
+## Reports — 26 across 3 publishers
 
 
 ## CB Insights (10 reports) — https://www.cbinsights.com/research/report/
